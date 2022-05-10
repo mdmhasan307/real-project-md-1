@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="1"/>
+    <jsp:setProperty name="userbean" property="selected2" value="0"/>
+    <f:view>
+        <af:document title="Receiving_General" id="d1">
+            <af:resource type="javascript"> 
+                function enforceProcessing(evt){
+                    var input1 = document.getElementById('txtProcessing');
+                    input1.style.display = 'block';
+                }
+            </af:resource>
+            <af:form id="f1">
+                <af:panelStretchLayout startWidth="25" topHeight="150" bottomHeight="25" id="psl1">
+                    <f:facet name="start">
+                        <f:subview id="rg_wrap_sidebar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="top">
+                        <f:subview id="rg_wrap_header">
+                            <jsp:include page="/ws/WS_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll" id="pgl5">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelFormLayout rendered="#{ReceivingGeneralDetail.reviewSerial}"
+                                                partialTriggers="reviewSerials" id="pfl1">
+                                <af:panelGroupLayout layout="horizontal" id="pgl1">
+                                    <af:panelGroupLayout layout="vertical" id="pgl2">
+                                        <af:outputLabel value="Serial Range Entry" inlineStyle="font-weight:bold"
+                                                        id="ol1"/>
+                                        <af:panelGroupLayout layout="horizontal" id="pgl3">
+                                            <af:panelGroupLayout layout="horizontal" id="pgl4">
+                                                <af:outputLabel value="Range from " inlineStyle="font-weight:bold"
+                                                                id="ol2"/>
+                                                <af:inputText binding="#{ReceivingGeneralDetail.startSerial1}"
+                                                              contentStyle="text-transform:uppercase;" maximumLength="30"
+                                                              columns="30" id="itStartSerial1"/>
+                                                <af:spacer width="15" id="s1"/>
+                                                <af:outputLabel value="to" inlineStyle="font-weight:bold" id="olTo"/>
+                                                <af:inputText binding="#{ReceivingGeneralDetail.endSerial1}"
+                                                              columns="30" maximumLength="30"
+                                                              contentStyle="text-transform:uppercase;" id="itEndSerial1"/>
+                                                <af:spacer width="15" id="s2"/>
+                                                <af:outputLabel value="Total" inlineStyle="font-weight:bold" id="ol3"/>
+                                                <af:inputText value="#{ReceivingGeneralDetail.numSerial1}" columns="10"
+                                                              partialTriggers="computeNum1" id="itNumSerial1" disabled="true"
+                                                              inlineStyle="color:Black; font-weight:bold;"/>
+                                                <af:button actionListener="#{ReceivingGeneralDetail.computeNum1}"
+                                                                  text="Calculate" id="computeNum1" partialSubmit="false"/>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                    </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                            </af:panelFormLayout>
+                            <af:panelFormLayout rendered="#{ReceivingGeneralDetail.reviewSerial}"
+                                                partialTriggers="reviewSerials" id="pfl3">
+                                <af:panelGroupLayout layout="horizontal" id="pgl8">
+                                    <af:outputLabel value="Range from " inlineStyle="font-weight:bold"
+                                                    id="olRangeFrom"/>
+                                    <af:inputText binding="#{ReceivingGeneralDetail.startSerial2}"
+                                                  contentStyle="text-transform:uppercase;" maximumLength="30" columns="30"
+                                                  id="itStartSerial2"/>
+                                    <af:spacer width="15" id="s3"/>
+                                    <af:outputLabel value="to" inlineStyle="font-weight:bold" id="olTo1"/>
+                                    <af:inputText binding="#{ReceivingGeneralDetail.endSerial2}" columns="30"
+                                                  maximumLength="30" contentStyle="text-transform:uppercase;"
+                                                  id="itEndSerial"/>
+                                    <af:spacer width="15" id="s4"/>
+                                    <af:outputLabel value="Total" inlineStyle="font-weight:bold" id="ol4"/>
+                                    <af:inputText value="#{ReceivingGeneralDetail.numSerial2}" columns="10"
+                                                  partialTriggers="computeNum2" id="itNumSerial2" disabled="true"
+                                                  inlineStyle="color:Black; font-weight:bold;"/>
+                                    <af:button actionListener="#{ReceivingGeneralDetail.computeNum2}"
+                                                      text="Calculate" id="computeNum2" partialSubmit="false"/>
+                                </af:panelGroupLayout>
+                            </af:panelFormLayout>
+                            <af:panelFormLayout rendered="#{ReceivingGeneralDetail.reviewSerial}"
+                                                partialTriggers="reviewSerials" id="pfl4">
+                                <af:panelGroupLayout layout="horizontal" id="pgl12">
+                                    <af:outputLabel value="Range from " inlineStyle="font-weight:bold"
+                                                    id="olRangeFrom2"/>
+                                    <af:inputText binding="#{ReceivingGeneralDetail.startSerial3}"
+                                                  contentStyle="text-transform:uppercase;" maximumLength="30" columns="30"
+                                                  id="itStartSerial3"/>
+                                    <af:spacer width="15" id="s5"/>
+                                    <af:outputLabel value="to" inlineStyle="font-weight:bold" id="olTo2"/>
+                                    <af:inputText binding="#{ReceivingGeneralDetail.endSerial3}" columns="30"
+                                                  maximumLength="30" contentStyle="text-transform:uppercase;"
+                                                  id="itEndSerial3"/>
+                                    <af:spacer width="15" id="s6"/>
+                                    <af:outputLabel value="Total" inlineStyle="font-weight:bold" id="ol5"/>
+                                    <af:inputText value="#{ReceivingGeneralDetail.numSerial3}" columns="10"
+                                                  partialTriggers="computeNum3" id="it1" disabled="true"
+                                                  inlineStyle="color:Black; font-weight:bold;"/>
+                                    <af:button actionListener="#{ReceivingGeneralDetail.computeNum3}"
+                                                      text="Calculate" id="computeNum3" partialSubmit="false"/>
+                                </af:panelGroupLayout>
+                            </af:panelFormLayout>
+                            <af:panelGroupLayout layout="horizontal" id="pgl17">
+                                <!--<af:button actionListener="#{ReceivingGeneralDetail.clearRanges}" text="Cancel"
+                                                  id="clearRanges" partialSubmit="false"/>-->
+                            </af:panelGroupLayout>
+                            <af:panelFormLayout id="pfl5">
+                                <af:panelGroupLayout layout="vertical" id="pgl18">
+                                    <af:outputLabel value="Manual Entry (Separate by Line Breaks)" inlineStyle="font-weight:bold"
+                                                    id="olManualEntry"/>
+                                    <af:inputText rows="15" value="#{ReceivingGeneralDetail.fullSerialString}"
+                                                  binding="#{ReceivingGeneralDetail.serialArea}" wrap="hard"
+                                                  columns="30" partialTriggers="reviewSerials" id="itReviewSerials"/>
+                                    <af:panelGroupLayout layout="horizontal" id="pgl20">
+                                        <af:button action="#{ReceivingGeneralDetail.getForwardAction}"
+                                                          actionListener="#{ReceivingGeneralDetail.computeArea}"
+                                                          text="Submit" id="computeArea" partialSubmit="false">
+                                            <af:clientListener method="enforceProcessing" type="action"/>
+                                        </af:button>
+                                        <af:button actionListener="#{ReceivingGeneralDetail.reviewSerials}"
+                                                          text="Review Serials" id="reviewSerials"
+                                                          rendered="#{ReceivingGeneralDetail.reviewSerial}" partialSubmit="false"/>
+                                        <af:button actionListener="#{ReceivingGeneralDetail.clearArea}"
+                                                          text="Cancel" id="clearArea" partialSubmit="false"/>
+                                    </af:panelGroupLayout>
+                                    <af:outputText id = "txtProcessing" binding = "#{ReceivingGeneralDetail.processingMsg}" value="Processing..." inlineStyle="color:Green; font-weight:bold;" visible="false" clientComponent="true" />
+                                </af:panelGroupLayout>
+                            </af:panelFormLayout>
+                            <f:subview id="wrap_footer">
+                            <jsp:include page="../FooterMain.jspx"/>
+                        </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

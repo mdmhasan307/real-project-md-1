@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="LocPendingViewObj"
+   Version="11.1.2.64.36"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   ComponentClass="mil.stratis.model.view.inv.LocPendingViewObjImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT Niin_info.NIIN, 
+       Niin_info.NIIN_ID, 
+       Location.LOCATION_LABEL, 
+       Location.LOCATION_ID, 
+       Niin_Location.NIIN_LOC_ID, 
+       Niin_info.NOMENCLATURE, 
+       InventoryItem.STATUS, 
+       InventoryItem.INVENTORY_ITEM_ID, 
+       InventoryItem.WAC_ID, 
+       Location.DIVIDER_INDEX, 
+       Location.LOC_LEVEL, 
+       Location.BAY, 
+       Location.SIDE, 
+       InventoryItem.MODIFIED_BY, 
+       Location.LOCATION_HEADER_BIN_ID,
+       Location.SLOT
+FROM NIIN_INFO Niin_info, LOCATION Location, NIIN_LOCATION Niin_Location, INVENTORY_ITEM InventoryItem
+WHERE (Location.LOCATION_ID = Niin_Location.LOCATION_ID) AND (((Niin_Location.NIIN_LOC_ID = InventoryItem.NIIN_LOC_ID)) AND (Niin_info.NIIN_ID = InventoryItem.NIIN_ID))
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+      <Attr Name="_isExpertMode" Value="true" />
+   </DesignTime>
+   <EntityUsage
+      Name="Niin_info"
+      Entity="mil.stratis.model.entity.site.NiinInfo"
+      ReadOnly="true" >
+   </EntityUsage>
+   <EntityUsage
+      Name="Location"
+      Entity="mil.stratis.model.entity.loc.Location"
+      SourceUsage="mil.stratis.model.view.inv.LocPendingViewObj.Niin_info"
+      ReadOnly="true"
+      Reference="true" >
+   </EntityUsage>
+   <EntityUsage
+      Name="Niin_Location"
+      Entity="mil.stratis.model.entity.loc.NiinLocation"
+      SourceUsage="mil.stratis.model.view.inv.LocPendingViewObj.Location"
+      ReadOnly="true"
+      Reference="true" >
+   </EntityUsage>
+   <EntityUsage
+      Name="InventoryItem"
+      Entity="mil.stratis.model.entity.inv.InventoryItem"
+      SourceUsage="mil.stratis.model.view.inv.LocPendingViewObj.Niin_Location"
+      ReadOnly="true"
+      Reference="true" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="Niin"
+      IsUpdateable="false"
+      IsNotNull="true"
+      EntityAttrName="Niin"
+      EntityUsage="Niin_info"
+      AliasName="NIIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NiinId"
+      IsNotNull="true"
+      EntityAttrName="NiinId"
+      EntityUsage="Niin_info"
+      AliasName="NIIN_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationLabel"
+      IsNotNull="true"
+      EntityAttrName="LocationLabel"
+      EntityUsage="Location"
+      AliasName="LOCATION_LABEL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationId"
+      IsNotNull="true"
+      EntityAttrName="LocationId"
+      EntityUsage="Location"
+      AliasName="LOCATION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NiinLocId"
+      IsNotNull="true"
+      EntityAttrName="NiinLocId"
+      EntityUsage="Niin_Location"
+      AliasName="NIIN_LOC_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Nomenclature"
+      EntityAttrName="Nomenclature"
+      EntityUsage="Niin_info"
+      AliasName="NOMENCLATURE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Status"
+      EntityAttrName="Status"
+      EntityUsage="InventoryItem"
+      AliasName="STATUS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="InventoryItemId"
+      IsNotNull="true"
+      EntityAttrName="InventoryItemId"
+      EntityUsage="InventoryItem"
+      AliasName="INVENTORY_ITEM_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WacId"
+      EntityAttrName="WacId"
+      EntityUsage="InventoryItem"
+      AliasName="WAC_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DividerIndex"
+      EntityAttrName="DividerIndex"
+      EntityUsage="Location"
+      AliasName="DIVIDER_INDEX" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocLevel"
+      IsUnique="true"
+      IsNotNull="true"
+      EntityAttrName="LocLevel"
+      EntityUsage="Location"
+      AliasName="LOC_LEVEL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Bay"
+      IsUnique="true"
+      IsNotNull="true"
+      EntityAttrName="Bay"
+      EntityUsage="Location"
+      AliasName="BAY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Side"
+      IsUnique="true"
+      EntityAttrName="Side"
+      EntityUsage="Location"
+      AliasName="SIDE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedBy"
+      EntityAttrName="ModifiedBy"
+      EntityUsage="InventoryItem"
+      AliasName="MODIFIED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationHeaderBinId"
+      EntityAttrName="LocationHeaderBinId"
+      EntityUsage="Location"
+      AliasName="LOCATION_HEADER_BIN_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Slot"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="2"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SLOT"
+      Expression="SLOT"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

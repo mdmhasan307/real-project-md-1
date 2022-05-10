@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <!-- Workload Detail (Picking Packing Shipping) -->
+    <af:table var="row" rowBandingInterval="1" id="t1_1" autoHeightRows="0"
+              styleClass="AFStretchWidth"
+              value="#{viewScope.ReportsQueryResultBean.reportColumnList}"
+              rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Workload Detail (Picking Packing Shipping)'}">
+        <af:column sortable="false" headerText="WAC" id="c1" width="25">
+            <af:outputText value="#{row.wac}" id="ot1"/>
+        </af:column>
+        <af:column sortable="false" headerText="Pick Location" id="c2">
+            <af:outputText value="#{row.pickLocation}" id="ot2"/>
+        </af:column>
+        <af:column sortable="false" headerText="Packing Station" id="c3">
+            <af:outputText value="#{row.packingStation}" id="ot3"/>
+        </af:column>
+        <af:column sortable="false" headerText="Column" id="c4" width="45">
+            <af:outputText value="#{row.column}" id="ot4"/>
+        </af:column>
+        <af:column sortable="false" headerText="Pack" id="c5" width="45">
+            <af:outputText value="#{row.pac}" id="ot5"/>
+        </af:column>
+        <af:column sortable="false" headerText="AAC" id="c6" width="50">
+            <af:outputText value="#{row.aac}" id="ot6"/>
+        </af:column>
+        <af:column sortable="false" headerText="NIIN" id="c7" width="75">
+            <af:outputText value="#{row.niin}" id="ot7"/>
+        </af:column>
+        <af:column sortable="false" headerText="Nomenclature" id="c19">
+            <af:outputText value="#{row.nomenclature}" id="ot19"/>
+        </af:column>
+        <af:column sortable="false" headerText="Supplementary Address" id="c20">
+            <af:outputText value="#{row.supplementaryAddress}" id="ot20"/>
+        </af:column>
+        <af:column sortable="false" headerText="Document Number" id="c8">
+            <af:outputText value="#{row.documentNumber}" id="ot8"/>
+        </af:column>
+        <af:column sortable="false" headerText="PIN" id="c9">
+            <af:outputText value="#{row.pin}" id="ot9"/>
+        </af:column>
+        <af:column sortable="false" headerText="Status" id="c10">
+            <af:outputText value="#{row.status}" id="ot10"/>
+        </af:column>
+        <af:column sortable="false" headerText="Qty to Be Picked" id="c11"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.pickQuantity}" id="ot11"/>
+        </af:column>
+        <af:column sortable="false" headerText="SCN" id="c12">
+            <af:outputText value="#{row.scn}" id="ot12"/>
+        </af:column>
+        <af:column sortable="false" headerText="UI" id="c14">
+            <af:outputText value="#{row.ui}" id="ot14"/>
+        </af:column>
+        <af:column sortable="false" headerText="Picked By" id="c15">
+            <af:outputText value="#{row.pickedBy}" id="ot15"/>
+        </af:column>
+        <af:column sortable="false" headerText="Date Picked" id="c13">
+            <af:outputText value="#{row.datePicked}"/>
+        </af:column>
+        <af:column sortable="false" headerText="Packed By" id="c16">
+            <af:outputText value="#{row.packedBy}" id="ot16"/>
+        </af:column>
+        <af:column sortable="false" headerText="Date Packed" id="c17">
+            <af:outputText value="#{row.datePacked}"/>
+        </af:column>
+        <af:column sortable="false" headerText="Priority" id="c18"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.priority}" id="ot18"/>
+        </af:column>
+    </af:table>
+</jsp:root>

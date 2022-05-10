@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="RefSlc"
+  Version="11.1.2.64.36"
+  DBObjectType="SYNONYM"
+  DBObjectName="REF_SLC"
+  AliasName="RefSlc"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <Attribute
+    Name="ShelfLifeCode"
+    Precision="1"
+    ColumnName="SHELF_LIFE_CODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="REF_SLC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Span"
+    IsNotNull="true"
+    ColumnName="SPAN"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="REF_SLC"/>
+  <Attribute
+    Name="EpxendLifeInA"
+    IsNotNull="true"
+    ColumnName="EPXEND_LIFE_IN_A"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="REF_SLC"/>
+  <Attribute
+    Name="ExpendLifeInB"
+    IsNotNull="true"
+    ColumnName="EXPEND_LIFE_IN_B"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="REF_SLC"/>
+  <Attribute
+    Name="ExpendLifeInC"
+    IsNotNull="true"
+    ColumnName="EXPEND_LIFE_IN_C"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="REF_SLC"/>
+  <Attribute
+    Name="RepairLifeInA"
+    IsNotNull="true"
+    ColumnName="REPAIR_LIFE_IN_A"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="REF_SLC"/>
+  <Attribute
+    Name="SpanDays"
+    IsNotNull="true"
+    ColumnName="SPAN_DAYS"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="REF_SLC"/>
+  <Attribute
+    Name="MinVSpan"
+    IsNotNull="true"
+    ColumnName="MIN_V_SPAN"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="REF_SLC"/>
+  <Attribute
+    Name="MinDSpan"
+    IsNotNull="true"
+    ColumnName="MIN_D_SPAN"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="REF_SLC"/>
+  <Attribute
+    Name="RefSlcId"
+    ColumnName="REF_SLC_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.DBSequence"
+    ColumnType="NUMBER"
+    TableName="REF_SLC"
+    IsUpdateable="while_insert"
+    DefaultValue="@0"
+    Domain="oracle.jbo.domain.DBSequence"
+    PrimaryKey="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_SequenceName" Value="REF_SLC_ID_SEQ"/>
+      <Attr Name="_SequenceStart" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Key
+    Name="RefslcPrimaryKey"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="REFSLC_PRIMARY_KEY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.security.RefSlc.RefSlcId"/>
+    </AttrArray>
+  </Key>
+</Entity>

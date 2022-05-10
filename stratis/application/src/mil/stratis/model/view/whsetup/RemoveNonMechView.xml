@@ -1,0 +1,306 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="RemoveNonMechView"
+   Version="11.1.2.64.36"
+   OrderBy="LOCATION_LABEL"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   ComponentClass="mil.stratis.model.view.whsetup.RemoveNonMechViewImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+      <Attr Name="_isExpertMode" Value="true"/>
+   </DesignTime>
+   <SQLQuery><![CDATA[
+SELECT Location.LOCATION_ID, 
+       Location.LOCATION_LABEL, 
+       Location.WAC_ID, 
+       Location.LOC_CLASSIFICATION_ID, 
+       Location.AISLE, 
+       Location.AVAILABILITY_FLAG, 
+       Location.BAY, 
+       Location.CREATED_BY, 
+       Location.CREATED_DATE, 
+       Location.CUBE, 
+       Location.DIVIDER_INDEX, 
+       Location.LAST_STOW_DATE, 
+       Location.LOCATION_HEADER_BIN_ID, 
+       Location.LOC_LEVEL, 
+       Location.MECHANIZED_FLAG, 
+       Location.MODIFIED_BY, 
+       Location.MODIFIED_DATE, 
+       Location.SIDE, 
+       Location.SLOT, 
+       Location.WEIGHT, 
+       LocationClassification.LOC_CLASSIFICATION_ID AS LOC_CLASSIFICATION_ID1, 
+       LocationClassification.LENGTH, 
+       LocationClassification.WIDTH, 
+       LocationClassification.HEIGHT, 
+       LocationClassification.USABLE_CUBE, 
+       LocationClassification.USABLE_WEIGHT, 
+       LocationClassification.MECHANIZABLE_STORAGE, 
+       LocationClassification.DIVIDER_CODE, 
+       LocationClassification.IMAGE_FILENAME, 
+       LocationClassification.DESCRIPTION, 
+       LocationClassification.NAME, 
+       LocationClassification.DIVIDER_TYPE_ID,
+	w.WAC_NUMBER
+FROM location Location left join location_classification LocationClassification on Location.loc_classification_id=LocationClassification.loc_classification_id inner join wac w on Location.wac_id=w.wac_id
+WHERE Location.MECHANIZED_FLAG = 'N' and Location.AVAILABILITY_FLAG='A'
+   ]]></SQLQuery>
+   <EntityUsage
+      Name="Location"
+      Entity="mil.stratis.model.entity.loc.Location" >
+   </EntityUsage>
+   <EntityUsage
+      Name="LocationClassification"
+      Entity="mil.stratis.model.entity.loc.LocationClassification"
+      Association="mil.stratis.model.entity.associations.LocationLocClassFkAssoc"
+      AssociationEnd="mil.stratis.model.entity.associations.LocationLocClassFkAssoc.LocationClassification"
+      SourceUsage="mil.stratis.model.view.whsetup.RemoveNonMechView.Location"
+      ReadOnly="true"
+      Reference="true" />
+   <ViewAttribute
+      Name="LocationId"
+      IsNotNull="true"
+      EntityAttrName="LocationId"
+      EntityUsage="Location"
+      AliasName="LOCATION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationLabel"
+      IsUnique="true"
+      IsNotNull="true"
+      EntityAttrName="LocationLabel"
+      EntityUsage="Location"
+      AliasName="LOCATION_LABEL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WacId"
+      IsUnique="true"
+      IsNotNull="true"
+      EntityAttrName="WacId"
+      EntityUsage="Location"
+      AliasName="WAC_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocClassificationId"
+      EntityAttrName="LocClassificationId"
+      EntityUsage="Location"
+      AliasName="LOC_CLASSIFICATION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Aisle"
+      IsUnique="true"
+      EntityAttrName="Aisle"
+      EntityUsage="Location"
+      AliasName="AISLE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AvailabilityFlag"
+      IsNotNull="true"
+      EntityAttrName="AvailabilityFlag"
+      EntityUsage="Location"
+      AliasName="AVAILABILITY_FLAG" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Bay"
+      IsUnique="true"
+      IsNotNull="true"
+      EntityAttrName="Bay"
+      EntityUsage="Location"
+      AliasName="BAY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="Location"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedDate"
+      EntityAttrName="CreatedDate"
+      EntityUsage="Location"
+      AliasName="CREATED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Cube"
+      IsNotNull="true"
+      EntityAttrName="Cube"
+      EntityUsage="Location"
+      AliasName="CUBE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DividerIndex"
+      EntityAttrName="DividerIndex"
+      EntityUsage="Location"
+      AliasName="DIVIDER_INDEX" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastStowDate"
+      EntityAttrName="LastStowDate"
+      EntityUsage="Location"
+      AliasName="LAST_STOW_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationHeaderBinId"
+      EntityAttrName="LocationHeaderBinId"
+      EntityUsage="Location"
+      AliasName="LOCATION_HEADER_BIN_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocLevel"
+      IsUnique="true"
+      IsNotNull="true"
+      EntityAttrName="LocLevel"
+      EntityUsage="Location"
+      AliasName="LOC_LEVEL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MechanizedFlag"
+      IsNotNull="true"
+      EntityAttrName="MechanizedFlag"
+      EntityUsage="Location"
+      AliasName="MECHANIZED_FLAG" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedBy"
+      EntityAttrName="ModifiedBy"
+      EntityUsage="Location"
+      AliasName="MODIFIED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedDate"
+      EntityAttrName="ModifiedDate"
+      EntityUsage="Location"
+      AliasName="MODIFIED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Side"
+      IsUnique="true"
+      EntityAttrName="Side"
+      EntityUsage="Location"
+      AliasName="SIDE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Slot"
+      IsUnique="true"
+      IsNotNull="true"
+      EntityAttrName="Slot"
+      EntityUsage="Location"
+      AliasName="SLOT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Weight"
+      IsNotNull="true"
+      EntityAttrName="Weight"
+      EntityUsage="Location"
+      AliasName="WEIGHT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocClassificationId1"
+      IsNotNull="true"
+      EntityAttrName="LocClassificationId"
+      EntityUsage="LocationClassification"
+      AliasName="LOC_CLASSIFICATION_ID1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Length"
+      IsNotNull="true"
+      EntityAttrName="Length"
+      EntityUsage="LocationClassification"
+      AliasName="LENGTH" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Width"
+      IsNotNull="true"
+      EntityAttrName="Width"
+      EntityUsage="LocationClassification"
+      AliasName="WIDTH" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Height"
+      IsNotNull="true"
+      EntityAttrName="Height"
+      EntityUsage="LocationClassification"
+      AliasName="HEIGHT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UsableCube"
+      EntityAttrName="UsableCube"
+      EntityUsage="LocationClassification"
+      AliasName="USABLE_CUBE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UsableWeight"
+      EntityAttrName="UsableWeight"
+      EntityUsage="LocationClassification"
+      AliasName="USABLE_WEIGHT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MechanizableStorage"
+      IsNotNull="true"
+      EntityAttrName="MechanizableStorage"
+      EntityUsage="LocationClassification"
+      AliasName="MECHANIZABLE_STORAGE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DividerCode"
+      EntityAttrName="DividerCode"
+      EntityUsage="LocationClassification"
+      AliasName="DIVIDER_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ImageFilename"
+      EntityAttrName="ImageFilename"
+      EntityUsage="LocationClassification"
+      AliasName="IMAGE_FILENAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Description"
+      EntityAttrName="Description"
+      EntityUsage="LocationClassification"
+      AliasName="DESCRIPTION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Name"
+      IsUnique="true"
+      EntityAttrName="Name"
+      EntityUsage="LocationClassification"
+      AliasName="NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DividerTypeId"
+      EntityAttrName="DividerTypeId"
+      EntityUsage="LocationClassification"
+      AliasName="DIVIDER_TYPE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SlotCount"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="$none$"
+      AliasName="SLOT_COUNT"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WacNumber"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="WAC_NUMBER"
+      Expression="WAC_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

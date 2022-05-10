@@ -1,0 +1,64 @@
+#stages run as follows:
+#pushes: build
+#master: build, build-docker-image
+#per nightly schedule in gitlab: build, nightly-scan
+
+stages:
+  # - compile
+  - build
+  - build-docker-image
+  - nightly-scan
+
+variables:
+  GITLAB_HOST: "gitlab.tacticaledge.us"
+  SONARQUBE_BUILD_BREAKER_VERSION: "1.1.8"
+  # DOCKER_IMAGE_NAME: "mls2/stratis_tomcat"
+
+compile test build job:
+  stage: build
+  tags:
+    - java
+  script:
+    - bash build-ci-checks.sh
+    - mvn clean compile test package -B -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -U
+  artifacts:
+    paths:
+      - "GCSSMCWS/target/*.war"
+      - "application/target/*.war"
+    expire_in: 2 hours
+
+build docker image job:
+  stage: build-docker-image
+  only:
+    - master
+  except:
+    - schedules
+  dependencies:
+    - compile test build job
+  script:
+    # exports RELEASE version to be defined as project.version_lastCommitDate ex: 0.9.0_2021-04-06
+    - apk update && apk upgrade && apk add maven && apk add git
+    - export RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)_$(git log -n1 --pretty='format:%cd' --date=format:'%Y-%m-%d')
+    - warpath=$(find application/target -type f -name *.war)
+    - echo war $warpath
+    - cp $warpath conf/container/sources/application/stratis.war
+    - cp doc/base_stratis_context.properties conf/container/sources/opt/app/conf/tomcat/stratis_context.properties
+    - cd conf/container
+    - scripts/build_containers.sh
+    - scripts/push_containers.sh
+
+nightly scan job:
+  stage: nightly-scan
+  only:
+    - schedules
+  tags:
+    - java
+  script:
+    - git clone -b $SONARQUBE_BUILD_BREAKER_VERSION https://gitlab-ci-token:${CI_JOB_TOKEN}@$GITLAB_HOST/build-utils/sonarqube-build-breaker.git
+    - python3 sonarqube-build-breaker/sonar-scan.py $SONARQUBE_URL $SONARQUBE_TOKEN -nobreak
+  artifacts:
+    paths:
+      - "target/dependency-check-report.html"
+    expire_in: 1 week
+  # FUTURE: uncomment once tests are running
+  #   - "target/site/jacoco/*"

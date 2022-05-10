@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Admin_WarehouseWACSetupPageDef"
+                Package="mil.stratis.view.pageDefs" EnableTokenValidation="false">
+  <parameters/>
+  <executables>
+    <iterator id="WacTableView1Iterator" RangeSize="25" Binds="WacTableView1"
+              StateValidation="false" DataControl="WarehouseSetupDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="WarehouseTableView1Iterator" RangeSize="-1" Binds="WarehouseTableView1"
+              DataControl="WarehouseSetupDataControl" StateValidation="false" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator Binds="WacTableView1" RangeSize="25" DataControl="WarehouseSetupDataControl" id="WacTableView1Iterator1" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="WacTableView1" IterBinding="WacTableView1Iterator">
+      <AttrNames>
+        <Item Value="WacId"/>
+        <Item Value="TasksPerTrip"/>
+        <Item Value="SidsPerTrip"/>
+        <Item Value="WarehouseId"/>
+        <Item Value="WacNumber"/>
+        <Item Value="MechanizedFlag"/>
+        <Item Value="SecureFlag"/>
+        <Item Value="BulkAreaNumber"/>
+        <Item Value="CarouselNumber"/>
+        <Item Value="Building"/>
+        <Item Value="WarehouseId1"/>
+        <Item Value="CarouselController"/>
+        <Item Value="CarouselOffset"/>
+        <Item Value="CarouselModel"/>
+        <Item Value="PackArea"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="WacId" IterBinding="WacTableView1Iterator">
+      <AttrNames>
+        <Item Value="WacId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="WacNumber" IterBinding="WacTableView1Iterator">
+      <AttrNames>
+        <Item Value="WacNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TasksPerTrip" IterBinding="WacTableView1Iterator">
+      <AttrNames>
+        <Item Value="TasksPerTrip"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="SidsPerTrip" IterBinding="WacTableView1Iterator">
+      <AttrNames>
+        <Item Value="SidsPerTrip"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Building" IterBinding="WacTableView1Iterator">
+      <AttrNames>
+        <Item Value="Building"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="MechanizedFlag" IterBinding="WacTableView1Iterator">
+      <AttrNames>
+        <Item Value="MechanizedFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="SecureFlag" IterBinding="WacTableView1Iterator">
+      <AttrNames>
+        <Item Value="SecureFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CarouselModel" IterBinding="WacTableView1Iterator">
+      <AttrNames>
+        <Item Value="CarouselModel"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PackArea" IterBinding="WacTableView1Iterator">
+      <AttrNames>
+        <Item Value="PackArea"/>
+      </AttrNames>
+    </attributeValues>
+    <list id="WacTableView1WarehouseId" IterBinding="WacTableView1Iterator" StaticList="false"
+          ListOperMode="setAttribute" ListIter="WarehouseTableView1Iterator">
+      <AttrNames>
+        <Item Value="WarehouseId"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="WarehouseId"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Building"/>
+      </ListDisplayAttrNames>
+    </list>
+    <list id="WacTableView1MechanizedFlag" IterBinding="WacTableView1Iterator" ListOperMode="setAttribute"
+          StaticList="true">
+      <AttrNames>
+        <Item Value="MechanizedFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="H"/>
+        <Item Value="V"/>
+        <Item Value="N"/>
+      </ValueList>
+    </list>
+    <list id="WacTableView1SecureFlag" IterBinding="WacTableView1Iterator" ListOperMode="setAttribute"
+          StaticList="true">
+      <AttrNames>
+        <Item Value="SecureFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </list>
+    <attributeValues id="WacTableView1CarouselController" IterBinding="WacTableView1Iterator">
+      <AttrNames>
+        <Item Value="CarouselController"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="WacTableView1CarouselOffset" IterBinding="WacTableView1Iterator">
+      <AttrNames>
+        <Item Value="CarouselOffset"/>
+      </AttrNames>
+    </attributeValues>
+    <list id="WacTableView1CarouselModel1" IterBinding="WacTableView1Iterator" ListOperMode="setAttribute"
+          StaticList="true" NullValueFlag="start">
+      <AttrNames>
+        <Item Value="CarouselModel"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="- Select -"/>
+        <Item Value="HANEL"/>
+        <Item Value="WHITE"/>
+        <Item Value="REMSTAR"/>
+        <Item Value="OTHER"/>
+      </ValueList>
+    </list>
+    <action IterBinding="WacTableView1Iterator" id="CreateInsert"
+            InstanceName="StratisRootServiceDataControl.Root.WarehouseSetup1.WacTableView1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="ExecuteWac" RequiresUpdateModel="true" Action="iteratorExecute" IterBinding="WacTableView1Iterator"/>
+    <tree IterBinding="WacTableView1Iterator1" id="WacTableView11">
+      <nodeDefinition DefName="mil.stratis.model.view.whsetup.WacTableView" Name="WacTableView110">
+        <AttrNames>
+          <Item Value="WacId"/>
+          <Item Value="Building"/>
+          <Item Value="TasksPerTrip"/>
+          <Item Value="SidsPerTrip"/>
+          <Item Value="MechanizedFlag"/>
+          <Item Value="SecureFlag"/>
+          <Item Value="CarouselController"/>
+          <Item Value="CarouselOffset"/>
+          <Item Value="CarouselModel"/>
+          <Item Value="PackArea"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

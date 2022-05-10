@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="WarehouseView"
+  Version="11.1.2.64.36"
+  SelectList="Warehouse.WAREHOUSE_ID, 
+       Warehouse.BUILDING, 
+       Warehouse.COMPLEX, 
+       Warehouse.SITE_ID, 
+       Warehouse.DESCRIPTION, 
+       Warehouse.LOCAL_DELIVERY_PREFIX, 
+       Warehouse.LOCAL_DELIVERY_SUFFIX, 
+       Warehouse.CARRIER_NAME, 
+       SiteInfo.SITE_ID AS SITE_ID1, 
+       SiteInfo.SUPPLY_CENTER_NAME"
+  FromList="WAREHOUSE Warehouse, SITE_INFO SiteInfo"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  Where="Warehouse.SITE_ID = SiteInfo.SITE_ID"
+  OrderBy="WAREHOUSE_ID ASC">
+  <EntityUsage
+    Name="Warehouse"
+    Entity="mil.stratis.model.entity.loc.Warehouse"/>
+  <EntityUsage
+    Name="SiteInfo"
+    Entity="mil.stratis.model.entity.site.SiteInfo"
+    Association="mil.stratis.model.entity.associations.WarehouseSiteFkAssoc"
+    AssociationEnd="mil.stratis.model.entity.associations.WarehouseSiteFkAssoc.SiteInfo"
+    SourceUsage="mil.stratis.model.view.loc.WarehouseView.Warehouse"
+    ReadOnly="true"
+    Reference="true"
+    DeleteParticipant="false"
+    JoinType="INNER JOIN">
+    <DesignTime>
+      <AttrArray Name="_srcAttributes">
+        <Item Value="mil.stratis.model.entity.loc.Warehouse.SiteId"/>
+      </AttrArray>
+      <AttrArray Name="_dstAttributes">
+        <Item Value="mil.stratis.model.entity.site.SiteInfo.SiteId"/>
+      </AttrArray>
+    </DesignTime>
+  </EntityUsage>
+  <ViewAttribute
+    Name="WarehouseId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="WarehouseId"
+    EntityUsage="Warehouse"
+    AliasName="WAREHOUSE_ID"/>
+  <ViewAttribute
+    Name="Building"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Building"
+    EntityUsage="Warehouse"
+    AliasName="BUILDING"/>
+  <ViewAttribute
+    Name="Complex"
+    PrecisionRule="true"
+    EntityAttrName="Complex"
+    EntityUsage="Warehouse"
+    AliasName="COMPLEX"/>
+  <ViewAttribute
+    Name="SiteId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="SiteId"
+    EntityUsage="Warehouse"
+    AliasName="SITE_ID"/>
+  <ViewAttribute
+    Name="Description"
+    PrecisionRule="true"
+    EntityAttrName="Description"
+    EntityUsage="Warehouse"
+    AliasName="DESCRIPTION"/>
+  <ViewAttribute
+    Name="LocalDeliveryPrefix"
+    PrecisionRule="true"
+    EntityAttrName="LocalDeliveryPrefix"
+    EntityUsage="Warehouse"
+    AliasName="LOCAL_DELIVERY_PREFIX"/>
+  <ViewAttribute
+    Name="LocalDeliverySuffix"
+    PrecisionRule="true"
+    EntityAttrName="LocalDeliverySuffix"
+    EntityUsage="Warehouse"
+    AliasName="LOCAL_DELIVERY_SUFFIX"/>
+  <ViewAttribute
+    Name="CarrierName"
+    PrecisionRule="true"
+    EntityAttrName="CarrierName"
+    EntityUsage="Warehouse"
+    AliasName="CARRIER_NAME"/>
+  <ViewAttribute
+    Name="SiteId1"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="SiteId"
+    EntityUsage="SiteInfo"
+    AliasName="SITE_ID1"/>
+  <ViewAttribute
+    Name="SupplyCenterName"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="SupplyCenterName"
+    EntityUsage="SiteInfo"
+    AliasName="SUPPLY_CENTER_NAME"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="WarehouseId"/>
+  </AttrArray>
+  <ViewLinkAccessor
+    Name="WacAllView"
+    ViewLink="mil.stratis.model.entity.link.WarehouseWacViewLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+</ViewObject>

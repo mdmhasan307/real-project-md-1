@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="UserStatus"
+  Version="11.1.2.64.36"
+  DBObjectType="TABLE"
+  DBObjectName="SGA.USERSTATUS_LU"
+  AliasName="UserStatus"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <Attribute
+    Name="UserstatusId"
+    ColumnName="USERSTATUS_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="SGA.USERSTATUS_LU"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_SequenceName" Value="SEQ_USERSTATUS_LU"/>
+      <Attr Name="_SequenceStart" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Userstatus"
+    IsUnique="true"
+    Precision="10"
+    ColumnName="USERSTATUS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="SGA.USERSTATUS_LU">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UserstatusDescn"
+    Precision="50"
+    ColumnName="USERSTATUS_DESCN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="SGA.USERSTATUS_LU">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TransTs"
+    ColumnName="TRANS_TS"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="SGA.USERSTATUS_LU"/>
+  <Attribute
+    Name="ModById"
+    ColumnName="MOD_BY_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="SGA.USERSTATUS_LU"/>
+  <Key
+    Name="PkUserstatusLu"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="PK_USERSTATUS_LU"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.ref.UserStatus.UserstatusId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="Uk1UserstatusLu">
+    <DesignTime>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="UK1_USERSTATUS_LU"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.ref.UserStatus.Userstatus"/>
+    </AttrArray>
+  </Key>
+</Entity>

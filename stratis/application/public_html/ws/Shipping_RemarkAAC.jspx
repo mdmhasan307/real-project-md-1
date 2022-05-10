@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="5"/>
+    <jsp:setProperty name="userbean" property="selected2" value="4"/>
+    <f:view>
+        <af:document title="STRATIS Shipping - Remark AAC" id="d1">
+            <af:form id="panelHForm">
+                <af:panelStretchLayout id="psl1" startWidth="24" topHeight="150" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/ws/WS_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGridLayout>
+                                <af:gridRow>
+                                    <af:gridCell valign="top">
+                                        <jsp:include page="../SideBar.jspx"/>
+                                    </af:gridCell>
+                                    <af:gridCell valign="top">
+                                        <!--af:form id="panelHForm"-->
+                                        <af:messages/>
+                                        <af:panelGroupLayout id="remarkPanelGroup" layout="vertical">
+                                            <af:panelHeader id="remarkPanelHeader" text="Remark for AAC"/>
+                                            <af:outputText value="&lt;br>" escape="false"/>
+                                            <af:outputText value="&lt;br>" escape="false"/>
+                                            <af:selectOneChoice id="ContainerNavList" autoSubmit="true"
+                                                                unselectedLabel="&lt;Make a Selection>"
+                                                                label="Container ID" inlineStyle="font-weight:bold;"
+                                                                binding="#{backing_shipping.remarkContainers}"
+                                                                valueChangeListener="#{backing_shipping.changeRemarkContainerValue}">
+                                                <f:selectItems value="#{backing_shipping.containers}"/>
+                                            </af:selectOneChoice>
+                                            <af:spacer height="4"/>
+                                            <af:panelGroupLayout layout="horizontal" id="panel2" valign="bottom">
+                                                <af:outputLabel id="lblAAC2" value="Current AAC"/>
+                                                <af:spacer width="15"/>
+                                                <af:inputText id="txtAAC2" columns="10"
+                                                              binding="#{backing_shipping.resetAACText}"
+                                                              inlineStyle="width:100px;background-color:rgb(212,208,200);"
+                                                              disabled="false" readOnly="true"
+                                                              partialTriggers="ContainerNavList"/>
+                                            </af:panelGroupLayout>
+                                            <af:outputText value="&lt;br>" escape="false"/>
+                                            <af:selectOneChoice id="CustomerNavList" autoSubmit="false"
+                                                                unselectedLabel="&lt;Make a Selection>"
+                                                                binding="#{backing_shipping.remarkAacs}" label="New AAC"
+                                                                inlineStyle="font-weight:bold;">
+                                                <f:selectItems value="#{backing_shipping.aacs}"/>
+                                            </af:selectOneChoice>
+                                            <af:outputText value="&lt;br>" escape="false"/>
+                                            <af:toolbar>
+                                                <af:button text="Remark AAC" inlineStyle="width:100px"
+                                                           id="submitButton"
+                                                           actionListener="#{backing_shipping.submitRemarkAAC}"
+                                                           disabled="#{bindings.ListContainersRemark.estimatedRowCount &lt; 1 or bindings.RemarkTo.estimatedRowCount &lt; 1}"
+                                                           partialSubmit="false">
+                                                </af:button>
+                                                <af:button text="Cancel" inlineStyle="width:100px"
+                                                           id="cancelButton" action="GoShipping" partialSubmit="false">
+                                                </af:button>
+                                            </af:toolbar>
+                                        </af:panelGroupLayout>
+                                        <!--/af:form-->
+                                    </af:gridCell>
+                                </af:gridRow>
+                            </af:panelGridLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <af:spacer width="24" height="675"/>
+                    </f:facet>
+                    <f:facet name="end"/>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

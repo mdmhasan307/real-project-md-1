@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="NiinGroupViewObj"
+   Version="11.1.2.64.36"
+   SelectList="Niin_info.NIIN, 
+       Niin_info.NIIN_ID, 
+       Niin_Location.QTY, 
+       Niin_Location.NIIN_LOC_ID, 
+       Niin_Location.CC, 
+       Niin_Location.PC, 
+       Location.LOCATION_LABEL, 
+       Location.LOCATION_ID, 
+       Location.LOC_CLASSIFICATION_ID, 
+       Location.DIVIDER_INDEX, 
+       Niin_info.UI, 
+       Niin_info.NOMENCLATURE"
+   FromList="NIIN_INFO Niin_info, NIIN_LOCATION Niin_Location, LOCATION Location"
+   Where="(Niin_info.NIIN_ID = Niin_Location.NIIN_ID) AND (Niin_Location.LOCATION_ID = Location.LOCATION_ID)"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.inv.NiinGroupViewObjImpl"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="Niin_info"
+      Entity="mil.stratis.model.entity.site.NiinInfo"
+      ReadOnly="true" >
+   </EntityUsage>
+   <EntityUsage
+      Name="Niin_Location"
+      Entity="mil.stratis.model.entity.loc.NiinLocation"
+      SourceUsage="mil.stratis.model.view.inv.NiinGroupViewObj.Niin_info"
+      ReadOnly="true"
+      Reference="true" >
+   </EntityUsage>
+   <EntityUsage
+      Name="Location"
+      Entity="mil.stratis.model.entity.loc.Location"
+      SourceUsage="mil.stratis.model.view.inv.NiinGroupViewObj.Niin_Location"
+      ReadOnly="true"
+      Reference="true" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="Niin"
+      IsUpdateable="false"
+      IsNotNull="true"
+      EntityAttrName="Niin"
+      EntityUsage="Niin_info"
+      AliasName="NIIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NiinId"
+      IsNotNull="true"
+      EntityAttrName="NiinId"
+      EntityUsage="Niin_info"
+      AliasName="NIIN_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Qty"
+      IsNotNull="true"
+      EntityAttrName="Qty"
+      EntityUsage="Niin_Location"
+      AliasName="QTY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NiinLocId"
+      IsNotNull="true"
+      EntityAttrName="NiinLocId"
+      EntityUsage="Niin_Location"
+      AliasName="NIIN_LOC_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Cc"
+      EntityAttrName="Cc"
+      EntityUsage="Niin_Location"
+      AliasName="CC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Pc"
+      EntityAttrName="Pc"
+      EntityUsage="Niin_Location"
+      AliasName="PC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationLabel"
+      IsNotNull="true"
+      EntityAttrName="LocationLabel"
+      EntityUsage="Location"
+      AliasName="LOCATION_LABEL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationId"
+      IsNotNull="true"
+      EntityAttrName="LocationId"
+      EntityUsage="Location"
+      AliasName="LOCATION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocClassificationId"
+      EntityAttrName="LocClassificationId"
+      EntityUsage="Location"
+      AliasName="LOC_CLASSIFICATION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DividerIndex"
+      EntityAttrName="DividerIndex"
+      EntityUsage="Location"
+      AliasName="DIVIDER_INDEX" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Ui"
+      EntityAttrName="Ui"
+      EntityUsage="Niin_info"
+      AliasName="UI" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Nomenclature"
+      EntityAttrName="Nomenclature"
+      EntityUsage="Niin_info"
+      AliasName="NOMENCLATURE" >
+   </ViewAttribute>
+</ViewObject>

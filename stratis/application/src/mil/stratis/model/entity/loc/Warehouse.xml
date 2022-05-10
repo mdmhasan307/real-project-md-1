@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="Warehouse"
+  Version="11.1.2.64.36"
+  DBObjectType="table"
+  DBObjectName="WAREHOUSE"
+  AliasName="Warehouse"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <Attribute
+    Name="WarehouseId"
+    Precision="6"
+    Scale="0"
+    ColumnName="WAREHOUSE_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.DBSequence"
+    ColumnType="NUMBER"
+    TableName="WAREHOUSE"
+    PrimaryKey="true"
+    IsUpdateable="while_insert"
+    DefaultValue="@0"
+    Domain="oracle.jbo.domain.DBSequence"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_SequenceName" Value="WAREHOUSE_ID_SEQ"/>
+      <Attr Name="_SequenceStart" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Building"
+    IsNotNull="true"
+    Precision="20"
+    ColumnName="BUILDING"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="WAREHOUSE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Complex"
+    Precision="1"
+    ColumnName="COMPLEX"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="WAREHOUSE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="SiteId"
+    IsNotNull="true"
+    ColumnName="SITE_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="WAREHOUSE"/>
+  <Attribute
+    Name="Description"
+    Precision="100"
+    ColumnName="DESCRIPTION"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="WAREHOUSE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LocalDeliveryPrefix"
+    Precision="3"
+    ColumnName="LOCAL_DELIVERY_PREFIX"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="WAREHOUSE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="3"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LocalDeliverySuffix"
+    Precision="5"
+    ColumnName="LOCAL_DELIVERY_SUFFIX"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="WAREHOUSE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CarrierName"
+    Precision="29"
+    ColumnName="CARRIER_NAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="WAREHOUSE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="29"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="Equip"
+    Association="mil.stratis.model.entity.associations.EquipWarehouseFkAssoc"
+    AssociationEnd="mil.stratis.model.entity.associations.EquipWarehouseFkAssoc.Equip"
+    AssociationOtherEnd="mil.stratis.model.entity.associations.EquipWarehouseFkAssoc.Warehouse"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="Wac"
+    Association="mil.stratis.model.entity.associations.WacWarehouseFkAssoc"
+    AssociationEnd="mil.stratis.model.entity.associations.WacWarehouseFkAssoc.Wac"
+    AssociationOtherEnd="mil.stratis.model.entity.associations.WacWarehouseFkAssoc.Warehouse"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="SiteInfo"
+    Association="mil.stratis.model.entity.associations.WarehouseSiteFkAssoc"
+    AssociationEnd="mil.stratis.model.entity.associations.WarehouseSiteFkAssoc.SiteInfo"
+    AssociationOtherEnd="mil.stratis.model.entity.associations.WarehouseSiteFkAssoc.Warehouse"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="WarehousePrimaryKey"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="WAREHOUSE_PRIMARY_KEY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.loc.Warehouse.WarehouseId"/>
+    </AttrArray>
+  </Key>
+</Entity>

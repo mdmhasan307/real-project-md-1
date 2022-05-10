@@ -1,0 +1,213 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="RefMatsView"
+   Version="11.1.2.64.36"
+   SelectList="RefMats.ADVICE_CODE, 
+       RefMats.CONDITION_CODE, 
+       RefMats.DEMAND_SUFFIX_CODE, 
+       RefMats.DISTRIBUTION_CODE, 
+       RefMats.DOCUMENT_IDENTIFIER, 
+       RefMats.DOCUMENT_NUMBER, 
+       RefMats.ERO_NUMBER, 
+       RefMats.FSC, 
+       RefMats.FUND_CODE, 
+       RefMats.ISSUE_PRIORITY_DESIGNATOR, 
+       RefMats.MEDIA_AND_STATUS_CODE, 
+       RefMats.NIIN, 
+       RefMats.PROJECT_CODE, 
+       RefMats.REF_MATS_ID, 
+       RefMats.ROUTING_IDENTIFIER_FROM, 
+       RefMats.ROUTING_IDENTIFIER_TO, 
+       RefMats.SHIP_TO_ADDRESS_1, 
+       RefMats.SHIP_TO_ADDRESS_2, 
+       RefMats.SHIP_TO_ADDRESS_3, 
+       RefMats.SHIP_TO_ADDRESS_4, 
+       RefMats.SIGNAL_CODE, 
+       RefMats.SUPPLEMENTARY_ADDRESS, 
+       RefMats.TRANSACTION_QUANTITY, 
+       RefMats.UNIT_OF_ISSUE, 
+       RefMats.UNIT_PRICE, 
+       RefMats.REQUIRED_DELIVERY_DATE, 
+       RefMats.DEMIL_CODE"
+   FromList="REF_MATS RefMats"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.wlm.RefMatsViewImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="RefMats"
+      Entity="mil.stratis.model.entity.wlm.RefMats" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="AdviceCode"
+      EntityAttrName="AdviceCode"
+      EntityUsage="RefMats"
+      AliasName="ADVICE_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ConditionCode"
+      EntityAttrName="ConditionCode"
+      EntityUsage="RefMats"
+      AliasName="CONDITION_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DemandSuffixCode"
+      EntityAttrName="DemandSuffixCode"
+      EntityUsage="RefMats"
+      AliasName="DEMAND_SUFFIX_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DistributionCode"
+      EntityAttrName="DistributionCode"
+      EntityUsage="RefMats"
+      AliasName="DISTRIBUTION_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocumentIdentifier"
+      EntityAttrName="DocumentIdentifier"
+      EntityUsage="RefMats"
+      AliasName="DOCUMENT_IDENTIFIER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocumentNumber"
+      EntityAttrName="DocumentNumber"
+      EntityUsage="RefMats"
+      AliasName="DOCUMENT_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EroNumber"
+      EntityAttrName="EroNumber"
+      EntityUsage="RefMats"
+      AliasName="ERO_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Fsc"
+      EntityAttrName="Fsc"
+      EntityUsage="RefMats"
+      AliasName="FSC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FundCode"
+      EntityAttrName="FundCode"
+      EntityUsage="RefMats"
+      AliasName="FUND_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IssuePriorityDesignator"
+      EntityAttrName="IssuePriorityDesignator"
+      EntityUsage="RefMats"
+      AliasName="ISSUE_PRIORITY_DESIGNATOR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MediaAndStatusCode"
+      EntityAttrName="MediaAndStatusCode"
+      EntityUsage="RefMats"
+      AliasName="MEDIA_AND_STATUS_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Niin"
+      EntityAttrName="Niin"
+      EntityUsage="RefMats"
+      AliasName="NIIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectCode"
+      EntityAttrName="ProjectCode"
+      EntityUsage="RefMats"
+      AliasName="PROJECT_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RefMatsId"
+      IsNotNull="true"
+      EntityAttrName="RefMatsId"
+      EntityUsage="RefMats"
+      AliasName="REF_MATS_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RoutingIdentifierFrom"
+      EntityAttrName="RoutingIdentifierFrom"
+      EntityUsage="RefMats"
+      AliasName="ROUTING_IDENTIFIER_FROM" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RoutingIdentifierTo"
+      EntityAttrName="RoutingIdentifierTo"
+      EntityUsage="RefMats"
+      AliasName="ROUTING_IDENTIFIER_TO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ShipToAddress1"
+      EntityAttrName="ShipToAddress1"
+      EntityUsage="RefMats"
+      AliasName="SHIP_TO_ADDRESS_1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ShipToAddress2"
+      EntityAttrName="ShipToAddress2"
+      EntityUsage="RefMats"
+      AliasName="SHIP_TO_ADDRESS_2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ShipToAddress3"
+      EntityAttrName="ShipToAddress3"
+      EntityUsage="RefMats"
+      AliasName="SHIP_TO_ADDRESS_3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ShipToAddress4"
+      EntityAttrName="ShipToAddress4"
+      EntityUsage="RefMats"
+      AliasName="SHIP_TO_ADDRESS_4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SignalCode"
+      EntityAttrName="SignalCode"
+      EntityUsage="RefMats"
+      AliasName="SIGNAL_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SupplementaryAddress"
+      EntityAttrName="SupplementaryAddress"
+      EntityUsage="RefMats"
+      AliasName="SUPPLEMENTARY_ADDRESS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TransactionQuantity"
+      EntityAttrName="TransactionQuantity"
+      EntityUsage="RefMats"
+      AliasName="TRANSACTION_QUANTITY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UnitOfIssue"
+      EntityAttrName="UnitOfIssue"
+      EntityUsage="RefMats"
+      AliasName="UNIT_OF_ISSUE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UnitPrice"
+      EntityAttrName="UnitPrice"
+      EntityUsage="RefMats"
+      AliasName="UNIT_PRICE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RequiredDeliveryDate"
+      EntityAttrName="RequiredDeliveryDate"
+      EntityUsage="RefMats"
+      AliasName="REQUIRED_DELIVERY_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DemilCode"
+      EntityAttrName="DemilCode"
+      EntityUsage="RefMats"
+      AliasName="DEMIL_CODE" >
+   </ViewAttribute>
+</ViewObject>

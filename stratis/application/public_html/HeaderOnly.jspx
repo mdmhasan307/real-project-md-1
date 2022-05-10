@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <!-- 1140 = 350 + 100 + 200 -->
+    <af:panelGridLayout id="ho_pgl1">
+        <af:gridRow id="ho_gr1" marginTop="10px" height="66px">
+            <af:gridCell inlineStyle="background-repeat:no-repeat; background-image:url(resources/images/TopBar_Left_long_1260x66.jpg);"
+                         id="ho_gc2" width="1260px">
+                <af:panelGroupLayout layout="horizontal" valign="top" id="ho_pgl2">
+                    <af:spacer width="400" height="66px" id="ho_s2"/>
+                    <af:panelGroupLayout layout="vertical" id="ho_pg22">
+                        <af:spacer height="20" width="300" id="ho_s1"/>
+                    </af:panelGroupLayout>
+                    <af:spacer width="300" height="66px" id="ho_s3"/>
+                    
+                        <af:panelGroupLayout layout="vertical" id="ho_pg23">                            
+                            <af:link text="Switch Workstation" rendered="#{userbean.loggedIn}"
+                                    disabled="true" action="#{userBackingBean.goSwitchWorkstation}"
+                                    inlineStyle="font-size: 10pt" id="cl15" immediate="true"/>
+                            <!--<af:goLink text="Help" rendered="true" destination="#{userbean.helpURL}"
+                                       inlineStyle="font-weight:bold" targetFrame="_blank" id="helpURL"/>-->
+                        </af:panelGroupLayout>
+                        
+                    <af:spacer width="198" height="66px" id="ho_s22"/>
+                </af:panelGroupLayout>
+            </af:gridCell>
+        </af:gridRow>
+        <af:gridRow id="ho_gr3">
+            <af:gridCell inlineStyle="background-image:url(resources/images/tiny_boxes_bw.gif); background-repeat:repeat;"
+                         id="ho_gc3">
+                <af:spacer width="1260px" height="8" id="s5"/>
+            </af:gridCell>
+        </af:gridRow>
+    </af:panelGridLayout>
+</jsp:root>    

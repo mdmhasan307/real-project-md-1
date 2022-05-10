@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.usmc.mil/schemas/1/if/I009_ShipmentReceiptsInbound" xmlns="http://www.w3.org/2001/XMLSchema">
+  <element name="I009_ShipmentReceiptsInboundProcessCompressedRequest">
+    <complexType>
+      <sequence>
+        <element name="input" type="base64Binary"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element name="I009_ShipmentReceiptsInboundProcessUncompressedRequest">
+    <complexType>
+      <sequence>
+        <element name="input" type="anyType"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element name="I009_ShipmentReceiptsInboundProcessResponse">
+    <complexType>
+      <sequence>
+        <element name="result" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+</schema>

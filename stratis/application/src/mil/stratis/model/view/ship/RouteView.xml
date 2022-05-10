@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="RouteView"
+  Version="11.1.2.64.36"
+  SelectList="Route.ROUTE_ID, 
+       Route.DESCRIPTION, 
+       Route.ROUTE_NAME"
+  FromList="ROUTE Route"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  OrderBy="ROUTE_NAME ASC">
+  <EntityUsage
+    Name="Route"
+    Entity="mil.stratis.model.entity.ship.Route"/>
+  <ViewAttribute
+    Name="RouteId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="RouteId"
+    EntityUsage="Route"
+    AliasName="ROUTE_ID"/>
+  <ViewAttribute
+    Name="Description"
+    PrecisionRule="true"
+    EntityAttrName="Description"
+    EntityUsage="Route"
+    AliasName="DESCRIPTION"/>
+  <ViewAttribute
+    Name="RouteName"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="RouteName"
+    EntityUsage="Route"
+    AliasName="ROUTE_NAME"/>
+</ViewObject>

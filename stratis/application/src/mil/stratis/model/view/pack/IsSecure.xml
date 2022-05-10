@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="IsSecure"
+   Version="11.1.2.64.36"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   ComponentClass="mil.stratis.model.view.pack.IsSecureImpl"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+      <Attr Name="_isExpertMode" Value="true" />
+   </DesignTime>
+   <Variable
+      Name="cName"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <Variable
+      Name="cValue"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <SQLQuery><![CDATA[
+SELECT 
+    SITE_SECURITY.CODE_NAME CODE_NAME, 
+    SITE_SECURITY.CODE_VALUE CODE_VALUE 
+FROM 
+    SITE_SECURITY 
+WHERE 
+    SITE_SECURITY.CODE_VALUE = :cValue AND SITE_SECURITY.CODE_NAME = :cName
+   ]]></SQLQuery>
+   <ViewAttribute
+      Name="CodeName"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="5"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CODE_NAME"
+      Expression="CODE_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="5" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CodeValue"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CODE_VALUE"
+      Expression="CODE_VALUE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="2"/>
+    <jsp:setProperty name="userbean" property="selected3" value="0"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="Admin_WarehouseManagement"/>
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session" />
+    <jsp:setProperty name="logBean" property="page" value="Warehouse Management Home"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="185" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout id="pgl1">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGridLayout id="tl4">
+                                <af:gridRow id="rl7">
+                                    <af:gridCell valign="top" id="cf10">
+                                        <af:spacer width="10" height="600" id="s1"/>
+                                    </af:gridCell>
+                                </af:gridRow>
+                            </af:panelGridLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6" id="s2"/>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

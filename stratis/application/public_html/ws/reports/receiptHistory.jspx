@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <!-- Receipt History Report -->
+    <af:table var="row" rowBandingInterval="1" id="rg5t2_1" autoHeightRows="0"
+              styleClass="AFStretchWidth"
+              value="#{viewScope.ReportsQueryResultBean.reportColumnList}"
+              rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Receipt History Report'}">
+        <af:column sortable="false" headerText="RCN" id="rg5c2_1" width="150">
+            <af:outputText value="#{row.rcn}" id="rg5ot2_1"/>
+        </af:column>
+        <af:column sortable="false" headerText="SID" id="rg5c2_2">
+            <af:outputText value="#{row.sid}" id="rg5ot2_2"/>
+        </af:column>
+        <af:column sortable="false" headerText="NIIN" id="rg5c2_3">
+            <af:outputText value="#{row.niin}" id="rg5ot2_3"/>
+        </af:column>
+        <af:column sortable="false" headerText="Date Received" id="rg5c2_4">
+            <af:outputText value="#{row.dateReceived}"/>
+        </af:column>
+        <af:column sortable="false" headerText="Document Number" id="rg5c2_5">
+            <af:outputText value="#{row.documentNumber}" id="rg5ot2_5"/>
+        </af:column>
+        <af:column sortable="false" headerText="Qty Received" id="rg5c2_6"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.qtyReceived}" id="rg5ot2_6"/>
+        </af:column>
+        <af:column sortable="false" headerText="Qty Stowed" id="rg5c2_7"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.stowedQty}" id="rg5ot2_7"/>
+        </af:column>
+        <af:column sortable="false" headerText="Qty Backordered" id="rg5c2_8"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.qtyBackordered}" id="rg5ot2_8"/>
+        </af:column>
+        <af:column sortable="false" headerText="Location" id="rg5c2_9">
+            <af:outputText value="#{row.location}" id="rg5ot2_9"/>
+        </af:column>
+        <af:column sortable="false" headerText="Received By" id="rg5c2_10">
+            <af:outputText value="#{row.receivedBy}" id="rg5ot2_10"/>
+        </af:column>
+        <af:column sortable="false" headerText="Stowed By" id="rg5c2_11">
+            <af:outputText value="#{row.stowedBy}" id="rg5ot2_11"/>
+        </af:column>
+        <af:column sortable="false" headerText="Date Stowed" id="rg5c2_12">
+            <af:outputText value="#{row.dateStowed}"/>
+        </af:column>
+    </af:table>
+</jsp:root>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+            <skins xmlns="http://myfaces.apache.org/trinidad/skin">
+                <skin>
+                    <id>
+                        stratis.desktop
+                    </id>
+                    <family>
+                        stratis
+                    </family>
+                    <version>
+                      <name>v1</name>
+                      <default>true</default>
+                    </version>
+                    <!-- if you want this skin to be for a pda, use org.apache.myfaces.trinidad.pda as the render-kit-id -->
+                    <render-kit-id>
+                        org.apache.myfaces.trinidad.desktop
+                    </render-kit-id>
+                    <style-sheet-name>
+                        css/Stratis.css
+                    </style-sheet-name>
+            <!--we are extending the default, simple skin, so no need for this-->
+                    <extends>fusionFx-v2.1.desktop</extends>
+            <!-- no need for this right now
+                    <bundle-name>
+                        org.apache.myfaces.trinidaddemo.resource.SkinBundle
+                    </bundle-name>
+            -->
+                </skin>
+            </skins>

@@ -1,0 +1,317 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="LocationVO"
+   Version="11.1.2.64.36"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   ComponentClass="mil.stratis.model.view.wlm.LocationVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+      <Attr Name="_isExpertMode" Value="true" />
+   </DesignTime>
+   <Variable
+      Name="newWeight"
+      Kind="where"
+      Type="java.lang.Double" >
+   </Variable>
+   <Variable
+      Name="newCube"
+      Kind="where"
+      Type="java.lang.Double" >
+   </Variable>
+   <Variable
+      Name="secureFlag"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <Variable
+      Name="locLabelStr"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <Variable
+      Name="whId"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <Variable
+      Name="mechFlagV"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <Variable
+      Name="mechFlagH"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <Variable
+      Name="bayStr"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <Variable
+      Name="locLevelStr"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <Variable
+      Name="wacNumberStr"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <Variable
+      Name="sideStr"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <Variable
+      Name="niinIdStr"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <Variable
+      Name="expDtStr"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <SQLQuery><![CDATA[
+SELECT distinct
+    Location.LOCATION_ID, 
+    Location.AISLE, 
+    Location.SIDE, 
+    Location.BAY, 
+    Location.LOC_LEVEL, 
+    Location.AVAILABILITY_FLAG, 
+    Location.LOCATION_LABEL, 
+    Location.SLOT, 
+    Location.WAC_ID, 
+    Location.LOCATION_HEADER_BIN_ID, 
+    Location.MECHANIZED_FLAG, 
+    Location.LOC_CLASSIFICATION_ID, 
+    Location.DIVIDER_INDEX,
+    Location.LAST_STOW_DATE
+FROM 
+    LOCATION Location, wac w, location_classification lc, location_header lh, location_header_bin lhb
+WHERE 
+    w.wac_id = Location.wac_id and
+    w.warehouse_id like nvl(:whId,'%') and
+    Location.LOCATION_HEADER_BIN_ID = lhb.LOCation_HEADER_bin_ID(+) and
+    lhb.loc_header_id  = lh.loc_header_id (+) and
+    lhb.LOC_CLASSIFICATION_ID = lc.LOC_CLASSIFICATION_ID (+) and
+    ((Location.MECHANIZED_FLAG = 'N') or
+     (((Location.weight + :newWeight) <= lc.usable_weight) and
+      ((Location.cube + :newCube) <= (lc.usable_cube/lc.SLOT_COUNT)) and
+      ((lhb.weight + :newWeight) <= lhb.max_weight) and
+      ((lh.weight + :newWeight) <= lh.max_weight))) and 
+    (w.mechanized_flag like  nvl(:mechFlagH,'%') or 
+    w.mechanized_flag like  nvl(:mechFlagV,'%')) and
+    w.secure_flag like nvl(:secureFlag,'%') and
+    Location.LOCATION_LABEL LIKE  nvl(:locLabelStr,'%') AND 
+    Location.AVAILABILITY_FLAG = 'A' 
+    AND (Location.bay like nvl(:bayStr,'%'))
+    AND (Location.loc_level like nvl(:locLevelStr, '%'))
+    AND (w.wac_number like nvl(:wacNumberStr, '%'))
+    AND (nvl(Location.side,'x') like nvl(:sideStr, '%'))
+     and Location.location_id not in (select unique nvl(s1.location_id,0) from receipt r1, stow s1  where r1.rcn = s1.rcn and ((r1.niin_id  <> :niinIdStr) or (TO_CHAR(nvl(s1.EXPIRATION_DATE,to_date('01019999','DDMMYYYY')), 'YYYYMM') <> nvl(:expDtStr,'999901'))) )
+order by  Location.LAST_STOW_DATE desc
+   ]]></SQLQuery>
+   <ViewAttribute
+      Name="LocationId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="LOCATION_ID"
+      Expression="LOCATION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Aisle"
+      IsPersistent="false"
+      Precision="10"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="AISLE"
+      Expression="AISLE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Side"
+      IsPersistent="false"
+      Precision="10"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SIDE"
+      Expression="SIDE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Bay"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="10"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="BAY"
+      Expression="BAY"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocLevel"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="10"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="LOC_LEVEL"
+      Expression="LOC_LEVEL"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AvailabilityFlag"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="AVAILABILITY_FLAG"
+      Expression="AVAILABILITY_FLAG"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationLabel"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="9"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="LOCATION_LABEL"
+      Expression="LOCATION_LABEL"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="9" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Slot"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="2"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SLOT"
+      Expression="SLOT"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WacId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="WAC_ID"
+      Expression="WAC_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationHeaderBinId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="LOCATION_HEADER_BIN_ID"
+      Expression="LOCATION_HEADER_BIN_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MechanizedFlag"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="MECHANIZED_FLAG"
+      Expression="MECHANIZED_FLAG"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocClassificationId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="LOC_CLASSIFICATION_ID"
+      Expression="LOC_CLASSIFICATION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DividerIndex"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="DIVIDER_INDEX"
+      Expression="DIVIDER_INDEX"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Qty"
+      IsUpdateable="false"
+      IsSelected="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="VIEW_ATTR"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastStowDate"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Type="java.lang.String"
+      ColumnType="DATE"
+      AliasName="LAST_STOW_DATE"
+      Expression="LAST_STOW_DATE"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+</ViewObject>

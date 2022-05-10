@@ -1,0 +1,292 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="5"/>
+    <jsp:setProperty name="userbean" property="selected2" value="1"/>
+    <f:view>
+        <af:document title="STRATIS Shipping - Review Contents" id="d1">
+            <af:form id="ReviewContentsForm">
+                <af:panelStretchLayout id="psl1" startWidth="24" topHeight="150" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/ws/WS_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <!--af:form id="ReviewContentsForm"-->
+                            <af:panelGroupLayout>
+                                <af:panelHeader text="Review Content(s) of a Location"/>
+                                <af:outputText value="&lt;br>" escape="false"/>
+                                <!-- inner table -->
+                                <af:panelBox text="Location Review" inlineStyle="width: 700px;">
+                                    <af:outputText value="&lt;br>" escape="false"/>
+                                    <!-- Begin page -->
+                                    <af:panelTabbed styleClass="AFStretchWidth">
+                                        <af:showDetailItem text="Container Review"
+                                                           disclosureListener="#{backing_shippingReview.clearReviewLocationDisclose}">
+                                            <af:subform id="subformContainerReview">
+                                                <af:panelFormLayout id="panelFormContainerReview">
+                                                    <af:panelGroupLayout layout="horizontal" valign="bottom">
+                                                        <af:panelGroupLayout id="panelGroupFloorLocation"
+                                                                             layout="vertical">
+                                                            <af:outputLabel value="Floor Location"
+                                                                            id="lblFloorLocation"/>
+                                                            <af:inputText value="#{bindings.FloorLocation.inputValue}"
+                                                                          columns="#{bindings.FloorLocation.displayWidth}"
+                                                                          contentStyle="text-transform:uppercase;"
+                                                                          maximumLength="5" id="txtFloorLocation"/>
+                                                        </af:panelGroupLayout>
+                                                        <af:spacer width="10"/>
+                                                        <af:panelGroupLayout id="panelGroupLeadTcn" layout="vertical">
+                                                            <af:outputLabel value="Lead TCN" id="lblLeadTcn"/>
+                                                            <af:inputText value="#{bindings.LeadTcn.inputValue}"
+                                                                          columns="#{bindings.LeadTcn.displayWidth}"
+                                                                          contentStyle="text-transform:uppercase;"
+                                                                          maximumLength="17" id="txtLeadTcn"/>
+                                                        </af:panelGroupLayout>
+                                                        <af:spacer width="10"/>
+                                                        <af:panelGroupLayout id="panelGroupBtnSearch" layout="vertical">
+                                                            <af:toolbar>
+                                                                <af:button actionListener="#{bindings.Execute.execute}"
+                                                                           text="Search"
+                                                                           disabled="#{!bindings.Execute.enabled}"
+                                                                           id="btnSearch" partialSubmit="false">
+                                                                    <!--<af:clientListener method="javascript:this.disabled=true;" type="click" />-->
+                                                                    <af:setActionListener from="#{true}"
+                                                                                          to="#{backing_shippingReview.hasContainerReviewResults}"/>
+                                                                </af:button>
+                                                            </af:toolbar>
+                                                        </af:panelGroupLayout>
+                                                    </af:panelGroupLayout>
+                                                </af:panelFormLayout>
+                                            </af:subform>
+                                            <af:outputText value="&lt;br>" escape="false"/>
+                                            <af:panelBox text="Contents Still at Location?" id="containerReviewPanelBox"
+                                                         rendered="#{requestContext.postback == true}">
+                                                <af:outputText value="&lt;br>" escape="false"/>
+                                                <af:subform id="containerReviewForm">
+                                                    <af:outputText value="&lt;br>" escape="false"/>
+                                                    <af:table value="#{bindings.Barcodes.collectionModel}" var="row"
+                                                              width="100%" rows="#{bindings.Barcodes.rangeSize}"
+                                                              first="#{bindings.Barcodes.rangeStart}"
+                                                              emptyText="#{bindings.Barcodes.viewable ? 'No rows found.' : 'Access Denied.'}"
+                                                              binding="#{backing_shippingReview.containerReviewTable}"
+                                                              id="containerReviewTable">
+                                                        <af:column sortProperty="ConsolidationBarcode" sortable="true"
+                                                                   headerText="Barcode">
+                                                            <af:outputText value="#{row.ConsolidationBarcode}"/>
+                                                        </af:column>
+                                                        <af:column sortProperty="LeadTcn" sortable="true"
+                                                                   headerText="Lead TCN">
+                                                            <af:outputText value="#{row.LeadTcn}"/>
+                                                        </af:column>
+                                                        <af:column sortProperty="FloorLocation" sortable="true"
+                                                                   headerText="Floor Location">
+                                                            <af:outputText value="#{row.FloorLocation}"/>
+                                                        </af:column>
+                                                        <af:column sortProperty="Aac" sortable="true" headerText="AAC">
+                                                            <af:outputText value="#{row.Aac}"/>
+                                                        </af:column>
+                                                    </af:table>
+                                                    <af:outputText value="&lt;br>" escape="false"/>
+                                                </af:subform>
+                                            </af:panelBox>
+                                        </af:showDetailItem>
+                                        <af:showDetailItem text="Barcode Review">
+                                            <af:messages/>
+                                            <af:outputText value="&lt;br>" escape="false"/>
+                                            <af:panelFormLayout>
+                                                <af:panelGroupLayout layout="vertical">
+                                                    <af:panelGroupLayout layout="horizontal">
+                                                        <af:outputLabel value="Floor Location" id="lblLocation"
+                                                                        inlineStyle="font-weight:bold;"/>
+                                                        <af:spacer width="10"/>
+                                                        <af:inputText value="" columns="18" maximumLength="5"
+                                                                      shortDesc="Enter 5-character Floor Location to Be Reviewed (required)"
+                                                                      contentStyle="text-transform:uppercase;"
+                                                                      binding="#{backing_shippingReview.txtEnterLocation}"
+                                                                      id="txtLocation"/>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer height="20"/>
+                                                    <af:panelGroupLayout layout="horizontal">
+                                                        <af:outputLabel value="Shipping Barcode" id="lblItem"
+                                                                        inlineStyle="font-weight:bold;"/>
+                                                        <af:spacer width="10"/>
+                                                        <af:inputText value="" columns="18" maximumLength="10"
+                                                                      shortDesc="Enter Shipping Barcode must be greater than or equal to 5 alphanumeric characters (required)"
+                                                                      id="txtContainer"
+                                                                      contentStyle="text-transform:uppercase;"
+                                                                      binding="#{backing_shippingReview.txtEnterContainer}"/>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer height="20"/>
+                                                    <af:panelGroupLayout>
+                                                        <af:toolbar>
+                                                            <af:button text="Review"
+                                                                       shortDesc="Click here to review the location"
+                                                                       inlineStyle="width:100px" accessKey="R"
+                                                                       disabled="#{backing_shippingReview.showTableResults}"
+                                                                       id="btnReview"
+                                                                       actionListener="#{backing_shippingReview.submitBarcodeReview}"
+                                                                       partialSubmit="false">
+                                                                <!--<af:clientListener method="javascript:this.disabled=true;" type="click" />-->
+                                                            </af:button>
+                                                            <af:button text="Cancel"
+                                                                       shortDesc="Click here to cancel the review of a location"
+                                                                       inlineStyle="width:100px" accessKey="C"
+                                                                       disabled="false" id="btnCancelReview"
+                                                                       actionListener="#{backing_shippingReview.cancelBarcodeReview}"
+                                                                       partialSubmit="false">
+                                                                <!--<af:clientListener method="javascript:this.disabled=true;" type="click" />-->
+                                                            </af:button>
+                                                            <!-- hidden buttons -->
+                                                        </af:toolbar>
+                                                    </af:panelGroupLayout>
+                                                </af:panelGroupLayout>
+                                                <af:outputText value="&lt;br>" escape="false"/>
+                                                <af:panelBox text="Message"
+                                                             rendered="#{backing_shippingReview.hasDisposition0}">
+                                                    <af:outputText value="&lt;br>" escape="false"/>
+                                                    <af:outputLabel value="ALREADY PICKED UP OR DELIVERED"
+                                                                    inlineStyle="font-weight:bold"
+                                                                    id="lblDisposition0"/>
+                                                </af:panelBox>
+                                                <af:panelBox text="Conflict Message"
+                                                             visible="#{backing_shippingReview.hasDisposition1}">
+                                                    <af:outputText value="&lt;br>" escape="false"/>
+                                                    <af:panelGroupLayout layout="vertical">
+                                                        <af:outputLabel value="WRONG CUSTOMER"
+                                                                        inlineStyle="font-weight:bold"
+                                                                        id="lblDisposition1"/>
+                                                        <af:inputText value=""
+                                                                      binding="#{backing_shippingReview.txtDispositionShippingId}"
+                                                                      id="txtDispositionShippingId"
+                                                                      inlineStyle="display:none;"/>
+                                                        <af:inputText value=""
+                                                                      binding="#{backing_shippingReview.txtDispositionShippingManifestId}"
+                                                                      id="txtDispositionShippingManifestId"
+                                                                      inlineStyle="display:none;"/>
+                                                        <af:inputText value=""
+                                                                      binding="#{backing_shippingReview.txtDispositionScn}"
+                                                                      id="txtDispositionScn"
+                                                                      inlineStyle="display:none;"/>
+                                                        <af:inputText value="" columns="7" readOnly="true"
+                                                                      binding="#{backing_shippingReview.txtDispositionCurrentAAC}"
+                                                                      id="txtDisposition1Current"
+                                                                      label="System currently shows Current AAC"/>
+                                                        <af:inputText value="" columns="7" readOnly="true"
+                                                                      binding="#{backing_shippingReview.txtDispositionExpectedAAC}"
+                                                                      id="txtDisposition1Expected"
+                                                                      label="Expected AAC"/>
+                                                        <af:outputText value="&lt;br>" escape="false"/>
+                                                        <af:outputLabel value="Would you like to Override the Current AAC?"
+                                                                        inlineStyle="font-weight:bold"
+                                                                        id="overrideAAC"/>
+                                                        <af:toolbar>
+                                                            <af:button id="submitYesButton1" text="Yes"
+                                                                       inlineStyle="width:100px"
+                                                                       actionListener="#{backing_shippingReview.btnReviewSubmitYes1}"
+                                                                       partialSubmit="false">
+                                                                <!--<af:clientListener method="javascript:submitYes1();" type="click" />-->
+                                                            </af:button>
+                                                            <af:button id="submitNoButton1" text="No"
+                                                                       inlineStyle="width:100px"
+                                                                       actionListener="#{backing_shippingReview.btnReviewSubmitNo1}"
+                                                                       partialSubmit="false">
+                                                                <!--<af:clientListener method="javascript:submitNo1();" type="click" />-->
+                                                            </af:button>
+                                                        </af:toolbar>
+                                                    </af:panelGroupLayout>
+                                                </af:panelBox>
+                                                <af:panelBox text="Conflict Message"
+                                                             visible="#{backing_shippingReview.hasDisposition2}">
+                                                    <af:outputText value="&lt;br>" escape="false"/>
+                                                    <af:panelGroupLayout layout="vertical">
+                                                        <af:outputLabel value="AT LOCATION"
+                                                                        inlineStyle="font-weight:bold"
+                                                                        id="lblDisposition2"/>
+                                                        <af:inputText value="" columns="18" readOnly="true"
+                                                                      binding="#{backing_shippingReview.txtDispositionCurrentLocation}"
+                                                                      id="txtDisposition2Current"
+                                                                      label="System currently shows AT LOCATION"/>
+                                                        <af:inputText value="" columns="18" readOnly="true"
+                                                                      binding="#{backing_shippingReview.txtDispositionExpectedLocation}"
+                                                                      id="txtDisposition2Expected"
+                                                                      label="Expected LOCATION"/>
+                                                        <af:outputText value="&lt;br>" escape="false"/>
+                                                        <af:outputLabel value="Would you like to Override the Current Location?"
+                                                                        inlineStyle="font-weight:bold"
+                                                                        id="overrideLocation"/>
+                                                        <af:toolbar>
+                                                            <af:button id="submitYesButton2" text="Yes"
+                                                                       inlineStyle="width:100px"
+                                                                       actionListener="#{backing_shippingReview.btnReviewSubmitYes2}"
+                                                                       partialSubmit="false">
+                                                                <!--<af:clientListener method="javascript:submitYes2();" type="click" />-->
+                                                            </af:button>
+                                                            <af:button id="submitNoButton2" text="No"
+                                                                       inlineStyle="width:100px"
+                                                                       actionListener="#{backing_shippingReview.btnReviewSubmitNo2}"
+                                                                       partialSubmit="false">
+                                                                <!--<af:clientListener method="javascript:submitNo2();" type="click" />-->
+                                                            </af:button>
+                                                        </af:toolbar>
+                                                    </af:panelGroupLayout>
+                                                </af:panelBox>
+                                                <af:panelBox text="Message"
+                                                             rendered="#{backing_shippingReview.hasDisposition3}">
+                                                    <af:outputText value="&lt;br>" escape="false"/>
+                                                    <af:outputLabel value="ADDED TO LOCATION"
+                                                                    inlineStyle="font-weight:bold"
+                                                                    id="lblDisposition3"/>
+                                                </af:panelBox>
+                                                <af:panelBox text="Message"
+                                                             rendered="#{backing_shippingReview.hasDisposition4}">
+                                                    <af:outputText value="&lt;br>" escape="false"/>
+                                                    <af:outputLabel value="ALREADY INCLUDED AT LOCATION"
+                                                                    inlineStyle="font-weight:bold"
+                                                                    id="lblDisposition4"/>
+                                                </af:panelBox>
+                                                <af:panelBox text="Message"
+                                                             rendered="#{backing_shippingReview.hasDispositionUnknown1}">
+                                                    <af:outputText value="&lt;br>" escape="false"/>
+                                                    <af:outputLabel value="UNKNOWN - LOCATION NOT FOUND"
+                                                                    inlineStyle="font-weight:bold"
+                                                                    id="lblDispositionUnknown1"/>
+                                                </af:panelBox>
+                                                <af:panelBox text="Message"
+                                                             rendered="#{backing_shippingReview.hasDispositionUnknown2}">
+                                                    <af:outputText value="&lt;br>" escape="false"/>
+                                                    <af:outputLabel value="UNKNOWN - NO BARCODE OR TCN FOUND"
+                                                                    inlineStyle="font-weight:bold"
+                                                                    id="lblDispositionUnknown2"/>
+                                                </af:panelBox>
+                                            </af:panelFormLayout>
+                                        </af:showDetailItem>
+                                    </af:panelTabbed>
+                                </af:panelBox>
+                                <!-- End page -->
+                            </af:panelGroupLayout>
+                            <!--/af:form-->
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <af:spacer width="24" height="675"/>
+                    </f:facet>
+                    <f:facet name="end"/>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

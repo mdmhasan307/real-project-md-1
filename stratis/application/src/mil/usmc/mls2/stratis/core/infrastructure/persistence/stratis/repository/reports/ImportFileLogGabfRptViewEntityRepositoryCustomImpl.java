@@ -1,0 +1,56 @@
+package mil.usmc.mls2.stratis.core.infrastructure.persistence.stratis.repository.reports;
+
+import com.querydsl.core.types.Predicate;
+import lombok.RequiredArgsConstructor;
+import lombok.val;
+import mil.usmc.mls2.stratis.common.model.enumeration.SearchTypeEnum;
+import mil.usmc.mls2.stratis.core.domain.model.reports.ImportFileLogGabfRptViewSearchCriteria;
+import mil.usmc.mls2.stratis.core.infrastructure.persistence.stratis.model.reports.ImportFileLogGabfRptViewEntity;
+import mil.usmc.mls2.stratis.core.infrastructure.persistence.stratis.model.reports.QImportFileLogGabfRptViewEntity;
+import mil.usmc.mls2.stratis.core.infrastructure.util.BooleanExpressionBuilder;
+import mil.usmc.mls2.stratis.integration.mls2.messaging.qry.application.model.SortOrderPair;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
+import java.util.List;
+
+import static mil.usmc.mls2.stratis.integration.mls2.messaging.qry.infrastructure.util.SearchUtils.*;
+
+@RequiredArgsConstructor
+@SuppressWarnings("unused, Duplicates")
+public class ImportFileLogGabfRptViewEntityRepositoryCustomImpl implements ImportFileLogGabfRptViewEntityRepositoryCustom {
+
+  @PersistenceContext
+  private EntityManager entityManager;
+
+  @Override
+  public List<ImportFileLogGabfRptViewEntity> search(ImportFileLogGabfRptViewSearchCriteria criteria) {
+    val qEntity = QImportFileLogGabfRptViewEntity.importFileLogGabfRptViewEntity;
+    val query = selectFrom(qEntity, entityManager);
+    configurePredicate(query, createSearchPredicate(criteria, qEntity));
+    configureOrderBy(query, createSortPairs(criteria, qEntity));
+    return query.fetch();
+  }
+
+  private Predicate createSearchPredicate(ImportFileLogGabfRptViewSearchCriteria criteria, QImportFileLogGabfRptViewEntity qImportFileLogGabfRptViewEntity) {
+    val expressions = BooleanExpressionBuilder.of(SearchTypeEnum.AND);
+    goe(qImportFileLogGabfRptViewEntity.createdDate, criteria.getStartDate(), expressions);
+    loe(qImportFileLogGabfRptViewEntity.createdDate, criteria.getEndDate(), expressions);
+
+    return expressions.getExpression();
+  }
+
+  private List<SortOrderPair> createSortPairs(ImportFileLogGabfRptViewSearchCriteria criteria, QImportFileLogGabfRptViewEntity qImportFileLogGabfRptViewEntity) {
+    val sorts = generateSortOrderPairs(criteria.getSortColumn(), criteria.getSortOrder(), qImportFileLogGabfRptViewEntity);
+    val filteredSorts = new ArrayList<SortOrderPair>(sorts.size());
+
+    for (SortOrderPair sort : sorts) {
+      String sortColumn = sort.property();
+      sort = sort.toBuilder().path(qImportFileLogGabfRptViewEntity).property(sortColumn).build();
+      filteredSorts.add(sort);
+    }
+
+    return filteredSorts;
+  }
+}

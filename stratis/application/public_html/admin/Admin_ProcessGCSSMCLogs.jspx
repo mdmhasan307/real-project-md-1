@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:stratis="taglib.mil.usmc.stratis">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="7"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="Admin_ProcessGCSSMCLogs"/>
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session" />
+    <jsp:setProperty name="logBean" property="page" value="GCSS-MC Logs"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="150" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6"/>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGroupLayout layout="horizontal">
+                                <af:panelGroupLayout layout="horizontal">
+                                    <af:link text="GCSS-MC Exports"
+                                             action="GoAdminProcessGCSSMCExports" id="linkExports"/>
+                                    <af:outputText value="&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;"
+                                                   escape="false"/>
+                                    <af:link text="GCSS-MC Imports"
+                                             action="GoAdminProcessGCSSMCImports" id="linkImports"/>
+                                    <af:outputText value="&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;"
+                                                   escape="false"/>
+                                    <af:link text="GCSS-MC Recon" id="linkRecon"
+                                             action="GoAdminProcessGCSSMCRecon"/>
+                                    <af:outputText value="&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;"
+                                                   escape="false"/>
+                                    <af:link text="GCSS-MC Logs" disabled="true"/>
+                                </af:panelGroupLayout>
+                            </af:panelGroupLayout>
+                            <af:spacer width="10" height="10"/>
+                            <af:panelBox text="GCSS-MC Logs Page" inlineStyle="font-weight:bold;"
+                                         showDisclosure="false">
+                                <af:spacer height="0" width="600"/>
+                                <af:panelGroupLayout id="firstGroup" layout="vertical">
+                                    <af:table value="#{bindings.GCSSMCImportsLog1.collectionModel}"
+                                              var="row" width="100%"
+                                              rows="#{bindings.GCSSMCImportsLog1.rangeSize}"
+                                              first="#{bindings.GCSSMCImportsLog1.rangeStart}"
+                                              emptyText="#{bindings.GCSSMCImportsLog1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                              selectionListener="#{bindings.GCSSMCImportsLog1.collectionModel.makeCurrent}"
+                                              id="GCSSMCImportsLogTable"
+                                              binding="#{refLogBean.gcssmcImportsLogTable}"
+                                              rowSelection="single">
+                                        <af:column sortProperty="GcssmcImportsDataId" sortable="true"
+                                                   headerText="ID">
+                                            <af:outputText value="#{row.GcssmcImportsDataId}"/>
+                                        </af:column>
+                                        <af:column sortProperty="InterfaceName" sortable="true"
+                                                   headerText="Interface">
+                                            <af:outputText value="#{row.InterfaceName}"/>
+                                        </af:column>
+                                        <af:column sortProperty="Status" sortable="true"
+                                                   headerText="Status">
+                                            <af:outputText value="#{row.Status}"/>
+                                        </af:column>
+                                        <af:column sortProperty="CreatedDate" sortable="true"
+                                                   headerText="Created Date">
+                                            <stratis:adfDateFormatter value="#{row.CreatedDate}"/>
+                                        </af:column>
+                                    </af:table>
+                                    <af:spacer height="20"/>
+                                    <af:button actionListener="#{refLogBean.saveToFile}"
+                                               id="linkExport" text="Save" accessKey="S" partialSubmit="false">
+                                    </af:button>
+                                </af:panelGroupLayout>
+                            </af:panelBox>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

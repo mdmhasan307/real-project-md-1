@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:af="http://xmlns.oracle.com/adf/faces/rich" >
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="3"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="Admin_UserManagement"/>
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session" />
+    <jsp:setProperty name="logBean" property="page" value="User Management"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="aumd1">
+
+            <af:form id="aumf1">
+                <af:panelStretchLayout id="aumpsl1" startWidth="12" topHeight="150" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="aumwrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6" id="aums1"/>
+                    </f:facet> 
+                    <f:facet name="center">
+                      <af:panelGroupLayout layout="scroll" id="aumasa_pgl2">
+                        <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGroupLayout id="aumpgl1">
+                                <af:panelTabbed dimensionsFrom="auto" id="aumpt1">
+                                    <af:showDetailItem text="User Management" id="aumsdi1" >
+                                        <f:subview id="aumwrap_user">
+                                            <jsp:include page="/admin/Admin_ModifyUser.jspx"/>
+                                        </f:subview>
+                                    </af:showDetailItem>
+                                    <af:showDetailItem text="Group Management" id="aumsdi2">
+                                        <f:subview id="aumwrap_group">
+                                            <jsp:include page="/admin/Admin_ModifyGroup.jspx"/>
+                                        </f:subview>
+                                    </af:showDetailItem>
+                                </af:panelTabbed>
+                                <af:spacer height="10" id="aums2"/>
+                            </af:panelGroupLayout>
+                             <f:subview id="aumwrap_footer">
+                            <jsp:include page="/FooterMain.jspx"/>
+                        </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="aumwrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>  
+</jsp:root>                    

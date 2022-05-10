@@ -1,0 +1,399 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="ReceiptView"
+   Version="11.1.2.64.36"
+   SelectList="Receipt.RCN, 
+       Receipt.FRUSTRATE_CODE, 
+       Receipt.FRUSTRATE_LOCATION, 
+       Receipt.QUANTITY_STOWED, 
+       Receipt.QUANTITY_RELEASED, 
+       Receipt.QUANTITY_MEASURED, 
+       Receipt.QUANTITY_INVOICED, 
+       Receipt.QUANTITY_INDUCTED, 
+       Receipt.NIIN_ID, 
+       Receipt.CONTRACT_NUMBER, 
+       Receipt.FUND_CODE, 
+       Receipt.SIGNAL_CODE, 
+       Receipt.DOCUMENT_NUMBER, 
+       Receipt.DOCUMENT_ID, 
+       Receipt.STATUS, 
+       Receipt.CREATED_BY, 
+       Receipt.CREATED_DATE, 
+       Receipt.MODIFIED_BY, 
+       Receipt.MODIFIED_DATE, 
+       Receipt.CONVERSION_FLAG, 
+       Receipt.ROUTING_ID, 
+       Receipt.WORK_STATION, 
+       Receipt.RDD, 
+       Receipt.SUPPLEMENTARY_ADDRESS, 
+       Receipt.CONSIGNEE, 
+       Receipt.DOD_DIST_CODE, 
+       Receipt.RPD, 
+       Receipt.PARTIAL_SHIPMENT_INDICATOR, 
+       Receipt.TRACEABILITY_NUMBER, 
+       Receipt.CLASS_COMMODITY_NUMBER, 
+       Receipt.SHIPPED_FROM, 
+       Receipt.CC, 
+       Receipt.PROJECT_CODE, 
+       Receipt.PC, 
+       Receipt.COGNIZANCE_CODE, 
+       Receipt.MECH_NON_MECH_FLAG, 
+       Receipt.RATION, 
+       Receipt.SUFFIX, 
+       Receipt.SHELF_LIFE_CODE, 
+       Receipt.WEIGHT, 
+       Receipt.LENGTH, 
+       Receipt.HEIGHT, 
+       Receipt.WIDTH, 
+       Receipt.UI, 
+       Receipt.PRICE, 
+       Receipt.FSC, 
+       Receipt.PART_NUMBER, 
+       Receipt.SERIAL_NUMBER, 
+       Receipt.QUANTITY_BACKORDERED, 
+       Receipt.RI, 
+       Receipt.PACKING_CONSOLIDATION_ID, 
+       Receipt.CUBE, 
+       Receipt.NIIN"
+   FromList="RECEIPT Receipt"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.sysadm.ReceiptViewImpl"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="Receipt"
+      Entity="mil.stratis.model.entity.rcv.Receipt" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="Rcn"
+      IsUpdateable="while_insert"
+      EntityAttrName="Rcn"
+      EntityUsage="Receipt"
+      AliasName="RCN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FrustrateCode"
+      EntityAttrName="FrustrateCode"
+      EntityUsage="Receipt"
+      AliasName="FRUSTRATE_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FrustrateLocation"
+      EntityAttrName="FrustrateLocation"
+      EntityUsage="Receipt"
+      AliasName="FRUSTRATE_LOCATION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="QuantityStowed"
+      IsNotNull="true"
+      EntityAttrName="QuantityStowed"
+      EntityUsage="Receipt"
+      AliasName="QUANTITY_STOWED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="QuantityReleased"
+      IsNotNull="true"
+      EntityAttrName="QuantityReleased"
+      EntityUsage="Receipt"
+      AliasName="QUANTITY_RELEASED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="QuantityMeasured"
+      IsNotNull="true"
+      EntityAttrName="QuantityMeasured"
+      EntityUsage="Receipt"
+      AliasName="QUANTITY_MEASURED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="QuantityInvoiced"
+      IsNotNull="true"
+      EntityAttrName="QuantityInvoiced"
+      EntityUsage="Receipt"
+      AliasName="QUANTITY_INVOICED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="QuantityInducted"
+      IsNotNull="true"
+      EntityAttrName="QuantityInducted"
+      EntityUsage="Receipt"
+      AliasName="QUANTITY_INDUCTED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NiinId"
+      EntityAttrName="NiinId"
+      EntityUsage="Receipt"
+      AliasName="NIIN_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ContractNumber"
+      EntityAttrName="ContractNumber"
+      EntityUsage="Receipt"
+      AliasName="CONTRACT_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FundCode"
+      EntityAttrName="FundCode"
+      EntityUsage="Receipt"
+      AliasName="FUND_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SignalCode"
+      EntityAttrName="SignalCode"
+      EntityUsage="Receipt"
+      AliasName="SIGNAL_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocumentNumber"
+      EntityAttrName="DocumentNumber"
+      EntityUsage="Receipt"
+      AliasName="DOCUMENT_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocumentId"
+      EntityAttrName="DocumentId"
+      EntityUsage="Receipt"
+      AliasName="DOCUMENT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Status"
+      EntityAttrName="Status"
+      EntityUsage="Receipt"
+      AliasName="STATUS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="Receipt"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedDate"
+      EntityAttrName="CreatedDate"
+      EntityUsage="Receipt"
+      AliasName="CREATED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedBy"
+      EntityAttrName="ModifiedBy"
+      EntityUsage="Receipt"
+      AliasName="MODIFIED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedDate"
+      EntityAttrName="ModifiedDate"
+      EntityUsage="Receipt"
+      AliasName="MODIFIED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ConversionFlag"
+      EntityAttrName="ConversionFlag"
+      EntityUsage="Receipt"
+      AliasName="CONVERSION_FLAG" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RoutingId"
+      EntityAttrName="RoutingId"
+      EntityUsage="Receipt"
+      AliasName="ROUTING_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WorkStation"
+      EntityAttrName="WorkStation"
+      EntityUsage="Receipt"
+      AliasName="WORK_STATION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Rdd"
+      EntityAttrName="Rdd"
+      EntityUsage="Receipt"
+      AliasName="RDD" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SupplementaryAddress"
+      EntityAttrName="SupplementaryAddress"
+      EntityUsage="Receipt"
+      AliasName="SUPPLEMENTARY_ADDRESS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Consignee"
+      EntityAttrName="Consignee"
+      EntityUsage="Receipt"
+      AliasName="CONSIGNEE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DodDistCode"
+      EntityAttrName="DodDistCode"
+      EntityUsage="Receipt"
+      AliasName="DOD_DIST_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Rpd"
+      EntityAttrName="Rpd"
+      EntityUsage="Receipt"
+      AliasName="RPD" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PartialShipmentIndicator"
+      EntityAttrName="PartialShipmentIndicator"
+      EntityUsage="Receipt"
+      AliasName="PARTIAL_SHIPMENT_INDICATOR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TraceabilityNumber"
+      EntityAttrName="TraceabilityNumber"
+      EntityUsage="Receipt"
+      AliasName="TRACEABILITY_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ClassCommodityNumber"
+      EntityAttrName="ClassCommodityNumber"
+      EntityUsage="Receipt"
+      AliasName="CLASS_COMMODITY_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ShippedFrom"
+      EntityAttrName="ShippedFrom"
+      EntityUsage="Receipt"
+      AliasName="SHIPPED_FROM" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Cc"
+      EntityAttrName="Cc"
+      EntityUsage="Receipt"
+      AliasName="CC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectCode"
+      EntityAttrName="ProjectCode"
+      EntityUsage="Receipt"
+      AliasName="PROJECT_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Pc"
+      EntityAttrName="Pc"
+      EntityUsage="Receipt"
+      AliasName="PC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CognizanceCode"
+      EntityAttrName="CognizanceCode"
+      EntityUsage="Receipt"
+      AliasName="COGNIZANCE_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MechNonMechFlag"
+      EntityAttrName="MechNonMechFlag"
+      EntityUsage="Receipt"
+      AliasName="MECH_NON_MECH_FLAG" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Ration"
+      EntityAttrName="Ration"
+      EntityUsage="Receipt"
+      AliasName="RATION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Suffix"
+      EntityAttrName="Suffix"
+      EntityUsage="Receipt"
+      AliasName="SUFFIX" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ShelfLifeCode"
+      EntityAttrName="ShelfLifeCode"
+      EntityUsage="Receipt"
+      AliasName="SHELF_LIFE_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Weight"
+      EntityAttrName="Weight"
+      EntityUsage="Receipt"
+      AliasName="WEIGHT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Length"
+      EntityAttrName="Length"
+      EntityUsage="Receipt"
+      AliasName="LENGTH" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Height"
+      EntityAttrName="Height"
+      EntityUsage="Receipt"
+      AliasName="HEIGHT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Width"
+      EntityAttrName="Width"
+      EntityUsage="Receipt"
+      AliasName="WIDTH" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Ui"
+      EntityAttrName="Ui"
+      EntityUsage="Receipt"
+      AliasName="UI" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Price"
+      EntityAttrName="Price"
+      EntityUsage="Receipt"
+      AliasName="PRICE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Fsc"
+      EntityAttrName="Fsc"
+      EntityUsage="Receipt"
+      AliasName="FSC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PartNumber"
+      EntityAttrName="PartNumber"
+      EntityUsage="Receipt"
+      AliasName="PART_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SerialNumber"
+      EntityAttrName="SerialNumber"
+      EntityUsage="Receipt"
+      AliasName="SERIAL_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="QuantityBackordered"
+      EntityAttrName="QuantityBackordered"
+      EntityUsage="Receipt"
+      AliasName="QUANTITY_BACKORDERED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Ri"
+      EntityAttrName="Ri"
+      EntityUsage="Receipt"
+      AliasName="RI" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PackingConsolidationId"
+      EntityAttrName="PackingConsolidationId"
+      EntityUsage="Receipt"
+      AliasName="PACKING_CONSOLIDATION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Cube"
+      EntityAttrName="Cube"
+      EntityUsage="Receipt"
+      AliasName="CUBE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Niin"
+      EntityAttrName="Niin"
+      EntityUsage="Receipt"
+      AliasName="NIIN" >
+   </ViewAttribute>
+</ViewObject>

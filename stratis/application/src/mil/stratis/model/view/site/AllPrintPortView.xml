@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+    xmlns="http://xmlns.oracle.com/bc4j"
+    Name="AllPrintPortView"
+    Version="11.1.2.64.36"
+    BindingStyle="OracleName"
+    CustomQuery="true"
+    ComponentClass="mil.stratis.model.view.site.AllPrintPortViewImpl"
+    FetchMode="FETCH_AS_NEEDED"
+    PageIterMode="Partial"
+    UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <SQLQuery><![CDATA[
+SELECT ComPort.COM_PORT_ID, 
+       ComPort.NAME, 
+       ComPort.COM_NAME
+FROM COM_PORT ComPort
+WHERE ComPort.COM_NAME in ('LPT1', 'LPT2')
+   ]]></SQLQuery>
+  <ViewAttribute
+      Name="ComPortId"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="COM_PORT_ID"
+      Expression="COM_PORT_ID"
+      SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+      Name="Name"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="100"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="NAME"
+      Expression="NAME"
+      SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+      Name="ComName"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="COM_NAME"
+      Expression="COM_NAME"
+      SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="ComPortId"/>
+  </AttrArray>
+</ViewObject>

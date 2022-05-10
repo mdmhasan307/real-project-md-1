@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="Admin_ProcessGCSSMCExportsPageDef" 
+	Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="DocIdListVO1Iterator" RangeSize="-1" Binds="Root.GCSSMCTransactions1.DocIdListVO1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="DocIdListVO1" IterBinding="DocIdListVO1Iterator">
+      <AttrNames>
+        <Item Value="Value"/>
+        <Item Value="Descriptiion"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="Descriptiion" IterBinding="DocIdListVO1Iterator">
+      <AttrNames>
+        <Item Value="Descriptiion"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

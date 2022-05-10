@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="2"/>
+    <jsp:setProperty name="userbean" property="selected3" value="9"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="Admin_WarehouseShippingRouteUpdate"/>
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session" />
+    <jsp:setProperty name="logBean" property="page" value="Shipping Route Update"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="185" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll" id="pgl1">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGroupLayout id="pgl2">
+                                <af:panelBox text="Warehouse Management - Shipping Route Setup" showDisclosure="false"
+                                             id="pb2">
+                                    <af:separator id="s3"/>
+                                    <af:table value="#{bindings.ShippingRouteView1.collectionModel}" var="row"
+                                              rows="#{bindings.ShippingRouteView1.rangeSize}"
+                                              first="#{bindings.ShippingRouteView1.rangeStart}"
+                                              emptyText="#{bindings.ShippingRouteView1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                              selectionListener="#{bindings.ShippingRouteView1.collectionModel.makeCurrent}"
+                                              id="RouteID" binding="#{WarehouseSetupBacking.shippingRouteTable}"
+                                              selectedRowKeys="#{bindings.ShippingRouteView1.collectionModel.selectedRow}"
+                                              rowSelection="single" styleClass="AFStretchWidth" columnStretching="last">
+                                        <af:column sortProperty="RouteName" sortable="true"
+                                                   headerText="Shipping Route Name" inlineStyle="white-space:nowrap;"
+                                                   id="c2" width="200">
+                                            <af:outputText value="#{row.RouteName}" id="ot2"/>
+                                        </af:column>
+                                        <af:column sortProperty="Description" sortable="false"
+                                                   headerText="#{bindings.ShippingRouteView1.labels.Description}"
+                                                   id="c1">
+                                            <af:outputText value="#{row.Description}" id="ot1"/>
+                                        </af:column>
+                                        <f:facet name="footer"/>
+                                    </af:table>
+                                    <af:toolbar inlineStyle="padding:5px;" id="t1">
+                                        <af:button actionListener="#{bindings.CreateInsert.execute}"
+                                                   text="Create" id="CreateButton" inlineStyle="width:50px"
+                                                   accessKey="C" partialSubmit="false"
+                                                   disabled="#{(!WarehouseSetupBacking.shippingRouteFlag) and (bindings.ShippingRouteView1.estimatedRowCount > 0)}">
+                                            <af:setActionListener from="#{false}"
+                                                                  to="#{WarehouseSetupBacking.shippingRouteFlag}"/>
+                                            <af:setActionListener from="#{false}"
+                                                                  to="#{WarehouseSetupBacking.shippingRouteRefresh}"/>
+                                        </af:button>
+                                        <af:button actionListener="#{WarehouseSetupBacking.submitUpdateShippingRoute}"
+                                                   text="Update" id="UpdateButton" inlineStyle="width:50px"
+                                                   accessKey="U" partialSubmit="false"
+                                                   disabled="#{!WarehouseSetupBacking.shippingRouteFlag}"/>
+                                        <af:group id="g1">
+                                            <af:button text="Delete" id="DeleteButton" inlineStyle="width:50px"
+                                                       accessKey="D" partialSubmit="false"
+                                                       disabled="#{!WarehouseSetupBacking.shippingRouteFlag}">
+                                                <af:showPopupBehavior popupId="confirmDelete" triggerType="action" align="afterStart"/>
+                                            </af:button>
+                                            <af:popup id="confirmDelete">
+                                                <af:dialog id="Confirm" title="Confirm" affirmativeTextAndAccessKey="Submit"
+                                                           dialogListener="#{WarehouseSetupBacking.dialogListenerShip}">
+                                                    <af:activeOutputText id="Delete" value="Are you sure you want to Delete?"/>
+                                                </af:dialog>
+                                            </af:popup>
+                                        </af:group>
+                                    </af:toolbar>
+                                </af:panelBox>
+                                <af:spacer height="10" id="s2"/>
+                                <af:panelBox text="Warehouse Management - Shipping Route Setup - Detail"
+                                             rendered="#{bindings.ShippingRouteView1.estimatedRowCount > 0}"
+                                             showDisclosure="false" id="pb1">
+                                    <af:separator id="s1"/>
+                                    <af:panelFormLayout partialTriggers="RouteID" id="pfl1">
+                                        <af:inputText label="Route Name" labelStyle="font-weight:bold"
+                                                      contentStyle="text-transform:uppercase"
+                                                      value="#{bindings.RouteName.inputValue}" columns="30"
+                                                      shortDesc="Required Name of the shipping route (max 15 alphanumeric)"
+                                                      styleClass="#{ (empty bindings.RouteId.inputValue) ? '' : 'ReadOnlyField'}"
+                                                      id="shippingRouteName"
+                                                      readOnly="#{ not empty bindings.RouteName.inputValue}"
+                                                      maximumLength="15" immediate="true"
+                                                      binding="#{WarehouseSetupBacking.shippingRouteName}"/>
+                                        <af:inputText label="Description" value="#{bindings.Description.inputValue}"
+                                                      columns="#{bindings.Description.displayWidth}"
+                                                      contentStyle="text-transform:uppercase"
+                                                      shortDesc="Description of the shipping route (max 75 characters)"
+                                                      id="shippingRouteDescription" immediate="true"
+                                                      styleClass="#{WarehouseSetupBacking.shippingRouteReadOnlyStyle}"
+                                                      readOnly="#{WarehouseSetupBacking.shippingRouteFlag}"
+                                                      binding="#{WarehouseSetupBacking.shippingRouteDescription}"
+                                                      maximumLength="75"/>
+                                    </af:panelFormLayout>
+                                    <af:toolbar id="panelButtonBar1"
+                                                rendered="#{!WarehouseSetupBacking.shippingRouteFlag}"
+                                                inlineStyle="padding:5px;">
+                                        <af:button actionListener="#{WarehouseSetupBacking.submitSaveShippingRoute}"
+                                                   text="Submit" inlineStyle="width:50px" accessKey="S"
+                                                   id="SaveButton2" immediate="true" partialSubmit="false"/>
+                                        <af:button actionListener="#{WarehouseSetupBacking.submitResetShippingRoute}"
+                                                   text="Reset" inlineStyle="width:50px" accessKey="R"
+                                                   rendered="#{not empty bindings.RouteId.inputValue}"
+                                                   id="ResetButton" partialSubmit="false"/>
+                                        <af:resetButton text="Reset" accessKey="R" id="ResetButton2"
+                                                        rendered="#{empty bindings.RouteId.inputValue}"
+                                                        inlineStyle="width:50px"/>
+                                        <af:button actionListener="#{WarehouseSetupBacking.submitCancelShippingRoute}"
+                                                   text="Cancel" inlineStyle="width:50px" accessKey="a"
+                                                   id="CancelButton" immediate="true" partialSubmit="false"/>
+                                    </af:toolbar>
+                                </af:panelBox>
+                            </af:panelGroupLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6" id="s4"/>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

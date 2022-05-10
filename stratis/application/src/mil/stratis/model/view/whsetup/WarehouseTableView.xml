@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="WarehouseTableView"
+   Version="11.1.2.64.36"
+   SelectList="WarehouseTable.WAREHOUSE_ID, 
+       WarehouseTable.BUILDING, 
+       WarehouseTable.COMPLEX, 
+       WarehouseTable.SITE_ID, 
+       WarehouseTable.DESCRIPTION, 
+       WarehouseTable.LOCAL_DELIVERY_PREFIX, 
+       WarehouseTable.LOCAL_DELIVERY_SUFFIX, 
+       WarehouseTable.CARRIER_NAME"
+   FromList="WAREHOUSE WarehouseTable"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Partial"
+   UseGlueCode="false"
+   ComponentClass="mil.stratis.model.view.whsetup.WarehouseTableViewImpl">
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+   </DesignTime>
+   <EntityUsage
+      Name="WarehouseTable"
+      Entity="mil.stratis.model.entity.loc.Warehouse" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="WarehouseId"
+      IsNotNull="true"
+      EntityAttrName="WarehouseId"
+      EntityUsage="WarehouseTable"
+      AliasName="WAREHOUSE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Building"
+      IsUnique="true"
+      IsNotNull="true"
+      EntityAttrName="Building"
+      EntityUsage="WarehouseTable"
+      AliasName="BUILDING" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Complex"
+      EntityAttrName="Complex"
+      EntityUsage="WarehouseTable"
+      AliasName="COMPLEX" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SiteId"
+      IsNotNull="true"
+      EntityAttrName="SiteId"
+      EntityUsage="WarehouseTable"
+      AliasName="SITE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Description"
+      EntityAttrName="Description"
+      EntityUsage="WarehouseTable"
+      AliasName="DESCRIPTION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocalDeliveryPrefix"
+      EntityAttrName="LocalDeliveryPrefix"
+      EntityUsage="WarehouseTable"
+      AliasName="LOCAL_DELIVERY_PREFIX" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocalDeliverySuffix"
+      EntityAttrName="LocalDeliverySuffix"
+      EntityUsage="WarehouseTable"
+      AliasName="LOCAL_DELIVERY_SUFFIX" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CarrierName"
+      EntityAttrName="CarrierName"
+      EntityUsage="WarehouseTable"
+      AliasName="CARRIER_NAME" >
+   </ViewAttribute>
+</ViewObject>

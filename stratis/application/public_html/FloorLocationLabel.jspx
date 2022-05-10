@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+  <jsp:output omit-xml-declaration="true" doctype-root-element="HTML"
+              doctype-system="http://www.w3.org/TR/html4/loose.dtd"
+              doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN"/>
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <jsp:useBean id="backing_label" type="mil.stratis.view.print.LabelBacking"
+               scope="request" beanName="mil.stratis.view.print.LabelBacking"/>
+
+  <jsp:scriptlet>
+       String floor = request.getParameter("floor");
+        String aac = request.getParameter("aac");
+        String area = request.getParameter("area");
+        String no_copies = request.getParameter("nocopies");
+        if (floor != null)
+        {
+            if (no_copies == null) no_copies = "1";
+            if (no_copies.equals("")) no_copies = "1";
+            out.print(backing_label.printFloorLocationLabelHTML(floor, aac, area));
+        }
+    </jsp:scriptlet>
+</jsp:root>

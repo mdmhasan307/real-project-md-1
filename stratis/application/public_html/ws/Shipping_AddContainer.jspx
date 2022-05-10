@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" scope="session" class="mil.stratis.view.user.UserInfo"/>
+    <jsp:setProperty name="userbean" property="selected" value="5"/>
+    <jsp:setProperty name="userbean" property="selected2" value="0"/>
+    <f:view>
+        <af:document title="STRATIS Shipping - Add Container" id="d1">
+            <af:form id="frmAddContainer" defaultCommand="Submit">
+                <af:panelStretchLayout id="psl1" startWidth="24" topHeight="150" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/ws/WS_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll" id="pgl1">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGroupLayout>
+                                <af:panelHeader text="Add Container"/>
+                                <af:panelGroupLayout layout="horizontal">
+                                    <af:link text="Add a Single Container" disabled="true"/>
+                                </af:panelGroupLayout>
+                                <af:outputText value="&lt;br>" escape="false"/>
+                                <af:panelBox text="Single Container Consolidation">
+                                    <af:outputText value="&lt;br>" escape="false"/>
+                                    <af:panelFormLayout id="panelFormSearchContainers" rendered="true">
+                                        <af:panelGroupLayout id="panelGroupMain" layout="vertical"
+                                                             rendered="#{!backing_shippingContainer.displayAssignment}">
+                                            <af:panelGroupLayout id="panelGroupStageLocator"
+                                                                 layout="horizontal">
+                                                <af:outputLabel id="lblStageLocator" value="Floor Location"
+                                                                inlineStyle="color:black;"/>
+                                                <af:spacer width="20"/>
+                                                <af:inputText value="" columns="20" maximumLength="17"
+                                                              inlineStyle="color:black;"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter 5-character Floor Location or 17-character Lead TCN of stage locator (optional)"
+                                                              id="txtStageLocator"
+                                                              binding="#{backing_shippingContainer.singleStageLocator}"/>
+                                            </af:panelGroupLayout>
+                                            <af:outputText value="&lt;br>" escape="false"/>
+                                            <af:panelGroupLayout id="panelGroupContainerId"
+                                                                 layout="horizontal">
+                                                <af:outputLabel id="lblContainerId" value="Shipping Barcode"
+                                                                inlineStyle="color:black;font-weight:bold"/>
+                                                <af:spacer width="20"/>
+                                                <af:inputText value="" columns="20" maximumLength="17"
+                                                              inlineStyle="color:black;"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter Shipping Barcode of selected container (must be 5 or more alphanumeric characters) (required)"
+                                                              id="txtContainerId"
+                                                              binding="#{backing_shippingContainer.singleContainerId}"/>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                        <af:panelGroupLayout id="panelGroupAssignment" layout="vertical"
+                                                             rendered="#{backing_shippingContainer.displayAssignment}">
+                                            <af:panelGroupLayout id="panelGroupAssignment_1"
+                                                                 layout="horizontal">
+                                                <af:outputLabel id="lbl1" value="CONTAINER IDENTIFIER:"
+                                                                inlineStyle="color:black;font-weight:bold"/>
+                                                <af:spacer width="10"/>
+                                                <af:outputLabel id="lblout1" value=""
+                                                                inlineStyle="color:black;font-weight:bold"
+                                                                binding="#{backing_shippingContainer.singleLblContainerIdentifier}"/>
+                                            </af:panelGroupLayout>
+                                            <af:outputText value="&lt;br>" escape="false"/>
+                                            <af:panelGroupLayout id="panelGroupAssignment_2"
+                                                                 layout="horizontal">
+                                                <af:outputLabel id="lblFirst" value="FIRST LOCATION:"
+                                                                inlineStyle="color:blue;font-weight:bold"/>
+                                                <af:spacer width="10"/>
+                                                <af:outputLabel id="lbloutFirst" value=""
+                                                                inlineStyle="color:blue;font-weight:bold"
+                                                                binding="#{backing_shippingContainer.singleLblFirstLocation}"/>
+                                            </af:panelGroupLayout>
+                                            <af:outputText value="&lt;br>" escape="false"/>
+                                            <af:panelGroupLayout id="panelGroupAssignment_3"
+                                                                 layout="horizontal">
+                                                <af:outputLabel id="lblOther" value="OTHER LOCATIONS:"
+                                                                inlineStyle="color:black;text-decoration:underline;font-style:italic;font-weight:bold"/>
+                                                <af:spacer width="10"/>
+                                                <af:outputLabel id="lbloutOther" value=""
+                                                                inlineStyle="color:black;"
+                                                                binding="#{backing_shippingContainer.singleLblOtherLocations}"/>
+                                            </af:panelGroupLayout>
+                                            <af:outputText value="&lt;br>" escape="false"/>
+                                            <af:panelGroupLayout id="panelGroup1" layout="horizontal">
+                                                <af:outputLabel id="lblStage" value="SHIPPING LOCATION:"
+                                                                inlineStyle="color:blue;font-weight:bold"/>
+                                                <af:spacer width="10"/>
+                                                <af:inputText value="" columns="10" maximumLength="5"
+                                                              inlineStyle="color:blue;font-weight:bold;font-size:larger;"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter 5-character Floor Location (required)"
+                                                              id="txtStageLocation"
+                                                              binding="#{backing_shippingContainer.singleStageLocatorEnter}"/>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                        <af:outputText value="&lt;br>" escape="false"/>
+                                        <af:panelGroupLayout id="panelGroupButtons" layout="horizontal">
+                                            <af:toolbar>
+                                                <af:button text="Submit" inlineStyle="" id="Submit"
+                                                           accessKey="S"
+                                                           actionListener="#{backing_shippingContainer.submitAddSingleContainer}"
+                                                           binding="#{backing_shippingContainer.singleSubmitBtn}"
+                                                           partialSubmit="false">
+                                                </af:button>
+                                                <af:button text="Cancel" inlineStyle="" id="Cancel"
+                                                           accessKey="C"
+                                                           actionListener="#{backing_shippingContainer.cancelAddSingleContainer}"
+                                                           partialSubmit="false">
+                                                </af:button>
+                                            </af:toolbar>
+                                        </af:panelGroupLayout>
+                                    </af:panelFormLayout>
+                                </af:panelBox>
+                            </af:panelGroupLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <af:spacer width="24" height="675"/>
+                    </f:facet>
+                    <f:facet name="end"/>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

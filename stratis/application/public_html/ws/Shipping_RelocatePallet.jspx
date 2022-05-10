@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="5"/>
+    <jsp:setProperty name="userbean" property="selected2" value="5"/>
+    <f:view>
+        <af:document title="STRATIS Shipping - Relocate Pallet" id="d1">
+          <af:form>
+            <af:panelStretchLayout id="psl1" startWidth="24" topHeight="150" bottomHeight="25">
+                <f:facet name="top">
+                    <f:subview id="wrap_header">
+                        <jsp:include page="/ws/WS_Header.jspx"/>
+                    </f:subview>
+                </f:facet>
+                <f:facet name="center">
+                    <af:panelGroupLayout layout="scroll">
+                        <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                        <!--af:form-->
+                            <af:panelGroupLayout>
+                                <af:panelHeader text="Pallet Relocation"/>
+                                <af:panelBox text="Relocate a Pallet">
+                                    <af:subform>
+                                        <af:panelFormLayout>
+                                            <af:panelGroupLayout layout="horizontal" valign="bottom">
+                                                <af:panelGroupLayout layout="vertical">
+                                                    <af:outputLabel value="Floor Location"/>
+                                                    <af:inputText value="#{bindings.FloorLocation.inputValue}"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  columns="#{bindings.FloorLocation.displayWidth}"
+                                                                  maximumLength="5"/>
+                                                </af:panelGroupLayout>
+                                                <af:spacer width="10"/>
+                                                <af:panelGroupLayout layout="vertical">
+                                                    <af:outputLabel value="Lead TCN"/>
+                                                    <af:inputText value="#{bindings.LeadTcn.inputValue}"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  columns="#{bindings.LeadTcn.displayWidth}"
+                                                                  maximumLength="17"/>
+                                                </af:panelGroupLayout>
+                                                <af:spacer width="15"/>
+                                                <af:panelGroupLayout layout="vertical">
+                                                    <af:toolbar>
+                                                        <af:button actionListener="#{bindings.ExecuteWithParams.execute}"
+                                                                          text="Search" partialSubmit="false"/>
+                                                    </af:toolbar>
+                                                </af:panelGroupLayout>
+                                            </af:panelGroupLayout>
+                                        </af:panelFormLayout>
+                                    </af:subform>
+                                    <af:outputText value="&lt;br>" escape="false"/>
+                                    <af:panelBox text="Pallet Results" rendered="#{requestContext.postback == true}">
+                                        <af:outputText value="&lt;br>" escape="false"/>
+                                        <af:subform>
+                                            <af:table value="#{bindings.AllPalletContainers.collectionModel}" var="row"
+                                                      width="375px" rows="#{bindings.AllPalletContainers.rangeSize}"
+                                                      first="#{bindings.AllPalletContainers.rangeStart}"
+                                                      emptyText="#{bindings.AllPalletContainers.viewable ? 'No rows found.' : 'Access Denied.'}"
+                                                      id="palletTable" binding="#{backing_shipping.palletTable}"
+                                                      rowSelection="single" autoHeightRows="5">
+                                                <af:column sortProperty="Aac" sortable="true" headerText="AAC"
+                                                           id="colAac">
+                                                    <af:outputText id="txtAac" value="#{row.Aac}"/>
+                                                </af:column>
+                                                <af:column sortProperty="FloorLocation" sortable="true"
+                                                           headerText="Floor Location">
+                                                    <af:outputText id="txtFloor" value="#{row.FloorLocation}"/>
+                                                </af:column>
+                                                <af:column width="150" sortProperty="LeadTcn" sortable="true" headerText="Lead TCN">
+                                                    <af:outputText id="txtTcn" value="#{row.LeadTcn}"/>
+                                                </af:column>
+                                            </af:table>
+                                            <af:outputText value="&lt;br>" escape="false"/>
+                                            <af:selectOneChoice id="FloorLocationNavList" label=" Relocate To "
+                                                                binding="#{backing_shipping.relocateToNavList}" value=""
+                                                                unselectedLabel="&lt;Make a Selection>"
+                                                                inlineStyle="font-weight:bold;">
+                                                <f:selectItems value="#{backing_shipping.floorLocations}"/>
+                                            </af:selectOneChoice>
+                                            <af:outputText value="&lt;br>" escape="false"/>
+                                            <af:button id="submitButton" text="Submit" inlineStyle="width:100px"
+                                                              actionListener="#{backing_shipping.relocatePallet}"
+                                                              disabled="#{bindings.AllPalletContainers.estimatedRowCount &lt; 1}"
+                                                              partialSubmit="false"/>
+                                        </af:subform>
+                                    </af:panelBox>
+                                </af:panelBox>
+                            </af:panelGroupLayout>
+                        <!--/af:form-->
+                        <f:subview id="wrap_footer">
+                            <jsp:include page="/FooterMain.jspx"/>
+                        </f:subview>
+                    </af:panelGroupLayout>
+                </f:facet>
+                <f:facet name="start">
+                    <af:spacer width="24" height="675"/>
+                </f:facet>
+                <f:facet name="end"/>
+                <f:facet name="bottom">
+                    <f:subview id="classificationFooter">
+                        <jsp:include page="/ClassificationBanner.jspx"/>
+                    </f:subview>
+                </f:facet>
+            </af:panelStretchLayout>
+          </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

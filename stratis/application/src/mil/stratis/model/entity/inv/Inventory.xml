@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="Inventory"
+   Version="11.1.2.64.36"
+   DBObjectType="table"
+   DBObjectName="INVENTORY"
+   AliasName="Inventory"
+   BindingStyle="OracleName"
+   UseGlueCode="false"
+   RowClass="mil.stratis.model.entity.inv.InventoryImpl">
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Access" />
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_panelSchema" Value="table|alias" />
+   </DesignTime>
+   <Attribute
+      Name="InventoryId"
+      ColumnName="INVENTORY_ID"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.DBSequence"
+      ColumnType="NUMBER"
+      TableName="INVENTORY"
+      PrimaryKey="true"
+      RetrievedOnInsert="true"
+      IsUpdateable="while_insert"
+      DefaultValue="@0"
+      Domain="oracle.jbo.domain.DBSequence">
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+         <Attr Name="_SequenceName" Value="INVENTORY_ID_SEQ"/>
+         <Attr Name="_SequenceStart" Value="1"/>
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="InvSerialNum"
+      IsUnique="true"
+      Precision="10"
+      ColumnName="INV_SERIAL_NUM"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="INVENTORY" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="InvCutoffDate"
+      ColumnName="INV_CUTOFF_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="INVENTORY" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="RequestDate"
+      ColumnName="REQUEST_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="INVENTORY" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CreatedBy"
+      Precision="6"
+      Scale="0"
+      ColumnName="CREATED_BY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="INVENTORY" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CreatedDate"
+      ColumnName="CREATED_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="INVENTORY"
+      IsNotNull="true">
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ModifiedBy"
+      Precision="6"
+      Scale="0"
+      ColumnName="MODIFIED_BY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="INVENTORY" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ModifiedDate"
+      ColumnName="MODIFIED_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="INVENTORY" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="StartLocation"
+      Precision="10"
+      ColumnName="START_LOCATION"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="INVENTORY" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="EndLocation"
+      Precision="10"
+      ColumnName="END_LOCATION"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="INVENTORY" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Description"
+      Precision="4000"
+      ColumnName="DESCRIPTION"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="INVENTORY" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Status"
+      Precision="30"
+      ColumnName="STATUS"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="INVENTORY" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </Attribute>
+   <AccessorAttribute
+      Name="InventoryItem"
+      Association="mil.stratis.model.entity.associations.InventoryItemInvFkAssoc"
+      AssociationEnd="mil.stratis.model.entity.associations.InventoryItemInvFkAssoc.InventoryItem"
+      AssociationOtherEnd="mil.stratis.model.entity.associations.InventoryItemInvFkAssoc.Inventory"
+      Type="oracle.jbo.RowIterator"
+      IsUpdateable="false" >
+   </AccessorAttribute>
+   <Key
+      Name="Ck1inventory">
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="CK1INVENTORY"/>
+         <Attr Name="_checkCondition" Value="INVENTORY_ID IS NOT NULL"/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="Ck2inventory">
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="CK2INVENTORY"/>
+         <Attr Name="_checkCondition" Value="CREATED_DATE IS NOT NULL"/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="InventoryCreatedDateCheck">
+      <DesignTime>
+         <Attr Name="_isNotNull" Value="true"/>
+         <Attr Name="_DBObjectName" Value="INVENTORY_CREATED_DATE_CHECK"/>
+         <Attr Name="_checkCondition" Value='"CREATED_DATE" IS NOT NULL'/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.inv.Inventory.CreatedDate"/>
+      </AttrArray>
+   </Key>
+   <Key
+      Name="InventoryInventoryIdCheck">
+      <DesignTime>
+         <Attr Name="_isNotNull" Value="true"/>
+         <Attr Name="_DBObjectName" Value="INVENTORY_INVENTORY_ID_CHECK"/>
+         <Attr Name="_checkCondition" Value='"INVENTORY_ID" IS NOT NULL'/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.inv.Inventory.InventoryId"/>
+      </AttrArray>
+   </Key>
+   <Key
+      Name="InventoryPk"
+      PrimaryKey="true" >
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="INVENTORY_PK"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.inv.Inventory.InventoryId" />
+      </AttrArray>
+   </Key>
+   <Key
+      Name="InventoryUk1" >
+      <DesignTime>
+         <Attr Name="_isUnique" Value="true"/>
+         <Attr Name="_DBObjectName" Value="INVENTORY_UK1"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.inv.Inventory.InvSerialNum" />
+      </AttrArray>
+   </Key>
+   <Key
+      Name="InventoryLocationFk1" >
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="LOCATION_UK1"/>
+         <Attr Name="_isForeign" Value="true"/>
+         <Attr Name="_DBObjectName" Value="INVENTORY_LOCATION_FK1"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.inv.Inventory.StartLocation" />
+      </AttrArray>
+   </Key>
+   <Key
+      Name="InventoryLocationFk2" >
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="LOCATION_UK1"/>
+         <Attr Name="_isForeign" Value="true"/>
+         <Attr Name="_DBObjectName" Value="INVENTORY_LOCATION_FK2"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.inv.Inventory.EndLocation" />
+      </AttrArray>
+   </Key>
+</Entity>

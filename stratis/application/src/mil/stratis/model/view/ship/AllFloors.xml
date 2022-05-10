@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="AllFloors"
+   Version="11.1.2.64.36"
+   OrderBy="floor_location ASC"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   ComponentClass="mil.stratis.model.view.ship.AllFloorsImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+      <Attr Name="_isExpertMode" Value="true" />
+   </DesignTime>
+   <Variable
+      Name="EQUIPMENT_NUMBER"
+      Kind="where"
+      Type="java.lang.String"
+      DefaultValue="0" >
+   </Variable>
+   <SQLQuery><![CDATA[select floor_location_id, floor_location 
+from Floor_Location where nvl(in_use, 'N') <> 'Y' and warehouse_id=(select warehouse_id from equip where equipment_number=:EQUIPMENT_NUMBER) and floor_location_id not in (select floor_location_id from shipping_manifest where floor_location_id is not null)]]></SQLQuery>
+   <ViewAttribute
+      Name="FloorLocationId"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="6"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="FLOOR_LOCATION_ID"
+      Expression="FLOOR_LOCATION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FloorLocation"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="5"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="FLOOR_LOCATION"
+      Expression="FLOOR_LOCATION"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="5" />
+      </DesignTime>
+   </ViewAttribute>
+   <AttrArray Name="KeyAttributes">
+      <Item Value="FloorLocationId" />
+   </AttrArray>
+</ViewObject>

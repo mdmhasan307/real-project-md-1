@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="Admin_WarehouseFloorLocationSetupPageDef" Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="SingleFloorLocationView1Iterator" RangeSize="10" StateValidation="false"
+              Binds="Root.AppModule1.SingleFloorLocationView1" DataControl="StratisRootServiceDataControl"
+              Refresh="ifNeeded"/>
+    <variableIterator id="variables" Refresh="ifNeeded">
+      <variable Type="java.lang.String" Name="FilterFloorData_FloorQry" IsQueriable="false"/>
+    </variableIterator>
+    <iterator Binds="Root.AppModule1.FloorLocationView1" RangeSize="25" DataControl="StratisRootServiceDataControl"
+              id="FloorLocationView1Iterator"/>
+    <searchRegion Binds="FloorLocationView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="FloorLocationView11Query"/>
+    <searchRegion Binds="SingleFloorLocationView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="SingleFloorLocationView1Query"/>
+  </executables>
+  <bindings>
+    <table id="FloorLocationView1" IterBinding="SingleFloorLocationView1Iterator">
+      <AttrNames>
+        <Item Value="FloorLocation1"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="FloorLocation1" IterBinding="SingleFloorLocationView1Iterator">
+      <AttrNames>
+        <Item Value="FloorLocation1"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="CreateInsert" IterBinding="SingleFloorLocationView1Iterator"
+            InstanceName="StratisRootServiceDataControl.Root.AppModule1.SingleFloorLocationView1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="ExecuteFloorLocation" RequiresUpdateModel="true" Action="iteratorExecute"
+            IterBinding="SingleFloorLocationView1Iterator"/>
+    <methodAction id="FilterFloorData" MethodName="FilterFloorData" RequiresUpdateModel="true" Action="invokeMethod"
+                  IsViewObjectMethod="false" DataControl="StratisRootServiceDataControl"
+                  InstanceName="StratisRootServiceDataControl.dataProvider.Root.AppModule1">
+      <NamedData NDName="FloorQry" NDType="java.lang.String" NDValue="${bindings.FilterFloorData_FloorQry}"/>
+    </methodAction>
+    <attributeValues id="FloorQry" IterBinding="variables">
+      <AttrNames>
+        <Item Value="FilterFloorData_FloorQry"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="FloorLocationView1Iterator" id="FloorLocationView11">
+      <nodeDefinition DefName="mil.stratis.model.view.ship.FloorLocationView" Name="FloorLocationView110">
+        <AttrNames>
+          <Item Value="FloorLocation1"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="SingleFloorLocationView1Iterator" id="SingleFloorLocationView1">
+      <nodeDefinition DefName="mil.stratis.model.view.ship.SingleFloorLocationView" Name="SingleFloorLocationView10">
+        <AttrNames>
+          <Item Value="FloorLocation1"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

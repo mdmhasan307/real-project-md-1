@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="Wac"
+  Version="11.1.2.64.36"
+  DBObjectType="SYNONYM"
+  DBObjectName="WAC"
+  AliasName="Wac"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <Attribute
+    Name="WacId"
+    ColumnName="WAC_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.DBSequence"
+    ColumnType="NUMBER"
+    TableName="WAC"
+    PrimaryKey="true"
+    IsUpdateable="while_insert"
+    DefaultValue="@0"
+    Domain="oracle.jbo.domain.DBSequence"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_SequenceName" Value="WAC_ID_SEQ"/>
+      <Attr Name="_SequenceStart" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TasksPerTrip"
+    ColumnName="TASKS_PER_TRIP"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="WAC"/>
+  <Attribute
+    Name="SidsPerTrip"
+    ColumnName="SIDS_PER_TRIP"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="WAC"/>
+  <Attribute
+    Name="WarehouseId"
+    IsNotNull="true"
+    ColumnName="WAREHOUSE_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="WAC"/>
+  <Attribute
+    Name="WacNumber"
+    Precision="30"
+    ColumnName="WAC_NUMBER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="WAC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="MechanizedFlag"
+    IsNotNull="true"
+    Precision="1"
+    ColumnName="MECHANIZED_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="WAC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="SecureFlag"
+    IsNotNull="true"
+    Precision="1"
+    ColumnName="SECURE_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="WAC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="BulkAreaNumber"
+    Precision="30"
+    ColumnName="BULK_AREA_NUMBER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="WAC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CarouselNumber"
+    Precision="30"
+    ColumnName="CAROUSEL_NUMBER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="WAC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CarouselController"
+    ColumnName="CAROUSEL_CONTROLLER"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="WAC"/>
+  <Attribute
+    Name="CarouselOffset"
+    ColumnName="CAROUSEL_OFFSET"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="WAC"/>
+  <Attribute
+    Name="CarouselModel"
+    Precision="20"
+    ColumnName="CAROUSEL_MODEL"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="WAC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="WacOrder"
+    Precision="6"
+    Scale="0"
+    ColumnName="WAC_ORDER"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="WAC"/>
+  <Attribute
+    Name="PackArea"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="PACK_AREA"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="WAC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="Warehouse"
+    Association="mil.stratis.model.entity.associations.WacWarehouseFkAssoc"
+    AssociationEnd="mil.stratis.model.entity.associations.WacWarehouseFkAssoc.Warehouse"
+    AssociationOtherEnd="mil.stratis.model.entity.associations.WacWarehouseFkAssoc.Wac"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="WacPrimaryKey"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="WAC_PRIMARY_KEY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.loc.Wac.WacId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_Wac">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="WAREHOUSE_PRIMARY_KEY"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_WAC"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.loc.Wac.WarehouseId"/>
+    </AttrArray>
+  </Key>
+</Entity>

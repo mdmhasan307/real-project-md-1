@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="DividerTypeView"
+  Version="11.1.2.64.36"
+  SelectList="DividerType.DIVIDER_TYPE_ID, 
+       DividerType.NAME"
+  FromList="DIVIDER_TYPE DividerType"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  OrderBy="DividerType.NAME DESC"
+  ComponentClass="mil.stratis.model.view.loc.DividerTypeViewImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
+  <EntityUsage
+    Name="DividerType"
+    Entity="mil.stratis.model.entity.loc.DividerType"/>
+  <ViewAttribute
+    Name="DividerTypeId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="DividerTypeId"
+    EntityUsage="DividerType"
+    AliasName="DIVIDER_TYPE_ID"/>
+  <ViewAttribute
+    Name="Name"
+    PrecisionRule="true"
+    EntityAttrName="Name"
+    EntityUsage="DividerType"
+    AliasName="NAME"/>
+  <ViewLinkAccessor
+    Name="DividerSlotsView1"
+    ViewLink="mil.stratis.model.entity.link.DividerType_Slot_View"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+</ViewObject>

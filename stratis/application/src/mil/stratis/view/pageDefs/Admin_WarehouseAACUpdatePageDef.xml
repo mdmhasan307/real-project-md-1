@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Admin_WarehouseAACUpdatePageDef"
+                Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="CustomerView1Iterator" RangeSize="5" Binds="Root.AppModule1.CustomerView1"
+              DataControl="StratisRootServiceDataControl" StateValidation="false" Refresh="ifNeeded"
+              ChangeEventPolicy="none"/>
+    <iterator id="RouteView1Iterator" RangeSize="-1" Binds="Root.AppModule1.RouteView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="ShippingRouteView1Iterator" RangeSize="-1" Binds="Root.AppModule1.ShippingRouteView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="FloorLocationView1Iterator" RangeSize="-1" Binds="Root.AppModule1.FloorLocationView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <variableIterator id="variables" Refresh="ifNeeded">
+      <variable Type="java.lang.String" Name="FilterCustomerDataAAC_AAC" IsQueriable="false"/>
+    </variableIterator>
+  </executables>
+  <bindings>
+    <table id="CustomerView1" IterBinding="CustomerView1Iterator">
+      <AttrNames>
+        <Item Value="Address1"/>
+        <Item Value="City"/>
+        <Item Value="State"/>
+        <Item Value="ZipCode"/>
+        <Item Value="Aac"/>
+        <Item Value="CustomerId"/>
+        <Item Value="Address2"/>
+        <Item Value="RouteId"/>
+        <Item Value="RestrictShip"/>
+        <Item Value="Name"/>
+        <Item Value="FloorLocationId"/>
+        <Item Value="FloorLocation1"/>
+        <Item Value="RouteName"/>
+        <Item Value="ShippingRouteId"/>
+        <Item Value="RouteName1"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="CustomerId" IterBinding="CustomerView1Iterator">
+      <AttrNames>
+        <Item Value="CustomerId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CustomerName" IterBinding="CustomerView1Iterator">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Aac1" IterBinding="CustomerView1Iterator">
+      <AttrNames>
+        <Item Value="Aac"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Address1" IterBinding="CustomerView1Iterator">
+      <AttrNames>
+        <Item Value="Address1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Address2" IterBinding="CustomerView1Iterator">
+      <AttrNames>
+        <Item Value="Address2"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="City" IterBinding="CustomerView1Iterator">
+      <AttrNames>
+        <Item Value="City"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="State" IterBinding="CustomerView1Iterator">
+      <AttrNames>
+        <Item Value="State"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ZipCode" IterBinding="CustomerView1Iterator">
+      <AttrNames>
+        <Item Value="ZipCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="RestrictShip" IterBinding="CustomerView1Iterator">
+      <AttrNames>
+        <Item Value="RestrictShip"/>
+      </AttrNames>
+    </attributeValues>
+    <list id="CustomerView1ShippingRouteId" IterBinding="CustomerView1Iterator" StaticList="false"
+          ListOperMode="setAttribute" ListIter="ShippingRouteView1Iterator">
+      <AttrNames>
+        <Item Value="ShippingRouteId"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="RouteId"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="RouteName"/>
+      </ListDisplayAttrNames>
+    </list>
+    <list id="CustomerView1RouteId" IterBinding="CustomerView1Iterator" StaticList="false" ListOperMode="setAttribute"
+          ListIter="RouteView1Iterator">
+      <AttrNames>
+        <Item Value="RouteId"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="RouteId"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="RouteName"/>
+      </ListDisplayAttrNames>
+    </list>
+    <list id="CustomerView1FloorLocationId" IterBinding="CustomerView1Iterator" StaticList="false"
+          ListOperMode="setAttribute" ListIter="FloorLocationView1Iterator">
+      <AttrNames>
+        <Item Value="FloorLocationId"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="FloorLocationId"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="FloorLocation1"/>
+      </ListDisplayAttrNames>
+    </list>
+    <list id="CustomerView1RestrictShip" IterBinding="CustomerView1Iterator" ListOperMode="setAttribute"
+          StaticList="true">
+      <AttrNames>
+        <Item Value="RestrictShip"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </list>
+    <attributeValues id="FloorLocation1" IterBinding="CustomerView1Iterator">
+      <AttrNames>
+        <Item Value="FloorLocation1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="RouteName" IterBinding="CustomerView1Iterator">
+      <AttrNames>
+        <Item Value="RouteName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ShippingRouteName" IterBinding="CustomerView1Iterator">
+      <AttrNames>
+        <Item Value="RouteName1"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FilterCustomerDataAAC" MethodName="filterCustomerDataAAC" RequiresUpdateModel="true"
+                  Action="invokeMethod" IsViewObjectMethod="false" DataControl="StratisRootServiceDataControl"
+                  InstanceName="StratisRootServiceDataControl.dataProvider.Root.AppModule1">
+      <NamedData NDName="AAC" NDType="java.lang.String" NDValue="${bindings.FilterCustomerDataAAC_AAC}"/>
+    </methodAction>
+    <attributeValues id="AAC" IterBinding="variables">
+      <AttrNames>
+        <Item Value="FilterCustomerDataAAC_AAC"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="CreateInsert" IterBinding="CustomerView1Iterator"
+            InstanceName="StratisRootServiceDataControl.Root.AppModule1.CustomerView1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="ExecuteAac" RequiresUpdateModel="true" Action="iteratorExecute" IterBinding="CustomerView1Iterator"/>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,315 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="1"/>
+    <jsp:setProperty name="userbean" property="selected3" value="8"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="Admin_WarehouseWorkstationSetup"/>
+
+
+    <!-- WorkstationSetupBacking -->
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session" />
+    <jsp:setProperty name="logBean" property="page" value="Workstation"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="195" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll" id="pgl2">
+                            <af:messages id="m2" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGroupLayout layout="vertical" id="pgl3">
+
+                                <af:panelBox text="Warehouse Setup - Workstation Setup" showDisclosure="false" id="pb1">
+
+                                    <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                                        <f:facet name="secondaryToolbar">
+                                            <af:toolbar inlineStyle="padding:2px;" id="t3">
+                                                <af:group id="g1">
+                                                    <af:button actionListener="#{bindings.CreateInsert.execute}"
+                                                               text="Create" id="CreateButton" accessKey="C"
+                                                               inlineStyle="width:50px" partialSubmit="false"
+                                                               disabled="#{(!WorkstationSetupBacking.equipFlag) and (bindings.EquipView1_Workstation.estimatedRowCount > 0)}">
+                                                        <af:setActionListener from="#{false}"
+                                                                              to="#{WorkstationSetupBacking.equipFlag}"/>
+                                                        <af:setActionListener from="#{false}"
+                                                                              to="#{WorkstationSetupBacking.equipRefresh}"/>
+                                                        <af:setActionListener from="#{true}"
+                                                                              to="#{WorkstationSetupBacking.newWorkstationFlag}"/>
+                                                        <af:setActionListener from="#{true}"
+                                                                              to="#{WorkstationSetupBacking.editing}"/>
+                                                    </af:button>
+                                                </af:group>
+                                                <af:group id="g2">
+                                                    <af:button actionListener="#{WorkstationSetupBacking.submitUpdateWorkstation}"
+                                                               text="Update" id="UpdateButton" accessKey="U"
+                                                               inlineStyle="width:50px" partialSubmit="false"
+                                                               disabled="#{!WorkstationSetupBacking.equipFlag}"/>
+                                                    <!-- actionListener="#{WorkstationSetupBacking.submitDeleteWorkstation}" -->
+                                                </af:group>
+                                                <af:group id="g3">
+                                                    <af:button text="Delete" accessKey="D"
+                                                               disabled="#{!WorkstationSetupBacking.equipFlag}"
+                                                               id="DeleteButton" inlineStyle="width:50px"
+                                                               immediate="true" partialSubmit="false"
+                                                               actionListener="#{WorkstationSetupBacking.submitDeleteWorkstation}"
+                                                    >
+                                                        <af:showPopupBehavior popupId="confirmDelete" triggerType="action"
+                                                                              align="afterStart"/>
+                                                    </af:button>
+                                                    <af:popup id="confirmDelete">
+                                                        <af:dialog id="Confirm" title="Confirm" affirmativeTextAndAccessKey="Submit"
+                                                                   dialogListener="#{WorkstationSetupBacking.dialogListener}">
+                                                            <af:activeOutputText id="Delete" value="Are you sure you want to Delete?"/>
+                                                        </af:dialog>
+                                                    </af:popup>
+                                                    <!--
+                                                          onclick="return confirm('Are you sure you want to permanently delete this Workstation?')"/> -->
+                                                </af:group>
+                                            </af:toolbar>
+                                        </f:facet>
+                                        <!-- width="675" works -->
+                                        <af:table value="#{bindings.EquipView1_Workstation.collectionModel}" var="row"
+                                                  rows="#{bindings.EquipView1_Workstation.rangeSize}"
+                                                  first="#{bindings.EquipView1_Workstation.rangeStart}"
+                                                  emptyText="#{bindings.EquipView1_Workstation.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                  selectionListener="#{bindings.EquipView1_Workstation.collectionModel.makeCurrent}"
+                                                  id="equipT"
+                                                  styleClass="AFStretchWidth"
+                                                  columnStretching="last"
+                                                  summary="Workstation View"
+                                                  selectedRowKeys="#{bindings.EquipView1_Workstation.collectionModel.selectedRow}"
+                                                  rowSelection="single" binding="#{WorkstationSetupBacking.equipTable}"
+                                                  partialTriggers="::CreateButton">
+                                            <af:column sortProperty="Name" sortable="true" rowHeader="true"
+                                                       headerText="#{bindings.EquipView1_Workstation.labels.Name}"
+                                                       id="c1">
+                                                <af:outputText value="#{row.Name}" id="ot1"/>
+                                            </af:column>
+                                            <af:column sortProperty="Description" sortable="true" width="125"
+                                                       headerText="#{bindings.EquipView1_Workstation.labels.Description}"
+                                                       id="c2">
+                                                <af:outputText value="#{row.Description}" id="ot2"/>
+                                            </af:column>
+                                            <af:column sortProperty="WacNumber" sortable="true" headerText="WAC"
+                                                       id="c3">
+                                                <af:outputText value="#{row.WacNumber}" id="ot3"/>
+                                            </af:column>
+                                            <af:column sortProperty="Building" sortable="true" headerText="Building"
+                                                       id="c4">
+                                                <af:outputText value="#{row.Building}" id="ot4"/>
+                                            </af:column>
+                                            <af:column sortProperty="ShippingArea" sortable="true"
+                                                       headerText="Shipping Area" id="c5">
+                                                <af:outputText value="#{row.ShippingArea}" id="ot5"/>
+                                            </af:column>
+                                            <af:column sortProperty="PackingGroup" sortable="true"
+                                                       headerText="Packing Group" id="c6">
+                                                <af:outputText value="#{row.PackingGroup}" id="ot6"/>
+                                            </af:column>
+                                        </af:table>
+                                    </af:panelCollection>
+                                    <af:spacer height="10" id="s2"/>
+                                    <!-- Detail Panel -->
+                                    <af:panelBox text="Workstation Details" id="detailPanelBox" showDisclosure="false"
+                                                 rendered="#{bindings.EquipView1_Workstation.estimatedRowCount > 0}">
+                                        <af:separator id="s3"/>
+                                        <af:panelFormLayout partialTriggers="pc1:equipT" id="detailPanelForm">
+                                            <!-- Name -->
+                                            <af:inputText label="Name" labelStyle="font-weight:bold"
+                                                          value="#{bindings.Name.inputValue}"
+                                                          contentStyle="text-transform:uppercase;"
+                                                          columns="#{bindings.Name.displayWidth}" maximumLength="12"
+                                                          shortDesc="Required Workstation Name (max 12 alphanumeric)"
+                                                          id="workstation_name" inlineStyle="text-transform:uppercase"
+                                                          rendered="#{WorkstationSetupBacking.newWorkstationFlag}"
+                                                          binding="#{WorkstationSetupBacking.workStationName}"/>
+                                            <af:inputText label="Name" labelStyle="font-weight:bold"
+                                                          value="#{bindings.Name.inputValue}" columns="15"
+                                                          id="workstation_name_h"
+                                                          shortDesc="Required Workstation Name (max 30 alphanumeric)"
+                                                          rendered="#{WorkstationSetupBacking.equipFlag or !WorkstationSetupBacking.newWorkstationFlag}"
+                                                          readOnly="true" styleClass="ReadOnlyField"/>
+                                            <!-- Description -->
+                                            <af:selectOneChoice label="Description" labelStyle="font-weight:bold"
+                                                                id="descriptionList"
+                                                                value="#{bindings.EquipView1Description.inputValue}"
+                                                                unselectedLabel="- Select -" autoSubmit="true"
+                                                                shortDesc="Required Workstation Description"
+                                                                rendered="#{WorkstationSetupBacking.newWorkstationFlag}"
+                                                                binding="#{WorkstationSetupBacking.workStationDescription}">
+                                                <f:selectItems value="#{bindings.EquipView1Description.items}" id="si6"/>
+                                            </af:selectOneChoice>
+                                            <af:inputText label="Description" labelStyle="font-weight:bold"
+                                                          value="#{bindings.Description.inputValue}" columns="30"
+                                                          id="descriptionList_h"
+                                                          rendered="#{WorkstationSetupBacking.equipFlag or !WorkstationSetupBacking.newWorkstationFlag}"
+                                                          shortDesc="Required Workstation Description" readOnly="true"
+                                                          styleClass="ReadOnlyField"/>
+                                            <!-- COM Port -->
+                                            <af:selectOneChoice label="Control Com Port" labelStyle="font-weight:bold"
+                                                                value="#{bindings.EquipView1ComPortEquipmentId.inputValue}"
+                                                                unselectedLabel="- Select -"
+                                                                id="controlComPortSelectOne"
+                                                                shortDesc="Optional Control Com Port"
+                                                                rendered="#{!WorkstationSetupBacking.equipFlag}">
+                                                <f:selectItems value="#{bindings.EquipView1ComPortEquipmentId.items}" id="si4"/>
+                                            </af:selectOneChoice>
+                                            <af:inputText label="Control Com Port" labelStyle="font-weight:bold"
+                                                          value="#{bindings.ComName.inputValue}" columns="10"
+                                                          id="comPort_equipment_h"
+                                                          rendered="#{WorkstationSetupBacking.equipFlag}"
+                                                          shortDesc="Optional Control Com Port" readOnly="true"
+                                                          styleClass="ReadOnlyField"/>
+                                            <!-- Building -->
+                                            <af:selectOneChoice label="Building" labelStyle="font-weight:bold;"
+                                                                id="navList4" autoSubmit="true"
+                                                                value="#{bindings.EquipView1WarehouseId.inputValue}"
+                                                                shortDesc="Required Building"
+                                                                rendered="#{WorkstationSetupBacking.newWorkstationFlag}"
+                                                                binding="#{WorkstationSetupBacking.adminWorkStationSetupWarehouse}"
+                                                                unselectedLabel="- Select -">
+                                                <f:selectItems value="#{bindings.EquipView1WarehouseId.items}"
+                                                               id="si5"/>
+                                            </af:selectOneChoice>
+                                            <af:inputText label="Building" labelStyle="font-weight:bold;"
+                                                          value="#{bindings.Building.inputValue}" columns="10"
+                                                          id="navList4_h"
+                                                          rendered="#{WorkstationSetupBacking.equipFlag or !WorkstationSetupBacking.newWorkstationFlag}"
+                                                          shortDesc="Required Building" readOnly="true"
+                                                          styleClass="ReadOnlyField"/>
+                                            <!-- Printer Name -->
+                                            <af:inputText label="Printer Name" labelStyle="font-weight:bold;"
+                                                          value="#{bindings.PrinterName.inputValue}"
+                                                          required="#{bindings.PrinterName.hints.mandatory}"
+                                                          columns="30"
+                                                          contentStyle="text-transform:uppercase;"
+                                                          maximumLength="#{bindings.PrinterName.hints.precision}"
+                                                          shortDesc="Optional Printer Name" id="it1"
+                                                          rendered="#{!WorkstationSetupBacking.equipFlag}">
+                                                <f:validator binding="#{bindings.PrinterName.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText label="Printer Name" labelStyle="font-weight:bold;"
+                                                          value="#{bindings.PrinterName.inputValue}" columns="10"
+                                                          id="it1_h"
+                                                          rendered="#{WorkstationSetupBacking.equipFlag}"
+                                                          shortDesc="Optional Printer Name" readOnly="true"
+                                                          styleClass="ReadOnlyField"/>
+                                            <!-- WAC -->
+                                            <af:selectOneChoice label="WAC" labelStyle="font-weight:bold;" id="navList2"
+                                                                partialTriggers="navList4"
+                                                                value="#{bindings.EquipView1WacId.inputValue}"
+                                                                unselectedLabel="- Select -"
+                                                                shortDesc="WAC Required only for Stow/Issue workstation (related to selected building)"
+                                                                rendered="#{WorkstationSetupBacking.newWorkstationFlag}"
+                                                                binding="#{WorkstationSetupBacking.workStationSetupWac}">
+                                                <f:selectItems value="#{bindings.EquipView1WacId.items}" id="si3"/>
+                                            </af:selectOneChoice>
+                                            <af:inputText label="WAC" labelStyle="font-weight:bold;"
+                                                          value="#{bindings.WacNumber.inputValue}" columns="10"
+                                                          id="navList2_h"
+                                                          shortDesc="WAC Required only for Stow/Issue workstation (related to selected building)"
+                                                          rendered="#{WorkstationSetupBacking.equipFlag or !WorkstationSetupBacking.newWorkstationFlag}"
+                                                          readOnly="true" styleClass="ReadOnlyField"/>
+                                            <!-- Shipping Area -->
+                                            <af:inputText label="Shipping Area" labelStyle="font-weight:bold;"
+                                                          value="#{bindings.ShippingArea.inputValue}" columns="5"
+                                                          maximumLength="4"
+                                                          shortDesc="Optional Shipping Area (max 4 alphanumeric)"
+                                                          id="workstation_shippingArea"
+                                                          inlineStyle="text-transform:uppercase"
+                                                          partialTriggers="descriptionList"
+                                                          visible="#{!WorkstationSetupBacking.equipFlag and (bindings.Description.inputValue == '4' or bindings.Description.inputValue == 'Shipping Station')}"
+                                                          binding="#{WorkstationSetupBacking.workStationShippingArea}"/>
+                                            <af:inputText label="Shipping Area" labelStyle="font-weight:bold;"
+                                                          value="#{bindings.ShippingArea.inputValue}" columns="5"
+                                                          id="workstation_shippingArea_h"
+                                                          shortDesc="Optional Shipping Area (max 4 alphanumeric)"
+                                                          rendered="#{WorkstationSetupBacking.equipFlag and (bindings.Description.inputValue == '4' or bindings.Description.inputValue == 'Shipping Station')}"
+                                                          readOnly="true" styleClass="ReadOnlyField"/>
+                                            <!-- Packing Group -->
+                                            <af:selectOneChoice label="Packing Group" labelStyle="font-weight:bold;"
+                                                                id="workstation_packingGroupList"
+                                                                value="#{bindings.EquipView1PackGroupList.inputValue}"
+                                                                unselectedLabel="- Select -" autoSubmit="true"
+                                                                shortDesc="Required Packing Group"
+                                                                partialTriggers="descriptionList"
+                                                                visible="#{(!WorkstationSetupBacking.equipFlag) and (bindings.Description.inputValue == '2' or bindings.Description.inputValue == '3' or  bindings.Description.inputValue == 'Packing Station - Consolidation' or bindings.Description.inputValue == 'Packing Station - Single')}"
+                                                                binding="#{WorkstationSetupBacking.workStationPackGroupList}">
+                                                <f:selectItems value="#{bindings.EquipView1PackGroupList.items}"
+                                                               id="si2"/>
+                                            </af:selectOneChoice>
+                                            <af:inputText label="Packing Group" labelStyle="font-weight:bold;"
+                                                          value="#{bindings.PackingGroup.inputValue}" columns="5"
+                                                          id="workstation_packingGroup_h"
+                                                          shortDesc="Required Packing Group (max 4 alphanumeric)"
+                                                          rendered="#{WorkstationSetupBacking.equipFlag and (bindings.Description.inputValue == '2' or bindings.Description.inputValue == '3' or bindings.Description.inputValue == 'Packing Station - Consolidation' or bindings.Description.inputValue == 'Packing Station - Single')}"
+                                                          readOnly="true" styleClass="ReadOnlyField"/>
+                                            <!-- Cubiscan -->
+                                            <af:selectOneChoice label="Has Cubiscan?" labelStyle="font-weight:bold;"
+                                                                id="workstation_cubiscan"
+                                                                value="#{bindings.EquipView1HasCubiscan.inputValue}"
+                                                                unselectedLabel="- Select -" autoSubmit="true"
+                                                                shortDesc="Required Cubiscan option"
+                                                                partialTriggers="descriptionList"
+                                                                visible="#{(!WorkstationSetupBacking.equipFlag) and (bindings.Description.inputValue == '0' or bindings.Description.inputValue == 'Receiving Station')}"
+                                                                binding="#{WorkstationSetupBacking.workStationCubiscan}">
+                                                <f:selectItems value="#{bindings.EquipView1HasCubiscan.items}" id="si1"/>
+                                            </af:selectOneChoice>
+                                            <af:inputText label="Has Cubiscan?" labelStyle="font-weight:bold;"
+                                                          value="#{bindings.HasCubiscan.inputValue}" columns="5"
+                                                          id="workstation_cubiscan_h"
+                                                          shortDesc="Required Cubiscan option"
+                                                          rendered="#{WorkstationSetupBacking.equipFlag and (bindings.Description.inputValue == '0' or bindings.Description.inputValue == 'Receiving Station')}"
+                                                          readOnly="true" styleClass="ReadOnlyField"/>
+                                            <!-- Tool bar -->
+                                            <af:toolbar rendered="#{!WorkstationSetupBacking.equipFlag}"
+                                                        inlineStyle="padding:5px;" id="t2">
+                                                <af:button actionListener="#{WorkstationSetupBacking.submitSaveWorkstation}"
+                                                           text="Submit" accessKey="S" inlineStyle="width:50px"
+                                                           id="SaveButton" partialSubmit="false"/>
+                                                <af:button actionListener="#{WorkstationSetupBacking.submitResetWorkstation}"
+                                                           text="Reset" accessKey="R" inlineStyle="width:50px"
+                                                           rendered="#{!WorkstationSetupBacking.newWorkstationFlag}"
+                                                           id="ResetButton" partialSubmit="false"/>
+                                                <af:resetButton text="Reset" accessKey="R" id="ResetButton2"
+                                                                rendered="#{WorkstationSetupBacking.newWorkstationFlag}"
+                                                                inlineStyle="width:50px"/>
+                                                <af:button actionListener="#{WorkstationSetupBacking.submitCancelWorkstation}"
+                                                           text="Cancel" accessKey="a" inlineStyle="width:50px" immediate="true"
+                                                           id="CancelButton" partialSubmit="false"/>
+                                            </af:toolbar>
+                                        </af:panelFormLayout>
+                                    </af:panelBox>
+                                </af:panelBox>
+
+                            </af:panelGroupLayout>
+                            <f:subview id="footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6" id="s7"/>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

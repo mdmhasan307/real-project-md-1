@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <!-- File Import Logs Report (DASF) -->
+    <af:table var="row" rowBandingInterval="1" id="rg3t1_1" autoHeightRows="0"
+              styleClass="AFStretchWidth"
+              value="#{viewScope.ReportsQueryResultBean.reportColumnList}"
+              rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'File Import Logs Report (DASF)'}">
+        <af:column sortable="false" headerText="Interface" id="rg3c1_1" width="150">
+            <af:outputText value="#{row.interfaceName}" id="rg3ot1_1"/>
+        </af:column>
+        <af:column sortable="false" headerText="Created Date" id="rg3c1_2">
+            <af:outputText value="#{row.createdDate}"/>
+        </af:column>
+        <af:column sortable="false" headerText="Description" id="rg3c1_3">
+            <af:outputText value="#{row.description}" id="rg3ot1_3"/>
+        </af:column>
+        <af:column sortable="false" headerText="Line No." id="rg3c1_4"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.lineNumber}" id="rg3ot1_4"/>
+        </af:column>
+        <af:column sortable="false" headerText="Data Row" id="rg3c1_5">
+            <af:outputText value="#{row.dataRow}" id="rg3ot1_5"/>
+        </af:column>
+    </af:table>
+</jsp:root>

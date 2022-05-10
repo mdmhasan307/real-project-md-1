@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="LoginResult"
+  Version="11.1.2.64.36"
+  DBObjectType="SYNONYM"
+  DBObjectName="STRATIS.LOGIN_RESULT_LU"
+  AliasName="LoginResult"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <Attribute
+    Name="LoginResultId"
+    IsNotNull="true"
+    ColumnName="LOGIN_RESULT_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="STRATIS.LOGIN_RESULT_LU"
+    PrimaryKey="true"/>
+  <Attribute
+    Name="LoginResult"
+    Precision="20"
+    ColumnName="LOGIN_RESULT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="STRATIS.LOGIN_RESULT_LU">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Descn"
+    Precision="100"
+    ColumnName="DESCN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="STRATIS.LOGIN_RESULT_LU">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </Attribute>
+  <Key
+    Name="LoginresultPrimaryKey"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="LOGINRESULT_PRIMARY_KEY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.ref.LoginResult.LoginResultId"/>
+    </AttrArray>
+  </Key>
+</Entity>

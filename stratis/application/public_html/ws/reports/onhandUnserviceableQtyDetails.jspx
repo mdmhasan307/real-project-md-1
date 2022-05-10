@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <!-- Onhand Un-Serviceable Qty Details -->
+    <af:table var="row" rowBandingInterval="1" id="t9_1" autoHeightRows="0"
+              styleClass="AFStretchWidth"
+              value="#{viewScope.ReportsQueryResultBean.reconReportColumnList}"
+              rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Onhand Un-Serviceable Qty Details'}">
+        <af:column sortable="false" headerText="NIIN" id="c9_1" width="150">
+            <af:outputText value="#{row.niin}" id="ot9_1"/>
+        </af:column>
+        <af:column sortable="false" headerText="STRATIS Balance" id="c9_2"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.stratisBalance}" id="ot9_2"/>
+        </af:column>
+        <af:column sortable="false" headerText="Host Balance" id="c9_3"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.hostBalance}" id="ot9_3"/>
+        </af:column>
+        <af:column sortable="false" headerText="Balance Differences" id="c9_4" width="150"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.balanceDiff}" id="ot9_4"/>
+        </af:column>
+        <af:column sortable="false" headerText="Price" id="c9_5"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.price}" id="ot9_5"/>
+        </af:column>
+        <af:column sortable="false" headerText="Adjustment" id="c9_6"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.adjustment}" id="ot9_6"/>
+        </af:column>
+        <af:column sortable="false" headerText="Location" id="c9_7">
+            <af:outputText value="#{row.location}" id="ot9_7"/>
+        </af:column>
+        <af:column sortable="false" headerText="QTY On Hand" id="c9_8"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.qtyOnHand}" id="ot9_8"/>
+        </af:column>
+    </af:table>
+</jsp:root>

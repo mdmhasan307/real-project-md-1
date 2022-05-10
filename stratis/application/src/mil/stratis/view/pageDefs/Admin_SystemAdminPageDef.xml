@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Admin_SystemAdminPageDef"
+                Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="UsersView1Iterator" RangeSize="50" Binds="Root.SysAdmin1.UsersView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="SiteInfoView1Iterator" RangeSize="1" Binds="Root.SysAdmin1.SiteInfoView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="UsersView1" IterBinding="UsersView1Iterator">
+      <AttrNames>
+        <Item Value="UserId"/>
+        <Item Value="FirstName"/>
+        <Item Value="MiddleName"/>
+        <Item Value="LastName"/>
+        <Item Value="Status"/>
+        <Item Value="LastLogin"/>
+        <Item Value="Username"/>
+        <Item Value="VisibleFlag"/>
+        <Item Value="LoggedIn"/>
+        <Item Value="TempKey"/>
+        <Item Value="LoggedInHh"/>
+        <Item Value="TempKeyHh"/>
+        <Item Value="LastLoginHh"/>
+      </AttrNames>
+    </table>
+    <action id="Execute" IterBinding="UsersView1Iterator"
+            InstanceName="StratisRootServiceDataControl.Root.SysAdmin1.UsersView1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <attributeValues id="SiteInfoView1ShutdownMessage" IterBinding="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="ShutdownMessage"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ShutdownWarningMessage" IterBinding="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="ShutdownWarning"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="SiteInfoView1ShutdownUserId" IterBinding="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="ShutdownUserId"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" InstanceName="StratisRootServiceDataControl.Root.SysAdmin1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <attributeValues id="BulkThreshold" IterBinding="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="BulkThreshold"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PackingBypass" IterBinding="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="PackingBypass"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="SingleItemCube" IterBinding="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="SingleItemCube"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="SingleItemWeight" IterBinding="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="SingleItemWeight"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="GenerateAs2" IterBinding="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="GenerateAs2"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="GcssMc" IterBinding="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="GcssMc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="InterfacesOn" IterBinding="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="InterfacesOn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="IssueCubeThreshold" IterBinding="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="IssueCubeThreshold"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="IssueWeightThreshold" IterBinding="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="IssueWeightThreshold"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="InventoryThresholdValue" IterBinding="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="InventoryThresholdValue"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="InventoryThresholdCount" IterBinding="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="InventoryThresholdCount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PackingConsolScanCount" IterBinding="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="PackingConsolScanCount"/>
+      </AttrNames>
+    </attributeValues>
+    <list id="SiteInfoView1GenerateAs2" IterBinding="SiteInfoView1Iterator" ListOperMode="setAttribute"
+          StaticList="true">
+      <AttrNames>
+        <Item Value="GenerateAs2"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </list>
+    <list id="SiteInfoView1PackingBypass" IterBinding="SiteInfoView1Iterator" ListOperMode="setAttribute"
+          StaticList="true">
+      <AttrNames>
+        <Item Value="PackingBypass"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </list>
+    <list id="SiteInfoView1IsGcssMc" IterBinding="SiteInfoView1Iterator" ListOperMode="setAttribute" StaticList="true">
+      <AttrNames>
+        <Item Value="GcssMc"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </list>
+    <list id="SiteInfoView1IsInterfacesOn" IterBinding="SiteInfoView1Iterator" ListOperMode="setAttribute"
+          StaticList="true">
+      <AttrNames>
+        <Item Value="InterfacesOn"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </list>
+    <attributeValues id="MhifRange" IterBinding="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="MhifRange"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="GcssmcLogClear" IterBinding="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="GcssmcLogClear"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="RefLogClear" IterBinding="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="RefLogClear"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="HelpUrl" IterBinding="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="HelpUrl"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PendingStowTime" IterBinding="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="PendingStowTime"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

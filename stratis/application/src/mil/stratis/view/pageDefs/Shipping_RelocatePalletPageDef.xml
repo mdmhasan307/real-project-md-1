@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Shipping_RelocatePalletPageDef"
+                Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="AllPalletContainersIterator" RangeSize="-1" Binds="Root.ShippingService1.ListPallets"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <invokeAction id="AlwaysFind" Binds="Find" RefreshCondition="${!bindings.AllPalletContainersIterator.findMode}"
+                  Refresh="ifNeeded"/>
+    <iterator id="PalletContainerResultsIterator" Binds="Root.ShippingService1.ListPallets" RangeSize="-1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <invokeAction id="refresh2" Refresh="ifNeeded" Binds="ExecuteWithParams"/>
+  </executables>
+  <bindings>
+    <attributeValues id="Aac" IterBinding="AllPalletContainersIterator">
+      <AttrNames>
+        <Item Value="Aac"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CustomerId" IterBinding="AllPalletContainersIterator">
+      <AttrNames>
+        <Item Value="CustomerId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="FloorLocation" IterBinding="AllPalletContainersIterator">
+      <AttrNames>
+        <Item Value="FloorLocation"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="FloorLocationId" IterBinding="AllPalletContainersIterator">
+      <AttrNames>
+        <Item Value="FloorLocationId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LeadTcn" IterBinding="AllPalletContainersIterator">
+      <AttrNames>
+        <Item Value="LeadTcn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ShippingManifestId" IterBinding="AllPalletContainersIterator">
+      <AttrNames>
+        <Item Value="ShippingManifestId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Manifest" IterBinding="AllPalletContainersIterator">
+      <AttrNames>
+        <Item Value="Manifest"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Execute" RequiresUpdateModel="true" Action="iteratorExecute" IterBinding="AllPalletContainersIterator"/>
+    <table id="AllPalletContainers" IterBinding="PalletContainerResultsIterator">
+      <AttrNames>
+        <Item Value="Aac"/>
+        <Item Value="FloorLocation"/>
+        <Item Value="LeadTcn"/>
+        <Item Value="Manifest"/>
+      </AttrNames>
+    </table>
+    <action IterBinding="AllPalletContainersIterator" id="Find"
+            InstanceName="StratisRootServiceDataControl.Root.ShippingService1.ListPallets"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="iteratorFind"/>
+    <action id="ExecuteWithParams" IterBinding="AllPalletContainersIterator"
+            InstanceName="StratisRootServiceDataControl.Root.ShippingService1.ListPallets"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="executeWithParams">
+      <NamedData NDName="EQUIPMENT_NUMBER" NDType="java.lang.String" NDValue="${userbean.workstationId}"/>
+    </action>
+  </bindings>
+</pageDefinition>

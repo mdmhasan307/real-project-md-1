@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Admin_InventorySchedulePageDef"
+                Package="mil.stratis.view.pageDefs" EnableTokenValidation="false">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables" Refresh="ifNeeded">
+      <variable Type="java.sql.Date" Name="CreateInventoryByDate_experationdate" IsQueriable="false"/>
+    </variableIterator>
+    <iterator id="LocSurveyCreateView1Iterator" RangeSize="10" Binds="Root.InventorySetupModule1.LocSurveyCreateView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="InventoryView1Iterator" RangeSize="10" Binds="Root.InventorySetupModule1.InventoryView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="InventoryItemView2Iterator" RangeSize="10" Binds="Root.InventorySetupModule1.InventoryItemView2"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="InventoryItemFilterView1Iterator" RangeSize="19"
+              Binds="Root.InventorySetupModule1.InventoryItemFilterView1" DataControl="StratisRootServiceDataControl"
+              StateValidation="false" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <action id="ExecuteFilter" IterBinding="InventoryItemFilterView1Iterator"
+            InstanceName="StratisRootServiceDataControl.Root.InventorySetupModule1.InventoryItemFilterView1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <action id="ExecuteInventory" IterBinding="InventoryView1Iterator"
+            InstanceName="StratisRootServiceDataControl.Root.InventorySetupModule1.InventoryView1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <action id="ExecuteItem" IterBinding="InventoryItemView2Iterator"
+            InstanceName="StratisRootServiceDataControl.Root.InventorySetupModule1.InventoryItemView2"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <action id="Execute" IterBinding="InventoryView1Iterator"
+            InstanceName="StratisRootServiceDataControl.Root.InventorySetupModule1.InventoryView1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <table id="LocSurveyCreateView1" IterBinding="LocSurveyCreateView1Iterator">
+      <AttrNames>
+        <Item Value="TotalLocations"/>
+        <Item Value="StartLoc"/>
+        <Item Value="EndLoc"/>
+      </AttrNames>
+    </table>
+    <methodAction id="DeleteCurrentRowLocSurvey"
+                  InstanceName="StratisRootServiceDataControl.dataProvider.Root.InventorySetupModule1"
+                  DataControl="StratisRootServiceDataControl" MethodName="DeleteCurrentRowLocSurvey"
+                  RequiresUpdateModel="true" Action="invokeMethod" IsViewObjectMethod="false"/>
+    <methodAction id="AddLocationSurveyList" MethodName="AddLocationSurveyList" RequiresUpdateModel="true"
+                  Action="invokeMethod" IsViewObjectMethod="false" DataControl="StratisRootServiceDataControl"
+                  InstanceName="StratisRootServiceDataControl.dataProvider.Root.InventorySetupModule1">
+      <NamedData NDName="StartLoc" NDType="java.lang.String" NDValue="${bindings.AddLocationSurveyList_StartLoc}"/>
+      <NamedData NDName="EndLoc" NDType="java.lang.String" NDValue="${bindings.AddLocationSurveyList_EndLoc}"/>
+    </methodAction>
+    <attributeValues id="experationdate" IterBinding="variables">
+      <AttrNames>
+        <Item Value="CreateInventoryByDate_experationdate"/>
+      </AttrNames>
+    </attributeValues>
+    <!--<methodAction id="DeleteCurrentRowLocSurvey"
+                  InstanceName="StratisRootServiceDataControl.dataProvider.Root.Inventory_SetupModule1"
+                  DataControl="StratisRootServiceDataControl"
+                  MethodName="DeleteCurrentRowLocSurvey"
+                  RequiresUpdateModel="true" Action="999"
+                  IsViewObjectMethod="false"/>-->
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="1"/>
+    <jsp:setProperty name="userbean" property="selected2" value="0"/>
+    <f:view>
+        <af:document title="STRATIS" id="d1">
+            <af:form id="main_form">
+                <af:panelStretchLayout id="psl1" startWidth="24" topHeight="150">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/ws/WS_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll" id="pgl5">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelFormLayout rows="20" id="pfl1">
+                                <af:panelGroupLayout layout="horizontal" id="pgl1">
+                                    <af:outputText value="#{processScope.dialogTxt}"
+                                                   inlineStyle="color:rgb(0,0,255); font-size:larger;"
+                                                   id="otDialogTxt"/>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout layout="horizontal" id="pgl2">
+                                    <af:spacer width="10" height="20" id="s1"/>
+                                </af:panelGroupLayout>
+                                <f:facet name="footer">
+                                    <af:panelGroupLayout id="pgl3">
+                                        <af:panelGroupLayout layout="horizontal" id="pgl4">
+                                            <af:button text="Done"
+                                                              actionListener="#{ReceivingGeneralDetail.UIDialogDone}"
+                                                              id="acceptDialogId" partialSubmit="false"/>
+                                            <af:button text="Cancel"
+                                                              actionListener="#{ReceivingGeneralDetail.UIDialogDone}"
+                                                              id="cancelDialogId" rendered="false" partialSubmit="false"/>
+                                        </af:panelGroupLayout>
+                                    </af:panelGroupLayout>
+                                </f:facet>
+                            </af:panelFormLayout>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <af:spacer width="24" height="675" id="s2"/>
+                    </f:facet>
+                    <f:facet name="end"/>
+                    <f:facet name="bottom">
+                        <f:subview id="lwrap_footer">
+                            <jsp:include page="/Footer.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

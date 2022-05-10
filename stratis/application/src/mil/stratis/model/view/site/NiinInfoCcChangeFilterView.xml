@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="NiinInfoCcChangeFilterView"
+  Version="11.1.2.64.36"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  ComponentClass="mil.stratis.model.view.site.NiinInfoCcChangeFilterViewImpl">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="mil.stratis.model.view.site.NiinInfoCcChangeFilterView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery><![CDATA[SELECT NiinInfo.NIIN_ID, 
+       NiinInfo.NIIN, 
+       NiinInfo.NOMENCLATURE, 
+       NiinInfo.FSC, 
+       NiinInfo.LOT_CONTROL_FLAG, 
+       NiinInfo.SERIAL_CONTROL_FLAG, 
+       NiinInfo.SHELF_LIFE_CODE, 
+       NiinInfo.SHELF_LIFE_EXTENSION, 
+       SerialLotNumTrack.SERIAL_NUMBER, 
+       SerialLotNumTrack.LOT_CON_NUM
+FROM 
+NIIN_INFO NiinInfo LEFT OUTER JOIN SERIAL_LOT_NUM_TRACK SerialLotNumTrack
+ON SerialLotNumTrack.NIIN_ID = NiinInfo.NIIN_ID]]></SQLQuery>
+  <EntityUsage
+    Name="NiinInfo"
+    Entity="mil.stratis.model.entity.site.NiinInfo"/>
+  <ViewAttribute
+    Name="NiinId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="NiinId"
+    EntityUsage="NiinInfo"
+    AliasName="NIIN_ID"/>
+  <ViewAttribute
+    Name="Niin"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Niin"
+    EntityUsage="NiinInfo"
+    AliasName="NIIN"/>
+  <ViewAttribute
+    Name="Nomenclature"
+    PrecisionRule="true"
+    EntityAttrName="Nomenclature"
+    EntityUsage="NiinInfo"
+    AliasName="NOMENCLATURE"/>
+  <ViewAttribute
+    Name="Fsc"
+    PrecisionRule="true"
+    EntityAttrName="Fsc"
+    EntityUsage="NiinInfo"
+    AliasName="FSC"/>
+  <ViewAttribute
+    Name="LotControlFlag"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LotControlFlag"
+    EntityUsage="NiinInfo"
+    AliasName="LOT_CONTROL_FLAG"/>
+  <ViewAttribute
+    Name="SerialControlFlag"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="SerialControlFlag"
+    EntityUsage="NiinInfo"
+    AliasName="SERIAL_CONTROL_FLAG"/>
+  <ViewAttribute
+    Name="ShelfLifeCode"
+    PrecisionRule="true"
+    EntityAttrName="ShelfLifeCode"
+    EntityUsage="NiinInfo"
+    AliasName="SHELF_LIFE_CODE"/>
+  <ViewAttribute
+    Name="ShelfLifeExtension"
+    PrecisionRule="true"
+    EntityAttrName="ShelfLifeExtension"
+    EntityUsage="NiinInfo"
+    AliasName="SHELF_LIFE_EXTENSION"/>
+  <ViewAttribute
+    Name="SerialNumber"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    Expression="SERIAL_NUMBER"
+    Precision="30"/>
+  <ViewAttribute
+    Name="LogConNum"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    Expression="LOT_CON_NUM"
+    Precision="30"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="NiinId"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="mil.stratis.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

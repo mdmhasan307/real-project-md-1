@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <!-- Workload Detail (Stowing) -->
+    <af:table var="row" rowBandingInterval="1" id="t2_1" autoHeightRows="0"
+              styleClass="AFStretchWidth"
+              value="#{viewScope.ReportsQueryResultBean.reportColumnList}"
+              rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Workload Detail (Stowing)'}">
+        <af:column sortable="false" headerText="WAC" id="c2_4">
+            <af:outputText value="#{row.wac}" id="ot2_4"/>
+        </af:column>
+        <af:column sortable="false" headerText="Location" id="c2_1" width="150">
+            <af:outputText value="#{row.location}" id="ot2_1"/>
+        </af:column>
+        <af:column sortable="false" headerText="SID" id="c2_2">
+            <af:outputText value="#{row.sid}" id="ot2_2"/>
+        </af:column>
+        <af:column sortable="false" headerText="Nomenclature" id="c2_10">
+            <af:outputText value="#{row.nomenclature}" id="ot2_10"/>
+        </af:column>
+        <af:column sortable="false" headerText="Qty To Be Stowed" id="c2_8"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.qtyToBeStowed}" id="ot2_8"/>
+        </af:column>
+        <af:column sortable="false" headerText="Stowed Qty" id="c2_7"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.stowedQty}" id="ot2_7"/>
+        </af:column>
+        <af:column sortable="false" headerText="Status" id="c2_3">
+            <af:outputText value="#{row.status}" id="ot2_3"/>
+        </af:column>
+        <af:column sortable="false" headerText="Pack Area" id="c2_6">
+            <af:outputText value="#{row.packingStation}" id="ot2_6"/>
+        </af:column>
+        <af:column sortable="false" headerText="Stowed By" id="c2_5">
+            <af:outputText value="#{row.stowedBy}" id="ot2_5"/>
+        </af:column>
+    </af:table>
+</jsp:root>

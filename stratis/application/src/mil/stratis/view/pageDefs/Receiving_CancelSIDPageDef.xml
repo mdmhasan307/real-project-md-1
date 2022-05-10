@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Receiving_CancelSIDPageDef"
+                Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="StowCancelVO1Iterator" RangeSize="10" Binds="Root.ReceiptAM1.StowCancelVO1"
+              DataControl="StratisRootServiceDataControl" RefreshCondition="${requestContext.postback== true}"
+              Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <variableIterator id="variables" Refresh="ifNeeded">
+      <variableUsage DataControl="StratisRootServiceDataControl" Binds="StowCancelVO1.variablesMap.sidStr"
+                     Name="StowCancelVO1_sidStr" IsQueriable="false"/>
+    </variableIterator>
+  </executables>
+  <bindings>
+    <action id="ExecuteWithParams" IterBinding="StowCancelVO1Iterator"
+            InstanceName="StratisRootServiceDataControl.Root.ReceiptAM1.StowCancelVO1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="executeWithParams">
+      <NamedData NDName="sidStr" NDType="java.lang.String" NDValue="${bindings.StowCancelVO1_sidStr}"/>
+    </action>
+    <attributeValues id="sidStr" IterBinding="variables">
+      <AttrNames>
+        <Item Value="StowCancelVO1_sidStr"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="StowId" IterBinding="StowCancelVO1Iterator">
+      <AttrNames>
+        <Item Value="StowId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CancelReason" IterBinding="StowCancelVO1Iterator">
+      <AttrNames>
+        <Item Value="CancelReason"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Rcn" IterBinding="StowCancelVO1Iterator">
+      <AttrNames>
+        <Item Value="Rcn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Suffix" IterBinding="StowCancelVO1Iterator">
+      <AttrNames>
+        <Item Value="Suffix"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="DocumentNumber" IterBinding="StowCancelVO1Iterator">
+      <AttrNames>
+        <Item Value="DocumentNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Niin" IterBinding="StowCancelVO1Iterator">
+      <AttrNames>
+        <Item Value="Niin"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Cc" IterBinding="StowCancelVO1Iterator">
+      <AttrNames>
+        <Item Value="Cc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Pc" IterBinding="StowCancelVO1Iterator">
+      <AttrNames>
+        <Item Value="Pc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Fsc" IterBinding="StowCancelVO1Iterator">
+      <AttrNames>
+        <Item Value="Fsc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Status" IterBinding="StowCancelVO1Iterator">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Nomenclature" IterBinding="StowCancelVO1Iterator">
+      <AttrNames>
+        <Item Value="Nomenclature"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Rollback" InstanceName="StratisRootServiceDataControl.Root.RcvReceiptAM1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <!--<action id="Rollback" InstanceName="ReceiptAMDataControl"
+            DataControl="ReceiptAMDataControl" RequiresUpdateModel="false"
+            Action="101"/>-->
+  </bindings>
+</pageDefinition>

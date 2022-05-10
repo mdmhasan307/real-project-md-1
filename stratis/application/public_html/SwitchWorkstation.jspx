@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+>
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <style>
+        .noSmvBackground {
+            background-image: url(resources/images/STRATIS_Login.jpg);
+        }
+
+        .smvBackground {
+            background-image: url(resources/images/STRATIS_LOGIN_SMV.jpg);
+        }
+    </style>
+    <f:view>
+        <af:document title="Login.jspx" id="d1">
+            <af:messages id="m1"/>
+            <f:subview id="classificationHeader">
+                <jsp:include page="/ClassificationBanner.jspx"/>
+            </f:subview>
+            <af:form id="f1">
+                <input type="hidden" id="smvEn" value="${appConfig.smvEnabled}"/>
+                <af:panelGridLayout id="hm_psl1"
+                                    inlineStyle="background-repeat:no-repeat;">
+                    <af:gridRow marginTop="334px" marginBottom="289px" id="gr1">
+                        <af:gridCell id="gc4">
+
+                        </af:gridCell>
+                        <af:gridCell id="gc1">
+                            <af:panelFormLayout id="pfl1" inlineStyle="margin-left:385px;margin-right:540px;">
+                                <af:inputText label="Label 1" id="it1" value="#{userBackingBean.userstring}"
+                                              simple="true" inlineStyle="border-color:Black;" disabled="true"/>
+                                <af:spacer height="24" width="0" rendered="true" id="s1"/>
+                                <af:panelGroupLayout id="rolehp" layout="horizontal">
+                                    <af:inputText label="Type" id="it2" value="#{userBackingBean.usertypestring}"
+                                                  simple="true" inlineStyle="border-color:Black;" contentStyle="width:45px"
+                                                  disabled="true"/>
+                                    <af:spacer width="50px" id="rolehpsp"/>
+                                    <af:selectOneChoice label="defaultHomepage" id="dhp" simple="true"
+                                                        rendered="#{appConfig.smvEnabled}" disabled="false"
+                                                        binding="#{userBackingBean.homePageSelect}"
+                                                        value="#{userBackingBean.defaultHomePage}">
+                                        <f:selectItem itemLabel="Desktop" itemValue="desktop" id="dhp1"/>
+                                        <f:selectItem itemLabel="Mobile" itemValue="mobile" id="dhp2"/>
+                                    </af:selectOneChoice>
+                                </af:panelGroupLayout>
+                                <af:spacer height="24" width="0" rendered="true" id="s2"/>
+                                <af:panelGroupLayout layout="horizontal" id="pgl2">
+                                    <af:selectOneChoice label="workstation" id="soc2" simple="true" disabled="false"
+                                                        binding="#{userBackingBean.userWorkstationSelect}">
+                                        <f:selectItems value="#{userBackingBean.equipLoginAllValues}" id="si2"/>
+                                    </af:selectOneChoice>
+                                    <af:spacer width="14" id="s7"/>
+                                    <!-- Notices -->
+                                    <!--<af:link action="dialog:DODNotices" text="Notices" useWindow="true"
+                                                    windowHeight="500" windowWidth="600"
+                                                    inlineStyle="color:#FFFFFF; font-size:10pt; font-weight:bold;"
+                                                    id="login_cl1"/>-->
+                                    <af:spacer height="0" width="10" id="s9"/>
+                                </af:panelGroupLayout>
+                                <af:spacer height="6" width="0" rendered="true" id="s3"/>
+                                <af:panelGroupLayout layout="horizontal" id="pgl3">
+                                    <af:link id="cb1" actionListener="#{userBackingBean.switchWorkstation}"
+                                             shortDesc="login button"
+                                             rendered="true"
+                                             action="#{userBackingBean.getSwitchWorkstationAction}"
+                                             icon="resources/images/Login_Button.gif">
+                                        <!--af:image id="export" source="resources/images/Login_Button.gif" shortDesc="CAC Login"/-->
+                                    </af:link>
+                                    <af:spacer width="20" height="0" id="s10"/>
+                                    <af:outputLabel value="#{userBackingBean.loginStatusMessage}" id="ol1"
+                                                    inlineStyle="color:Red; font-family:Arial, Helvetica, sans-serif; background-color:Menu; padding:2px; font-weight:bold;"
+                                                    rendered="#{not empty userBackingBean.loginStatusMessage}"/>
+                                </af:panelGroupLayout>
+                            </af:panelFormLayout>
+                        </af:gridCell>
+                    </af:gridRow>
+                </af:panelGridLayout>
+            </af:form>
+            <f:subview id="classificationFooter">
+                <jsp:include page="/ClassificationBanner.jspx"/>
+            </f:subview>
+        </af:document>
+    </f:view>
+    <script language="Javascript" type="text/javascript">
+        var docPage = document.getElementById("hm_psl1");
+        var smvEnabled = document.getElementById("smvEn").value;
+        if (smvEnabled == "true") {
+            docPage.className += " smvBackground";
+        } else {
+            docPage.className += " noSmvBackground";
+        }
+    </script>
+</jsp:root>

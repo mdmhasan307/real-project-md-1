@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:stratis="taglib.mil.usmc.stratis">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" scope="session" class="mil.stratis.view.user.UserInfo"/>
+    <jsp:setProperty name="userbean" property="selected" value="2"/>
+    <jsp:setProperty name="userbean" property="selected2" value="1"/>
+    <f:view>
+        <af:document title="Picking_NormalMain.jspx" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="25" topHeight="150" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="pn_wrap_header">
+                            <jsp:include page="/ws/WS_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout id="topGroup" layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGridLayout id="pgl2">
+                                <af:gridRow id="gr1">
+                                    <af:gridCell valign="top" id="gc2">
+                                        <af:panelHeader text="Reassign SID" id="ph1">
+                                            <af:spacer width="10" height="10" id="s1"/>
+                                            <af:panelGroupLayout layout="horizontal" id="pgl3">
+                                                <af:inputText label="Scan or Enter the SID"
+                                                              binding="#{StowingAll.scanLocLabel}"
+                                                              inlineStyle="font-weight:bold;"
+                                                              contentStyle="text-transform:uppercase;" id="itScanSid"/>
+                                                <af:spacer width="5" height="10" id="s3"/>
+                                                <af:button text="Get Stow Details"
+                                                           actionListener="#{StowingAll.getScannedSIDDetails}"
+                                                           id="cbStowDetails" partialSubmit="false"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="10" height="10" id="s4"/>
+                                            <af:panelGroupLayout layout="horizontal" id="pgl4">
+                                                <af:table value="#{bindings.StowLocVO1.collectionModel}" var="row"
+                                                          rows="#{bindings.StowLocVO1.rangeSize}"
+                                                          first="#{bindings.StowLocVO1.rangeStart}"
+                                                          emptyText="#{bindings.StowLocVO1.viewable ? 'No rows.' : 'No rows.'}"
+                                                          id="tStLcV1" width="500"
+                                                          autoHeightRows="5">
+                                                    <af:column sortProperty="Sid" sortable="false"
+                                                               headerText="#{bindings.StowLocVO1.labels.Sid}" id="c1">
+                                                        <af:inputText value="#{row.Sid}" simple="true"
+                                                                      required="#{bindings.StowLocVO1.attrDefs.Sid.mandatory}"
+                                                                      columns="#{bindings.StowLocVO1.attrHints.Sid.displayWidth}"
+                                                                      id="itSid" readOnly="true"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="QtyToBeStowed" sortable="false"
+                                                               headerText="#{bindings.StowLocVO1.labels.QtyToBeStowed}"
+                                                               id="c2">
+                                                        <af:inputText value="#{row.QtyToBeStowed}"
+                                                                      required="#{bindings.StowLocVO1.attrDefs.QtyToBeStowed.mandatory}"
+                                                                      columns="#{bindings.StowLocVO1.attrHints.QtyToBeStowed.displayWidth}"
+                                                                      id="itQtyToBeStowed" readOnly="true">
+                                                            <f:convertNumber groupingUsed="false"
+                                                                             pattern="#{bindings.StowLocVO1.formats.QtyToBeStowed}"/>
+                                                        </af:inputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="LocationLabel" sortable="false"
+                                                               headerText="#{bindings.StowLocVO1.labels.LocationLabel}"
+                                                               id="c3">
+                                                        <af:inputText value="#{row.LocationLabel}" simple="true"
+                                                                      required="#{bindings.StowLocVO1.attrDefs.LocationLabel.mandatory}"
+                                                                      columns="#{bindings.StowLocVO1.attrHints.LocationLabel.displayWidth}"
+                                                                      id="itLocationLabel" readOnly="true"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="ExpirationDate" sortable="false"
+                                                               headerText="#{bindings.StowLocVO1.labels.ExpirationDate}"
+                                                               id="cExpDate">
+                                                        <stratis:adfDateFormatter value="#{row.ExpirationDate}"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="DateOfManufacture" sortable="false"
+                                                               headerText="#{bindings.StowLocVO1.labels.DateOfManufacture}"
+                                                               id="c4">
+                                                        <stratis:adfDateFormatter value="#{row.DateOfManufacture}"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="SerialNumber" sortable="false"
+                                                               headerText="#{bindings.StowLocVO1.labels.SerialNumber}"
+                                                               id="c5">
+                                                        <af:inputText value="#{row.SerialNumber}" simple="true"
+                                                                      required="#{bindings.StowLocVO1.attrDefs.SerialNumber.mandatory}"
+                                                                      columns="#{bindings.StowLocVO1.attrHints.SerialNumber.displayWidth}"
+                                                                      maximumLength="30" id="itSerialNumber" readOnly="true"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="Status" sortable="false"
+                                                               headerText="#{bindings.StowLocVO1.labels.Status}"
+                                                               id="c6">
+                                                        <af:inputText value="#{row.Status}" simple="true"
+                                                                      required="#{bindings.StowLocVO1.attrDefs.Status.mandatory}"
+                                                                      columns="#{bindings.StowLocVO1.attrHints.Status.displayWidth}"
+                                                                      id="itStowLocV01" readOnly="true"/>
+                                                    </af:column>
+                                                </af:table>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="10" height="10" id="s5"/>
+                                            <af:panelGroupLayout layout="horizontal" id="pgl5">
+                                                <af:inputText label="Enter Stow Area" id="newLocLabelId"
+                                                              contentStyle="text-transform:uppercase;" maximumLength="9"
+                                                              rendered="true" columns="9"
+                                                              binding="#{StowingAll.stowArea}"/>
+                                                <af:outputText value="(optional)"
+                                                               inlineStyle="font-style:italic; font-weight:lighter;"
+                                                               id="otOptional"/>
+                                                <af:spacer width="10" height="10" id="s6"/>
+                                                <af:button text="Get Locations" id="getLocId"
+                                                           actionListener="#{StowingAll.BuildLocationList2}"
+                                                           partialSubmit="false"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="10" height="20"/>
+                                            <af:panelGroupLayout layout="horizontal" id="pgl6">
+                                                <af:table value="#{bindings.LocationList1.collectionModel}" var="row"
+                                                          rows="#{bindings.LocationList1.rangeSize}"
+                                                          first="#{bindings.LocationList1.rangeStart}"
+                                                          emptyText="#{bindings.LocationList1.viewable ? 'No rows.' : 'No rows retrieved.'}"
+                                                          selectionListener="#{bindings.LocationList1.collectionModel.makeCurrent}"
+                                                          selectedRowKeys="#{bindings.LocationList1.collectionModel.selectedRow}"
+                                                          rowSelection="single" id="tLcLst1"
+                                                          autoHeightRows="5">
+                                                    <af:column sortProperty="LocationId" sortable="false"
+                                                               headerText="#{bindings.LocationList1.labels.LocationId}"
+                                                               id="c7">
+                                                        <af:inputText value="#{row.LocationId}"
+                                                                      required="#{bindings.LocationList1.attrDefs.LocationId.mandatory}"
+                                                                      columns="#{bindings.LocationList1.attrHints.LocationId.displayWidth}"
+                                                                      readOnly="true" id="itLocationId">
+                                                            <f:convertNumber groupingUsed="false"
+                                                                             pattern="#{bindings.LocationList1.formats.LocationId}"/>
+                                                        </af:inputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="LocationLabel" sortable="false"
+                                                               headerText="#{bindings.LocationList1.labels.LocationLabel}"
+                                                               id="c8">
+                                                        <af:inputText value="#{row.LocationLabel}" simple="true"
+                                                                      required="#{bindings.LocationList1.attrDefs.LocationLabel.mandatory}"
+                                                                      columns="#{bindings.LocationList1.attrHints.LocationLabel.displayWidth}"
+                                                                      readOnly="true" id="itLocationLabel2"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="LocQty" sortable="false"
+                                                               headerText="On-Hand Qty" id="c9">
+                                                        <af:inputText value="#{row.LocQty}"
+                                                                      required="#{bindings.LocationList1.attrDefs.LocQty.mandatory}"
+                                                                      columns="#{bindings.LocationList1.attrHints.LocQty.displayWidth}"
+                                                                      readOnly="true" id="itlocQty">
+                                                            <f:convertNumber groupingUsed="false"
+                                                                             pattern="#{bindings.LocationList1.formats.LocQty}"/>
+                                                        </af:inputText>
+                                                    </af:column>
+                                                </af:table>
+                                                <af:button text="Update" action="#{StowingAll.getActionForward}"
+                                                           actionListener="#{StowingAll.UpdateStowLocation}"
+                                                           id="cbUpdate" partialSubmit="false"/>
+                                            </af:panelGroupLayout>
+                                        </af:panelHeader>
+                                    </af:gridCell>
+                                </af:gridRow>
+                            </af:panelGridLayout>
+                            <f:subview id="lwrap_footer">
+                                <jsp:include page="../FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <!-- End center facet -->
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="start"/>
+                    <f:facet name="end"/>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

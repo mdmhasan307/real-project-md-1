@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Page2PageDef"
+                Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="CompleteUserList1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="CompleteUserList1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="CompleteUserList1Iterator" id="CompleteUserList1">
+      <nodeDefinition DefName="mil.stratis.model.view.user.CompleteUserList" Name="CompleteUserList10">
+        <AttrNames>
+          <Item Value="UserId"/>
+          <Item Value="FirstName"/>
+          <Item Value="MiddleName"/>
+          <Item Value="LastName"/>
+          <Item Value="Status"/>
+          <Item Value="LastLogin"/>
+          <Item Value="Username"/>
+          <Item Value="VisibleFlag"/>
+          <Item Value="LoggedIn"/>
+          <Item Value="LoggedInHh"/>
+          <Item Value="Locked"/>
+          <Item Value="CacNumber"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

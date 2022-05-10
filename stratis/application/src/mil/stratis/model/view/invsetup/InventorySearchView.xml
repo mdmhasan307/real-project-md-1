@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="InventorySearchView"
+   Version="11.1.2.64.36"
+   SelectList="Inventory.INVENTORY_ID, 
+       Inventory.DESCRIPTION"
+   FromList="INVENTORY Inventory"
+   Where="Inventory.DESCRIPTION = :SearchDesc"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.invsetup.InventorySearchViewImpl"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <Variable
+      Name="SearchDesc"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <EntityUsage
+      Name="Inventory"
+      Entity="mil.stratis.model.entity.inv.Inventory" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="InventoryId"
+      EntityAttrName="InventoryId"
+      EntityUsage="Inventory"
+      AliasName="INVENTORY_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Description"
+      EntityAttrName="Description"
+      EntityUsage="Inventory"
+      AliasName="DESCRIPTION" >
+   </ViewAttribute>
+</ViewObject>

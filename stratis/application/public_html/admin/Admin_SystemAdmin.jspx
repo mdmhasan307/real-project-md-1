@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="8"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="Admin_SystemAdmin"/>
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session"/>
+    <jsp:setProperty name="logBean" property="page" value="System Admin"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="135" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6" id="s1"/>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout id="asa_pgl2">
+                            <af:messages id="m1" inline="true"/>
+                            <af:panelGridLayout id="asa_pgl1">
+                                <af:gridRow id="asa_gr1">
+                                    <af:gridCell id="asa_gc1">
+                                        <af:panelTabbed id="SysAdminTabs" dimensionsFrom="auto">
+                                            <af:showDetailItem text="Kill Active Session"
+                                                               disclosureListener="#{SysAdminBacking.systemAdminTabChange}"
+                                                               id="KillActiveSession">
+                                                <f:subview id="wrap_ses">
+                                                    <jsp:include page="/admin/Admin_KillSessionTab.jspx"/>
+                                                </f:subview>
+                                            </af:showDetailItem>
+                                            <af:showDetailItem text="System Notifications"
+                                                               disclosureListener="#{SysAdminBacking.systemAdminTabChange}"
+                                                               id="SystemShutdown">
+                                                <f:subview id="wrap_sys2">
+                                                    <jsp:include page="/admin/Admin_SystemNotificationsTab.jspx"/>
+                                                </f:subview>
+                                            </af:showDetailItem>
+                                            <af:showDetailItem text="Direct Table Access"
+                                                               disclosureListener="#{SysAdminBacking.systemAdminTabChange}"
+                                                               id="DirectTableAccess">
+                                                <f:subview id="wrap_dta">
+                                                    <jsp:include page="/admin/Admin_DirectTableAcessTab.jspx"/>
+                                                </f:subview>
+                                            </af:showDetailItem>
+                                            <af:showDetailItem text="Setup System Defaults"
+                                                               disclosureListener="#{SysAdminBacking.systemAdminTabChange}"
+                                                               id="SetupSystemDefaults">
+                                                <f:subview id="wrap_ssd">
+                                                    <jsp:include page="/admin/Admin_SystemSetupDefaultsTab.jspx"/>
+                                                </f:subview>
+                                            </af:showDetailItem>
+                                        </af:panelTabbed>
+                                    </af:gridCell>
+                                </af:gridRow>
+                                <af:gridRow id="asa_gr2">
+                                    <af:gridCell id="asa_gc2">
+                                        <af:spacer height="10" width="10" id="asa_s2"/>
+                                    </af:gridCell>
+                                </af:gridRow>
+                            </af:panelGridLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

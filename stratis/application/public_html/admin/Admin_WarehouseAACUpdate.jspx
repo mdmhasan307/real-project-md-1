@@ -1,0 +1,245 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:h="http://java.sun.com/jsf/html">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="2"/>
+    <jsp:setProperty name="userbean" property="selected3" value="6"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="Admin_WarehouseAACUpdate"/>
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session" />
+    <jsp:setProperty name="logBean" property="page" value="AAC Update"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="185" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6" id="s7"/>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll" id="pgl1">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGroupLayout id="pgl2">
+                                <af:panelBox text="Warehouse Management - AAC Update" showDisclosure="false" id="pb1">
+                                    <af:separator id="s1"/>
+                                    <af:toolbar inlineStyle="padding:5px;" id="t1">
+                                        <af:inputText value="#{bindings.AAC.inputValue}" label="Filter AAC"
+                                                      required="#{bindings.AAC.mandatory}"
+                                                      columns="#{bindings.AAC.displayWidth}" maximumLength="6"
+                                                      contentStyle="text-transform:uppercase;" id="it1"/>
+                                        <af:button actionListener="#{bindings.FilterCustomerDataAAC.execute}"
+                                                   text="Filter" id="filterCustomerButton"
+                                                   disabled="#{!bindings.FilterCustomerDataAAC.enabled}"
+                                                   partialSubmit="false"/>
+                                    </af:toolbar>
+                                    <af:table value="#{bindings.CustomerView1.collectionModel}" var="row"
+                                              summary="customer table" rows="#{bindings.CustomerView1.rangeSize}"
+                                              emptyText="#{bindings.CustomerView1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                              selectionListener="#{bindings.CustomerView1.collectionModel.makeCurrent}"
+                                              id="CustomerTable" binding="#{backing_AACUpdate.aacTable}"
+                                              selectedRowKeys="#{bindings.CustomerView1.collectionModel.selectedRow}"
+                                              rowSelection="single" styleClass="AFStretchWidth" columnStretching="last"
+                                              partialTriggers="::CreateButton ::UpdateButton ::filterCustomerButton">
+                                        <af:column sortProperty="Name" sortable="true"
+                                                   headerText="#{bindings.CustomerView1.labels.Name}"
+                                                   rowHeader="unstyled" id="c4" width="400">
+                                            <af:outputText value="#{row.Name}" id="ot1"/>
+                                        </af:column>
+                                        <af:column sortProperty="Aac" sortable="true" headerText="AAC" id="c3">
+                                            <af:outputText value="#{row.Aac}"/>
+                                        </af:column>
+                                        <af:column sortProperty="ZipCode" sortable="true" headerText="Zip Code" id="c2">
+                                            <af:outputText value="#{row.ZipCode}"/>
+                                        </af:column>
+                                        <af:column sortProperty="RestrictShip" sortable="true"
+                                                   headerText="Restrict Transship" width="5" id="c1">
+                                            <af:outputText value="#{row.RestrictShip}"/>
+                                        </af:column>
+                                        <f:facet name="footer"/>
+                                    </af:table>
+                                    <af:toolbar inlineStyle="padding:5px;" id="t2">
+                                        <af:button actionListener="#{bindings.CreateInsert.execute}"
+                                                   text="Create" accessKey="C" id="CreateButton"
+                                                   inlineStyle="width:50px" partialSubmit="false"
+                                                   disabled="#{(!backing_AACUpdate.aacFlag) and (bindings.CustomerView1.estimatedRowCount > 0)}">
+                                            <af:setActionListener from="#{false}" to="#{backing_AACUpdate.aacFlag}"/>
+                                            <af:setActionListener from="#{true}" to="#{backing_AACUpdate.newFlag}"/>
+                                        </af:button>
+                                        <af:button text="Update" accessKey="U" id="UpdateButton"
+                                                   inlineStyle="width:50px"
+                                                   disabled="#{!backing_AACUpdate.aacFlag}"
+                                                   actionListener="#{backing_AACUpdate.submitUpdateAac}"
+                                                   partialSubmit="false"/>
+                                        <af:button text="Delete" accessKey="D" id="DeleteButton"
+                                                   inlineStyle="width:50px"
+                                                   disabled="#{!backing_AACUpdate.aacFlag}"
+                                                   partialSubmit="true">
+                                            <af:showPopupBehavior popupId="confirmDelete" triggerType="action" align="afterStart"/>
+                                        </af:button>
+                                        <af:popup id="confirmDelete">
+                                            <af:dialog id="Confirm" title="Confirm" affirmativeTextAndAccessKey="Submit"
+                                                       dialogListener="#{backing_AACUpdate.dialogListener}">
+                                                <af:activeOutputText id="Delete" value="Are you sure you want to Delete?"/>
+                                            </af:dialog>
+                                        </af:popup>
+                                    </af:toolbar>
+                                </af:panelBox>
+                                <af:spacer width="10" height="10" id="s2"/>
+                                <af:panelBox text="Update Customer"
+                                             rendered="#{bindings.CustomerView1.estimatedRowCount > 0}"
+                                             showDisclosure="false" id="pb2">
+                                    <af:separator id="s3"/>
+                                    <af:panelFormLayout partialTriggers="CustomerTable" id="pfl1">
+                                        <!-- AAC -->
+                                        <af:inputText label="AAC" labelStyle="font-weight:bold"
+                                                      value="#{bindings.Aac1.inputValue}" required="true"
+                                                      requiredMessageDetail="AAC is required."
+                                                      binding="#{backing_AACUpdate.aac}" columns="10" maximumLength="6"
+                                                      contentStyle="text-transform:uppercase;"
+                                                      shortDesc="Required AAC (must be 6 alphanumeric)"
+                                                      rendered="#{backing_AACUpdate.newFlag}"
+                                                      showRequired="false" id="aac"/>
+                                        <af:inputText value="#{bindings.Aac1.inputValue}" columns="10" label="AAC"
+                                                      labelStyle="font-weight:bold"
+                                                      shortDesc="Required AAC (must be 6 alphanumeric)" readOnly="true"
+                                                      styleClass="ReadOnlyField"
+                                                      rendered="#{!backing_AACUpdate.newFlag}"
+                                                      id="aac_h"/>
+                                        <!-- Name -->
+                                        <af:inputText label="Name" labelStyle="font-weight:bold" required="true"
+                                                      requiredMessageDetail="Name is required."
+                                                      value="#{bindings.CustomerName.inputValue}" columns="100"
+                                                      maximumLength="35"
+                                                      shortDesc="Required Customer Name (max 35 alphanumeric)"
+                                                      id="customer_name" contentStyle="text-transform:uppercase;"
+                                                      readOnly="#{backing_AACUpdate.aacFlag}" showRequired="false"
+                                                      binding="#{backing_AACUpdate.customerName}"/>
+                                        <!-- Address 1 -->
+                                        <af:inputText label="Address 1" labelStyle="font-weight:bold" required="true"
+                                                      requiredMessageDetail="Address 1 is required."
+                                                      value="#{bindings.Address1.inputValue}" columns="100"
+                                                      maximumLength="35" contentStyle="text-transform:uppercase;"
+                                                      shortDesc="Required Address 1 (must be less than 35 characters)"
+                                                      readOnly="#{backing_AACUpdate.aacFlag}"
+                                                      binding="#{backing_AACUpdate.address1}" id="address1"/>
+                                        <af:inputText label="Address 2" value="#{bindings.Address2.inputValue}"
+                                                      showRequired="false" columns="100" maximumLength="35"
+                                                      contentStyle="text-transform:uppercase;"
+                                                      shortDesc="Optional Address 2 (must be less than 35 characters)"
+                                                      id="address2" binding="#{backing_AACUpdate.address2}"
+                                                      readOnly="#{backing_AACUpdate.aacFlag}"/>
+                                        <af:inputText label="City" labelStyle="font-weight:bold" required="true"
+                                                      requiredMessageDetail="City is required."
+                                                      value="#{bindings.City.inputValue}" id="city" columns="50"
+                                                      maximumLength="50" contentStyle="text-transform:uppercase;"
+                                                      readOnly="#{backing_AACUpdate.aacFlag}"
+                                                      binding="#{backing_AACUpdate.city}"/>
+                                        <af:inputText label="State" labelStyle="font-weight:bold" required="true"
+                                                      requiredMessageDetail="State is required."
+                                                      value="#{bindings.State.inputValue}"
+                                                      shortDesc="Required State (must be 2 characters)" columns="2"
+                                                      maximumLength="2" contentStyle="text-transform:uppercase;"
+                                                      readOnly="#{backing_AACUpdate.aacFlag}" id="state"
+                                                      binding="#{backing_AACUpdate.state}"/>
+                                        <af:inputText label="Zip Code" labelStyle="font-weight:bold" required="true"
+                                                      requiredMessageDetail="Zip Code is required."
+                                                      value="#{bindings.ZipCode.inputValue}"
+                                                      shortDesc="Required Zip Code (must be less than 10 digits)"
+                                                      contentStyle="text-transform:uppercase;" columns="10"
+                                                      maximumLength="10" id="zipcode"
+                                                      readOnly="#{backing_AACUpdate.aacFlag}"
+                                                      binding="#{backing_AACUpdate.zipCode}"/>
+                                        <af:selectOneChoice label="Restrict Transship" labelStyle="font-weight:bold" required="true"
+                                                            requiredMessageDetail="Restrict Transshipment is required."
+                                                            value="#{bindings.CustomerView1RestrictShip.inputValue}"
+                                                            shortDesc="Required Restrict Transshipment (Yes or No)"
+                                                            showRequired="false"
+                                                            rendered="#{!backing_AACUpdate.aacFlag}"
+                                                            id="restrictSelectOne"
+                                                            binding="#{backing_AACUpdate.restrictTransship}">
+                                            <f:selectItems value="#{bindings.CustomerView1RestrictShip.items}"
+                                                           id="si1"/>
+                                        </af:selectOneChoice>
+                                        <af:inputText label="Restrict Transship" labelStyle="font-weight:bold"
+                                                      value="#{bindings.RestrictShip.inputValue}" columns="3"
+                                                      shortDesc="Required Restrict Transshipment (Yes or No)"
+                                                      id="restrict_h" readOnly="true" styleClass="ReadOnlyField"
+                                                      rendered="#{backing_AACUpdate.aacFlag}"/>
+                                        <af:selectOneChoice label="Default Shipping Route"
+                                                            value="#{bindings.CustomerView1ShippingRouteId.inputValue}"
+                                                            shortDesc="Optional Select a Default Shipping Route"
+                                                            showRequired="false"
+                                                            rendered="#{!backing_AACUpdate.aacFlag}"
+                                                            unselectedLabel="- Select -" id="shippingRouteSelectOne">
+                                            <f:selectItems value="#{bindings.CustomerView1ShippingRouteId.items}"
+                                                           id="si2"/>
+                                        </af:selectOneChoice>
+                                        <af:inputText label="Default Shipping Route"
+                                                      value="#{bindings.ShippingRouteName.inputValue}" columns="20"
+                                                      shortDesc="Optional Select a Default Shipping Route"
+                                                      id="shipping_route_h" readOnly="true" styleClass="ReadOnlyField"
+                                                      rendered="#{backing_AACUpdate.aacFlag}"/>
+                                        <af:spacer height="10" id="s4"/>
+                                        <af:outputLabel value="Default Floor Location (s)" id="ol2"/>
+                                        <af:spacer height="10" id="s5"/>
+                                        <af:spacer width="20" id="s6"/>
+                                        <af:selectManyShuttle value="#{backing_AACUpdate.selectedFLOORValues}"
+                                                              id="selectFloorShuttle"
+                                                              valueChangeListener="#{backing_AACUpdate.refreshFLOORSelectedList}"
+                                                              leadingHeader="Available Floor Locations"
+                                                              trailingHeader="Selected Floor Locations"
+                                                              binding="#{backing_AACUpdate.shuttleFLOORs}"
+                                                              shortDesc="Optional Select Default Shipping Floor Location(s)"
+                                                              rendered="#{!backing_AACUpdate.aacFlag}" size="10">
+                                            <f:selectItems value="#{backing_AACUpdate.allFLOORItems}" id="si3"/>
+                                        </af:selectManyShuttle>
+                                        <h:inputTextarea value="#{backing_AACUpdate.defaultFloors}"
+                                                         rows="#{backing_AACUpdate.defaultFloorsCOLS}" cols="40"
+                                                         title="Optional Select a Default Floor Location(s)"
+                                                         id="shipping_floor_h" readonly="true"
+                                                         style="background-color:#CCCCCC"
+                                                         rendered="#{backing_AACUpdate.aacFlag}"/>
+                                        <af:toolbar rendered="#{!backing_AACUpdate.aacFlag}" inlineStyle="padding:5px;"
+                                                    id="t3">
+                                            <af:button actionListener="#{backing_AACUpdate.submitSaveAac}"
+                                                       text="Submit" accessKey="S" inlineStyle="width:50px"
+                                                       id="SaveButton" partialSubmit="false"/>
+                                            <af:button actionListener="#{backing_AACUpdate.submitResetAac}"
+                                                       text="Reset" accessKey="R" inlineStyle="width:50px"
+                                                       rendered="#{not empty bindings.Aac1.inputValue}"
+                                                       id="ResetButton" immediate="true" partialSubmit="false"/>
+                                            <af:resetButton text="Reset" accessKey="R" id="ResetButton2"
+                                                            rendered="#{empty bindings.Aac1.inputValue}"
+                                                            inlineStyle="width:50px"/>
+                                            <af:button actionListener="#{backing_AACUpdate.submitCancelAac}"
+                                                       text="Cancel" accessKey="a" inlineStyle="width:50px"
+                                                       id="CancelButton" immediate="true" partialSubmit="false"/>
+                                        </af:toolbar>
+                                    </af:panelFormLayout>
+                                </af:panelBox>
+                            </af:panelGroupLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

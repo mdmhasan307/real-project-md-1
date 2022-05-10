@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    
+    <f:subview id="topDisplay">
+        <af:panelGridLayout id="tl1">
+            <af:gridRow id="rl1">
+                <af:gridCell id="cf1">
+                    <af:outputText value="#{userbean.specialMessage}"
+                                   inlineStyle="color:rgb(0,0,255); font-weight:bold;" id="ot1"/>
+                </af:gridCell>
+            </af:gridRow>
+        </af:panelGridLayout>
+    </f:subview>
+</jsp:root>

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <jsp:output omit-xml-declaration="true" doctype-root-element="HTML"
+              doctype-system="http://www.w3.org/TR/html4/loose.dtd"
+              doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN"/>
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <jsp:useBean id="formbean" 
+               class="mil.stratis.view.reports.HisonReportBacking"
+               scope="session"/>
+  <jsp:scriptlet>
+    out.println("&lt;html&gt;");
+    out.println("&lt;head&gt;");
+    out.println("&lt;style type='text/css'&gt;");
+    out.println("table,td {border-style:solid; border-color:rgb(0,0,0);}");
+    out.println("table {border-width:1px 1px 1px 1px;border-collapse:collapse;}");
+    out.println("td {border-width:1px 1px 0 0;}");
+    out.println("&lt;/style&gt;");
+    out.println("&lt;title&gt;");
+    out.println("HISON");
+    out.println("&lt;/title&gt;");
+    out.println("&lt;/head&gt;");
+    out.println(formbean.getHisonReportString());
+    out.println("&lt;/body&gt;&lt;/html&gt;");
+    </jsp:scriptlet>
+</jsp:root>

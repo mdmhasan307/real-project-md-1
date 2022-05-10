@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Admin_WarehouseChangeLocPageDef"
+                Package="mil.stratis.view.pageDefs" EnableTokenValidation="false" ControllerClass="#{changelocbacking}">
+  <parameters/>
+  <executables>
+    <iterator id="ChangeLocationFromView1Iterator" RangeSize="5" Binds="Root.WarehouseSetup1.ChangeLocationFromView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="SerialOrLotNumList1Iterator" RangeSize="10" Binds="Root.PickingAM1.SerialOrLotNumList1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="ChangeLocationFromView1" IterBinding="ChangeLocationFromView1Iterator">
+      <AttrNames>
+        <Item Value="LocationLabel"/>
+        <Item Value="LocationId"/>
+        <Item Value="Qty"/>
+        <Item Value="NiinLocId"/>
+        <Item Value="Cc"/>
+        <Item Value="DateOfManufacture"/>
+        <Item Value="ExpirationDate"/>
+        <Item Value="Niin"/>
+        <Item Value="NiinId"/>
+        <Item Value="Nomenclature"/>
+        <Item Value="Ui"/>
+        <Item Value="SerialControlFlag"/>
+        <Item Value="LotControlFlag"/>
+      </AttrNames>
+    </table>
+    <action id="ExecuteWithParams" RequiresUpdateModel="true" Action="iteratorExecute"
+            IterBinding="ChangeLocationFromView1Iterator"/>
+    <table id="SerialOrLotNumList1" IterBinding="SerialOrLotNumList1Iterator">
+      <AttrNames>
+        <Item Value="SerialOrLoNum"/>
+        <Item Value="SrlLotNumTrackId"/>
+        <Item Value="QtyLot"/>
+        <Item Value="LotConNum"/>
+      </AttrNames>
+    </table>
+  </bindings>
+</pageDefinition>

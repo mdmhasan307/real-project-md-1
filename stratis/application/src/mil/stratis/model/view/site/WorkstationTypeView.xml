@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="WorkstationTypeView"
+  Version="11.1.2.64.36"
+  SelectList="WorkstationType.WORKSTATION_ID, 
+       WorkstationType.WORKSTATION_NAME, 
+       WorkstationType.WORKSTATION_DESCN, 
+       WorkstationType.TRANS_TS, 
+       WorkstationType.MOD_BY_ID"
+  FromList="STRATIS.WORKSTATION_LU WorkstationType"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  OrderBy="WorkstationType.WORKSTATION_ID">
+  <EntityUsage
+    Name="WorkstationType"
+    Entity="mil.stratis.model.entity.site.WorkstationType"/>
+  <ViewAttribute
+    Name="WorkstationId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="WorkstationId"
+    EntityUsage="WorkstationType"
+    AliasName="WORKSTATION_ID"/>
+  <ViewAttribute
+    Name="WorkstationName"
+    PrecisionRule="true"
+    EntityAttrName="WorkstationName"
+    EntityUsage="WorkstationType"
+    AliasName="WORKSTATION_NAME"/>
+  <ViewAttribute
+    Name="WorkstationDescn"
+    PrecisionRule="true"
+    EntityAttrName="WorkstationDescn"
+    EntityUsage="WorkstationType"
+    AliasName="WORKSTATION_DESCN"/>
+  <ViewAttribute
+    Name="TransTs"
+    PrecisionRule="true"
+    EntityAttrName="TransTs"
+    EntityUsage="WorkstationType"
+    AliasName="TRANS_TS"/>
+  <ViewAttribute
+    Name="ModById"
+    PrecisionRule="true"
+    EntityAttrName="ModById"
+    EntityUsage="WorkstationType"
+    AliasName="MOD_BY_ID"/>
+</ViewObject>

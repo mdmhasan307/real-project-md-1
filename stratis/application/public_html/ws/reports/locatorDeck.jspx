@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+>
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="8"/>
+    <jsp:setProperty name="userbean" property="selected2" value="0"/>
+    <!-- Locator Deck -->
+    <af:table var="row" rowBandingInterval="1" id="t14_1" autoHeightRows="0"
+              styleClass="AFStretchWidth"
+              value="#{viewScope.ReportsQueryResultBean.stdReportColumnList}"
+              rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Locator Deck'}">
+        <af:column sortable="false" headerText="Location" id="c14_1" width="85">
+            <af:outputText value="#{row.locationlabel}" id="ot14_1"/>
+        </af:column>
+        <af:column sortable="false" headerText="NIIN" id="c14_2">
+            <af:outputText value="#{row.niin}" id="ot14_2"/>
+        </af:column>
+        <af:column sortable="false" headerText="CC" id="c14_3" width="25">
+            <af:outputText value="#{row.cc}" id="ot14_3"/>
+        </af:column>
+        <af:column sortable="false" headerText="Nomenclature" id="c14_4">
+            <af:outputText value="#{row.nomenclature}" id="ot14_4"/>
+        </af:column>
+        <af:column sortable="false" headerText="UI" id="c14_5" width="25">
+            <af:outputText value="#{row.ui}" id="ot14_5"/>
+        </af:column>
+        <af:column sortable="false" headerText="Qty" id="c14_6"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.qty}" id="ot14_6"/>
+        </af:column>
+        <af:column sortable="false" headerText="Pack Area" id="c14_7">
+            <af:outputText value="#{row.packArea}" id="ot14_7"/>
+        </af:column>
+        <af:column sortable="false" headerText="Price SUM" id="c14_8"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.priceSum}" id="ot14_8"/>
+        </af:column>
+        <af:column sortable="false" headerText="Shelf Life Code" id="c14_9">
+            <af:outputText value="#{row.shelfLifeCode}" id="ot14_9"/>
+        </af:column>
+        <af:column sortable="false" headerText="SCC" id="c14_10" width="25">
+            <af:outputText value="#{row.scc}" id="ot14_10"/>
+        </af:column>
+        <af:column sortable="false" headerText="Manufacturer's Date" id="c14_11" width="115">
+            <af:outputText value="#{row.manufactureDate}"/>
+        </af:column>
+        <af:column sortable="false" headerText="Expiration Date" id="c14_12" width="115">
+            <af:outputText value="#{row.expirationDate}"/>
+        </af:column>
+        <af:column sortable="false" headerText="Last Inv Date" id="c12_13" width="115">
+            <af:outputText value="#{row.lastInvDate}"/>
+        </af:column>
+        <af:column sortable="false" headerText="Availability Flag" id="c12_14" width="75">
+            <af:outputText value="#{row.availabilityFlag}" id="ot14_14"/>
+        </af:column>
+    </af:table>
+
+</jsp:root>

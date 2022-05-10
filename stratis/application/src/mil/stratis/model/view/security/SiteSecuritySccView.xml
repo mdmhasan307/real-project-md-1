@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="SiteSecuritySccView"
+  Version="11.1.2.64.36"
+  SelectList="SiteSecurity.CODE_NAME, 
+       SiteSecurity.CODE_VALUE"
+  FromList="SITE_SECURITY SiteSecurity"
+  Where="SiteSecurity.CODE_NAME = 'SCC'"
+  OrderBy="CODE_VALUE"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="mil.stratis.model.view.security.SiteSecuritySccView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <EntityUsage
+    Name="SiteSecurity"
+    Entity="mil.stratis.model.entity.security.SiteSecurity"/>
+  <ViewAttribute
+    Name="CodeName"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CodeName"
+    EntityUsage="SiteSecurity"
+    AliasName="CODE_NAME"/>
+  <ViewAttribute
+    Name="CodeValue"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CodeValue"
+    EntityUsage="SiteSecurity"
+    AliasName="CODE_VALUE"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="mil.stratis.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

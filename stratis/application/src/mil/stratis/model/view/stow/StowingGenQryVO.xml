@@ -1,0 +1,974 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="StowingGenQryVO"
+   Version="11.1.2.64.36"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   ComponentClass="mil.stratis.model.view.stow.StowingGenQryVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   Passivate="All"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+      <Attr Name="_isExpertMode" Value="true" />
+   </DesignTime>
+   <Variable
+      Name="wacIdStr"
+      Kind="where"
+      Type="java.lang.String"
+      DefaultValue="0" >
+   </Variable>
+   <SQLQuery><![CDATA[
+SELECT 
+    rs.rrcn, 
+    rs.DOCUMENT_ID, 
+    rs.DOCUMENT_NUMBER, 
+    rs.sqty, 
+    rs.rSTATUS, 
+    rs.rmodified_by, 
+    rs.rmodified_date,
+    rs.SID, 
+    rs.RCN,
+    rs.MODIFIED_BY, 
+    rs.MODIFIED_DATE, 
+    rs.QTY_TO_BE_STOWED, 
+    nvl(rs.STOW_QTY,0) STOW_QTY, 
+    rs.STATUS,
+    nl.NIIN_LOC_ID,
+    l.LOCATION_ID,
+    nl.CC, 
+    nl.EXPIRATION_DATE, 
+    nvl(nl.QTY,0) aqty, 
+    nf.FSC, 
+    nf.NIIN, 
+    nf.NOMENCLATURE, 
+    nf.PART_NUMBER, 
+    nf.UI, 
+    l.LOCATION_LABEL, 
+    l.DIVIDER_INDEX, 
+    lc.DIVIDER_TYPE_ID,
+    l.SIDE, 
+    l.AISLE, 
+    l.LOC_LEVEL, 
+    l.BAY, 
+    l.SLOT,
+    l.wac_id,
+    rs.SUFFIX,
+    rs.STOW_ID,
+    rs.BYPASS_COUNT, 
+    rs.SEXP_DATE,
+    rs.DATE_OF_MANUFACTURE,
+    rs.CASE_WEIGHT_QTY,
+    rs.LOT_CON_NUM,
+    rs.SERIAL_NUMBER,
+    rs.PACKED_DATE,
+    p.PIN,
+    nf.NIIN_ID,
+    nvl(nl.NSN_REMARK,'N') NSN_REMARK,
+    nvl(nl.EXP_REMARK,'N') EXP_REMARK,
+    nvl(nl.LOCKED,'N') LOCKED,
+    rs.RCC,
+rs.PID
+FROM 
+    (select r.RCN rrcn, s.ASSIGN_TO_USER, s.location_id, s.scan_ind, s.PID, r.document_id, r.document_number,
+    r.QUANTITY_STOWED sqty, r.STATUS rstatus, r.MODIFIED_BY rmodified_by, r.MODIFIED_DATE rmodified_date,
+    s.SID, s.RCN, s.MODIFIED_BY, s.MODIFIED_DATE, s.QTY_TO_BE_STOWED, s.STOW_QTY, s.STATUS, r.SUFFIX,
+    s.STOW_ID, s.BYPASS_COUNT, s.EXPIRATION_DATE SEXP_DATE, s.DATE_OF_MANUFACTURE, s.CASE_WEIGHT_QTY, s.LOT_CON_NUM,
+    s.SERIAL_NUMBER, s.PACKED_DATE, r.niin_id, r.CC RCC from Receipt r, Stow s where r.rcn = s.rcn) rs, 
+    NIIN_LOCATION nl, 
+    NIIN_INFO nf, 
+    LOCATION l, location_header_bin lhb,
+    LOCATION_CLASSIFICATION lc,
+    PICKING p
+WHERE 
+    ((UPPER(rs.STATUS) = 'STOW READY'  OR UPPER(rs.STATUS) = 'STOW PARTIAL') OR UPPER(rs.STATUS) = 'STOW BYPASS1')
+    AND (rs.ASSIGN_TO_USER is null)
+    and rs.NIIN_ID = nf.NIIN_ID
+    and rs.niin_id = nl.niin_id (+)
+    AND rs.LOCATION_ID = l.LOCATION_ID
+    AND rs.LOCATION_ID <> 1
+    AND rs.LOCATION_ID = nl.LOCATION_ID (+)
+    AND l.location_header_bin_id = lhb.location_header_bin_id(+)
+    and lhb.LOC_CLASSIFICATION_ID = lc.LOC_CLASSIFICATION_ID(+)
+    AND rs.SCAN_IND = 'Y' AND nvl(rs.PID,'0') = p.PID (+)
+    AND l.WAC_ID = :wacIdStr
+   ]]></SQLQuery>
+   <ViewAttribute
+      Name="Rrcn"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="RRCN"
+      Expression="RRCN"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocumentId"
+      IsPersistent="false"
+      Precision="3"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DOCUMENT_ID"
+      Expression="DOCUMENT_ID"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="3" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="3" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="DocumentId_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocumentNumber"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DOCUMENT_NUMBER"
+      Expression="DOCUMENT_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="14" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="DocumentNumber_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Sqty"
+      IsPersistent="false"
+      IsNotNull="true"
+      DefaultValue="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="SQTY"
+      Expression="SQTY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="6" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="Sqty_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Rstatus"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="RSTATUS"
+      Expression="RSTATUS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Rstatus_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RmodifiedBy"
+      IsPersistent="false"
+      Precision="6"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="RMODIFIED_BY"
+      Expression="RMODIFIED_BY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RmodifiedDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="RMODIFIED_DATE"
+      Expression="RMODIFIED_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Sid"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="19"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SID"
+      Expression="SID"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="19" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Sid_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="9" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Rcn"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="RCN"
+      Expression="RCN"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Rcn_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedBy"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="MODIFIED_BY"
+      Expression="MODIFIED_BY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="MODIFIED_DATE"
+      Expression="MODIFIED_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="QtyToBeStowed"
+      IsPersistent="false"
+      IsNotNull="true"
+      DefaultValue="0"
+      Type="java.lang.Long"
+      ColumnType="NUMBER"
+      AliasName="QTY_TO_BE_STOWED"
+      Expression="QTY_TO_BE_STOWED"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="QtyToBeStowed_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="6" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StowQty"
+      IsPersistent="false"
+      DefaultValue="0"
+      Type="java.lang.Long"
+      ColumnType="NUMBER"
+      AliasName="STOW_QTY"
+      Expression="STOW_QTY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="6" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="StowQty_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Status"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="STATUS"
+      Expression="STATUS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Status_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NiinLocId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="NIIN_LOC_ID"
+      Expression="NIIN_LOC_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationId"
+      IsPersistent="false"
+      Precision="38"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="LOCATION_ID"
+      Expression="LOCATION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Cc"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CC"
+      Expression="CC"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Cc_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="2" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ExpirationDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="EXPIRATION_DATE"
+      Expression="EXPIRATION_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="12" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="ExpirationDate_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Aqty"
+      IsPersistent="false"
+      DefaultValue="0"
+      Precision="6"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="AQTY"
+      Expression="AQTY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="6" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="Aqty_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Fsc"
+      IsPersistent="false"
+      Precision="4"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="FSC"
+      Expression="FSC"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Fsc_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="4" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Niin"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="NIIN"
+      Expression="NIIN"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="9" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="Niin_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Nomenclature"
+      IsPersistent="false"
+      Precision="100"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="NOMENCLATURE"
+      Expression="NOMENCLATURE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="100" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Nomenclature_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="30" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PartNumber"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PART_NUMBER"
+      Expression="PART_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="PartNumber_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Ui"
+      IsPersistent="false"
+      Precision="2"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="UI"
+      Expression="UI"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Ui_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="2" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationLabel"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="9"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="LOCATION_LABEL"
+      Expression="LOCATION_LABEL"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="9" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="LocationLabel_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="9" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DividerIndex"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="DIVIDER_INDEX"
+      Expression="DIVIDER_INDEX"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DividerTypeId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="DIVIDER_TYPE_ID"
+      Expression="DIVIDER_TYPE_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Side"
+      IsPersistent="false"
+      Precision="10"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SIDE"
+      Expression="SIDE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="1" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="Side_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Aisle"
+      IsPersistent="false"
+      Precision="10"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="AISLE"
+      Expression="AISLE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="3" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocLevel"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="10"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="LOC_LEVEL"
+      Expression="LOC_LEVEL"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="3" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="LocLevel_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Bay"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="10"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="BAY"
+      Expression="BAY"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Bay_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="3" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Slot"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="2"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SLOT"
+      Expression="SLOT"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Slot_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="3" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WacId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="WAC_ID"
+      Expression="WAC_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Suffix"
+      IsPersistent="false"
+      Precision="3"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SUFFIX"
+      Expression="SUFFIX"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StowId"
+      IsPersistent="false"
+      Type="java.lang.Long"
+      ColumnType="NUMBER"
+      AliasName="STOW_ID"
+      Expression="STOW_ID"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BypassCount"
+      IsPersistent="false"
+      Precision="6"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="BYPASS_COUNT"
+      Expression="BYPASS_COUNT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SexpDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="SEXP_DATE"
+      Expression="SEXP_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="12" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="SexpDate_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DateOfManufacture"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="DATE_OF_MANUFACTURE"
+      Expression="DATE_OF_MANUFACTURE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CaseWeightQty"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="CASE_WEIGHT_QTY"
+      Expression="CASE_WEIGHT_QTY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LotConNum"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="LOT_CON_NUM"
+      Expression="LOT_CON_NUM"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SerialNumber"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SERIAL_NUMBER"
+      Expression="SERIAL_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PackedDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="PACKED_DATE"
+      Expression="PACKED_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Pin"
+      IsPersistent="false"
+      Precision="10"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PIN"
+      Expression="PIN"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NiinId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="NIIN_ID"
+      Expression="NIIN_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NsnRemark"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="NSN_REMARK"
+      Expression="NSN_REMARK"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ExpRemark"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="EXP_REMARK"
+      Expression="EXP_REMARK"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Locked"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="LOCKED"
+      Expression="LOCKED"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Rcc"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="RCC"
+      Expression="RCC"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Rcc_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="1" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Pid"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PID"
+      Expression="PID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <AttrArray Name="KeyAttributes">
+      <Item Value="Sid" />
+   </AttrArray>
+   <ResourceBundle >
+      <JavaResourceBundle
+         MsgBundleClass="mil.stratis.model.view.stow.common.StowingGenQryVORowImplMsgBundle" >
+      </JavaResourceBundle>
+   </ResourceBundle>
+</ViewObject>

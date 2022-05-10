@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="Stow"
+   Version="11.1.2.64.36"
+   DBObjectType="table"
+   DBObjectName="STOW"
+   AliasName="Stow"
+   BindingStyle="OracleName"
+   UseGlueCode="false"
+   RowClass="mil.stratis.model.entity.rcv.StowImpl" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Access" />
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_panelSchema" Value="table|alias" />
+   </DesignTime>
+   <Attribute
+      Name="Sid"
+      IsUnique="true"
+      IsNotNull="true"
+      Precision="19"
+      ColumnName="SID"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="STOW" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="19" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="QtyToBeStowed"
+      IsNotNull="true"
+      DefaultValue="0"
+      ColumnName="QTY_TO_BE_STOWED"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="STOW" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+      <CompareValidationBean
+         xmlns="http://xmlns.oracle.com/adfm/validation"
+         Name="QtyToBeStowed_Rule_1"
+         ResId="QtyToBeStowed_Rule_0"
+         OnAttribute="QtyToBeStowed"
+         OperandType="LITERAL"
+         CompareType="GREATERTHAN"
+         CompareValue="0"
+         Inverse="false">
+      </CompareValidationBean>
+   </Attribute>
+   <Attribute
+      Name="Rcn"
+      IsNotNull="true"
+      ColumnName="RCN"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="STOW" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="NiinLocId"
+      IsPersistent="false"
+      DefaultValue="1"
+      ColumnName="&#34;Synchronize:Fix_SQL&#34;"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      RetrievedOnInsert="true" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CreatedBy"
+      ColumnName="CREATED_BY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="STOW" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CreatedDate"
+      ColumnName="CREATED_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="STOW" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ModifiedBy"
+      ColumnName="MODIFIED_BY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="STOW" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ModifiedDate"
+      ColumnName="MODIFIED_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="STOW" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="StowId"
+      IsUpdateable="while_insert"
+      DefaultValue="@0"
+      ColumnName="STOW_ID"
+      SQLType="NUMERIC"
+      Domain="oracle.jbo.domain.DBSequence"
+      Type="oracle.jbo.domain.DBSequence"
+      ColumnType="NUMBER"
+      TableName="STOW"
+      PrimaryKey="true"
+      RetrievedOnInsert="true" >
+      <DesignTime>
+         <Attr Name="_SequenceStart" Value="100" />
+         <Attr Name="_DisplaySize" Value="22" />
+         <Attr Name="_SequenceName" Value="STOW_ID_SEQ" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Pid"
+      ColumnName="PID"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="STOW" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Status"
+      Precision="20"
+      ColumnName="STATUS"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="STOW" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CancelReason"
+      Precision="100"
+      ColumnName="CANCEL_REASON"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="STOW" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="100" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="CancelReason_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </Attribute>
+   <Attribute
+      Name="ExpirationDate"
+      ColumnName="EXPIRATION_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="STOW" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="DateOfManufacture"
+      ColumnName="DATE_OF_MANUFACTURE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="STOW" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="LocationId"
+      ColumnName="LOCATION_ID"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="STOW" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="LotConNum"
+      Precision="30"
+      ColumnName="LOT_CON_NUM"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="STOW" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CaseWeightQty"
+      DefaultValue="0"
+      ColumnName="CASE_WEIGHT_QTY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="STOW" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="PackedDate"
+      ColumnName="PACKED_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="STOW" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="SerialNumber"
+      Precision="30"
+      ColumnName="SERIAL_NUMBER"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="STOW" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="StowQty"
+      DefaultValue="0"
+      ColumnName="STOW_QTY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="STOW" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ScanInd"
+      IsNotNull="true"
+      DefaultValue="N"
+      Precision="1"
+      ColumnName="SCAN_IND"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="STOW" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="BypassCount"
+      DefaultValue="0"
+      Precision="6"
+      Scale="0"
+      ColumnName="BYPASS_COUNT"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="STOW" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="AssignToUser"
+      Precision="6"
+      Scale="0"
+      ColumnName="ASSIGN_TO_USER"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="STOW" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="StowedBy"
+      Precision="6"
+      Scale="0"
+      ColumnName="STOWED_BY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="STOW" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="StowedDate"
+      ColumnName="STOWED_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="STOW" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <AccessorAttribute
+      Name="Location"
+      Association="mil.stratis.model.entity.associations.StowLocationFkAssoc"
+      AssociationEnd="mil.stratis.model.entity.associations.StowLocationFkAssoc.Location"
+      AssociationOtherEnd="mil.stratis.model.entity.associations.StowLocationFkAssoc.Stow"
+      Type="mil.stratis.model.entity.loc.LocationImpl"
+      IsUpdateable="true">
+   </AccessorAttribute>
+   <Key
+      Name="StowChk1" >
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="STOW_CHK1" />
+         <Attr Name="_checkCondition"
+            Value="QTY_TO_BE_STOWED >= 0 AND CASE_WEIGHT_QTY >= 0 AND STOW_QTY >= 0 AND BYPASS_COUNT >= 0" />
+         <Attr Name="_isCheck" Value="true" />
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="StowChk2" >
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="STOW_CHK2" />
+         <Attr Name="_checkCondition" Value="SCAN_IND IN ('Y', 'N')" />
+         <Attr Name="_isCheck" Value="true" />
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="StowPk"
+      PrimaryKey="true" >
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="STOW_PK" />
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.rcv.Stow.StowId"/>
+      </AttrArray>
+   </Key>
+   <Key
+      Name="StowUk1" >
+      <DesignTime>
+         <Attr Name="_isUnique" Value="true" />
+         <Attr Name="_DBObjectName" Value="STOW_UK1" />
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.rcv.Stow.Sid"/>
+      </AttrArray>
+   </Key>
+   <Key
+      Name="StowLocationFk" >
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="LOCATION_PK" />
+         <Attr Name="_isForeign" Value="true" />
+         <Attr Name="_DBObjectName" Value="STOW_LOCATION_FK" />
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.rcv.Stow.LocationId"/>
+      </AttrArray>
+   </Key>
+   <Key
+      Name="StowPickFk" >
+      <DesignTime>
+         <Attr Name="_isCascadeDelete" Value="true" />
+         <Attr Name="_referencedKey" Value="PICKING_PK" />
+         <Attr Name="_isForeign" Value="true" />
+         <Attr Name="_DBObjectName" Value="STOW_PICK_FK" />
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.rcv.Stow.Pid"/>
+      </AttrArray>
+   </Key>
+   <Key
+      Name="StowReceiptFk1" >
+      <DesignTime>
+         <Attr Name="_isCascadeDelete" Value="true" />
+         <Attr Name="_referencedKey" Value="RECEIPT_PK" />
+         <Attr Name="_isForeign" Value="true" />
+         <Attr Name="_DBObjectName" Value="STOW_RECEIPT_FK1" />
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.rcv.Stow.Rcn"/>
+      </AttrArray>
+   </Key>
+   <Key
+      Name="StowUsersFk1" >
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="USERS_PK" />
+         <Attr Name="_isForeign" Value="true" />
+         <Attr Name="_DBObjectName" Value="STOW_USERS_FK1" />
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.rcv.Stow.CreatedBy"/>
+      </AttrArray>
+   </Key>
+   <Key
+      Name="StowUsersFk2" >
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="USERS_PK" />
+         <Attr Name="_isForeign" Value="true" />
+         <Attr Name="_DBObjectName" Value="STOW_USERS_FK2" />
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.rcv.Stow.ModifiedBy"/>
+      </AttrArray>
+   </Key>
+   <Key
+      Name="StowUsersFk3" >
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="USERS_PK" />
+         <Attr Name="_isForeign" Value="true" />
+         <Attr Name="_DBObjectName" Value="STOW_USERS_FK3" />
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.rcv.Stow.AssignToUser"/>
+      </AttrArray>
+   </Key>
+   <Key
+      Name="StowUsersFk4" >
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="USERS_PK" />
+         <Attr Name="_isForeign" Value="true" />
+         <Attr Name="_DBObjectName" Value="STOW_USERS_FK4" />
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.rcv.Stow.StowedBy"/>
+      </AttrArray>
+   </Key>
+</Entity>

@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.usmc.mil/schemas/1/if/I136_ItemMasterReconInboundOutbound" xmlns="http://www.w3.org/2001/XMLSchema">
+  <element name="I136_ItemMasterReconInboundOutboundProcessCompressedRequest">
+    <complexType>
+      <sequence>
+        <element name="input" type="base64Binary"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element name="I136_ItemMasterReconInboundOutboundProcessUncompressedRequest">
+    <complexType>
+      <sequence>
+        <element name="input" type="anyType"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element name="I136_ItemMasterReconInboundOutboundProcessResponse">
+    <complexType>
+      <sequence>
+        <element name="result" type="base64Binary"/>
+      </sequence>
+    </complexType>
+  </element>
+</schema>

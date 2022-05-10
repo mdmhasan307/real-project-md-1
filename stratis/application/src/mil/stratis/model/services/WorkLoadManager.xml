@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<AppModule
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="WorkLoadManager"
+   Version="11.1.2.64.36"
+   ComponentClass="mil.stratis.model.services.WorkLoadManagerImpl"
+   LoadComponentsLazily="true"
+   DefClass="mil.stratis.model.services.WorkLoadManagerDefImpl"
+   ClearCacheOnRollback="true">
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isDefCodegen" Value="true"/>
+   </DesignTime>
+   <Properties >
+      <CustomProperties>
+         <Property Name ="DATA_CONTROL_NAME" Value ="WorkLoadManagerDataControl1" />
+      </CustomProperties>
+   </Properties>
+   <ViewUsage
+      Name="PackingIssuesView1"
+      ViewObjectName="mil.stratis.model.view.pack.PackingIssuesView" >
+   </ViewUsage>
+   <ViewUsage
+      Name="BypassThresholdView1"
+      ViewObjectName="mil.stratis.model.view.pack.BypassThresholdView" >
+   </ViewUsage>
+   <ViewUsage
+      Name="IsSecure1"
+      ViewObjectName="mil.stratis.model.view.pack.IsSecure" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PackingStation1"
+      ViewObjectName="mil.stratis.model.view.pack.PackingStation" >
+   </ViewUsage>
+   <ViewUsage
+      Name="ConsolidationView1"
+      ViewObjectName="mil.stratis.model.view.pack.ConsolidationView" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PickingView1"
+      ViewObjectName="mil.stratis.model.view.pack.PickingView" >
+   </ViewUsage>
+   <ViewUsage
+      Name="ErrorQueueVO1"
+      ViewObjectName="mil.stratis.model.view.wlm.ErrorQueueVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="ErrorLVO1"
+      ViewObjectName="mil.stratis.model.view.wlm.ErrorLVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="LocationList1"
+      ViewObjectName="mil.stratis.model.view.wlm.LocationList" >
+   </ViewUsage>
+   <ViewUsage
+      Name="LocationVO1"
+      ViewObjectName="mil.stratis.model.view.wlm.LocationVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="NiinLocListVVOF1"
+      ViewObjectName="mil.stratis.model.view.wlm.NiinLocListVVOF" >
+   </ViewUsage>
+   <ViewUsage
+      Name="SiteInfoView1"
+      ViewObjectName="mil.stratis.model.view.wlm.SiteInfoView" >
+   </ViewUsage>
+   <ViewUsage
+      Name="ShippingView1"
+      ViewObjectName="mil.stratis.model.view.wlm.ShippingView" >
+   </ViewUsage>
+   <ViewUsage
+      Name="SIDLabelVO1"
+      ViewObjectName="mil.stratis.model.view.wlm.SIDLabelVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PINLabelVO1"
+      ViewObjectName="mil.stratis.model.view.wlm.PINLabelVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="LocationSearchVO1"
+      ViewObjectName="mil.stratis.model.view.wlm.LocationSearchVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="NiinAndLocationWeightAndCubeVO1"
+      ViewObjectName="mil.stratis.model.view.wlm.NiinAndLocationWeightAndCubeVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="NiinAndLocationWeightAndCubeByLocIdVO1"
+      ViewObjectName="mil.stratis.model.view.wlm.NiinAndLocationWeightAndCubeByLocIdVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="NewIssueView1"
+      ViewObjectName="mil.stratis.model.view.wlm.NewIssueView" >
+   </ViewUsage>
+   <ViewUsage
+      Name="LocationSearchAvailVO1"
+      ViewObjectName="mil.stratis.model.view.wlm.LocationSearchAvailVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="LocationSearchBulkAvailVO1"
+      ViewObjectName="mil.stratis.model.view.wlm.LocationSearchBulkAvailVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="LocationSearchBulkAvailVO2"
+      ViewObjectName="mil.stratis.model.view.wlm.LocationSearchBulkAvailVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="NiinInfoView1"
+      ViewObjectName="mil.stratis.model.view.wlm.NiinInfoView" >
+   </ViewUsage>
+   <ViewUsage
+      Name="NiinInfoMATSView1"
+      ViewObjectName="mil.stratis.model.view.wlm.NiinInfoMATSView" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PackingIssuesView2"
+      ViewObjectName="mil.stratis.model.view.pack.PackingIssuesView" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RefMatsView1"
+      ViewObjectName="mil.stratis.model.view.wlm.RefMatsView" >
+   </ViewUsage>
+   <ViewUsage
+      Name="SerialOrLotNumList1"
+      ViewObjectName="mil.stratis.model.view.pick.SerialOrLotNumList" >
+   </ViewUsage>
+   <ViewUsage
+      Name="CustomerView1"
+      ViewObjectName="mil.stratis.model.view.wlm.CustomerView"/>
+   <AppModuleUsage
+      Name="Transactions1"
+      FullName="mil.stratis.model.services.Transactions"
+      SharedScope="0" >
+   </AppModuleUsage>
+</AppModule>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Stowing_Reassign_SIDPageDef"
+                ControllerClass="#{StowingAll}" Package="mil.stratis.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="StowLocVO1Iterator" RangeSize="-1" Binds="Root.StowingAM1.StowLocVO1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="LocationList1Iterator" RangeSize="-1" Binds="Root.WorkLoadManager1.LocationList1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="StowLocVO1" IterBinding="StowLocVO1Iterator">
+      <AttrNames>
+        <Item Value="Sid"/>
+        <Item Value="QtyToBeStowed"/>
+        <Item Value="Rcn"/>
+        <Item Value="CreatedBy"/>
+        <Item Value="CreatedDate"/>
+        <Item Value="ModifiedBy"/>
+        <Item Value="ModifiedDate"/>
+        <Item Value="StowId"/>
+        <Item Value="Pid"/>
+        <Item Value="Status"/>
+        <Item Value="CancelReason"/>
+        <Item Value="ExpirationDate"/>
+        <Item Value="DateOfManufacture"/>
+        <Item Value="LotConNum"/>
+        <Item Value="CaseWeightQty"/>
+        <Item Value="PackedDate"/>
+        <Item Value="LocationLabel"/>
+        <Item Value="LocationId"/>
+        <Item Value="LocationId1"/>
+        <Item Value="SerialNumber"/>
+      </AttrNames>
+    </table>
+    <table id="LocationList1" IterBinding="LocationList1Iterator">
+      <AttrNames>
+        <Item Value="WacId"/>
+        <Item Value="LocationId"/>
+        <Item Value="LocationLabel"/>
+        <Item Value="LocQty"/>
+      </AttrNames>
+    </table>
+  </bindings>
+</pageDefinition>

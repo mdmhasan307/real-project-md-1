@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty  name="userbean" property="selected" value="3"/>
+    <jsp:setProperty  name="userbean" property="selected2" value="3"/>
+    <f:view>
+        <af:document title="STRATIS" id="d1">
+          <af:form id="f1">
+            <af:panelStretchLayout id="psl1" startWidth="24" topHeight="145" bottomHeight="25">
+                <f:facet name="top">
+                    <f:subview id="wrap_header">
+                        <jsp:include page="/HeaderMain.jspx"/>
+                    </f:subview>
+                </f:facet>
+                <f:facet name="center">
+                    <af:panelGroupLayout layout="scroll" id="pgl3">
+                        <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                        <af:panelGridLayout id="pgl1">
+                            <af:gridRow id="gr1">
+                                <af:gridCell id="gc1" valign="top">
+                                    <!--<jsp:include page="../SideBar.jspx"/>-->
+                                </af:gridCell>
+                                <af:gridCell id="gc2" valign="top">
+                                    <!--af:form id="f1"-->
+                                        <af:panelFormLayout id="pfl1">
+                                            <f:facet name="footer"/>
+                                            <af:panelHeader id="pickACCHeader" text="Picking - By Priority"/>
+                                            <af:spacer id="s1" width="10" height="10"/>
+                                            <af:table summary="Displays all the Priorities that have picks"
+                                                      id="pickPriTable"
+                                                      value="#{bindings.PickingByPriorityQryVO1.collectionModel}"
+                                                      var="row" rows="#{bindings.PickingByPriorityQryVO1.rangeSize}"
+                                                      first="#{bindings.PickingByPriorityQryVO1.rangeStart}"
+                                                      binding="#{PickingAll.priorityList}" rowSelection="multiple">
+                                                <!--<af:column id="priCol" sortProperty="IssuePriorityGroup"
+                                                           sortable="false"
+                                                           headerText="#{bindings.PickingByPriorityQryVO1.labels.IssuePriorityGroup}">
+                                                    <af:inputText id="priTxt" value="#{row.IssuePriorityGroup}"
+                                                                  simple="true"
+                                                                  required="#{bindings.PickingByPriorityQryVO1.attrDefs.IssuePriorityGroup.mandatory}"
+                                                                  columns="#{bindings.PickingByPriorityQryVO1.attrHints.IssuePriorityGroup.displayWidth}"/>
+                                                </af:column>-->
+                                                <af:column id="priCol2" sortProperty="PriorityName"
+                                                           sortable="false"
+                                                           headerText="Priority">
+                                                    <af:inputText id="priTxt" value="#{row.PriorityName}"
+                                                                  simple="true"
+                                                                  required="#{bindings.PickingByPriorityQryVO1.attrDefs.PriorityName.mandatory}"
+                                                                  columns="#{bindings.PickingByPriorityQryVO1.attrHints.PriorityName.displayWidth}"/>
+                                                </af:column>
+                                                
+                                            </af:table>
+                                            <af:toolbar id="pgl2">
+                                                <af:spacer id="s2" width="10" height="10"/>
+                                                <af:button id="submitCmd" text="Submit"
+                                                                  action="#{PickingAll.getActionForwardStr}"
+                                                                  actionListener="#{PickingAll.buildParmStrForPriorities}"
+                                                                  partialSubmit="false"/>
+                                                <af:spacer id="s3" width="10" height="10"/>
+                                                <af:button id="quitCmd" text="Quit" action="GoPicking" partialSubmit="false"/>
+                                            </af:toolbar>
+                                        </af:panelFormLayout>
+                                    <!--/af:form-->
+                                </af:gridCell>
+                            </af:gridRow>
+                        </af:panelGridLayout>
+                        <f:subview id="wrap_footer">
+                            <jsp:include page="/FooterMain.jspx"/>
+                        </f:subview>
+                    </af:panelGroupLayout>
+                </f:facet>
+                <f:facet name="start">
+                    <af:spacer width="24" height="675"/>
+                </f:facet>
+                <f:facet name="end"/>
+                <f:facet name="bottom">
+                    <f:subview id="classificationFooter">
+                        <jsp:include page="/ClassificationBanner.jspx"/>
+                    </f:subview>
+                </f:facet>
+            </af:panelStretchLayout>
+          </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

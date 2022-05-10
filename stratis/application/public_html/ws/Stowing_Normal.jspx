@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="2"/>
+    <jsp:setProperty name="userbean" property="selected2" value="0"/>
+    <f:view>
+        <af:document title="STRATIS" id="d1">
+            <af:form defaultCommand="addToStowListBtn" id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="150" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/HeaderMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6" id="s2"/>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout id="topGroup" layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGroupLayout layout="horizontal" id="pgl1">
+                                <af:panelBox text="Scanned Stow List for this WAC" id="ph1"
+                                             showDisclosure="false">
+                                    <af:spacer width="10" height="10" id="s1"/>
+                                    <af:panelGroupLayout layout="horizontal" id="pgl3">
+                                        <af:inputText label="SID" binding="#{StowingAll.scanSIDLabel}"
+                                                      inlineStyle="font-weight:bold;" contentStyle="text-transform:uppercase;"
+                                                      id="scanStrId" maximumLength="9"/>
+                                        <af:spacer width="5" height="10" id="s3"/>
+                                        <af:button text="Add to List" id="addToStowListBtn"
+                                                   actionListener="#{StowingAll.addScannedSIDToStowList}"
+                                                   partialSubmit="false"/>
+                                    </af:panelGroupLayout>
+                                    <af:spacer width="10" height="15" id="s4"/>
+                                    <af:outputText value="Scanned Stow List" inlineStyle="font-weight:bold;"
+                                                   id="otScannedStowList"/>
+                                    <af:spacer width="10" height="5" id="s5"/>
+                                    <af:table value="#{bindings.ScannedStowLVO1.collectionModel}" var="row"
+                                              rows="#{bindings.ScannedStowLVO1.rangeSize}"
+                                              first="#{bindings.ScannedStowLVO1.rangeStart}"
+                                              emptyText="#{bindings.ScannedStowLVO1.viewable ? 'No SIDS currently scanned in.' : 'No SIDS currently scanned in.'}"
+                                              id="tSSLV01"
+                                              styleClass="AFStretchWidth" columnStretching="last" width="250"
+                                              rowSelection="single" inlineStyle="height:250px;">
+                                        <af:column sortProperty="Sid" sortable="false"
+                                                   headerText="#{bindings.ScannedStowLVO1.labels.Sid}"
+                                                   id="cSid" rowHeader="unstyled">
+                                            <af:inputText value="#{row.Sid}" simple="true"
+                                                          required="#{bindings.ScannedStowLVO1.attrDefs.Sid.mandatory}"
+                                                          columns="#{bindings.ScannedStowLVO1.attrHints.Sid.displayWidth}"
+                                                          id="itSid"/>
+                                        </af:column>
+                                    </af:table>
+                                    <af:toolbar inlineStyle="padding:5px;" id="t1">
+                                        <af:button text="Start Stowing"
+                                                   action="#{StowingAll.actionForwardForStartStowing}"
+                                                   id="cb1" partialSubmit="false"/>
+                                        <af:button text="Cancel" action="GoStowing" id="cb2" partialSubmit="false"/>
+                                    </af:toolbar>
+                                </af:panelBox>
+                            </af:panelGroupLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

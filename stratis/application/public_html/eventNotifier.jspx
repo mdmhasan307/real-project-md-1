@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          version="2.1">
+    <jsp:useBean id="EVENT_MESSAGE" class="java.lang.String" scope="session"/>
+    <input type="hidden" id="eventMessage" value="${EVENT_MESSAGE}"/>
+
+
+    <script language="Javascript" type="text/javascript">
+      var eventMessage = document.getElementById("eventMessage").value;
+      if (eventMessage) {
+        alert(eventMessage);
+      }
+    </script>
+    <jsp:scriptlet>
+        request.getSession().removeAttribute("EVENT_MESSAGE");
+    </jsp:scriptlet>
+</jsp:root>

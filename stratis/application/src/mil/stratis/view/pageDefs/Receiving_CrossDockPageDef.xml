@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Receiving_CrossDockPageDef"
+                Package="mil.stratis.view.pageDefs">
+<parameters/>
+  <executables>
+    <iterator id="IssueBackordersVO1Iterator" RangeSize="10" Binds="Root.ReceiptAM1.IssueBackordersVO1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="SerialOrLoNumR1Iterator" RangeSize="-1" Binds="Root.ReceiptAM1.SerialOrLoNumR1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <attributeValues id="Scn" IterBinding="IssueBackordersVO1Iterator">
+      <AttrNames>
+        <Item Value="Scn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="IssuePriorityGroup" IterBinding="IssueBackordersVO1Iterator">
+      <AttrNames>
+        <Item Value="IssuePriorityGroup"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Status" IterBinding="IssueBackordersVO1Iterator">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ModifiedBy" IterBinding="IssueBackordersVO1Iterator">
+      <AttrNames>
+        <Item Value="ModifiedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ModifiedDate" IterBinding="IssueBackordersVO1Iterator">
+      <AttrNames>
+        <Item Value="ModifiedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Rcn" IterBinding="IssueBackordersVO1Iterator">
+      <AttrNames>
+        <Item Value="Rcn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="RdocumentNumber" IterBinding="IssueBackordersVO1Iterator">
+      <AttrNames>
+        <Item Value="RdocumentNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Cc" IterBinding="IssueBackordersVO1Iterator">
+      <AttrNames>
+        <Item Value="Cc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ProjectCode" IterBinding="IssueBackordersVO1Iterator">
+      <AttrNames>
+        <Item Value="ProjectCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="QuantityBackordered" IterBinding="IssueBackordersVO1Iterator">
+      <AttrNames>
+        <Item Value="QuantityBackordered"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Fsc" IterBinding="IssueBackordersVO1Iterator">
+      <AttrNames>
+        <Item Value="Fsc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NiinId" IterBinding="IssueBackordersVO1Iterator">
+      <AttrNames>
+        <Item Value="NiinId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Niin" IterBinding="IssueBackordersVO1Iterator">
+      <AttrNames>
+        <Item Value="Niin"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Rsuffix" IterBinding="IssueBackordersVO1Iterator">
+      <AttrNames>
+        <Item Value="Rsuffix"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PartNumber" IterBinding="IssueBackordersVO1Iterator">
+      <AttrNames>
+        <Item Value="PartNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Ui" IterBinding="IssueBackordersVO1Iterator">
+      <AttrNames>
+        <Item Value="Ui"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Scc" IterBinding="IssueBackordersVO1Iterator">
+      <AttrNames>
+        <Item Value="Scc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Iqty" IterBinding="IssueBackordersVO1Iterator">
+      <AttrNames>
+        <Item Value="Iqty"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="IdocumentNumber" IterBinding="IssueBackordersVO1Iterator">
+      <AttrNames>
+        <Item Value="IdocumentNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Isuffix" IterBinding="IssueBackordersVO1Iterator">
+      <AttrNames>
+        <Item Value="Isuffix"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="QuantityInducted" IterBinding="IssueBackordersVO1Iterator">
+      <AttrNames>
+        <Item Value="QuantityInducted"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="QuantityReleased" IterBinding="IssueBackordersVO1Iterator">
+      <AttrNames>
+        <Item Value="QuantityReleased"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AvailQty" IterBinding="IssueBackordersVO1Iterator">
+      <AttrNames>
+        <Item Value="AvailQty"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="SerialControlFlag" IterBinding="IssueBackordersVO1Iterator">
+      <AttrNames>
+        <Item Value="SerialControlFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LotControlFlag" IterBinding="IssueBackordersVO1Iterator">
+      <AttrNames>
+        <Item Value="LotControlFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <table id="SerialOrLoNumR1" IterBinding="SerialOrLoNumR1Iterator">
+      <AttrNames>
+        <Item Value="SerialOrLoNum"/>
+        <Item Value="SrlLotNumTrackId"/>
+        <Item Value="QtyLot"/>
+        <Item Value="LotConNum"/>
+        <Item Value="ExpirationDate"/>
+      </AttrNames>
+    </table>
+    <action id="Create1" RequiresUpdateModel="true" Action="createRow" IterBinding="SerialOrLoNumR1Iterator1"/>
+    <attributeValues id="SerialOrLoNum" IterBinding="SerialOrLoNumR1Iterator1">
+      <AttrNames>
+        <Item Value="SerialOrLoNum"/>
+        <Item Value="SrlLotNumTrackId"/>
+        <Item Value="QtyLot"/>
+        <Item Value="LotConNum"/>
+        <Item Value="ExpirationDate"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>
+

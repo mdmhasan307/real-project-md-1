@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:stratis="taglib.mil.usmc.stratis">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="2"/>
+    <jsp:setProperty name="userbean" property="selected3" value="3"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="Admin_WarehouseRewarehouse"/>
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session" />
+    <jsp:setProperty name="logBean" property="page" value="Rewarehouse"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="185" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll" id="pgl1">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGroupLayout layout="vertical" id="pgl2">
+                                <af:panelBox text="Warehouse Management - Re-Warehouse" id="panelBoxMain"
+                                             showDisclosure="false">
+                                    <af:separator id="s1"/>
+                                    <af:panelBox id="panelBoxFrom" text="Rewarehouse From" showDisclosure="false">
+                                        <af:panelGroupLayout layout="vertical" id="pgl3">
+                                            <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                                                <f:facet name="secondaryToolbar">
+                                                    <af:toolbar id="t1" inlineStyle="padding:2px;">
+                                                        <af:inputText binding="#{backingrewarehouse.txtNIINSearch}"
+                                                                      maximumLength="9"
+                                                                      contentStyle="text-transform:uppercase;"
+                                                                      id="txtNIINSearch"/>
+                                                        <af:spacer width="10" id="s2"/>
+                                                        <af:button text="Find NIIN(s)"
+                                                                   actionListener="#{backingrewarehouse.findRewarehouseLocs}"
+                                                                   id="btnFindNIIN" partialSubmit="false"/>
+                                                    </af:toolbar>
+                                                </f:facet>
+                                                <af:table value="#{bindings.RewarehouseTempView1.collectionModel}"
+                                                          var="row" summary="Rewarehouse data"
+                                                          rows="#{bindings.RewarehouseTempView1.rangeSize}"
+                                                          first="#{bindings.RewarehouseTempView1.rangeStart}"
+                                                          emptyText="#{bindings.RewarehouseTempView1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                          selectionListener="#{bindings.RewarehouseTempView1.collectionModel.makeCurrent}"
+                                                          sortListener="#{backingrewarehouse.tableSortListener}"
+                                                          binding="#{backingrewarehouse.fromTable}" id="reWarehouse"
+                                                          selectedRowKeys="#{bindings.RewarehouseTempView1.collectionModel.selectedRow}"
+                                                          rowSelection="single" styleClass="AFStretchWidth"
+                                                          columnStretching="last"
+                                                          partialTriggers="::btnFindNIIN">
+                                                    <af:column sortProperty="Niin" sortable="false" headerText="NIIN"
+                                                               id="c1" rowHeader="unstyled">
+                                                        <af:outputText value="#{row.Niin}"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="Weight" sortable="false"
+                                                               headerText="Weight">
+                                                        <af:outputText value="#{row.Weight}"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="Location" sortable="true"
+                                                               headerText="#{bindings.RewarehouseTempView1.labels.Location}">
+                                                        <af:outputText value="#{row.Location}"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="LocationQTY" sortable="false"
+                                                               headerText="Shelf QTY">
+                                                        <af:outputText value="#{row.LocationQTY}">
+                                                            <f:convertNumber groupingUsed="false"
+                                                                             pattern="#{bindings.RewarehouseTempView1.formats.LocationQTY}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="Locked" sortable="true"
+                                                               headerText="Locked?">
+                                                        <af:outputText value="#{row.Locked}"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="LocationCC" sortable="false"
+                                                               headerText="CC">
+                                                        <af:outputText value="#{row.LocationCC}"/>
+                                                    </af:column>
+                                                    <af:column sortable="false" headerText="Expiration">
+                                                        <stratis:adfDateFormatter value="#{row.Expiration}"
+                                                                                  shiftZone="false"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="DateofManufacture" sortable="false"
+                                                               headerText="DOM">
+                                                        <stratis:adfDateFormatter value="#{row.DateofManufacture}"
+                                                                                  shiftZone="false"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="InputQTY" sortable="false"
+                                                               headerText="Move QTY">
+                                                        <af:inputText value="#{row.InputQTY}"
+                                                                      required="#{bindings.RewarehouseTempView1.attrDefs.InputQTY.mandatory}"
+                                                                      columns="10">
+                                                            <f:convertNumber groupingUsed="false"
+                                                                             pattern="#{bindings.RewarehouseTempView1.formats.InputQTY}"/>
+                                                        </af:inputText>
+                                                    </af:column>
+                                                </af:table>
+                                            </af:panelCollection>
+                                        </af:panelGroupLayout>
+                                    </af:panelBox>
+                                    <af:spacer height="10"/>
+                                    <af:panelBox text="Rewarehouse To" showDisclosure="false">
+                                        <af:separator/>
+                                        <af:spacer height="10"/>
+                                        <af:panelGroupLayout layout="vertical">
+                                            <af:panelFormLayout rows="3" inlineStyle="padding:2px;">
+                                                <af:inputText label="Location" binding="#{backingrewarehouse.txtLocTo}"
+                                                              columns="11" maximumLength="9"
+                                                              contentStyle="text-transform:uppercase;" id="txtLocTo"/>
+                                                <af:spacer height="4"/>
+                                                <af:inputText label="WAC" binding="#{backingrewarehouse.txtWacTo}"
+                                                              columns="11" maximumLength="3"
+                                                              contentStyle="text-transform:uppercase;" id="txtWacTo"/>
+                                                <af:button text="Rewarehouse by Location"
+                                                           id="RewarehouseLocButton"
+                                                           actionListener="#{backingrewarehouse.rewarehouseLoc}"
+                                                           binding="#{backingrewarehouse.btnRewarehouseLoc}"
+                                                           inlineStyle="width:180px" partialSubmit="false"/>
+                                                <af:spacer height="4"/>
+                                                <af:button text="Rewarehouse by WAC" id="RewarehouseWacButton"
+                                                           actionListener="#{backingrewarehouse.rewarehouseWac}"
+                                                           binding="#{backingrewarehouse.btnRewarehouseWac}"
+                                                           inlineStyle="width:180px" partialSubmit="false"/>
+                                            </af:panelFormLayout>
+                                        </af:panelGroupLayout>
+                                    </af:panelBox>
+                                    <af:button text="Cancel" id="CancelButton"
+                                               actionListener="#{backingrewarehouse.cancelButton}"
+                                               inlineStyle="width:50px"
+                                               binding="#{backingrewarehouse.btnCancel}" partialSubmit="false"/>
+                                </af:panelBox>
+                            </af:panelGroupLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6" id="s3"/>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

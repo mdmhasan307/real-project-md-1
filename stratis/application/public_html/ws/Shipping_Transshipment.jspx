@@ -1,0 +1,824 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:setProperty name="userbean" property="selected" value="5"/>
+    <jsp:setProperty name="userbean" property="selected2" value="6"/>
+    <f:view>
+        <af:document title="STRATIS Shipping - Transshipment" id="d1">
+            <af:form id="formTransshipment">
+                <af:panelStretchLayout id="psl1" startWidth="24" topHeight="150" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/ws/WS_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:messages/>
+                            <af:outputText value="&lt;br>&lt;br>" escape="false"/>
+                            <af:panelTabbed styleClass="AFStretchWidth">
+                                <af:showDetailItem text="TCN">
+                                    <af:outputText value="&lt;br>" escape="false"/>
+                                    <af:subform id="subFormTCN">
+                                        <af:spacer height="10"/>
+                                        <af:panelGroupLayout layout="horizontal" valign="top">
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="TCN" inlineStyle="font-weight:bold;"
+                                                                id="lblTCNTcn"/>
+                                                <af:inputText columns="19" maximumLength="17" id="txtTCNTcn"
+                                                              binding="#{backing_transshipment.txtTCNTcn}"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter 17-character Lead TCN (required)"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Consignee" id="lblConsigneeTcn"/>
+                                                <af:inputText columns="7" maximumLength="6" id="txtConsigneeTcn"
+                                                              binding="#{backing_transshipment.txtConsigneeTcn}"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter 6-character Consignee (only required if no valid AAC in first 6 of TCN)"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Tracking Number" id="lblTrackingNumTcn"/>
+                                                <af:inputText columns="20" maximumLength="18" id="txtTrackingNumTcn"
+                                                              binding="#{backing_transshipment.txtTrackingNumTcn}"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter up to 18-character Tracking Number (optional)"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Shipping Barcode" id="lblBarcodeTcn"
+                                                                inlineStyle="font-weight:bold"/>
+                                                <af:inputText columns="14" id="txtBarcodeTcn" maximumLength="10"
+                                                              binding="#{backing_transshipment.txtBarcodeTcn}"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter 5-10 alphanumeric Shipping Barcode (required)"/>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                        <af:spacer height="15"/>
+                                        <af:panelGroupLayout layout="horizontal" valign="top">
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Document #" id="lblDocNumTcn"/>
+                                                <af:inputText columns="15" maximumLength="14" id="txtDocNumTcn"
+                                                              binding="#{backing_transshipment.txtDocNumTcn}"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter 14-character Document Number (optional)"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Demand Suffix" id="lblSuffixTcn"/>
+                                                <af:inputText columns="1" maximumLength="1" id="txtSuffixTcn"
+                                                              binding="#{backing_transshipment.txtSuffixTcn}"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter 1-character Demand Suffix (optional)"/>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                        <af:spacer height="10"/>
+                                        <af:panelGroupLayout layout="horizontal" valign="top">
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="NSN" id="lblNSNTcn"/>
+                                                <af:inputText columns="14" maximumLength="13" id="txtNSNTcn"
+                                                              binding="#{backing_transshipment.txtNSNTcn}"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter 13-character National Stock Number (NSN) (optional)"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="SMIC" id="lblSMICTcn"/>
+                                                <af:inputText columns="2" maximumLength="2" id="txtSMICTcn"
+                                                              binding="#{backing_transshipment.txtSMICTcn}"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter 2-character Special Material Identification Code (SMIC) (optional)"/>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                        <af:spacer height="15"/>
+                                        <af:panelGroupLayout layout="horizontal" valign="top">
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="RIC From" id="lblRicFromTcn"/>
+                                                <af:inputText columns="3" maximumLength="3" id="txtRicFromTcn"
+                                                              binding="#{backing_transshipment.txtRicFromTcn}"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter 3-character Routing Identifier Code (optional)"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="U/I" id="lblUITcn"/>
+                                                <af:inputText columns="5" maximumLength="5" id="txtUITcn"
+                                                              binding="#{backing_transshipment.txtUITcn}"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter 2-character Unit of Issue (optional)"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Quantity" id="lblQtyTcn"/>
+                                                <af:inputText columns="5" id="txtQtyTcn"
+                                                              binding="#{backing_transshipment.txtQtyTcn}"
+                                                              maximumLength="5"
+                                                              shortDesc="Enter up to 5-digits for Quantity (optional)"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Price" id="lblPriceTcn"/>
+                                                <af:inputText columns="5" id="txtPriceTcn"
+                                                              binding="#{backing_transshipment.txtPriceTcn}"
+                                                              shortDesc="Enter up to 5-digit for Price (optional)"/>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                        <af:spacer height="10"/>
+                                        <af:panelGroupLayout layout="horizontal" valign="top">
+                                            <af:panelGroupLayout layout="horizontal">
+                                                <af:selectOneChoice label="Condition Code" id="ccTcn"
+                                                                    binding="#{backing_transshipment.ccTcn}"
+                                                                    shortDesc="Select a Condition Code (optional)">
+                                                    <af:selectItem label="A" value="A"/>
+                                                    <af:selectItem label="F" value="F"/>
+                                                </af:selectOneChoice>
+                                                <af:spacer width="15"/>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                        <af:spacer height="10"/>
+                                        <af:panelGroupLayout layout="horizontal">
+                                            <af:toolbar id="panelButtonBarTcn"
+                                                        rendered="#{!processScope.renderMiniAACForm || !backing_transshipment.renderMiniAACForm}">
+                                                <af:button text="Save"
+                                                           actionListener="#{backing_transshipment.submitByTCN}"
+                                                           id="saveButtonTcn" partialSubmit="false"/>
+                                                <af:resetButton text="Cancel" id="cancelButtonTcn"/>
+                                            </af:toolbar>
+                                        </af:panelGroupLayout>
+                                        <af:spacer height="10"/>
+                                        <af:panelBox text="AAC Creation" id="miniForm_AACCreateTcn"
+                                                     rendered="#{processScope.renderMiniAACForm || backing_transshipment.renderMiniAACForm}">
+                                            <af:panelFormLayout id="miniForm_AACCreate1Tcn">
+                                                <af:panelGroupLayout layout="horizontal">
+                                                    <af:inputText value="#{bindings.Aac.inputValue}"
+                                                                  label="#{bindings.Aac.label}"
+                                                                  required="#{bindings.Aac.mandatory}"
+                                                                  columns="#{bindings.Aac.displayWidth}"
+                                                                  maximumLength="6" inlineStyle="font-weight:bold;"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  disabled="true"
+                                                                  shortDesc="Enter 6-character AAC (required)"
+                                                                  binding="#{backing_transshipment.aacCreateTcn}"
+                                                                  id="aacCreateTcn">
+                                                        <f:validator binding="#{bindings.Aac.validator}"/>
+                                                    </af:inputText>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout layout="horizontal">
+                                                    <af:inputText value="#{bindings.Name.inputValue}"
+                                                                  label="#{bindings.Name.label}"
+                                                                  required="#{bindings.Name.mandatory}"
+                                                                  columns="#{bindings.Name.displayWidth}"
+                                                                  maximumLength="35" inlineStyle="font-weight:bold;"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  shortDesc="Enter up to 35-character Customer Name (required)"
+                                                                  binding="#{backing_transshipment.nameCreateTcn}"
+                                                                  id="nameCreateTcn">
+                                                        <f:validator binding="#{bindings.Name.validator}"/>
+                                                    </af:inputText>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout layout="horizontal">
+                                                    <af:inputText value="#{bindings.Address1.inputValue}"
+                                                                  label="#{bindings.Address1.label}"
+                                                                  required="#{bindings.Address1.mandatory}"
+                                                                  columns="#{bindings.Address1.displayWidth}"
+                                                                  maximumLength="35" inlineStyle="font-weight:bold;"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  shortDesc="Enter up to 35-character Customer Address 1 (required)"
+                                                                  binding="#{backing_transshipment.address1CreateTcn}"
+                                                                  id="address1CreateTcn">
+                                                        <f:validator binding="#{bindings.Address1.validator}"/>
+                                                    </af:inputText>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout layout="horizontal">
+                                                    <af:inputText value="#{bindings.Address2.inputValue}"
+                                                                  label=" #{bindings.Address2.label}"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  required="#{bindings.Address2.mandatory}"
+                                                                  columns="#{bindings.Address2.displayWidth}"
+                                                                  maximumLength="35"
+                                                                  shortDesc="Enter up to 35-character Customer Address 2 (optional)"
+                                                                  binding="#{backing_transshipment.address2CreateTcn}"
+                                                                  id="address2CreateTcn">
+                                                        <f:validator binding="#{bindings.Address2.validator}"/>
+                                                    </af:inputText>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout layout="horizontal">
+                                                    <af:inputText value="#{bindings.City.inputValue}"
+                                                                  label=" #{bindings.City.label}"
+                                                                  required="#{bindings.City.mandatory}"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  columns="#{bindings.City.displayWidth}"
+                                                                  maximumLength="50"
+                                                                  shortDesc="Enter up to 50-character City (required)"
+                                                                  binding="#{backing_transshipment.cityCreateTcn}"
+                                                                  id="cityCreateTcn">
+                                                        <f:validator binding="#{bindings.City.validator}"/>
+                                                    </af:inputText>
+                                                    <af:spacer width="15"/>
+                                                    <af:inputText value="#{bindings.State.inputValue}"
+                                                                  label="#{bindings.State.label}"
+                                                                  required="#{bindings.State.mandatory}"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  columns="#{bindings.State.displayWidth}"
+                                                                  maximumLength="2"
+                                                                  shortDesc="Enter 2-character State (required)"
+                                                                  binding="#{backing_transshipment.stateCreateTcn}"
+                                                                  id="stateCreateTcn">
+                                                        <f:validator binding="#{bindings.State.validator}"/>
+                                                    </af:inputText>
+                                                    <af:spacer width="15"/>
+                                                    <af:inputText value="#{bindings.ZipCode.inputValue}"
+                                                                  label="#{bindings.ZipCode.label}"
+                                                                  required="#{bindings.ZipCode.mandatory}"
+                                                                  columns="#{bindings.ZipCode.displayWidth}"
+                                                                  maximumLength="10"
+                                                                  shortDesc="Enter up to 5-10 digit Zip Code (required)"
+                                                                  binding="#{backing_transshipment.zipCodeCreateTcn}"
+                                                                  id="zipCodeCreateTcn">
+                                                        <f:validator binding="#{bindings.ZipCode.validator}"/>
+                                                    </af:inputText>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout layout="horizontal">
+                                                    <af:inputText value="#{bindings.RestrictShip.inputValue}"
+                                                                  label="Restrict Ship?" inlineStyle="display:none"
+                                                                  binding="#{backing_transshipment.restrictShipTcn}"
+                                                                  id="restrictShipTcn"
+                                                                  required="#{bindings.RestrictShip.mandatory}"/>
+                                                    <af:inputText value="#{bindings.Supported.inputValue}"
+                                                                  label="Supported?" inlineStyle="display:none"
+                                                                  binding="#{backing_transshipment.supportedTcn}"
+                                                                  id="supportedTcn"/>
+                                                </af:panelGroupLayout>
+                                                <f:facet name="footer">
+                                                    <af:toolbar>
+                                                        <af:button text="Create AAC/Submit Transshipment"
+                                                                   id="SubmitButton1Tcn"
+                                                                   actionListener="#{backing_transshipment.submitByTCNAAC}"
+                                                                   partialSubmit="false"/>
+                                                        <af:button text="Reset Transshipment" immediate="true"
+                                                                   actionListener="#{backing_transshipment.resetByTCNAAC}"
+                                                                   id="ResetButton1Tcn" partialSubmit="false"/>
+                                                        <af:button text="Cancel Transshipment" immediate="true"
+                                                                   action="GoShippingTransshipment"
+                                                                   actionListener="#{backing_transshipment.cancelTransshipment}"
+                                                                   id="CancelButton1Tcn" partialSubmit="false"/>
+                                                    </af:toolbar>
+                                                </f:facet>
+                                            </af:panelFormLayout>
+                                        </af:panelBox>
+                                    </af:subform>
+                                </af:showDetailItem>
+                                <af:showDetailItem text="Document Number">
+                                    <af:outputText value="&lt;br>" escape="false"/>
+                                    <af:subform id="subFormDocNum">
+                                        <af:spacer height="10"/>
+                                        <af:panelGroupLayout layout="horizontal" valign="top">
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Document Number" id="lblDocNumDocnum"
+                                                                inlineStyle="font-weight:bold;"/>
+                                                <af:inputText columns="15" maximumLength="14"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              id="txtDocNumDocnum"
+                                                              shortDesc="Enter 14-character Document Number (required)"
+                                                              binding="#{backing_transshipment.txtDocNumDocnum}"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Suffix" id="lblSuffixDocnum"/>
+                                                <af:inputText columns="1" maximumLength="1"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              id="txtSuffixDocnum"
+                                                              shortDesc="Enter 1-character Demand Suffix (optional)"
+                                                              binding="#{backing_transshipment.txtSuffixDocnum}"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Shipping Barcode" id="lblBarcodeDocnum"
+                                                                inlineStyle="font-weight:bold;"/>
+                                                <af:inputText columns="14" id="txtBarcodeDocnum" maximumLength="10"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter 5-10 alphanumeric Shipping Barcode (required)"
+                                                              binding="#{backing_transshipment.txtBarcodeDocnum}"/>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                        <af:spacer height="10"/>
+                                        <af:panelGroupLayout layout="horizontal" valign="top">
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="NSN" id="lblNSNDocnum"/>
+                                                <af:inputText columns="14" maximumLength="13" id="txtNSNDocnum"
+                                                              binding="#{backing_transshipment.txtNSNDocnum}"
+                                                              shortDesc="Enter 13-character National Stock Number (NSN) (optional)"
+                                                              contentStyle="text-transform:uppercase;"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="SMIC" id="lblSMICDocnum"/>
+                                                <af:inputText columns="2" maximumLength="2" id="txtSMICDocnum"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter 2-character Special Material Identification Code (SMIC) (optional)"
+                                                              binding="#{backing_transshipment.txtSMICDocnum}"/>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                        <af:spacer height="10"/>
+                                        <af:panelGroupLayout layout="horizontal" valign="top">
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Mark for AAC" id="lblAACDocnum"/>
+                                                <af:inputText columns="7" maximumLength="6"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              id="txtAACDocnum" shortDesc="Enter 6-character AAC"
+                                                              binding="#{backing_transshipment.txtAACDocnum}"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Tracking Number" id="lblTrackingNumDocnum"/>
+                                                <af:inputText columns="20" maximumLength="18"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              id="txtTrackingNumDocnum"
+                                                              shortDesc="Enter up to 18-character Tracking Number (optional)"
+                                                              binding="#{backing_transshipment.txtTrackingNumDocnum}"/>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                        <af:spacer height="10"/>
+                                        <af:panelGroupLayout layout="horizontal" valign="top">
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="RIC From" id="lblRicFromDocnum"/>
+                                                <af:inputText columns="7" maximumLength="3"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              id="txtRicFromDocnum"
+                                                              shortDesc="Enter 3-character Routing Identifier Code (RIC) (optional)"
+                                                              binding="#{backing_transshipment.txtRicFromDocnum}"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="U/I" id="lblUIDocnum"/>
+                                                <af:inputText columns="5" maximumLength="2"
+                                                              contentStyle="text-transform:uppercase;" id="txtUIDocnum"
+                                                              shortDesc="Enter 2-character Unit of Issue (UI) (optional)"
+                                                              binding="#{backing_transshipment.txtUIDocnum}"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Quantity" id="lblQtyDocnum"/>
+                                                <af:inputText columns="5" id="txtQtyDocnum"
+                                                              binding="#{backing_transshipment.txtQtyDocnum}"
+                                                              shortDesc="Enter up to 5-digit Quantity (optional)"
+                                                              maximumLength="5"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Price" id="lblPriceDocnum"/>
+                                                <af:inputText columns="5" id="txtPriceDocnum"
+                                                              shortDesc="Enter up to 5-digit Price (optional)"
+                                                              binding="#{backing_transshipment.txtPriceDocnum}"/>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                        <af:spacer height="10"/>
+                                        <af:panelGroupLayout layout="horizontal" valign="top">
+                                            <af:selectOneChoice id="ccDocnum" label="Condition Code"
+                                                                shortDesc="Select a Condition Code (optional)"
+                                                                binding="#{backing_transshipment.ccDocnum}">
+                                                <af:selectItem label="A" value="A"/>
+                                                <af:selectItem label="F" value="F"/>
+                                            </af:selectOneChoice>
+                                            <af:spacer width="15"/>
+                                        </af:panelGroupLayout>
+                                        <af:spacer height="10"/>
+                                        <af:panelGroupLayout layout="horizontal">
+                                            <af:toolbar id="panelButtonBarDocnum"
+                                                        rendered="#{!processScope.renderMiniAACForm || !backing_transshipment.renderMiniAACForm}">
+                                                <af:button text="Save" id="saveButtonDocnum"
+                                                           actionListener="#{backing_transshipment.submitByDocNum}"
+                                                           partialSubmit="false"/>
+                                                <af:resetButton text="Cancel" id="cancelButtonDocnum"/>
+                                            </af:toolbar>
+                                        </af:panelGroupLayout>
+                                        <af:spacer height="10"/>
+                                        <af:panelBox text="AAC Creation" id="miniForm_AACCreateDocnum"
+                                                     rendered="#{processScope.renderMiniAACForm || backing_transshipment.renderMiniAACForm}">
+                                            <af:panelFormLayout id="miniForm_AACCreate1Docnum">
+                                                <af:panelGroupLayout layout="horizontal">
+                                                    <af:inputText value="#{bindings.Aac.inputValue}"
+                                                                  label="#{bindings.Aac.label}"
+                                                                  required="#{bindings.Aac.mandatory}"
+                                                                  columns="#{bindings.Aac.displayWidth}"
+                                                                  maximumLength="6" inlineStyle="font-weight:bold;"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  shortDesc="Enter 6-character AAC (required)"
+                                                                  binding="#{backing_transshipment.aacCreateDocnum}"
+                                                                  id="aacCreateDocnum">
+                                                        <f:validator binding="#{bindings.Aac.validator}"/>
+                                                    </af:inputText>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout layout="horizontal">
+                                                    <af:inputText value="#{bindings.Name.inputValue}"
+                                                                  label="#{bindings.Name.label}"
+                                                                  required="#{bindings.Name.mandatory}"
+                                                                  columns="#{bindings.Name.displayWidth}"
+                                                                  maximumLength="100" inlineStyle="font-weight:bold;"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  shortDesc="Enter up to 100-character Customer Name (required)"
+                                                                  binding="#{backing_transshipment.nameCreateDocnum}"
+                                                                  id="nameCreateDocnum">
+                                                        <f:validator binding="#{bindings.Name.validator}"/>
+                                                    </af:inputText>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout layout="horizontal">
+                                                    <af:inputText value="#{bindings.Address1.inputValue}"
+                                                                  label="#{bindings.Address1.label}"
+                                                                  required="#{bindings.Address1.mandatory}"
+                                                                  columns="#{bindings.Address1.displayWidth}"
+                                                                  maximumLength="100" inlineStyle="font-weight:bold;"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  shortDesc="Enter up to 100-character Address 1 (required)"
+                                                                  binding="#{backing_transshipment.address1CreateDocnum}"
+                                                                  id="address1CreateDocnum">
+                                                        <f:validator binding="#{bindings.Address1.validator}"/>
+                                                    </af:inputText>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout layout="horizontal">
+                                                    <af:inputText value="#{bindings.Address2.inputValue}"
+                                                                  label=" #{bindings.Address2.label}"
+                                                                  required="#{bindings.Address2.mandatory}"
+                                                                  columns="#{bindings.Address2.displayWidth}"
+                                                                  maximumLength="100"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  shortDesc="Enter up to 100-character Address 2 (optional)"
+                                                                  binding="#{backing_transshipment.address2CreateDocnum}"
+                                                                  id="address2CreateDocnum">
+                                                        <f:validator binding="#{bindings.Address2.validator}"/>
+                                                    </af:inputText>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout layout="horizontal">
+                                                    <af:inputText value="#{bindings.City.inputValue}"
+                                                                  label=" #{bindings.City.label}"
+                                                                  required="#{bindings.City.mandatory}"
+                                                                  columns="#{bindings.City.displayWidth}"
+                                                                  maximumLength="50"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  shortDesc="Enter 50-character City (required)"
+                                                                  binding="#{backing_transshipment.cityCreateDocnum}"
+                                                                  id="cityCreateDocnum">
+                                                        <f:validator binding="#{bindings.City.validator}"/>
+                                                    </af:inputText>
+                                                    <af:spacer width="15"/>
+                                                    <af:inputText value="#{bindings.State.inputValue}"
+                                                                  label="#{bindings.State.label}"
+                                                                  required="#{bindings.State.mandatory}"
+                                                                  columns="#{bindings.State.displayWidth}"
+                                                                  maximumLength="2"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  shortDesc="Enter 2-character State (required)"
+                                                                  binding="#{backing_transshipment.stateCreateDocnum}"
+                                                                  id="stateCreateDocnum">
+                                                        <f:validator binding="#{bindings.State.validator}"/>
+                                                    </af:inputText>
+                                                    <af:spacer width="15"/>
+                                                    <af:inputText value="#{bindings.ZipCode.inputValue}"
+                                                                  label="#{bindings.ZipCode.label}"
+                                                                  required="#{bindings.ZipCode.mandatory}"
+                                                                  columns="#{bindings.ZipCode.displayWidth}"
+                                                                  shortDesc="Enter 5-10 digit Zip Code (required)"
+                                                                  binding="#{backing_transshipment.zipCodeCreateDocnum}"
+                                                                  id="zipCodeCreateDocnum">
+                                                        <f:validator binding="#{bindings.ZipCode.validator}"/>
+                                                    </af:inputText>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout layout="horizontal">
+                                                    <af:inputText value="#{bindings.RestrictShip.inputValue}"
+                                                                  label="Restrict Ship?" inlineStyle="display:none"
+                                                                  binding="#{backing_transshipment.restrictShipDocnum}"
+                                                                  id="restrictShipDocnum"
+                                                                  required="#{bindings.RestrictShip.mandatory}"/>
+                                                    <af:inputText value="#{bindings.Supported.inputValue}"
+                                                                  label="Supported?" inlineStyle="display:none"
+                                                                  binding="#{backing_transshipment.supportedDocnum}"
+                                                                  id="supportedDocnum"/>
+                                                </af:panelGroupLayout>
+                                                <f:facet name="footer">
+                                                    <af:toolbar>
+                                                        <af:button text="Create AAC/Submit Transshipment"
+                                                                   id="SubmitButton1Docnum"
+                                                                   actionListener="#{backing_transshipment.submitByDocNumAAC}"
+                                                                   partialSubmit="false"/>
+                                                        <af:button text="Reset Transshipment"
+                                                                   id="ResetButton1Docnum" immediate="true"
+                                                                   actionListener="#{backing_transshipment.resetByDocNumAAC}"
+                                                                   partialSubmit="false"/>
+                                                        <af:button text="Cancel Transshipment"
+                                                                   id="CancelButton1Docnum" immediate="true"
+                                                                   actionListener="#{backing_transshipment.cancelTransshipment}"
+                                                                   action="GoShippingTransshipment" partialSubmit="false"/>
+                                                    </af:toolbar>
+                                                </f:facet>
+                                            </af:panelFormLayout>
+                                        </af:panelBox>
+                                    </af:subform>
+                                </af:showDetailItem>
+                                <af:showDetailItem text="Contract Number">
+                                    <af:outputText value="&lt;br>" escape="false"/>
+                                    <af:subform id="subFormContractNum">
+                                        <af:spacer height="10"/>
+                                        <af:panelGroupLayout layout="horizontal" valign="top">
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Contract Number" id="lblContractNumCtr"
+                                                                inlineStyle="font-weight:bold;"/>
+                                                <af:inputText columns="14" maximumLength="13" id="txtContractNumCtr"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter 13-character Contract Number (e.g., Fed Ex) (required)"
+                                                              binding="#{backing_transshipment.txtContractNumCtr}"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Qty Invoiced" id="lblQtyInvoicedCtr"
+                                                                inlineStyle="font-weight:bold;"/>
+                                                <af:inputText columns="7" maximumLength="5" id="txtQtyInvoicedCtr"
+                                                              shortDesc="Enter up to 5-digit Quantity Invoiced (required)"
+                                                              binding="#{backing_transshipment.txtQtyInvoicedCtr}"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Qty Received" id="lblQtyReceivedCtr"
+                                                                inlineStyle="font-weight:bold;"/>
+                                                <af:inputText columns="7" maximumLength="5" id="txtQtyReceivedCtr"
+                                                              shortDesc="Enter up to 5-digit Quantity Received (required)"
+                                                              binding="#{backing_transshipment.txtQtyReceivedCtr}"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Shipping Barcode" id="lblBarcodeCtr"
+                                                                inlineStyle="font-weight:bold;"/>
+                                                <af:inputText columns="14" id="txtBarcodeCtr" maximumLength="10"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter 5-10 character Shipping Barcode (required)"
+                                                              binding="#{backing_transshipment.txtBarcodeCtr}"/>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                        <af:spacer height="10"/>
+                                        <af:panelGroupLayout layout="horizontal" valign="top">
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Document Number" id="lblDocNumCtr"/>
+                                                <af:inputText columns="15" maximumLength="14" id="txtDocNumCtr"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter 14-character Document Number (optional)"
+                                                              binding="#{backing_transshipment.txtDocNumCtr}"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Demand Suffix" id="lblSuffixCtr"/>
+                                                <af:inputText columns="1" maximumLength="1" id="txtSuffixCtr"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter 1-character Demand Suffix (optional)"
+                                                              binding="#{backing_transshipment.txtSuffixCtr}"/>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                        <af:spacer height="10"/>
+                                        <af:panelGroupLayout layout="horizontal" valign="top">
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Mark for AAC" id="lblAACCtr"/>
+                                                <af:inputText columns="7" maximumLength="6" id="txtAACCtr"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter 6-character AAC (required)"
+                                                              binding="#{backing_transshipment.txtAACCtr}"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Tracking Number" id="lblTrackingNumCtr"/>
+                                                <af:inputText columns="20" maximumLength="18" id="txtTrackingNumCtr"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter up to 18-character Tracking Number (optional)"
+                                                              binding="#{backing_transshipment.txtTrackingNumCtr}"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="NSN" id="lblNSNCtr"/>
+                                                <af:inputText columns="14" maximumLength="13" id="txtNSNCtr"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter 13-character National Stock Number (NSN) (optional)"
+                                                              binding="#{backing_transshipment.txtNSNCtr}"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="SMIC" id="lblSMICCtr"/>
+                                                <af:inputText columns="2" maximumLength="2" id="txtSMICCtr"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter 2-character Special Material Identification Code (SMIC) (optional)"
+                                                              binding="#{backing_transshipment.txtSMICCtr}"/>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                        <af:spacer height="10"/>
+                                        <af:panelGroupLayout layout="horizontal" valign="top">
+                                            <af:panelGroupLayout layout="horizontal">
+                                                <af:selectOneChoice id="purposeCtr" label="Purpose Code"
+                                                                    shortDesc="Select a Purpose Code (optional)"
+                                                                    binding="#{backing_transshipment.purposeCtr}">
+                                                    <af:selectItem label="A" value="A"/>
+                                                </af:selectOneChoice>
+                                                <af:spacer width="15"/>
+                                                <af:selectOneChoice id="ccCtr" label="Condition Code"
+                                                                    shortDesc="Select a Condition Code (optional)"
+                                                                    binding="#{backing_transshipment.ccCtr}">
+                                                    <af:selectItem label="A" value="A"/>
+                                                    <af:selectItem label="F" value="F"/>
+                                                </af:selectOneChoice>
+                                                <af:spacer width="15"/>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                        <af:spacer height="10"/>
+                                        <af:panelGroupLayout layout="horizontal" valign="top">
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Call Number" id="lblCallNumCtr"/>
+                                                <af:inputText columns="5" maximumLength="5" id="txtCallNumCtr"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter a 5-character Call Number (optional)"
+                                                              binding="#{backing_transshipment.txtCallNumCtr}"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Shipment Number" id="lblShipmentNumCtr"/>
+                                                <af:inputText columns="7" maximumLength="7" id="txtShipmentNumCtr"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter a 7-character Shipment Number (optional)"
+                                                              binding="#{backing_transshipment.txtShipmentNumCtr}"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Line Number" id="lblLineNumCtr"/>
+                                                <af:inputText columns="5" maximumLength="5" id="txtLineNumCtr"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter a 5-digit Line Number (optional)"
+                                                              binding="#{backing_transshipment.txtLineNumCtr}"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Billed Amount" id="lblBilledCtr"/>
+                                                <af:inputText columns="5" id="txtBilledCtr" maximumLength="5"
+                                                              shortDesc="Enter up to 5-digit Billed Amount (optional)"
+                                                              binding="#{backing_transshipment.txtBilledCtr}"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout layout="vertical">
+                                                <af:outputLabel value="Tailgate Date" id="lblTailDateCtr"/>
+                                                <af:inputText columns="11" id="txtTailDateCtr" maximumLength="11"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Enter up to 11-character Tailgate Date (optional)"
+                                                              binding="#{backing_transshipment.txtTailDateCtr}"/>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                        <af:spacer height="10"/>
+                                        <af:panelGroupLayout layout="horizontal">
+                                            <af:toolbar id="panelButtonBarCtr"
+                                                        rendered="#{!processScope.renderMiniAACForm || !backing_transshipment.renderMiniAACForm}">
+                                                <af:button text="Save" id="saveButtonCtr"
+                                                           actionListener="#{backing_transshipment.submitByContractNum}"
+                                                           partialSubmit="false"/>
+                                                <af:button text="Cancel" id="cancelButtonCtr"
+                                                           actionListener="#{backing_transshipment.resetByContractNumAAC}"
+                                                           partialSubmit="false"/>
+                                            </af:toolbar>
+                                        </af:panelGroupLayout>
+                                        <af:spacer height="10"/>
+                                        <af:panelBox text="AAC Creation" id="miniForm_AACCreateCtr"
+                                                     rendered="#{processScope.renderMiniAACForm || backing_transshipment.renderMiniAACForm}">
+                                            <af:panelFormLayout id="miniForm_AACCreate1Ctr">
+                                                <af:panelGroupLayout layout="horizontal">
+                                                    <af:inputText value="#{bindings.Aac.inputValue}"
+                                                                  label="#{bindings.Aac.label}"
+                                                                  required="#{bindings.Aac.mandatory}"
+                                                                  columns="#{bindings.Aac.displayWidth}"
+                                                                  maximumLength="6" inlineStyle="font-weight:bold;"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  shortDesc="Enter 6-character AAC (required)"
+                                                                  binding="#{backing_transshipment.aacCreateCtr}"
+                                                                  id="aacCreateCtr">
+                                                        <f:validator binding="#{bindings.Aac.validator}"/>
+                                                    </af:inputText>
+                                                    <af:spacer width="15"/>
+                                                    <af:inputText value="#{bindings.Name.inputValue}"
+                                                                  label="#{bindings.Name.label}"
+                                                                  required="#{bindings.Name.mandatory}"
+                                                                  columns="#{bindings.Name.displayWidth}"
+                                                                  maximumLength="100" inlineStyle="font-weight:bold;"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  shortDesc="Enter up to 100-character Customer Name (required)"
+                                                                  binding="#{backing_transshipment.nameCreateCtr}"
+                                                                  id="nameCreateCtr">
+                                                        <f:validator binding="#{bindings.Name.validator}"/>
+                                                    </af:inputText>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout layout="horizontal">
+                                                    <af:inputText value="#{bindings.Address1.inputValue}"
+                                                                  label="#{bindings.Address1.label}"
+                                                                  required="#{bindings.Address1.mandatory}"
+                                                                  columns="#{bindings.Address1.displayWidth}"
+                                                                  maximumLength="100" inlineStyle="font-weight:bold;"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  shortDesc="Enter up to 100-character Address 1 (required)"
+                                                                  binding="#{backing_transshipment.address1CreateCtr}"
+                                                                  id="address1CreateCtr">
+                                                        <f:validator binding="#{bindings.Address1.validator}"/>
+                                                    </af:inputText>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout layout="horizontal">
+                                                    <af:inputText value="#{bindings.Address2.inputValue}"
+                                                                  label=" #{bindings.Address2.label}"
+                                                                  required="#{bindings.Address2.mandatory}"
+                                                                  columns="#{bindings.Address2.displayWidth}"
+                                                                  maximumLength="100"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  shortDesc="Enter up to 100-character Address 2 (optional)"
+                                                                  binding="#{backing_transshipment.address2CreateCtr}"
+                                                                  id="address2CreateCtr">
+                                                        <f:validator binding="#{bindings.Address2.validator}"/>
+                                                    </af:inputText>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout layout="horizontal">
+                                                    <af:inputText value="#{bindings.City.inputValue}"
+                                                                  label=" #{bindings.City.label}"
+                                                                  required="#{bindings.City.mandatory}"
+                                                                  columns="#{bindings.City.displayWidth}"
+                                                                  maximumLength="50"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  shortDesc="Enter up to 50-character City (required)"
+                                                                  binding="#{backing_transshipment.cityCreateCtr}"
+                                                                  id="cityCreateCtr">
+                                                        <f:validator binding="#{bindings.City.validator}"/>
+                                                    </af:inputText>
+                                                    <af:spacer width="15"/>
+                                                    <af:inputText value="#{bindings.State.inputValue}"
+                                                                  label="#{bindings.State.label}"
+                                                                  required="#{bindings.State.mandatory}"
+                                                                  columns="#{bindings.State.displayWidth}"
+                                                                  maximumLength="2"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  shortDesc="Enter 2-character State (required)"
+                                                                  binding="#{backing_transshipment.stateCreateCtr}"
+                                                                  id="stateCreateCtr">
+                                                        <f:validator binding="#{bindings.State.validator}"/>
+                                                    </af:inputText>
+                                                    <af:spacer width="15"/>
+                                                    <af:inputText value="#{bindings.ZipCode.inputValue}"
+                                                                  label="#{bindings.ZipCode.label}"
+                                                                  required="#{bindings.ZipCode.mandatory}"
+                                                                  columns="#{bindings.ZipCode.displayWidth}"
+                                                                  maximumLength="10"
+                                                                  shortDesc="Enter 5-10 digit Zip Code (required)"
+                                                                  binding="#{backing_transshipment.zipCodeCreateCtr}"
+                                                                  id="zipCodeCreateCtr">
+                                                        <f:validator binding="#{bindings.ZipCode.validator}"/>
+                                                    </af:inputText>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout layout="horizontal">
+                                                    <af:inputText value="#{bindings.RestrictShip.inputValue}"
+                                                                  label="Restrict Ship?" inlineStyle="display:none"
+                                                                  binding="#{backing_transshipment.restrictShipCtr}"
+                                                                  id="restrictShipCtr"
+                                                                  required="#{bindings.RestrictShip.mandatory}"/>
+                                                    <af:inputText value="#{bindings.Supported.inputValue}"
+                                                                  label="Supported?" inlineStyle="display:none"
+                                                                  binding="#{backing_transshipment.supportedCtr}"
+                                                                  id="supportedCtr"/>
+                                                </af:panelGroupLayout>
+                                                <f:facet name="footer">
+                                                    <af:toolbar>
+                                                        <af:button text="Create AAC/Submit Transshipment"
+                                                                   id="SubmitButton1Ctr"
+                                                                   actionListener="#{backing_transshipment.submitByContractNumAAC}"
+                                                                   partialSubmit="false"/>
+                                                        <af:button text="Reset Transshipment"
+                                                                   id="ResetButton1Ctr" immediate="true"
+                                                                   actionListener="#{backing_transshipment.resetByContractNumAAC}"
+                                                                   partialSubmit="false"/>
+                                                        <af:button text="Cancel Transshipment"
+                                                                   id="CancelButton1Ctr" immediate="true"
+                                                                   actionListener="#{backing_transshipment.cancelTransshipment}"
+                                                                   action="GoShippingTransshipment" partialSubmit="false"/>
+                                                    </af:toolbar>
+                                                </f:facet>
+                                            </af:panelFormLayout>
+                                        </af:panelBox>
+                                    </af:subform>
+                                </af:showDetailItem>
+                            </af:panelTabbed>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <af:spacer width="24" height="675"/>
+                    </f:facet>
+                    <f:facet name="end"/>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

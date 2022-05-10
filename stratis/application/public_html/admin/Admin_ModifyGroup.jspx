@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+
+    <af:switcher facetName="#{userbean.usersAdminAuthorizationStatus}" id="fmusersadminauthstatus">
+        <f:facet name="0">
+            <f:verbatim>
+                <script language="Javascript" type="text/javascript">
+                  //alert('Your session has expired!\nYou will be returned to the login screen.');
+                  console.log("A_MG detected expired/no session.");
+                  this.location.href = 'unauthenticated.html';
+                </script>
+            </f:verbatim>
+        </f:facet>
+        <f:facet name="-1">
+            <f:verbatim>
+                <script language="Javascript" type="text/javascript">
+                  this.location.href = 'unauthorized.html';
+                </script>
+            </f:verbatim>
+        </f:facet>
+        <f:facet name="1">
+
+
+            <af:subform id="modgrp">
+                <af:spacer height="10" width="1" id="amgmgs1"/>
+                <af:panelGroupLayout id="amgmgpgl1">
+                    <af:panelBox text="Group Management" showDisclosure="false" id="amgmgpb1">
+                        <af:separator id="amgmgs2"/>
+                        <af:panelGroupLayout layout="horizontal" valign="top" id="amgmgpgl2">
+                            <af:spacer width="10" id="amgmgs3"/>
+                            <af:panelBox text="Groups" showDisclosure="false" id="amgpb1" visible="#{backing_Admin_ModifyGroup.groupFlag}">
+                                <af:panelGroupLayout id="amgpgl1">
+                                    <af:spacer height="10" id="amgs1"/>
+                                    <af:table value="#{bindings.GroupViewAll1.collectionModel}" var="row" width="200"
+                                              rows="#{bindings.GroupViewAll1.rangeSize}"
+                                              first="#{bindings.GroupViewAll1.rangeStart}"
+                                              selectionListener="#{bindings.GroupViewAll1.collectionModel.makeCurrent}"
+                                              emptyText="#{bindings.GroupViewAll1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                              binding="#{backing_Admin_ModifyGroup.groupTable2}" id="groupTable2"
+                                              rowSelection="single" columnStretching="last" inlineStyle="height:200px;">
+                                        <af:column sortProperty="GroupName" sortable="true" headerText="Group Name" id="amgc1">
+                                            <af:outputText value="#{row.GroupName}" id="amgot1"/>
+                                        </af:column>
+                                    </af:table>
+                                    <af:spacer height="10" id="amgs2"/>
+                                    <af:toolbar id="amgt1">
+                                        <af:button actionListener="#{backing_Admin_ModifyGroup.submitCreateGroup}"
+                                                   text="Create" accessKey="C" id="CreateButton"
+                                                   disabled="#{(!backing_Admin_ModifyGroup.groupFlag) and (bindings.GroupViewAll1.estimatedRowCount > 0)}"
+                                                   partialSubmit="false">
+                                            <af:setActionListener from="#{false}" to="#{backing_Admin_ModifyGroup.groupFlag}"/>
+                                        </af:button>
+                                        <af:button text="Update" accessKey="U" id="UpdateButton" inlineStyle="width:50px"
+                                                   disabled="#{!backing_Admin_ModifyGroup.groupFlag}"
+                                                   actionListener="#{backing_Admin_ModifyGroup.submitUpdateGroup}"
+                                                   partialSubmit="false"/>
+                                        <af:button text="Delete" accessKey="D" id="DeleteButton"
+                                                   disabled="#{!backing_Admin_ModifyGroup.groupFlag}" immediate="true"
+                                                   partialSubmit="false">
+                                            <af:showPopupBehavior popupId="confirmDelete" triggerType="action" align="afterStart"/>
+                                        </af:button>
+                                        <af:popup id="confirmDelete">
+                                            <af:dialog id="Confirm" title="Confirm" affirmativeTextAndAccessKey="Submit"
+                                                       dialogListener="#{backing_Admin_ModifyGroup.dialogListener}">
+                                                <af:activeOutputText id="Delete" value="Are you sure you want to Delete?"/>
+                                            </af:dialog>
+                                        </af:popup>
+                                    </af:toolbar>
+                                </af:panelGroupLayout>
+                            </af:panelBox>
+                            <af:spacer width="40" id="amgs3"/>
+                            <af:panelBox text="Group Details" rendered="#{bindings.GroupViewAll1.estimatedRowCount > 0}"
+                                         showDisclosure="false" id="amgpb2">
+                                <af:panelFormLayout id="panelForm1" partialTriggers="groupTable2">
+                                    <af:panelGridLayout inlineStyle="padding:2px;" id="amgpgl2">
+                                        <af:gridRow id="amggr1">
+                                            <af:gridCell id="amggc1">
+                                                <af:inputText value="#{bindings.GroupName.inputValue}" showRequired="true"
+                                                              label="Group Name"
+                                                              inlineStyle="font-weight:bold;"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              columns="20"
+                                                              binding="#{backing_Admin_ModifyGroup.inputText1}"
+                                                              shortDesc="Required Group Name (max 20 alphanumeric)"
+                                                              rendered="#{!backing_Admin_ModifyGroup.groupFlag}" id="groupName">
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.GroupName.inputValue}" columns="20"
+                                                              label="Group Name"
+                                                              shortDesc="Required Group Name (max 20 alphanumeric)"
+                                                              readOnly="true"
+                                                              rendered="#{backing_Admin_ModifyGroup.groupFlag}"
+                                                              id="groupName_h"/>
+                                                <af:spacer height="10" id="amgs4"/>
+                                            </af:gridCell>
+                                        </af:gridRow>
+                                        <af:gridRow id="amggr2">
+                                            <af:gridCell id="amggc2">
+                                                <af:inputText value="#{backing_Admin_ModifyGroup.defaultPrivs}" columns="70"
+                                                              rows="4" label="Group Privilege(s)"
+                                                              shortDesc="Required Group Privilege(s)" readOnly="true"
+                                                              inlineStyle="background-color:#CCCCCC"
+                                                              rendered="#{backing_Admin_ModifyGroup.groupFlag}"
+                                                              id="groupPrivileges_h"/>
+                                                <af:spacer height="10" id="amgs5"/>
+                                                <af:selectManyShuttle value="#{backing_Admin_ModifyGroup.selectedList}"
+                                                                      id="selectManyShuttle1"
+                                                                      label="Privileges"
+                                                                      valueChangeListener="#{backing_Admin_ModifyGroup.refreshSelectedList}"
+                                                                      leadingHeader="Available Privileges"
+                                                                      trailingHeader="Selected Privileges"
+                                                                      rendered="#{!backing_Admin_ModifyGroup.groupFlag}"
+                                                                      inlineStyle="height:210px;">
+                                                    <f:selectItems value="#{backing_Admin_ModifyGroup.allList}" id="amgsi1"/>
+                                                </af:selectManyShuttle>
+                                                <af:spacer height="10" id="amgs6"/>
+                                            </af:gridCell>
+                                        </af:gridRow>
+                                        <af:gridRow id="amggr3">
+                                            <af:gridCell id="amggc3">
+                                                <af:spacer height="10" id="amgs7"/>
+                                                <af:toolbar rendered="#{!backing_Admin_ModifyGroup.groupFlag}" id="amgt2">
+                                                    <af:button actionListener="#{backing_Admin_ModifyGroup.submitSaveGroup}"
+                                                               text="Submit" inlineStyle="width:50px" accessKey="S"
+                                                               id="SaveButton" partialSubmit="false"/>
+                                                    <af:button actionListener="#{backing_Admin_ModifyGroup.submitCancelGroup}"
+                                                               text="Cancel" inlineStyle="width:50px" accessKey="a"
+                                                               id="CancelButton" partialSubmit="false"/>
+                                                </af:toolbar>
+                                            </af:gridCell>
+                                        </af:gridRow>
+                                    </af:panelGridLayout>
+                                </af:panelFormLayout>
+                            </af:panelBox>
+                        </af:panelGroupLayout>
+                    </af:panelBox>
+                </af:panelGroupLayout>
+            </af:subform>
+        </f:facet>
+    </af:switcher>
+</jsp:root>                        

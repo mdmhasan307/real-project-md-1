@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="Location"
+  Version="11.1.2.64.36"
+  DBObjectType="SYNONYM"
+  DBObjectName="LOCATION"
+  AliasName="Location"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="mil.stratis.model.entity.loc.LocationImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="LocationId"
+    ColumnName="LOCATION_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.DBSequence"
+    ColumnType="NUMBER"
+    TableName="LOCATION"
+    PrimaryKey="true"
+    IsUpdateable="while_insert"
+    DefaultValue="@0"
+    Domain="oracle.jbo.domain.DBSequence"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_SequenceName" Value="LOCATION_ID_SEQ"/>
+      <Attr Name="_SequenceStart" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Aisle"
+    Precision="10"
+    ColumnName="AISLE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="LOCATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Side"
+    Precision="10"
+    ColumnName="SIDE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="LOCATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Bay"
+    IsNotNull="true"
+    Precision="10"
+    ColumnName="BAY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="LOCATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LocLevel"
+    IsNotNull="true"
+    Precision="10"
+    ColumnName="LOC_LEVEL"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="LOCATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AvailabilityFlag"
+    IsNotNull="true"
+    Precision="1"
+    ColumnName="AVAILABILITY_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="LOCATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LocationLabel"
+    IsNotNull="true"
+    Precision="9"
+    ColumnName="LOCATION_LABEL"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="LOCATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="9"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Slot"
+    IsNotNull="true"
+    Precision="2"
+    ColumnName="SLOT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="LOCATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="WacId"
+    IsNotNull="true"
+    ColumnName="WAC_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="LOCATION"/>
+  <Attribute
+    Name="LocationHeaderBinId"
+    ColumnName="LOCATION_HEADER_BIN_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="LOCATION"/>
+  <Attribute
+    Name="MechanizedFlag"
+    IsNotNull="true"
+    Precision="1"
+    ColumnName="MECHANIZED_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="LOCATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LocClassificationId"
+    ColumnName="LOC_CLASSIFICATION_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="LOCATION"/>
+  <Attribute
+    Name="DividerIndex"
+    ColumnName="DIVIDER_INDEX"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="LOCATION"/>
+  <Attribute
+    Name="Cube"
+    IsNotNull="true"
+    ColumnName="CUBE"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="LOCATION"/>
+  <Attribute
+    Name="Weight"
+    IsNotNull="true"
+    ColumnName="WEIGHT"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="LOCATION"/>
+  <Attribute
+    Name="LastStowDate"
+    ColumnName="LAST_STOW_DATE"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="LOCATION"/>
+  <Attribute
+    Name="CreatedBy"
+    Precision="6"
+    Scale="0"
+    ColumnName="CREATED_BY"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="LOCATION"/>
+  <Attribute
+    Name="CreatedDate"
+    IsNotNull="true"
+    ColumnName="CREATED_DATE"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="LOCATION"/>
+  <Attribute
+    Name="ModifiedBy"
+    Precision="6"
+    Scale="0"
+    ColumnName="MODIFIED_BY"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="LOCATION"/>
+  <Attribute
+    Name="ModifiedDate"
+    ColumnName="MODIFIED_DATE"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="LOCATION"/>
+  <AccessorAttribute
+    Name="LocationClassification"
+    Association="mil.stratis.model.entity.associations.LocationLocClassFkAssoc"
+    AssociationEnd="mil.stratis.model.entity.associations.LocationLocClassFkAssoc.LocationClassification"
+    AssociationOtherEnd="mil.stratis.model.entity.associations.LocationLocClassFkAssoc.Location"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="NiinLocation"
+    Association="mil.stratis.model.entity.associations.NiinLocLocationFkAssoc"
+    AssociationEnd="mil.stratis.model.entity.associations.NiinLocLocationFkAssoc.NiinLocation"
+    AssociationOtherEnd="mil.stratis.model.entity.associations.NiinLocLocationFkAssoc.Location"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="Stow"
+    Association="mil.stratis.model.entity.associations.StowLocationFkAssoc"
+    AssociationEnd="mil.stratis.model.entity.associations.StowLocationFkAssoc.Stow"
+    AssociationOtherEnd="mil.stratis.model.entity.associations.StowLocationFkAssoc.Location"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="LocationPrimaryKey"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="LOCATION_PRIMARY_KEY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.loc.Location.LocationId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_Location">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="LOCATIONCLASSIFICATION_PRIMARY"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_LOCATION"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.loc.Location.LocClassificationId"/>
+    </AttrArray>
+  </Key>
+</Entity>

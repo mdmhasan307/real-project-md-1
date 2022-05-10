@@ -1,0 +1,136 @@
+<Context path="/stratis">
+
+  <!--  The spring.config.additional-location is only requried on legacy server setups.
+        Local development supplies this in the vm options.
+        containers supply this in their version of the stratis.xml in /conf/container/sources/opt/app/conf/tomcat/Catalina/localhost/stratis.xml-->
+  <Parameter name="spring.config.additional-location" value="/opt/app/stratis/conf/tomcat/stratis_context.properties"/>
+  <!--
+    The below 7 resources:
+    jdbc/STRATDBSVRDS: This is the resource used in Legacy mode. (Non Innovation)  The url/password must match whats setup in your .env for STRATIS_DB_NAME and STRATIS_DB_DATASOURCE_PASSWORD
+    jdbc/XXXX: these are the resources for all 6 instances of STRATIS (Innovation).  Make sure the url/username/passwords are correct for the db your using.
+  -->
+
+  <Resource name="jdbc/STRATDBSVRDS"
+            auth="SERVLET"
+            factory="mil.stratis.common.db.EncryptedDataSourceFactory"
+            type="oracle.ucp.jdbc.PoolDataSource"
+            connectionFactoryClassName="oracle.jdbc.pool.OracleDataSource"
+            url="jdbc:oracle:thin:@//127.0.0.1:1521/STRATCPEN"
+            user="stratis"
+            password="ENC(wex21kAlZtHRWea20lItMfGX8P68tplV)"
+            connectionPoolName="STRATISPool"
+            loginTimeout="10"
+            initialPoolSize="3"
+            minPoolSize="2"
+            maxPoolSize="200"
+            inactiveConnectionTimeout="60"
+            maxConnectionReuseTime="300"
+            validateConnectionOnBorrow="true"
+            sqlForValidateConnection="select 1 from DUAL"
+            maxStatements="10"
+  />
+
+  <Resource
+      name="jdbc/CPEN"
+      auth="SERVLET"
+      factory="mil.stratis.common.db.EncryptedDataSourceFactory"
+      type="oracle.ucp.jdbc.PoolDataSource"
+      connectionFactoryClassName="oracle.jdbc.pool.OracleDataSource"
+      url="jdbc:oracle:thin:@//127.0.0.1:1521/STRATCPEN"
+      user="stratis"
+      password="ENC(wex21kAlZtHRWea20lItMfGX8P68tplV)"
+      connectionPoolName="CPENPool"
+      minPoolSize="1"
+      maxPoolSize="50"
+      inactiveConnectionTimeout="120"
+      setMaxConnectionReuseTime="300"
+      validateConnectionOnBorrow="true"
+  />
+
+
+  <Resource
+      name="jdbc/CLNC"
+      auth="SERVLET"
+      factory="mil.stratis.common.db.EncryptedDataSourceFactory"
+      type="oracle.ucp.jdbc.PoolDataSource"
+      connectionFactoryClassName="oracle.jdbc.pool.OracleDataSource"
+      url="jdbc:oracle:thin:@//127.0.0.1:1521/STRATCLNC"
+      user="stratis"
+      password="ENC(wex21kAlZtHRWea20lItMfGX8P68tplV)"
+      connectionPoolName="CLNCPool"
+      minPoolSize="1"
+      maxPoolSize="50"
+      inactiveConnectionTimeout="120"
+      setMaxConnectionReuseTime="300"
+      validateConnectionOnBorrow="true"
+  />
+
+  <Resource
+      name="jdbc/OKI"
+      auth="SERVLET"
+      factory="mil.stratis.common.db.EncryptedDataSourceFactory"
+      type="oracle.ucp.jdbc.PoolDataSource"
+      connectionFactoryClassName="oracle.jdbc.pool.OracleDataSource"
+      url="jdbc:oracle:thin:@//127.0.0.1:1521/STRATOKI"
+      user="stratis"
+      password="ENC(wex21kAlZtHRWea20lItMfGX8P68tplV)"
+      connectionPoolName="OKIPool"
+      minPoolSize="1"
+      maxPoolSize="50"
+      inactiveConnectionTimeout="120"
+      setMaxConnectionReuseTime="300"
+      validateConnectionOnBorrow="true"
+  />
+
+  <Resource
+      name="jdbc/BIC"
+      auth="SERVLET"
+      factory="mil.stratis.common.db.EncryptedDataSourceFactory"
+      type="oracle.ucp.jdbc.PoolDataSource"
+      connectionFactoryClassName="oracle.jdbc.pool.OracleDataSource"
+      url="jdbc:oracle:thin:@//127.0.0.1:1521/STRATBIC"
+      user="stratis"
+      password="ENC(wex21kAlZtHRWea20lItMfGX8P68tplV)"
+      connectionPoolName="BICPool"
+      minPoolSize="1"
+      maxPoolSize="50"
+      inactiveConnectionTimeout="120"
+      setMaxConnectionReuseTime="300"
+      validateConnectionOnBorrow="true"
+  />
+
+  <Resource
+      name="jdbc/MCBH"
+      auth="SERVLET"
+      factory="mil.stratis.common.db.EncryptedDataSourceFactory"
+      type="oracle.ucp.jdbc.PoolDataSource"
+      connectionFactoryClassName="oracle.jdbc.pool.OracleDataSource"
+      url="jdbc:oracle:thin:@//127.0.0.1:1521/STRATMCBH"
+      user="stratis"
+      password="ENC(wex21kAlZtHRWea20lItMfGX8P68tplV)"
+      connectionPoolName="MCBHPool"
+      minPoolSize="1"
+      maxPoolSize="50"
+      inactiveConnectionTimeout="120"
+      setMaxConnectionReuseTime="300"
+      validateConnectionOnBorrow="true"
+  />
+
+  <Resource
+      name="jdbc/ESD"
+      auth="SERVLET"
+      factory="mil.stratis.common.db.EncryptedDataSourceFactory"
+      type="oracle.ucp.jdbc.PoolDataSource"
+      connectionFactoryClassName="oracle.jdbc.pool.OracleDataSource"
+      url="jdbc:oracle:thin:@//127.0.0.1:1521/STRATESD"
+      user="stratis"
+      password="ENC(wex21kAlZtHRWea20lItMfGX8P68tplV)"
+      connectionPoolName="ESDPool"
+      minPoolSize="1"
+      maxPoolSize="50"
+      inactiveConnectionTimeout="120"
+      setMaxConnectionReuseTime="300"
+      validateConnectionOnBorrow="true"
+  />
+
+</Context>

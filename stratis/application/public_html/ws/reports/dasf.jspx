@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <!-- DASF -->
+    <af:table var="row" rowBandingInterval="1" id="t12_1" autoHeightRows="0"
+              styleClass="AFStretchWidth"
+              value="#{viewScope.ReportsQueryResultBean.stdReportColumnList}"
+              rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'DASF'}">
+        <af:column sortable="false" headerText="Document Number" id="c12_1" width="150">
+            <af:outputText value="#{row.docNumber}" id="ot12_1"/>
+        </af:column>
+        <af:column sortable="false" headerText="Unit of Issue" id="c12_2">
+            <af:outputText value="#{row.unitOfIssue}" id="ot12_2"/>
+        </af:column>
+        <af:column sortable="false" headerText="Quantity Due" id="c12_3"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.qtyDue}" id="ot12_3"/>
+        </af:column>
+        <af:column sortable="false" headerText="Quantity Invoiced" id="c12_4"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.qtyInvoiced}" id="ot12_4"/>
+        </af:column>
+        <af:column sortable="false" headerText="Record FSC" id="c12_5">
+            <af:outputText value="#{row.recordFsc}" id="ot12_5"/>
+        </af:column>
+        <af:column sortable="false" headerText="Record NIIN" id="c12_6">
+            <af:outputText value="#{row.recordNiin}" id="ot12_6"/>
+        </af:column>
+        <af:column sortable="false" headerText="Signal Code" id="c12_7">
+            <af:outputText value="#{row.signalCode}" id="ot12_7"/>
+        </af:column>
+        <af:column sortable="false" headerText="Supplementary Address" id="c12_8">
+            <af:outputText value="#{row.supplAddr}" id="ot12_8"/>
+        </af:column>
+        <af:column sortable="false" headerText="Unit Price SUM" id="c12_9"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.unitPriceSum}" id="ot12_9"/>
+        </af:column>
+    </af:table>
+
+</jsp:root>

@@ -1,0 +1,370 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="PackingIssuesView"
+   Version="11.1.2.64.36"
+   SelectList="Picking.SCN, 
+       Picking.PACKING_CONSOLIDATION_ID, 
+       Issue.QTY, 
+       Issue.ISSUE_TYPE, 
+       Issue.ISSUE_PRIORITY_DESIGNATOR, 
+       Issue.ISSUE_PRIORITY_GROUP, 
+       Picking.PID, 
+       Issue.NIIN_ID, 
+       Issue.STATUS, 
+       Issue.SUFFIX, 
+       Issue.SCN AS SCN1, 
+       NiinInfo.NIIN, 
+       NiinInfo.NOMENCLATURE, 
+       NiinInfo.CUBE, 
+       NiinInfo.NIIN_ID AS NIIN_ID1, 
+       NiinInfo.UI, 
+       NiinInfo.FSC, 
+       NiinInfo.WEIGHT, 
+       NiinInfo.SCC, 
+       Issue.DOCUMENT_ID, 
+       Issue.RDD, 
+       Issue.DOCUMENT_NUMBER, 
+       Customer.AAC, 
+       Customer.CUSTOMER_ID, 
+       Picking.BYPASS_COUNT, 
+       Picking.PICK_QTY, 
+       Picking.TIME_OF_PICK, 
+       Picking.QTY_PICKED, 
+       Picking.PIN, 
+       Issue.ADVICE_CODE, 
+       Issue.CC, 
+       Issue.DATE_BACK_ORDERED, 
+       Issue.DISTRIBUTION_CODE, 
+       Issue.ERO_NUMBER, 
+       Issue.FUND_CODE, 
+       Issue.MEDIA_AND_STATUS_CODE, 
+       Issue.PROJECT_CODE, 
+       Issue.ROUTING_ID_FROM, 
+       Issue.SIGNAL_CODE, 
+       Issue.SUPPLEMENTARY_ADDRESS"
+   FromList="PICKING Picking, ISSUE Issue, NIIN_INFO NiinInfo, CUSTOMER Customer"
+   Where="Picking.SCN = Issue.SCN AND Issue.CUSTOMER_ID = Customer.CUSTOMER_ID AND  NiinInfo.NIIN_ID = Issue.NIIN_ID"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.pack.PackingIssuesViewImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="Picking"
+      Entity="mil.stratis.model.entity.wlm.Picking" >
+   </EntityUsage>
+   <EntityUsage
+      Name="Issue"
+      Entity="mil.stratis.model.entity.wlm.Issue"
+      Association="mil.stratis.model.entity.associations.PickingIssueFkAssoc"
+      AssociationEnd="mil.stratis.model.entity.associations.PickingIssueFkAssoc.Issue"
+      SourceUsage="mil.stratis.model.view.pack.PackingIssuesView.Picking"
+      ReadOnly="true"
+      Reference="true" >
+      <DesignTime>
+         <AttrArray Name="_srcAttributes">
+            <Item Value="mil.stratis.model.entity.wlm.Picking.Scn" />
+         </AttrArray>
+         <AttrArray Name="_dstAttributes">
+            <Item Value="mil.stratis.model.entity.wlm.Issue.Scn" />
+         </AttrArray>
+      </DesignTime>
+   </EntityUsage>
+   <EntityUsage
+      Name="NiinInfo"
+      Entity="mil.stratis.model.entity.site.NiinInfo"
+      SourceUsage="mil.stratis.model.view.pack.PackingIssuesView.Issue"
+      ReadOnly="true"
+      Reference="true" >
+   </EntityUsage>
+   <EntityUsage
+      Name="Customer"
+      Entity="mil.stratis.model.entity.site.Customer"
+      Association="mil.stratis.model.entity.associations.IssueCustFkAssoc"
+      AssociationEnd="mil.stratis.model.entity.associations.IssueCustFkAssoc.Customer"
+      SourceUsage="mil.stratis.model.view.pack.PackingIssuesView.Issue"
+      ReadOnly="true"
+      Reference="true" >
+      <DesignTime>
+         <AttrArray Name="_srcAttributes">
+            <Item Value="mil.stratis.model.entity.wlm.Issue.CustomerId" />
+         </AttrArray>
+         <AttrArray Name="_dstAttributes">
+            <Item Value="mil.stratis.model.entity.site.Customer.CustomerId" />
+         </AttrArray>
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Scn"
+      EntityAttrName="Scn"
+      EntityUsage="Picking"
+      AliasName="SCN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PackingConsolidationId"
+      EntityAttrName="PackingConsolidationId"
+      EntityUsage="Picking"
+      AliasName="PACKING_CONSOLIDATION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Qty"
+      IsUpdateable="false"
+      IsNotNull="true"
+      DefaultValue="0"
+      EntityAttrName="Qty"
+      EntityUsage="Issue"
+      AliasName="QTY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IssueType"
+      IsUpdateable="false"
+      DefaultValue=" "
+      EntityAttrName="IssueType"
+      EntityUsage="Issue"
+      AliasName="ISSUE_TYPE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IssuePriorityDesignator"
+      IsUpdateable="false"
+      DefaultValue="15"
+      EntityAttrName="IssuePriorityDesignator"
+      EntityUsage="Issue"
+      AliasName="ISSUE_PRIORITY_DESIGNATOR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IssuePriorityGroup"
+      EntityAttrName="IssuePriorityGroup"
+      EntityUsage="Issue"
+      AliasName="ISSUE_PRIORITY_GROUP" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Pid"
+      IsUpdateable="while_insert"
+      IsNotNull="true"
+      EntityAttrName="Pid"
+      EntityUsage="Picking"
+      AliasName="PID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NiinId"
+      EntityAttrName="NiinId"
+      EntityUsage="Issue"
+      AliasName="NIIN_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Status"
+      EntityAttrName="Status"
+      EntityUsage="Issue"
+      AliasName="STATUS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Suffix"
+      EntityAttrName="Suffix"
+      EntityUsage="Issue"
+      AliasName="SUFFIX" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Scn1"
+      IsNotNull="true"
+      EntityAttrName="Scn"
+      EntityUsage="Issue"
+      AliasName="SCN1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Niin"
+      IsUnique="true"
+      EntityAttrName="Niin"
+      EntityUsage="NiinInfo"
+      AliasName="NIIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Nomenclature"
+      EntityAttrName="Nomenclature"
+      EntityUsage="NiinInfo"
+      AliasName="NOMENCLATURE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Cube"
+      IsUpdateable="false"
+      DefaultValue="0"
+      EntityAttrName="Cube"
+      EntityUsage="NiinInfo"
+      AliasName="CUBE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NiinId1"
+      EntityAttrName="NiinId"
+      EntityUsage="NiinInfo"
+      AliasName="NIIN_ID1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Ui"
+      EntityAttrName="Ui"
+      EntityUsage="NiinInfo"
+      AliasName="UI" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Fsc"
+      EntityAttrName="Fsc"
+      EntityUsage="NiinInfo"
+      AliasName="FSC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Weight"
+      IsUpdateable="false"
+      DefaultValue="0"
+      EntityAttrName="Weight"
+      EntityUsage="NiinInfo"
+      AliasName="WEIGHT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Scc"
+      IsUpdateable="false"
+      DefaultValue=" "
+      EntityAttrName="Scc"
+      EntityUsage="NiinInfo"
+      AliasName="SCC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocumentId"
+      IsNotNull="true"
+      EntityAttrName="DocumentId"
+      EntityUsage="Issue"
+      AliasName="DOCUMENT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Rdd"
+      IsUpdateable="false"
+      DefaultValue="   "
+      EntityAttrName="Rdd"
+      EntityUsage="Issue"
+      AliasName="RDD" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocumentNumber"
+      IsUpdateable="false"
+      IsNotNull="true"
+      DefaultValue="                    "
+      EntityAttrName="DocumentNumber"
+      EntityUsage="Issue"
+      AliasName="DOCUMENT_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Aac"
+      EntityAttrName="Aac"
+      EntityUsage="Customer"
+      AliasName="AAC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CustomerId"
+      IsNotNull="true"
+      EntityAttrName="CustomerId"
+      EntityUsage="Customer"
+      AliasName="CUSTOMER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BypassCount"
+      EntityAttrName="BypassCount"
+      EntityUsage="Picking"
+      AliasName="BYPASS_COUNT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PickQty"
+      EntityAttrName="PickQty"
+      EntityUsage="Picking"
+      AliasName="PICK_QTY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TimeOfPick"
+      EntityAttrName="TimeOfPick"
+      EntityUsage="Picking"
+      AliasName="TIME_OF_PICK" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="QtyPicked"
+      IsNotNull="true"
+      EntityAttrName="QtyPicked"
+      EntityUsage="Picking"
+      AliasName="QTY_PICKED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Pin"
+      IsUnique="true"
+      EntityAttrName="Pin"
+      EntityUsage="Picking"
+      AliasName="PIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AdviceCode"
+      EntityAttrName="AdviceCode"
+      EntityUsage="Issue"
+      AliasName="ADVICE_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Cc"
+      EntityAttrName="Cc"
+      EntityUsage="Issue"
+      AliasName="CC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DateBackOrdered"
+      EntityAttrName="DateBackOrdered"
+      EntityUsage="Issue"
+      AliasName="DATE_BACK_ORDERED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DistributionCode"
+      EntityAttrName="DistributionCode"
+      EntityUsage="Issue"
+      AliasName="DISTRIBUTION_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EroNumber"
+      EntityAttrName="EroNumber"
+      EntityUsage="Issue"
+      AliasName="ERO_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FundCode"
+      EntityAttrName="FundCode"
+      EntityUsage="Issue"
+      AliasName="FUND_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MediaAndStatusCode"
+      EntityAttrName="MediaAndStatusCode"
+      EntityUsage="Issue"
+      AliasName="MEDIA_AND_STATUS_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectCode"
+      EntityAttrName="ProjectCode"
+      EntityUsage="Issue"
+      AliasName="PROJECT_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RoutingIdFrom"
+      EntityAttrName="RoutingIdFrom"
+      EntityUsage="Issue"
+      AliasName="ROUTING_ID_FROM" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SignalCode"
+      EntityAttrName="SignalCode"
+      EntityUsage="Issue"
+      AliasName="SIGNAL_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SupplementaryAddress"
+      EntityAttrName="SupplementaryAddress"
+      EntityUsage="Issue"
+      AliasName="SUPPLEMENTARY_ADDRESS" >
+   </ViewAttribute>
+</ViewObject>

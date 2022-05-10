@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="YesNoView"
+  Version="11.1.2.64.36"
+  SelectList="YesNo.YESNO_ID, 
+       YesNo.YESNO_VALUE, 
+       YesNo.YESNO_FL"
+  FromList="STRATIS.YESNO_LU YesNo"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="mil.stratis.model.view.ref.YesNoView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <EntityUsage
+    Name="YesNo"
+    Entity="mil.stratis.model.entity.ref.YesNo"
+    ReadOnly="true"
+    DeleteParticipant="false"/>
+  <ViewAttribute
+    Name="YesnoId"
+    IsUpdateable="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="YesnoId"
+    EntityUsage="YesNo"
+    AliasName="YESNO_ID">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="YesnoValue"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    EntityAttrName="YesnoValue"
+    EntityUsage="YesNo"
+    AliasName="YESNO_VALUE"/>
+  <ViewAttribute
+    Name="YesnoFl"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    EntityAttrName="YesnoFl"
+    EntityUsage="YesNo"
+    AliasName="YESNO_FL"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="mil.stratis.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

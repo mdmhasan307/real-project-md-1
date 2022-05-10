@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="DividerSlots"
+   Version="11.1.2.64.36"
+   DBObjectType="table"
+   DBObjectName="DIVIDER_SLOTS"
+   AliasName="DividerSlots"
+   BindingStyle="OracleName"
+   UseGlueCode="false"
+   RowClass="mil.stratis.model.entity.loc.DividerSlotsImpl">
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Access" />
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_panelSchema" Value="table|alias" />
+   </DesignTime>
+   <Attribute
+      Name="DividerSlotsId"
+      ColumnName="DIVIDER_SLOTS_ID"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.DBSequence"
+      ColumnType="NUMBER"
+      TableName="DIVIDER_SLOTS"
+      PrimaryKey="true"
+      IsUpdateable="while_insert"
+      DefaultValue="@0"
+      Domain="oracle.jbo.domain.DBSequence"
+      RetrievedOnInsert="true">
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+         <Attr Name="_SequenceName" Value="DIVIDER_SLOTS_ID_SEQ"/>
+         <Attr Name="_SequenceStart" Value="1"/>
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="DividerTypeId"
+      IsUnique="true"
+      ColumnName="DIVIDER_TYPE_ID"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="DIVIDER_SLOTS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="RowNumber"
+      ColumnName="ROW_NUMBER"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="DIVIDER_SLOTS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ColumnNumber"
+      ColumnName="COLUMN_NUMBER"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="DIVIDER_SLOTS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Length"
+      ColumnName="LENGTH"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="DIVIDER_SLOTS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="SelectIndex"
+      IsUnique="true"
+      ColumnName="SELECT_INDEX"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="DIVIDER_SLOTS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Width"
+      ColumnName="WIDTH"
+      SQLType="NUMERIC"
+      Type="java.lang.String"
+      ColumnType="NUMBER"
+      TableName="DIVIDER_SLOTS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="DisplayPosition"
+      IsUnique="true"
+      Precision="5"
+      ColumnName="DISPLAY_POSITION"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="DIVIDER_SLOTS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="5" />
+      </DesignTime>
+   </Attribute>
+   <Key
+      Name="DividerSlotsChk1" >
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="DIVIDER_SLOTS_CHK1"/>
+         <Attr Name="_checkCondition"
+            Value="ROW_NUMBER >= 0 AND (COLUMN_NUMBER >= 0 AND SELECT_INDEX >= 0) AND LENGTH >= 0 AND WIDTH >= 0"/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="DividerSlotsPk"
+      PrimaryKey="true" >
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="DIVIDER_SLOTS_PK"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.loc.DividerSlots.DividerSlotsId" />
+      </AttrArray>
+   </Key>
+   <Key
+      Name="DividerSlotsUk1" >
+      <DesignTime>
+         <Attr Name="_isUnique" Value="true"/>
+         <Attr Name="_DBObjectName" Value="DIVIDER_SLOTS_UK1"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.loc.DividerSlots.DividerTypeId" />
+         <Item Value="mil.stratis.model.entity.loc.DividerSlots.SelectIndex" />
+      </AttrArray>
+   </Key>
+   <Key
+      Name="DividerSlotsUk2" >
+      <DesignTime>
+         <Attr Name="_isUnique" Value="true"/>
+         <Attr Name="_DBObjectName" Value="DIVIDER_SLOTS_UK2"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.loc.DividerSlots.DividerTypeId" />
+         <Item Value="mil.stratis.model.entity.loc.DividerSlots.DisplayPosition" />
+      </AttrArray>
+   </Key>
+   <Key
+      Name="DividerSlotsDividerTypFk1" >
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="DIVIDER_TYPE_PK"/>
+         <Attr Name="_isForeign" Value="true"/>
+         <Attr Name="_DBObjectName" Value="DIVIDER_SLOTS_DIVIDER_TYP_FK1"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.loc.DividerSlots.DividerTypeId" />
+      </AttrArray>
+   </Key>
+</Entity>
+

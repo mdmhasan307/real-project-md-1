@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="Admin_WarehouseDividerSetupPageDef" Package="mil.stratis.view.pageDefs" EnableTokenValidation="false">
+  <parameters/>
+  <executables>
+    <iterator id="DividerTypeView1Iterator" RangeSize="10" StateValidation="false"
+              Binds="Root.AppModule1.DividerTypeView1" DataControl="StratisRootServiceDataControl" Refresh="ifNeeded"
+              ChangeEventPolicy="none"/>
+    <iterator id="DividerSlotsView1Iterator" RangeSize="10" Binds="Root.AppModule1.DividerSlotsView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="DividerSlotsView2Iterator" RangeSize="10" Binds="Root.AppModule1.DividerSlotsView2"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="DividerTypeView1" IterBinding="DividerTypeView1Iterator">
+      <AttrNames>
+        <Item Value="DividerTypeId"/>
+        <Item Value="Name"/>
+      </AttrNames>
+    </table>
+    <table id="DividerSlotsView1" IterBinding="DividerSlotsView1Iterator">
+      <AttrNames>
+        <Item Value="DividerSlotsId"/>
+        <Item Value="DividerTypeId"/>
+        <Item Value="RowNumber"/>
+        <Item Value="ColumnNumber"/>
+        <Item Value="Length"/>
+        <Item Value="SelectIndex"/>
+        <Item Value="Width"/>
+        <Item Value="DisplayPosition"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="Name" IterBinding="DividerTypeView1Iterator">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="DividerTypeView1DividerTypeId" IterBinding="DividerTypeView1Iterator">
+      <AttrNames>
+        <Item Value="DividerTypeId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="RowNumber" IterBinding="DividerSlotsView1Iterator">
+      <AttrNames>
+        <Item Value="RowNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ColumnNumber" IterBinding="DividerSlotsView1Iterator">
+      <AttrNames>
+        <Item Value="ColumnNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Length" IterBinding="DividerSlotsView1Iterator">
+      <AttrNames>
+        <Item Value="Length"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Width" IterBinding="DividerSlotsView1Iterator">
+      <AttrNames>
+        <Item Value="Width"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="SelectIndex" IterBinding="DividerSlotsView1Iterator">
+      <AttrNames>
+        <Item Value="SelectIndex"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="DividerSlotsView1DisplayPosition" IterBinding="DividerSlotsView1Iterator">
+      <AttrNames>
+        <Item Value="DisplayPosition"/>
+      </AttrNames>
+    </attributeValues>
+    <table id="DividerTypeView1DividerSlotsView2" IterBinding="DividerSlotsView2Iterator">
+      <AttrNames>
+        <Item Value="DividerSlotsId"/>
+        <Item Value="DividerTypeId"/>
+        <Item Value="RowNumber"/>
+        <Item Value="ColumnNumber"/>
+        <Item Value="Length"/>
+        <Item Value="SelectIndex"/>
+        <Item Value="Width"/>
+        <Item Value="DisplayPosition"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="RowNumber1" IterBinding="DividerSlotsView2Iterator">
+      <AttrNames>
+        <Item Value="RowNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ColumnNumber1" IterBinding="DividerSlotsView2Iterator">
+      <AttrNames>
+        <Item Value="ColumnNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Length1" IterBinding="DividerSlotsView2Iterator">
+      <AttrNames>
+        <Item Value="Length"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Width1" IterBinding="DividerSlotsView2Iterator">
+      <AttrNames>
+        <Item Value="Width"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="SelectIndex1" IterBinding="DividerSlotsView2Iterator">
+      <AttrNames>
+        <Item Value="SelectIndex"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="DividerSlotsView2DisplayPosition" IterBinding="DividerSlotsView2Iterator">
+      <AttrNames>
+        <Item Value="DisplayPosition"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="DividerTypeView1Iterator" id="CreateInsert"
+            InstanceName="StratisRootServiceDataControl.Root.AppModule1.DividerTypeView1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="ExecuteDividerType" RequiresUpdateModel="true" Action="iteratorExecute"
+            IterBinding="DividerTypeView1Iterator"/>
+  </bindings>
+</pageDefinition>

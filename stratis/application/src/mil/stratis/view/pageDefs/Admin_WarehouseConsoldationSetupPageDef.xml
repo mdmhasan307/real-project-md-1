@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="Admin_WarehouseConsoldationSetupPageDef" Package="mil.stratis.view.pageDefs" EnableTokenValidation="false">
+  <parameters/>
+  <executables>
+    <iterator id="PackingStationTableView1Iterator_Consolidation" RangeSize="10"
+              Binds="Root.WarehouseSetup1.PackingStationTableView1Consolidation" StateValidation="false"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <invokeAction id="refreshEquipList" Binds="ExecuteWithParams" Refresh="ifNeeded"/>
+    <iterator id="EquipTableConsolidationView1Iterator" RangeSize="-1"
+              Binds="Root.WarehouseSetup1.EquipTableConsolidationView1" DataControl="StratisRootServiceDataControl"
+              Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="PackingStationTable1" IterBinding="PackingStationTableView1Iterator_Consolidation">
+      <AttrNames>
+        <Item Value="PackingStationId"/>
+        <Item Value="Levels"/>
+        <Item Value="Columns"/>
+        <Item Value="TotalIssues"/>
+        <Item Value="NumberOfSlotsInUse"/>
+        <Item Value="EquipmentNumber"/>
+        <Item Value="Name"/>
+        <Item Value="EquipmentNumber1"/>
+        <Item Value="Description"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="PackingStationId" IterBinding="PackingStationTableView1Iterator_Consolidation">
+      <AttrNames>
+        <Item Value="PackingStationId"/>
+      </AttrNames>
+    </attributeValues>
+    <list id="equipList" IterBinding="PackingStationTableView1Iterator_Consolidation" StaticList="false"
+          ListOperMode="setAttribute" ListIter="EquipTableConsolidationView1Iterator">
+      <AttrNames>
+        <Item Value="EquipmentNumber"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="EquipmentNumber"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Name"/>
+        <Item Value="Description"/>
+      </ListDisplayAttrNames>
+    </list>
+    <attributeValues id="Levels1" IterBinding="PackingStationTableView1Iterator_Consolidation">
+      <AttrNames>
+        <Item Value="Levels"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Columns1" IterBinding="PackingStationTableView1Iterator_Consolidation">
+      <AttrNames>
+        <Item Value="Columns"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ConsolidationTriwallName" IterBinding="PackingStationTableView1Iterator_Consolidation">
+      <AttrNames>
+        <Item Value="Name"/>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="CreateInsert" IterBinding="PackingStationTableView1Iterator_Consolidation"
+            InstanceName="StratisRootServiceDataControl.Root.WarehouseSetup1.PackingStationTableView1Consolidation"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="EquipTableConsolidationView1Iterator" id="ExecuteWithParams"
+            InstanceName="StratisRootServiceDataControl.Root.WarehouseSetup1.EquipTableConsolidationView1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="executeWithParams">
+      <NamedData NDName="EQUIPMENT_NUMBER" NDValue="${bindings.PackingStationTable1.EquipmentNumber}"
+                 NDType="oracle.jbo.domain.Number"/>
+    </action>
+    <action id="ExecuteConsolidation" RequiresUpdateModel="true" Action="iteratorExecute"
+            IterBinding="PackingStationTableView1Iterator_Consolidation"/>
+  </bindings>
+</pageDefinition>

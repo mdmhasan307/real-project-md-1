@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="WalkThruQueue"
+  Version="11.1.2.64.36"
+  DBObjectType="SYNONYM"
+  DBObjectName="WALKTHRU_QUEUE"
+  AliasName="WALKTHRU_QUEUE"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <Attribute
+    Name="DocumentNumber"
+    Precision="20"
+    Scale="0"
+    ColumnName="DOCUMENT_NUMBER"
+    SQLType="VARCHAR"
+    Type="oracle.jbo.domain.DBSequence"
+    ColumnType="VARCHAR2"
+    TableName="WALKTHRU_QUEUE"
+    PrimaryKey="true"
+    IsUpdateable="while_insert"
+    Domain="oracle.jbo.domain.DBSequence"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_SequenceName" Value="DOCUMENT_NUMBER_SEQ"/>
+      <Attr Name="_SequenceStart" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Status"
+    Precision="20"
+    ColumnName="STATUS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="WALKTHRU_QUEUE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CreatedBy"
+    Precision="6"
+    Scale="0"
+    ColumnName="CREATED_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="WALKTHRU_QUEUE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="6"/>
+    </DesignTime>
+  </Attribute>
+  <Key
+    Name="WalkThruPrimaryKey"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="WALKTHRU_PRIMARY_KEY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.walkThru.WalkThruQueue.DocumentNumber"/>
+    </AttrArray>
+  </Key>
+</Entity>

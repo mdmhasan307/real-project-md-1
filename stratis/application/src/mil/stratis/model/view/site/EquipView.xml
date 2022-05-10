@@ -1,0 +1,198 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="EquipView"
+   Version="11.1.2.64.36"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   ComponentClass="mil.stratis.model.view.site.EquipViewImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Full"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+      <Attr Name="_isExpertMode" Value="true"/>
+   </DesignTime>
+   <ViewAccessor
+      Name="EquipView1"
+      ViewObjectName="mil.stratis.model.view.site.EquipView"
+      RowLevelBinds="true"/>
+   <SQLQuery><![CDATA[SELECT Equip.COM_PORT_EQUIPMENT_ID, 
+       Equip.COM_PORT_PRINTER_ID, 
+       Equip.CURRENT_USER_ID, 
+       Equip.DESCRIPTION, 
+       Equip.EQUIPMENT_NUMBER, 
+       Equip.NAME, 
+       Equip.WAC_ID, 
+       Equip.WAREHOUSE_ID,
+Equip.HAS_CUBISCAN,
+Equip.SHIPPING_AREA,
+       Warehouse.BUILDING, 
+       Warehouse.WAREHOUSE_ID AS WAREHOUSE_ID1, 
+       Wac.WAC_NUMBER, 
+       Wac.WAC_ID AS WAC_ID1,
+       ComPort.COM_NAME,
+Equip.Printer_Name as COM_NAME1, 
+Equip.PACKING_GROUP, Equip.Printer_Name
+FROM EQUIP Equip left join WAC Wac on Wac.WAC_ID = Equip.WAC_ID left join WAREHOUSE Warehouse on Warehouse.WAREHOUSE_ID = Equip.WAREHOUSE_ID left join  com_port ComPort on ComPort.com_port_id = Equip.COM_PORT_EQUIPMENT_ID 
+WHERE Equip.Name <> 'Dummy' and Equip.Name <> 'DUMMY']]></SQLQuery>
+   <EntityUsage
+      Name="Equip"
+      Entity="mil.stratis.model.entity.site.Equip" >
+   </EntityUsage>
+   <EntityUsage
+      Name="Wac"
+      Entity="mil.stratis.model.entity.loc.Wac"
+      SourceUsage="mil.stratis.model.view.site.EquipView.Equip"
+      ReadOnly="true"
+      Reference="true" >
+   </EntityUsage>
+   <EntityUsage
+      Name="Warehouse"
+      Entity="mil.stratis.model.entity.loc.Warehouse"
+      Association="mil.stratis.model.entity.associations.WacWarehouseFkAssoc"
+      AssociationEnd="mil.stratis.model.entity.associations.WacWarehouseFkAssoc.Warehouse"
+      SourceUsage="mil.stratis.model.view.site.EquipView.Wac"
+      ReadOnly="true"
+      Reference="true" />
+   <EntityUsage
+      Name="ComPort"
+      Entity="mil.stratis.model.entity.site.ComPort"
+      Association="mil.stratis.model.entity.associations.ComEquipFkAssoc"
+      AssociationEnd="mil.stratis.model.entity.associations.ComEquipFkAssoc.ComPort1"
+      SourceUsage="mil.stratis.model.view.site.EquipView.Equip"
+      ReadOnly="true"
+      Reference="true"
+      DeleteParticipant="false"/>
+   <ViewAttribute
+      Name="ComPortEquipmentId"
+      EntityAttrName="ComPortEquipmentId"
+      EntityUsage="Equip"
+      AliasName="COM_PORT_EQUIPMENT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ComPortPrinterId"
+      EntityAttrName="ComPortPrinterId"
+      EntityUsage="Equip"
+      AliasName="COM_PORT_PRINTER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CurrentUserId"
+      EntityAttrName="CurrentUserId"
+      EntityUsage="Equip"
+      AliasName="CURRENT_USER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Description"
+      EntityAttrName="Description"
+      EntityUsage="Equip"
+      AliasName="DESCRIPTION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EquipmentNumber"
+      EntityAttrName="EquipmentNumber"
+      EntityUsage="Equip"
+      AliasName="EQUIPMENT_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Name"
+      EntityAttrName="Name"
+      EntityUsage="Equip"
+      AliasName="NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WacId"
+      EntityAttrName="WacId"
+      EntityUsage="Equip"
+      AliasName="WAC_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WarehouseId"
+      IsNotNull="true"
+      EntityAttrName="WarehouseId"
+      EntityUsage="Equip"
+      AliasName="WAREHOUSE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="HasCubiscan"
+      EntityAttrName="HasCubiscan"
+      EntityUsage="Equip"
+      AliasName="HAS_CUBISCAN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ShippingArea"
+      EntityAttrName="ShippingArea"
+      EntityUsage="Equip"
+      AliasName="SHIPPING_AREA"/>
+   <ViewAttribute
+      Name="Building"
+      IsUpdateable="false"
+      IsNotNull="true"
+      EntityAttrName="Building"
+      EntityUsage="Warehouse"
+      AliasName="BUILDING" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WarehouseId1"
+      IsUpdateable="false"
+      EntityAttrName="WarehouseId"
+      EntityUsage="Warehouse"
+      AliasName="WAREHOUSE_ID1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WacNumber"
+      IsUpdateable="false"
+      EntityAttrName="WacNumber"
+      EntityUsage="Wac"
+      AliasName="WAC_NUMBER"/>
+   <ViewAttribute
+      Name="WacId1"
+      IsUpdateable="false"
+      EntityAttrName="WacId"
+      EntityUsage="Wac"
+      AliasName="WAC_ID1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ComName"
+      IsUpdateable="false"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="COM_NAME"
+      Expression="COM_NAME"
+      SQLType="VARCHAR">
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20"/>
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ComName2_1"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Precision="255"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="COM_NAME1"
+      Expression="COM_NAME1"
+      SQLType="VARCHAR">
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="255"/>
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PackingGroup"
+      EntityAttrName="PackingGroup"
+      EntityUsage="Equip"
+      AliasName="PACKING_GROUP"/>
+   <ViewAttribute
+      Name="PrinterName"
+      PrecisionRule="true"
+      EntityAttrName="PrinterName"
+      EntityUsage="Equip"
+      AliasName="PRINTER_NAME"/>
+</ViewObject>

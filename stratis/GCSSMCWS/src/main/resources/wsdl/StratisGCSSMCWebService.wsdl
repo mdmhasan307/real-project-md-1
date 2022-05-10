@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<WL5G3N0:definitions xmlns="" name="StratisGCSSMCWebService" targetNamespace="http://gcssmcws/StratisGCSSMCWebServiceServer.wsdl"
+                     xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/" xmlns:WL5G3N1="http://gcssmcws/StratisGCSSMCWebServiceServer.wsdl"
+                     xmlns:WL5G3N2="http://schemas.xmlsoap.org/wsdl/soap/">
+  <WL5G3N0:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                targetNamespace="http://gcssmcws.server.webservice/types/" elementFormDefault="qualified">
+      <xsd:import namespace="http://gcssmcws/StratisGCSSMCWebServiceServer.wsdl"/>
+      <xsd:complexType name="StratisXmlStatus">
+        <xsd:sequence>
+          <xsd:element name="interfaceId" type="string" nillable="true"/>
+          <xsd:element name="errorMessage" type="string" nillable="true"/>
+          <xsd:element name="timestamp" type="string" nillable="true"/>
+          <xsd:element name="errorCode" type="string" nillable="true"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://gcssmcws.server.webservice/types/"
+                xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                targetNamespace="http://gcssmcws/StratisGCSSMCWebServiceServer.wsdl" elementFormDefault="qualified">
+      <xsd:import namespace="http://gcssmcws.server.webservice/types/"/>
+      <xsd:element name="importDASFCompressedElement">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="DASFRecord" type="base64Binary" nillable="true"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="importDASFCompressedResponseElement">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="result" type="ns1:StratisXmlStatus" nillable="true"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="importGABFCompressedElement">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="GABFRecord" type="base64Binary" nillable="true"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="importGABFCompressedResponseElement">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="result" type="ns1:StratisXmlStatus" nillable="true"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="importMATSandGBOFCompressedElement">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="MATSandGBOFRecord" type="base64Binary" nillable="true"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="importMATSandGBOFCompressedResponseElement">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="result" type="ns1:StratisXmlStatus" nillable="true"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="StratisGCSSMCWebService_importDASFCompressed">
+    <WL5G3N0:part name="parameters" element="WL5G3N1:importDASFCompressedElement"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="StratisGCSSMCWebService_importDASFCompressedResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N1:importDASFCompressedResponseElement"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="StratisGCSSMCWebService_importGABFCompressed">
+    <WL5G3N0:part name="parameters" element="WL5G3N1:importGABFCompressedElement"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="StratisGCSSMCWebService_importGABFCompressedResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N1:importGABFCompressedResponseElement"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="StratisGCSSMCWebService_importMATSandGBOFCompressed">
+    <WL5G3N0:part name="parameters" element="WL5G3N1:importMATSandGBOFCompressedElement"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="StratisGCSSMCWebService_importMATSandGBOFCompressedResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N1:importMATSandGBOFCompressedResponseElement"/>
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="StratisGCSSMCWebService">
+    <WL5G3N0:operation name="importDASFCompressed">
+      <WL5G3N0:input message="WL5G3N1:StratisGCSSMCWebService_importDASFCompressed"/>
+      <WL5G3N0:output message="WL5G3N1:StratisGCSSMCWebService_importDASFCompressedResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="importGABFCompressed">
+      <WL5G3N0:input message="WL5G3N1:StratisGCSSMCWebService_importGABFCompressed"/>
+      <WL5G3N0:output message="WL5G3N1:StratisGCSSMCWebService_importGABFCompressedResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="importMATSandGBOFCompressed">
+      <WL5G3N0:input message="WL5G3N1:StratisGCSSMCWebService_importMATSandGBOFCompressed"/>
+      <WL5G3N0:output message="WL5G3N1:StratisGCSSMCWebService_importMATSandGBOFCompressedResponse"/>
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="StratisGCSSMCWebServiceSoapHttp" type="WL5G3N1:StratisGCSSMCWebService">
+    <WL5G3N2:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsp:PolicyReference xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+                         URI="#stratisPolicy"/>
+    <WL5G3N0:operation name="importDASFCompressed">
+      <WL5G3N2:operation soapAction="http://gcssmcws/StratisGCSSMCWebServiceServer.wsdl/importDASFCompressed"/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="importGABFCompressed">
+      <WL5G3N2:operation soapAction="http://gcssmcws/StratisGCSSMCWebServiceServer.wsdl/importGABFCompressed"/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="importMATSandGBOFCompressed">
+      <WL5G3N2:operation soapAction="http://gcssmcws/StratisGCSSMCWebServiceServer.wsdl/importMATSandGBOFCompressed"/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="StratisGCSSMCWebService">
+    <WL5G3N0:port name="StratisGCSSMCWebServiceSoapHttpPort" binding="WL5G3N1:StratisGCSSMCWebServiceSoapHttp">
+      <WL5G3N2:address location="http://localhost:7101/Stratis-GCSSMCWS-context-root/StratisGCSSMCWebServiceImplService"/>
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+
+  <wsp:Policy wsu:Id="stratisPolicy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+              xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+    <sp:AsymmetricBinding>
+      <wsp:Policy>
+        <sp:InitiatorToken>
+          <wsp:Policy>
+            <sp:X509Token sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/Always">
+              <wsp:Policy>
+                <sp:WssX509V3Token10/>
+              </wsp:Policy>
+            </sp:X509Token>
+          </wsp:Policy>
+        </sp:InitiatorToken>
+        <sp:RecipientToken>
+          <wsp:Policy>
+            <sp:X509Token sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/Always">
+              <wsp:Policy>
+                <sp:WssX509V3Token10/>
+              </wsp:Policy>
+            </sp:X509Token>
+          </wsp:Policy>
+        </sp:RecipientToken>
+        <sp:AlgorithmSuite>
+          <wsp:Policy>
+            <sp:Basic128/>
+          </wsp:Policy>
+        </sp:AlgorithmSuite>
+        <sp:Layout>
+          <wsp:Policy>
+            <sp:Lax/>
+          </wsp:Policy>
+        </sp:Layout>
+        <sp:IncludeTimestamp/>
+        <sp:ProtectTokens/>
+        <sp:OnlySignEntireHeadersAndBody/>
+      </wsp:Policy>
+    </sp:AsymmetricBinding>
+    <sp:SignedParts>
+      <sp:Body/>
+      <sp:Header Name="Timestamp" Namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"/>
+    </sp:SignedParts>
+    <sp:Wss10>
+      <wsp:Policy/>
+    </sp:Wss10>
+    <wsss:KeyStore wspp:visibility="private"
+                   callbackHandler="gcssmcws.stratisgcssmcwebserviceserver.KeystorePasswordCallback"
+                   xmlns:wspp="http://java.sun.com/xml/ns/wsit/policy"
+                   xmlns:wsss="http://schemas.sun.com/2006/03/wss/server"/>
+    <wsss:TrustStore wspp:visibility="private"
+                     callbackHandler="gcssmcws.stratisgcssmcwebserviceserver.TruststorePasswordCallback"
+                     xmlns:wspp="http://java.sun.com/xml/ns/wsit/policy"
+                     xmlns:wsss="http://schemas.sun.com/2006/03/wss/server"/>
+  </wsp:Policy>
+</WL5G3N0:definitions>

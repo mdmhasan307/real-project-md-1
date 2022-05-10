@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Shipping_HomePageDef" ControllerClass="#{shippingHomeBean}"
+                Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="UnprocessBarcodeRptView1Iterator" RangeSize="-1"
+              Binds="Root.ShippingService1.UnprocessBarcodeRptView1" StateValidation="false"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <invokeAction id="refreshUnprocessed" Refresh="ifNeeded" Binds="ExecuteUnprocessedWithParams"/>
+    <iterator id="UnmanifestRptView1Iterator" RangeSize="10" Binds="Root.ShippingService1.UnmanifestRptView1"
+              StateValidation="false" DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <invokeAction id="refreshUnmanifested" Refresh="ifNeeded" Binds="ExecuteUnmanifestedWithParams"/>
+    <iterator id="ManifestedTodayRptView1Iterator" RangeSize="10" Binds="Root.ShippingService1.ManifestedTodayRptView1"
+              StateValidation="false" DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <invokeAction id="refreshManifestedToday" Refresh="ifNeeded" Binds="ExecuteManifestedWithParams"/>
+  </executables>
+  <bindings>
+    <table id="UnprocessBarcodeRptView1" IterBinding="UnprocessBarcodeRptView1Iterator">
+      <AttrNames>
+        <Item Value="PackingConsolidationId"/>
+        <Item Value="ConsolidationBarcode"/>
+        <Item Value="Aac"/>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </table>
+    <action id="ExecuteUnprocessed" RequiresUpdateModel="true" Action="iteratorExecute"
+            IterBinding="UnprocessBarcodeRptView1Iterator"/>
+    <table id="UnmanifestRptView1" IterBinding="UnmanifestRptView1Iterator">
+      <AttrNames>
+        <Item Value="Aac"/>
+        <Item Value="FloorLocation"/>
+      </AttrNames>
+    </table>
+    <table id="ManifestedTodayRptView1" IterBinding="ManifestedTodayRptView1Iterator">
+      <AttrNames>
+        <Item Value="Manifest"/>
+        <Item Value="Aac"/>
+        <Item Value="FloorLocation"/>
+      </AttrNames>
+    </table>
+    <action id="ExecuteUnprocessedWithParams" IterBinding="UnprocessBarcodeRptView1Iterator"
+            InstanceName="StratisRootServiceDataControl.Root.ShippingService1.UnprocessBarcodeRptView1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="executeWithParams">
+      <NamedData NDName="EQUIPMENT_NUMBER" NDType="java.lang.String" NDValue="${userbean.workstationId}"/>
+    </action>
+    <action id="ExecuteUnmanifestedWithParams" IterBinding="UnmanifestRptView1Iterator"
+            InstanceName="StratisRootServiceDataControl.Root.ShippingService1.UnmanifestedRptView1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="executeWithParams">
+      <NamedData NDName="EQUIPMENT_NUMBER" NDType="java.lang.String" NDValue="${userbean.workstationId}"/>
+    </action>
+    <action id="ExecuteManifestedWithParams" IterBinding="ManifestedTodayRptView1Iterator"
+            InstanceName="StratisRootServiceDataControl.Root.ShippingService1.ManifestedTodayRptView1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="executeWithParams">
+      <NamedData NDName="EQUIPMENT_NUMBER" NDType="java.lang.String" NDValue="${userbean.workstationId}"/>
+    </action>
+  </bindings>
+</pageDefinition>

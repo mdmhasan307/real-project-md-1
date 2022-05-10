@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:stratis="taglib.mil.usmc.stratis">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="2"/>
+    <jsp:setProperty name="userbean" property="selected3" value="4"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="Admin_WarehouseChangeCC"/>
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session" />
+    <jsp:setProperty name="logBean" property="page" value="Change CC"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="185" bottomHeight="25" endWidth="6">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6"/>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGroupLayout>
+                                <!--<af:switcher id="switchPanels" facetName="#{WarehouseCCBacking.serialFlag}">
+                                    <f:facet name="false">-->
+                                <af:panelBox text="Warehouse Management - Change CC" id="changeCCMainPanelBox"
+                                             showDisclosure="false">
+                                    <af:separator/>
+                                    <af:toolbar inlineStyle="padding:2px;">
+                                        <af:inputText value="#{bindings.byLocation.inputValue}"
+                                                      required="#{bindings.byLocation.mandatory}"
+                                                      contentStyle="text-transform:uppercase;" columns="10"
+                                                      maximumLength="9" id="filterLocation" label="Location">
+                                            <f:validator binding="#{bindings.byLocation.validator}"/>
+                                        </af:inputText>
+                                        <af:spacer width="10"/>
+                                        <af:inputText value="#{bindings.byNIIN.inputValue}"
+                                                      required="#{bindings.byNIIN.mandatory}"
+                                                      contentStyle="text-transform:uppercase;" columns="10"
+                                                      maximumLength="9" id="filterNiin" label="NIIN">
+                                            <f:validator binding="#{bindings.byNIIN.validator}"/>
+                                        </af:inputText>
+                                        <af:spacer width="10"/>
+                                        <af:inputText value="#{bindings.byNomenclature.inputValue}"
+                                                      required="#{bindings.byNomenclature.mandatory}"
+                                                      contentStyle="text-transform:uppercase;" columns="20"
+                                                      maximumLength="100" label="Nomenclature"
+                                                      id="filterNomenclature">
+                                            <f:validator binding="#{bindings.byNomenclature.validator}"/>
+                                        </af:inputText>
+                                        <af:spacer width="10"/>
+                                        <af:button actionListener="#{bindings.FilterNIINCC.execute}"
+                                                   text="Filter" id="filterButton1"
+                                                   disabled="#{!bindings.FilterNIINCC.enabled}"
+                                                   partialSubmit="false">
+                                            <af:setActionListener from="#{true}"
+                                                                  to="#{WarehouseCCBacking.resetFlag}"/>
+                                        </af:button>
+                                    </af:toolbar>
+                                    <af:table value="#{bindings['NiinLoc_LocationView1'].collectionModel}"
+                                              summary="NIIN list" var="row" varStatus="vs"
+                                              rows="#{bindings['NiinLoc_LocationView1'].rangeSize}"
+                                              first="#{bindings['NiinLoc_LocationView1'].rangeStart}"
+                                              emptyText="#{bindings['NiinLoc_LocationView1'].viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                              selectionListener="#{bindings['NiinLoc_LocationView1'].collectionModel.makeCurrent}"
+                                              id="LocationTable"
+                                              selectedRowKeys="#{bindings['NiinLoc_LocationView1'].collectionModel.selectedRow}"
+                                              rowSelection="single" styleClass="AFStretchWidth"
+                                              columnStretching="last">
+                                        <af:column rowHeader="true" id="c1" width="40">
+                                            <af:outputText value="#{vs.index}"/>
+                                        </af:column>
+                                        <af:column sortProperty="Niin" sortable="true" headerText="NIIN">
+                                            <af:outputText value="#{row.Niin}"/>
+                                        </af:column>
+                                        <af:column sortProperty="Nomenclature" sortable="true"
+                                                   headerText="Nomenclature">
+                                            <af:outputText value="#{row.Nomenclature}"/>
+                                        </af:column>
+                                        <af:column sortProperty="LocationLabel" sortable="true"
+                                                   headerText="Location">
+                                            <af:outputText value="#{row.LocationLabel}"/>
+                                        </af:column>
+                                        <af:column sortProperty="Qty" sortable="false"
+                                                   headerText="#{bindings['NiinLoc_LocationView1'].labels.Qty}">
+                                            <af:outputText value="#{row.Qty}">
+                                                <f:convertNumber groupingUsed="false"
+                                                                 pattern="#{bindings['NiinLoc_LocationView1'].formats.Qty}"/>
+                                            </af:outputText>
+                                        </af:column>
+                                        <af:column sortProperty="ExpirationDate" sortable="false"
+                                                   headerText="Expiration">
+                                            <stratis:adfDateFormatter
+                                                    value="#{row.ExpirationDate}"
+                                                    shiftZone="false"/>
+                                        </af:column>
+                                        <af:column sortProperty="DateOfManufacture" sortable="false"
+                                                   headerText="DOM">
+                                            <stratis:adfDateFormatter
+                                                    value="#{row.DateOfManufacture}"
+                                                    shiftZone="false"/>
+                                        </af:column>
+                                        <af:column sortProperty="Cc" sortable="true" headerText="CC">
+                                            <af:outputText value="#{row.Cc}"/>
+                                        </af:column>
+                                        <af:column sortProperty="LastInvDate" sortable="false"
+                                                   headerText="Last Inventory">
+                                            <stratis:adfDateFormatter
+                                                    value="#{row.LastInvDate}"
+                                                    pattern="${userbean.dateWithTimeFormatPattern}"/>
+                                        </af:column>
+                                        <f:facet name="footer"/>
+                                    </af:table>
+                                    <!-- -->
+                                    <af:spacer height="10"/>
+                                    <af:panelGroupLayout id="panelGroup1" layout="horizontal">
+                                        <af:outputLabel id="lblStage" value="Change Condition Code to:"
+                                                        inlineStyle="font-size:12pt"/>
+                                        <af:spacer width="10"/>
+                                        <af:selectOneChoice id="ccSelectOne" label=""
+                                                            binding="#{WarehouseCCBacking.ccupdatetext}">
+                                            <af:selectItem label="A" value="A"/>
+                                            <af:selectItem label="F" value="F"/>
+                                        </af:selectOneChoice>
+                                        <af:spacer width="10"/>
+                                        <af:button text="Update" id="UpdateCCButton" partialSubmit="false"
+                                                   actionListener="#{WarehouseCCBacking.changeWarehouseCC}">
+                                            <af:setActionListener
+                                                    from="#{bindings.SerialControlFlag.inputValue == 'Y' or bindings.LotControlFlag.inputValue == 'Y' ? true : false}"
+                                                    to="#{WarehouseCCBacking.serialFlag}"/>
+                                            <af:setActionListener
+                                                    from="#{bindings.SerialControlFlag.inputValue == 'Y' or bindings.LotControlFlag.inputValue == 'Y' ? true : false}"
+                                                    to="#{WarehouseCCBacking.serialUpdateFlag}"/>
+                                        </af:button>
+                                    </af:panelGroupLayout>
+                                </af:panelBox>
+                            </af:panelGroupLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

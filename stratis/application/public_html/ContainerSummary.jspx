@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+  <jsp:output omit-xml-declaration="true" doctype-root-element="HTML"
+              doctype-system="http://www.w3.org/TR/html4/loose.dtd"
+              doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN"/>
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <jsp:useBean id="backing_reprint" type="mil.stratis.view.print.ReprintBacking"
+               scope="request" beanName="mil.stratis.view.print.ReprintBacking"/>
+  <jsp:scriptlet>
+        String barcode = request.getParameter("barcode");
+        String no_copies = request.getParameter("nocopies");
+        if (barcode != null)
+        {
+            if (no_copies == null) no_copies = "1";
+            if (no_copies.equals("")) no_copies = "1";
+            out.print(backing_reprint.printContainerSummary(barcode, no_copies));
+        }
+    </jsp:scriptlet>
+</jsp:root>

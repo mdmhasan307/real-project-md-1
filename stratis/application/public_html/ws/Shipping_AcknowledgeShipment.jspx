@@ -1,0 +1,178 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:stratis="taglib.mil.usmc.stratis">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" scope="session" class="mil.stratis.view.user.UserInfo"/>
+    <jsp:setProperty name="userbean" property="selected" value="5"/>
+    <jsp:setProperty name="userbean" property="selected2" value="3"/>
+    <f:view>
+        <af:document title="STRATIS Shipping - Acknowledge Shipment" id="d1">
+            <af:form id="subLDCONForm">
+                <af:panelStretchLayout id="psl1" startWidth="24" topHeight="150" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/ws/WS_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGroupLayout>
+                                <af:panelHeader text="Acknowledge Shipment"/>
+                                <af:outputText value="&lt;br>" escape="false"/>
+                                <!-- inner table -->
+                                <af:panelBox text="Acknowledge Shipment">
+                                    <af:outputText value="&lt;br>" escape="false"/>
+
+                                    <af:panelFormLayout id="searchPanelForm">
+                                        <af:panelGroupLayout layout="horizontal"
+                                                             id="SearchPanel">
+                                            <af:panelGroupLayout id="grpLDCON"
+                                                                 layout="vertical">
+                                                <af:outputLabel id="lblLDCONSearch"
+                                                                value="LD CON"/>
+                                                <af:inputText id="txtLDCON"
+                                                              value="#{bindings.Manifest.inputValue}"
+                                                              columns="#{bindings.Manifest.displayWidth}"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              maximumLength="9"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="10"/>
+                                            <af:panelGroupLayout id="grpAAC" layout="vertical">
+                                                <af:outputLabel id="lblAacSearch"
+                                                                value="Customer (AAC)"/>
+                                                <af:inputText id="txtAAC"
+                                                              value="#{bindings.Aac.inputValue}"
+                                                              columns="#{bindings.Aac.displayWidth}"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              maximumLength="6"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="15"/>
+                                            <af:panelGroupLayout id="grpButtonBar1"
+                                                                 layout="vertical">
+                                                <af:toolbar>
+                                                    <af:button id="searchButton"
+                                                               actionListener="#{bindings.ExecuteWithParams.execute}"
+                                                               text="Search"
+                                                               disabled="#{!bindings.ExecuteWithParams.enabled}"
+                                                               partialTriggers="acknowledgeTable"
+                                                               partialSubmit="false">
+                                                        <!--<af:clientListener method="javascript:allCaps()" type="click" />-->
+                                                    </af:button>
+                                                </af:toolbar>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                    </af:panelFormLayout>
+                                    <af:outputText value="&lt;br>" escape="false"/>
+                                    <!-- list of manifest area -->
+                                    <af:outputText value="&lt;br>" escape="false"/>
+                                    <!--<af:panelGroupLayout layout = "horizontal">
+                                    <af:link actionListener="#{backing_shipping.selectAll}"
+                                                            text="Select All" id="cmdSelectAll" />
+                                    <af:spacer id = "spaceSelect" width="10" />
+                                    <af:link actionListener="#{backing_shipping.selectNone}"
+                                        text="Select None" id="cmdSelectNone" />
+                                    </af:panelGroupLayout>-->
+                                    <af:table value="#{bindings.UndeliveredLDCONList.collectionModel}"
+                                              var="row" rows="10"
+                                              first="#{bindings.UndeliveredLDCONList.rangeStart}"
+                                              emptyText="#{bindings.UndeliveredLDCONList.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                              width="95%" id="acknowledgeTable" autoHeightRows="5"
+                                              binding="#{backing_shipping.acknowledgeTable}"
+                                              rowSelection="multiple" columnStretching="last">
+                                        <af:column sortProperty="Manifest" sortable="true"
+                                                   headerText="LD CON">
+                                            <af:outputText value="#{row.Manifest}"/>
+                                        </af:column>
+                                        <af:column sortProperty="Aac" sortable="true"
+                                                   headerText="#{bindings.UndeliveredLDCONList.labels.Aac}">
+                                            <af:outputText value="#{row.Aac}"/>
+                                        </af:column>
+                                        <af:column sortProperty="ManifestPrintDate"
+                                                   sortable="true"
+                                                   headerText="Manifest Print Date">
+                                            <stratis:adfDateFormatter
+                                                    value="#{row.ManifestPrintDate}"
+                                                    pattern="${userbean.dateWithTimeFormatPattern}"/>
+                                        </af:column>
+                                    </af:table>
+                                    <af:outputText value="&lt;br>" escape="false"/>
+                                    <!-- select mode of shipment -->
+                                    <af:panelFormLayout id="form2">
+                                        <af:panelGroupLayout layout="horizontal">
+                                            <af:selectOneChoice label="Mode of Shipment"
+                                                                id="modes"
+                                                                unselectedLabel="&lt;Make a Selection>"
+                                                                autoSubmit="true"
+                                                                inlineStyle="font-weight:bold;"
+                                                                binding="#{backing_shipping.acknowledgeModes}"
+                                                                valuePassThru="true">
+                                                <af:selectItem label="Pick Up" value="0"/>
+                                                <af:selectItem label="Delivery" value="1"/>
+                                            </af:selectOneChoice>
+                                            <af:inputText id="driver" label="Driver"
+                                                          binding="#{backing_shipping.driver}"
+                                                          maximumLength="50"
+                                                          inlineStyle="font-weight:bold;"
+                                                          contentStyle="text-transform:uppercase;"/>
+                                        </af:panelGroupLayout>
+                                        <af:spacer width="10"/>
+                                        <af:toolbar>
+                                            <af:button id="submitButton"
+                                                       inlineStyle="width:100px"
+                                                       text="Submit"
+                                                       partialSubmit="false">
+                                                <af:showPopupBehavior popupId="confirmSubmit" triggerType="action" align="overlap"/>
+                                            </af:button>
+                                            <af:popup id="confirmSubmit">
+                                                <af:dialog type="none">
+                                                    <af:panelGroupLayout>
+                                                        <af:activeOutputText id="Delete"
+                                                                             value="Acknowledge Delivery will permanently kick issue to history. Are you sure you want to continue?"/>
+                                                        <!--<af:dialog id="Confirm" title="Confirm" affirmativeTextAndAccessKey="Submit"
+                                                            dialogListener="#{backing_shipping.dialogListener}">
+                                                        <af:activeOutputText id="Delete" value="Acknowledge Delivery will permanently kick issue to history. Are you sure you want to continue?"/>-->
+                                                        <af:toolbar>
+                                                            <af:button id="submitButton2"
+                                                                       inlineStyle="width:100px"
+                                                                       text="Confirm"
+                                                                       actionListener="#{backing_shipping.acknowledgeShipment}"
+                                                                       partialSubmit="false"/>
+                                                            <af:button id="cancelButton2" inlineStyle="width:100px" text="Cancel"
+                                                                       actionListener="#{backing_shipping.closeDialog}"
+                                                                       partialSubmit="false"/>
+                                                        </af:toolbar>
+                                                    </af:panelGroupLayout>
+                                                </af:dialog>
+                                            </af:popup>
+
+                                            <af:button text="Cancel"
+                                                       id="cancelButton"
+                                                       inlineStyle="width:100px"
+                                                       action="GoShipping"
+                                                       partialSubmit="false"/>
+                                        </af:toolbar>
+                                    </af:panelFormLayout>
+                                </af:panelBox>
+                                <!-- End page -->
+                            </af:panelGroupLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <af:spacer width="24" height="675"/>
+                    </f:facet>
+                    <f:facet name="end"/>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="StowDelayView"
+   Version="11.1.2.64.36"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   ComponentClass="mil.stratis.model.view.sysadm.StowDelayViewImpl"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="DOCUMENT_NUMBER"
+      IsSelected="false"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="VIEW_ATTR"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SID"
+      IsSelected="false"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="255"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="VIEW_ATTR"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RCN"
+      IsSelected="false"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="255"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="VIEW_ATTR"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RECEIPT_QTY"
+      IsSelected="false"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="java.lang.Integer"
+      ColumnType="NUMBER"
+      AliasName="VIEW_ATTR"
+      SQLType="INTEGER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="QTY_TO_BE_STOWED"
+      IsSelected="false"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="java.lang.Integer"
+      ColumnType="NUMBER"
+      AliasName="VIEW_ATTR"
+      SQLType="INTEGER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="STOWED_QTY"
+      IsSelected="false"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="java.lang.Integer"
+      ColumnType="NUMBER"
+      AliasName="VIEW_ATTR"
+      SQLType="INTEGER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NIIN"
+      IsSelected="false"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="VIEW_ATTR"
+      SQLType="VARCHAR"
+      IsQueriable="false"/>
+   <ViewAttribute
+      Name="NOMENCLATURE"
+      IsSelected="false"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="VIEW_ATTR"
+      SQLType="VARCHAR"
+      IsQueriable="false"/>
+   <ViewAttribute
+      Name="UI"
+      IsSelected="false"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="VIEW_ATTR"
+      SQLType="VARCHAR"
+      IsQueriable="false"/>
+</ViewObject>

@@ -1,0 +1,755 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:stratis="taglib.mil.usmc.stratis">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="3"/>
+    <f:view>
+        <af:document title="Picking_NormalNiinVer.jspx" id="d1">
+            <af:form>
+                <af:panelStretchLayout id="psl1" startWidth="25" topHeight="150" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="ph_wrap_header">
+                            <jsp:include page="/ws/WS_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout id="topGroup" layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;" styleClass="messagePanel"/>
+                            <af:panelFormLayout id="pfl1">
+                                <f:facet name="footer"/>
+                                <af:panelHeader text="Picking - NIIN Verification" id="ph1"/>
+                                <af:panelBox id="pb1">
+                                    <af:panelGroupLayout layout="horizontal" id="pgl1">
+                                        <af:popup id="niinInfo" contentDelivery="lazyUncached">
+                                            <af:dialog title="NIIN INFO" id="niinInfoDialog" type="ok">
+                                                <af:table value="#{bindings.NiinInfoView1.collectionModel}"
+                                                          var="row" rows="#{bindings.NiinInfoView1.rangeSize}"
+                                                          emptyText="#{bindings.NiinInfoView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                          fetchSize="#{bindings.NiinInfoView1.rangeSize}"
+                                                          rowBandingInterval="0" id="t5">
+                                                    <af:column sortProperty="#{bindings.NiinInfoView1.hints.Fsc.name}"
+                                                               sortable="false"
+                                                               headerText="FSC"
+                                                               id="c1">
+                                                        <af:outputText value="#{row.Fsc}"
+                                                                       shortDesc="#{bindings.NiinInfoView1.hints.Fsc.tooltip}"
+                                                                       id="ot1"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.NiinInfoView1.hints.Niin.name}"
+                                                               sortable="false"
+                                                               headerText="NIIN"
+                                                               id="c2">
+                                                        <af:outputText value="#{row.Niin}"
+                                                                       shortDesc="#{bindings.NiinInfoView1.hints.Niin.tooltip}"
+                                                                       id="ot2"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.NiinInfoView1.hints.Ui.name}"
+                                                               sortable="false"
+                                                               headerText="UI"
+                                                               id="c3">
+                                                        <af:outputText value="#{row.Ui}"
+                                                                       shortDesc="#{bindings.NiinInfoView1.hints.Ui.tooltip}"
+                                                                       id="ot3"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.NiinInfoView1.hints.Nomenclature.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.NiinInfoView1.hints.Nomenclature.label}"
+                                                               id="c4">
+                                                        <af:outputText value="#{row.Nomenclature}"
+                                                                       shortDesc="#{bindings.NiinInfoView1.hints.Nomenclature.tooltip}"
+                                                                       id="ot4"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.NiinInfoView1.hints.ShelfLifeCode.name}"
+                                                               sortable="false"
+                                                               headerText="Shelf Life Code"
+                                                               id="c5">
+                                                        <af:outputText value="#{row.ShelfLifeCode}"
+                                                                       shortDesc="#{bindings.NiinInfoView1.hints.ShelfLifeCode.tooltip}"
+                                                                       id="ot5"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.NiinInfoView1.hints.Scc.name}"
+                                                               sortable="false"
+                                                               headerText="SCC"
+                                                               id="c6">
+                                                        <af:outputText value="#{row.Scc}"
+                                                                       shortDesc="#{bindings.NiinInfoView1.hints.Scc.tooltip}"
+                                                                       id="ot6"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.NiinInfoView1.hints.SerialControlFlag.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.NiinInfoView1.hints.SerialControlFlag.label}"
+                                                               id="c7">
+                                                        <af:outputText value="#{row.SerialControlFlag}"
+                                                                       shortDesc="#{bindings.NiinInfoView1.hints.SerialControlFlag.tooltip}"
+                                                                       id="ot7"/>
+                                                    </af:column>
+                                                </af:table>
+                                            </af:dialog>
+                                        </af:popup>
+                                        <af:panelGroupLayout layout="vertical" id="pgl2">
+                                            <af:panelFormLayout id="pfl2">
+                                                <af:spacer width="10" height="10" id="s1"/>
+                                                <af:panelGroupLayout id="pgl3" layout="horizontal">
+                                                    <af:panelFormLayout inlineStyle="border-style:solid;"
+                                                                        id="pfl3">
+                                                        <af:outputText id="scnTitle" value="SCN Information"
+                                                                       inlineStyle="font-weight:bold;"/>
+                                                        <af:panelGroupLayout layout="horizontal" id="pgl4">
+                                                            <af:panelFormLayout id="pfl4">
+                                                                <f:facet name="footer"/>
+                                                                <af:panelLabelAndMessage label="SCN"
+                                                                                         id="scnLbl">
+                                                                    <af:inputText value="#{bindings.Scn.inputValue}"
+                                                                                  styleClass="ReadOnlyField"
+                                                                                  columns="#{bindings.Scn.displayWidth}"
+                                                                                  readOnly="true" id="scnTxt"/>
+                                                                </af:panelLabelAndMessage>
+                                                                <af:panelLabelAndMessage label="PIN"
+                                                                                         id="pinLbl">
+                                                                    <af:inputText id="pinTxt"
+                                                                                  value="#{bindings.Pin.inputValue}"
+                                                                                  styleClass="ReadOnlyField"
+                                                                                  columns="#{bindings.Pin.displayWidth}"
+                                                                                  readOnly="true"/>
+                                                                </af:panelLabelAndMessage>
+                                                            </af:panelFormLayout>
+                                                            <af:panelFormLayout id="pfl5">
+                                                                <f:facet name="footer"/>
+                                                                <af:panelLabelAndMessage id="docIdLbl"
+                                                                                         label="#{bindings.DocumentId.label}">
+                                                                    <af:inputText id="docIdTxt"
+                                                                                  value="#{bindings.DocumentId.inputValue}"
+                                                                                  styleClass="ReadOnlyField"
+                                                                                  columns="#{bindings.DocumentId.displayWidth}"
+                                                                                  readOnly="true"/>
+                                                                </af:panelLabelAndMessage>
+                                                                <af:panelLabelAndMessage id="uiLbl"
+                                                                                         label="UI">
+                                                                    <af:inputText id="uiTxt"
+                                                                                  value="#{bindings.Ui.inputValue}"
+                                                                                  styleClass="ReadOnlyField"
+                                                                                  columns="#{bindings.Ui.displayWidth}"
+                                                                                  readOnly="true"/>
+                                                                </af:panelLabelAndMessage>
+                                                            </af:panelFormLayout>
+                                                            <af:panelFormLayout id="pfl6">
+                                                                <f:facet name="footer"/>
+                                                                <af:panelLabelAndMessage id="expDateLbl"
+                                                                                         label="#{bindings.ExpirationDate.label}">
+                                                                    <stratis:adfDateFormatter
+                                                                            value="#{bindings.ExpirationDate.inputValue}"/>
+                                                                </af:panelLabelAndMessage>
+                                                                <af:panelLabelAndMessage id="ccLbl"
+                                                                                         label="CC">
+                                                                    <af:inputText id="ccTxt"
+                                                                                  value="#{bindings.Cc.inputValue}"
+                                                                                  styleClass="ReadOnlyField"
+                                                                                  columns="#{bindings.Cc.displayWidth}"
+                                                                                  readOnly="true"/>
+                                                                </af:panelLabelAndMessage>
+                                                            </af:panelFormLayout>
+                                                        </af:panelGroupLayout>
+                                                        <af:panelGroupLayout layout="horizontal" id="pgl5">
+                                                            <af:panelLabelAndMessage id="nomenLbl"
+                                                                                     label="#{bindings.Nomenclature.label}">
+                                                                <af:inputText id="nomenTxt"
+                                                                              value="#{bindings.Nomenclature.inputValue}"
+                                                                              styleClass="ReadOnlyField"
+                                                                              columns="#{bindings.Nomenclature.displayWidth}"
+                                                                              readOnly="true"/>
+                                                            </af:panelLabelAndMessage>
+                                                        </af:panelGroupLayout>
+                                                        <af:outputText id="qtyOut" value="Quantity"
+                                                                       inlineStyle="font-weight:bold;"/>
+                                                        <af:panelGroupLayout id="pgl6" layout="horizontal">
+                                                            <af:panelFormLayout id="pfl7">
+                                                                <f:facet name="footer"/>
+                                                                <af:panelLabelAndMessage id="pickQtyLbl"
+                                                                                         label="#{bindings.PickQty.label}">
+                                                                    <af:inputText id="pickQtyTxt"
+                                                                                  value="#{bindings.PickQty.inputValue}"
+                                                                                  styleClass="ReadOnlyField"
+                                                                                  columns="#{bindings.PickQty.displayWidth}"
+                                                                                  readOnly="true">
+                                                                        <f:convertNumber groupingUsed="false"
+                                                                                         pattern="#{bindings.PickQty.format}"/>
+                                                                    </af:inputText>
+                                                                </af:panelLabelAndMessage>
+                                                            </af:panelFormLayout>
+                                                            <af:panelFormLayout id="pfl8">
+                                                                <f:facet name="footer"/>
+                                                                <af:panelLabelAndMessage id="qtyPickedLbl"
+                                                                                         label="Qty to be Picked">
+                                                                    <af:inputText id="qtyPickedTxt"
+                                                                                  value="#{bindings.PickQty.inputValue - bindings.QtyPicked.inputValue}"
+                                                                                  styleClass="ReadOnlyField"
+                                                                                  columns="#{bindings.QtyPicked.displayWidth}"
+                                                                                  readOnly="true">
+                                                                        <f:convertNumber groupingUsed="false"
+                                                                                         pattern="#{bindings.QtyPicked.format}"/>
+                                                                    </af:inputText>
+                                                                </af:panelLabelAndMessage>
+                                                            </af:panelFormLayout>
+                                                        </af:panelGroupLayout>
+                                                    </af:panelFormLayout>
+                                                </af:panelGroupLayout>
+                                                <af:spacer width="10" height="10" id="s2"/>
+                                                <af:outputText id="veriOut" value="Verification"
+                                                               inlineStyle="font-weight:bold;"/>
+                                                <af:panelGroupLayout layout="horizontal" id="pgl7">
+                                                    <af:panelFormLayout id="pfl9"
+                                                                        inlineStyle="border-style:solid;">
+                                                        <f:facet name="footer"/>
+                                                        <af:panelGroupLayout layout="horizontal" id="pgl8">
+                                                            <af:inputText id="NIINtxt"
+                                                                          label="Enter last two digits of NIIN"
+                                                                          columns="2"
+                                                                          validator="#{PickingAll.niinLastTwoValidation}"
+                                                                          inlineStyle="font-weight:bold;"
+                                                                          binding="#{PickingAll.enterNiinLastTwoDigits}"
+                                                                          maximumLength="2"/>
+                                                            <af:link id="niinLookUp"
+                                                                     actionListener="#{PickingAll.lookupNiins}"
+                                                                     immediate="true" partialSubmit="true"
+                                                                     icon="/resources/images/view_image.gif">
+                                                                <!-- ZSL af:image is replaced to icon attribute in af:link -->
+                                                                <!--af:image id="binoculars"
+                                                                          source="/resources/images/view_image.gif"/-->
+                                                                <af:showPopupBehavior popupId="niinInfo" triggerType="click"/>
+                                                            </af:link>
+                                                        </af:panelGroupLayout>
+                                                        <af:inputText id="itemLabelhidden"
+                                                                      label="Scan Item Label" columns="10"
+                                                                      rendered="false"
+                                                                      inlineStyle="font-weight:bold;"
+                                                                      contentStyle="text-transform:uppercase;"/>
+                                                        <af:inputText id="qtyPickedTxtEntry"
+                                                                      label="Enter Quantity Picked" columns="6"
+                                                                      validator="#{PickingAll.pickQtyValidation}"
+                                                                      inlineStyle="font-weight:bold;"
+                                                                      binding="#{PickingAll.enterQtyPicked}"
+                                                                      maximumLength="6">
+                                                            <af:validateRegExp pattern="[0-9]{1,5}"
+                                                                               messageDetailNoMatch="Qty must be a whole number."/>
+                                                        </af:inputText>
+                                                    </af:panelFormLayout>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout id="serialPanel"
+                                                                     rendered="#{PickingAll.srlChoice==1}">
+                                                    <af:spacer id="s3" width="10" height="10"/>
+                                                    <af:panelFormLayout id="pfl10"
+                                                                        inlineStyle="border-style:solid;">
+                                                        <af:outputText id="serialOut"
+                                                                       inlineStyle="color:rgb(0,0,255); font-weight:bold;"
+                                                                       value="Serial Number(s)"/>
+                                                        <af:spacer id="s4" width="10" height="15"/>
+                                                        <af:button id="deleteBtn" text="Delete"
+                                                                   actionListener="#{PickingAll.deleteSrlLotNumFromList}"
+                                                                   partialSubmit="false"/>
+                                                        <af:table summary="Serial Number Table" id="serialTable"
+                                                                  value="#{bindings.SerialOrLotNumList1.collectionModel}"
+                                                                  var="row" autoHeightRows="3"
+                                                                  rows="#{bindings.SerialOrLotNumList1.rangecolumns}"
+                                                                  first="#{bindings.SerialOrLotNumList1.rangeStart}"
+                                                                  emptyText="#{bindings.SerialOrLotNumList1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                                  selectionListener="#{bindings.SerialOrLotNumList1.collectionModel.makeCurrent}"
+                                                                  selectedRowKeys="#{bindings.SerialOrLotNumList1.collectionModel.selectedRow}"
+                                                                  rowSelection="single">
+                                                            <af:column rowHeader="true" id="serialColumn"
+                                                                       sortProperty="SerialOrLoNum"
+                                                                       sortable="false"
+                                                                       headerText="Serial Number">
+                                                                <af:inputText id="serialTxt"
+                                                                              value="#{row.SerialOrLoNum}"
+                                                                              simple="true"
+                                                                              required="#{bindings.SerialOrLotNumList1.attrDefs.SerialOrLoNum.mandatory}"
+                                                                              columns="35" maximumLength="30" readOnly="true"/>
+                                                            </af:column>
+                                                            <af:column id="qtyLotColumn" sortProperty="QtyLot"
+                                                                       sortable="false"
+                                                                       headerText="Qty">
+                                                                <af:inputText id="qtyLotTxt"
+                                                                              value="#{row.QtyLot}"
+                                                                              simple="true"
+                                                                              required="#{bindings.SerialOrLotNumList1.attrDefs.QtyLot.mandatory}"
+                                                                              columns="5" maximumLength="4" readOnly="true"/>
+                                                            </af:column>
+                                                        </af:table>
+                                                        <af:spacer id="s5" width="10" height="10"/>
+                                                        <af:panelGroupLayout layout="horizontal" id="pgl10">
+                                                            <af:panelFormLayout id="pfl11">
+                                                                <af:inputText id="serialTxt2"
+                                                                              label="Serial Number "
+                                                                              binding="#{PickingAll.srlOrLotConNum}"
+                                                                              inlineStyle="font-weight:bold;"
+                                                                              contentStyle="text-transform:uppercase;"
+                                                                              maximumLength="30"/>
+                                                                <af:spacer id="s6" width="10" height="10"/>
+                                                                <af:inputText id="fromSerialTxt"
+                                                                              label="Serial Range From "
+                                                                              binding="#{PickingAll.startSerial}"
+                                                                              inlineStyle="font-weight:bold;"
+                                                                              contentStyle="text-transform:uppercase;"
+                                                                              maximumLength="30"/>
+                                                                <af:inputText id="toSerialTxt" label="to "
+                                                                              binding="#{PickingAll.endSerial}"
+                                                                              inlineStyle="font-weight:bold;"
+                                                                              contentStyle="text-transform:uppercase;"
+                                                                              maximumLength="30"/>
+                                                            </af:panelFormLayout>
+                                                            <af:toolbar>
+                                                                <af:button id="addBtn" text="Add"
+                                                                           actionListener="#{PickingAll.addSrlLotNumList}"
+                                                                           partialSubmit="false"/>
+                                                            </af:toolbar>
+                                                        </af:panelGroupLayout>
+                                                        <f:facet name="footer"/>
+                                                    </af:panelFormLayout>
+                                                </af:panelGroupLayout>
+                                            </af:panelFormLayout>
+                                            <af:panelFormLayout id="pfl12">
+                                                <af:spacer id="s7" width="10" height="10"/>
+                                                <af:switcher id="switch1" facetName="#{PickingAll.expObj}">
+                                                    <f:facet name="0">
+                                                        <af:panelGroupLayout>
+                                                            <af:toolbar>
+                                                                <af:button id="submitBtn" text="Submit"
+                                                                           action="#{PickingAll.actionForwardStrForPickingNormalNiinVerOnSubmit}"
+                                                                           partialSubmit="false"/>
+                                                                <af:button id="refuseBtn" text="Refuse"
+                                                                           action="#{PickingAll.actionForwardStrForPickingNormalNiinVerOnRefuse}"
+                                                                           actionListener="#{PickingAll.assignExpObj}"
+                                                                           partialSubmit="false" immediate="true"/>
+                                                                <af:button id="emptyBtn"
+                                                                           text="Location Empty"
+                                                                           action="#{PickingAll.actionForwardStrForPickingNormalNiinVerOnLocationEmpty}"
+                                                                           rendered="false" partialSubmit="false" immediate="true"/>
+                                                                <af:button id="bypassBtn" text="Bypass"
+                                                                           action="#{PickingAll.actionForwardStrForPickingNormalNiinVerOnByPass}"
+                                                                           actionListener="#{PickingAll.assignExpObjForByPass}"
+                                                                           partialSubmit="false" immediate="true"/>
+                                                            </af:toolbar>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                    <f:facet name="1">
+                                                        <af:panelGroupLayout id="pgl14">
+                                                            <af:selectOneChoice value="#{bindings.PickRefuseList.inputValue}"
+                                                                                label="Select Refuse Reason"
+                                                                                rendered="true"
+                                                                                id="pickRefuseEid"
+                                                                                valueChangeListener="#{PickingAll.selEid}"
+                                                                                valuePassThru="true"
+                                                                                inlineStyle="font-weight:bold;">
+                                                                <f:selectItems value="#{bindings.PickRefuseList.items}"/>
+                                                            </af:selectOneChoice>
+                                                            <af:panelGroupLayout id="pgl15">
+                                                                <af:toolbar id="t1">
+                                                                    <af:button text="Submit"
+                                                                               action="#{PickingAll.actionForwardStrForPickingNormalNiinVerOnRefuseDone}"
+                                                                               id="expSObj1" partialSubmit="false" immediate="true"/>
+                                                                    <af:button text="Cancel"
+                                                                               action="#{PickingAll.actionForwardStrForPickingNormalNiinVerOnCancel}"
+                                                                               id="expNObj1" partialSubmit="false" immediate="true"/>
+                                                                </af:toolbar>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                    <f:facet name="2">
+                                                        <af:panelGroupLayout id="pgl13">
+                                                            <af:selectOneChoice value="#{bindings.PickByPassList.inputValue}"
+                                                                                label="Select Bypass Reason"
+                                                                                rendered="true"
+                                                                                id="pickByPassEid"
+                                                                                valueChangeListener="#{PickingAll.selEid}"
+                                                                                valuePassThru="true"
+                                                                                inlineStyle="font-weight:bold;"
+                                                                                binding="#{PickingAll.bypassList}">
+                                                                <f:selectItems value="#{bindings.PickByPassList.items}"/>
+                                                            </af:selectOneChoice>
+                                                            <af:panelGroupLayout id="pgl16">
+                                                                <af:toolbar id="t2">
+                                                                    <af:button text="Submit"
+                                                                               action="#{PickingAll.actionForwardStrForPickingNormalNiinVerOnByPassDone}"
+                                                                               id="expSObj2" partialSubmit="false" immediate="true"/>
+                                                                    <af:button text="Cancel"
+                                                                               action="#{PickingAll.actionForwardStrForPickingNormalNiinVerOnCancel}"
+                                                                               id="expNObj2" partialSubmit="false" immediate="true"/>
+                                                                </af:toolbar>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                    <f:facet name="3">
+                                                        <af:panelGroupLayout id="pgl17">
+                                                            <af:panelGroupLayout id="pgl18" layout="horizontal">
+                                                                <af:outputText id="qtyWarning"
+                                                                               value="Quantity picked value is less than requested Pick Quantity. Is this because the location is empty?"
+                                                                               inlineStyle="color:rgb(0,0,255); font-weight:bold;"/>
+                                                            </af:panelGroupLayout>
+                                                            <af:panelGroupLayout>
+                                                                <af:toolbar id="t3">
+                                                                    <af:button text="Yes"
+                                                                               actionListener="#{PickingAll.createExceptionInErrorQueue}"
+                                                                               action="#{PickingAll.actionForwardStrForPickingNormalNiinVerOnQtyDone}"
+                                                                               id="expSObj3" partialSubmit="false"/>
+                                                                    <af:button text="No"
+                                                                               actionListener="#{PickingAll.showQtyPickedErrorMessage}"
+                                                                               action="#{PickingAll.actionForwardStrForPickingNormalNiinVerOnCancel}"
+                                                                               id="expNObj3" partialSubmit="false" immediate="true"/>
+                                                                </af:toolbar>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                    <f:facet name="4">
+                                                        <af:panelGroupLayout id="pgl19">
+                                                            <af:panelGroupLayout layout="horizontal" id="pgl20">
+                                                                <af:outputText id="emptyLbl"
+                                                                               value="Is the location empty?"
+                                                                               inlineStyle="color:rgb(0,0,255); font-weight:bold;"/>
+                                                            </af:panelGroupLayout>
+                                                            <af:panelGroupLayout id="pgl21">
+                                                                <af:toolbar id="t4">
+                                                                    <af:button text="Yes"
+                                                                               action="#{PickingAll.actionForwardStrForPickingNormalNiinVerOnQtyDone}"
+                                                                               id="expSObj4" partialSubmit="false"/>
+                                                                    <af:button text="No"
+                                                                               action="#{PickingAll.actionForwardStrForPickingNormalNiinVerOnCancel}"
+                                                                               actionListener="#{PickingAll.createExceptionInErrorQueue}"
+                                                                               id="expNObj4" partialSubmit="false" immediate="true"/>
+                                                                </af:toolbar>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                    <f:facet name="5">
+                                                        <af:panelGroupLayout id="pgl22">
+                                                            <af:panelGroupLayout id="pgl23" layout="horizontal">
+                                                                <af:outputText id="invOut"
+                                                                               value="Please perform inventory count."
+                                                                               inlineStyle="color:rgb(0,0,255); font-weight:bold;"/>
+                                                            </af:panelGroupLayout>
+                                                            <af:spacer id="s8" width="10" height="10"/>
+                                                            <af:panelGroupLayout id="pgl24">
+                                                                <af:inputText id="availQtyTxt"
+                                                                              label="Remaining Loc Qty"
+                                                                              inlineStyle="font-weight:bold;"
+                                                                              columns="6"
+                                                                              binding="#{PickingAll.availQty}"
+                                                                              valueChangeListener="#{PickingAll.setAvailQty1}"
+                                                                              immediate="true"
+                                                                              maximumLength="6">
+                                                                    <af:validateRegExp pattern="[0-9]{1,5}"
+                                                                                       messageDetailNoMatch="Qty must be a whole number."/>
+                                                                </af:inputText>
+                                                                <af:spacer id="s9" width="10" height="10"/>
+                                                                <af:inputText id="reconfirmTxt"
+                                                                              label="Confirm Remaining Qty"
+                                                                              rendered="#{PickingAll.availQty.value >= 0}"
+                                                                              inlineStyle="font-weight:bold;"
+                                                                              columns="6"
+                                                                              binding="#{PickingAll.availQtyR}"
+                                                                              valueChangeListener="#{PickingAll.setAvailQtyR1}"
+                                                                              immediate="true"
+                                                                              maximumLength="6">
+                                                                    <af:validateRegExp pattern="[0-9]{1,5}"
+                                                                                       messageDetailNoMatch="Qty must be a whole number."/>
+                                                                </af:inputText>
+                                                            </af:panelGroupLayout>
+                                                            <af:panelGroupLayout id="pgl25">
+                                                                <af:toolbar id="t7">
+                                                                    <af:button text="Done"
+                                                                               action="#{PickingAll.actionForwardStrForPickingNormalNiinVerOnInvQtyDone}"
+                                                                               id="expSObj5" partialSubmit="false"/>
+                                                                    <af:button text="Cancel"
+                                                                               action="#{PickingAll.actionForwardStrForPickingNormalNiinVerOnCancel}"
+                                                                               rendered="false"
+                                                                               id="expNObj5" partialSubmit="false" immediate="true"/>
+                                                                </af:toolbar>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                </af:switcher>
+                                            </af:panelFormLayout>
+                                        </af:panelGroupLayout>
+                                        <af:panelGroupLayout id="pgl26">
+                                            <af:panelFormLayout id="pfl14">
+                                                <af:panelGroupLayout layout="horizontal" valign="top"
+                                                                     id="pgl27">
+                                                    <af:inputText id="pickLocation"
+                                                                  label="Current Pick Location"
+                                                                  value="#{bindings.LocationLabel.inputValue}"
+                                                                  readOnly="true"/>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout id="pgl28" layout="horizontal"
+                                                                     valign="top">
+                                                    <af:inputText id="sideTxt" label="#{bindings.Side.label}"
+                                                                  value="#{bindings.Side.inputValue}"
+                                                                  readOnly="true"/>
+                                                    <af:spacer id="s10" width="5" height="10"/>
+                                                    <af:inputText id="bayTxt" label="#{bindings.Bay.label}"
+                                                                  value="#{bindings.Bay.inputValue}"
+                                                                  readOnly="true"/>
+                                                    <af:spacer id="s11" width="5" height="10"/>
+                                                    <af:inputText id="LocLevelTxt"
+                                                                  label="#{bindings.LocLevel.label}"
+                                                                  value="#{bindings.LocLevel.inputValue}"
+                                                                  readOnly="true"/>
+                                                    <af:spacer id="s12" width="5" height="10"/>
+                                                    <af:inputText id="slotTxt" label="#{bindings.Slot.label}"
+                                                                  value="#{bindings.Slot.inputValue}"
+                                                                  readOnly="true"/>
+                                                </af:panelGroupLayout>
+                                                <af:image id="getSlot"
+                                                          source="/SlotImage?type=SLOT&amp;DI=#{bindings.DividerTypeId.inputValue}&amp;SI=#{bindings.DividerIndex.inputValue}"/>
+                                            </af:panelFormLayout>
+                                        </af:panelGroupLayout>
+                                        <af:panelFormLayout rendered="false" id="pg29">
+                                            <af:panelLabelAndMessage id="scnLabel"
+                                                                     label="#{bindings.Iscn.label}">
+                                                <af:outputText id="scnOut" value="#{bindings.Iscn.inputValue}"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="docIdLabel"
+                                                                     label="#{bindings.DocumentId.label}">
+                                                <af:outputText id="docOut"
+                                                               value="#{bindings.DocumentId.inputValue}"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="docNumLabel"
+                                                                     label="#{bindings.DocumentNumber.label}">
+                                                <af:outputText id="docNumOut"
+                                                               value="#{bindings.DocumentNumber.inputValue}"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="suffixLabel"
+                                                                     label="#{bindings.Suffix.label}">
+                                                <af:outputText id="suffixOut"
+                                                               value="#{bindings.Suffix.inputValue}"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="issueTypeLabel"
+                                                                     label="#{bindings.IssueType.label}">
+                                                <af:outputText id="issueTypeOut"
+                                                               value="#{bindings.IssueType.inputValue}"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="issuePriLabel"
+                                                                     label="#{bindings.IssuePriorityGroup.label}">
+                                                <af:outputText id="issuePriOut"
+                                                               value="#{bindings.IssuePriorityGroup.inputValue}"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="rddLabel"
+                                                                     label="#{bindings.Rdd.label}">
+                                                <af:outputText id="rddOut" value="#{bindings.Rdd.inputValue}"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="iqtyLabel"
+                                                                     label="#{bindings.Iqty.label}">
+                                                <af:outputText id="iqtyOut" value="#{bindings.Iqty.inputValue}">
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.Iqty.format}"/>
+                                                </af:outputText>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="iStatusLabel"
+                                                                     label="#{bindings.Istatus.label}">
+                                                <af:outputText id="iStatusOut"
+                                                               value="#{bindings.Istatus.inputValue}"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="imodifiedLabel"
+                                                                     label="#{bindings.Imodified.label}">
+                                                <af:outputText id="imodifiedOut"
+                                                               value="#{bindings.Imodified.inputValue}">
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.Imodified.format}"/>
+                                                </af:outputText>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="imodifiedDateLabel"
+                                                                     label="#{bindings.ImodifiedDate.label}">
+                                                <stratis:adfDateFormatter
+                                                        value="#{bindings.ImodifiedDate.inputValue}"
+                                                        pattern="${userbean.dateWithTimeFormatPattern}"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="packConsolLabel"
+                                                                     label="#{bindings.IpackingConsolidationId.label}">
+                                                <af:outputText id="packConsolOut"
+                                                               value="#{bindings.IpackingConsolidationId.inputValue}">
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.IpackingConsolidationId.format}"/>
+                                                </af:outputText>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="pidLabel"
+                                                                     label="#{bindings.Pid.label}">
+                                                <af:outputText id="pidOut" value="#{bindings.Pid.inputValue}">
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.Pid.format}"/>
+                                                </af:outputText>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="scnLabel2"
+                                                                     label="#{bindings.Scn.label}">
+                                                <af:outputText id="scnOut2" value="#{bindings.Scn.inputValue}"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="suffixLabel2"
+                                                                     label="#{bindings.SuffixCode.label}">
+                                                <af:outputText id="suffixOut2"
+                                                               value="#{bindings.SuffixCode.inputValue}">
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.SuffixCode.format}"/>
+                                                </af:outputText>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="packConsolLabel2"
+                                                                     label="#{bindings.PackingConsolidationId.label}">
+                                                <af:outputText id="packConsolOut2"
+                                                               value="#{bindings.PackingConsolidationId.inputValue}">
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.PackingConsolidationId.format}"/>
+                                                </af:outputText>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="niinlocLabel"
+                                                                     label="#{bindings.NiinLocId.label}">
+                                                <af:outputText id="niinLocOut"
+                                                               value="#{bindings.NiinLocId.inputValue}">
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.NiinLocId.format}"/>
+                                                </af:outputText>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="modifiedLabel2"
+                                                                     label="#{bindings.ModifiedBy.label}">
+                                                <af:outputText id="modifiedOut2"
+                                                               value="#{bindings.ModifiedBy.inputValue}">
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.ModifiedBy.format}"/>
+                                                </af:outputText>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="modifiedDateLabel2"
+                                                                     label="#{bindings.ModifiedDate.label}">
+                                                <stratis:adfDateFormatter
+                                                        value="#{bindings.ModifiedDate.inputValue}"
+                                                        pattern="${userbean.dateWithTimeFormatPattern}"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="qtyPickedLabel2"
+                                                                     label="#{bindings.QtyPicked.label}">
+                                                <af:outputText id="qtyPickedOut2"
+                                                               value="#{bindings.QtyPicked.inputValue}">
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.QtyPicked.format}"/>
+                                                </af:outputText>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="pickqtyLabel2"
+                                                                     label="#{bindings.PickQty.label}">
+                                                <af:outputText id="pickqtyOut2"
+                                                               value="#{bindings.PickQty.inputValue}">
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.PickQty.format}"/>
+                                                </af:outputText>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="statusLabel"
+                                                                     label="#{bindings.Status.label}">
+                                                <af:outputText id="statusOut"
+                                                               value="#{bindings.Status.inputValue}"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="ccLabel2" label="#{bindings.Cc.label}">
+                                                <af:outputText id="ccOut2" value="#{bindings.Cc.inputValue}"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="expDateLabel2"
+                                                                     label="#{bindings.ExpirationDate.label}">
+                                                <stratis:adfDateFormatter
+                                                        value="#{bindings.ExpirationDate.inputValue}"
+                                                        pattern="${userbean.dateWithTimeFormatPattern}"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="aqtyLabel"
+                                                                     label="#{bindings.Aqty.label}">
+                                                <af:outputText id="aqtyOut" value="#{bindings.Aqty.inputValue}">
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.Aqty.format}"/>
+                                                </af:outputText>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="fscLabel"
+                                                                     label="#{bindings.Fsc.label}">
+                                                <af:outputText id="fscOut" value="#{bindings.Fsc.inputValue}"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="niinLabel2"
+                                                                     label="#{bindings.Niin.label}">
+                                                <af:outputText id="niinOut2"
+                                                               value="#{bindings.Niin.inputValue}"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="nomenLabel2"
+                                                                     label="#{bindings.Nomenclature.label}">
+                                                <af:outputText id="nomenOut2"
+                                                               value="#{bindings.Nomenclature.inputValue}"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="partLabel"
+                                                                     label="#{bindings.PartNumber.label}">
+                                                <af:outputText id="partOut"
+                                                               value="#{bindings.PartNumber.inputValue}"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="uiLabel" label="#{bindings.Ui.label}">
+                                                <af:outputText id="uiOut" value="#{bindings.Ui.inputValue}"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="locationLabelLabel"
+                                                                     label="#{bindings.LocationLabel.label}">
+                                                <af:outputText id="locationLabelOut"
+                                                               value="#{bindings.LocationLabel.inputValue}"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="dividerLabel"
+                                                                     label="#{bindings.DividerIndex.label}">
+                                                <af:outputText id="dividerOut"
+                                                               value="#{bindings.DividerIndex.inputValue}">
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.DividerIndex.format}"/>
+                                                </af:outputText>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="dividerTypeLabel"
+                                                                     label="#{bindings.DividerTypeId.label}">
+                                                <af:outputText id="dividerTypeOut"
+                                                               value="#{bindings.DividerTypeId.inputValue}">
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.DividerTypeId.format}"/>
+                                                </af:outputText>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="aacLabel"
+                                                                     label="#{bindings.Aac.label}">
+                                                <af:outputText id="aacOut" value="#{bindings.Aac.inputValue}"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="addressLabel"
+                                                                     label="#{bindings.Address1.label}">
+                                                <af:outputText id="addressOut"
+                                                               value="#{bindings.Address1.inputValue}"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="routeLabel"
+                                                                     label="#{bindings.RouteName.label}">
+                                                <af:outputText id="routeOut"
+                                                               value="#{bindings.RouteName.inputValue}"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="sideLabel"
+                                                                     label="#{bindings.Side.label}">
+                                                <af:outputText id="sideOut"
+                                                               value="#{bindings.Side.inputValue}"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="locLevelLabel"
+                                                                     label="#{bindings.LocLevel.label}">
+                                                <af:outputText id="locLevelOut"
+                                                               value="#{bindings.LocLevel.inputValue}"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage id="aisleLabel"
+                                                                     label="#{bindings.Aisle.label}">
+                                                <af:outputText id="aisleOut"
+                                                               value="#{bindings.Aisle.inputValue}"/>
+                                            </af:panelLabelAndMessage>
+                                        </af:panelFormLayout>
+                                    </af:panelGroupLayout>
+                                </af:panelBox>
+                            </af:panelFormLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="../FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="start">
+                        <af:spacer width="24px" height="675px"/>
+                    </f:facet>
+                    <f:facet name="end"/>
+                </af:panelStretchLayout>
+            </af:form>
+            <!--<jsp:include page="../Footer.jspx"/>-->
+        </af:document>
+    </f:view>
+</jsp:root>

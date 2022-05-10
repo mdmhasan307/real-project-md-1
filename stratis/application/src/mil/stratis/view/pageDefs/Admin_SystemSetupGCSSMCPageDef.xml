@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Admin_SystemSetupGCSSMCPageDef"
+                Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="SiteInfoView1Iterator" RangeSize="1" Binds="Root.AppModule1.SiteInfoView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="GCSSMCSiteRemoteConnectionsView1Iterator" RangeSize="10"
+              Binds="Root.WarehouseSetup1.GCSSMCSiteRemoteConnectionsView1" DataControl="StratisRootServiceDataControl"
+              StateValidation="false" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <attributeValues id="Aac" IterBinding="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="Aac"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="SupplyCenterName" IterBinding="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="SupplyCenterName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="City" IterBinding="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="City"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="State" IterBinding="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="State"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ZipCode" IterBinding="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="ZipCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ConusOcunusFlag" IterBinding="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="ConusOcunusFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" InstanceName="AppModuleDataControl" DataControl="StratisRootServiceDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <list id="SiteInfoView1ConusOcunusFlag" IterBinding="SiteInfoView1Iterator" ListOperMode="setAttribute"
+          StaticList="true">
+      <AttrNames>
+        <Item Value="ConusOcunusFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </list>
+    <action id="Commit1" InstanceName="StratisRootServiceDataControl.Root.WarehouseSetup1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <table id="GCSSMCSiteRemoteConnectionsView1" IterBinding="GCSSMCSiteRemoteConnectionsView1Iterator">
+      <AttrNames>
+        <Item Value="ConnectionId"/>
+        <Item Value="HostName"/>
+        <Item Value="IpAddress"/>
+        <Item Value="Protocol"/>
+        <Item Value="Port"/>
+        <Item Value="UserId"/>
+        <Item Value="Password"/>
+        <Item Value="HostDir"/>
+        <Item Value="LocalDir"/>
+        <Item Value="UseCertificateFlag"/>
+        <Item Value="CertificatePath"/>
+        <Item Value="DefMode"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="GCSSMCConnectionId" IterBinding="GCSSMCSiteRemoteConnectionsView1Iterator">
+      <AttrNames>
+        <Item Value="ConnectionId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="GCSSMCUserId" IterBinding="GCSSMCSiteRemoteConnectionsView1Iterator">
+      <AttrNames>
+        <Item Value="UserId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="GCSSMCHostDir" IterBinding="GCSSMCSiteRemoteConnectionsView1Iterator">
+      <AttrNames>
+        <Item Value="HostDir"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="ExecuteSiteGCSSMCConnection" RequiresUpdateModel="true" Action="iteratorExecute"
+            IterBinding="GCSSMCSiteRemoteConnectionsView1Iterator"/>
+    <action id="GCSSMCCommit" InstanceName="StratisRootServiceDataControl.Root.WarehouseSetup1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <tree IterBinding="GCSSMCSiteRemoteConnectionsView1Iterator" id="GCSSMCSiteRemoteConnectionsView11">
+      <nodeDefinition DefName="mil.stratis.model.view.whsetup.GCSSMCSiteRemoteConnectionsView"
+                      Name="GCSSMCSiteRemoteConnectionsView110">
+        <AttrNames>
+          <Item Value="HostName"/>
+          <Item Value="HostDir"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="GCSSMCSiteRemoteConnectionsView1Iterator" id="GCSSMCSiteRemoteConnectionsView12">
+      <nodeDefinition DefName="mil.stratis.model.view.whsetup.GCSSMCSiteRemoteConnectionsView"
+                      Name="GCSSMCSiteRemoteConnectionsView120">
+        <AttrNames>
+          <Item Value="HostName"/>
+          <Item Value="HostDir"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="Shipping_ManifestshipmentPageDef" Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="AllShippingFloors_ManifestIterator" RangeSize="-1"
+              Binds="AllShippingFloors_Manifest" StateValidation="false"
+              DataControl="ShippingServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+
+    <iterator id="AllShippingFloors_ManifestIterator1" RangeSize="-1"
+              Binds="AllShippingFloors_Manifest" StateValidation="false"
+              DataControl="ShippingServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+              
+    <iterator id="TempManifestReview1Iterator" RangeSize="-1" Binds="Root.ShippingService1.TempManifestReview1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  
+    <invokeAction id="refresh1" Refresh="ifNeeded" Binds="ExecuteWithParams"/></executables>
+  <bindings>
+    <attributeValues IterBinding="AllShippingFloors_ManifestIterator1" id="FloorLocationId">
+      <AttrNames>
+        <Item Value="FloorLocationId"/>
+      </AttrNames>
+    </attributeValues>
+
+    <table IterBinding="AllShippingFloors_ManifestIterator" id="AllManifestFloors">
+      <AttrNames>
+        <Item Value="FloorLocationId"/>
+        <Item Value="FloorLocation"/>
+      </AttrNames>
+    </table>
+    
+    <table id="TempManifestReview1" IterBinding="TempManifestReview1Iterator">
+      <AttrNames>
+        <Item Value="ShippingManifestId"/>
+        <Item Value="Manifest"/>
+        <Item Value="Aac"/>
+        <Item Value="FloorLocation"/>
+      </AttrNames>
+    </table>
+  
+    <action id="ExecuteWithParams" IterBinding="AllShippingFloors_ManifestIterator"
+            InstanceName="StratisRootServiceDataControl.Root.ShippingService1.AllManifestFloors"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="executeWithParams">
+      <NamedData NDName="EQUIPMENT_NUMBER" NDType="java.lang.String" NDValue="${userbean.workstationId}"/>
+    </action></bindings>
+</pageDefinition>

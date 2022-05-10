@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Admin_ModifyGroupPageDef"
+                Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="GroupViewAll1Iterator" RangeSize="25" Binds="GroupView1"
+              DataControl="AppModuleDataControl" StateValidation="false" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="GroupViewAll1" IterBinding="GroupViewAll1Iterator" >
+      <AttrNames>
+        <Item Value="GroupId"/>
+        <Item Value="GroupName"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="GroupId" IterBinding="GroupViewAll1Iterator" >
+      <AttrNames>
+        <Item Value="GroupId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="GroupName" IterBinding="GroupViewAll1Iterator" >
+      <AttrNames>
+        <Item Value="GroupName"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" InstanceName="StratisRootServiceDataControl.Root.AppModule1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+  </bindings>
+</pageDefinition>

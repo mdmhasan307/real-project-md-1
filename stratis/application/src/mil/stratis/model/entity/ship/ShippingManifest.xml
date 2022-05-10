@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="ShippingManifest"
+   Version="11.1.2.64.36"
+   DBObjectType="table"
+   DBObjectName="SHIPPING_MANIFEST"
+   AliasName="ShippingManifest"
+   BindingStyle="OracleName"
+   UseGlueCode="false"
+   RowClass="mil.stratis.model.entity.ship.ShippingManifestImpl">
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Access" />
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_panelSchema" Value="table|alias" />
+   </DesignTime>
+   <Attribute
+      Name="ShippingManifestId"
+      ColumnName="SHIPPING_MANIFEST_ID"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.DBSequence"
+      ColumnType="NUMBER"
+      TableName="SHIPPING_MANIFEST"
+      PrimaryKey="true"
+      RetrievedOnInsert="true"
+      IsUpdateable="while_insert"
+      DefaultValue="@0"
+      Domain="oracle.jbo.domain.DBSequence">
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+         <Attr Name="_SequenceName" Value="SHIPPING_MANIFEST_ID_SEQ"/>
+         <Attr Name="_SequenceStart" Value="1"/>
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CustomerId"
+      IsNotNull="true"
+      ColumnName="CUSTOMER_ID"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="SHIPPING_MANIFEST" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="LeadTcn"
+      IsUnique="true"
+      Precision="30"
+      ColumnName="LEAD_TCN"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="SHIPPING_MANIFEST" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Manifest"
+      IsUnique="true"
+      Precision="20"
+      ColumnName="MANIFEST"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="SHIPPING_MANIFEST" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="FloorLocationId"
+      IsUnique="true"
+      ColumnName="FLOOR_LOCATION_ID"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="SHIPPING_MANIFEST" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ManifestDate"
+      ColumnName="MANIFEST_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="SHIPPING_MANIFEST" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="PickedUpFlag"
+      IsNotNull="true"
+      Precision="1"
+      ColumnName="PICKED_UP_FLAG"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="SHIPPING_MANIFEST" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="DeliveredFlag"
+      IsNotNull="true"
+      Precision="1"
+      ColumnName="DELIVERED_FLAG"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="SHIPPING_MANIFEST" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="PickedUpDate"
+      ColumnName="PICKED_UP_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="SHIPPING_MANIFEST" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="DeliveredDate"
+      ColumnName="DELIVERED_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="SHIPPING_MANIFEST" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CreatedDate"
+      IsNotNull="true"
+      ColumnName="CREATED_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="SHIPPING_MANIFEST" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CreatedBy"
+      ColumnName="CREATED_BY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="SHIPPING_MANIFEST" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ModifiedDate"
+      ColumnName="MODIFIED_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="SHIPPING_MANIFEST" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ModifiedBy"
+      ColumnName="MODIFIED_BY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="SHIPPING_MANIFEST" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ManifestPrintDate"
+      ColumnName="MANIFEST_PRINT_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="SHIPPING_MANIFEST" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Driver"
+      Precision="50"
+      ColumnName="DRIVER"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="SHIPPING_MANIFEST" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="50" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ModeOfShipment"
+      Precision="20"
+      ColumnName="MODE_OF_SHIPMENT"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="SHIPPING_MANIFEST" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="EquipmentNumber"
+      Precision="6"
+      Scale="0"
+      ColumnName="EQUIPMENT_NUMBER"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="SHIPPING_MANIFEST" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ManifestedBy"
+      Precision="6"
+      Scale="0"
+      ColumnName="MANIFESTED_BY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="SHIPPING_MANIFEST"/>
+   <Key
+      Name="ShippingManifestChk1" >
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="SHIPPING_MANIFEST_CHK1"/>
+         <Attr Name="_checkCondition" Value="PICKED_UP_FLAG IN ('Y', 'N')"/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="ShippingManifestChk2" >
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="SHIPPING_MANIFEST_CHK2"/>
+         <Attr Name="_checkCondition" Value="DELIVERED_FLAG IN ('Y', 'N')"/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="ShippingManifestPk"
+      PrimaryKey="true" >
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="SHIPPING_MANIFEST_PK"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.ship.ShippingManifest.ShippingManifestId" />
+      </AttrArray>
+   </Key>
+   <Key
+      Name="ShippingManifestUk1" >
+      <DesignTime>
+         <Attr Name="_isUnique" Value="true"/>
+         <Attr Name="_DBObjectName" Value="SHIPPING_MANIFEST_UK1"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.ship.ShippingManifest.Manifest" />
+         <Item Value="mil.stratis.model.entity.ship.ShippingManifest.FloorLocationId" />
+         <Item Value="mil.stratis.model.entity.ship.ShippingManifest.LeadTcn" />
+      </AttrArray>
+   </Key>
+   <Key
+      Name="ShippingManifestCustomeFk1" >
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="CUSTOMER_PK"/>
+         <Attr Name="_isForeign" Value="true"/>
+         <Attr Name="_DBObjectName" Value="SHIPPING_MANIFEST_CUSTOME_FK1"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.ship.ShippingManifest.CustomerId" />
+      </AttrArray>
+   </Key>
+   <Key
+      Name="ShippingManifestFloorLFk1" >
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="FLOOR_LOCATION_PK"/>
+         <Attr Name="_isForeign" Value="true"/>
+         <Attr Name="_DBObjectName" Value="SHIPPING_MANIFEST_FLOOR_L_FK1"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.ship.ShippingManifest.FloorLocationId" />
+      </AttrArray>
+   </Key>
+   <Key
+      Name="ShippingManifestUsersFk1" >
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="USERS_PK"/>
+         <Attr Name="_isForeign" Value="true"/>
+         <Attr Name="_DBObjectName" Value="SHIPPING_MANIFEST_USERS_FK1"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.ship.ShippingManifest.CreatedBy" />
+      </AttrArray>
+   </Key>
+   <Key
+      Name="ShippingManifestUsersFk2" >
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="USERS_PK"/>
+         <Attr Name="_isForeign" Value="true"/>
+         <Attr Name="_DBObjectName" Value="SHIPPING_MANIFEST_USERS_FK2"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.ship.ShippingManifest.ModifiedBy" />
+      </AttrArray>
+   </Key>
+   <Key
+      Name="ShippingManifestUsersFk3">
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="USERS_PK"/>
+         <Attr Name="_isForeign" Value="true"/>
+         <Attr Name="_DBObjectName" Value="SHIPPING_MANIFEST_USERS_FK3"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.ship.ShippingManifest.ManifestedBy"/>
+      </AttrArray>
+   </Key>
+</Entity>

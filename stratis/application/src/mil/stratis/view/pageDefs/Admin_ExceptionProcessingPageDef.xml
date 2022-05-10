@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="Admin_ExceptionProcessingPageDef" EnableTokenValidation="false" Package="mil.stratis.view.pageDefs"
+                ControllerClass="#{ExceptionBacking}">
+  <parameters/>
+  <executables>
+
+    <iterator id="RefusalBuffer1Iterator" RangeSize="10" Binds="Root.SysAdmin1.RefusalBuffer1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="RefusalBuffer2Iterator" RangeSize="-1" Binds="Root.SysAdmin1.RefusalBuffer2"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="pickExceptionView1Iterator" RangeSize="10" Binds="Root.SysAdmin1.PickExceptionView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="pickExceptionView2Iterator" RangeSize="10" Binds="Root.SysAdmin1.PickExceptionView2"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="exceptionReceipt1Iterator" RangeSize="10" Binds="Root.SysAdmin1.ExceptionReceipt1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="RefGbofView1Iterator" RangeSize="10" Binds="Root.SysAdmin1.RefGbofView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="SiteInterfacesView1Iterator" RangeSize="10" Binds="Root.SysAdmin1.SiteInterfacesView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="SiteRemoteConnectionsView1Iterator" RangeSize="10" Binds="Root.SysAdmin1.SiteRemoteConnectionsView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="niinUIchange1Iterator" RangeSize="10" Binds="Root.SysAdmin1.NiinUIchange1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="MatsExceptionView1Iterator" RangeSize="10" Binds="Root.SysAdmin1.MatsExceptionView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="serialPickView1Iterator" RangeSize="10" Binds="Root.SysAdmin1.SerialPickView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="StowDelayView1Iterator" RangeSize="10" Binds="Root.SysAdmin1.StowDelayView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator Binds="Root.SysAdmin1.ExceptionView1" DataControl="StratisRootServiceDataControl" RangeSize="25"
+              id="ExceptionView1Iterator" ChangeEventPolicy="none"/>
+    <iterator Binds="ExceptionView1" RangeSize="25" DataControl="SysAdminDataControl1" id="ExceptionView1Iterator1"/>
+    <iterator id="ExpirationViewIterator" RangeSize="10" Binds="Root.SysAdmin1.ExpirationView"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+              
+    <iterator id="NiinLocationWalkThruView1Iterator" Binds="Root.SysAdmin1.NiinLocationWalkThruView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    
+    <iterator id="SerialOrLotNumList1Iterator" RangeSize="10" Binds="Root.PickingAM1.SerialOrLotNumList1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+
+    <table id="RefusalBuffer1" IterBinding="RefusalBuffer1Iterator">
+      <AttrNames>
+        <Item Value="SCN"/>
+        <Item Value="DOCUMENT_NUMBER"/>
+        <Item Value="NIIN"/>
+        <Item Value="CC"/>
+        <Item Value="QTY"/>
+        <Item Value="QTY_REFUSED"/>
+        <Item Value="ISSUE_TYPE"/>
+        <Item Value="ADVICE_CODE"/>
+      </AttrNames>
+    </table>
+    <table id="RefusalBuffer2" IterBinding="RefusalBuffer2Iterator">
+      <AttrNames>
+        <Item Value="SCN"/>
+        <Item Value="DOCUMENT_NUMBER"/>
+        <Item Value="NIIN"/>
+        <Item Value="QTY"/>
+        <Item Value="QTY_REFUSED"/>
+        <Item Value="SUFFIX"/>
+        <Item Value="STATUS"/>
+        <Item Value="QTY_PICKED"/>
+        <Item Value="ADVICE_CODE"/>
+        <Item Value="ISSUE_TYPE"/>
+        <Item Value="CC"/>
+        <Item Value="QTY_ONHAND"/>
+        <Item Value="QTY_PENDING_PICK"/>
+        <Item Value="Location_Label"/>
+      </AttrNames>
+    </table>
+    <table id="pickExceptionView1" IterBinding="pickExceptionView1Iterator">
+      <AttrNames>
+        <Item Value="Scn"/>
+        <Item Value="Suffix"/>
+        <Item Value="Niin"/>
+        <Item Value="Location"/>
+        <Item Value="PickQty"/>
+        <Item Value="issueType"/>
+      </AttrNames>
+    </table>
+    <table id="pickExceptionView2" IterBinding="pickExceptionView2Iterator">
+      <AttrNames>
+        <Item Value="Scn"/>
+        <Item Value="Suffix"/>
+        <Item Value="Niin"/>
+        <Item Value="Location"/>
+        <Item Value="PickQty"/>
+      </AttrNames>
+    </table>
+    <table id="ExpirationView" IterBinding="ExpirationViewIterator">
+      <AttrNames>
+        <Item Value="Niin"/>
+        <Item Value="Location"/>
+        <Item Value="PickQty"/>
+        <Item Value="Cc"/>
+        <Item Value="ExpirationDate"/>
+      </AttrNames>
+    </table>
+    <table id="exceptionReceipt1" IterBinding="exceptionReceipt1Iterator">
+      <AttrNames>
+        <Item Value="Rcn"/>
+        <Item Value="DocumentNumber"/>
+        <Item Value="Nomenclature"/>
+        <Item Value="Niin"/>
+        <Item Value="Fsc"/>
+        <Item Value="Received"/>
+        <Item Value="Invoiced"/>
+        <Item Value="Price"/>
+        <Item Value="UI"/>
+        <Item Value="Weight"/>
+        <Item Value="Cube"/>
+        <Item Value="Sid"/>
+        <Item Value="Qty_Stowed"/>
+        <Item Value="Qty_To_Stow"/>
+        <Item Value="NiinFSC"/>
+        <Item Value="NiinUI"/>
+      </AttrNames>
+    </table>
+    <table id="RefGbofView1" IterBinding="RefGbofView1Iterator">
+      <AttrNames>
+        <Item Value="PrimeNsn"/>
+        <Item Value="ActivityAddressCode"/>
+        <Item Value="ProcessSequenceCode"/>
+        <Item Value="DateBackOrdered"/>
+        <Item Value="DocumentIdentifierCode"/>
+        <Item Value="RoutingIdentifierCode"/>
+        <Item Value="MediaAndStatusCode"/>
+        <Item Value="NationalStockNumber"/>
+        <Item Value="UnitOfIssue"/>
+        <Item Value="TransactionQuantity"/>
+        <Item Value="DocumentNumber"/>
+        <Item Value="DemandCode"/>
+        <Item Value="SupplementaryAddress"/>
+        <Item Value="SignalCode"/>
+        <Item Value="FundCode"/>
+        <Item Value="DistributionCode"/>
+        <Item Value="ProjectCode"/>
+        <Item Value="PriorityDesignatorCode"/>
+        <Item Value="RequiredDeliveryDate"/>
+        <Item Value="AdviceCode"/>
+        <Item Value="ControlCode"/>
+        <Item Value="PassControlCode"/>
+        <Item Value="CostCode"/>
+        <Item Value="TypeUnitCode"/>
+        <Item Value="CrossSupportGroupCode"/>
+        <Item Value="LoadedUnitMimmsCode"/>
+        <Item Value="LoadDateIndicator"/>
+        <Item Value="TransactionDate"/>
+        <Item Value="NonsystemItemIndicator"/>
+        <Item Value="OriginalDocIdCode"/>
+        <Item Value="TransactionRoutingCode"/>
+        <Item Value="ExtensionQuantity"/>
+        <Item Value="MimmsManagedCode"/>
+        <Item Value="CombatEssentialityCode"/>
+        <Item Value="ExtensionUnitPrice"/>
+        <Item Value="ExtensionStatusCode"/>
+        <Item Value="StoresAccountCode"/>
+        <Item Value="MaterielIdentificationCode"/>
+        <Item Value="ControlledItemCode"/>
+        <Item Value="TotalBackOrderIndicator"/>
+        <Item Value="PendingFundsField"/>
+        <Item Value="AnalystCode"/>
+        <Item Value="Pdri"/>
+        <Item Value="ExceptionCode"/>
+        <Item Value="LastTransactionCode"/>
+        <Item Value="MrpServiceCode"/>
+        <Item Value="RefGbofId"/>
+        <Item Value="Smic"/>
+      </AttrNames>
+    </table>
+    <table id="SiteInterfacesView1" IterBinding="SiteInterfacesView1Iterator">
+      <AttrNames>
+        <Item Value="InterfaceId"/>
+        <Item Value="InterfaceName"/>
+        <Item Value="FileName"/>
+        <Item Value="FilePath"/>
+        <Item Value="LastFtpDate"/>
+        <Item Value="LastImpexpDate"/>
+        <Item Value="ConnectionId"/>
+        <Item Value="Status"/>
+        <Item Value="HostName"/>
+      </AttrNames>
+    </table>
+    <table id="SiteRemoteConnectionsView1" IterBinding="SiteRemoteConnectionsView1Iterator">
+      <AttrNames>
+        <Item Value="ConnectionId"/>
+        <Item Value="HostName"/>
+        <Item Value="IpAddress"/>
+        <Item Value="Protocol"/>
+        <Item Value="Port"/>
+        <Item Value="UserId"/>
+        <Item Value="Password"/>
+        <Item Value="HostDir"/>
+        <Item Value="LocalDir"/>
+        <Item Value="UseCertificateFlag"/>
+        <Item Value="CertificatePath"/>
+      </AttrNames>
+    </table>
+    <table id="niinUIchange1" IterBinding="niinUIchange1Iterator">
+      <AttrNames>
+        <Item Value="Niin"/>
+        <Item Value="NiinId"/>
+        <Item Value="Nomenclature"/>
+        <Item Value="OldUi"/>
+        <Item Value="Ui"/>
+        <Item Value="Qty"/>
+        <Item Value="NiinLocId"/>
+        <Item Value="Cc"/>
+        <Item Value="LocationLabel"/>
+        <Item Value="LocationId"/>
+        <Item Value="Weight"/>
+        <Item Value="Length"/>
+        <Item Value="Width"/>
+        <Item Value="Height"/>
+      </AttrNames>
+    </table>
+    <table id="MatsExceptionView1" IterBinding="MatsExceptionView1Iterator">
+      <AttrNames>
+        <Item Value="RefMatsId"/>
+        <Item Value="DocumentIdentifier"/>
+        <Item Value="ConditionCode"/>
+        <Item Value="DocumentNumber"/>
+        <Item Value="Fsc"/>
+        <Item Value="Niin"/>
+        <Item Value="UnitOfIssue"/>
+        <Item Value="TransactionQuantity"/>
+        <Item Value="RequiredDeliveryDate"/>
+        <Item Value="IssuePriorityDesignator"/>
+      </AttrNames>
+    </table>
+    <table id="serialPickView1" IterBinding="serialPickView1Iterator">
+      <AttrNames>
+        <Item Value="SCN"/>
+        <Item Value="PIN"/>
+        <Item Value="NIIN"/>
+        <Item Value="SERIAL_NUMBER"/>
+        <Item Value="LOT_NUMBER"/>
+        <Item Value="INV_LOCATION"/>
+        <Item Value="PICK_LOCATION"/>
+        <Item Value="TIME_OF_PICK"/>
+      </AttrNames>
+    </table>
+    <table id="StowDelayView1" IterBinding="StowDelayView1Iterator">
+      <AttrNames>
+        <Item Value="DOCUMENT_NUMBER"/>
+        <Item Value="SID"/>
+        <Item Value="RCN"/>
+        <Item Value="RECEIPT_QTY"/>
+        <Item Value="QTY_TO_BE_STOWED"/>
+        <Item Value="STOWED_QTY"/>
+        <Item Value="NIIN"/>
+        <Item Value="NOMENCLATURE"/>
+        <Item Value="UI"/>
+      </AttrNames>
+    </table>
+    <tree IterBinding="ExceptionView1Iterator" id="ExceptionView1">
+      <nodeDefinition DefName="mil.stratis.model.view.sysadm.ExceptionView" Name="ExceptionView10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="Error"/>
+          <Item Value="Title"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="Notes"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="ExceptionView1Iterator1" id="ExceptionView11">
+      <nodeDefinition DefName="mil.stratis.model.view.sysadm.ExceptionView" Name="ExceptionView110">
+        <AttrNames>
+          <Item Value="Error"/>
+          <Item Value="Title"/>
+          <Item Value="CreatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <table id="NiinInfoWalkThruView1NiinLocationWalkThruView1" IterBinding="NiinLocationWalkThruView1Iterator">
+      <AttrNames>
+        <Item Value="NiinLocId"/>
+        <Item Value="Qty"/>
+        <Item Value="Cc"/>
+        <Item Value="ExpirationDate"/>
+        <Item Value="DateOfManufacture"/>
+        <Item Value="NiinId"/>
+        <Item Value="LocationLabel"/>
+        <Item Value="SumPick"/>
+        <Item Value="Left"/>
+        <Item Value="PickedQtys"/>
+        <Item Value="NiinlocationQtySumPickingPickQty"/>
+        <Item Value="PickAmmount"/>
+      </AttrNames>
+    </table>
+    <table id="SerialOrLotNumList1" IterBinding="SerialOrLotNumList1Iterator">
+      <AttrNames>
+        <Item Value="SerialOrLoNum"/>
+        <Item Value="SrlLotNumTrackId"/>
+        <Item Value="QtyLot"/>
+        <Item Value="LotConNum"/>
+      </AttrNames>
+    </table>
+    <action id="Create1" RequiresUpdateModel="true" Action="createRow" IterBinding="SerialOrLotNumList1Iterator1"/>
+  </bindings>
+</pageDefinition>

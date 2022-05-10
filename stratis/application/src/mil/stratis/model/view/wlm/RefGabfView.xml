@@ -1,0 +1,332 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="RefGabfView"
+   Version="11.1.2.64.36"
+   SelectList="RefGabf.PRIME_NATIONAL_STOCK_NUMBER, 
+       RefGabf.RECORD_FSC, 
+       RefGabf.RECORD_NIIN, 
+       RefGabf.RECORD_SMIC, 
+       RefGabf.ACTIVITY_ADDRESS_CODE, 
+       RefGabf.UNIT_OF_ISSUE, 
+       RefGabf.UNIT_PRICE, 
+       RefGabf.STORES_ACCOUNT_COUNT, 
+       RefGabf.MATERIEL_IDENTIFICATION_CODE, 
+       RefGabf.CONTROLLED_ITEM_CODE, 
+       RefGabf.NONSYSTEM_ITEM_INDICATOR, 
+       RefGabf.PHRASE_CODE, 
+       RefGabf.FAMILY_RELATION_CODE, 
+       RefGabf.MANAGEMENT_ECHELON_CODE, 
+       RefGabf.PROVISIONING_DATE, 
+       RefGabf.CLD_REQUISITIONING_OBJECTIVE, 
+       RefGabf.REORDER_POINT, 
+       RefGabf.REQUISITIONING_OBJECTIVE, 
+       RefGabf.ON_HAND_OP_STOCK_SERVICEABLE, 
+       RefGabf.DUE_OPERATING_STOCK, 
+       RefGabf.BACK_ORDER_QUANTITY, 
+       RefGabf.REQUIREMENT_CODE, 
+       RefGabf.OPERATION_CODE, 
+       RefGabf.FIXED_LEVEL, 
+       RefGabf.THIRTY_DAY_USAGE, 
+       RefGabf.FLOAT_REQUISITION_OBJECTIVE, 
+       RefGabf.EXCESS_ON_HAND, 
+       RefGabf.MANAGEMENT_VALUE_FACTOR, 
+       RefGabf.ON_HAND_UNSERVICEABLE, 
+       RefGabf.PROVISIONING_ON_HAND, 
+       RefGabf.PROVISIONING_DUE, 
+       RefGabf.NUMBER_OF_FIRST_RECEIPTS, 
+       RefGabf.DAYS_OF_FIRST_RECEIPTS, 
+       RefGabf.SUPPLY_SOURCE_CODE, 
+       RefGabf.FREEZE_CODE, 
+       RefGabf.FREEZE_DATE, 
+       RefGabf.LAST_TRANSACTION_DATE, 
+       RefGabf.ANALYST_CODE, 
+       RefGabf.TOTAL_MOUNT_OUT_ALLOWANCE, 
+       RefGabf.MOUNT_OUT_QUANTITY_IN_BLOCKS, 
+       RefGabf.MOUNT_OUT_RESERVED, 
+       RefGabf.SPECIAL_ALLOCANCE, 
+       RefGabf.PROCESSED, 
+       RefGabf.REF_GABF_ID"
+   FromList="REF_GABF RefGabf"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.wlm.RefGabfViewImpl"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="RefGabf"
+      Entity="mil.stratis.model.entity.wlm.RefGabf" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="PrimeNationalStockNumber"
+      EntityAttrName="PrimeNationalStockNumber"
+      EntityUsage="RefGabf"
+      AliasName="PRIME_NATIONAL_STOCK_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RecordFsc"
+      EntityAttrName="RecordFsc"
+      EntityUsage="RefGabf"
+      AliasName="RECORD_FSC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RecordNiin"
+      EntityAttrName="RecordNiin"
+      EntityUsage="RefGabf"
+      AliasName="RECORD_NIIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RecordSmic"
+      EntityAttrName="RecordSmic"
+      EntityUsage="RefGabf"
+      AliasName="RECORD_SMIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ActivityAddressCode"
+      EntityAttrName="ActivityAddressCode"
+      EntityUsage="RefGabf"
+      AliasName="ACTIVITY_ADDRESS_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UnitOfIssue"
+      EntityAttrName="UnitOfIssue"
+      EntityUsage="RefGabf"
+      AliasName="UNIT_OF_ISSUE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UnitPrice"
+      EntityAttrName="UnitPrice"
+      EntityUsage="RefGabf"
+      AliasName="UNIT_PRICE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StoresAccountCount"
+      EntityAttrName="StoresAccountCount"
+      EntityUsage="RefGabf"
+      AliasName="STORES_ACCOUNT_COUNT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MaterielIdentificationCode"
+      EntityAttrName="MaterielIdentificationCode"
+      EntityUsage="RefGabf"
+      AliasName="MATERIEL_IDENTIFICATION_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ControlledItemCode"
+      EntityAttrName="ControlledItemCode"
+      EntityUsage="RefGabf"
+      AliasName="CONTROLLED_ITEM_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NonsystemItemIndicator"
+      EntityAttrName="NonsystemItemIndicator"
+      EntityUsage="RefGabf"
+      AliasName="NONSYSTEM_ITEM_INDICATOR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PhraseCode"
+      EntityAttrName="PhraseCode"
+      EntityUsage="RefGabf"
+      AliasName="PHRASE_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FamilyRelationCode"
+      EntityAttrName="FamilyRelationCode"
+      EntityUsage="RefGabf"
+      AliasName="FAMILY_RELATION_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ManagementEchelonCode"
+      EntityAttrName="ManagementEchelonCode"
+      EntityUsage="RefGabf"
+      AliasName="MANAGEMENT_ECHELON_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProvisioningDate"
+      EntityAttrName="ProvisioningDate"
+      EntityUsage="RefGabf"
+      AliasName="PROVISIONING_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CldRequisitioningObjective"
+      EntityAttrName="CldRequisitioningObjective"
+      EntityUsage="RefGabf"
+      AliasName="CLD_REQUISITIONING_OBJECTIVE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ReorderPoint"
+      EntityAttrName="ReorderPoint"
+      EntityUsage="RefGabf"
+      AliasName="REORDER_POINT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RequisitioningObjective"
+      EntityAttrName="RequisitioningObjective"
+      EntityUsage="RefGabf"
+      AliasName="REQUISITIONING_OBJECTIVE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OnHandOpStockServiceable"
+      EntityAttrName="OnHandOpStockServiceable"
+      EntityUsage="RefGabf"
+      AliasName="ON_HAND_OP_STOCK_SERVICEABLE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DueOperatingStock"
+      EntityAttrName="DueOperatingStock"
+      EntityUsage="RefGabf"
+      AliasName="DUE_OPERATING_STOCK" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BackOrderQuantity"
+      EntityAttrName="BackOrderQuantity"
+      EntityUsage="RefGabf"
+      AliasName="BACK_ORDER_QUANTITY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RequirementCode"
+      EntityAttrName="RequirementCode"
+      EntityUsage="RefGabf"
+      AliasName="REQUIREMENT_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OperationCode"
+      EntityAttrName="OperationCode"
+      EntityUsage="RefGabf"
+      AliasName="OPERATION_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FixedLevel"
+      EntityAttrName="FixedLevel"
+      EntityUsage="RefGabf"
+      AliasName="FIXED_LEVEL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ThirtyDayUsage"
+      EntityAttrName="ThirtyDayUsage"
+      EntityUsage="RefGabf"
+      AliasName="THIRTY_DAY_USAGE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FloatRequisitionObjective"
+      EntityAttrName="FloatRequisitionObjective"
+      EntityUsage="RefGabf"
+      AliasName="FLOAT_REQUISITION_OBJECTIVE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ExcessOnHand"
+      EntityAttrName="ExcessOnHand"
+      EntityUsage="RefGabf"
+      AliasName="EXCESS_ON_HAND" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ManagementValueFactor"
+      EntityAttrName="ManagementValueFactor"
+      EntityUsage="RefGabf"
+      AliasName="MANAGEMENT_VALUE_FACTOR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OnHandUnserviceable"
+      EntityAttrName="OnHandUnserviceable"
+      EntityUsage="RefGabf"
+      AliasName="ON_HAND_UNSERVICEABLE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProvisioningOnHand"
+      EntityAttrName="ProvisioningOnHand"
+      EntityUsage="RefGabf"
+      AliasName="PROVISIONING_ON_HAND" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProvisioningDue"
+      EntityAttrName="ProvisioningDue"
+      EntityUsage="RefGabf"
+      AliasName="PROVISIONING_DUE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NumberOfFirstReceipts"
+      EntityAttrName="NumberOfFirstReceipts"
+      EntityUsage="RefGabf"
+      AliasName="NUMBER_OF_FIRST_RECEIPTS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DaysOfFirstReceipts"
+      EntityAttrName="DaysOfFirstReceipts"
+      EntityUsage="RefGabf"
+      AliasName="DAYS_OF_FIRST_RECEIPTS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SupplySourceCode"
+      EntityAttrName="SupplySourceCode"
+      EntityUsage="RefGabf"
+      AliasName="SUPPLY_SOURCE_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FreezeCode"
+      EntityAttrName="FreezeCode"
+      EntityUsage="RefGabf"
+      AliasName="FREEZE_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FreezeDate"
+      EntityAttrName="FreezeDate"
+      EntityUsage="RefGabf"
+      AliasName="FREEZE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastTransactionDate"
+      EntityAttrName="LastTransactionDate"
+      EntityUsage="RefGabf"
+      AliasName="LAST_TRANSACTION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AnalystCode"
+      EntityAttrName="AnalystCode"
+      EntityUsage="RefGabf"
+      AliasName="ANALYST_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TotalMountOutAllowance"
+      EntityAttrName="TotalMountOutAllowance"
+      EntityUsage="RefGabf"
+      AliasName="TOTAL_MOUNT_OUT_ALLOWANCE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MountOutQuantityInBlocks"
+      EntityAttrName="MountOutQuantityInBlocks"
+      EntityUsage="RefGabf"
+      AliasName="MOUNT_OUT_QUANTITY_IN_BLOCKS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MountOutReserved"
+      EntityAttrName="MountOutReserved"
+      EntityUsage="RefGabf"
+      AliasName="MOUNT_OUT_RESERVED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SpecialAllocance"
+      EntityAttrName="SpecialAllocance"
+      EntityUsage="RefGabf"
+      AliasName="SPECIAL_ALLOCANCE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Processed"
+      EntityAttrName="Processed"
+      EntityUsage="RefGabf"
+      AliasName="PROCESSED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RefGabfId"
+      IsUpdateable="while_insert"
+      IsNotNull="true"
+      EntityAttrName="RefGabfId"
+      EntityUsage="RefGabf"
+      AliasName="REF_GABF_ID" >
+   </ViewAttribute>
+</ViewObject>

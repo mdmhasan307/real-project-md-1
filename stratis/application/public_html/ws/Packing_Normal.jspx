@@ -1,0 +1,473 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="4"/>
+    <jsp:setProperty name="userbean" property="selected2" value="0"/>
+    <f:view>
+        <af:document title="Packing Normal" id="d1">
+            <af:form id="pinForm">
+                <af:panelStretchLayout startWidth="25" topHeight="150" bottomHeight="25" id="psl1">
+                    <f:facet name="top">
+                        <f:subview id="pn_wrap_header">
+                            <jsp:include page="/ws/WS_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <!--af:form id="pinForm"-->
+                            <af:panelGroupLayout layout="horizontal">
+
+                                <!--<af:panelBox text="PACKING" inlineStyle="text-align:center;">-->
+                                <af:panelGroupLayout>
+                                    <af:panelBox text="PIN Entry" inlineStyle="text-align:center;width:500px;">
+                                        <af:panelFormLayout>
+                                            <af:panelGridLayout>
+                                                <af:gridRow>
+                                                    <af:gridCell columnSpan="1">
+                                                        <af:inputText label="Enter PIN:  " binding="#{consolbean.pinVal}"
+                                                                      inlineStyle="font-size:large;text-transform:uppercase"
+                                                                      maximumLength="15" id="enterPin">
+                                                            <af:validateRegExp pattern="[a-zA-Z0-9]{0,15}"/>
+                                                        </af:inputText>
+                                                    </af:gridCell>
+                                                    <af:gridCell columnSpan="2">
+                                                        <af:button actionListener="#{consolbean.addPin}" text="Add PIN"
+                                                                   binding="#{consolbean.addPin}" inlineStyle="font-size:medium;"
+                                                                   id="submitPin"
+                                                                   partialSubmit="false"/>
+                                                    </af:gridCell>
+                                                </af:gridRow>
+                                            </af:panelGridLayout>
+                                        </af:panelFormLayout>
+                                    </af:panelBox>
+                                    <af:panelBox text="PIN List" inlineStyle="text-align:center;width:500px;">
+                                        <af:panelFormLayout>
+                                            <af:panelGridLayout>
+                                                <af:gridRow>
+                                                    <af:gridCell>
+                                                        <af:table value="#{bindings.pinlist1.collectionModel}" var="row"
+                                                                  rows="#{bindings.pinlist1.rangeSize}"
+                                                                  first="#{bindings.pinlist1.rangeStart}"
+                                                                  emptyText="#{bindings.pinlist1.viewable ? 'Enter PIN' : 'Access Denied.'}"
+                                                                  width="450px">
+                                                            <af:column sortProperty="PIN" sortable="false" width="80"
+                                                                       headerText="#{bindings.pinlist1.labels.PIN}"
+                                                                       inlineStyle="text-align:left;">
+                                                                <af:outputText value="#{row.PIN}"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="AAC" sortable="false" width="60"
+                                                                       headerText="#{bindings.pinlist1.labels.AAC}"
+                                                                       inlineStyle="text-align:left;">
+                                                                <af:outputText value="#{row.AAC}"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="Document_Number" sortable="false" width="120"
+                                                                       headerText="Document Number" inlineStyle="text-align:left;">
+                                                                <af:outputText value="#{row['Document_Number']}"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="SCN" sortable="false" width="80"
+                                                                       headerText="#{bindings.pinlist1.labels.SCN}"
+                                                                       inlineStyle="text-align:left;">
+                                                                <af:outputText value="#{row.SCN}"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="Qty" sortable="false" width="18"
+                                                                       headerText="#{bindings.pinlist1.labels.Qty}">
+                                                                <af:outputText value="#{row.Qty}">
+                                                                    <f:convertNumber groupingUsed="false"
+                                                                                     pattern="#{bindings.pinlist1.formats.Qty}"/>
+                                                                </af:outputText>
+                                                            </af:column>
+                                                            <af:column sortProperty="pickNo" sortable="false" width="40"
+                                                                       headerText="Pick #">
+                                                                <af:outputText value="#{row.pickNo}"/>
+                                                            </af:column>
+                                                        </af:table>
+                                                    </af:gridCell>
+                                                </af:gridRow>
+                                                <af:gridRow>
+                                                    <af:gridCell>
+                                                        <af:panelGridLayout>
+                                                            <af:gridRow>
+                                                                <af:gridCell>
+                                                                    <af:button text="Submit" actionListener="#{consolbean.submitPINList}"
+                                                                               binding="#{consolbean.pinListSubmit}"
+                                                                               inlineStyle="font-size:medium;"
+                                                                               partialTriggers="pinSwitcher stationSwitcher"
+                                                                               partialSubmit="false"/>
+                                                                </af:gridCell>
+                                                                <af:gridCell>
+                                                                    <af:button actionListener="#{consolbean.clearPinList}" text="Clear"
+                                                                               binding="#{consolbean.pinListClear}"
+                                                                               inlineStyle="font-size:medium;"
+                                                                               partialSubmit="false"/>
+                                                                </af:gridCell>
+                                                            </af:gridRow>
+                                                        </af:panelGridLayout>
+                                                    </af:gridCell>
+                                                </af:gridRow>
+                                            </af:panelGridLayout>
+                                        </af:panelFormLayout>
+                                    </af:panelBox>
+                                </af:panelGroupLayout>
+                                <af:panelGroupLayout>
+                                    <af:switcher facetName="#{consolbean.pinState}" id="pinSwitcher">
+                                        <f:facet name="0">
+                                        </f:facet>
+                                        <f:facet name="1">
+                                            <af:switcher facetName="#{consolbean.stationState}" id="stationSwitcher">
+                                                <f:facet name="0">
+                                                    <af:panelBox text="Location Verification" inlineStyle="text-align:center;width:500px">
+                                                        <af:panelFormLayout>
+                                                            <af:panelGridLayout>
+                                                                <af:gridRow>
+                                                                    <af:gridCell>
+                                                                        <af:outputText value="Process the following pick:"/>
+                                                                        <af:table value="#{bindings.pinlist2.collectionModel}" var="row"
+                                                                                  rows="#{bindings.pinlist2.rangeSize}"
+                                                                                  first="#{bindings.pinlist2.rangeStart}"
+                                                                                  emptyText="#{bindings.pinlist2.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                                                  width="450px">
+                                                                            <af:column sortProperty="PIN" sortable="false" width="90"
+                                                                                       headerText="#{bindings.pinlist2.labels.PIN}"
+                                                                                       inlineStyle="text-align:left;">
+                                                                                <af:outputText value="#{row.PIN}"/>
+                                                                            </af:column>
+                                                                            <af:column sortProperty="AAC" sortable="false" width="60"
+                                                                                       headerText="#{bindings.pinlist2.labels.AAC}"
+                                                                                       inlineStyle="text-align:left;">
+                                                                                <af:outputText value="#{row.AAC}"/>
+                                                                            </af:column>
+                                                                            <af:column sortProperty="Document_Number" sortable="false"
+                                                                                       width="120" headerText="Document Number"
+                                                                                       inlineStyle="text-align:left;">
+                                                                                <af:outputText value="#{row['Document_Number']}"/>
+                                                                            </af:column>
+                                                                            <af:column sortProperty="SCN" sortable="false" width="80"
+                                                                                       headerText="#{bindings.pinlist2.labels.SCN}"
+                                                                                       inlineStyle="text-align:left;">
+                                                                                <af:outputText value="#{row.SCN}"/>
+                                                                            </af:column>
+                                                                            <af:column sortProperty="Qty" sortable="false" width="18"
+                                                                                       headerText="#{bindings.pinlist2.labels.Qty}">
+                                                                                <af:outputText value="#{row.Qty}">
+                                                                                    <f:convertNumber groupingUsed="false"
+                                                                                                     pattern="#{bindings.pinlist2.formats.Qty}"/>
+                                                                                </af:outputText>
+                                                                            </af:column>
+                                                                        </af:table>
+                                                                    </af:gridCell>
+                                                                </af:gridRow>
+                                                                <af:gridRow>
+                                                                    <af:gridCell>
+                                                                        <af:panelGridLayout>
+                                                                            <af:gridRow>
+                                                                                <af:gridCell halign="center">
+                                                                                    <af:separator/>
+                                                                                    <af:outputText value="Consolidation Bin:"/>
+                                                                                </af:gridCell>
+                                                                            </af:gridRow>
+                                                                            <af:gridRow>
+                                                                                <af:gridCell halign="center">
+                                                                                    <af:outputText value="#{consolbean.binLocation}"
+                                                                                                   inlineStyle="font-size:42.0pt; font-weight:bold; color:rgb(128,0,0);"/>
+                                                                                    <af:separator/>
+                                                                                </af:gridCell>
+                                                                            </af:gridRow>
+                                                                            <af:gridRow>
+                                                                                <af:gridCell>
+                                                                                    <af:panelGridLayout>
+                                                                                        <af:gridRow>
+                                                                                            <af:gridCell>
+                                                                                                <af:outputText
+                                                                                                        value="Verify Bin Location:  "
+                                                                                                        inlineStyle="font-size:larger;"/>
+                                                                                            </af:gridCell>
+                                                                                            <af:gridCell>
+                                                                                                <af:inputText
+                                                                                                        binding="#{consolbean.locationBarcode}"
+                                                                                                        inlineStyle="font-size:larger;"
+                                                                                                        contentStyle="text-transform:uppercase;"
+                                                                                                        maximumLength="5" columns="18">
+                                                                                                    <af:validateRegExp
+                                                                                                            pattern="[a-zA-Z0-9]{0,5}"/>
+                                                                                                </af:inputText>
+                                                                                            </af:gridCell>
+                                                                                        </af:gridRow>
+                                                                                        <af:gridRow>
+                                                                                            <af:gridCell columnSpan="2">
+                                                                                                <af:toolbar>
+                                                                                                    <af:button text="Submit"
+                                                                                                               actionListener="#{consolbean.verifyLocation1}"
+                                                                                                               binding="#{consolbean.submitLocation}"
+                                                                                                               inlineStyle="font-size:medium;"
+                                                                                                               partialSubmit="false"/>
+                                                                                                    <af:button
+                                                                                                            actionListener="#{consolbean.cancelLocationBarcode}"
+                                                                                                            text="Cancel"
+                                                                                                            binding="#{consolbean.cancelLocation}"
+                                                                                                            inlineStyle="font-size:medium;"
+                                                                                                            partialSubmit="false"/>
+                                                                                                </af:toolbar>
+                                                                                            </af:gridCell>
+                                                                                        </af:gridRow>
+                                                                                    </af:panelGridLayout>
+                                                                                </af:gridCell>
+                                                                            </af:gridRow>
+                                                                        </af:panelGridLayout>
+                                                                    </af:gridCell>
+                                                                </af:gridRow>
+                                                            </af:panelGridLayout>
+                                                        </af:panelFormLayout>
+                                                    </af:panelBox>
+                                                </f:facet>
+                                                <f:facet name="1">
+                                                    <af:panelBox text="Barcode Entry" inlineStyle="text-align:center;width:500px;">
+                                                        <af:panelFormLayout>
+                                                            <af:panelGridLayout>
+                                                                <af:gridRow>
+                                                                    <af:gridCell>
+                                                                        <f:verbatim>
+                                                                            <br/>
+                                                                        </f:verbatim>
+                                                                        <af:outputText value="Process the following pick:"/>
+                                                                        <af:table value="#{bindings.pinlist2.collectionModel}" var="row"
+                                                                                  rows="#{bindings.pinlist2.rangeSize}"
+                                                                                  first="#{bindings.pinlist2.rangeStart}"
+                                                                                  emptyText="#{bindings.pinlist2.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                                                  width="450px">
+                                                                            <af:column sortProperty="PIN" sortable="false" width="80"
+                                                                                       headerText="#{bindings.pinlist2.labels.PIN}"
+                                                                                       inlineStyle="text-align:left;">
+                                                                                <af:outputText value="#{row.PIN}"/>
+                                                                            </af:column>
+                                                                            <af:column sortProperty="AAC" sortable="false" width="60"
+                                                                                       headerText="#{bindings.pinlist2.labels.AAC}"
+                                                                                       inlineStyle="text-align:left;">
+                                                                                <af:outputText value="#{row.AAC}"/>
+                                                                            </af:column>
+                                                                            <af:column sortProperty="Document_Number" sortable="false"
+                                                                                       width="120" headerText="Document Number"
+                                                                                       inlineStyle="text-align:left;">
+                                                                                <af:outputText value="#{row['Document_Number']}"/>
+                                                                            </af:column>
+                                                                            <af:column sortProperty="SCN" sortable="false" width="70"
+                                                                                       headerText="#{bindings.pinlist2.labels.SCN}">
+                                                                                <af:outputText value="#{row.SCN}"/>
+                                                                            </af:column>
+                                                                            <af:column sortProperty="Qty" sortable="false" width="18"
+                                                                                       headerText="#{bindings.pinlist2.labels.Qty}">
+                                                                                <af:outputText value="#{row.Qty}">
+                                                                                    <f:convertNumber groupingUsed="false"
+                                                                                                     pattern="#{bindings.pinlist2.formats.Qty}"/>
+                                                                                </af:outputText>
+                                                                            </af:column>
+                                                                        </af:table>
+                                                                    </af:gridCell>
+                                                                </af:gridRow>
+                                                                <af:switcher facetName="#{consolbean.singlePack}">
+                                                                    <f:facet name="0">
+                                                                        <af:gridRow>
+                                                                            <af:gridCell halign="center">
+                                                                                <af:panelGridLayout>
+                                                                                    <af:gridRow>
+                                                                                        <af:gridCell>
+                                                                                            <f:verbatim>
+                                                                                                <br/>
+                                                                                            </f:verbatim>
+                                                                                            <af:outputText
+                                                                                                    value="Enter Shipping Barcode: "
+                                                                                                    inlineStyle="font-size:large;"/>
+                                                                                        </af:gridCell>
+                                                                                    </af:gridRow>
+                                                                                    <af:gridRow>
+                                                                                        <af:gridCell>
+                                                                                            <af:inputText
+                                                                                                    binding="#{consolbean.consolBarcode}"
+                                                                                                    inlineStyle="font-size:large;"
+                                                                                                    contentStyle="text-transform:uppercase;"
+                                                                                                    maximumLength="10">
+                                                                                                <af:validateRegExp
+                                                                                                        pattern="[A-Za-z][A-Za-z0-9]{0,10}"
+                                                                                                        messageDetailNoMatch="Shipping Barcode can only contain alphanumeric characters, no special characters allowed"/>
+                                                                                            </af:inputText>
+                                                                                        </af:gridCell>
+                                                                                    </af:gridRow>
+                                                                                    <af:gridRow>
+                                                                                        <af:gridCell columnSpan="2">
+                                                                                            <af:toolbar>
+                                                                                                <af:button text="Submit"
+                                                                                                           actionListener="#{consolbean.addScannedConsol1}"
+                                                                                                           binding="#{consolbean.submitConsol}"
+                                                                                                           inlineStyle="font-size:medium;"
+                                                                                                           partialSubmit="false"/>
+                                                                                                <af:button
+                                                                                                        actionListener="#{consolbean.cancelConsolBarcode}"
+                                                                                                        text="Cancel"
+                                                                                                        binding="#{consolbean.cancelConsol}"
+                                                                                                        inlineStyle="font-size:medium;"
+                                                                                                        immediate="true"
+                                                                                                        partialSubmit="false"/>
+                                                                                            </af:toolbar>
+                                                                                        </af:gridCell>
+                                                                                    </af:gridRow>
+                                                                                </af:panelGridLayout>
+                                                                            </af:gridCell>
+                                                                        </af:gridRow>
+                                                                    </f:facet>
+                                                                    <f:facet name="1">
+                                                                        <af:gridRow>
+                                                                            <af:gridCell>
+                                                                                <af:panelGridLayout>
+                                                                                    <af:gridRow>
+                                                                                        <af:gridCell halign="center">
+                                                                                            <af:separator/>
+                                                                                            <af:switcher facetName="#{consolbean.lastPack}">
+                                                                                                <f:facet name="0">
+                                                                                                    <af:outputText
+                                                                                                            value="Place item in Consolidation Bin:"/>
+                                                                                                </f:facet>
+                                                                                                <f:facet name="1">
+                                                                                                    <af:outputText
+                                                                                                            value="Remove items from Consolidation Bin:"/>
+                                                                                                </f:facet>
+                                                                                            </af:switcher>
+                                                                                        </af:gridCell>
+                                                                                    </af:gridRow>
+                                                                                    <af:gridRow>
+                                                                                        <af:gridCell halign="center">
+                                                                                            <af:outputText value="#{consolbean.binLocation}"
+                                                                                                           inlineStyle="font-size:42.0pt; font-weight:bold; color:rgb(128,0,0);"/>
+                                                                                            <af:separator/>
+                                                                                        </af:gridCell>
+                                                                                    </af:gridRow>
+                                                                                    <af:switcher facetName="#{consolbean.lastPack}">
+                                                                                        <f:facet name="0">
+                                                                                            <af:gridRow>
+                                                                                                <af:gridCell>
+                                                                                                    <af:panelGridLayout>
+                                                                                                        <af:gridRow>
+                                                                                                            <af:gridCell>
+                                                                                                                <af:outputText
+                                                                                                                        value="Verify Bin Location:  "
+                                                                                                                        inlineStyle="font-size:larger;"/>
+                                                                                                            </af:gridCell>
+                                                                                                            <af:gridCell>
+                                                                                                                <af:inputText
+                                                                                                                        binding="#{consolbean.locationBarcode2}"
+                                                                                                                        inlineStyle="font-size:larger;"
+                                                                                                                        contentStyle="text-transform:uppercase;"
+                                                                                                                        maximumLength="5"
+                                                                                                                        columns="18">
+                                                                                                                    <af:validateRegExp
+                                                                                                                            pattern="[a-zA-Z0-9]{0,5}"
+                                                                                                                            messageDetailNoMatch="Shipping Barcode can only contain alphanumeric characters, no special characters allowed"/>
+                                                                                                                </af:inputText>
+                                                                                                            </af:gridCell>
+                                                                                                        </af:gridRow>
+                                                                                                        <af:gridRow>
+                                                                                                            <af:gridCell columnSpan="2">
+                                                                                                                <af:toolbar>
+                                                                                                                    <af:button text="Submit"
+                                                                                                                               actionListener="#{consolbean.verifyLocation2}"
+                                                                                                                               binding="#{consolbean.submitLocation2}"
+                                                                                                                               inlineStyle="font-size:medium;"
+                                                                                                                               partialSubmit="false"/>
+                                                                                                                    <af:button
+                                                                                                                            actionListener="#{consolbean.cancelLocationBarcode}"
+                                                                                                                            text="Cancel"
+                                                                                                                            binding="#{consolbean.cancelLocation2}"
+                                                                                                                            inlineStyle="font-size:medium;"
+                                                                                                                            immediate="true"
+                                                                                                                            partialSubmit="false"/>
+                                                                                                                </af:toolbar>
+                                                                                                            </af:gridCell>
+                                                                                                        </af:gridRow>
+                                                                                                    </af:panelGridLayout>
+                                                                                                </af:gridCell>
+                                                                                            </af:gridRow>
+                                                                                        </f:facet>
+                                                                                        <f:facet name="1">
+                                                                                            <af:gridRow>
+                                                                                                <af:gridCell halign="center">
+                                                                                                    <af:panelGridLayout>
+                                                                                                        <af:gridRow>
+                                                                                                            <af:gridCell>
+                                                                                                                <f:verbatim>
+                                                                                                                    <br/>
+                                                                                                                </f:verbatim>
+                                                                                                                <af:outputText
+                                                                                                                        value="Enter Shipping Barcode:  "
+                                                                                                                        inlineStyle="font-size:large;"/>
+                                                                                                            </af:gridCell>
+                                                                                                        </af:gridRow>
+                                                                                                        <af:gridRow>
+                                                                                                            <af:gridCell>
+                                                                                                                <af:inputText
+                                                                                                                        binding="#{consolbean.consolBarcode2}"
+                                                                                                                        inlineStyle="font-size:large;"
+                                                                                                                        contentStyle="text-transform:uppercase;"
+                                                                                                                        maximumLength="10">
+                                                                                                                    <af:validateRegExp
+                                                                                                                            pattern="[a-zA-Z0-9]{0,10}"
+                                                                                                                            messageDetailNoMatch="Shipping Barcode can only contain alphanumeric characters, no special characters allowed"/>
+                                                                                                                </af:inputText>
+                                                                                                            </af:gridCell>
+                                                                                                        </af:gridRow>
+                                                                                                        <af:gridRow>
+                                                                                                            <af:gridCell columnSpan="2">
+                                                                                                                <af:toolbar>
+                                                                                                                    <af:button text="Submit"
+                                                                                                                               actionListener="#{consolbean.addScannedConsol2}"
+                                                                                                                               binding="#{consolbean.submitConsol2}"
+                                                                                                                               inlineStyle="font-size:medium;"
+                                                                                                                               partialSubmit="false"/>
+                                                                                                                    <af:button
+                                                                                                                            actionListener="#{consolbean.cancelConsolBarcode}"
+                                                                                                                            text="Cancel"
+                                                                                                                            binding="#{consolbean.cancelConsol2}"
+                                                                                                                            inlineStyle="font-size:medium;"
+                                                                                                                            immediate="true"
+                                                                                                                            partialSubmit="false"/>
+                                                                                                                </af:toolbar>
+                                                                                                            </af:gridCell>
+                                                                                                        </af:gridRow>
+                                                                                                    </af:panelGridLayout>
+                                                                                                </af:gridCell>
+                                                                                            </af:gridRow>
+                                                                                        </f:facet>
+                                                                                    </af:switcher>
+                                                                                </af:panelGridLayout>
+                                                                            </af:gridCell>
+                                                                        </af:gridRow>
+                                                                    </f:facet>
+                                                                </af:switcher>
+                                                            </af:panelGridLayout>
+                                                        </af:panelFormLayout>
+                                                    </af:panelBox>
+                                                </f:facet>
+                                            </af:switcher>
+                                        </f:facet>
+                                    </af:switcher>
+                                </af:panelGroupLayout>
+                            </af:panelGroupLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="../FooterMain.jspx"/>
+                            </f:subview>
+                            <!--/af:form-->
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <!-- End center facet -->
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="start"/>
+                    <f:facet name="end"/>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

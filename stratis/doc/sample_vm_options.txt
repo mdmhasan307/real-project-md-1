@@ -1,0 +1,19 @@
+set the additional-location to point to the sample_stratis_context.properties file in this same folder
+
+-Dspring.config.additional-location=/Users/isaactroll/projects/MLS2/stratis/doc/base_stratis_context.properties
+-Dnet.jawr.debug.on=true
+-Duser.timezone=UTC
+-Xms4096m
+-Xmx4096m
+-Djavax.xml.parsers.DocumentBuilderFactory=com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl
+-Djavax.xml.transform.TransformerFactory=com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl
+-Djavax.xml.parsers.SAXParserFactory=com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl
+-Djavax.xml.datatype.DatatypeFactory=com.sun.org.apache.xerces.internal.jaxp.datatype.DatatypeFactoryImpl
+
+-Duser.timezone needs set to UTC for innovation, or the appropriate timezone for legacy db being used.
+
+
+if you want to run stratis in legacy, but other applications in innovation mode, you can add the following vm option
+-Dspring.profiles.active=dev
+
+This vm option will override whats in your .env file that all other mls2 applications will use.

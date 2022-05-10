@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PackingStation"
+  Version="11.1.2.64.36"
+  DBObjectType="SYNONYM"
+  DBObjectName="PACKING_STATION"
+  AliasName="PackingStation"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <Attribute
+    Name="PackingStationId"
+    Precision="6"
+    Scale="0"
+    ColumnName="PACKING_STATION_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.DBSequence"
+    ColumnType="NUMBER"
+    TableName="PACKING_STATION"
+    PrimaryKey="true"
+    IsUpdateable="while_insert"
+    DefaultValue="@0"
+    Domain="oracle.jbo.domain.DBSequence"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_SequenceName" Value="PACKING_STATION_ID_SEQ"/>
+      <Attr Name="_SequenceStart" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Levels"
+    IsNotNull="true"
+    Precision="6"
+    Scale="0"
+    ColumnName="LEVELS"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="PACKING_STATION"/>
+  <Attribute
+    Name="Columns"
+    IsNotNull="true"
+    Precision="6"
+    Scale="0"
+    ColumnName="COLUMNS"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="PACKING_STATION"/>
+  <Attribute
+    Name="TotalIssues"
+    Precision="6"
+    Scale="0"
+    ColumnName="TOTAL_ISSUES"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="PACKING_STATION"/>
+  <Attribute
+    Name="NumberOfSlotsInUse"
+    Precision="6"
+    Scale="0"
+    ColumnName="NUMBER_OF_SLOTS_IN_USE"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="PACKING_STATION"/>
+  <Attribute
+    Name="EquipmentNumber"
+    ColumnName="EQUIPMENT_NUMBER"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="PACKING_STATION"/>
+  <AccessorAttribute
+    Name="PackingConsolidation"
+    Association="mil.stratis.model.entity.associations.PackingConsolStationFkAssoc"
+    AssociationEnd="mil.stratis.model.entity.associations.PackingConsolStationFkAssoc.PackingConsolidation"
+    AssociationOtherEnd="mil.stratis.model.entity.associations.PackingConsolStationFkAssoc.PackingStation"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="Equip"
+    Association="mil.stratis.model.entity.associations.PackingStationEquipFkAssoc"
+    AssociationEnd="mil.stratis.model.entity.associations.PackingStationEquipFkAssoc.Equip"
+    AssociationOtherEnd="mil.stratis.model.entity.associations.PackingStationEquipFkAssoc.PackingStation"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="PackingstationPrimaryKey"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="PACKINGSTATION_PRIMARY_KEY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.pack.PackingStation.PackingStationId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_PackingStation">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="EQUIP_PRIMARY_KEY"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_PACKING_STATION"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.pack.PackingStation.EquipmentNumber"/>
+    </AttrArray>
+  </Key>
+</Entity>

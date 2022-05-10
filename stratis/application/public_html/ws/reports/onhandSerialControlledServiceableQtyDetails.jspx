@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <!-- Onhand Serial Controlled Serviceable Qty Details -->
+    <af:table var="row" rowBandingInterval="1" id="t10_1" autoHeightRows="0"
+              styleClass="AFStretchWidth"
+              value="#{viewScope.ReportsQueryResultBean.reconReportColumnList}"
+              rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Onhand Serial Controlled Serviceable Qty Details'}">
+        <af:column sortable="false" headerText="NIIN" id="c10_1" width="150">
+            <af:outputText value="#{row.niin}" id="ot10_1"/>
+        </af:column>
+        <af:column sortable="false" headerText="System" id="c10_2">
+            <af:outputText value="#{row.system}" id="ot10_2"/>
+        </af:column>
+        <af:column sortable="false" headerText="Qty by Serial" id="c10_3"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.qtyBySerial}" id="ot10_3"/>
+        </af:column>
+        <af:column sortable="false" headerText="Serial No." id="c10_4" width="150">
+            <af:outputText value="#{row.serialNum}" id="ot10_4"/>
+        </af:column>
+        <af:column sortable="false" headerText="Location" id="c10_5">
+            <af:outputText value="#{row.location}" id="ot10_5"/>
+        </af:column>
+        <af:column sortable="false" headerText="Stratis Balance Servicable" id="c10_6"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.servStratisBalance}" id="ot10_6"/>
+        </af:column>
+        <af:column sortable="false" headerText="Host Balance Servicable" id="c10_7"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.servHostBalance}" id="ot10_7"/>
+        </af:column>
+    </af:table>
+</jsp:root>

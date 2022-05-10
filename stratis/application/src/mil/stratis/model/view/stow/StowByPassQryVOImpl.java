@@ -1,0 +1,9 @@
+package mil.stratis.model.view.stow;
+
+import lombok.NoArgsConstructor;
+import oracle.jbo.server.ViewObjectImpl;
+
+@NoArgsConstructor //ViewObjImpl need default no args constructor
+public class StowByPassQryVOImpl extends ViewObjectImpl {
+
+}

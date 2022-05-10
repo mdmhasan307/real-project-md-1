@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ComBaudRate"
+  Version="11.1.2.64.36"
+  DBObjectType="SYNONYM"
+  DBObjectName="STRATIS.COMBAUDRATE_LU"
+  AliasName="ComBaudRate"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <Attribute
+    Name="CombaudrateId"
+    ColumnName="COMBAUDRATE_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="STRATIS.COMBAUDRATE_LU"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_SequenceName" Value="SEQ_COMBAUDRATE_LU"/>
+      <Attr Name="_SequenceStart" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CombaudrateValue"
+    Precision="10"
+    Scale="0"
+    ColumnName="COMBAUDRATE_VALUE"
+    SQLType="NUMERIC"
+    Type="java.lang.Long"
+    ColumnType="NUMBER"
+    TableName="STRATIS.COMBAUDRATE_LU"/>
+  <Attribute
+    Name="CombaudrateDescn"
+    Precision="50"
+    ColumnName="COMBAUDRATE_DESCN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="STRATIS.COMBAUDRATE_LU">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TransTs"
+    ColumnName="TRANS_TS"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="STRATIS.COMBAUDRATE_LU"/>
+  <Attribute
+    Name="ModById"
+    ColumnName="MOD_BY_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="STRATIS.COMBAUDRATE_LU"/>
+  <Key
+    Name="CombaudratePrimaryKey"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="COMBAUDRATE_PRIMARY_KEY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.ref.ComBaudRate.CombaudrateId"/>
+    </AttrArray>
+  </Key>
+</Entity>

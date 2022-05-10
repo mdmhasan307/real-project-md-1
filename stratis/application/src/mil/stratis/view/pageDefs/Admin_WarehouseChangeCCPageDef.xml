@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Admin_WarehouseChangeCCPageDef"
+                ControllerClass="#{WarehouseCCBacking}" EnableTokenValidation="false" Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables" Refresh="ifNeeded">
+      <variable Type="java.lang.String" Name="FilterNIINCC_Location" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="FilterNIINCC_NIIN" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="FilterNIINCC_Nomenclature" IsQueriable="false"/>
+    </variableIterator>
+    <iterator id="NiinLoc_LocationView1Iterator" RangeSize="10" Binds="Root.AppModule1.NiinLoc_LocationView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="SerialOrLotNumList1Iterator" RangeSize="10" Binds="Root.PickingAM1.SerialOrLotNumList1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="ChangeLocationFromView1Iterator" RangeSize="5" Binds="Root.WarehouseSetup1.ChangeLocationFromView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <methodAction id="FilterNIINCC" MethodName="filterNIINCC" RequiresUpdateModel="true" Action="invokeMethod"
+                  IsViewObjectMethod="false" DataControl="StratisRootServiceDataControl"
+                  InstanceName="StratisRootServiceDataControl.dataProvider.Root.AppModule1">
+      <NamedData NDName="Location" NDType="java.lang.String" NDValue="${bindings.FilterNIINCC_Location}"/>
+      <NamedData NDName="NIIN" NDType="java.lang.String" NDValue="${bindings.FilterNIINCC_NIIN}"/>
+      <NamedData NDName="Nomenclature" NDType="java.lang.String" NDValue="${bindings.FilterNIINCC_Nomenclature}"/>
+    </methodAction>
+    <attributeValues id="byLocation" IterBinding="variables">
+      <AttrNames>
+        <Item Value="FilterNIINCC_Location"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="byNIIN" IterBinding="variables">
+      <AttrNames>
+        <Item Value="FilterNIINCC_NIIN"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="byNomenclature" IterBinding="variables">
+      <AttrNames>
+        <Item Value="FilterNIINCC_Nomenclature"/>
+      </AttrNames>
+    </attributeValues>
+    <table id="NiinLoc_LocationView1" IterBinding="NiinLoc_LocationView1Iterator">
+      <AttrNames>
+        <Item Value="NiinLocId"/>
+        <Item Value="NiinId"/>
+        <Item Value="LocationId"/>
+        <Item Value="Qty"/>
+        <Item Value="ExpirationDate"/>
+        <Item Value="DateOfManufacture"/>
+        <Item Value="Cc"/>
+        <Item Value="Locked"/>
+        <Item Value="CreatedBy"/>
+        <Item Value="CreatedDate"/>
+        <Item Value="ModifiedBy"/>
+        <Item Value="ModifiedDate"/>
+        <Item Value="ProjectCode"/>
+        <Item Value="Pc"/>
+        <Item Value="LastInvDate"/>
+        <Item Value="CaseWeightQty"/>
+        <Item Value="LotConNum"/>
+        <Item Value="SerialNumber"/>
+        <Item Value="PackedDate"/>
+        <Item Value="NumExtents"/>
+        <Item Value="NumCounts"/>
+        <Item Value="LocationLabel"/>
+        <Item Value="LocationId1"/>
+        <Item Value="ShelfLifeCode"/>
+        <Item Value="ShelfLifeExtension"/>
+        <Item Value="LotControlFlag"/>
+        <Item Value="SerialControlFlag"/>
+        <Item Value="Niin"/>
+        <Item Value="Fsc"/>
+        <Item Value="Nomenclature"/>
+        <Item Value="LocationLabel"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="Cc" IterBinding="NiinLoc_LocationView1Iterator">
+      <AttrNames>
+        <Item Value="Cc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Locked" IterBinding="NiinLoc_LocationView1Iterator">
+      <AttrNames>
+        <Item Value="Locked"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CreatedBy" IterBinding="NiinLoc_LocationView1Iterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CreatedDate" IterBinding="NiinLoc_LocationView1Iterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ModifiedBy" IterBinding="NiinLoc_LocationView1Iterator">
+      <AttrNames>
+        <Item Value="ModifiedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ModifiedDate" IterBinding="NiinLoc_LocationView1Iterator">
+      <AttrNames>
+        <Item Value="ModifiedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ProjectCode" IterBinding="NiinLoc_LocationView1Iterator">
+      <AttrNames>
+        <Item Value="ProjectCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Pc" IterBinding="NiinLoc_LocationView1Iterator">
+      <AttrNames>
+        <Item Value="Pc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LastInvDate" IterBinding="NiinLoc_LocationView1Iterator">
+      <AttrNames>
+        <Item Value="LastInvDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CaseWeightQty" IterBinding="NiinLoc_LocationView1Iterator">
+      <AttrNames>
+        <Item Value="CaseWeightQty"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LotConNum" IterBinding="NiinLoc_LocationView1Iterator">
+      <AttrNames>
+        <Item Value="LotConNum"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="SerialNumber" IterBinding="NiinLoc_LocationView1Iterator">
+      <AttrNames>
+        <Item Value="SerialNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PackedDate" IterBinding="NiinLoc_LocationView1Iterator">
+      <AttrNames>
+        <Item Value="PackedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NumExtents" IterBinding="NiinLoc_LocationView1Iterator">
+      <AttrNames>
+        <Item Value="NumExtents"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NumCounts" IterBinding="NiinLoc_LocationView1Iterator">
+      <AttrNames>
+        <Item Value="NumCounts"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LocationLabel" IterBinding="NiinLoc_LocationView1Iterator">
+      <AttrNames>
+        <Item Value="LocationLabel"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LocationId1" IterBinding="NiinLoc_LocationView1Iterator">
+      <AttrNames>
+        <Item Value="LocationId1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="SerialControlFlag" IterBinding="NiinLoc_LocationView1Iterator">
+      <AttrNames>
+        <Item Value="SerialControlFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LotControlFlag" IterBinding="NiinLoc_LocationView1Iterator">
+      <AttrNames>
+        <Item Value="LotControlFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ShelfLifeCode" IterBinding="NiinLoc_LocationView1Iterator">
+      <AttrNames>
+        <Item Value="ShelfLifeCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ShelfLifeExtension" IterBinding="NiinLoc_LocationView1Iterator">
+      <AttrNames>
+        <Item Value="ShelfLifeExtension"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Fsc" IterBinding="NiinLoc_LocationView1Iterator">
+      <AttrNames>
+        <Item Value="Fsc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Niin" IterBinding="NiinLoc_LocationView1Iterator">
+      <AttrNames>
+        <Item Value="Niin"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Nomenclature" IterBinding="NiinLoc_LocationView1Iterator">
+      <AttrNames>
+        <Item Value="Nomenclature"/>
+      </AttrNames>
+    </attributeValues>
+    <table id="SerialOrLotNumList1" IterBinding="SerialOrLotNumList1Iterator">
+      <AttrNames>
+        <Item Value="SerialOrLoNum"/>
+        <Item Value="SrlLotNumTrackId"/>
+        <Item Value="QtyLot"/>
+        <Item Value="LotConNum"/>
+      </AttrNames>
+    </table>
+    <action id="RefreshChangeLoc" RequiresUpdateModel="true" Action="iteratorExecute"
+            IterBinding="ChangeLocationFromView1Iterator"/>
+  </bindings>
+</pageDefinition>

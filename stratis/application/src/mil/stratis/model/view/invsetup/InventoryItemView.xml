@@ -1,0 +1,285 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="InventoryItemView"
+   Version="11.1.2.64.36"
+   SelectList="InventoryItem.INVENTORY_ITEM_ID, 
+       InventoryItem.NIIN_ID, 
+       InventoryItem.NIIN_LOC_ID, 
+       InventoryItem.INVENTORY_ID, 
+       InventoryItem.NUM_COUNTS, 
+       InventoryItem.CUM_NEG_ADJ, 
+       InventoryItem.CUM_POS_ADJ, 
+       InventoryItem.NUM_COUNTED, 
+       InventoryItem.CREATED_BY, 
+       InventoryItem.CREATED_DATE, 
+       InventoryItem.MODIFIED_BY, 
+       InventoryItem.MODIFIED_DATE, 
+       InventoryItem.INV_TYPE, 
+       InventoryItem.WAC_ID, 
+       InventoryItem.PRIORITY, 
+       InventoryItem.STATUS, 
+       NiinInfo.NIIN, 
+       NiinInfo.NIIN_ID AS NIIN_ID1, 
+       NiinLocation.QTY, 
+       NiinLocation.NIIN_LOC_ID AS NIIN_LOC_ID1, 
+       Location.LOCATION_LABEL, 
+       Location.LOCATION_ID, 
+       NiinInfo.SERIAL_CONTROL_FLAG, 
+       NiinInfo.LOT_CONTROL_FLAG, 
+       InventoryItem.NIIN_LOC_QTY, 
+       InventoryItem.TRANSACTION_TYPE, 
+       InventoryItem.RELEASED_BY, 
+       InventoryItem.RELEASED_DATE"
+   FromList="INVENTORY_ITEM InventoryItem, NIIN_INFO NiinInfo, NIIN_LOCATION NiinLocation, LOCATION Location"
+   Where="((InventoryItem.NIIN_ID = NiinInfo.NIIN_ID(+)) AND (InventoryItem.NIIN_LOC_ID = NiinLocation.NIIN_LOC_ID(+))) AND (InventoryItem.LOCATION_ID = Location.LOCATION_ID)"
+   OrderBy="Location.LOCATION_LABEL ASC"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.invsetup.InventoryItemViewImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="InventoryItem"
+      Entity="mil.stratis.model.entity.inv.InventoryItem" >
+   </EntityUsage>
+   <EntityUsage
+      Name="NiinInfo"
+      Entity="mil.stratis.model.entity.site.NiinInfo"
+      Association="mil.stratis.model.entity.associations.InventoryItemNiinFkAssoc"
+      AssociationEnd="mil.stratis.model.entity.associations.InventoryItemNiinFkAssoc.NiinInfo"
+      SourceUsage="mil.stratis.model.view.invsetup.InventoryItemView.InventoryItem"
+      ReadOnly="true"
+      Reference="true" >
+      <DesignTime>
+         <AttrArray Name="_srcAttributes">
+            <Item Value="mil.stratis.model.entity.inv.InventoryItem.NiinId" />
+         </AttrArray>
+         <AttrArray Name="_dstAttributes">
+            <Item Value="mil.stratis.model.entity.site.NiinInfo.NiinId" />
+         </AttrArray>
+      </DesignTime>
+   </EntityUsage>
+   <EntityUsage
+      Name="NiinLocation"
+      Entity="mil.stratis.model.entity.loc.NiinLocation"
+      Association="mil.stratis.model.entity.associations.InventoryItemNiinLocFkAssoc"
+      AssociationEnd="mil.stratis.model.entity.associations.InventoryItemNiinLocFkAssoc.NiinLocation"
+      SourceUsage="mil.stratis.model.view.invsetup.InventoryItemView.InventoryItem"
+      ReadOnly="true"
+      Reference="true" >
+      <DesignTime>
+         <AttrArray Name="_srcAttributes">
+            <Item Value="mil.stratis.model.entity.inv.InventoryItem.NiinLocId" />
+         </AttrArray>
+         <AttrArray Name="_dstAttributes">
+            <Item Value="mil.stratis.model.entity.loc.NiinLocation.NiinLocId" />
+         </AttrArray>
+      </DesignTime>
+   </EntityUsage>
+   <EntityUsage
+      Name="Location"
+      Entity="mil.stratis.model.entity.loc.Location"
+      Association="mil.stratis.model.entity.associations.NiinLocLocationFkAssoc"
+      AssociationEnd="mil.stratis.model.entity.associations.NiinLocLocationFkAssoc.Location"
+      SourceUsage="mil.stratis.model.view.invsetup.InventoryItemView.NiinLocation"
+      ReadOnly="true"
+      Reference="true" >
+      <DesignTime>
+         <AttrArray Name="_srcAttributes">
+            <Item Value="mil.stratis.model.entity.loc.NiinLocation.LocationId" />
+         </AttrArray>
+         <AttrArray Name="_dstAttributes">
+            <Item Value="mil.stratis.model.entity.loc.Location.LocationId" />
+         </AttrArray>
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="InventoryItemId"
+      IsNotNull="true"
+      EntityAttrName="InventoryItemId"
+      EntityUsage="InventoryItem"
+      AliasName="INVENTORY_ITEM_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NiinId"
+      EntityAttrName="NiinId"
+      EntityUsage="InventoryItem"
+      AliasName="NIIN_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NiinLocId"
+      EntityAttrName="NiinLocId"
+      EntityUsage="InventoryItem"
+      AliasName="NIIN_LOC_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="InventoryId"
+      EntityAttrName="InventoryId"
+      EntityUsage="InventoryItem"
+      AliasName="INVENTORY_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NumCounts"
+      EntityAttrName="NumCounts"
+      EntityUsage="InventoryItem"
+      AliasName="NUM_COUNTS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CumNegAdj"
+      EntityAttrName="CumNegAdj"
+      EntityUsage="InventoryItem"
+      AliasName="CUM_NEG_ADJ" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CumPosAdj"
+      EntityAttrName="CumPosAdj"
+      EntityUsage="InventoryItem"
+      AliasName="CUM_POS_ADJ" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NumCounted"
+      EntityAttrName="NumCounted"
+      EntityUsage="InventoryItem"
+      AliasName="NUM_COUNTED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      EntityAttrName="CreatedBy"
+      EntityUsage="InventoryItem"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedDate"
+      IsNotNull="true"
+      EntityAttrName="CreatedDate"
+      EntityUsage="InventoryItem"
+      AliasName="CREATED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedBy"
+      EntityAttrName="ModifiedBy"
+      EntityUsage="InventoryItem"
+      AliasName="MODIFIED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedDate"
+      EntityAttrName="ModifiedDate"
+      EntityUsage="InventoryItem"
+      AliasName="MODIFIED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="InvType"
+      EntityAttrName="InvType"
+      EntityUsage="InventoryItem"
+      AliasName="INV_TYPE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WacId"
+      EntityAttrName="WacId"
+      EntityUsage="InventoryItem"
+      AliasName="WAC_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Priority"
+      EntityAttrName="Priority"
+      EntityUsage="InventoryItem"
+      AliasName="PRIORITY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Status"
+      EntityAttrName="Status"
+      EntityUsage="InventoryItem"
+      AliasName="STATUS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Niin"
+      IsUnique="true"
+      IsNotNull="true"
+      EntityAttrName="Niin"
+      EntityUsage="NiinInfo"
+      AliasName="NIIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NiinId1"
+      IsNotNull="true"
+      EntityAttrName="NiinId"
+      EntityUsage="NiinInfo"
+      AliasName="NIIN_ID1"
+      IsUpdateable="while_insert">
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Qty"
+      IsNotNull="true"
+      EntityAttrName="Qty"
+      EntityUsage="NiinLocation"
+      AliasName="QTY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NiinLocId1"
+      IsNotNull="true"
+      EntityAttrName="NiinLocId"
+      EntityUsage="NiinLocation"
+      AliasName="NIIN_LOC_ID1"
+      IsUpdateable="while_insert">
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationLabel"
+      IsNotNull="true"
+      EntityAttrName="LocationLabel"
+      EntityUsage="Location"
+      AliasName="LOCATION_LABEL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationId"
+      IsNotNull="true"
+      EntityAttrName="LocationId"
+      EntityUsage="Location"
+      AliasName="LOCATION_ID"
+      IsUpdateable="while_insert">
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SerialControlFlag"
+      EntityAttrName="SerialControlFlag"
+      EntityUsage="NiinInfo"
+      AliasName="SERIAL_CONTROL_FLAG" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LotControlFlag"
+      EntityAttrName="LotControlFlag"
+      EntityUsage="NiinInfo"
+      AliasName="LOT_CONTROL_FLAG" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NiinLocQty"
+      EntityAttrName="NiinLocQty"
+      EntityUsage="InventoryItem"
+      AliasName="NIIN_LOC_QTY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TransactionType"
+      EntityAttrName="TransactionType"
+      EntityUsage="InventoryItem"
+      AliasName="TRANSACTION_TYPE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ReleasedBy"
+      EntityAttrName="ReleasedBy"
+      EntityUsage="InventoryItem"
+      AliasName="RELEASED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ReleasedDate"
+      EntityAttrName="ReleasedDate"
+      EntityUsage="InventoryItem"
+      AliasName="RELEASED_DATE" >
+   </ViewAttribute>
+</ViewObject>

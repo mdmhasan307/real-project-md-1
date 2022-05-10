@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:af="http://xmlns.oracle.com/adf/faces/rich" >
+
+<af:switcher facetName="#{userbean.usersAdminAuthorizationStatus}" id="fmusersadminauthstatus">
+<f:facet name="0">
+    <f:verbatim>
+        <script language="Javascript" type="text/javascript">
+            //alert('Your session has expired!\nYou will be returned to the login screen.');
+            console.log("A_DTAT detected expired/no session.");
+            this.location.href = 'unauthenticated.html';
+        </script>
+    </f:verbatim>
+</f:facet>
+<f:facet name="-1">
+    <f:verbatim>
+        <script language="Javascript" type="text/javascript">
+            this.location.href = 'unauthorized.html';
+        </script>
+    </f:verbatim>
+</f:facet>
+<f:facet name="1">
+
+          
+    <af:subform id="DirectTableAccessForm">
+        <af:spacer height="10" width="1"/>
+        <af:panelBox text="Direct Table Access" showDisclosure="false" type="flow">
+            <af:separator />
+            <af:panelGridLayout>
+            <af:gridRow>
+            <af:gridCell>
+            <af:spacer height="5" width="0" />
+            <af:panelGroupLayout layout="horizontal" valign="middle">
+                <af:spacer width="10" />
+                <af:outputText value="Command" noWrap="true"/>
+                <af:spacer width="30" />
+                <af:outputText value="Columns (field1,field2)" noWrap="true" />
+                <af:spacer width="124" />                
+                <af:outputText value="From Table" noWrap="true" />
+                <af:spacer width="195"/>
+                <af:outputText value="Where Clause" noWrap="true" />
+            </af:panelGroupLayout>
+            </af:gridCell>
+            </af:gridRow>
+            <af:gridRow >
+            <af:gridCell>
+            <af:spacer height="2" width="0"/>
+            </af:gridCell>
+            </af:gridRow>
+            <af:gridRow >
+            <af:gridCell>
+            <af:panelGroupLayout layout="horizontal" valign="middle">
+            
+                <af:spacer height="0" width="2"/>
+                <af:selectOneChoice id="TableCommand" binding="#{SysAdminBacking.sysAdminTableAccessCommand}">
+                            <af:selectItem value="SELECT" label="SELECT"/>
+                </af:selectOneChoice>
+                <af:spacer width="10" />
+                <af:inputText id="TableColumns" contentStyle="text-transform:uppercase;" binding="#{SysAdminBacking.sysAdminTableAccessColumn}">
+                  <af:validateRegExp id="TableColumnsRegEx" pattern="[a-zA-Z_0-9 ,\*()]+"
+                        messageDetailNoMatch="Special characters are not allowed in the columns" />
+                </af:inputText>
+
+                <af:spacer width="10" />
+                <af:outputText value="FROM" noWrap="true" />
+                <af:spacer width="10" />
+                <af:selectOneChoice id="TableList" binding="#{SysAdminBacking.sysAdminTableAccessTable}">
+                            <af:selectItem value="COM_PORT" label="COM PORT"/>
+                            <af:selectItem value="CUSTOMER" label="CUSTOMER"/>
+                            <af:selectItem value="CUST_FLOOR_LOCATION" label="CUSTOMER FLOOR LOCATIONS"/>
+                            <af:selectItem value="DIVIDER_SLOTS" label="DIVIDER SLOTS"/>
+                            <af:selectItem value="DIVIDER_TYPE" label="DIVIDER TYPE"/>
+                            <af:selectItem value="DOCUMENT_TYPE" label="DOCUMENT TYPE"/>
+                            <af:selectItem value="EQUIP" label="EQUIP"/>
+                            <af:selectItem value="ERROR" label="ERROR"/>
+                            <af:selectItem value="ERROR_QUEUE" label="ERROR QUEUE"/>
+                            <af:selectItem value="ERROR_QUEUE_HIST" label="ERROR QUEUE HIST"/>
+                            <af:selectItem value="FLOOR_LOCATION" label="FLOOR LOCATION"/>
+                            <af:selectItem value="GCSSMC_IMPORTS_DATA" label="GCSS IMPORTS DATA"/>
+                            <af:selectItem value="GROUP_LU" label="GROUPS"/>
+                            <af:selectItem value="COM_PORT" label="COM PORT"/>
+                            <af:selectItem value="INVENTORY" label="INVENTORY"/>
+                            <af:selectItem value="INVENTORY_HIST" label="INVENTORY HIST"/>
+                            <af:selectItem value="INVENTORY_ITEM" label="INVENTORY ITEM"/>
+                            <af:selectItem value="INVENTORY_ITEM_HIST" label="INVENTORY ITEM HIST"/>
+                            <af:selectItem value="INV_SERIAL_LOT_NUM" label="INV SERIAL LOT NUM"/>
+                            <af:selectItem value="ISSUE" label="ISSUE"/>
+                            <af:selectItem value="ISSUE_HIST" label="ISSUE HIST"/>
+                            <af:selectItem value="LOCATION" label="LOCATION"/>
+                            <af:selectItem value="LOCATION_CLASSIFICATION" label="LOCATION CLASSIFICATION"/>
+                            <af:selectItem value="LOCATION_HEADER" label="LOCATION HEADER"/>
+                            <af:selectItem value="LOCATION_HEADER_BIN" label="LOCATION HEADER BIN"/>
+                            <af:selectItem value="MASTER_DROPDOWN" label="MASTER DROPDOWN"/>
+                            <af:selectItem value="NIIN_INFO" label="NIIN INFO"/>
+                            <af:selectItem value="NIIN_INFO_LOG" label="NIIN INFO LOG"/>
+                            <af:selectItem value="NIIN_LOCATION" label="NIIN LOCATION"/>
+                            <af:selectItem value="NIIN_LOCATION_HIST" label="NIIN LOCATION HIST"/>
+                            <af:selectItem value="PACKING_CONSOLIDATION" label="PACKING CONSOLIDATION"/>
+                            <af:selectItem value="PACKING_CONSOLIDATION_HIST" label="PACKING CONSOLIDATION HIST"/>
+                            <af:selectItem value="PACKING_STATION" label="PACKING STATION"/>
+                            <af:selectItem value="PICK_SERIAL_LOT_NUM" label="PICK_SERIAL_LOT_NUM"/>
+                            <af:selectItem value="PICKING" label="PICKING"/>
+                            <af:selectItem value="PICKING_HIST" label="PICKING HIST"/>
+                            <af:selectItem value="RECEIPT" label="RECEIPT"/>
+                            <af:selectItem value="RECEIPT_HIST" label="RECEIPT HIST"/>
+                            <af:selectItem value="RECEIPT_ISSUE" label="RECEIPT ISSUE"/>
+                            <af:selectItem value="RECEIPT_ISSUE_HIST" label="RECEIPT ISSUE HIST"/>
+                            <af:selectItem value="RECON_HIST" label="RECON HIST"/>
+                            <af:selectItem value="REF_DATALOAD_LOG" label="REF DATALOAD_LOG"/>
+                            <af:selectItem value="REF_DASF" label="REF DASF"/>
+                            <af:selectItem value="REF_GABF" label="REF GABF"/>
+                            <af:selectItem value="REF_GBOF" label="REF GBOF"/>
+                            <af:selectItem value="REF_MATS" label="REF MATS"/>
+                            <af:selectItem value="REF_MHIF" label="REF MHIF"/>
+                            <af:selectItem value="REF_SLC" label="REF SLC"/>
+                            <af:selectItem value="REF_UI" label="REF UI"/>
+                            <af:selectItem value="REF_UI_VALID" label="REF UI VALID"/>
+                            <af:selectItem value="REFUSE" label="REFUSE"/>
+                            <af:selectItem value="ROUTE" label="ROUTE"/>
+                            <af:selectItem value="SERIAL_LOT_NUM_TRACK" label="SERIAL LOT NUM TRACK"/>
+                            <af:selectItem value="SHIPPING" label="SHIPPING"/>
+                            <af:selectItem value="SHIPPING_HIST" label="SHIPPING HIST"/>
+                            <af:selectItem value="SHIPPING_MANIFEST" label="SHIPPING MANIFEST"/>
+                            <af:selectItem value="SHIPPING_MANIFEST_HIST" label="SHIPPING MANIFEST HIST"/>
+                            <af:selectItem value="SHIPPING_ROUTE" label="SHIPPING ROUTE"/>
+                            <af:selectItem value="SITE_INFO" label="SITE INFO"/>
+                            <af:selectItem value="SITE_INTERFACES" label="SITE INTERFACES"/>
+                            <af:selectItem value="SITE_REMOTE_CONNECTIONS" label="SITE REMOTE CONNECTIONS"/>
+                            <af:selectItem value="SITE_SCHEDULES" label="SITE SCHEDULES"/>
+                            <af:selectItem value="SITE_SECURITY" label="SITE SECURITY"/>
+                            <af:selectItem value="SPOOL" label="SPOOL"/>
+                            <af:selectItem value="SPOOL_HIST" label="SPOOL HIST"/>
+                            <af:selectItem value="STOW" label="STOW"/>
+                            <af:selectItem value="STOW_HIST" label="STOW HIST"/>
+                            <af:selectItem value="USERS" label="USERS"/>
+                            <af:selectItem value="USER_GROUPS" label="USER GROUPS"/>
+                            <af:selectItem value="WAC" label="WAC"/>
+                            <af:selectItem value="WAREHOUSE" label="WAREHOUSE"/>
+                        </af:selectOneChoice>
+
+                <af:spacer width="10" />
+                
+                <af:outputText value="WHERE" noWrap="true" />
+                <af:spacer width="10" />
+                <af:inputText id="TableWhere" binding="#{SysAdminBacking.sysAdminTableAccessWhere}">
+                  <af:validateRegExp id="TableWhereRegEx" pattern="[a-zA-Z_0-9 \*%'=>&lt;]+"
+                        messageDetailNoMatch="Special characters are not allowed in the where clause" />
+                </af:inputText>
+                
+                
+                
+                <af:spacer width="10" />
+                
+            </af:panelGroupLayout>
+            </af:gridCell>
+            </af:gridRow>
+            <af:gridRow >
+            <af:gridCell>
+            <af:spacer height="5" width="0"/>
+            </af:gridCell>
+            </af:gridRow>
+            <af:gridRow>
+            <af:gridCell>
+                <af:button text="Submit Statement" id="SubmitStatementButton"
+                                          actionListener="#{SysAdminBacking.returnPreparedStatement}"
+                                          partialSubmit="false"/>
+            </af:gridCell>
+            </af:gridRow>
+            <af:gridRow >
+            <af:gridCell>
+            <af:spacer height="5" width="0"/>
+            </af:gridCell>
+            </af:gridRow>
+            </af:panelGridLayout>
+                <af:panelGroupLayout layout="scroll" inlineStyle = "height:300px">
+                    <af:outputText value="#{SysAdminBacking.sysAdminTableAccessOutput}" escape="false"/>
+                </af:panelGroupLayout>
+                <af:spacer height="10" /> 
+            <af:messages/>
+        </af:panelBox>
+    </af:subform>
+</f:facet>
+</af:switcher>
+</jsp:root>

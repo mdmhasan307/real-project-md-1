@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Admin_UserManagementPageDef"
+                Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+     <iterator id="CompleteUserList1Iterator" RangeSize="5" StateValidation="false"
+              Binds="Root.AppModule1.CompleteUserList1" DataControl="StratisRootServiceDataControl" Refresh="ifNeeded"/>
+    <iterator id="CompleteUserList2Iterator" RangeSize="5" Binds="CompleteUserList2"
+              DataControl="AppModuleDataControl" StateValidation="false" Refresh="ifNeeded"
+              ChangeEventPolicy="none"/>
+    <iterator id="GroupViewAll1Iterator" RangeSize="2" Binds="GroupView1"
+              DataControl="AppModuleDataControl" StateValidation="false" Refresh="ifNeeded"
+              ChangeEventPolicy="none"/>
+    <!-- Group import -->
+     <iterator id="GroupView1Iterator" RangeSize="25" Binds="GroupView1"
+              DataControl="AppModuleDataControl" StateValidation="false" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <!-- Group import -->
+    <variableIterator id="variables" Refresh="always" ChangeEventPolicy="none">
+        <variable Type="java.lang.String" Name="FilterUserData_UsernameQry" IsQueriable="false"/>
+        <variable Type="java.lang.String" Name="FilterUserData_LastNameQry" IsQueriable="false"/>
+    </variableIterator>
+  </executables>
+  <bindings>
+    <tree IterBinding="CompleteUserList1Iterator" id="CompleteUserList1">
+      <nodeDefinition DefName="mil.stratis.model.view.user.CompleteUserList" Name="CompleteUserList10">
+        <AttrNames>
+          <Item Value="UserId"/>
+          <Item Value="FirstName"/>
+          <Item Value="MiddleName"/>
+          <Item Value="LastName"/>
+          <Item Value="Status"/>
+          <Item Value="LastLogin"/>
+          <Item Value="Username"/>
+          <Item Value="VisibleFlag"/>
+          <Item Value="LoggedIn"/>
+          <Item Value="LoggedInHh"/>
+          <Item Value="Locked"/>
+          <Item Value="CacNumber"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="CompleteUserList1Iterator" id="UserId">
+      <AttrNames>
+        <Item Value="UserId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CompleteUserList1Iterator" id="FirstName">
+      <AttrNames>
+        <Item Value="FirstName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CompleteUserList1Iterator" id="MiddleName">
+      <AttrNames>
+        <Item Value="MiddleName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CompleteUserList1Iterator" id="LastName">
+      <AttrNames>
+        <Item Value="LastName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CompleteUserList1Iterator" id="Status">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CompleteUserList1Iterator" id="LastLogin">
+      <AttrNames>
+        <Item Value="LastLogin"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CompleteUserList1Iterator" id="Username">
+      <AttrNames>
+        <Item Value="Username"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CompleteUserList1Iterator" id="VisibleFlag">
+      <AttrNames>
+        <Item Value="VisibleFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CompleteUserList1Iterator" id="LoggedIn">
+      <AttrNames>
+        <Item Value="LoggedIn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CompleteUserList1Iterator" id="LoggedInHh">
+      <AttrNames>
+        <Item Value="LoggedInHh"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CompleteUserList1Iterator" id="Locked">
+      <AttrNames>
+        <Item Value="Locked"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CompleteUserList1Iterator" id="CacNumber">
+      <AttrNames>
+        <Item Value="CacNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <table id="CompleteUserList2" IterBinding="CompleteUserList2Iterator">
+      <AttrNames>
+        <Item Value="UserId"/>
+        <Item Value="FirstName"/>
+        <Item Value="MiddleName"/>
+        <Item Value="LastName"/>
+        <Item Value="Status"/>
+        <Item Value="LastLogin"/>
+        <Item Value="Username"/>
+        <Item Value="VisibleFlag"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="FirstName2" IterBinding="CompleteUserList2Iterator">
+      <AttrNames>
+        <Item Value="FirstName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="MiddleName2" IterBinding="CompleteUserList2Iterator">
+      <AttrNames>
+        <Item Value="MiddleName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LastName2" IterBinding="CompleteUserList2Iterator">
+      <AttrNames>
+        <Item Value="LastName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Status2" IterBinding="CompleteUserList2Iterator">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Username2" IterBinding="CompleteUserList2Iterator">
+      <AttrNames>
+        <Item Value="Username"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FilterUserData" MethodName="FilterUserData" RequiresUpdateModel="true" Action="invokeMethod"
+                  IsViewObjectMethod="false" DataControl="StratisRootServiceDataControl"
+                  InstanceName="StratisRootServiceDataControl.dataProvider.Root.AppModule1">
+      <NamedData NDName="UsernameQry" NDType="java.lang.String" NDValue="${bindings.FilterUserData_UsernameQry}"/>
+      <NamedData NDName="LastNameQry" NDType="java.lang.String" NDValue="${bindings.FilterUserData_LastNameQry}"/>
+    </methodAction>
+    <attributeValues id="UsernameQry" IterBinding="variables" ChangeEventPolicy="none">
+      <AttrNames>
+        <Item Value="FilterUserData_UsernameQry"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LastNameQry" IterBinding="variables" ChangeEventPolicy="none">
+      <AttrNames>
+        <Item Value="FilterUserData_LastNameQry"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="CompleteUserList1Iterator" id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <!-- Group Page Def Include -->
+    <table id="GroupViewAll1" IterBinding="GroupViewAll1Iterator">
+      <AttrNames>
+        <Item Value="GroupId"/>
+        <Item Value="GroupName"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="GroupId" IterBinding="GroupViewAll1Iterator">
+      <AttrNames>
+        <Item Value="GroupId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="GroupName" IterBinding="GroupViewAll1Iterator">
+      <AttrNames>
+        <Item Value="GroupName"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" InstanceName="StratisRootServiceDataControl.Root.AppModule1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <!-- Group Page Def Include -->
+  </bindings>
+</pageDefinition>

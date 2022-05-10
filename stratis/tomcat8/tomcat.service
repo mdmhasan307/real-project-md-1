@@ -1,0 +1,28 @@
+[Unit]
+Description=Tomcat 9 servlet container
+After=network.target
+
+[Service]
+Type=forking
+
+User=tomcat
+Group=tomcat
+
+WorkingDirectory=/opt/app/stratis/tomcat/current
+
+Environment="JAVA_HOME=/usr/java/default/jre"
+Environment="JAVA_OPTS=-Djava.security.egd=file:///dev/./urandom -Dsecurerandom.source=file:///dev/./urandom "
+
+Environment="CATALINA_BASE=/opt/app/stratis/tomcat/current/"
+Environment="CATALINA_HOME=/opt/app/stratis/tomcat/current/"
+Environment="CATALINA_PID=/opt/app/stratis/tomcat/current/temp/tomcat.pid"
+
+#Environment="CATALINA_OPTS=-Xms4096M -Xmx6144M -Djava.security.manager -Djava.security.policy=/opt/app/stratis/tomcat/current/conf/catalina.policy"
+
+Environment="CATALINA_OPTS=-Xms4096M -Xmx6144M -Djavax.net.ssl.trustStore=/opt/app/stratis/conf/tomcat/ssl/ws/stratiskeystore.jks -Djavax.net.ssl.trustStorePassword=smokeONTHEwater321 -Djavax.net.ssl.trustStoreType=JKS -Djavax.net.ssl.keyStore=/opt/app/stratis/conf/tomcat/ssl/ws/stratistrust.jks -Djavax.net.ssl.keyStorePassword=smokeONTHEwater321 -Djavax.net.ssl.keyStoreType=JKS"
+
+ExecStart=/opt/app/stratis/tomcat/current/bin/startup.sh
+ExecStop=/opt/app/stratis/tomcat/current/bin/shutdown.sh
+
+[Install]
+WantedBy=multi-user.target

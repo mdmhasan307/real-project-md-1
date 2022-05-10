@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Picking_NormalNiinVerPageDef"
+                Package="ws">
+  <parameters/>
+  <executables>
+    <iterator id="PickingGenQryVO1Iterator" RangeSize="-1" Binds="Root.PickingAM1.PickingGenQryVO1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="PickRefuseQryVO1Iterator" RangeSize="-1" Binds="Root.PickingAM1.PickRefuseQryVO1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="PickByPassQryVO1Iterator" RangeSize="-1" Binds="Root.PickingAM1.PickByPassQryVO1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="ErrorLVO1Iterator" RangeSize="-1" Binds="Root.WorkLoadManager1.ErrorLVO1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="SerialOrLotNumList1Iterator" RangeSize="-1" Binds="Root.PickingAM1.SerialOrLotNumList1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <invokeAction Binds="Create1" id="invokeCreate2" Refresh="prepareModel"
+                  RefreshCondition="${!adfFacesContext.postback and empty bindings.exceptionsList}"/>
+    <iterator Binds="Root.WorkLoadManager1.NiinInfoView1" DataControl="StratisRootServiceDataControl" RangeSize="25"
+              id="NiinInfoView1Iterator" />
+  </executables>
+  <bindings>
+    <attributeValues id="Iscn" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Iscn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="DocumentId" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="DocumentId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="DocumentNumber" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="DocumentNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Suffix" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Suffix"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="IssueType" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="IssueType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="IssuePriorityGroup" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="IssuePriorityGroup"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Rdd" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Rdd"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Iqty" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Iqty"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Istatus" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Istatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Imodified" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Imodified"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImodifiedDate" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="ImodifiedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="IpackingConsolidationId" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="IpackingConsolidationId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Pid" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Pid"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Scn" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Scn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="SuffixCode" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="SuffixCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PackingConsolidationId" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="PackingConsolidationId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NiinLocId" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="NiinLocId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ModifiedBy" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="ModifiedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ModifiedDate" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="ModifiedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="QtyPicked" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="QtyPicked"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PickQty" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="PickQty"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Status" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Cc" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Cc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ExpirationDate" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="ExpirationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Aqty" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Aqty"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Fsc" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Fsc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Niin" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Niin"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Nomenclature" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Nomenclature"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PartNumber" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="PartNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Ui" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Ui"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LocationLabel" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="LocationLabel"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="DividerIndex" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="DividerIndex"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="DividerTypeId" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="DividerTypeId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Aac" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Aac"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Address1" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Address1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="RouteName" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="RouteName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Side" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Side"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LocLevel" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="LocLevel"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Aisle" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Aisle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Bay" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Bay"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Slot" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Slot"/>
+      </AttrNames>
+    </attributeValues>
+    <list ListOperMode="navigation" IterBinding="PickRefuseQryVO1Iterator" id="PickRefuseList">
+      <AttrNames>
+        <Item Value="Eid"/>
+        <Item Value="ErrorDescription"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="Eid"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="ErrorDescription"/>
+      </ListDisplayAttrNames>
+    </list>
+    <list ListOperMode="navigation" IterBinding="PickByPassQryVO1Iterator" id="PickByPassList">
+      <AttrNames>
+        <Item Value="Eid"/>
+        <Item Value="ErrorDescription"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="Eid"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="ErrorDescription"/>
+      </ListDisplayAttrNames>
+    </list>
+    <attributeValues id="Pin" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Pin"/>
+      </AttrNames>
+    </attributeValues>
+    <table id="SerialOrLotNumList1" IterBinding="SerialOrLotNumList1Iterator">
+      <AttrNames>
+        <Item Value="SerialOrLoNum"/>
+        <Item Value="SrlLotNumTrackId"/>
+        <Item Value="QtyLot"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="SerialOrLotNumList1SerialOrLoNum" IterBinding="SerialOrLotNumList1Iterator">
+      <AttrNames>
+        <Item Value="SerialOrLoNum"/>
+        <Item Value="SrlLotNumTrackId"/>
+        <Item Value="QtyLot"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Create1" RequiresUpdateModel="true" Action="createRow" IterBinding="SerialOrLotNumList1Iterator1"/>
+    <attributeValues id="SerialOrLoNum" IterBinding="SerialOrLotNumList1Iterator1">
+      <AttrNames>
+        <Item Value="SerialOrLoNum"/>
+        <Item Value="SrlLotNumTrackId"/>
+        <Item Value="QtyLot"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="NiinInfoView1Iterator" id="NiinInfoView1">
+      <nodeDefinition DefName="mil.stratis.model.view.wlm.NiinInfoView" Name="NiinInfoView10">
+        <AttrNames>
+          <Item Value="Fsc"/>
+          <Item Value="Niin"/>
+          <Item Value="Ui"/>
+          <Item Value="Nomenclature"/>
+          <Item Value="ShelfLifeCode"/>
+          <Item Value="Scc"/>
+          <Item Value="SerialControlFlag"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

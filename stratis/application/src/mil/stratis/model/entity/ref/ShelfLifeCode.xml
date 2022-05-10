@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ShelfLifeCode"
+  Version="11.1.2.64.36"
+  DBObjectType="SYNONYM"
+  DBObjectName="STRATIS.SHELFLIFECODE_LU"
+  AliasName="ShelfLifeCode"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <Attribute
+    Name="ShelflifecodeId"
+    ColumnName="SHELFLIFECODE_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="STRATIS.SHELFLIFECODE_LU"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_SequenceName" Value="SEQ_SHELFLIFECODE_LU"/>
+      <Attr Name="_SequenceStart" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Shelflifecode"
+    Precision="1"
+    ColumnName="SHELFLIFECODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="STRATIS.SHELFLIFECODE_LU">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ShelflifecodeDescn"
+    Precision="50"
+    ColumnName="SHELFLIFECODE_DESCN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="STRATIS.SHELFLIFECODE_LU">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TransTs"
+    ColumnName="TRANS_TS"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="STRATIS.SHELFLIFECODE_LU"/>
+  <Attribute
+    Name="ModById"
+    ColumnName="MOD_BY_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="STRATIS.SHELFLIFECODE_LU"/>
+  <Key
+    Name="ShelflifecodePrimaryKey"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SHELFLIFECODE_PRIMARY_KEY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.ref.ShelfLifeCode.ShelflifecodeId"/>
+    </AttrArray>
+  </Key>
+</Entity>

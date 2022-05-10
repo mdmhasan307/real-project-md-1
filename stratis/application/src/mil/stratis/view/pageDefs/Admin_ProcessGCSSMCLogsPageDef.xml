@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Admin_ProcessGCSSMCLogsPageDef"
+                Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="GCSSImportsLog1Iterator" RangeSize="20" Binds="Root.AppModule1.GCSSImportsLog1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="GCSSMCImportsLog1" IterBinding="GCSSImportsLog1Iterator">
+      <AttrNames>
+        <Item Value="GcssmcImportsDataId"/>
+        <Item Value="InterfaceName"/>
+        <Item Value="Status"/>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="GcssmcImportsDataId" IterBinding="GCSSImportsLog1Iterator">
+      <AttrNames>
+        <Item Value="GcssmcImportsDataId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="InterfaceName" IterBinding="GCSSImportsLog1Iterator">
+      <AttrNames>
+        <Item Value="InterfaceName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Status" IterBinding="GCSSImportsLog1Iterator">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CreatedDate" IterBinding="GCSSImportsLog1Iterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

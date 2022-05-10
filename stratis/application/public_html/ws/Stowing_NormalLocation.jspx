@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" scope="session" class="mil.stratis.view.user.UserInfo"/>
+    <jsp:setProperty name="userbean" property="selected" value="2"/>
+    <jsp:setProperty name="userbean" property="selected2" value="0"/>
+    <f:view>
+        <af:document title="STRATIS" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="150" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="pn_wrap_header">
+                            <jsp:include page="/ws/WS_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6" id="s2"/>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout id="topGroup" layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelHeader text="Stowing - Location Verification" id="ph1">
+                                <af:panelGroupLayout id="pgl12" layout="horizontal" valign="bottom">
+                                    <af:panelGroupLayout id="pgl115">
+                                        <af:separator id="s9"/>
+                                        <af:panelGroupLayout layout="horizontal" id="pgl2">
+                                            <af:panelFormLayout id="pfl1" inlineStyle="border-style:solid;">
+                                                <af:spacer width="10" height="10" id="s8"/>
+                                                <af:inputText label="#{bindings.Sid.label}"
+                                                              value="#{bindings.Sid.inputValue}"
+                                                              styleClass="ReadOnlyField"
+                                                              columns="#{bindings.Sid.displayWidth}" readOnly="true"
+                                                              id="itSid"/>
+                                                <af:inputText label="Location"
+                                                              value="#{bindings.LocationLabel.inputValue}"
+                                                              styleClass="ReadOnlyField"
+                                                              columns="#{bindings.LocationLabel.displayWidth}"
+                                                              readOnly="true" id="itLocationLabel"/>
+                                                <af:inputText label="#{bindings.Side.label}"
+                                                              value="#{bindings.Side.inputValue}"
+                                                              styleClass="ReadOnlyField"
+                                                              columns="#{bindings.Side.displayWidth}" readOnly="true"
+                                                              id="itSide"/>
+                                                <af:inputText label="#{bindings.Bay.label}"
+                                                              value="#{bindings.Bay.inputValue}"
+                                                              styleClass="ReadOnlyField"
+                                                              columns="#{bindings.Bay.displayWidth}" readOnly="true"
+                                                              id="itInputValue"/>
+                                                <af:inputText label="#{bindings.LocLevel.label}"
+                                                              value="#{bindings.LocLevel.inputValue}"
+                                                              styleClass="ReadOnlyField"
+                                                              columns="#{bindings.LocLevel.displayWidth}"
+                                                              readOnly="true" id="itInputValue1"/>
+                                                <af:panelGroupLayout layout="horizontal"
+                                                                     inlineStyle="border-style:solid;" id="pgl3">
+                                                    <af:inputText label="Scan Location label"
+                                                                  validator="#{StowingAll.locationValidator}"
+                                                                  columns="10" inlineStyle="font-weight:bold;"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  binding="#{StowingAll.scanLocLabel}"
+                                                                  id="itLocationValidatior"/>
+                                                </af:panelGroupLayout>
+                                            </af:panelFormLayout>
+                                        </af:panelGroupLayout>
+                                        <af:spacer width="10" height="10" id="s1"/>
+                                        <af:switcher facetName="#{StowingAll.expObj}" id="s3">
+                                            <f:facet name="0">
+                                                <af:panelGroupLayout id="pgl4">
+                                                    <af:button text="Submit"
+                                                               action="#{StowingAll.actionForwardStrForStowingNormalOnSubmit}"
+                                                               id="stowNormalSubmitId"
+                                                               partialSubmit="#{StowingAll.uiDialog}"
+                                                               useWindow="#{StowingAll.uiDialog}"
+                                                               windowHeight="300" windowWidth="600"
+                                                               launchListener="#{StowingAll.handleUIDialogLaunch}"/>
+                                                    <af:spacer width="10" height="10" id="s4"/>
+                                                    <af:button text="Bypass"
+                                                               action="#{StowingAll.actionForwardStrForStowingNormalOnCancel}"
+                                                               actionListener="#{StowingAll.assignExpObjForByPass}"
+                                                               id="stowNormalCancelId" partialSubmit="false"
+                                                               immediate="true"/>
+                                                </af:panelGroupLayout>
+                                            </f:facet>
+                                            <f:facet name="6">
+                                                <af:panelGroupLayout id="pgl5">
+                                                    <af:selectOneChoice value="#{bindings.StowByPassList.inputValue}"
+                                                                        label="Select Bypass Reason" rendered="true"
+                                                                        id="stowByPassEid" valuePassThru="true"
+                                                                        inlineStyle="font-weight:bold;">
+                                                        <f:selectItems value="#{bindings.StowByPassList.items}"
+                                                                       id="siStowByPassList"/>
+                                                    </af:selectOneChoice>
+                                                    <af:panelGroupLayout id="pgl6">
+                                                        <af:toolbar id="t2">
+                                                            <af:button text="Submit"
+                                                                       action="#{StowingAll.actionForwardStrForStowingNormalNiinVerOnByPassDone}"
+                                                                       id="cbDone" partialSubmit="false" immediate="true"/>
+                                                            <af:button text="Cancel"
+                                                                       action="#{StowingAll.actionForwardStrForStowingNormalNiinVerOnCancel}"
+                                                                       id="cbCancel" partialSubmit="false" immediate="true"/>
+                                                        </af:toolbar>
+                                                    </af:panelGroupLayout>
+                                                </af:panelGroupLayout>
+                                            </f:facet>
+                                        </af:switcher>
+                                    </af:panelGroupLayout>
+                                    <!--/af:form-->
+                                    <af:panelGroupLayout valign="top" id="pgl7">
+                                        <af:inputText label="Current Stow Location"
+                                                      value="#{bindings.LocationLabel.inputValue}" readOnly="true"
+                                                      id="itCurrentStowLoc"/>
+                                        <af:panelGroupLayout layout="horizontal" id="pg175">
+                                            <af:inputText label="#{bindings.Side.label}" value="#{bindings.Side.inputValue}"
+                                                          readOnly="true" id="itSide1"/>
+                                            <af:spacer width="5" height="10" id="s5"/>
+                                            <af:inputText label="#{bindings.Bay.label}" value="#{bindings.Bay.inputValue}"
+                                                          readOnly="true" id="itBay"/>
+                                            <af:spacer width="5" height="10" id="s6"/>
+                                            <af:inputText label="#{bindings.LocLevel.label}"
+                                                          value="#{bindings.LocLevel.inputValue}" readOnly="true"
+                                                          id="itLocLevel"/>
+                                            <af:spacer width="5" height="10" id="s7"/>
+                                            <af:inputText label="#{bindings.Slot.label}" value="#{bindings.Slot.inputValue}"
+                                                          readOnly="true" id="itSlot"/>
+                                        </af:panelGroupLayout>
+                                        <af:image shortDesc="divider"
+                                                  source="/SlotImage?type=SLOT&amp;DI=#{bindings.DividerTypeId.inputValue}&amp;SI=#{bindings.DividerIndex.inputValue}"
+                                                  id="iDivIndex"/>
+                                    </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                            </af:panelHeader>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="../FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

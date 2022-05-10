@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MechanizedFlag"
+  Version="11.1.2.64.36"
+  DBObjectType="SYNONYM"
+  DBObjectName="STRATIS.MECHANIZEDFLAG_LU"
+  AliasName="MechanizedFlag"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <Attribute
+    Name="MechanizedflagId"
+    ColumnName="MECHANIZEDFLAG_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="STRATIS.MECHANIZEDFLAG_LU"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_SequenceName" Value="SEQ_MECHANIZEDFLAG_LU"/>
+      <Attr Name="_SequenceStart" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Mechanizedflag"
+    Precision="1"
+    ColumnName="MECHANIZEDFLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="STRATIS.MECHANIZEDFLAG_LU">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="MechanizedflagDescn"
+    Precision="50"
+    ColumnName="MECHANIZEDFLAG_DESCN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="STRATIS.MECHANIZEDFLAG_LU">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TransTs"
+    ColumnName="TRANS_TS"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="STRATIS.MECHANIZEDFLAG_LU"/>
+  <Attribute
+    Name="ModById"
+    ColumnName="MOD_BY_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="STRATIS.MECHANIZEDFLAG_LU"/>
+  <Key
+    Name="MechanizedflagPrimaryKey"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="MECHANIZEDFLAG_PRIMARY_KEY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.ref.MechanizedFlag.MechanizedflagId"/>
+    </AttrArray>
+  </Key>
+</Entity>

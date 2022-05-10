@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="MatsExceptionView"
+   Version="11.1.2.64.36"
+   SelectList="RefMats.REF_MATS_ID, 
+       RefMats.DOCUMENT_IDENTIFIER, 
+       RefMats.CONDITION_CODE, 
+       RefMats.DOCUMENT_NUMBER, 
+       RefMats.FSC, 
+       RefMats.NIIN, 
+       RefMats.UNIT_OF_ISSUE, 
+       RefMats.TRANSACTION_QUANTITY, 
+       RefMats.REQUIRED_DELIVERY_DATE, 
+       RefMats.ISSUE_PRIORITY_DESIGNATOR"
+   FromList="REF_MATS RefMats"
+   OrderBy="RefMats.ref_mats_id"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.sysadm.MatsExceptionViewImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="RefMats"
+      Entity="mil.stratis.model.entity.wlm.RefMats" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="RefMatsId"
+      IsUpdateable="while_insert"
+      EntityAttrName="RefMatsId"
+      EntityUsage="RefMats"
+      AliasName="REF_MATS_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocumentIdentifier"
+      EntityAttrName="DocumentIdentifier"
+      EntityUsage="RefMats"
+      AliasName="DOCUMENT_IDENTIFIER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ConditionCode"
+      EntityAttrName="ConditionCode"
+      EntityUsage="RefMats"
+      AliasName="CONDITION_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocumentNumber"
+      EntityAttrName="DocumentNumber"
+      EntityUsage="RefMats"
+      AliasName="DOCUMENT_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Fsc"
+      EntityAttrName="Fsc"
+      EntityUsage="RefMats"
+      AliasName="FSC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Niin"
+      EntityAttrName="Niin"
+      EntityUsage="RefMats"
+      AliasName="NIIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UnitOfIssue"
+      EntityAttrName="UnitOfIssue"
+      EntityUsage="RefMats"
+      AliasName="UNIT_OF_ISSUE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TransactionQuantity"
+      EntityAttrName="TransactionQuantity"
+      EntityUsage="RefMats"
+      AliasName="TRANSACTION_QUANTITY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RequiredDeliveryDate"
+      EntityAttrName="RequiredDeliveryDate"
+      EntityUsage="RefMats"
+      AliasName="REQUIRED_DELIVERY_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IssuePriorityDesignator"
+      PrecisionRule="true"
+      EntityAttrName="IssuePriorityDesignator"
+      EntityUsage="RefMats"
+      AliasName="ISSUE_PRIORITY_DESIGNATOR"/>
+</ViewObject>

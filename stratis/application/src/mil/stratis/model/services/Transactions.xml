@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<AppModule
+    xmlns="http://xmlns.oracle.com/bc4j"
+    Name="Transactions"
+    Version="11.1.2.64.36"
+    ComponentClass="mil.stratis.model.services.TransactionsImpl"
+    ComponentInterface="mil.stratis.model.services.common.Transactions"
+    ClientProxyName="mil.stratis.model.services.client.TransactionsClient"
+    LoadComponentsLazily="true">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <ViewUsage
+      Name="SiteInfoView1"
+      ViewObjectName="mil.stratis.model.view.wlm.SiteInfoView"/>
+  <AppModuleUsage
+      Name="GCSSMCTransactions1"
+      FullName="mil.stratis.model.services.GCSSMCTransactions"
+      SharedScope="0"/>
+  <ClientInterface>
+    <Method
+        Name="sendAsxTrans"
+        MethodName="sendAsxTrans">
+      <Return
+          Type="int">
+      </Return>
+      <Parameter
+          Name="scnVal"
+          Type="java.lang.String">
+      </Parameter>
+      <Parameter
+          Name="transNum"
+          Type="int">
+      </Parameter>
+    </Method>
+  </ClientInterface>
+  <Properties>
+    <CustomProperties>
+      <Property
+          Name="DATA_CONTROL_NAME"
+          Value="TransacationsDataControl"/>
+    </CustomProperties>
+  </Properties>
+</AppModule>

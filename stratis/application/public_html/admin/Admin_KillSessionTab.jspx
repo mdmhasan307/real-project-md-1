@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:stratis="taglib.mil.usmc.stratis">
+    <af:switcher facetName="#{userbean.usersAdminAuthorizationStatus}" id="fmusersadminauthstatus">
+        <f:facet name="0">
+            <f:verbatim>
+                <script language="Javascript" type="text/javascript">
+                  //alert('Your session has expired!\nYou will be returned to the login screen.');
+                  console.log("A_KST detected expired/no session.");
+                  this.location.href = 'unauthenticated.html';
+                </script>
+            </f:verbatim>
+        </f:facet>
+        <f:facet name="-1">
+            <f:verbatim>
+                <script language="Javascript" type="text/javascript">
+                  this.location.href = 'unauthorized.html';
+                </script>
+            </f:verbatim>
+        </f:facet>
+        <f:facet name="1">
+
+
+            <af:subform id="KillSessionForm">
+                <af:spacer height="10" width="1"/>
+                <af:panelBox text="Kill Active Sessions" showDisclosure="false">
+                    <af:separator/>
+                    <af:table value="#{bindings.UsersView1.collectionModel}" var="row" id="activeSessionTable"
+                              rows="#{bindings.UsersView1.rangeSize}" first="#{bindings.UsersView1.rangeStart}"
+                              emptyText="#{bindings.UsersView1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                              binding="#{SysAdminBacking.loggedinuserTable}" rowSelection="single" inlineStyle="height:200px;"
+                              styleClass="AFStretchWidth" columnStretching="last">
+                        <af:column sortProperty="Username" sortable="true" headerText="#{bindings.UsersView1.labels.Username}"
+                                   width="100">
+                            <af:outputText value="#{row.Username}"/>
+                        </af:column>
+                        <af:column sortProperty="LastLogin" sortable="false" headerText="Last Login" width="150">
+                            <stratis:adfDateFormatter
+                                    value="#{(row.LoggedIn == 'Y') ? row.LastLogin : ''}"
+                                    pattern="${userbean.dateWithTimeFormatPattern}"/>
+                        </af:column>
+                    </af:table>
+                    <af:toolbar inlineStyle="padding:5px;">
+                        <af:button text="End Selected Sessions" id="killButton"
+                                   actionListener="#{SysAdminBacking.killUsers}" partialSubmit="false"/>
+                    </af:toolbar>
+                </af:panelBox>
+                <af:spacer height="10"/>
+            </af:subform>
+        </f:facet>
+    </af:switcher>
+</jsp:root>

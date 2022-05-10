@@ -1,0 +1,45 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
+  <display-name>GCSS</display-name>
+  <description>GCSSMCWS Feeds</description>
+
+  <listener>
+    <listener-class>
+      com.sun.xml.ws.transport.http.servlet.WSServletContextListener
+    </listener-class>
+  </listener>
+  <servlet>
+    <servlet-name>StratisGCSSMCWebServiceSoapHttpPort</servlet-name>
+    <servlet-class>
+      com.sun.xml.ws.transport.http.servlet.WSServlet
+    </servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StratisGCSSMCWebServiceSoapHttpPort</servlet-name>
+    <url-pattern>/StratisGCSSMCWebServiceSoapHttpPort</url-pattern>
+  </servlet-mapping>
+
+  <env-entry>
+    <env-entry-name>masterSchemaPath</env-entry-name>
+    <env-entry-type>java.lang.String</env-entry-type>
+    <env-entry-value>/opt/app/stratis/tomcat/current/webapps/gcss/WEB-INF/RICE_INTF/RICE-Master-Schema.xsd</env-entry-value>
+  </env-entry>
+  <env-entry>
+    <env-entry-name>GcssSendMultiThread</env-entry-name>
+    <env-entry-type>java.lang.String</env-entry-type>
+    <env-entry-value>false</env-entry-value>
+  </env-entry>
+
+  <env-entry>
+    <description>STRATIS build date and git commit</description>
+    <env-entry-name>STRATBUILDINFO</env-entry-name>
+    <env-entry-type>java.lang.String</env-entry-type>
+    <env-entry-value>2020.08.14</env-entry-value>
+  </env-entry>
+
+</web-app>

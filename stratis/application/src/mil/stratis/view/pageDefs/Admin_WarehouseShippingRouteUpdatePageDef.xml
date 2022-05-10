@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="Admin_WarehouseShippingRouteUpdatePageDef" Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="ShippingRouteView1Iterator_WarehouseSetup" RangeSize="10"
+              Binds="Root.AppModule1.ShippingRouteView1_WarehouseSetup" DataControl="StratisRootServiceDataControl"
+              StateValidation="false" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="ShippingRouteView1" IterBinding="ShippingRouteView1Iterator_WarehouseSetup">
+      <AttrNames>
+        <Item Value="RouteId"/>
+        <Item Value="Description"/>
+        <Item Value="RouteName"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="RouteId" IterBinding="ShippingRouteView1Iterator_WarehouseSetup">
+      <AttrNames>
+        <Item Value="RouteId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="RouteName" IterBinding="ShippingRouteView1Iterator_WarehouseSetup">
+      <AttrNames>
+        <Item Value="RouteName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Description" IterBinding="ShippingRouteView1Iterator_WarehouseSetup">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="CreateInsert" IterBinding="ShippingRouteView1Iterator_WarehouseSetup"
+            InstanceName="StratisRootServiceDataControl.Root.AppModule1.ShippingRouteView1_WarehouseSetup"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="Commit" InstanceName="StratisRootServiceDataControl.Root.AppModule1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="ExecuteShippingRoute" RequiresUpdateModel="true" Action="iteratorExecute"
+            IterBinding="ShippingRouteView1Iterator_WarehouseSetup"/>
+  </bindings>
+</pageDefinition>

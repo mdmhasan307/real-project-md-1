@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="InventoryLocSurvey_NormalMainPageDef" ControllerClass="#{LocSurveyAll}" Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="LocSurveyVO1Iterator" RangeSize="-1" Binds="Root.InventoryModule1.LocSurveyVO1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="NiinLocVO1Iterator" RangeSize="-1" Binds="Root.InventoryModule1.NiinLocVO1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="NIINLocDetailsVO1Iterator" RangeSize="-1" Binds="Root.InventoryModule1.NIINLocDetailsVO1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="NIINLocDetailsVO1" IterBinding="NIINLocDetailsVO1Iterator">
+      <AttrNames>
+        <Item Value="Niin"/>
+        <Item Value="Nomenclature"/>
+        <Item Value="Qty"/>
+        <Item Value="ExpirationDate"/>
+        <Item Value="NiinId"/>
+        <Item Value="NiinLocId"/>
+      </AttrNames>
+    </table>
+    <table id="NiinLocVO1" IterBinding="NiinLocVO1Iterator">
+      <AttrNames>
+        <Item Value="Niin"/>
+        <Item Value="Comments"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="NiinLocVO1Niin" IterBinding="NiinLocVO1Iterator">
+      <AttrNames>
+        <Item Value="Niin"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NiinLocVO1Qty" IterBinding="NiinLocVO1Iterator">
+      <AttrNames>
+        <Item Value="Qty"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NiinLocVO1Cc" IterBinding="NiinLocVO1Iterator">
+      <AttrNames>
+        <Item Value="Cc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NiinLocVO1ExpirationDate" IterBinding="NiinLocVO1Iterator">
+      <AttrNames>
+        <Item Value="ExpirationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NiinLocVO1Comments" IterBinding="NiinLocVO1Iterator">
+      <AttrNames>
+        <Item Value="Comments"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NiinLocVO1NewRow" IterBinding="NiinLocVO1Iterator">
+      <AttrNames>
+        <Item Value="NewRow"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LocationLabel" IterBinding="LocSurveyVO1Iterator">
+      <AttrNames>
+        <Item Value="LocationLabel"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LocationId" IterBinding="LocSurveyVO1Iterator">
+      <AttrNames>
+        <Item Value="LocationId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="WacId" IterBinding="LocSurveyVO1Iterator">
+      <AttrNames>
+        <Item Value="WacId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="DividerIndex" IterBinding="LocSurveyVO1Iterator">
+      <AttrNames>
+        <Item Value="DividerIndex"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LocLevel" IterBinding="LocSurveyVO1Iterator">
+      <AttrNames>
+        <Item Value="LocLevel"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Bay" IterBinding="LocSurveyVO1Iterator">
+      <AttrNames>
+        <Item Value="Bay"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Side" IterBinding="LocSurveyVO1Iterator">
+      <AttrNames>
+        <Item Value="Side"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="MechanizedFlag" IterBinding="LocSurveyVO1Iterator">
+      <AttrNames>
+        <Item Value="MechanizedFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Slot" IterBinding="LocSurveyVO1Iterator">
+      <AttrNames>
+        <Item Value="Slot"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="DividerTypeId" IterBinding="LocSurveyVO1Iterator">
+      <AttrNames>
+        <Item Value="DividerTypeId"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

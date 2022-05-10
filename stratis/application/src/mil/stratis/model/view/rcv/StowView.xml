@@ -1,0 +1,337 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="StowView"
+   Version="11.1.2.64.36"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   ComponentClass="mil.stratis.model.view.rcv.StowViewImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+      <Attr Name="_isExpertMode" Value="true"/>
+   </DesignTime>
+   <SQLQuery><![CDATA[
+SELECT 
+    Stow.SID, 
+    Stow.QTY_TO_BE_STOWED, 
+    Stow.RCN, 
+    Stow.CREATED_BY, 
+    Stow.CREATED_DATE, 
+    Stow.MODIFIED_BY, 
+    Stow.MODIFIED_DATE, 
+    Stow.STOW_ID, 
+    Stow.PID, 
+    Stow.STATUS, 
+    Stow.CANCEL_REASON, 
+    Stow.EXPIRATION_DATE, 
+    Stow.DATE_OF_MANUFACTURE, 
+    Stow.LOT_CON_NUM, 
+    Stow.CASE_WEIGHT_QTY, 
+    Stow.PACKED_DATE, 
+    Location.LOCATION_LABEL, 
+    Stow.LOCATION_ID, 
+    Location.LOCATION_ID AS LOCATION_ID1,
+    Stow.SERIAL_NUMBER,
+    Stow.STOW_QTY
+FROM 
+    STOW Stow, 
+    LOCATION Location 
+WHERE 
+    Stow.LOCATION_ID = Location.LOCATION_ID 
+ORDER BY 
+    Stow.SID DESC
+   ]]></SQLQuery>
+   <EntityUsage
+      Name="Stow"
+      Entity="mil.stratis.model.entity.rcv.Stow" >
+   </EntityUsage>
+   <EntityUsage
+      Name="Location"
+      Entity="mil.stratis.model.entity.loc.Location"
+      Association="mil.stratis.model.entity.associations.StowLocationFkAssoc"
+      AssociationEnd="mil.stratis.model.entity.associations.StowLocationFkAssoc.Location"
+      SourceUsage="mil.stratis.model.view.rcv.StowView.Stow"
+      ReadOnly="true"
+      Reference="true" >
+      <DesignTime>
+         <AttrArray Name="_srcAttributes">
+            <Item Value="mil.stratis.model.entity.rcv.Stow.LocationId" />
+         </AttrArray>
+         <AttrArray Name="_dstAttributes">
+            <Item Value="mil.stratis.model.entity.loc.Location.LocationId" />
+         </AttrArray>
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="Sid"
+      IsNotNull="true"
+      EntityAttrName="Sid"
+      EntityUsage="Stow"
+      AliasName="SID" >
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Sid_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="9" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="QtyToBeStowed"
+      EntityAttrName="QtyToBeStowed"
+      EntityUsage="Stow"
+      AliasName="QTY_TO_BE_STOWED" >
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="QtyToBeStowed_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="6" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Rcn"
+      EntityAttrName="Rcn"
+      EntityUsage="Stow"
+      AliasName="RCN" >
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="9" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="Rcn_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="Stow"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedDate"
+      EntityAttrName="CreatedDate"
+      EntityUsage="Stow"
+      AliasName="CREATED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedBy"
+      EntityAttrName="ModifiedBy"
+      EntityUsage="Stow"
+      AliasName="MODIFIED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedDate"
+      EntityAttrName="ModifiedDate"
+      EntityUsage="Stow"
+      AliasName="MODIFIED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StowId"
+      IsUpdateable="false"
+      EntityAttrName="StowId"
+      EntityUsage="Stow"
+      AliasName="STOW_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Pid"
+      EntityAttrName="Pid"
+      EntityUsage="Stow"
+      AliasName="PID" >
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="9" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="Pid_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Status"
+      EntityAttrName="Status"
+      EntityUsage="Stow"
+      AliasName="STATUS" >
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Status_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CancelReason"
+      EntityAttrName="CancelReason"
+      EntityUsage="Stow"
+      AliasName="CANCEL_REASON" >
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="CancelReason_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ExpirationDate"
+      EntityAttrName="ExpirationDate"
+      EntityUsage="Stow"
+      AliasName="EXPIRATION_DATE" >
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="10" >
+            </DISPLAYWIDTH>
+            <FMT_FORMAT
+               ResId="ExpirationDate_FMT_FORMAT" >
+            </FMT_FORMAT>
+            <FMT_FORMATTER
+               ResId="ExpirationDate_FMT_FORMATTER" >
+            </FMT_FORMATTER>
+            <LABEL
+               ResId="ExpirationDate_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DateOfManufacture"
+      EntityAttrName="DateOfManufacture"
+      EntityUsage="Stow"
+      AliasName="DATE_OF_MANUFACTURE" >
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="DateOfManufacture_LABEL" >
+            </LABEL>
+            <FMT_FORMATTER
+               ResId="DateOfManufacture_FMT_FORMATTER" >
+            </FMT_FORMATTER>
+            <FMT_FORMAT
+               ResId="DateOfManufacture_FMT_FORMAT" >
+            </FMT_FORMAT>
+            <DISPLAYWIDTH
+               Value="10" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LotConNum"
+      EntityAttrName="LotConNum"
+      EntityUsage="Stow"
+      AliasName="LOT_CON_NUM" >
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="10" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="LotConNum_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CaseWeightQty"
+      EntityAttrName="CaseWeightQty"
+      EntityUsage="Stow"
+      AliasName="CASE_WEIGHT_QTY" >
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="10" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="CaseWeightQty_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PackedDate"
+      EntityAttrName="PackedDate"
+      EntityUsage="Stow"
+      AliasName="PACKED_DATE" >
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="10" >
+            </DISPLAYWIDTH>
+            <FMT_FORMAT
+               ResId="PackedDate_FMT_FORMAT" >
+            </FMT_FORMAT>
+            <LABEL
+               ResId="PackedDate_LABEL" >
+            </LABEL>
+            <FMT_FORMATTER
+               ResId="PackedDate_FMT_FORMATTER" >
+            </FMT_FORMATTER>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationLabel"
+      IsUpdateable="false"
+      IsNotNull="true"
+      EntityAttrName="LocationLabel"
+      EntityUsage="Location"
+      AliasName="LOCATION_LABEL" >
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="LocationLabel_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationId"
+      EntityAttrName="LocationId"
+      EntityUsage="Stow"
+      AliasName="LOCATION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationId1"
+      IsUpdateable="false"
+      IsNotNull="true"
+      EntityAttrName="LocationId"
+      EntityUsage="Location"
+      AliasName="LOCATION_ID1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SerialNumber"
+      EntityAttrName="SerialNumber"
+      EntityUsage="Stow"
+      AliasName="SERIAL_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StowQty"
+      EntityAttrName="StowQty"
+      EntityUsage="Stow"
+      AliasName="STOW_QTY" >
+   </ViewAttribute>
+   <ResourceBundle >
+      <JavaResourceBundle
+         MsgBundleClass="mil.stratis.model.view.rcv.common.StowViewRowImplMsgBundle" >
+      </JavaResourceBundle>
+   </ResourceBundle>
+</ViewObject>

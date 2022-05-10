@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="3"/>
+    <f:view>
+        <af:document title="Picking_NormalMain.jspx" id="d1">
+            <af:form>
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="150" endWidth="6" bottomHeight="25">
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout id="topGroup" layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                                        <af:panelGroupLayout>
+                                            <af:panelHeader text="Picking - Location Verification"/>
+                                            <af:panelBox>
+                                                <af:panelGroupLayout>
+                                                <af:outputText value="#{userbean.specialMessage}"
+                                                    inlineStyle="color:rgb(0,0,255); font-weight:bold;" id="ot1"/>
+                                                <af:panelGroupLayout layout="horizontal">
+                                                    <af:panelGroupLayout>
+                                                        <af:spacer width="10" height="10"/>
+                                                        <af:panelLabelAndMessage label="SCN">
+                                                            <af:inputText value="#{bindings.Scn.inputValue}"
+                                                                          styleClass="ReadOnlyField"
+                                                                          columns="#{bindings.Scn.displayWidth}"
+                                                                          readOnly="true"/>
+                                                        </af:panelLabelAndMessage>
+                                                        <af:panelLabelAndMessage label="#{bindings.LocationLabel.label}">
+                                                            <af:inputText value="#{bindings.LocationLabel.inputValue}"
+                                                                          styleClass="ReadOnlyField"
+                                                                          columns="#{bindings.LocationLabel.displayWidth}"
+                                                                          readOnly="true"/>
+                                                        </af:panelLabelAndMessage>
+                                                        <af:panelLabelAndMessage label="#{bindings.Side.label}">
+                                                            <af:inputText value="#{bindings.Side.inputValue}"
+                                                                          styleClass="ReadOnlyField"
+                                                                          columns="#{bindings.Side.displayWidth}"
+                                                                          readOnly="true"/>
+                                                        </af:panelLabelAndMessage>
+                                                        <af:panelLabelAndMessage label="#{bindings.Bay.label}">
+                                                            <af:inputText value="#{bindings.Bay.inputValue}"
+                                                                          styleClass="ReadOnlyField"
+                                                                          columns="#{bindings.Bay.displayWidth}"
+                                                                          readOnly="true"/>
+                                                        </af:panelLabelAndMessage>
+                                                        <af:panelLabelAndMessage label="#{bindings.LocLevel.label}">
+                                                            <af:inputText value="#{bindings.LocLevel.inputValue}"
+                                                                          styleClass="ReadOnlyField"
+                                                                          columns="#{bindings.LocLevel.displayWidth}"
+                                                                          readOnly="true"/>
+                                                        </af:panelLabelAndMessage>
+                                                        <af:panelGroupLayout inlineStyle="border-style:solid;">
+                                                            <af:inputText label="Scan Location label"
+                                                                          columns="10"
+                                                                          inlineStyle="font-weight:bold;" contentStyle="text-transform:uppercase;"
+                                                                          binding="#{PickingAll.scanLocLabel}"/>
+                                                        </af:panelGroupLayout>
+                                                        <af:spacer width="10" height="10"/>
+                                                        <af:switcher facetName="#{PickingAll.expObj}">
+                                                            <f:facet name="0">
+                                                                <af:panelGroupLayout>
+                                                                    <af:button text="Submit"
+                                                                                      action="#{PickingAll.actionForwardStrForPickingNormalOnSubmit}"
+                                                                                      id="pickNormalSubmitId" partialSubmit="false"/>
+                                                                    <af:spacer width="10" height="10"/>
+                                                                    <af:button text="Bypass Pick"
+                                                                                      action="#{PickingAll.actionForwardStrForPickingNormalOnCancel}"
+                                                                                      actionListener="#{PickingAll.assignExpObjForByPass}"
+                                                                                      id="pickNormalCancelId" partialSubmit="false"/>
+                                                                </af:panelGroupLayout>
+                                                            </f:facet>
+                                                        </af:switcher>
+                                                        <af:panelGroupLayout visible="#{PickingAll.bypass}">
+                                                            <af:selectOneChoice value="#{bindings.PickByPassList.inputValue}"
+                                                                                label="Select Bypass Reason"
+                                                                                rendered="true" id="pickByPassEid"
+                                                                                valueChangeListener="#{PickingAll.selEid}"
+                                                                                valuePassThru="true"
+                                                                                inlineStyle="font-weight:bold;"
+                                                                                binding = "#{PickingAll.bypassList}">
+                                                                <f:selectItems value="#{bindings.PickByPassList.items}"/>
+                                                            </af:selectOneChoice>
+                                                            <af:panelGroupLayout>
+                                                                <af:button text="Submit"
+                                                                                  action="#{PickingAll.actionForwardStrForPickingNormalNiinVerOnByPassDone}"
+                                                                                  id="cbDone" partialSubmit="false"/>
+                                                                <af:button text="Cancel"
+                                                                                  action="#{PickingAll.actionForwardStrForPickingNormalNiinVerOnCancel}"
+                                                                                  id="cbCancel" partialSubmit="false"/>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                    </af:panelGroupLayout>
+                                                    <af:panelGroupLayout>
+                                                        <af:panelGroupLayout valign="top">
+                                                            <af:inputText label="Current Pick Location"
+                                                                          value="#{bindings.LocationLabel.inputValue}"
+                                                                          readOnly="true"/>
+                                                        </af:panelGroupLayout>
+                                                        <af:panelGroupLayout valign="top">
+                                                            <af:inputText label="#{bindings.Side.label}"
+                                                                          value="#{bindings.Side.inputValue}"
+                                                                          readOnly="true"/>
+                                                            <af:spacer width="5" height="10"/>
+                                                            <af:inputText label="#{bindings.Bay.label}"
+                                                                          value="#{bindings.Bay.inputValue}"
+                                                                          readOnly="true"/>
+                                                            <af:spacer width="5" height="10"/>
+                                                            <af:inputText label="#{bindings.LocLevel.label}"
+                                                                          value="#{bindings.LocLevel.inputValue}"
+                                                                          readOnly="true"/>
+                                                            <af:spacer width="5" height="10"/>
+                                                            <af:inputText label="#{bindings.Slot.label}"
+                                                                          value="#{bindings.Slot.inputValue}"
+                                                                          readOnly="true"/>
+                                                        </af:panelGroupLayout>
+                                                        <af:image shortDesc="Slot Image"
+                                                                  source="/SlotImage?type=SLOT&amp;DI=#{bindings.DividerTypeId.inputValue}&amp;SI=#{bindings.DividerIndex.inputValue}"/>
+                                                    </af:panelGroupLayout>
+                                                </af:panelGroupLayout>
+                                                </af:panelGroupLayout>
+                                            </af:panelBox>
+                                        </af:panelGroupLayout>
+                                        <af:panelGroupLayout rendered="false">
+                                            <af:inputText value="#{bindings.Eid.inputValue}"
+                                                          label="#{bindings.Eid.label}"
+                                                          required="#{bindings.Eid.mandatory}"
+                                                          columns="#{bindings.Eid.displayWidth}">
+                                                <f:validator binding="#{bindings.Eid.validator}"/>
+                                                <f:convertNumber groupingUsed="false" pattern="#{bindings.Eid.format}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.ErrorCode.inputValue}"
+                                                          label="#{bindings.ErrorCode.label}"
+                                                          required="#{bindings.ErrorCode.mandatory}"
+                                                          columns="#{bindings.ErrorCode.displayWidth}">
+                                                <f:validator binding="#{bindings.ErrorCode.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.ErrorDescription.inputValue}"
+                                                          label="#{bindings.ErrorDescription.label}"
+                                                          required="#{bindings.ErrorDescription.mandatory}"
+                                                          columns="#{bindings.ErrorDescription.displayWidth}">
+                                                <f:validator binding="#{bindings.ErrorDescription.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.SecurityLevel.inputValue}"
+                                                          label="#{bindings.SecurityLevel.label}"
+                                                          required="#{bindings.SecurityLevel.mandatory}"
+                                                          columns="#{bindings.SecurityLevel.displayWidth}">
+                                                <f:validator binding="#{bindings.SecurityLevel.validator}"/>
+                                                <f:convertNumber groupingUsed="false"
+                                                                 pattern="#{bindings.SecurityLevel.format}"/>
+                                            </af:inputText>
+                                        </af:panelGroupLayout>
+                                        <f:subview id="wrap_footer">
+                                            <jsp:include page="/FooterMain.jspx"/>
+                                        </f:subview>
+                                        <!-- TOODO: FIX THIS <f:verbatim><script>this.location.href='Picking_Normal.jspx';</script></f:verbatim> -->
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <!-- End center facet -->
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6" id="s1"/>
+                    </f:facet>
+                    <f:facet name="top">
+                        <f:subview id="pn_wrap_header">
+                            <jsp:include page="/ws/WS_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

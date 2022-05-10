@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="ErrorQueueVO"
+   Version="11.1.2.64.36"
+   SelectList="ErrorQueue.ERROR_QUEUE_ID, 
+       ErrorQueue.STATUS, 
+       ErrorQueue.CREATED_BY, 
+       ErrorQueue.CREATED_DATE, 
+       ErrorQueue.EID, 
+       ErrorQueue.KEY_TYPE, 
+       ErrorQueue.KEY_NUM, 
+       ErrorQueue.MODIFIED_BY, 
+       ErrorQueue.MODIFIED_DATE, 
+       ErrorQueue.NOTES"
+   FromList="ERROR_QUEUE ErrorQueue"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.wlm.ErrorQueueVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="ErrorQueue"
+      Entity="mil.stratis.model.entity.wlm.ErrorQueue" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="ErrorQueueId"
+      IsUpdateable="while_insert"
+      IsNotNull="true"
+      EntityAttrName="ErrorQueueId"
+      EntityUsage="ErrorQueue"
+      AliasName="ERROR_QUEUE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Status"
+      EntityAttrName="Status"
+      EntityUsage="ErrorQueue"
+      AliasName="STATUS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="ErrorQueue"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedDate"
+      EntityAttrName="CreatedDate"
+      EntityUsage="ErrorQueue"
+      AliasName="CREATED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Eid"
+      EntityAttrName="Eid"
+      EntityUsage="ErrorQueue"
+      AliasName="EID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KeyType"
+      EntityAttrName="KeyType"
+      EntityUsage="ErrorQueue"
+      AliasName="KEY_TYPE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="KeyNum"
+      EntityAttrName="KeyNum"
+      EntityUsage="ErrorQueue"
+      AliasName="KEY_NUM" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedBy"
+      EntityAttrName="ModifiedBy"
+      EntityUsage="ErrorQueue"
+      AliasName="MODIFIED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedDate"
+      EntityAttrName="ModifiedDate"
+      EntityUsage="ErrorQueue"
+      AliasName="MODIFIED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Notes"
+      EntityAttrName="Notes"
+      EntityUsage="ErrorQueue"
+      AliasName="NOTES" >
+   </ViewAttribute>
+</ViewObject>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="Admin_WarehouseNiinInquiryDialogPageDef" Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables" Refresh="ifNeeded">
+      <variable Type="java.lang.String" Name="FilterNIINInquiry_Location" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="FilterNIINInquiry_SecureFlag" IsQueriable="false"/>
+    </variableIterator>
+    <iterator id="LocationView1Iterator" RangeSize="10" Binds="Root.AppModule1.LocationView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="LocationView1" IterBinding="LocationView1Iterator">
+      <AttrNames>
+        <Item Value="LocationId"/>
+        <Item Value="LocationLabel"/>
+        <Item Value="SecureFlag"/>
+        <Item Value="Cube"/>
+        <Item Value="Weight"/>
+        <Item Value="MechanizedFlag"/>
+      </AttrNames>
+    </table>
+    <list id="LocationView1LocationId" IterBinding="LocationView1Iterator" StaticList="false"
+          ListOperMode="setAttribute" ListIter="LocationView1Iterator">
+      <AttrNames>
+        <Item Value="LocationId"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="LocationId"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="LocationLabel"/>
+      </ListDisplayAttrNames>
+    </list>
+    <methodAction id="FilterNIINInquiry" MethodName="FilterNIINInquiry_AddLocation" RequiresUpdateModel="true"
+                  Action="invokeMethod" IsViewObjectMethod="false" DataControl="StratisRootServiceDataControl"
+                  InstanceName="StratisRootServiceDataControl.dataProvider.Root.AppModule1">
+      <NamedData NDName="LocationQry" NDType="java.lang.String" NDValue="${bindings.FilterNIINInquiry_Location}"/>
+      <NamedData NDName="SecureFlagQry" NDType="java.lang.String" NDValue="${bindings.FilterNIINInquiry_SecureFlag}"/>
+    </methodAction>
+    <attributeValues id="LocationQry" IterBinding="variables">
+      <AttrNames>
+        <Item Value="FilterNIINInquiry_Location"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="SecureFlagQry" IterBinding="variables">
+      <AttrNames>
+        <Item Value="FilterNIINInquiry_SecureFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LocationId" IterBinding="LocationView1Iterator">
+      <AttrNames>
+        <Item Value="LocationId"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

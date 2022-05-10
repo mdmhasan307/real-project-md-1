@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="DocIdListVO"
+   Version="11.1.2.64.36"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   ComponentClass="mil.stratis.model.view.gcssmc.DocIdListVOImpl"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+      <Attr Name="_isExpertMode" Value="true"/>
+   </DesignTime>
+   <SQLQuery><![CDATA[
+select value, descriptiion from master_dropdown where domain = 'DOCID' order by value asc
+   ]]></SQLQuery>
+   <ViewAttribute
+      Name="Value"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="10"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="VALUE"
+      Expression="VALUE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="3" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="Value_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Descriptiion"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="100"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="DESCRIPTIION"
+      Expression="DESCRIPTIION"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="100" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="20" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="Descriptiion_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ResourceBundle >
+      <JavaResourceBundle
+         MsgBundleClass="mil.stratis.model.view.gcssmc.common.DocIdListVORowImplMsgBundle" >
+      </JavaResourceBundle>
+   </ResourceBundle>
+</ViewObject>

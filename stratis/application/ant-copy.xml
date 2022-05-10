@@ -1,0 +1,9 @@
+<project name="stratis" basedir="." default="copy">
+
+  <target name="copy">
+    <copy todir="target/view-controller-704.01.08">
+      <fileset dir="public_html"/>
+    </copy>
+  </target>
+
+</project>

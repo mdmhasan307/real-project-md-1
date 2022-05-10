@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="Admin_WarehouseNiinInquiryPageDef" Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="NiinInfoView_CC_Change2Iterator" RangeSize="12" Binds="Root.AppModule1.NiinInfoView_CC_Change2"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <variableIterator id="variables" Refresh="ifNeeded">
+      <variable Type="java.lang.String" Name="FilterNIINInquiry_NIIN" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="FilterNIINInquiry_Nomenclature" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="FilterNIINInquiry_Location" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="FilterNIINInquiry_SecureFlag" IsQueriable="false"/>
+    </variableIterator>
+    <iterator id="NiinLoc_LocationView_CC_Change2Iterator" RangeSize="10"
+              Binds="Root.AppModule1.NiinLoc_LocationView_CC_Change2" DataControl="StratisRootServiceDataControl"
+              Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="LocationView1Iterator" RangeSize="10" Binds="Root.AppModule1.LocationView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="SerialOrLotNumList1Iterator" RangeSize="10" Binds="Root.PickingAM1.SerialOrLotNumList1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="NIINSerialNumbers1Iterator" RangeSize="10" Binds="Root.AppModule1.NIINSerialNumbers1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none" />
+  </executables>
+  <bindings>
+    <table id="NiinInfoView_CC_Change2" IterBinding="NiinInfoView_CC_Change2Iterator">
+      <AttrNames>
+        <Item Value="NiinId"/>
+        <Item Value="Niin"/>
+        <Item Value="Nomenclature"/>
+        <Item Value="Fsc"/>
+        <Item Value="SerialControlFlag"/>
+        <Item Value="LotControlFlag"/>
+        <Item Value="ShelfLifeCode"/>
+        <Item Value="ShelfLifeExtension"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="SerialControlFlag" IterBinding="NiinInfoView_CC_Change2Iterator">
+      <AttrNames>
+        <Item Value="SerialControlFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LotControlFlag" IterBinding="NiinInfoView_CC_Change2Iterator">
+      <AttrNames>
+        <Item Value="LotControlFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FilterNIINInquiry" MethodName="filterNIINInquiry" RequiresUpdateModel="true" Action="invokeMethod"
+                  IsViewObjectMethod="false" DataControl="StratisRootServiceDataControl"
+                  InstanceName="StratisRootServiceDataControl.dataProvider.Root.AppModule1">
+      <NamedData NDName="NIINQry" NDType="java.lang.String" NDValue="${bindings.FilterNIINInquiry_NIIN}"/>
+      <NamedData NDName="NomenclatureQry" NDType="java.lang.String"
+                 NDValue="${bindings.FilterNIINInquiry_Nomenclature}"/>
+    </methodAction>
+    <attributeValues id="NIINQry" IterBinding="variables">
+      <AttrNames>
+        <Item Value="FilterNIINInquiry_NIIN"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NomenclatureQry" IterBinding="variables">
+      <AttrNames>
+        <Item Value="FilterNIINInquiry_Nomenclature"/>
+      </AttrNames>
+    </attributeValues>
+    <table id="NiinLoc_LocationView_CC_Change2" IterBinding="NiinLoc_LocationView_CC_Change2Iterator">
+      <AttrNames>
+        <Item Value="NiinLocId"/>
+        <Item Value="NiinId"/>
+        <Item Value="LocationId"/>
+        <Item Value="Qty"/>
+        <Item Value="ExpirationDate"/>
+        <Item Value="DateOfManufacture"/>
+        <Item Value="Cc"/>
+        <Item Value="Locked"/>
+        <Item Value="UnderAudit"/>
+        <Item Value="ProjectCode"/>
+        <Item Value="Pc"/>
+        <Item Value="CaseWeightQty"/>
+        <Item Value="LotConNum"/>
+        <Item Value="SerialNumber"/>
+        <Item Value="LocationLabel"/>
+        <Item Value="LocationId1"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="Cc" IterBinding="NiinLoc_LocationView_CC_Change2Iterator">
+      <AttrNames>
+        <Item Value="Cc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Locked" IterBinding="NiinLoc_LocationView_CC_Change2Iterator">
+      <AttrNames>
+        <Item Value="Locked"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ProjectCode" IterBinding="NiinLoc_LocationView_CC_Change2Iterator">
+      <AttrNames>
+        <Item Value="ProjectCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Pc" IterBinding="NiinLoc_LocationView_CC_Change2Iterator">
+      <AttrNames>
+        <Item Value="Pc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UnderAudit" IterBinding="NiinLoc_LocationView_CC_Change2Iterator">
+      <AttrNames>
+        <Item Value="UnderAudit"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LotConNum" IterBinding="NiinLoc_LocationView_CC_Change2Iterator">
+      <AttrNames>
+        <Item Value="LotConNum"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="SerialNumber" IterBinding="NiinLoc_LocationView_CC_Change2Iterator">
+      <AttrNames>
+        <Item Value="SerialNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LocationLabel" IterBinding="NiinLoc_LocationView_CC_Change2Iterator">
+      <AttrNames>
+        <Item Value="LocationLabel"/>
+      </AttrNames>
+    </attributeValues>
+    <!-- second half of niin inquiry -->
+    <table id="LocationView1" IterBinding="LocationView1Iterator">
+      <AttrNames>
+        <Item Value="LocationId"/>
+        <Item Value="LocationLabel"/>
+        <Item Value="SecureFlag"/>
+        <Item Value="Cube"/>
+        <Item Value="Weight"/>
+        <Item Value="MechanizedFlag"/>
+      </AttrNames>
+    </table>
+    <methodAction id="FilterNIINInquiry_AddLocation" MethodName="filterNIINInquiry_AddLocation"
+                  RequiresUpdateModel="true" Action="invokeMethod" IsViewObjectMethod="false"
+                  DataControl="StratisRootServiceDataControl"
+                  InstanceName="StratisRootServiceDataControl.dataProvider.Root.AppModule1">
+      <NamedData NDName="LocationQry" NDType="java.lang.String" NDValue="${bindings.FilterNIINInquiry_Location}"/>
+      <NamedData NDName="SecureFlagQry" NDType="java.lang.String" NDValue="${bindings.FilterNIINInquiry_SecureFlag}"/>
+    </methodAction>
+    <attributeValues id="LocationQry" IterBinding="variables">
+      <AttrNames>
+        <Item Value="FilterNIINInquiry_Location"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="SecureFlagQry" IterBinding="variables">
+      <AttrNames>
+        <Item Value="FilterNIINInquiry_SecureFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LocationId" IterBinding="LocationView1Iterator">
+      <AttrNames>
+        <Item Value="LocationId"/>
+      </AttrNames>
+    </attributeValues>
+    <table id="SerialOrLotNumList1" IterBinding="SerialOrLotNumList1Iterator">
+      <AttrNames>
+        <Item Value="SerialOrLoNum"/>
+        <Item Value="SrlLotNumTrackId"/>
+        <Item Value="QtyLot"/>
+        <Item Value="LotConNum"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="SerialOrLoNum" IterBinding="SerialOrLotNumList1Iterator">
+      <AttrNames>
+        <Item Value="SerialOrLoNum"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Create1" RequiresUpdateModel="true" Action="createRow" IterBinding="SerialOrLotNumList1Iterator1"/>
+    <table id="NiinLoc_LocationView_CC_Change2NIINSerialNumbers1" IterBinding="NIINSerialNumbers1Iterator">
+      <AttrNames>
+        <Item Value="SerialLotNumTrackId"/>
+        <Item Value="NiinId"/>
+        <Item Value="SerialNumber"/>
+        <Item Value="Cc"/>
+        <Item Value="ExpirationDate"/>
+        <Item Value="IssuedFlag"/>
+        <Item Value="LocationId"/>
+        <Item Value="LocationLabel"/>
+      </AttrNames>
+    </table>
+  </bindings>
+</pageDefinition>

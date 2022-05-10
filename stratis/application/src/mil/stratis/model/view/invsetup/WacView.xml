@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="WacView"
+   Version="11.1.2.64.36"
+   SelectList="Wac.WAC_ID, 
+       Wac.WAC_NUMBER"
+   FromList="WAC Wac"
+   OrderBy="Wac.WAC_NUMBER ASC"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.invsetup.WacViewImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="Wac"
+      Entity="mil.stratis.model.entity.loc.Wac"
+      ReadOnly="true" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="WacId"
+      EntityAttrName="WacId"
+      EntityUsage="Wac"
+      AliasName="WAC_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WacNumber"
+      IsUnique="true"
+      EntityAttrName="WacNumber"
+      EntityUsage="Wac"
+      AliasName="WAC_NUMBER" >
+   </ViewAttribute>
+</ViewObject>

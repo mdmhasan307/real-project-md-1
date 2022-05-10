@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="5" />
+    <jsp:setProperty name="userbean" property="selected2" value="2" />
+    <f:view>
+        <af:document title="STRATIS Shipping - Manifest By AAC" id="d1">
+           <af:form id="ManifestForm">
+                <af:panelStretchLayout id="psl1" startWidth="24" topHeight="150" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/ws/WS_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll">
+                        <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                          <!--af:form id="ManifestForm"-->
+                            <af:messages/>
+                            <af:panelGroupLayout>
+                              <af:panelHeader text="Shipment Manifest"/>
+                              <af:outputText value="&lt;br>" escape="false"/>
+                            <af:panelGroupLayout layout="horizontal">
+                                <af:link text="Manifest by Floor" action="GoShippingManifestshipment" id="linkHome"/>
+                                <af:outputText value="&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;" escape="false"/>
+                                <af:link text="Manifest by AAC" disabled="true" id="linkAAC"/>
+                            </af:panelGroupLayout>
+                            <af:outputText value="&lt;br>" escape="false"/>
+                                  <af:panelGroupLayout layout="horizontal" id="panel1">
+                                    <af:panelGroupLayout layout="vertical">
+                                      <af:selectOneChoice id="AacNavList" autoSubmit="true" label="AAC"
+                                                          binding="#{backing_shipping.manifestAacs}" value=""
+                                                          unselectedLabel="&lt;Make a Selection>"
+                                                          inlineStyle="font-weight:bold;">
+                                        <f:selectItems value="#{backing_shipping.manifestAACList}"/>
+                                      </af:selectOneChoice>
+                                      <af:spacer height="10"/>
+                                    </af:panelGroupLayout>
+                                  </af:panelGroupLayout>
+                                  <af:spacer height="10"/>
+                                  <af:toolbar id="manifestButtonBar">
+                                    <!--<af:button text="Manifest" id="manifestButton1" inlineStyle="width:100px"
+                                                      partialSubmit="false"
+                                                      blocking="true">-->
+                                    <!--<af:clientListener method="javascript:confirmPrint(this)" type="click" />-->
+                                    <af:button  id="submitManifestButton" text="Manifest" inlineStyle="width:100px"
+                                                      actionListener="#{backing_shipping.submitManifestShipmentByAac}"
+                                                      partialSubmit="false"/>
+                                    <af:button inlineStyle="display:none" id="submitPrintButton"
+                                                      action="GoShippingAACUpdate" partialSubmit="false"/>
+                                    <af:button inlineStyle="display:none" id="submitHomeButton" action="GoShipping"
+                                        partialSubmit="false"/>
+                                    <af:button text="Cancel" id="cancelButton1" inlineStyle="width:100px"
+                                                      action="GoShipping" partialSubmit="false"/>
+                                  </af:toolbar>
+                                  <af:outputText value="&lt;br>" escape="false"/>
+                                  <af:outputText value="&lt;br>" escape="false"/>
+                                  <af:panelBox text="Manifest Review" id="manifestReviewPanelBox"
+                                               rendered="#{backing_shipping.hasManifestReview}">
+                                    <af:outputText value="&lt;br>" escape="false"/>
+                                    <af:table id="ManifestReviewTable" value="#{bindings.TempManifestReview1.collectionModel}"
+                                              var="row" binding="#{backing_shipping.tableManifestReview}"
+                                              rows="#{bindings.TempManifestReview1.rangeSize}"
+                                              first="#{bindings.TempManifestReview1.rangeStart}"
+                                              emptyText="#{bindings.TempManifestReview1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                              selectionListener="#{bindings.TempManifestReview1.collectionModel.makeCurrent}"
+                                              selectedRowKeys="#{bindings.TempManifestReview1.collectionModel.selectedRow}">
+                                      <af:column sortable="false" headerText="#" id="col1">
+                                        <af:outputText value="#{row.index+1}"/>
+                                      </af:column>
+                                      <af:column sortProperty="Manifest" sortable="true" id="col2" headerText="Manifest">
+                                        <af:outputText value="#{row.Manifest}"/>
+                                      </af:column>
+                                      <af:column headerText="Print" id="col5">
+                                        <af:link destination="Shipping_AACUpdate.jspx?ldcon=#{row.Manifest}"
+                                                   targetFrame="_blank" id="goLinkPrint"
+                                                   icon="/resources/images/print.gif">
+                                          <!--af:image id="print" source="/resources/images/print.gif"/-->
+                                        </af:link>
+                                      </af:column>
+                                      <af:column headerText="Export to AMS or CMOS" id="col6">
+                                        <af:link actionListener="#{backing_shipping.exportAMSCMOS}"
+                                                                    id="cmdLinkExport"
+                                                                    icon="/resources/images/export.gif">
+                                            <!--af:image id="export" source="/resources/images/export.gif"
+                                                      shortDesc="Export AMS or CMOS"/-->
+                                            <f:attribute name="manifest" value="#{row.Manifest}"/>
+                                        </af:link>
+                                      </af:column>
+                                    </af:table>
+                                  </af:panelBox>
+                                  <af:inputText visible="false" id="downloadManifest"
+                                              clientComponent="true"
+                                              binding="#{backing_shipping.downloadManifest}" />
+
+                                  <af:commandButton text="Export" visible="false" id="downloadAMSCMOS"
+                                                  clientComponent="true"
+                                                  binding="#{backing_shipping.downloadCommandButton}">
+                                      <af:fileDownloadActionListener contentType="text/plain; charset=utf-8"
+                                                                     method="#{backing_shipping.downloadZip}" />
+                                  </af:commandButton>
+                          <!-- End page -->
+                        </af:panelGroupLayout>
+                        <af:resource type="javascript" source="/js/download.js"/>
+                      <!--/af:form-->
+                      <f:subview id="wrap_footer">
+                        <jsp:include page="/FooterMain.jspx"/>
+                      </f:subview>
+                      </af:panelGroupLayout>
+                   </f:facet>
+                    <f:facet name="start">
+                       <af:spacer width="24" height="675" />
+                   </f:facet>
+                    <f:facet name="end"/>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

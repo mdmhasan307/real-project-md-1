@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="LDCONList"
+   Version="11.1.2.64.36"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true"/>
+   </DesignTime>
+   <SQLQuery><![CDATA[
+select m.manifest, m.shipping_manifest_id, m.floor_location_id, m.customer_id
+from Shipping_Manifest m
+where m.manifest IS NOT NULL 
+and m.manifest_date IS NOT NULL
+   ]]></SQLQuery>
+   <ViewAttribute
+      Name="Manifest"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="MANIFEST"
+      Expression="MANIFEST"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Manifest_LABEL" >
+            </LABEL>
+            <TOOLTIP
+               ResId="Manifest_TOOLTIP" >
+            </TOOLTIP>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ShippingManifestId"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="SHIPPING_MANIFEST_ID"
+      Expression="SHIPPING_MANIFEST_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FloorLocationId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="FLOOR_LOCATION_ID"
+      Expression="FLOOR_LOCATION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CustomerId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="CUSTOMER_ID"
+      Expression="CUSTOMER_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <AttrArray Name="KeyAttributes">
+      <Item Value="ShippingManifestId" />
+   </AttrArray>
+   <ResourceBundle >
+      <JavaResourceBundle
+         MsgBundleClass="mil.stratis.model.view.ship.common.LDCONListRowImplMsgBundle" >
+      </JavaResourceBundle>
+   </ResourceBundle>
+</ViewObject>

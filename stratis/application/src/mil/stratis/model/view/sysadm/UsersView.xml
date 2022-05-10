@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="UsersView"
+   Version="11.1.2.64.36"
+   SelectList="Users.USER_ID, 
+       Users.FIRST_NAME, 
+       Users.MIDDLE_NAME, 
+       Users.LAST_NAME, 
+       Users.STATUS, 
+       Users.LAST_LOGIN, 
+       Users.USERNAME, 
+       Users.VISIBLE_FLAG, 
+       Users.LOGGED_IN, 
+       Users.TEMP_KEY, 
+       Users.LAST_LOGIN_HH, 
+       Users.LOGGED_IN_HH, 
+       Users.TEMP_KEY_HH"
+   FromList="USERS Users"
+   Where="(Users.LOGGED_IN = &#39;Y&#39; or Users.LOGGED_IN_HH = &#39;Y&#39;)"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.sysadm.UsersViewImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="Users"
+      Entity="mil.stratis.model.entity.user.Users" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="UserId"
+      IsNotNull="true"
+      EntityAttrName="UserId"
+      EntityUsage="Users"
+      AliasName="USER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FirstName"
+      IsNotNull="true"
+      EntityAttrName="FirstName"
+      EntityUsage="Users"
+      AliasName="FIRST_NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MiddleName"
+      EntityAttrName="MiddleName"
+      EntityUsage="Users"
+      AliasName="MIDDLE_NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastName"
+      IsNotNull="true"
+      EntityAttrName="LastName"
+      EntityUsage="Users"
+      AliasName="LAST_NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Status"
+      IsNotNull="true"
+      EntityAttrName="Status"
+      EntityUsage="Users"
+      AliasName="STATUS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastLogin"
+      EntityAttrName="LastLogin"
+      EntityUsage="Users"
+      AliasName="LAST_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Username"
+      EntityAttrName="Username"
+      EntityUsage="Users"
+      AliasName="USERNAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="VisibleFlag"
+      IsNotNull="true"
+      EntityAttrName="VisibleFlag"
+      EntityUsage="Users"
+      AliasName="VISIBLE_FLAG" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LoggedIn"
+      IsNotNull="true"
+      EntityAttrName="LoggedIn"
+      EntityUsage="Users"
+      AliasName="LOGGED_IN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TempKey"
+      EntityAttrName="TempKey"
+      EntityUsage="Users"
+      AliasName="TEMP_KEY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastLoginHh"
+      EntityAttrName="LastLoginHh"
+      EntityUsage="Users"
+      AliasName="LAST_LOGIN_HH">
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LoggedInHh"
+      IsNotNull="true"
+      EntityAttrName="LoggedInHh"
+      EntityUsage="Users"
+      AliasName="LOGGED_IN_HH">
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TempKeyHh"
+      EntityAttrName="TempKeyHh"
+      EntityUsage="Users"
+      AliasName="TEMP_KEY_HH">
+   </ViewAttribute>
+</ViewObject>

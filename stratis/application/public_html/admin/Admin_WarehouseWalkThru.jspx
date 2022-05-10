@@ -1,0 +1,662 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:stratis="taglib.mil.usmc.stratis">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" scope="session" class="mil.stratis.view.user.UserInfo"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="2"/>
+    <jsp:setProperty name="userbean" property="selected3" value="7"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="Admin_WarehouseWalkThru"/>
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session" />
+    <jsp:setProperty name="logBean" property="page" value="Walk Thru"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="d1">
+            <af:form id="f1" usesUpload="true">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="185" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGroupLayout layout="vertical">
+                                <af:switcher id="switchPanels" facetName="#{backingwalkthru.serialFlag}">
+                                    <f:facet name="false">
+                                        <af:panelBox text="Warehouse Management - Walk Thru" showDisclosure="false">
+                                            <af:separator/>
+                                            <af:panelGridLayout>
+                                                <af:gridRow>
+                                                    <af:gridCell>
+                                                        <af:outputText value="&lt;br>" escape="false"/>
+                                                        <!--output the message-->
+                                                        <af:outputText inlineStyle="font-weight:bolder;"
+                                                                       value="#{backingwalkthru.transMessage}"/>
+                                                        <af:switcher facetName="#{backingwalkthru.pageState}">
+                                                            <f:facet name="0">
+                                                                <af:panelGroupLayout>
+                                                                    <af:navigationPane hint="tabs">
+                                                                        <af:commandNavigationItem text="Manual Walk Thru"
+                                                                                                  actionListener="#{backingwalkthru.setManualState}"
+                                                                                                  selected="true"/>
+                                                                        <af:commandNavigationItem text="Courier File Walk Thru"
+                                                                                                  actionListener="#{backingwalkthru.setCourierState}"/>
+                                                                    </af:navigationPane>
+                                                                    <af:panelBox>
+                                                                        <af:panelFormLayout>
+                                                                            <af:outputText value="&lt;br>"
+                                                                                           escape="false"/>
+                                                                            <af:panelBox text="ISSUE INFO"
+                                                                                         showDisclosure="false">
+                                                                                <af:separator/>
+                                                                                <af:panelGridLayout>
+                                                                                    <af:gridRow>
+                                                                                        <af:gridCell>
+                                                                                            <af:panelLabelAndMessage label="Doc ID">
+                                                                                                <af:inputText
+                                                                                                        value="#{backingwalkthru.z0DocumentId}"
+                                                                                                        styleClass="AFFieldTextMarker"
+                                                                                                        columns="3"/>
+                                                                                            </af:panelLabelAndMessage>
+                                                                                        </af:gridCell>
+                                                                                        <af:gridCell>
+                                                                                            <af:inputText label="Document #"
+                                                                                                          inlineStyle="font-weight:bold;"
+                                                                                                          contentStyle="text-transform:uppercase;"
+                                                                                                          columns="15"
+                                                                                                          shortDesc="Required Document Number"
+                                                                                                          binding="#{backingwalkthru.txtDocNum}"
+                                                                                                          maximumLength="14"/>
+                                                                                        </af:gridCell>
+                                                                                    </af:gridRow>
+                                                                                    <af:gridRow>
+                                                                                        <af:gridCell>
+                                                                                            <af:inputText label="RIC From"
+                                                                                                          inlineStyle="font-weight:bold;"
+                                                                                                          contentStyle="text-transform:uppercase;"
+                                                                                                          shortDesc="Required Routing ID Code (RIC) From"
+                                                                                                          columns="4"
+                                                                                                          binding="#{backingwalkthru.txtRicFrom}"
+                                                                                                          maximumLength="3"/>
+                                                                                        </af:gridCell>
+                                                                                        <af:gridCell>
+                                                                                            <af:inputText label="Media Status Code"
+                                                                                                          columns="4"
+                                                                                                          shortDesc="Optional Media and Status Code"
+                                                                                                          contentStyle="text-transform:uppercase;"
+                                                                                                          binding="#{backingwalkthru.txtMediaStatusCode}"
+                                                                                                          maximumLength="1"/>
+                                                                                        </af:gridCell>
+                                                                                        <af:gridCell>
+                                                                                            <af:inputText label="Cost JON"
+                                                                                                          labelStyle="white-space:nowrap;"
+                                                                                                          columns="12"
+                                                                                                          shortDesc="Required Cost Job Order Number(JON)"
+                                                                                                          inlineStyle="font-weight:bold;text-transform:uppercase;"
+                                                                                                          binding="#{backingwalkthru.txtCostJon}"
+                                                                                                          maximumLength="12"/>
+                                                                                        </af:gridCell>
+                                                                                    </af:gridRow>
+                                                                                    <af:gridRow>
+                                                                                        <af:gridCell>
+                                                                                            <af:inputText label="Fund Code"
+                                                                                                          columns="4"
+                                                                                                          shortDesc="Required Fund Code"
+                                                                                                          inlineStyle="font-weight:bold;"
+                                                                                                          contentStyle="text-transform:uppercase;"
+                                                                                                          binding="#{backingwalkthru.txtFundCode}"
+                                                                                                          maximumLength="2"/>
+                                                                                        </af:gridCell>
+                                                                                        <af:gridCell>
+                                                                                            <af:selectOneChoice label="Priority"
+                                                                                                                binding="#{backingwalkthru.selectPriority}"
+                                                                                                                shortDesc="Required Issue Priority Designator"
+                                                                                                                inlineStyle="font-weight:bold">
+                                                                                                <af:selectItem label="1"
+                                                                                                               value="1"/>
+                                                                                                <af:selectItem label="2"
+                                                                                                               value="2"/>
+                                                                                                <af:selectItem label="3"
+                                                                                                               value="3"/>
+                                                                                                <af:selectItem label="4"
+                                                                                                               value="4"/>
+                                                                                                <af:selectItem label="5"
+                                                                                                               value="5"/>
+                                                                                                <af:selectItem label="6"
+                                                                                                               value="6"/>
+                                                                                                <af:selectItem label="7"
+                                                                                                               value="7"/>
+                                                                                                <af:selectItem label="8"
+                                                                                                               value="8"/>
+                                                                                                <af:selectItem label="9"
+                                                                                                               value="9"/>
+                                                                                                <af:selectItem label="10"
+                                                                                                               value="10"/>
+                                                                                                <af:selectItem label="11"
+                                                                                                               value="11"/>
+                                                                                                <af:selectItem label="12"
+                                                                                                               value="12"/>
+                                                                                                <af:selectItem label="13"
+                                                                                                               value="13"/>
+                                                                                                <af:selectItem label="14"
+                                                                                                               value="14"/>
+                                                                                                <af:selectItem label="15"
+                                                                                                               value="15"/>
+                                                                                            </af:selectOneChoice>
+                                                                                        </af:gridCell>
+                                                                                        <af:gridCell>
+                                                                                            <af:inputText label="RDD"
+                                                                                                          columns="4"
+                                                                                                          inlineStyle="font-weight:bold;"
+                                                                                                          contentStyle="text-transform:uppercase;"
+                                                                                                          shortDesc="Required Delivery Date (RDD)"
+                                                                                                          binding="#{backingwalkthru.txtRDD}"
+                                                                                                          maximumLength="3"/>
+                                                                                        </af:gridCell>
+                                                                                    </af:gridRow>
+                                                                                    <af:gridRow>
+                                                                                        <af:gridCell>
+                                                                                            <af:button text="Clear Previous Info"
+                                                                                                       actionListener="#{backingwalkthru.clearFields}"
+                                                                                                       partialSubmit="false"/>
+                                                                                        </af:gridCell>
+                                                                                    </af:gridRow>
+                                                                                </af:panelGridLayout>
+                                                                            </af:panelBox>
+                                                                            <af:spacer height="10"/>
+                                                                            <af:panelBox text="NIIN INFO"
+                                                                                         showDisclosure="false">
+                                                                                <af:separator/>
+                                                                                <af:panelGridLayout>
+                                                                                    <af:gridRow>
+                                                                                        <af:gridCell>
+                                                                                            <af:panelGridLayout>
+                                                                                                <af:gridRow>
+                                                                                                    <af:gridCell>
+                                                                                                        <af:panelGridLayout>
+                                                                                                            <af:gridRow>
+                                                                                                                <af:gridCell>
+                                                                                                                    <af:toolbar
+                                                                                                                            inlineStyle="padding:2px;">
+                                                                                                                        <af:inputText
+                                                                                                                                label="FSC"
+                                                                                                                                columns="5"
+                                                                                                                                id="FSCSearch"
+                                                                                                                                binding="#{backingwalkthru.fscSearchText}"
+                                                                                                                                contentStyle="text-transform:uppercase;"
+                                                                                                                                maximumLength="4"/>
+                                                                                                                        <af:inputText
+                                                                                                                                label="NIIN"
+                                                                                                                                columns="10"
+                                                                                                                                id="NIINSearch"
+                                                                                                                                contentStyle="text-transform:uppercase;"
+                                                                                                                                binding="#{backingwalkthru.niinSearchText}"
+                                                                                                                                maximumLength="9"/>
+                                                                                                                        <af:inputText
+                                                                                                                                label="Nomenclature"
+                                                                                                                                contentStyle="text-transform:uppercase;"
+                                                                                                                                columns="15"
+                                                                                                                                id="NomenclatureSearch"
+                                                                                                                                maximumLength="100"
+                                                                                                                                binding="#{backingwalkthru.nomSearchText}"/>
+                                                                                                                        <af:button
+                                                                                                                                text="Filter"
+                                                                                                                                actionListener="#{backingwalkthru.filterNIINSeachTable}"
+                                                                                                                                partialSubmit="false"/>
+                                                                                                                    </af:toolbar>
+                                                                                                                </af:gridCell>
+                                                                                                            </af:gridRow>
+                                                                                                        </af:panelGridLayout>
+                                                                                                    </af:gridCell>
+                                                                                                </af:gridRow>
+                                                                                                <af:gridRow>
+                                                                                                    <af:gridCell>
+                                                                                                        <af:table
+                                                                                                                value="#{bindings.NiinInfoWalkThruView1.collectionModel}"
+                                                                                                                var="row"
+                                                                                                                width="550"
+                                                                                                                rows="#{bindings.NiinInfoWalkThruView1.rangeSize}"
+                                                                                                                first="#{bindings.NiinInfoWalkThruView1.rangeStart}"
+                                                                                                                emptyText="#{bindings.NiinInfoWalkThruView1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                                                                                selectionListener="#{bindings.NiinInfoWalkThruView1.collectionModel.makeCurrent}"
+                                                                                                                id="niinTable"
+                                                                                                                binding="#{backingwalkthru.niinTable}"
+                                                                                                                selectedRowKeys="#{bindings.NiinInfoWalkThruView1.collectionModel.selectedRow}"
+                                                                                                                rowSelection="single"
+                                                                                                                autoHeightRows="5">
+                                                                                                            <af:column sortProperty="Fsc"
+                                                                                                                       sortable="true"
+                                                                                                                       headerText="FSC">
+                                                                                                                <af:outputText
+                                                                                                                        value="#{row.Fsc}"/>
+                                                                                                            </af:column>
+                                                                                                            <af:column sortProperty="Niin"
+                                                                                                                       sortable="true"
+                                                                                                                       headerText="NIIN">
+                                                                                                                <af:outputText
+                                                                                                                        value="#{row.Niin}"/>
+                                                                                                            </af:column>
+                                                                                                            <af:column
+                                                                                                                    sortProperty="Nomenclature"
+                                                                                                                    sortable="true"
+                                                                                                                    headerText="#{bindings.NiinInfoWalkThruView1.labels.Nomenclature}">
+                                                                                                                <af:outputText
+                                                                                                                        value="#{row.Nomenclature}"/>
+                                                                                                            </af:column>
+                                                                                                            <af:column sortProperty="Ui"
+                                                                                                                       sortable="true"
+                                                                                                                       headerText="UI">
+                                                                                                                <af:outputText
+                                                                                                                        value="#{row.Ui}"/>
+                                                                                                            </af:column>
+                                                                                                            <af:column sortProperty="Price"
+                                                                                                                       sortable="false"
+                                                                                                                       headerText="#{bindings.NiinInfoWalkThruView1.labels.Price}">
+                                                                                                                <af:outputText
+                                                                                                                        value="#{row.Price}">
+                                                                                                                    <f:convertNumber
+                                                                                                                            groupingUsed="false"
+                                                                                                                            pattern="#{bindings.NiinInfoWalkThruView1.formats.Price}"/>
+                                                                                                                </af:outputText>
+                                                                                                            </af:column>
+                                                                                                            <f:facet name="footer"/>
+                                                                                                        </af:table>
+                                                                                                    </af:gridCell>
+                                                                                                </af:gridRow>
+                                                                                            </af:panelGridLayout>
+                                                                                        </af:gridCell>
+                                                                                    </af:gridRow>
+                                                                                </af:panelGridLayout>
+                                                                            </af:panelBox>
+                                                                            <af:spacer height="10"/>
+                                                                            <af:panelBox text="CUSTOMER INFO"
+                                                                                         showDisclosure="false">
+                                                                                <af:separator/>
+                                                                                <af:panelGridLayout>
+                                                                                    <af:gridRow>
+                                                                                        <af:gridCell>
+                                                                                            <af:panelGridLayout>
+                                                                                                <af:gridRow>
+                                                                                                    <af:gridCell>
+                                                                                                        <af:inputText label="AAC"
+                                                                                                                      columns="7"
+                                                                                                                      maximumLength="6"
+                                                                                                                      binding="#{backingwalkthru.aacSearchText}"
+                                                                                                                      contentStyle="text-transform:uppercase;"/>
+                                                                                                    </af:gridCell>
+                                                                                                    <af:gridCell>
+                                                                                                        <af:link
+                                                                                                                actionListener="#{backingwalkthru.searchAACEvent}"
+                                                                                                                icon="/resources/images/view_image.gif">
+                                                                                                            <!--af:image source="/resources/images/view_image.gif"/-->
+                                                                                                        </af:link>
+                                                                                                    </af:gridCell>
+                                                                                                </af:gridRow>
+                                                                                            </af:panelGridLayout>
+                                                                                        </af:gridCell>
+                                                                                        <af:gridCell>
+                                                                                            <af:inputText label="Supplementary Address"
+                                                                                                          required="#{bindings.SupplementaryAddress.mandatory}"
+                                                                                                          columns="15"
+                                                                                                          maximumLength="6"
+                                                                                                          binding="#{backingwalkthru.txtSuppAddress}"
+                                                                                                          contentStyle="text-transform:uppercase;"/>
+                                                                                        </af:gridCell>
+                                                                                    </af:gridRow>
+                                                                                    <af:gridRow>
+                                                                                        <af:gridCell>
+                                                                                            <af:panelLabelAndMessage
+                                                                                                    label="Ship To Address 1">
+                                                                                                <af:inputText id="ShipAddress1"
+                                                                                                              value="#{backingwalkthru.shipAddress1DisplayText}"
+                                                                                                              readOnly="true"
+                                                                                                              styleClass="ReadOnlyField"
+                                                                                                              columns="30"/>
+                                                                                            </af:panelLabelAndMessage>
+                                                                                        </af:gridCell>
+                                                                                        <af:gridCell>
+                                                                                            <af:panelLabelAndMessage
+                                                                                                    label="Ship To Address 2">
+                                                                                                <af:inputText id="ShipAddress2"
+                                                                                                              value="#{backingwalkthru.shipAddress2DisplayText}"
+                                                                                                              readOnly="true"
+                                                                                                              styleClass="ReadOnlyField"
+                                                                                                              columns="30"/>
+                                                                                            </af:panelLabelAndMessage>
+                                                                                        </af:gridCell>
+                                                                                    </af:gridRow>
+                                                                                    <af:gridRow>
+                                                                                        <af:gridCell>
+                                                                                            <af:panelLabelAndMessage
+                                                                                                    label="Ship To Address 3">
+                                                                                                <af:inputText id="ShipAddress3"
+                                                                                                              value="#{backingwalkthru.shipAddress3DisplayText}"
+                                                                                                              readOnly="true"
+                                                                                                              styleClass="ReadOnlyField"
+                                                                                                              columns="30"/>
+                                                                                            </af:panelLabelAndMessage>
+                                                                                        </af:gridCell>
+                                                                                        <af:gridCell>
+                                                                                            <af:panelLabelAndMessage
+                                                                                                    label="Ship To Address 4">
+                                                                                                <af:inputText id="ShipAddress4"
+                                                                                                              value="#{backingwalkthru.shipAddress4DisplayText}"
+                                                                                                              readOnly="true"
+                                                                                                              styleClass="ReadOnlyField"
+                                                                                                              columns="30"/>
+                                                                                            </af:panelLabelAndMessage>
+                                                                                        </af:gridCell>
+                                                                                    </af:gridRow>
+                                                                                </af:panelGridLayout>
+                                                                            </af:panelBox>
+                                                                            <af:spacer height="10"/>
+                                                                            <af:panelBox text="WALK THRU OPTIONS"
+                                                                                         showDisclosure="false">
+                                                                                <af:separator/>
+                                                                                <af:panelGridLayout>
+                                                                                    <af:gridRow>
+                                                                                        <af:gridCell/>
+                                                                                    </af:gridRow>
+                                                                                    <af:gridRow>
+                                                                                        <af:gridCell>
+                                                                                            <af:table
+                                                                                                    value="#{bindings.NiinInfoWalkThruView1NiinLocationWalkThruView2.collectionModel}"
+                                                                                                    var="row"
+                                                                                                    rows="#{bindings.NiinInfoWalkThruView1NiinLocationWalkThruView2.rangeSize}"
+                                                                                                    first="#{bindings.NiinInfoWalkThruView1NiinLocationWalkThruView2.rangeStart}"
+                                                                                                    emptyText="#{bindings.NiinInfoWalkThruView1NiinLocationWalkThruView2.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                                                                    binding="#{backingwalkthru.locationTable}"
+                                                                                                    rowSelection="none"
+                                                                                                    styleClass="AFStretchWidth"
+                                                                                                    columnStretching="last"
+                                                                                                    autoHeightRows="5">
+                                                                                                <af:column sortProperty="LocationLabel"
+                                                                                                           sortable="false"
+                                                                                                           headerText="Location">
+                                                                                                    <af:outputText
+                                                                                                            value="#{row.LocationLabel}"/>
+                                                                                                </af:column>
+                                                                                                <af:column sortProperty="Qty"
+                                                                                                           sortable="false"
+                                                                                                           headerText="#{bindings.NiinInfoWalkThruView1NiinLocationWalkThruView2.labels.Qty}">
+                                                                                                    <af:outputText value="#{row.Qty}">
+                                                                                                        <f:convertNumber
+                                                                                                                groupingUsed="false"
+                                                                                                                pattern="#{bindings.NiinInfoWalkThruView1NiinLocationWalkThruView2.formats.Qty}"/>
+                                                                                                    </af:outputText>
+                                                                                                </af:column>
+                                                                                                <af:column sortProperty="Cc"
+                                                                                                           sortable="false"
+                                                                                                           headerText="CC">
+                                                                                                    <af:outputText value="#{row.Cc}"/>
+                                                                                                </af:column>
+                                                                                                <af:column sortProperty="ExpirationDate"
+                                                                                                           sortable="false"
+                                                                                                           headerText="Expiration Date">
+                                                                                                    <stratis:adfDateFormatter
+                                                                                                            value="#{row.ExpirationDate}"
+                                                                                                            shiftZone="false"/>
+                                                                                                </af:column>
+                                                                                                <af:column sortProperty="DateOfManufacture"
+                                                                                                           sortable="false"
+                                                                                                           headerText="DOM">
+                                                                                                    <stratis:adfDateFormatter
+                                                                                                            value="#{row.DateOfManufacture}"
+                                                                                                            shiftZone="false"/>
+
+                                                                                                </af:column>
+                                                                                                <af:column headerText="Pending Pick Qtys">
+                                                                                                    <af:outputText value="#{row.SumPick}"/>
+                                                                                                </af:column>
+                                                                                                <af:column
+                                                                                                        headerText="QTY Left after pending picks">
+                                                                                                    <af:outputText value="#{row.Left}"/>
+                                                                                                </af:column>
+                                                                                                <af:column sortProperty="PickAmmount"
+                                                                                                           sortable="false"
+                                                                                                           headerText="QTY to Pick">
+                                                                                                    <af:inputText value="#{row.PickAmmount}"
+                                                                                                                  required="#{bindings.NiinInfoWalkThruView1NiinLocationWalkThruView2.attrDefs.PickAmmount.mandatory}"
+                                                                                                                  columns="5"
+                                                                                                                  maximumLength="5">
+                                                                                                        <f:convertNumber
+                                                                                                                groupingUsed="false"
+                                                                                                                pattern="#{bindings.NiinInfoWalkThruView1NiinLocationWalkThruView2.formats.PickAmmount}"/>
+                                                                                                    </af:inputText>
+                                                                                                </af:column>
+                                                                                            </af:table>
+                                                                                        </af:gridCell>
+                                                                                    </af:gridRow>
+                                                                                    <af:gridRow>
+                                                                                        <af:gridCell>
+                                                                                            <af:toolbar>
+                                                                                                <af:button text="Generate Selected Picks"
+                                                                                                           id="CreateButton"
+                                                                                                           actionListener="#{backingwalkthru.processWalkThruCreatePick}"
+                                                                                                           partialSubmit="false"/>
+                                                                                                <af:button text="Generate Hardcard Picks"
+                                                                                                           id="CreateButtonHardcard"
+                                                                                                           shortDesc="Hardcard Walk Thru"
+                                                                                                           actionListener="#{backingwalkthru.processWalkThruAlreadyPicked}"
+                                                                                                           partialSubmit="false">
+                                                                                                    <af:setActionListener
+                                                                                                            from="#{bindings.SerialControlFlag.inputValue == 'Y' or bindings.LotControlFlag.inputValue == 'Y' ? true : false}"
+                                                                                                            to="#{backingwalkthru.serialFlag}"/>
+                                                                                                    <af:setActionListener
+                                                                                                            from="#{bindings.SerialControlFlag.inputValue == 'Y' or bindings.LotControlFlag.inputValue == 'Y' ? true : false}"
+                                                                                                            to="#{backingwalkthru.serialUpdateFlag}"/>
+                                                                                                </af:button>
+                                                                                                <af:button text="Cancel"
+                                                                                                           id="CancelButton"
+                                                                                                           actionListener="#{backingwalkthru.cancelPickProcess}"
+                                                                                                           partialSubmit="false"/>
+                                                                                            </af:toolbar>
+                                                                                        </af:gridCell>
+                                                                                    </af:gridRow>
+                                                                                </af:panelGridLayout>
+                                                                            </af:panelBox>
+                                                                        </af:panelFormLayout>
+                                                                    </af:panelBox>
+                                                                </af:panelGroupLayout>
+                                                            </f:facet>
+                                                            <f:facet name="1">
+                                                                <af:panelGroupLayout>
+                                                                    <af:navigationPane hint="tabs">
+                                                                        <af:commandNavigationItem text="Manual Walk Thru"
+                                                                                                  actionListener="#{backingwalkthru.setManualState}"/>
+                                                                        <af:commandNavigationItem text="Courier File Walk Thru"
+                                                                                                  actionListener="#{backingwalkthru.setCourierState}"
+                                                                                                  selected="true"/>
+                                                                    </af:navigationPane>
+
+                                                                    <af:panelBox>
+                                                                        <af:panelFormLayout>
+                                                                            <af:outputText value="&lt;br>" escape="false"/>
+
+                                                                            <af:panelBox text="Courier File Walk Thru Upload">
+                                                                                <af:inputFile
+                                                                                        valueChangeListener="#{backingwalkthru.onFileUploadValueChangeListener}"/>
+                                                                                <af:button text="upload"
+                                                                                           action="#{backingwalkthru.doUploaded}"
+                                                                                           partialSubmit="false"/>
+                                                                            </af:panelBox>
+                                                                        </af:panelFormLayout>
+                                                                    </af:panelBox>
+                                                                </af:panelGroupLayout>
+                                                            </f:facet>
+                                                        </af:switcher>
+                                                    </af:gridCell>
+                                                </af:gridRow>
+                                            </af:panelGridLayout>
+                                        </af:panelBox>
+                                    </f:facet>
+                                    <f:facet name="true">
+                                        <af:panelGroupLayout id="secondGroup" rendered="#{backingwalkthru.serialFlag}">
+                                            <af:panelBorderLayout id="niinAddPanelBorder">
+                                                <af:panelFormLayout id="secondPanelForm"
+                                                                    rendered="#{backingwalkthru.serialFlag}">
+                                                    <af:panelGridLayout>
+                                                        <af:gridRow>
+                                                            <af:gridCell>
+                                                                <af:outputLabel value="Document Number"
+                                                                                inlineStyle="font-weight:bold"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell width="5"/>
+                                                            <af:gridCell>
+                                                                <af:inputText columns="100" id="doc_num" disabled="true"
+                                                                              contentStyle="text-transform:uppercase;"
+                                                                              value="#{processScope.documentNumber}"/>
+                                                            </af:gridCell>
+                                                        </af:gridRow>
+                                                        <af:gridRow>
+                                                            <af:gridCell>
+                                                                <af:outputLabel value="NIIN"
+                                                                                inlineStyle="font-weight:bold"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell width="5"/>
+                                                            <af:gridCell>
+                                                                <af:inputText columns="100" id="niin" disabled="true"
+                                                                              contentStyle="text-transform:uppercase;"
+                                                                              value="#{processScope.niin} - #{processScope.nomenclature}"/>
+                                                            </af:gridCell>
+                                                        </af:gridRow>
+                                                        <af:gridRow>
+                                                            <af:gridCell>
+                                                                <af:outputLabel value="Location"
+                                                                                inlineStyle="font-weight:bold"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell width="5"/>
+                                                            <af:gridCell>
+                                                                <af:inputText columns="100" id="locationLabel"
+                                                                              disabled="true"
+                                                                              contentStyle="text-transform:uppercase;"
+                                                                              value="#{processScope.location}"/>
+                                                            </af:gridCell>
+                                                        </af:gridRow>
+                                                        <af:gridRow>
+                                                            <af:gridCell columnSpan="3">
+                                                                <af:panelFormLayout inlineStyle="border-style:solid;">
+                                                                    <af:outputText inlineStyle="color:rgb(0,0,255); font-weight:bold;"
+                                                                                   value="Enter Serial Number(s) used for this pick"/>
+                                                                    <af:spacer width="10" height="15"/>
+                                                                    <af:table value="#{bindings.SerialOrLotNumList1.collectionModel}"
+                                                                              var="row"
+                                                                              rows="#{bindings.SerialOrLotNumList1.rangeSize}"
+                                                                              first="#{bindings.SerialOrLotNumList1.rangeStart}"
+                                                                              emptyText="#{bindings.SerialOrLotNumList1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                                              selectionListener="#{bindings.SerialOrLotNumList1.collectionModel.makeCurrent}"
+                                                                              selectedRowKeys="#{bindings.SerialOrLotNumList1.collectionModel.selectedRow}"
+                                                                              rowSelection="single">
+                                                                        <af:column sortProperty="SerialOrLoNum"
+                                                                                   sortable="false" headerText="Serial"
+                                                                                   rendered="#{processScope.serialControlFlag == 'Y'}">
+                                                                            <af:inputText value="#{row.SerialOrLoNum}"
+                                                                                          simple="true"
+                                                                                          contentStyle="text-transform:uppercase;"
+                                                                                          maximumLength="30"
+                                                                                          required="#{bindings.SerialOrLotNumList1.attrDefs.SerialOrLoNum.mandatory}"
+                                                                                          columns="20" readOnly="true"/>
+                                                                        </af:column>
+                                                                    </af:table>
+                                                                    <af:spacer width="10" height="10"/>
+                                                                    <af:panelGroupLayout
+                                                                            rendered="#{bindings.SerialOrLotNumList1.estimatedRowCount &lt; processScope.totalPickedQty}">
+                                                                        <af:inputText label="Serial Number "
+                                                                                      binding="#{backingwalkthru.serialOrLotNum}"
+                                                                                      inlineStyle="font-weight:bold;"
+                                                                                      contentStyle="text-transform:uppercase;"
+                                                                                      rendered="#{bindings.SerialOrLotNumList1.estimatedRowCount &lt; processScope.totalPickedQty}"
+                                                                                      maximumLength="20"/>
+                                                                        <af:panelGroupLayout layout="horizontal">
+                                                                            <af:inputText label="Start Range from "
+                                                                                          binding="#{backingwalkthru.startSerial}"
+                                                                                          inlineStyle="font-weight:bold;"
+                                                                                          contentStyle="text-transform:uppercase;"
+                                                                                          rendered="#{bindings.SerialOrLotNumList1.estimatedRowCount &lt; processScope.totalPickedQty}"
+                                                                                          maximumLength="20"/>
+                                                                            <af:inputText label="to "
+                                                                                          binding="#{backingwalkthru.endSerial}"
+                                                                                          inlineStyle="font-weight:bold;"
+                                                                                          contentStyle="text-transform:uppercase;"
+                                                                                          rendered="#{bindings.SerialOrLotNumList1.estimatedRowCount &lt; processScope.totalPickedQty}"
+                                                                                          maximumLength="20"/>
+                                                                        </af:panelGroupLayout>
+                                                                        <af:spacer width="10" height="10"/>
+                                                                        <af:toolbar>
+                                                                            <af:button text="Add to List"
+                                                                                       actionListener="#{backingwalkthru.addSerialLotNum}"
+                                                                                       rendered="#{bindings.SerialOrLotNumList1.estimatedRowCount &lt; processScope.totalPickedQty}"
+                                                                                       id="btnAddSerial" partialSubmit="false"/>
+                                                                            <af:button text="Delete"
+                                                                                       actionListener="#{backingwalkthru.deleteSerialLotNum}"
+                                                                                       id="btnDeleteSerial" partialSubmit="false"/>
+                                                                        </af:toolbar>
+                                                                    </af:panelGroupLayout>
+                                                                    <f:facet name="footer"/>
+                                                                </af:panelFormLayout>
+                                                            </af:gridCell>
+                                                        </af:gridRow>
+                                                        <af:gridRow>
+                                                            <af:gridCell columnSpan="3">
+                                                                <af:toolbar>
+                                                                    <af:button text="Save Hardcard Walk Thru"
+                                                                               accessKey="S"
+                                                                               id="secondCreateButton"
+                                                                               inlineStyle="width:180px"
+                                                                               actionListener="#{backingwalkthru.saveHardcardSerial}"
+                                                                               partialSubmit="false"/>
+                                                                    <af:button text="Go Back" accessKey="G"
+                                                                               id="backButton"
+                                                                               inlineStyle="width:180px"
+                                                                               partialSubmit="false">
+                                                                        <af:setActionListener from="#{false}"
+                                                                                              to="#{backingwalkthru.serialFlag}"/>
+                                                                        <af:setActionListener from="#{false}"
+                                                                                              to="#{backingwalkthru.serialUpdateFlag}"/>
+                                                                    </af:button>
+                                                                    <af:button text="Cancel Hardcard Walk Thru"
+                                                                               accessKey="C"
+                                                                               id="lastCancelButton"
+                                                                               inlineStyle="width:180px"
+                                                                               actionListener="#{backingwalkthru.cancelHardcardSerial}"
+                                                                               partialSubmit="false">
+                                                                        <af:setActionListener from="#{false}"
+                                                                                              to="#{backingwalkthru.serialFlag}"/>
+                                                                        <af:setActionListener from="#{false}"
+                                                                                              to="#{backingwalkthru.serialUpdateFlag}"/>
+                                                                    </af:button>
+                                                                </af:toolbar>
+                                                            </af:gridCell>
+                                                        </af:gridRow>
+                                                    </af:panelGridLayout>
+                                                </af:panelFormLayout>
+                                            </af:panelBorderLayout>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                </af:switcher>
+                            </af:panelGroupLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6" id="s1"/>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

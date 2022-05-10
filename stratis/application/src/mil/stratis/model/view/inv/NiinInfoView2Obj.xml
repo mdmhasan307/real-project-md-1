@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="NiinInfoView2Obj"
+   Version="11.1.2.64.36"
+   SelectList="Niin_info.NIIN_ID, 
+       Niin_info.NIIN, 
+       Niin_info.NOMENCLATURE, 
+       Niin_info.CUBE, 
+       Niin_info.PRICE, 
+       Niin_info.ACTIVITY_DATE, 
+       Niin_info.TAMCN, 
+       Niin_info.SUPPLY_CLASS, 
+       Niin_info.TYPE_OF_MATERIAL, 
+       Niin_info.COGNIZANCE_CODE, 
+       Niin_info.PART_NUMBER, 
+       Niin_info.UI, 
+       Niin_info.CAGE_CODE, 
+       Niin_info.FSC, 
+       Niin_info.SHELF_LIFE_CODE, 
+       Niin_info.WEIGHT, 
+       Niin_info.LENGTH, 
+       Niin_info.WIDTH, 
+       Niin_info.HEIGHT, 
+       Niin_info.SHELF_LIFE_EXTENSION, 
+       Niin_info.SCC, 
+       Niin_info.DEMIL_CODE"
+   FromList="NIIN_INFO Niin_info"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.inv.NiinInfoView2ObjImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="Niin_info"
+      Entity="mil.stratis.model.entity.site.NiinInfo" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="NiinId"
+      IsNotNull="true"
+      EntityAttrName="NiinId"
+      EntityUsage="Niin_info"
+      AliasName="NIIN_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Niin"
+      IsUnique="true"
+      IsNotNull="true"
+      EntityAttrName="Niin"
+      EntityUsage="Niin_info"
+      AliasName="NIIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Nomenclature"
+      EntityAttrName="Nomenclature"
+      EntityUsage="Niin_info"
+      AliasName="NOMENCLATURE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Cube"
+      IsNotNull="true"
+      EntityAttrName="Cube"
+      EntityUsage="Niin_info"
+      AliasName="CUBE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Price"
+      IsNotNull="true"
+      EntityAttrName="Price"
+      EntityUsage="Niin_info"
+      AliasName="PRICE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ActivityDate"
+      EntityAttrName="ActivityDate"
+      EntityUsage="Niin_info"
+      AliasName="ACTIVITY_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Tamcn"
+      EntityAttrName="Tamcn"
+      EntityUsage="Niin_info"
+      AliasName="TAMCN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SupplyClass"
+      EntityAttrName="SupplyClass"
+      EntityUsage="Niin_info"
+      AliasName="SUPPLY_CLASS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TypeOfMaterial"
+      EntityAttrName="TypeOfMaterial"
+      EntityUsage="Niin_info"
+      AliasName="TYPE_OF_MATERIAL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CognizanceCode"
+      EntityAttrName="CognizanceCode"
+      EntityUsage="Niin_info"
+      AliasName="COGNIZANCE_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PartNumber"
+      EntityAttrName="PartNumber"
+      EntityUsage="Niin_info"
+      AliasName="PART_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Ui"
+      EntityAttrName="Ui"
+      EntityUsage="Niin_info"
+      AliasName="UI" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CageCode"
+      EntityAttrName="CageCode"
+      EntityUsage="Niin_info"
+      AliasName="CAGE_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Fsc"
+      EntityAttrName="Fsc"
+      EntityUsage="Niin_info"
+      AliasName="FSC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ShelfLifeCode"
+      EntityAttrName="ShelfLifeCode"
+      EntityUsage="Niin_info"
+      AliasName="SHELF_LIFE_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Weight"
+      EntityAttrName="Weight"
+      EntityUsage="Niin_info"
+      AliasName="WEIGHT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Length"
+      EntityAttrName="Length"
+      EntityUsage="Niin_info"
+      AliasName="LENGTH" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Width"
+      EntityAttrName="Width"
+      EntityUsage="Niin_info"
+      AliasName="WIDTH" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Height"
+      EntityAttrName="Height"
+      EntityUsage="Niin_info"
+      AliasName="HEIGHT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ShelfLifeExtension"
+      EntityAttrName="ShelfLifeExtension"
+      EntityUsage="Niin_info"
+      AliasName="SHELF_LIFE_EXTENSION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Scc"
+      EntityAttrName="Scc"
+      EntityUsage="Niin_info"
+      AliasName="SCC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DemilCode"
+      EntityAttrName="DemilCode"
+      EntityUsage="Niin_info"
+      AliasName="DEMIL_CODE" >
+   </ViewAttribute>
+</ViewObject>

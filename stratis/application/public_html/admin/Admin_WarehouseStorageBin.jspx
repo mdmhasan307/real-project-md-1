@@ -1,0 +1,309 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" scope="session" class="mil.stratis.view.user.UserInfo"/>
+    <jsp:useBean id="shuttlebean" scope="request" class="mil.stratis.view.session.ShuttlePageBackingBeanBase"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="1"/>
+    <jsp:setProperty name="userbean" property="selected3" value="1"/>
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session" />
+    <jsp:setProperty name="logBean" property="page" value="Storage Bin"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="195" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll" id="pgl1">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGroupLayout layout="vertical" id="pgl2">
+                                <af:panelBox text="Warehouse Setup - Storage Bin Setup" showDisclosure="false"
+                                             styleClass="AFStretchWidth" id="pb1">
+                                    <af:panelGroupLayout id="pgl3">
+                                        <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                                            <f:facet name="menus"/>
+                                            <f:facet name="toolbar"/>
+                                            <f:facet name="statusbar"/>
+                                            <f:facet name="secondaryToolbar">
+                                                <af:toolbar inlineStyle="padding:2px;" id="t1">
+                                                    <af:button actionListener="#{StorageSetupBacking.submitCreateStorageBin}"
+                                                               text="Create" accessKey="C" id="CreateButton"
+                                                               inlineStyle="width:50px"
+                                                               disabled="#{(!StorageSetupBacking.storageBinFlag) and (bindings.LocationClassificationView1.estimatedRowCount > 0)}"
+                                                               partialSubmit="false">
+                                                        <af:setActionListener from="#{false}"
+                                                                              to="#{StorageSetupBacking.storageBinFlag}"/>
+                                                        <af:setActionListener from="#{false}"
+                                                                              to="#{StorageSetupBacking.storageBinRefresh}"/>
+                                                    </af:button>
+                                                    <af:button actionListener="#{StorageSetupBacking.submitUpdateStorageBin}"
+                                                               text="Update" accessKey="U" id="UpdateButton"
+                                                               inlineStyle="width:50px"
+                                                               disabled="#{!StorageSetupBacking.storageBinFlag}"
+                                                               partialSubmit="false"/>
+                                                    <af:button text="Delete" accessKey="D" id="DeleteButton"
+                                                               inlineStyle="width:50px"
+                                                               disabled="#{!StorageSetupBacking.storageBinFlag}"
+                                                               partialSubmit="false">
+                                                        <af:showPopupBehavior popupId="confirmDelete" triggerType="action"
+                                                                              align="afterStart"/>
+                                                    </af:button>
+                                                    <af:popup id="confirmDelete">
+                                                        <af:dialog id="Confirm" title="Confirm" affirmativeTextAndAccessKey="Submit"
+                                                                   dialogListener="#{StorageSetupBacking.dialogListener}">
+                                                            <af:activeOutputText id="Delete" value="Are you sure you want to Delete?"/>
+                                                        </af:dialog>
+                                                    </af:popup>
+                                                </af:toolbar>
+                                            </f:facet>
+                                            <af:table value="#{bindings.LocationClassificationView1.collectionModel}"
+                                                      var="row"
+                                                      binding="#{StorageSetupBacking.storageBinTable}"
+                                                      rows="#{bindings.LocationClassificationView1.rangeSize}"
+                                                      first="#{bindings.LocationClassificationView1.rangeStart}"
+                                                      emptyText="#{bindings.LocationClassificationView1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                      selectionListener="#{bindings.LocationClassificationView1.collectionModel.makeCurrent}"
+                                                      id="Locations"
+                                                      selectedRowKeys="#{bindings.LocationClassificationView1.collectionModel.selectedRow}"
+                                                      rowSelection="single"
+                                                      styleClass="AFStretchWidth"
+                                                      columnStretching="last">
+                                                <af:column sortable="true" sortProperty="Name" headerText="Name"
+                                                           width="110" id="c1">
+                                                    <af:outputText value="#{row.Name}" id="ot1"/>
+                                                </af:column>
+                                                <af:column sortProperty="Length" sortable="false" width="40"
+                                                           headerText="#{bindings.LocationClassificationView1.labels.Length}"
+                                                           id="c2">
+                                                    <af:outputText value="#{row.Length}" id="ot2">
+                                                        <f:convertNumber groupingUsed="false"
+                                                                         pattern="#{bindings.LocationClassificationView1.formats.Length}"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column sortProperty="Width" sortable="false" width="40"
+                                                           headerText="#{bindings.LocationClassificationView1.labels.Width}"
+                                                           id="c3">
+                                                    <af:outputText value="#{row.Width}" id="ot3">
+                                                        <f:convertNumber groupingUsed="false"
+                                                                         pattern="#{bindings.LocationClassificationView1.formats.Width}"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column sortProperty="Height" sortable="false" width="40"
+                                                           headerText="#{bindings.LocationClassificationView1.labels.Height}"
+                                                           id="c4">
+                                                    <af:outputText value="#{row.Height}" id="ot4">
+                                                        <f:convertNumber groupingUsed="false"
+                                                                         pattern="#{bindings.LocationClassificationView1.formats.Height}"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column sortProperty="UsableCube" sortable="false" width="40"
+                                                           headerText="Usable Cube" id="c5">
+                                                    <af:outputText value="#{row.UsableCube}">
+                                                        <f:convertNumber groupingUsed="false"
+                                                                         pattern="#{bindings.LocationClassificationView1.formats.UsableCube}"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column sortProperty="UsableWeight" sortable="false" width="40"
+                                                           headerText="Usable Weight">
+                                                    <af:outputText value="#{row.UsableWeight}">
+                                                        <f:convertNumber groupingUsed="false"
+                                                                         pattern="#{bindings.LocationClassificationView1.formats.UsableWeight}"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column sortable="false" headerText="Type">
+                                                    <af:image source="../resources/images/bin_images/#{row.ImageFilename}"
+                                                              rendered="#{row.ImageFilename != null}" id="i1"
+                                                              inlineStyle="height:40px;"/>
+                                                </af:column>
+                                                <f:facet name="footer"/>
+                                            </af:table>
+                                        </af:panelCollection>
+                                    </af:panelGroupLayout>
+                                    <af:spacer height="10" id="s1"/>
+                                    <af:panelBox text="Storage Bin Details" id="storageBinSetupPanelBox"
+                                                 rendered="#{bindings.LocationClassificationView1.estimatedRowCount > 0}"
+                                                 showDisclosure="false">
+                                        <af:separator id="s2"/>
+                                        <af:toolbar rendered="#{!StorageSetupBacking.storageBinFlag}" id="t2">
+                                            <af:button actionListener="#{StorageSetupBacking.submitSaveStorageBin}"
+                                                       text="Submit" accessKey="S" id="SaveButton"
+                                                       inlineStyle="width:50px"
+                                                       partialSubmit="false">
+                                                <!-- onclick="return checkBinAndDividerImage();"> -->
+                                                <af:setActionListener from="#{true}"
+                                                                      to="#{StorageSetupBacking.storageBinInUseFlag}"/>
+                                            </af:button>
+                                            <af:button actionListener="#{StorageSetupBacking.submitResetStorageBin}"
+                                                       text="Reset" accessKey="R" id="ResetButton"
+                                                       rendered="#{not empty bindings.LocClassificationId.inputValue}"
+                                                       inlineStyle="width:50px"
+                                                       partialSubmit="false"/>
+                                            <!--af:resetButton text="Reset" accessKey="R" id="ResetButton2"
+                                                            rendered="#{empty bindings.LocClassificationId.inputValue}"
+                                                            inlineStyle="width:50px"/-->
+                                            <af:resetButton text="Reset" accessKey="R" id="ResetButton2"
+                                                            rendered="#{empty bindings.LocClassificationId.inputValue}"
+                                                            inlineStyle="width:50px"
+                                            />
+                                            <af:button actionListener="#{StorageSetupBacking.submitCancelStorageBin}"
+                                                       text="Cancel" accessKey="a" id="CancelButton"
+                                                       inlineStyle="width:50px" immediate="true"
+                                                       partialSubmit="false">
+                                                <af:setActionListener from="#{true}"
+                                                                      to="#{StorageSetupBacking.storageBinInUseFlag}"/>
+                                            </af:button>
+                                        </af:toolbar>
+                                        <af:separator id="s4"/>
+                                        <af:panelGroupLayout layout="horizontal" valign="top" id="pgl4">
+                                            <!-- Detail Panel -->
+                                            <af:panelFormLayout partialTriggers="pc1:Locations" id="pfl1">
+                                                <af:inputText label="Name" value="#{bindings.Name.inputValue}"
+                                                              columns="#{bindings.Name.displayWidth}" maximumLength="2"
+                                                              shortDesc="Required Storage Bin Name (max 2 alphanumeric)"
+                                                              binding="#{StorageSetupBacking.storageBinName}"
+                                                              id="storageBinName" contentStyle="text-transform:uppercase;"
+                                                              rendered="#{empty bindings.Name.inputValue}"/>
+                                                <af:inputText label="Name" value="#{bindings.Name.inputValue}"
+                                                              columns="#{bindings.Name.displayWidth}"
+                                                              shortDesc="Required Storage Bin Name (max 2 alphanumeric)"
+                                                              id="storageBinName_h" readOnly="true"
+                                                              styleClass="ReadOnlyField"
+                                                              rendered="#{StorageSetupBacking.storageBinFlag or not empty bindings.Name.inputValue}"/>
+                                                <af:inputText label="Description"
+                                                              value="#{bindings.Description.inputValue}" columns="20"
+                                                              rows="3" wrap="soft" id="storageBinDesc"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              shortDesc="Optional Description of storage bin"
+                                                              binding="#{StorageSetupBacking.storageBinDescription}"
+                                                              rendered="#{!StorageSetupBacking.storageBinFlag}"
+                                                              maximumLength="100"/>
+                                                <af:inputText label="Description"
+                                                              value="#{bindings.Description.inputValue}"
+                                                              shortDesc="Optional Description of storage bin (max 100 characters)"
+                                                              id="storageBinDesc_h" readOnly="true" columns="20"
+                                                              styleClass="ReadOnlyField"
+                                                              rendered="#{StorageSetupBacking.storageBinFlag}"/>
+                                                <af:inputText label="Length" value="#{bindings.Length.inputValue}"
+                                                              columns="#{bindings.Length.displayWidth}"
+                                                              id="storageBinLength"
+                                                              binding="#{StorageSetupBacking.storageBinLength}"
+                                                              shortDesc="Required Length of Storage Bin (must be a positive decimal)"
+                                                              rendered="#{empty bindings.Name.inputValue or not StorageSetupBacking.storageBinInUseFlag}"/>
+                                                <af:inputText label="Length" value="#{bindings.Length.inputValue}"
+                                                              shortDesc="Required Length of storage bin (must be a positive decimal)"
+                                                              columns="#{bindings.Length.displayWidth}"
+                                                              id="storageBinLength_h" readOnly="true"
+                                                              styleClass="ReadOnlyField"
+                                                              rendered="#{(StorageSetupBacking.storageBinFlag or StorageSetupBacking.storageBinInUseFlag) and not empty bindings.Name.inputValue}"/>
+                                                <af:inputText label="Width" value="#{bindings.Width.inputValue}"
+                                                              columns="#{bindings.Width.displayWidth}"
+                                                              id="storageBinWidth"
+                                                              shortDesc="Required Width of storage bin (must be a positive decimal)"
+                                                              binding="#{StorageSetupBacking.storageBinWidth}"
+                                                              rendered="#{empty bindings.Name.inputValue or not StorageSetupBacking.storageBinInUseFlag}"/>
+                                                <af:inputText label="Width" value="#{bindings.Width.inputValue}"
+                                                              shortDesc="Required Width of storage bin (must be a positive decimal)"
+                                                              columns="#{bindings.Width.displayWidth}"
+                                                              id="storageBinWidth_h" readOnly="true"
+                                                              styleClass="ReadOnlyField"
+                                                              rendered="#{(StorageSetupBacking.storageBinFlag or StorageSetupBacking.storageBinInUseFlag) and not empty bindings.Name.inputValue}"/>
+                                                <af:inputText label="Height" value="#{bindings.Height.inputValue}"
+                                                              columns="#{bindings.Height.displayWidth}"
+                                                              id="storageBinHeight"
+                                                              binding="#{StorageSetupBacking.storageBinHeight}"
+                                                              shortDesc="Required Height of storage bin (must be a positive decimal)"
+                                                              rendered="#{empty bindings.Name.inputValue or not StorageSetupBacking.storageBinInUseFlag}"/>
+                                                <af:inputText label="Height" value="#{bindings.Height.inputValue}"
+                                                              shortDesc="Required Height of storage bin (must be a positive decimal)"
+                                                              id="storageBinHeight_h"
+                                                              columns="#{bindings.Height.displayWidth}" readOnly="true"
+                                                              styleClass="ReadOnlyField"
+                                                              rendered="#{(StorageSetupBacking.storageBinFlag or StorageSetupBacking.storageBinInUseFlag) and not empty bindings.Name.inputValue}"/>
+                                                <af:inputText label="Usable Cube"
+                                                              value="#{bindings.UsableCube.inputValue}"
+                                                              columns="#{bindings.Height.displayWidth}"
+                                                              binding="#{StorageSetupBacking.storageBinUsableCube}"
+                                                              id="storageBinUsableCube"
+                                                              shortDesc="Autocomputed Usable Cube (length*width*height)"
+                                                              rendered="#{empty bindings.Name.inputValue or not StorageSetupBacking.storageBinInUseFlag}"
+                                                              disabled="true" styleClass="AFFieldTextMarker"/>
+                                                <!-- ="ReadOnlyField"/> -->
+                                                <af:inputText label="Usable Cube"
+                                                              value="#{bindings.UsableCube.inputValue}"
+                                                              id="storageBinUsableCube_h"
+                                                              columns="#{bindings.Height.displayWidth}" readOnly="true"
+                                                              shortDesc="Autocomputed Usable Cube (length*width*height)"
+                                                              styleClass="ReadOnlyField"
+                                                              rendered="#{(StorageSetupBacking.storageBinFlag or StorageSetupBacking.storageBinInUseFlag) and not empty bindings.Name.inputValue}"/>
+                                                <af:inputText label="Usable Weight"
+                                                              value="#{bindings.UsableWeight.inputValue}"
+                                                              columns="#{bindings.Height.displayWidth}"
+                                                              binding="#{StorageSetupBacking.storageBinUsableWeight}"
+                                                              id="storageBinUsableWeight"
+                                                              shortDesc="Required Usable Weight of storage bin (must be a positive decimal)"
+                                                              rendered="#{empty bindings.Name.inputValue or not StorageSetupBacking.storageBinInUseFlag}"/>
+                                                <af:inputText label="Usable Weight"
+                                                              value="#{bindings.UsableWeight.inputValue}"
+                                                              shortDesc="Required Usable Weight of storage bin (must be a positive decimal)"
+                                                              id="storageBinUsableWeight_h"
+                                                              columns="#{bindings.Height.displayWidth}" readOnly="true"
+                                                              styleClass="ReadOnlyField"
+                                                              rendered="#{(StorageSetupBacking.storageBinFlag or StorageSetupBacking.storageBinInUseFlag) and not empty bindings.Name.inputValue}"/>
+                                                <af:spacer height="10" id="s3"/>
+                                                <af:inputText value="#{bindings.SlotCount.inputValue}"
+                                                              inlineStyle="display:none"
+                                                              binding="#{StorageSetupBacking.storageBinSlotCount}"
+                                                              id="it1"/>
+                                                <af:selectOneChoice value="#{bindings.ImageFilename.inputValue}"
+                                                                    id="binimagename" label="Bin Image"
+                                                                    disabled="#{StorageSetupBacking.storageBinFlag or not empty bindings.Name.inputValue}"
+                                                                    valuePassThru="true" binding="#{StorageSetupBacking.binImageChoice}"
+                                                                    autoSubmit="true"
+                                                                    unselectedLabel="- Select Bin Type -">
+                                                    <f:selectItems value="#{shuttlebean.binFileList}"/>
+                                                </af:selectOneChoice>
+                                                <af:image source="#{StorageSetupBacking.binSource}" partialTriggers="binimagename"
+                                                          id="binimage" shortDesc="Bin Image" binding="#{StorageSetupBacking.binImage}"/>
+                                                <af:selectOneChoice value="#{bindings.LocationClassificationView1DividerTypeId.inputValue}"
+                                                                    valuePassThru="true" id="dividetypename"
+                                                                    binding="#{StorageSetupBacking.divImageChoice}"
+                                                                    autoSubmit="true" label="Divider Image"
+                                                                    valueChangeListener="#{StorageSetupBacking.getDataForDiv}"
+                                                                    disabled="#{StorageSetupBacking.storageBinFlag or not empty bindings.Name.inputValue}"
+                                                                    unselectedLabel="- Select Divider Type -">
+                                                    <f:selectItems value="#{bindings.LocationClassificationView1DividerTypeId.items}"/>
+                                                </af:selectOneChoice>
+                                                <af:image source="#{StorageSetupBacking.divSource}" partialTriggers="dividetypename"
+                                                          id="divimage" shortDesc="Divider Image" inlineStyle="width:400px"
+                                                          binding="#{StorageSetupBacking.divImage}"/>
+                                            </af:panelFormLayout>
+                                        </af:panelGroupLayout>
+                                    </af:panelBox>
+                                </af:panelBox>
+                            </af:panelGroupLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end"><af:spacer width="6"/></f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Stowing_NormalNiinVerPageDef"
+                Package="mil.stratis.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="StowingGenQryVO1Iterator" RangeSize="-1" Binds="Root.StowingAM1.StowingGenQryVO1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="StowRefuseQryVO1Iterator" RangeSize="-1" Binds="Root.StowingAM1.StowRefuseQryVO1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="LocationList1Iterator" RangeSize="-1" Binds="Root.WorkLoadManager1.LocationList1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="StowByPassQryVO1Iterator" RangeSize="-1" Binds="Root.StowingAM1.StowByPassQryVO1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator Binds="Root.WorkLoadManager1.NiinInfoView1" DataControl="StratisRootServiceDataControl" RangeSize="25"
+              id="NiinInfoView1Iterator"/>
+  </executables>
+  <bindings>
+    <list ListOperMode="navigation" IterBinding="StowRefuseQryVO1Iterator" id="StowRefuseList">
+      <AttrNames>
+        <Item Value="Eid"/>
+        <Item Value="ErrorDescription"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="Eid"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="ErrorDescription"/>
+      </ListDisplayAttrNames>
+    </list>
+    <attributeValues id="Rrcn" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Rrcn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="DocumentId" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="DocumentId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="DocumentNumber" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="DocumentNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Sqty" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Sqty"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Rstatus" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Rstatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="RmodifiedBy" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="RmodifiedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="RmodifiedDate" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="RmodifiedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Sid" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Sid"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Rcn" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Rcn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ModifiedBy" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="ModifiedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ModifiedDate" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="ModifiedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="QtyToBeStowed" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="QtyToBeStowed"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="StowQty" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="StowQty"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Status" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NiinLocId" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="NiinLocId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LocationId" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="LocationId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Cc" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Cc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ExpirationDate" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="ExpirationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Aqty" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Aqty"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Fsc" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Fsc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Niin" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Niin"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Nomenclature" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Nomenclature"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PartNumber" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="PartNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Ui" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Ui"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LocationLabel" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="LocationLabel"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="DividerIndex" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="DividerIndex"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="DividerTypeId" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="DividerTypeId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Side" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Side"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Aisle" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Aisle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LocLevel" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="LocLevel"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Bay" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Bay"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Slot" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Slot"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="WacId" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="WacId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Suffix" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Suffix"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="BypassCount" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="BypassCount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="SexpDate" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="SexpDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Rcc" IterBinding="StowingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Rcc"/>
+      </AttrNames>
+    </attributeValues>
+    <table id="LocationList1" IterBinding="LocationList1Iterator">
+      <AttrNames>
+        <Item Value="WacId"/>
+        <Item Value="LocationId"/>
+        <Item Value="LocationLabel"/>
+        <Item Value="LocQty"/>
+      </AttrNames>
+    </table>
+    <list ListOperMode="navigation" IterBinding="StowByPassQryVO1Iterator" id="StowByPassList">
+      <AttrNames>
+        <Item Value="Eid"/>
+        <Item Value="ErrorDescription"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="Eid"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="ErrorDescription"/>
+      </ListDisplayAttrNames>
+    </list>
+    <tree IterBinding="NiinInfoView1Iterator" id="NiinInfoView1">
+      <nodeDefinition DefName="mil.stratis.model.view.wlm.NiinInfoView" Name="NiinInfoView10">
+        <AttrNames>
+          <Item Value="Fsc"/>
+          <Item Value="Niin"/>
+          <Item Value="Ui"/>
+          <Item Value="Nomenclature"/>
+          <Item Value="ShelfLifeCode"/>
+          <Item Value="Scc"/>
+          <Item Value="SerialControlFlag"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

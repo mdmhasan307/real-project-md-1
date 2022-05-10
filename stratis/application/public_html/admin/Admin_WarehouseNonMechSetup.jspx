@@ -1,0 +1,277 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="1"/>
+    <jsp:setProperty name="userbean" property="selected3" value="7"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="Admin_WarehouseNonMechSetup"/>
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session" />
+    <jsp:setProperty name="logBean" property="page" value="Non-Mechanized Location"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="195" bottomHeight="25" endWidth="6">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGridLayout>
+                                <af:gridRow>
+                                    <af:gridCell valign="top">
+                                        <af:panelBox text="Warehouse Setup - Non-Mechanized Setup"
+                                                     showDisclosure="false">
+                                            <af:separator/>
+                                            <af:toolbar inlineStyle="padding:2px;">
+                                                <af:link text="View/Create Bulk Locations" disabled="true"
+                                                         id="view"/>
+                                                <af:group>
+                                                    <af:link text="Remove Bulk Locations"
+                                                             action="GoRemoveNonMech" id="remove"/>
+                                                </af:group>
+                                            </af:toolbar>
+                                            <af:separator/>
+                                            <af:panelGridLayout>
+                                                <af:gridRow>
+                                                    <af:gridCell>
+                                                        <af:panelGridLayout>
+                                                            <af:gridRow>
+                                                                <af:gridCell>
+                                                                    <af:panelFormLayout>
+                                                                        <af:panelGridLayout>
+                                                                            <af:gridRow>
+                                                                                <af:gridCell>
+                                                                                    <af:toolbar inlineStyle="padding:2px;">
+                                                                                        <af:selectOneChoice
+                                                                                                value="#{bindings.WacID.inputValue}"
+                                                                                                label="WAC"
+                                                                                                unselectedLabel="- Select -"
+                                                                                                valuePassThru="true"
+                                                                                                id="wacFilter">
+                                                                                            <f:selectItems
+                                                                                                    value="#{shuttlebean.warehouseWACList}"/>
+                                                                                        </af:selectOneChoice>
+                                                                                        <af:inputText
+                                                                                                value="#{bindings.LocationLabel1.inputValue}"
+                                                                                                label="Location"
+                                                                                                id="locationFilter"
+                                                                                                contentStyle="text-transform:uppercase;"
+                                                                                                columns="14" maximumLength="9">
+                                                                                            <f:validator
+                                                                                                    binding="#{bindings.LocationLabel1.validator}"/>
+                                                                                        </af:inputText>
+                                                                                        <af:button
+                                                                                                actionListener="#{bindings.FilterLocationData.execute}"
+                                                                                                text="Filter"
+                                                                                                id="FilterButton"
+                                                                                                disabled="#{!bindings.FilterLocationData.enabled}"
+                                                                                                partialSubmit="false"/>
+                                                                                    </af:toolbar>
+                                                                                </af:gridCell>
+                                                                            </af:gridRow>
+                                                                        </af:panelGridLayout>
+                                                                    </af:panelFormLayout>
+                                                                    <af:table value="#{bindings.LocationNonMechView1.collectionModel}"
+                                                                              var="row"
+                                                                              rows="#{bindings.LocationNonMechView1.rangeSize}"
+                                                                              first="#{bindings.LocationNonMechView1.rangeStart}"
+                                                                              emptyText="#{bindings.LocationNonMechView1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                                              selectionListener="#{bindings.LocationNonMechView1.collectionModel.makeCurrent}"
+                                                                              id="LocationTable"
+                                                                              binding="#{WarehouseSetupBacking.nonMechLocationTable}"
+                                                                              selectedRowKeys="#{bindings.LocationNonMechView1.collectionModel.selectedRow}"
+                                                                              styleClass="AFStretchWidth"
+                                                                              columnStretching="last" width="500px">
+                                                                        <af:column sortProperty="LocationLabel"
+                                                                                   sortable="true"
+                                                                                   headerText="Location">
+                                                                            <af:outputText value="#{row.LocationLabel}"/>
+                                                                        </af:column>
+                                                                        <af:column sortProperty="WacNumber"
+                                                                                   sortable="false" width="50"
+                                                                                   headerText="WAC">
+                                                                            <af:outputText value="#{row.WacNumber}"/>
+                                                                        </af:column>
+                                                                        <af:column sortProperty="Aisle" sortable="false"
+                                                                                   width="50" headerText="Aisle">
+                                                                            <af:outputText value="#{row.Aisle}"/>
+                                                                        </af:column>
+                                                                        <af:column sortProperty="Bay" sortable="false"
+                                                                                   width="50" headerText="Bay">
+                                                                            <af:outputText value="#{row.Bay}"/>
+                                                                        </af:column>
+                                                                        <af:column sortProperty="LocLevel"
+                                                                                   sortable="false" width="50"
+                                                                                   headerText="Level">
+                                                                            <af:outputText value="#{row.LocLevel}"/>
+                                                                        </af:column>
+                                                                        <af:column sortProperty="Slot" sortable="false"
+                                                                                   width="50" headerText="Slot">
+                                                                            <af:outputText value="#{row.Slot}"/>
+                                                                        </af:column>
+                                                                        <af:column sortProperty="AvailabilityFlag"
+                                                                                   sortable="true" width="50"
+                                                                                   headerText="Avail.">
+                                                                            <af:outputText value="#{row.AvailabilityFlag}"/>
+                                                                        </af:column>
+                                                                    </af:table>
+                                                                </af:gridCell>
+                                                            </af:gridRow>
+                                                        </af:panelGridLayout>
+                                                    </af:gridCell>
+                                                </af:gridRow>
+                                                <af:gridRow>
+                                                    <af:gridCell>
+                                                        <af:outputText value="&lt;br>" escape="false"/>
+                                                        <af:outputText value="&lt;br>" escape="false"/>
+                                                        <af:panelBox text="Non-Mechanized Setup Details"
+                                                                     showDisclosure="false">
+                                                            <af:separator/>
+                                                            <af:panelFormLayout>
+                                                                <af:panelGridLayout>
+                                                                    <af:gridRow>
+                                                                        <af:gridCell>
+                                                                            <af:outputLabel inlineStyle="font-weight:bold;"
+                                                                                            value="WAC"/>
+                                                                        </af:gridCell>
+                                                                        <af:gridCell/>
+                                                                        <af:gridCell>
+                                                                            <af:selectOneChoice value="#{bindings.WACID1.inputValue}"
+                                                                                                binding="#{WarehouseSetupBacking.bulkAddWAC}"
+                                                                                                valuePassThru="true"
+                                                                                                id="wacId" immediate="true"
+                                                                                                unselectedLabel="- Select -">
+                                                                                <f:selectItems value="#{shuttlebean.warehouseWACList}"/>
+                                                                            </af:selectOneChoice>
+                                                                        </af:gridCell>
+                                                                        <af:gridCell rowSpan="6">
+                                                                            <f:verbatim>
+                                                                                <img src="../images/nonmech2.jpg"
+                                                                                     id="NONMECHIMAGE"
+                                                                                     alt="Non-Mechanized Sample Image"
+                                                                                     width="40"
+                                                                                     onmouseover="this.width=250;"
+                                                                                     onmouseout="this.width=40;"/>
+                                                                            </f:verbatim>
+                                                                        </af:gridCell>
+                                                                    </af:gridRow>
+                                                                    <af:gridRow>
+                                                                        <af:gridCell>
+                                                                            <af:outputLabel value="Number of Rows"
+                                                                                            inlineStyle="font-weight:bold;"/>
+                                                                        </af:gridCell>
+                                                                        <af:gridCell/>
+                                                                        <af:gridCell>
+                                                                            <af:inputText columns="5" immediate="true"
+                                                                                          binding="#{WarehouseSetupBacking.bulkAddRow}"
+                                                                                          maximumLength="5"/>
+                                                                        </af:gridCell>
+                                                                    </af:gridRow>
+                                                                    <af:gridRow>
+                                                                        <af:gridCell>
+                                                                            <af:outputLabel value="Shelf Groups"
+                                                                                            inlineStyle="font-weight:bold;"/>
+                                                                        </af:gridCell>
+                                                                        <af:gridCell/>
+                                                                        <af:gridCell>
+                                                                            <af:inputText columns="5" immediate="true"
+                                                                                          contentStyle="text-transform:uppercase;"
+                                                                                          binding="#{WarehouseSetupBacking.bulkAddShelfGroup}"
+                                                                                          maximumLength="5"/>
+                                                                        </af:gridCell>
+                                                                    </af:gridRow>
+                                                                    <af:gridRow>
+                                                                        <af:gridCell>
+                                                                            <af:outputLabel value="Locations Per Shelf Group"
+                                                                                            inlineStyle="font-weight:bold;"/>
+                                                                        </af:gridCell>
+                                                                        <af:gridCell/>
+                                                                        <af:gridCell>
+                                                                            <af:inputText columns="5" immediate="true"
+                                                                                          contentStyle="text-transform:uppercase;"
+                                                                                          binding="#{WarehouseSetupBacking.bulkAddLocationsPerShelf}"
+                                                                                          maximumLength="5"/>
+                                                                        </af:gridCell>
+                                                                    </af:gridRow>
+                                                                    <af:gridRow>
+                                                                        <af:gridCell>
+                                                                            <af:outputLabel value="Number of Levels"
+                                                                                            inlineStyle="font-weight:bold;"/>
+                                                                        </af:gridCell>
+                                                                        <af:gridCell/>
+                                                                        <af:gridCell>
+                                                                            <af:inputText columns="5" immediate="true"
+                                                                                          contentStyle="text-transform:uppercase;"
+                                                                                          binding="#{WarehouseSetupBacking.bulkAddLevel}"
+                                                                                          maximumLength="5"/>
+                                                                        </af:gridCell>
+                                                                    </af:gridRow>
+                                                                    <af:gridRow>
+                                                                        <af:gridCell>
+                                                                            <af:outputLabel value="Add a Single Bulk Location"
+                                                                                            inlineStyle="font-weight:bold;"/>
+                                                                        </af:gridCell>
+                                                                        <af:gridCell/>
+                                                                        <af:gridCell>
+                                                                            <af:inputText columns="12" immediate="true"
+                                                                                          binding="#{WarehouseSetupBacking.bulkLocation}"
+                                                                                          contentStyle="text-transform:uppercase;"
+                                                                                          maximumLength="9"/>
+                                                                        </af:gridCell>
+                                                                    </af:gridRow>
+                                                                    <af:gridRow>
+                                                                        <af:gridCell columnSpan="3">
+                                                                            <af:button
+                                                                                    actionListener="#{WarehouseSetupBacking.createBulkLocations}"
+                                                                                    text="Create Non-Mechanized Locations"
+                                                                                    inlineStyle="width:200px"
+                                                                                    id="CreateBulkButton" immediate="true"
+                                                                                    partialSubmit="false"/>
+                                                                            <!-- onclick="javascript:this.disabled=true;"/> -->
+                                                                            <af:button
+                                                                                    actionListener="#{WarehouseSetupBacking.addOneBulkLocation}"
+                                                                                    text="Add One Non-Mechanized Location" immediate="true"
+                                                                                    inlineStyle="width:200px"
+                                                                                    id="AddBulkButton"
+                                                                                    partialSubmit="false"/>
+                                                                            <!-- onclick="javascript:this.disabled=true;"/> -->
+                                                                        </af:gridCell>
+                                                                    </af:gridRow>
+                                                                </af:panelGridLayout>
+                                                            </af:panelFormLayout>
+                                                        </af:panelBox>
+                                                    </af:gridCell>
+                                                </af:gridRow>
+                                            </af:panelGridLayout>
+                                        </af:panelBox>
+                                    </af:gridCell>
+                                </af:gridRow>
+                            </af:panelGridLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6" id="s1"/>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="FloorLocation"
+  Version="11.1.2.64.36"
+  DBObjectType="SYNONYM"
+  DBObjectName="FLOOR_LOCATION"
+  AliasName="FloorLocation"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <Attribute
+    Name="FloorLocationId"
+    Precision="6"
+    Scale="0"
+    ColumnName="FLOOR_LOCATION_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.DBSequence"
+    ColumnType="NUMBER"
+    TableName="FLOOR_LOCATION"
+    PrimaryKey="true"
+    IsUpdateable="while_insert"
+    DefaultValue="@0"
+    Domain="oracle.jbo.domain.DBSequence"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_SequenceName" Value="FLOOR_LOCATION_ID_SEQ"/>
+      <Attr Name="_SequenceStart" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FloorLocation"
+    IsNotNull="true"
+    Precision="5"
+    ColumnName="FLOOR_LOCATION"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="FLOOR_LOCATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="RouteId"
+    ColumnName="ROUTE_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="FLOOR_LOCATION"/>
+  <Attribute
+    Name="InUse"
+    IsNotNull="true"
+    Precision="1"
+    ColumnName="IN_USE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="FLOOR_LOCATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="WarehouseId"
+    IsNotNull="true"
+    Precision="6"
+    Scale="0"
+    ColumnName="WAREHOUSE_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="FLOOR_LOCATION"/>
+  <Key
+    Name="FloorlocationPrimaryKey"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="FLOORLOCATION_PRIMARY_KEY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.ship.FloorLocation.FloorLocationId"/>
+    </AttrArray>
+  </Key>
+</Entity>

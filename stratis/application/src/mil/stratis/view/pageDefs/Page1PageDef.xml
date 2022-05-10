@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Page1PageDef"
+                Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="CustomerView1" RangeSize="25" DataControl="AppModuleDataControl" id="CustomerView1Iterator" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="CustomerView1Iterator" id="CustomerView1">
+      <nodeDefinition DefName="mil.stratis.model.view.site.CustomerView" Name="CustomerView10">
+        <AttrNames>
+          <Item Value="Address1"/>
+          <Item Value="CustomerId"/>
+          <Item Value="City"/>
+          <Item Value="ZipCode"/>
+          <Item Value="Aac"/>
+          <Item Value="CustomerId1"/>
+          <Item Value="Address2"/>
+          <Item Value="RouteId"/>
+          <Item Value="RestrictShip"/>
+          <Item Value="Name"/>
+          <Item Value="FloorLocationId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

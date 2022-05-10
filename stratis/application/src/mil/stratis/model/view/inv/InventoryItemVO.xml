@@ -1,0 +1,501 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="InventoryItemVO"
+   Version="11.1.2.64.36"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   ComponentClass="mil.stratis.model.view.inv.InventoryItemVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   Passivate="All"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+      <Attr Name="_isExpertMode" Value="true" />
+   </DesignTime>
+   <Variable
+      Name="wacIdStr"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <Variable
+      Name="usrId"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <Variable
+     Name="assignToUserId"
+     Kind="where"
+     Type="java.lang.String" >
+   </Variable>
+   <SQLQuery><![CDATA[SELECT unique Niin_info.NIIN, 
+       Niin_info.NIIN_ID, 
+       Niin_info.NOMENCLATURE,  
+       Niin_Location.NIIN_LOC_ID, 
+       Niin_Location.qty,
+       Niin_Location.NSN_REMARK,
+       InventoryItem.STATUS,
+       Location.LOCATION_LABEL, 
+       Location.LOCATION_ID,
+       Location.WAC_ID,
+       Location.DIVIDER_INDEX, 
+       Location.LOC_LEVEL, 
+       Location.BAY, 
+       Location.SIDE, 
+       Location.MECHANIZED_FLAG,
+       Location.SLOT,
+       lc.DIVIDER_TYPE_ID,
+       InventoryItem.INVENTORY_ITEM_ID,
+       nvl(InventoryItem.BYPASS_COUNT,0) BYPASS_COUNT,
+       Niin_info.SERIAL_CONTROL_FLAG, Niin_info.LOT_CONTROL_FLAG,
+       Niin_info.FSC,
+       InventoryItem.ASSIGN_TO_USER,
+       Location.AISLE
+FROM NIIN_INFO Niin_info, LOCATION Location, NIIN_LOCATION Niin_Location, 
+     INVENTORY_ITEM InventoryItem, LOCATION_CLASSIFICATION lc, location_header_bin lhb
+WHERE (Location.LOCATION_ID = Niin_Location.LOCATION_ID) 
+    AND (((Niin_Location.NIIN_LOC_ID = InventoryItem.NIIN_LOC_ID)) 
+    AND (Niin_info.NIIN_ID = InventoryItem.NIIN_ID))
+    AND Location.location_header_bin_id = lhb.location_header_bin_id(+) 
+    AND lhb.LOC_CLASSIFICATION_ID = lc.LOC_CLASSIFICATION_ID(+) 
+    AND InventoryItem.STATUS = 'INVENTORYPENDING'
+    AND (InventoryItem.ASSIGN_TO_USER is not null OR (InventoryItem.NUM_COUNTS = 0 OR nvl(InventoryItem.COMPLETED_BY,'-1') != nvl(:usrId,'0')))
+    AND ((InventoryItem.ASSIGN_TO_USER is null) OR (InventoryItem.ASSIGN_TO_USER = :assignToUserId))
+    AND Location.WAC_ID like nvl(:wacIdStr,'%')]]></SQLQuery>
+   <ViewAttribute
+      Name="Niin"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="9"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="NIIN"
+      Expression="NIIN"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="9" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Niin_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NiinId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="NIIN_ID"
+      Expression="NIIN_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="NiinId_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Nomenclature"
+      IsPersistent="false"
+      Precision="100"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="NOMENCLATURE"
+      Expression="NOMENCLATURE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="100" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Nomenclature_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NiinLocId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="NIIN_LOC_ID"
+      Expression="NIIN_LOC_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <FMT_FORMATTER
+               ResId="NiinLocId_FMT_FORMATTER" >
+            </FMT_FORMATTER>
+            <FMT_FORMAT
+               ResId="NiinLocId_FMT_FORMAT" >
+            </FMT_FORMAT>
+            <LABEL
+               ResId="NiinLocId_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Qty"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="6"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="QTY"
+      Expression="QTY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Qty_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NsnRemark"
+      IsUpdateable="false"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="NSN_REMARK"
+      Expression="NSN_REMARK"
+      SQLType="VARCHAR">
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1"/>
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Status"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="STATUS"
+      Expression="STATUS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Status_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationLabel"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="11"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="LOCATION_LABEL"
+      Expression="LOCATION_LABEL"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="11" />
+         <Attr Name="_diagramName" Value="Location"/>
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="LocationLabel_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="38"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="LOCATION_ID"
+      Expression="LOCATION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="LocationId_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WacId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="WAC_ID"
+      Expression="WAC_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="WacId_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DividerIndex"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="DIVIDER_INDEX"
+      Expression="DIVIDER_INDEX"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="DividerIndex_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocLevel"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="10"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="LOC_LEVEL"
+      Expression="LOC_LEVEL"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="LocLevel_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Bay"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="10"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="BAY"
+      Expression="BAY"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Bay_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Side"
+      IsPersistent="false"
+      Precision="10"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SIDE"
+      Expression="SIDE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Side_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MechanizedFlag"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="MECHANIZED_FLAG"
+      Expression="MECHANIZED_FLAG"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="MechanizedFlag_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Slot"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="2"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SLOT"
+      Expression="SLOT"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Slot_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DividerTypeId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="DIVIDER_TYPE_ID"
+      Expression="DIVIDER_TYPE_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="DividerTypeId_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="InventoryItemId"
+      IsPersistent="false"
+      Type="java.lang.String"
+      ColumnType="NUMBER"
+      AliasName="INVENTORY_ITEM_ID"
+      Expression="INVENTORY_ITEM_ID"
+      SQLType="VARCHAR" >
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="InventoryItemId_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BypassCount"
+      IsPersistent="false"
+      Precision="6"
+      Scale="0"
+      Type="java.lang.String"
+      ColumnType="NUMBER"
+      AliasName="BYPASS_COUNT"
+      Expression="BYPASS_COUNT"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SerialControlFlag"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SERIAL_CONTROL_FLAG"
+      Expression="SERIAL_CONTROL_FLAG"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LotControlFlag"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="LOT_CONTROL_FLAG"
+      Expression="LOT_CONTROL_FLAG"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Fsc"
+      IsUpdateable="false"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Precision="4"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="FSC"
+      Expression="FSC"
+      SQLType="VARCHAR">
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4"/>
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+           Name="Aisle"
+           IsUpdateable="false"
+           IsPersistent="false"
+           IsNotNull="false"
+           Precision="10"
+           Type="java.lang.String"
+           ColumnType="VARCHAR2"
+           AliasName="AISLE"
+           Expression="AISLE"
+           SQLType="VARCHAR" >
+   </ViewAttribute>
+   <AttrArray Name="KeyAttributes">
+      <Item Value="NiinLocId" />
+   </AttrArray>
+   <ResourceBundle >
+      <JavaResourceBundle
+         MsgBundleClass="mil.stratis.model.view.inv.common.InventoryItemVORowImplMsgBundle" >
+      </JavaResourceBundle>
+   </ResourceBundle>
+</ViewObject>

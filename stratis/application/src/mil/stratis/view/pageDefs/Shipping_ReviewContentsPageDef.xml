@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Shipping_ReviewContentsPageDef"
+                Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="BarcodeIterator" RangeSize="10" Binds="Root.ShippingService1.ListBarcodeInfo_INNER"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <invokeAction id="AlwaysFind" Binds="Find" RefreshCondition="${!bindings.BarcodeIterator.findMode}"
+                  Refresh="ifNeeded"/>
+    <iterator id="BarcodeResultsIterator" Binds="Root.ShippingService1.ListBarcodeInfo_INNER" RangeSize="10"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="BarcodeResultsIterator2" Binds="Root.ShippingService1.ListBarcodeInfo_INNER" RangeSize="-1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <invokeAction id="refresh1" Refresh="ifNeeded" Binds="ExecuteWithParams"/>
+  </executables>
+  <bindings>
+    <attributeValues id="FloorLocation" IterBinding="BarcodeIterator">
+      <AttrNames>
+        <Item Value="FloorLocation"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LeadTcn" IterBinding="BarcodeIterator">
+      <AttrNames>
+        <Item Value="LeadTcn"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="ExecuteWithParams" IterBinding="BarcodeResultsIterator"
+            InstanceName="StratisRootServiceDataControl.Root.ShippingService1.ListBarcodeInfo_INNER"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="executeWithParams">
+      <NamedData NDName="EQUIPMENT_NUMBER" NDType="java.lang.String" NDValue="${userbean.workstationId}"/>
+    </action>
+    <action IterBinding="BarcodeIterator" id="Find"
+            InstanceName="StratisRootServiceDataControl.Root.ShippingService1.ListBarcodeInfo_INNER"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="iteratorFind"/>
+    <action id="Execute" RequiresUpdateModel="true" Action="iteratorExecute" IterBinding="BarcodeIterator"/>
+    <table id="Barcodes" IterBinding="BarcodeResultsIterator">
+      <AttrNames>
+        <Item Value="Aac"/>
+        <Item Value="LeadTcn"/>
+        <Item Value="ConsolidationBarcode"/>
+        <Item Value="CustomerId"/>
+        <Item Value="FloorLocation"/>
+        <Item Value="FloorLocationId"/>
+        <Item Value="PackingConsolidationId"/>
+        <Item Value="ShippingManifestId"/>
+      </AttrNames>
+    </table>
+    <tree id="ListBarcodeInfo_INNER" IterBinding="BarcodeResultsIterator">
+      <AttrNames>
+        <Item Value="ShippingManifestId"/>
+        <Item Value="PackingConsolidationId"/>
+        <Item Value="ConsolidationBarcode"/>
+        <Item Value="LeadTcn"/>
+        <Item Value="Manifest"/>
+        <Item Value="CustomerId"/>
+        <Item Value="Aac"/>
+        <Item Value="FloorLocationId"/>
+        <Item Value="FloorLocation"/>
+      </AttrNames>
+      <nodeDefinition DefName="mil.stratis.queries.ship.ConsolidationBarcodeInfoList_INNER"
+                      Name="ListBarcodeInfo_INNER0">
+        <AttrNames>
+          <Item Value="ConsolidationBarcode"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="Tcn"/>
+        </Accessors>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

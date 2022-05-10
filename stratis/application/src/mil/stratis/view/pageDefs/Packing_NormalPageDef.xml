@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Packing_NormalPageDef"
+                Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="pinlist1Iterator" RangeSize="10" Binds="Root.PackingModule1.PinList1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <variableIterator id="variables" Refresh="ifNeeded"/>
+    <iterator id="pinlist2Iterator" RangeSize="10" Binds="Root.PackingModule1.PinList2"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="pinlist1" IterBinding="pinlist1Iterator">
+      <AttrNames>
+        <Item Value="PIN"/>
+        <Item Value="AAC"/>
+        <Item Value="Document_Number"/>
+        <Item Value="SCN"/>
+        <Item Value="Qty"/>
+        <Item Value="pickNo"/>
+      </AttrNames>
+    </table>
+    <table id="pinlist2" IterBinding="pinlist2Iterator">
+      <AttrNames>
+        <Item Value="PIN"/>
+        <Item Value="AAC"/>
+        <Item Value="Document_Number"/>
+        <Item Value="SCN"/>
+        <Item Value="Qty"/>
+        <Item Value="pickNo"/>
+      </AttrNames>
+    </table>
+  </bindings>
+</pageDefinition>

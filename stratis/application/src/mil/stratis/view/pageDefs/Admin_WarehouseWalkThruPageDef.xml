@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Admin_WarehouseWalkThruPageDef"
+                Package="mil.stratis.view.pageDefs" ControllerClass="mil.stratis.view.admin.warehouse.WalkThruBacking">
+            
+  <parameters/>
+  <executables>
+    <iterator id="NiinInfoWalkThruView1Iterator" RangeSize="3" Binds="Root.SysAdmin1.NiinInfoWalkThruView1" 
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="NiinLocationWalkThruView2Iterator" Binds="Root.SysAdmin1.NiinLocationWalkThruView2"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="SerialOrLotNumList1Iterator" RangeSize="10" Binds="Root.PickingAM1.SerialOrLotNumList1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="NiinInfoWalkThruView1" IterBinding="NiinInfoWalkThruView1Iterator">
+      <AttrNames>
+        <Item Value="Niin"/>
+        <Item Value="NiinId"/>
+        <Item Value="Nomenclature"/>
+        <Item Value="Ui"/>
+        <Item Value="Fsc"/>
+        <Item Value="Price"/>
+        <Item Value="SerialControlFlag"/>
+        <Item Value="LotControlFlag"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="Fsc" IterBinding="NiinInfoWalkThruView1Iterator">
+      <AttrNames>
+        <Item Value="Fsc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Niin" IterBinding="NiinInfoWalkThruView1Iterator">
+      <AttrNames>
+        <Item Value="Niin"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Ui" IterBinding="NiinInfoWalkThruView1Iterator">
+      <AttrNames>
+        <Item Value="Ui"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Price" IterBinding="NiinInfoWalkThruView1Iterator">
+      <AttrNames>
+        <Item Value="Price"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="SerialControlFlag" IterBinding="NiinInfoWalkThruView1Iterator">
+      <AttrNames>
+        <Item Value="SerialControlFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LotControlFlag" IterBinding="NiinInfoWalkThruView1Iterator">
+      <AttrNames>
+        <Item Value="LotControlFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <table id="NiinInfoWalkThruView1NiinLocationWalkThruView2" IterBinding="NiinLocationWalkThruView2Iterator">
+      <AttrNames>
+        <Item Value="NiinLocId"/>
+        <Item Value="Qty"/>
+        <Item Value="Cc"/>
+        <Item Value="ExpirationDate"/>
+        <Item Value="DateOfManufacture"/>
+        <Item Value="NiinId"/>
+        <Item Value="LocationLabel"/>
+        <Item Value="SumPick"/>
+        <Item Value="Left"/>
+        <Item Value="PickedQtys"/>
+        <Item Value="NiinlocationQtySumPickingPickQty"/>
+        <Item Value="PickAmmount"/>
+      </AttrNames>
+    </table>
+    <action id="ExecuteNiinLocation" RequiresUpdateModel="true" Action="iteratorExecute"
+            IterBinding="NiinLocationWalkThruView2Iterator"/>
+    <table id="SerialOrLotNumList1" IterBinding="SerialOrLotNumList1Iterator">
+      <AttrNames>
+        <Item Value="SerialOrLoNum"/>
+        <Item Value="SrlLotNumTrackId"/>
+        <Item Value="QtyLot"/>
+        <Item Value="LotConNum"/>
+      </AttrNames>
+    </table>
+    <action id="Create1" RequiresUpdateModel="true" Action="createRow" IterBinding="SerialOrLotNumList1Iterator1"/>
+  </bindings>
+</pageDefinition>

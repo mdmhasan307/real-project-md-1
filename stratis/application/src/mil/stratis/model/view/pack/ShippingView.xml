@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="ShippingView"
+   Version="11.1.2.64.36"
+   SelectList="Shipping.QUANTITY, 
+       Shipping.CREATED_BY, 
+       Shipping.CREATED_DATE, 
+       Shipping.MODIFIED_BY, 
+       Shipping.MODIFIED_DATE, 
+       Shipping.TCN, 
+       Shipping.SHIPPING_MANIFEST_ID, 
+       Shipping.SHIPPING_ID, 
+       Shipping.SCN, 
+       Shipping.PACKING_CONSOLIDATION_ID, 
+       Shipping.LAST_REVIEW_DATE"
+   FromList="SHIPPING Shipping"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.pack.ShippingViewImpl"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="Shipping"
+      Entity="mil.stratis.model.entity.ship.Shipping" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="Quantity"
+      IsNotNull="true"
+      EntityAttrName="Quantity"
+      EntityUsage="Shipping"
+      AliasName="QUANTITY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="Shipping"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedDate"
+      IsNotNull="true"
+      EntityAttrName="CreatedDate"
+      EntityUsage="Shipping"
+      AliasName="CREATED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedBy"
+      EntityAttrName="ModifiedBy"
+      EntityUsage="Shipping"
+      AliasName="MODIFIED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedDate"
+      EntityAttrName="ModifiedDate"
+      EntityUsage="Shipping"
+      AliasName="MODIFIED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Tcn"
+      EntityAttrName="Tcn"
+      EntityUsage="Shipping"
+      AliasName="TCN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ShippingManifestId"
+      EntityAttrName="ShippingManifestId"
+      EntityUsage="Shipping"
+      AliasName="SHIPPING_MANIFEST_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ShippingId"
+      IsUpdateable="while_insert"
+      IsNotNull="true"
+      EntityAttrName="ShippingId"
+      EntityUsage="Shipping"
+      AliasName="SHIPPING_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Scn"
+      EntityAttrName="Scn"
+      EntityUsage="Shipping"
+      AliasName="SCN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PackingConsolidationId"
+      EntityAttrName="PackingConsolidationId"
+      EntityUsage="Shipping"
+      AliasName="PACKING_CONSOLIDATION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastReviewDate"
+      EntityAttrName="LastReviewDate"
+      EntityUsage="Shipping"
+      AliasName="LAST_REVIEW_DATE" >
+   </ViewAttribute>
+</ViewObject>

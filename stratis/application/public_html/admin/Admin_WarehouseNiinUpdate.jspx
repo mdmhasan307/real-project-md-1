@@ -1,0 +1,364 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:stratis="taglib.mil.usmc.stratis">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="2"/>
+    <jsp:setProperty name="userbean" property="selected3" value="1"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="Admin_WarehouseNiinUpdate"/>
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session" />
+    <jsp:setProperty name="logBean" property="page" value="NIIN Update"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="185" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGroupLayout layout="vertical">
+                                <af:panelBox id="niinUpdateMainPanel" text="Warehouse Management - NIIN Update"
+                                             showDisclosure="false">
+                                    <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                                        <f:facet name="menus"/>
+                                        <f:facet name="secondaryToolbar">
+                                            <af:toolbar>
+                                                <af:inputText value="#{bindings.NIINQry.inputValue}" label="NIIN"
+                                                              id="filterNIIN" required="#{bindings.NIINQry.mandatory}"
+                                                              columns="10" maximumLength="9"
+                                                              contentStyle="text-transform:uppercase;">
+                                                    <f:validator binding="#{bindings.NIINQry.validator}"/>
+                                                </af:inputText>
+                                                <af:spacer width="10"/>
+                                                <af:inputText value="#{bindings.FSCQry.inputValue}" label="FSC"
+                                                              id="filterFSC" required="#{bindings.FSCQry.mandatory}"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              columns="5" maximumLength="4">
+                                                    <f:validator binding="#{bindings.FSCQry.validator}"/>
+                                                </af:inputText>
+                                                <af:spacer width="10"/>
+                                                <af:inputText value="#{bindings.NomenclatureQry.inputValue}"
+                                                              label="Nomenclature"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              id="filterNomenclature"
+                                                              required="#{bindings.NomenclatureQry.mandatory}"
+                                                              columns="10" maximumLength="100"/>
+                                                <af:spacer width="10"/>
+                                                <af:button actionListener="#{bindings.FilterNIINData.execute}"
+                                                           text="Filter" id="FilterButton"
+                                                           disabled="#{!bindings.FilterNIINData.enabled}"
+                                                           partialSubmit="false"/>
+                                                <af:spacer width="10"/>
+                                                <af:button text="Create" accessKey="C" id="CreateButton"
+                                                           inlineStyle="width:50px"
+                                                           disabled="#{(!niinUpdateBean.niinFlag) and (bindings.NiinInfoView1.estimatedRowCount > 0)}"
+                                                           actionListener="#{bindings.CreateInsert.execute}"
+                                                           partialSubmit="false">
+                                                    <af:setActionListener from="#{false}"
+                                                                          to="#{niinUpdateBean.niinFlag}"/>
+                                                    <af:setActionListener from="#{true}"
+                                                                          to="#{niinUpdateBean.newFlag}"/>
+                                                </af:button>
+                                                <af:button text="Update" accessKey="U" id="UpdateButton"
+                                                           inlineStyle="width:50px"
+                                                           disabled="#{!niinUpdateBean.niinFlag}"
+                                                           actionListener="#{niinUpdateBean.submitUpdateNiin}"
+                                                           partialSubmit="false"/>
+                                                <af:button text="Delete" accessKey="D" id="DeleteButton"
+                                                           inlineStyle="width:50px"
+                                                           disabled="#{!niinUpdateBean.niinFlag}"
+                                                           partialSubmit="false">
+                                                    <af:showPopupBehavior popupId="confirmDelete" triggerType="action" align="afterStart"/>
+                                                </af:button>
+                                                <af:popup id="confirmDelete">
+                                                    <af:dialog id="Confirm" title="Confirm" affirmativeTextAndAccessKey="Submit"
+                                                               dialogListener="#{niinUpdateBean.dialogListener}">
+                                                        <af:activeOutputText id="Delete" value="Are you sure you want to Delete?"/>
+                                                    </af:dialog>
+                                                </af:popup>
+                                            </af:toolbar>
+                                        </f:facet>
+                                        <af:table value="#{bindings.NiinInfoView1.collectionModel}" var="row"
+                                                  rows="#{bindings.NiinInfoView1.rangeSize}"
+                                                  first="#{bindings.NiinInfoView1.rangeStart}"
+                                                  emptyText="#{bindings.NiinInfoView1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                  selectionListener="#{bindings.NiinInfoView1.collectionModel.makeCurrent}"
+                                                  id="NIINTable" binding="#{niinUpdateBean.niinTable}"
+                                                  selectedRowKeys="#{bindings.NiinInfoView1.collectionModel.selectedRow}"
+                                                  rowSelection="single" styleClass="AFStretchWidth"
+                                                  columnStretching="last"
+                                                  autoHeightRows="10">
+                                            <af:column sortProperty="Fsc" sortable="true" headerText="FSC">
+                                                <af:outputText value="#{row.Fsc}"/>
+                                            </af:column>
+                                            <af:column sortProperty="Niin" sortable="true" headerText="NIIN">
+                                                <af:outputText value="#{row.Niin}"/>
+                                            </af:column>
+                                            <af:column sortProperty="Nomenclature" sortable="true"
+                                                       headerText="#{bindings.NiinInfoView1.labels.Nomenclature}">
+                                                <af:outputText value="#{row.Nomenclature}"/>
+                                            </af:column>
+                                            <af:column sortProperty="ActivityDate" sortable="false"
+                                                       headerText="Activity Date">
+                                                <stratis:adfDateFormatter
+                                                        value="#{row.ActivityDate}"
+                                                        pattern="${userbean.dateFormatPattern}"/>
+                                            </af:column>
+                                            <af:column sortProperty="TypeOfMaterial" sortable="false"
+                                                       headerText="Type of Material">
+                                                <af:outputText value="#{row.TypeOfMaterial}"/>
+                                            </af:column>
+                                            <af:column sortProperty="Ui" sortable="false" headerText="UI">
+                                                <af:outputText value="#{row.ui}"/>
+                                            </af:column>
+                                            <af:column sortProperty="InventoryThreshold" sortable="false"
+                                                       headerText="Review">
+                                                <af:outputText value="#{row.InventoryThreshold}"/>
+                                            </af:column>
+                                        </af:table>
+                                    </af:panelCollection>
+                                </af:panelBox>
+                                <af:panelBox text="NIIN Details" id="niinDetailPanelBox"
+                                             rendered="#{bindings.NiinInfoView1.estimatedRowCount > 0}"
+                                             showDisclosure="false">
+                                    <af:separator id="s1"/>
+                                    <af:panelFormLayout partialTriggers="pc1:NIINTable" rows="8" id="pfl1">
+                                        <!-- National Item Identification Number -->
+                                        <af:inputText label="NIIN" labelStyle="font-weight:bold"
+                                                      value="#{bindings.Niin.inputValue}" columns="11" id="niin"
+                                                      maximumLength="9" showRequired="false"
+                                                      shortDesc="Required NIIN (must be 9 numeric)"
+                                                      contentStyle="text-transform:uppercase;"
+                                                      rendered="#{niinUpdateBean.newFlag}"
+                                                      binding="#{niinUpdateBean.niin}"/>
+                                        <af:inputText label="NIIN" labelStyle="font-weight:bold"
+                                                      value="#{bindings.Niin.inputValue}" columns="11" id="niin_h"
+                                                      shortDesc="Required NIIN (must be 9 numeric)" readOnly="true"
+                                                      styleClass="ReadOnlyField"
+                                                      rendered="#{!niinUpdateBean.newFlag}"/>
+                                        <!-- Federal Supply Classification -->
+                                        <af:inputText label="FSC" labelStyle="font-weight:bold"
+                                                      value="#{bindings.Fsc.inputValue}" columns="5" id="fsc"
+                                                      maximumLength="4" showRequired="false"
+                                                      shortDesc="Required FSC (must be 4 numeric)"
+                                                      contentStyle="text-transform:uppercase;"
+                                                      binding="#{niinUpdateBean.fsc}"
+                                                      readOnly="#{!niinUpdateBean.newFlag}"
+                                        />
+                                        <af:selectOneChoice label="UI" labelStyle="font-weight:bold"
+                                                            value="#{bindings.RefUiValidView1Code.inputValue}"
+                                                            unselectedLabel="- Select - " id="uiSelectOne"
+                                                            shortDesc="Required UI"
+                                                            rendered="#{!niinUpdateBean.niinFlag}" showRequired="false"
+                                                            binding="#{niinUpdateBean.ui}"
+                                                            readOnly="#{!niinUpdateBean.newFlag}">
+                                            <f:selectItems value="#{bindings.RefUiValidView1Code.items}"/>
+                                        </af:selectOneChoice>
+                                        <af:inputText label="UI" value="#{bindings.ui.inputValue}" columns="5" id="ui_h"
+                                                      shortDesc="Required UI Selection" labelStyle="font-weight:bold"
+                                                      readOnly="true" styleClass="ReadOnlyField"
+                                                      rendered="#{niinUpdateBean.niinFlag}"/>
+                                        <af:inputText label="Price" labelStyle="font-weight:bold"
+                                                      value="#{bindings.Price.inputValue}" columns="5" id="price"
+                                                      showRequired="false" shortDesc="Required Price (must be numeric)"
+                                                      binding="#{niinUpdateBean.price}"
+                                                      readOnly="#{!niinUpdateBean.newFlag}"/>
+                                        <!-- Security Classification Code -->
+                                        <af:selectOneChoice label="SCC" labelStyle="font-weight:bold"
+                                                            value="#{bindings['MasterDropView_SCC1CodeValue'].inputValue}"
+                                                            unselectedLabel="- Select - " id="sccSelectOne"
+                                                            shortDesc="Required SCC"
+                                                            rendered="#{!niinUpdateBean.niinFlag}" showRequired="false"
+                                                            binding="#{niinUpdateBean.scc}"
+                                                            readOnly="#{!niinUpdateBean.newFlag}">
+                                            <f:selectItems value="#{bindings['MasterDropView_SCC1CodeValue'].items}"/>
+                                        </af:selectOneChoice>
+                                        <af:inputText value="#{bindings.Scc.inputValue}" columns="11" id="scc_h"
+                                                      label="Required SCC" labelStyle="font-weight:bold" readOnly="true"
+                                                      styleClass="ReadOnlyField" rendered="#{niinUpdateBean.niinFlag}"/>
+                                        <af:inputText label="Cube" labelStyle="font-weight:bold"
+                                                      value="#{bindings.Cube.inputValue}" columns="5" id="cube"
+                                                      maximumLength="5" showRequired="false"
+                                                      shortDesc="Required Cube (must be numeric)"
+                                                      binding="#{niinUpdateBean.cube}"
+                                                      readOnly="#{niinUpdateBean.niinFlag}"/>
+                                        <af:inputText label="Weight" labelStyle="font-weight:bold"
+                                                      value="#{bindings.Weight.inputValue}" columns="5" id="weight"
+                                                      maximumLength="5" showRequired="false"
+                                                      shortDesc="Required Weight (must be numeric)"
+                                                      binding="#{niinUpdateBean.weight}"
+                                                      readOnly="#{niinUpdateBean.niinFlag}"/>
+                                        <af:inputText label="Length" labelStyle="font-weight:bold"
+                                                      value="#{bindings.Length.inputValue}" columns="5" id="inputLength"
+                                                      maximumLength="5" showRequired="false"
+                                                      shortDesc="Required Length (must be numeric)"
+                                                      binding="#{niinUpdateBean.length}"
+                                                      readOnly="#{niinUpdateBean.niinFlag}"/>
+                                        <af:inputText label="Width" labelStyle="font-weight:bold"
+                                                      value="#{bindings.Width.inputValue}" columns="5" id="width"
+                                                      maximumLength="5" showRequired="false"
+                                                      shortDesc="Required Width (must be numeric)"
+                                                      binding="#{niinUpdateBean.width}"
+                                                      readOnly="#{niinUpdateBean.niinFlag}"/>
+                                        <af:inputText label="Height" labelStyle="font-weight:bold"
+                                                      value="#{bindings.Height.inputValue}" columns="5" id="height"
+                                                      maximumLength="5" showRequired="false"
+                                                      shortDesc="Required Height (must be numeric)"
+                                                      binding="#{niinUpdateBean.height}"
+                                                      readOnly="#{niinUpdateBean.niinFlag}"/>
+
+                                        <af:selectOneChoice label="Shelf Life Code" labelStyle="font-weight:bold"
+                                                            value="#{bindings.RefSlcView1ShelfLifeCode.inputValue}"
+                                                            unselectedLabel="- Select - " id="shelfLifeCodeSelectOne"
+                                                            shortDesc="Required Shelf Life Code"
+                                                            rendered="#{!niinUpdateBean.niinFlag}" showRequired="false"
+                                                            binding="#{niinUpdateBean.shelfLifeCode}" autoSubmit="true"
+                                                            readOnly="#{!niinUpdateBean.newFlag}">
+                                            <f:selectItems value="#{bindings.RefSlcView1ShelfLifeCode.items}"/>
+                                        </af:selectOneChoice>
+                                        <af:inputText label="Shelf Life Code" labelStyle="font-weight:bold"
+                                                      value="#{bindings.ShelfLifeCode.inputValue}" columns="5"
+                                                      id="shelfLifeCode_h" shortDesc="Required Shelf Life Code"
+                                                      readOnly="true" styleClass="ReadOnlyField"
+                                                      rendered="#{niinUpdateBean.niinFlag}"/>
+                                        <!-- Table of Allowable Material Control Number -->
+                                        <af:inputText label="TAMCN" value="#{bindings.Tamcn.inputValue}" columns="5"
+                                                      id="tamcn" maximumLength="5" showRequired="false"
+                                                      shortDesc="Optional TAMCN"
+                                                      binding="#{niinUpdateBean.tamcn}"
+                                                      readOnly="#{niinUpdateBean.niinFlag}"/>
+                                        <af:selectOneChoice label="Supply Class"
+                                                            value="#{bindings['MasterDropView_SC1Value'].inputValue}"
+                                                            unselectedLabel="- Select - " id="supplyClassSelectOne"
+                                                            shortDesc="Optional Supply Class"
+                                                            rendered="#{!niinUpdateBean.niinFlag}" showRequired="false"
+                                                            binding="#{niinUpdateBean.supplyClass}">
+                                            <f:selectItems value="#{bindings['MasterDropView_SC1Value'].items}"/>
+                                        </af:selectOneChoice>
+                                        <af:inputText label="Supply Class" value="#{bindings.SupplyClass.inputValue}"
+                                                      columns="3" id="supplyClass_h" shortDesc="Optional Supply Class"
+                                                      readOnly="true" styleClass="ReadOnlyField"
+                                                      rendered="#{niinUpdateBean.niinFlag}"/>
+                                        <af:selectOneChoice label="Type of Material"
+                                                            value="#{bindings['MasterDropView_SMCC1CodeValue'].inputValue}"
+                                                            unselectedLabel="- Select - " id="smccSelectOne"
+                                                            shortDesc="Optional Type of Material"
+                                                            rendered="#{!niinUpdateBean.niinFlag}" showRequired="false"
+                                                            binding="#{niinUpdateBean.typeOfMaterial}">
+                                            <f:selectItems value="#{bindings['MasterDropView_SMCC1CodeValue'].items}"/>
+                                        </af:selectOneChoice>
+                                        <af:inputText label="Type of Material"
+                                                      value="#{bindings.TypeOfMaterial.inputValue}" columns="3"
+                                                      id="typeOfMaterial_h" shortDesc="Optional Type Of Material"
+                                                      readOnly="true" styleClass="ReadOnlyField"
+                                                      rendered="#{niinUpdateBean.niinFlag}"/>
+                                        <af:selectOneChoice value="#{bindings.MasterDropDownCOGVO1value.inputValue}"
+                                                            label="Cognizance Code" unselectedLabel="- Select - "
+                                                            id="cogSelectOne" shortDesc="Optional Cognizance Code"
+                                                            rendered="#{!niinUpdateBean.niinFlag}" showRequired="false"
+                                                            binding="#{niinUpdateBean.cognizanceCode}">
+                                            <f:selectItems value="#{bindings.MasterDropDownCOGVO1value.items}"/>
+                                        </af:selectOneChoice>
+                                        <af:inputText label="Cognizance Code"
+                                                      value="#{bindings.CognizanceCode.inputValue}" columns="5"
+                                                      id="cog_h" shortDesc="Optional Cognizance Code" readOnly="true"
+                                                      styleClass="ReadOnlyField" rendered="#{niinUpdateBean.niinFlag}"/>
+                                        <af:inputText label="Part Number" value="#{bindings.PartNumber.inputValue}"
+                                                      columns="5" id="partNumber" maximumLength="20"
+                                                      showRequired="false" shortDesc="Optional Part Number"
+                                                      readOnly="#{niinUpdateBean.niinFlag}"
+                                                      binding="#{niinUpdateBean.partNumber}"/>
+                                        <!-- CAGE = Commercial and Government Entity Code -->
+                                        <af:inputText label="CAGE Code" value="#{bindings.CageCode.inputValue}"
+                                                      columns="5" id="cageCode" maximumLength="9" showRequired="false"
+                                                      shortDesc="Optional CAGE Code"
+                                                      readOnly="#{niinUpdateBean.niinFlag}"
+                                                      binding="#{niinUpdateBean.cageCode}"/>
+                                        <af:selectOneChoice label="Threshold" labelStyle="font-weight:bold"
+                                                            value="#{bindings.NiinInfoView1InventoryThreshold.inputValue}"
+                                                            unselectedLabel="- Select - " id="thresholdSelectOne"
+                                                            binding="#{niinUpdateBean.threshold}"
+                                                            shortDesc="Required Threshold Flag (Yes or No)"
+                                                            rendered="#{!niinUpdateBean.niinFlag}" showRequired="false" required="true"
+                                                            requiredMessageDetail="Threshold is required.">
+                                            <f:selectItems value="#{bindings.NiinInfoView1InventoryThreshold.items}"/>
+                                        </af:selectOneChoice>
+                                        <af:inputText label="Threshold"
+                                                      value="#{bindings.InventoryThreshold.inputValue}" columns="5"
+                                                      id="threshold_h" shortDesc="Required Threshold Flag (Yes or No)"
+                                                      readOnly="true" styleClass="ReadOnlyField"
+                                                      rendered="#{niinUpdateBean.niinFlag}"/>
+                                        <af:inputText label="Serial Control" labelStyle="font-weight:bold"
+                                                      value="#{bindings.SerialControlFlag.inputValue}" columns="5"
+                                                      id="serialControl_h"
+                                                      shortDesc="Required Serial Control Flag (Yes or No)"
+                                                      readOnly="true" styleClass="ReadOnlyField"/>
+                                        <af:inputText label="Lot Control" labelStyle="font-weight:bold"
+                                                      value="#{bindings.LotControlFlag.inputValue}" columns="5"
+                                                      id="lotControl_h"
+                                                      shortDesc="Required Lot Control Flag (Yes or No)" readOnly="true"
+                                                      styleClass="ReadOnlyField"/>
+                                        <af:inputText label="Replacement National Stock Number (NSN)" value="#{bindings.NewNsn.inputValue}"
+                                                      id="newNsn" binding="#{niinUpdateBean.newNsn}" maximumLength="13"
+                                                      columns="20" showRequired="false"
+                                                      shortDesc="Optional Replacement National Stock Number (NSN)"
+                                                      readOnly="#{niinUpdateBean.niinFlag}"/>
+
+                                        <af:panelLabelAndMessage label="Activity Date">
+                                            <stratis:adfDateFormatter value="#{bindings.ActivityDate.inputValue}"/>
+                                        </af:panelLabelAndMessage>
+
+                                        <af:inputText label="Nomenclature" labelStyle="font-weight:bold"
+                                                      value="#{bindings.Nomenclature.inputValue}" columns="100"
+                                                      id="nomenclature" maximumLength="100" showRequired="false"
+                                                      shortDesc="Required Nomenclature (max 100 characters)"
+                                                      contentStyle="text-transform:uppercase;"
+                                                      binding="#{niinUpdateBean.nomenclature}"
+                                                      readOnly="#{!niinUpdateBean.newFlag}"/>
+
+                                    </af:panelFormLayout>
+                                    <af:toolbar rendered="#{!niinUpdateBean.niinFlag}">
+                                        <af:button actionListener="#{niinUpdateBean.submitSaveNiin}" text="Submit"
+                                                   inlineStyle="width:50px" id="SaveButton" partialSubmit="false"/>
+                                        <af:button actionListener="#{niinUpdateBean.submitResetNiin}"
+                                                   text="Reset" inlineStyle="width:50px"
+                                                   rendered="#{not empty bindings.NiinId.inputValue}"
+                                                   id="ResetButton" partialSubmit="false"/>
+                                        <af:resetButton text="Reset" accessKey="R" id="ResetButton2"
+                                                        rendered="#{empty bindings.NiinId.inputValue}"
+                                                        inlineStyle="width:50px"/>
+                                        <af:button actionListener="#{niinUpdateBean.submitCancelNiin}"
+                                                   text="Cancel" inlineStyle="width:50px" id="CancelButton" immediate="true"
+                                                   partialSubmit="false"/>
+                                    </af:toolbar>
+                                </af:panelBox>
+                            </af:panelGroupLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6"/>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

@@ -1,0 +1,250 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="1"/>
+    <jsp:setProperty name="userbean" property="selected3" value="9"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="Admin_WarehouseComSetup"/>
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session" />
+    <jsp:setProperty name="logBean" property="page" value="Port"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="195" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGroupLayout layout="vertical">
+                                <af:panelBox text="Warehouse Setup - COM Setup" showDisclosure="false">
+                                    <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                                        <f:facet name="secondaryToolbar">
+                                            <af:toolbar inlineStyle="padding:2px;">
+                                                <af:button actionListener="#{bindings.CreateInsert.execute}"
+                                                           text="Create" accessKey="C" inlineStyle="width:50px;"
+                                                           disabled="#{(!ComSetupBacking.comPortFlag) and (bindings.ComPortView1.estimatedRowCount > 0)}"
+                                                           id="CreateButton" partialSubmit="false">
+                                                    <af:setActionListener from="#{false}"
+                                                                          to="#{ComSetupBacking.comPortFlag}"/>
+                                                    <af:setActionListener from="#{false}"
+                                                                          to="#{ComSetupBacking.comPortRefresh}"/>
+                                                </af:button>
+                                                <af:button actionListener="#{ComSetupBacking.submitUpdateCOMPort}"
+                                                           text="Update" accessKey="U" inlineStyle="width:50px;"
+                                                           disabled="#{!ComSetupBacking.comPortFlag}"
+                                                           id="UpdateButton" partialSubmit="false"/>
+                                                <af:group>
+                                                    <af:button text="Delete" accessKey="D"
+                                                               inlineStyle="width:50px;"
+                                                               disabled="#{!ComSetupBacking.comPortFlag}"
+                                                               id="DeleteButton" partialSubmit="false">
+                                                        <af:showPopupBehavior popupId="confirmDelete" triggerType="action"
+                                                                              align="afterStart"/>
+                                                    </af:button>
+                                                    <af:popup id="confirmDelete">
+                                                        <af:dialog id="Confirm" title="Confirm" affirmativeTextAndAccessKey="Submit"
+                                                                   dialogListener="#{ComSetupBacking.dialogListener}">
+                                                            <af:activeOutputText id="Delete" value="Are you sure you want to Delete?"/>
+                                                        </af:dialog>
+                                                    </af:popup>
+                                                </af:group>
+                                            </af:toolbar>
+                                        </f:facet>
+                                        <af:table value="#{bindings.ComPortView1.collectionModel}" var="row"
+                                                  rows="#{bindings.ComPortView1.rangeSize}"
+                                                  emptyText="#{bindings.ComPortView1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                  selectionListener="#{bindings.ComPortView1.collectionModel.makeCurrent}"
+                                                  sortListener="#{ComSetupBacking.comPortSort}" id="ComTable"
+                                                  binding="#{ComSetupBacking.comPortTable}" width="500"
+                                                  selectedRowKeys="#{bindings.ComPortView1.collectionModel.selectedRow}"
+                                                  rowSelection="single" styleClass="AFStretchWidth"
+                                                  columnStretching="last" partialTriggers="::DeleteButton">
+                                            <af:column sortProperty="ComName" sortable="false" headerText="COM Name"
+                                                       inlineStyle="text-align:center;">
+                                                <af:outputText value="#{row.ComName}"/>
+                                            </af:column>
+                                            <af:column sortProperty="Name" sortable="false"
+                                                       inlineStyle="text-align:center;" headerText="Description">
+                                                <af:outputText value="#{row.Name}"/>
+                                            </af:column>
+                                            <af:column sortProperty="BaudRate" sortable="false" headerText="Baud Rate"
+                                                       width="50">
+                                                <af:outputText value="#{row.BaudRate}">
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.ComPortView1.formats.BaudRate}"/>
+                                                </af:outputText>
+                                            </af:column>
+                                            <af:column sortProperty="Parity" sortable="false"
+                                                       headerText="#{bindings.ComPortView1.labels.Parity}" width="50">
+                                                <af:outputText value="#{row.Parity}"/>
+                                            </af:column>
+                                            <af:column sortProperty="Fparity" sortable="false" headerText="FParity"
+                                                       width="50">
+                                                <af:outputText value="#{row.Fparity}"/>
+                                            </af:column>
+                                            <af:column sortProperty="ByteSize" sortable="false" headerText="Byte Size"
+                                                       width="50">
+                                                <af:outputText value="#{row.ByteSize}">
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.ComPortView1.formats.ByteSize}"/>
+                                                </af:outputText>
+                                            </af:column>
+                                            <af:column sortProperty="StopBits" sortable="false" headerText="Stop Bits"
+                                                       width="50">
+                                                <af:outputText value="#{row.StopBits}"/>
+                                            </af:column>
+                                            <f:facet name="footer"/>
+                                        </af:table>
+                                    </af:panelCollection>
+                                    <af:spacer height="10"/>
+                                    <!-- Detail Panels -->
+                                    <af:panelBox text="COM Setup Details" id="comPortSetupPanelBox"
+                                                 rendered="#{bindings.ComPortView1.estimatedRowCount > 0}"
+                                                 showDisclosure="false">
+                                        <af:separator/>
+                                        <af:panelFormLayout partialTriggers="pc1:ComTable">
+                                            <!-- COM Name-->
+                                            <af:selectOneChoice label="COM Name"
+                                                                value="#{bindings.ComNameList.inputValue}"
+                                                                unselectedLabel="- Select -"
+                                                                shortDesc="Required Select a COM Port to use with connection"
+                                                                rendered="#{empty bindings.ComName.inputValue}"
+                                                                id="comNameSelectOne" required="true" showRequired="false"
+                                                                requiredMessageDetail="Name is required."
+                                                                binding="#{ComSetupBacking.comPortCOMNameList}">
+                                                <f:selectItems value="#{bindings.ComNameList.items}"/>
+                                            </af:selectOneChoice>
+                                            <af:inputText label="COM Name" value="#{bindings.ComName.inputValue}"
+                                                          columns="20" shortDesc="Required COM Port Name (e.g., COM1)"
+                                                          rendered="#{not empty bindings.ComName.inputValue or ComSetupBacking.comPortFlag}"
+                                                          readOnly="true" styleClass="ReadOnlyField" id="txtComName_h"/>
+                                            <!-- Description -->
+                                            <af:inputText label="Description" value="#{bindings.Name.inputValue}"
+                                                          columns="20" id="txtName" maximumLength="100"
+                                                          contentStyle="text-transform:uppercase;" required="true" showRequired="false"
+                                                          requiredMessageDetail="Description is required."
+                                                          shortDesc="Required COM Port Short Description"
+                                                          rendered="#{!ComSetupBacking.comPortFlag}"
+                                                          binding="#{ComSetupBacking.comPortName}"/>
+                                            <af:inputText label="Description" value="#{bindings.Name.inputValue}"
+                                                          columns="20" shortDesc="Required COM Port Short Description"
+                                                          rendered="#{ComSetupBacking.comPortFlag}" readOnly="true"
+                                                          styleClass="ReadOnlyField" id="txtName_h"/>
+                                            <!-- Baud Rate -->
+                                            <af:selectOneChoice label="Baud Rate"
+                                                                value="#{bindings.ComPortView1BaudRate.inputValue}"
+                                                                unselectedLabel="- Select -"
+                                                                shortDesc="Optional Select a Baud Rate"
+                                                                rendered="#{!ComSetupBacking.comPortFlag}"
+                                                                id="baudRateSelectOne">
+                                                <f:selectItems value="#{bindings.ComPortView1BaudRate.items}"/>
+                                            </af:selectOneChoice>
+                                            <af:inputText label="Baud Rate" value="#{bindings.BaudRate.inputValue}"
+                                                          columns="7" shortDesc="Optional Select a Baud Rate"
+                                                          rendered="#{ComSetupBacking.comPortFlag}" readOnly="true"
+                                                          styleClass="ReadOnlyField" id="baudRateSelectOne_h"/>
+                                            <!-- Parity -->
+                                            <af:selectOneChoice label="Parity"
+                                                                value="#{bindings.ComPortView1Parity.inputValue}"
+                                                                unselectedLabel="- Select -"
+                                                                shortDesc="Select a Parity (required if FParity is T (True))"
+                                                                rendered="#{!ComSetupBacking.comPortFlag}"
+                                                                binding="#{ComSetupBacking.comPortParity}"
+                                                                id="paritySelectOne">
+                                                <f:selectItems value="#{bindings.ComPortView1Parity.items}"/>
+                                            </af:selectOneChoice>
+                                            <af:inputText label="Parity" value="#{bindings.Parity.inputValue}"
+                                                          columns="7"
+                                                          shortDesc="Select a Parity (required if FParity is T (True))"
+                                                          rendered="#{ComSetupBacking.comPortFlag}" readOnly="true"
+                                                          styleClass="ReadOnlyField" id="paritySelectOne_h"/>
+                                            <!-- FParity -->
+                                            <af:selectOneChoice label="FParity"
+                                                                value="#{bindings.Fparity.inputValue}"
+                                                                id="fParitySelectOne" required="true" showRequired="false"
+                                                                requiredMessageDetail="FParity is required."
+                                                                shortDesc="Required Select a FParity (True or False)"
+                                                                rendered="#{!ComSetupBacking.comPortFlag}"
+                                                                binding="#{ComSetupBacking.comPortFParity}">
+                                                <f:selectItem itemLabel="T" itemValue="T"/>
+                                                <f:selectItem itemLabel="F" itemValue="F"/>
+                                            </af:selectOneChoice>
+                                            <af:inputText label="FParity" value="#{bindings.Fparity.inputValue}"
+                                                          columns="7" shortDesc="Required Select a FParity"
+                                                          rendered="#{ComSetupBacking.comPortFlag}" readOnly="true"
+                                                          styleClass="ReadOnlyField" id="fParitySelectOne_h"/>
+                                            <!-- Stop Bits -->
+                                            <af:selectOneChoice label="Stop Bits"
+                                                                value="#{bindings.ComPortView1StopBits.inputValue}"
+                                                                unselectedLabel="- Select -"
+                                                                shortDesc="Optional Select Stop Bits"
+                                                                rendered="#{!ComSetupBacking.comPortFlag}"
+                                                                id="stopBitsSelectOne">
+                                                <f:selectItems value="#{bindings.ComPortView1StopBits.items}"/>
+                                            </af:selectOneChoice>
+                                            <af:inputText label="Stop Bits" value="#{bindings.StopBits.inputValue}"
+                                                          columns="7" shortDesc="Optional Select Stop Bits"
+                                                          rendered="#{ComSetupBacking.comPortFlag}" readOnly="true"
+                                                          styleClass="ReadOnlyField" id="stopBitsSelectOne_h"/>
+                                            <!-- Byte Size -->
+                                            <af:selectOneChoice label="Byte Size"
+                                                                value="#{bindings.ComPortView1ByteSize.inputValue}"
+                                                                unselectedLabel="- Select -"
+                                                                shortDesc="Optional Select a Byte Size"
+                                                                rendered="#{!ComSetupBacking.comPortFlag}"
+                                                                id="byteSizeSelectOne">
+                                                <f:selectItems value="#{bindings.ComPortView1ByteSize.items}"/>
+                                            </af:selectOneChoice>
+                                            <af:inputText label="Byte Size" value="#{bindings.ByteSize.inputValue}"
+                                                          columns="7" shortDesc="Optional Select a Byte Size"
+                                                          rendered="#{ComSetupBacking.comPortFlag}" readOnly="true"
+                                                          styleClass="ReadOnlyField" id="byteSizeSelectOne_h"/>
+                                            <af:toolbar rendered="#{!ComSetupBacking.comPortFlag}">
+                                                <af:button actionListener="#{ComSetupBacking.submitSaveCOMPort}"
+                                                           text="Submit" id="SaveButton" accessKey="S"
+                                                           inlineStyle="width:50px;" partialSubmit="false"/>
+                                                <af:button actionListener="#{ComSetupBacking.submitResetCOMPort}"
+                                                           text="Reset" id="ResetButton" accessKey="R"
+                                                           rendered="#{not empty bindings.ComPortId.inputValue}"
+                                                           inlineStyle="width:50px;" partialSubmit="false"/>
+                                                <af:resetButton text="Reset" accessKey="R" id="ResetButton2"
+                                                                rendered="#{empty bindings.ComPortId.inputValue}"
+                                                                inlineStyle="width:50px"/>
+                                                <af:button actionListener="#{ComSetupBacking.submitCancelCOMPort}"
+                                                           text="Cancel" id="CancelButton" accessKey="a"
+                                                           inlineStyle="width:50px;" immediate="true"
+                                                           partialSubmit="false"/>
+                                            </af:toolbar>
+                                        </af:panelFormLayout>
+                                    </af:panelBox>
+                                </af:panelBox>
+                            </af:panelGroupLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6" id="s1"/>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

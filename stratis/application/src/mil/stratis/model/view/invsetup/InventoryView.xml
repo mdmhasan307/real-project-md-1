@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="InventoryView"
+   Version="11.1.2.64.36"
+   SelectList="Inventory.INVENTORY_ID, 
+       Inventory.REQUEST_DATE, 
+       Inventory.CREATED_BY, 
+       Inventory.CREATED_DATE, 
+       Inventory.MODIFIED_BY, 
+       Inventory.MODIFIED_DATE, 
+       Inventory.DESCRIPTION, 
+       Inventory.STATUS"
+   FromList="INVENTORY Inventory"
+   Where="Inventory.DESCRIPTION NOT LIKE &#39;%Spot Check%&#39;"
+   OrderBy="Inventory.INVENTORY_ID DESC"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.invsetup.InventoryViewImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="Inventory"
+      Entity="mil.stratis.model.entity.inv.Inventory" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="InventoryId"
+      IsNotNull="true"
+      EntityAttrName="InventoryId"
+      EntityUsage="Inventory"
+      AliasName="INVENTORY_ID"
+      IsUpdateable="while_insert">
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RequestDate"
+      EntityAttrName="RequestDate"
+      EntityUsage="Inventory"
+      AliasName="REQUEST_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="Inventory"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedDate"
+      EntityAttrName="CreatedDate"
+      EntityUsage="Inventory"
+      AliasName="CREATED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedBy"
+      EntityAttrName="ModifiedBy"
+      EntityUsage="Inventory"
+      AliasName="MODIFIED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedDate"
+      EntityAttrName="ModifiedDate"
+      EntityUsage="Inventory"
+      AliasName="MODIFIED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Description"
+      EntityAttrName="Description"
+      EntityUsage="Inventory"
+      AliasName="DESCRIPTION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Status"
+      EntityAttrName="Status"
+      EntityUsage="Inventory"
+      AliasName="STATUS" >
+   </ViewAttribute>
+   <ViewLinkAccessor
+      Name="InventoryItemView"
+      ViewLink="mil.stratis.model.entity.link.InventoryItemViewLink"
+      Type="oracle.jbo.RowIterator"
+      IsUpdateable="false"/>
+</ViewObject>

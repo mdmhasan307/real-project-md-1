@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="PickingView"
+   Version="11.1.2.64.36"
+   SelectList="Picking.PID, 
+       Picking.SCN, 
+       Picking.SUFFIX_CODE, 
+       Picking.PACKING_CONSOLIDATION_ID, 
+       Picking.NIIN_LOC_ID, 
+       Picking.CREATED_BY, 
+       Picking.CREATED_DATE, 
+       Picking.MODIFIED_BY, 
+       Picking.MODIFIED_DATE, 
+       Picking.QTY_PICKED, 
+       Picking.PIN, 
+       Picking.STATUS, 
+       Picking.PICK_QTY, 
+       Location.WAC_ID, 
+       Location.LOCATION_ID"
+   FromList="PICKING Picking, NIIN_LOCATION NiinLocation, LOCATION Location"
+   Where="((Picking.NIIN_LOC_ID = NiinLocation.NIIN_LOC_ID) AND (NiinLocation.LOCATION_ID = Location.LOCATION_ID)) AND (Location.WAC_ID = :WacSearch) AND ((Picking.STATUS = &#39;PICK READY&#39;) OR (Picking.STATUS = &#39;PICK BYPASS1&#39;))"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.whsetup.PickingViewImpl"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <Variable
+      Name="WacSearch"
+      Kind="where"
+      Type="oracle.jbo.domain.Number" >
+   </Variable>
+   <EntityUsage
+      Name="Picking"
+      Entity="mil.stratis.model.entity.wlm.Picking" >
+   </EntityUsage>
+   <EntityUsage
+      Name="NiinLocation"
+      Entity="mil.stratis.model.entity.loc.NiinLocation"
+      Association="mil.stratis.model.entity.associations.PickingNiinLocFkAssoc"
+      AssociationEnd="mil.stratis.model.entity.associations.PickingNiinLocFkAssoc.NiinLocation"
+      SourceUsage="mil.stratis.model.view.whsetup.PickingView.Picking"
+      ReadOnly="true"
+      Reference="true" >
+      <DesignTime>
+         <AttrArray Name="_srcAttributes">
+            <Item Value="mil.stratis.model.entity.wlm.Picking.NiinLocId" />
+         </AttrArray>
+         <AttrArray Name="_dstAttributes">
+            <Item Value="mil.stratis.model.entity.loc.NiinLocation.NiinLocId" />
+         </AttrArray>
+      </DesignTime>
+   </EntityUsage>
+   <EntityUsage
+      Name="Location"
+      Entity="mil.stratis.model.entity.loc.Location"
+      Association="mil.stratis.model.entity.associations.NiinLocLocationFkAssoc"
+      AssociationEnd="mil.stratis.model.entity.associations.NiinLocLocationFkAssoc.Location"
+      SourceUsage="mil.stratis.model.view.whsetup.PickingView.NiinLocation"
+      ReadOnly="true"
+      Reference="true" />
+   <ViewAttribute
+      Name="Pid"
+      IsNotNull="true"
+      EntityAttrName="Pid"
+      EntityUsage="Picking"
+      AliasName="PID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Scn"
+      IsUnique="true"
+      EntityAttrName="Scn"
+      EntityUsage="Picking"
+      AliasName="SCN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SuffixCode"
+      IsUnique="true"
+      EntityAttrName="SuffixCode"
+      EntityUsage="Picking"
+      AliasName="SUFFIX_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PackingConsolidationId"
+      EntityAttrName="PackingConsolidationId"
+      EntityUsage="Picking"
+      AliasName="PACKING_CONSOLIDATION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NiinLocId"
+      IsNotNull="true"
+      EntityAttrName="NiinLocId"
+      EntityUsage="Picking"
+      AliasName="NIIN_LOC_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      EntityAttrName="CreatedBy"
+      EntityUsage="Picking"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedDate"
+      IsNotNull="true"
+      EntityAttrName="CreatedDate"
+      EntityUsage="Picking"
+      AliasName="CREATED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedBy"
+      EntityAttrName="ModifiedBy"
+      EntityUsage="Picking"
+      AliasName="MODIFIED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedDate"
+      IsNotNull="true"
+      EntityAttrName="ModifiedDate"
+      EntityUsage="Picking"
+      AliasName="MODIFIED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="QtyPicked"
+      IsNotNull="true"
+      EntityAttrName="QtyPicked"
+      EntityUsage="Picking"
+      AliasName="QTY_PICKED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Pin"
+      IsUnique="true"
+      EntityAttrName="Pin"
+      EntityUsage="Picking"
+      AliasName="PIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Status"
+      EntityAttrName="Status"
+      EntityUsage="Picking"
+      AliasName="STATUS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PickQty"
+      EntityAttrName="PickQty"
+      EntityUsage="Picking"
+      AliasName="PICK_QTY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WacId"
+      IsUnique="true"
+      IsNotNull="true"
+      EntityAttrName="WacId"
+      EntityUsage="Location"
+      AliasName="WAC_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationId"
+      IsNotNull="true"
+      EntityAttrName="LocationId"
+      EntityUsage="Location"
+      AliasName="LOCATION_ID" >
+   </ViewAttribute>
+</ViewObject>

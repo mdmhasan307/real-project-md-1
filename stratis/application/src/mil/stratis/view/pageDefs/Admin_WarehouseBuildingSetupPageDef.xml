@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="Admin_WarehouseBuildingSetupPageDef" Package="mil.stratis.view.pageDefs" EnableTokenValidation="false">
+  <parameters/>
+  <executables>
+    <iterator id="WarehouseView1Iterator" RangeSize="10" Binds="Root.AppModule1.WarehouseView1_Building"
+              DataControl="StratisRootServiceDataControl" StateValidation="false" Refresh="ifNeeded"
+              ChangeEventPolicy="none"/>
+    <iterator id="SiteInfoView1Iterator" RangeSize="-1" Binds="Root.AppModule1.SiteInfoView1"
+              DataControl="StratisRootServiceDataControl" StateValidation="false" Refresh="ifNeeded"
+              ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="WarehouseView1" IterBinding="WarehouseView1Iterator">
+      <AttrNames>
+        <Item Value="WarehouseId"/>
+        <Item Value="Building"/>
+        <Item Value="Complex"/>
+        <Item Value="SiteId"/>
+        <Item Value="Description"/>
+        <Item Value="LocalDeliveryPrefix"/>
+        <Item Value="LocalDeliverySuffix"/>
+        <Item Value="CarrierName"/>
+        <Item Value="SupplyCenterName"/>
+      </AttrNames>
+    </table>
+    <action id="CreateInsert" IterBinding="WarehouseView1Iterator"
+            InstanceName="StratisRootServiceDataControl.Root.AppModule1.WarehouseView1_Building"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="ExecuteBuilding" RequiresUpdateModel="true" Action="iteratorExecute"
+            IterBinding="WarehouseView1Iterator"/>
+    <attributeValues id="WarehouseId" IterBinding="WarehouseView1Iterator">
+      <AttrNames>
+        <Item Value="WarehouseId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Building" IterBinding="WarehouseView1Iterator">
+      <AttrNames>
+        <Item Value="Building"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Complex" IterBinding="WarehouseView1Iterator">
+      <AttrNames>
+        <Item Value="Complex"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="SiteId" IterBinding="WarehouseView1Iterator">
+      <AttrNames>
+        <Item Value="SiteId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Description" IterBinding="WarehouseView1Iterator">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LocalDeliveryPrefix" IterBinding="WarehouseView1Iterator">
+      <AttrNames>
+        <Item Value="LocalDeliveryPrefix"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LocalDeliverySuffix" IterBinding="WarehouseView1Iterator">
+      <AttrNames>
+        <Item Value="LocalDeliverySuffix"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CarrierName" IterBinding="WarehouseView1Iterator">
+      <AttrNames>
+        <Item Value="CarrierName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Building1" IterBinding="WarehouseView1Iterator">
+      <AttrNames>
+        <Item Value="Building"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Complex1" IterBinding="WarehouseView1Iterator">
+      <AttrNames>
+        <Item Value="Complex"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="SiteId1" IterBinding="WarehouseView1Iterator">
+      <AttrNames>
+        <Item Value="SiteId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="SupplyCenterName1" IterBinding="WarehouseView1Iterator">
+      <AttrNames>
+        <Item Value="SupplyCenterName"/>
+      </AttrNames>
+    </attributeValues>
+    <list id="WarehouseView1SiteId" IterBinding="WarehouseView1Iterator" StaticList="false" ListOperMode="setAttribute"
+          ListIter="SiteInfoView1Iterator">
+      <AttrNames>
+        <Item Value="SiteId"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="SiteId"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="SupplyCenterName"/>
+      </ListDisplayAttrNames>
+    </list>
+    <attributeValues id="WarehouseView1Description" IterBinding="WarehouseView1Iterator">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LocalDeliveryPrefix1" IterBinding="WarehouseView1Iterator">
+      <AttrNames>
+        <Item Value="LocalDeliveryPrefix"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LocalDeliverySuffix1" IterBinding="WarehouseView1Iterator">
+      <AttrNames>
+        <Item Value="LocalDeliverySuffix"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CarrierName1" IterBinding="WarehouseView1Iterator">
+      <AttrNames>
+        <Item Value="CarrierName"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

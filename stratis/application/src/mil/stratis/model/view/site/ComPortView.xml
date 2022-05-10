@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ComPortView"
+  Version="11.1.2.64.36"
+  SelectList="ComPort.COM_PORT_ID, 
+       ComPort.NAME, 
+       ComPort.BAUD_RATE, 
+       ComPort.PARITY, 
+       ComPort.FPARITY, 
+       ComPort.BYTE_SIZE, 
+       ComPort.STOP_BITS, 
+       ComPort.COM_NAME"
+  FromList="STRATIS.COM_PORT ComPort"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <EntityUsage
+    Name="ComPort"
+    Entity="mil.stratis.model.entity.site.ComPort"/>
+  <ViewAttribute
+    Name="ComPortId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ComPortId"
+    EntityUsage="ComPort"
+    AliasName="COM_PORT_ID"/>
+  <ViewAttribute
+    Name="Name"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Name"
+    EntityUsage="ComPort"
+    AliasName="NAME"/>
+  <ViewAttribute
+    Name="BaudRate"
+    PrecisionRule="true"
+    EntityAttrName="BaudRate"
+    EntityUsage="ComPort"
+    AliasName="BAUD_RATE"/>
+  <ViewAttribute
+    Name="Parity"
+    PrecisionRule="true"
+    EntityAttrName="Parity"
+    EntityUsage="ComPort"
+    AliasName="PARITY"/>
+  <ViewAttribute
+    Name="Fparity"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Fparity"
+    EntityUsage="ComPort"
+    AliasName="FPARITY"/>
+  <ViewAttribute
+    Name="ByteSize"
+    PrecisionRule="true"
+    EntityAttrName="ByteSize"
+    EntityUsage="ComPort"
+    AliasName="BYTE_SIZE"/>
+  <ViewAttribute
+    Name="StopBits"
+    PrecisionRule="true"
+    EntityAttrName="StopBits"
+    EntityUsage="ComPort"
+    AliasName="STOP_BITS"/>
+  <ViewAttribute
+    Name="ComName"
+    PrecisionRule="true"
+    EntityAttrName="ComName"
+    EntityUsage="ComPort"
+    AliasName="COM_NAME"/>
+</ViewObject>

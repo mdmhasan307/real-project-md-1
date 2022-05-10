@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <!-- Active Receipt Report -->
+    <af:table var="row" rowBandingInterval="1" id="rg5t1_1" autoHeightRows="0"
+              styleClass="AFStretchWidth"
+              value="#{viewScope.ReportsQueryResultBean.reportColumnList}"
+              rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Active Receipt Report'}">
+        <af:column sortable="false" headerText="RCN" id="rg5c1_1" width="150">
+            <af:outputText value="#{row.rcn}" id="rg5ot1_1"/>
+        </af:column>
+        <af:column sortable="false" headerText="Date Received" id="rg5c1_2">
+            <af:outputText value="#{row.dateReceived}"/>
+        </af:column>
+        <af:column sortable="false" headerText="NIIN" id="rg5c1_3">
+            <af:outputText value="#{row.niin}" id="rg5ot1_3"/>
+        </af:column>
+        <af:column sortable="false" headerText="Qty Inducted" id="rg5c1_4"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.qtyInducted}" id="rg5ot1_4"/>
+        </af:column>
+        <af:column sortable="false" headerText="Qty Stowed" id="rg5c1_5"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.stowedQty}" id="rg5ot1_5"/>
+        </af:column>
+        <af:column sortable="false" headerText="Document Number" id="rg5c1_6">
+            <af:outputText value="#{row.documentNumber}" id="rg5ot1_6"/>
+        </af:column>
+        <af:column sortable="false" headerText="Status" id="rg5c1_7">
+            <af:outputText value="#{row.status}" id="rg5ot1_7"/>
+        </af:column>
+        <af:column sortable="false" headerText="SID" id="rg5c1_8">
+            <af:outputText value="#{row.sid}" id="rg5ot1_8"/>
+        </af:column>
+        <af:column sortable="false" headerText="Location" id="rg5c1_9">
+            <af:outputText value="#{row.location}" id="rg5ot1_9"/>
+        </af:column>
+    </af:table>
+</jsp:root>

@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="LocationList"
+   Version="11.1.2.64.36"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   ComponentClass="mil.stratis.model.view.wlm.LocationListImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   Passivate="All"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="WacId"
+      IsSelected="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="VIEW_ATTR"
+      SQLType="NUMERIC" >
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="6" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="VIEW_ATTR"
+      SQLType="NUMERIC" >
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="6" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationLabel"
+      IsSelected="false"
+      IsPersistent="false"
+      Precision="255"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="VIEW_ATTR"
+      SQLType="VARCHAR" >
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="12" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="LocationLabel_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+      <DesignTime>
+         <Attr Name="_diagramName" Value="Location"/>
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocQty"
+      IsSelected="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="VIEW_ATTR"
+      SQLType="NUMERIC" >
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="LocQty_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="6" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <AttrArray Name="KeyAttributes">
+      <Item Value="LocationId" />
+   </AttrArray>
+   <ResourceBundle >
+      <JavaResourceBundle
+         MsgBundleClass="mil.stratis.model.view.wlm.common.LocationListRowImplMsgBundle" >
+      </JavaResourceBundle>
+   </ResourceBundle>
+</ViewObject>

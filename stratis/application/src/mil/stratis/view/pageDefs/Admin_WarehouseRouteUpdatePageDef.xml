@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="Admin_WarehouseRouteUpdatePageDef" Package="mil.stratis.view.pageDefs" EnableTokenValidation="false">
+  <parameters/>
+  <executables>
+    <iterator id="RouteView1Iterator_WarehouseMgmt" RangeSize="10" Binds="Root.AppModule1.RouteView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="RouteView1" IterBinding="RouteView1Iterator_WarehouseMgmt">
+      <AttrNames>
+        <Item Value="RouteId"/>
+        <Item Value="Description"/>
+        <Item Value="RouteName"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="RouteId" IterBinding="RouteView1Iterator_WarehouseMgmt">
+      <AttrNames>
+        <Item Value="RouteId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="RouteName" IterBinding="RouteView1Iterator_WarehouseMgmt">
+      <AttrNames>
+        <Item Value="RouteName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Description" IterBinding="RouteView1Iterator_WarehouseMgmt">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="CreateInsert" IterBinding="RouteView1Iterator_WarehouseMgmt"
+            InstanceName="StratisRootServiceDataControl.Root.AppModule1.RouteView1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="Commit" InstanceName="StratisRootServiceDataControl.Root.AppModule1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="ExecuteRoute" RequiresUpdateModel="true" Action="iteratorExecute"
+            IterBinding="RouteView1Iterator_WarehouseMgmt"/>
+  </bindings>
+</pageDefinition>

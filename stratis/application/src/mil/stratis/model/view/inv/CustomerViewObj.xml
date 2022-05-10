@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="CustomerViewObj"
+   Version="11.1.2.64.36"
+   SelectList="Customer.ADDRESS_1, 
+       Customer.CITY, 
+       Customer.STATE, 
+       Customer.ZIP_CODE, 
+       Customer.AAC, 
+       Customer.CUSTOMER_ID, 
+       Customer.ADDRESS_2, 
+       Customer.ROUTE_ID, 
+       Customer.RESTRICT_SHIP, 
+       Customer.NAME, 
+       Customer.FLOOR_LOCATION_ID"
+   FromList="CUSTOMER Customer"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.inv.CustomerViewObjImpl"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="Customer"
+      Entity="mil.stratis.model.entity.site.Customer" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="Address1"
+      EntityAttrName="Address1"
+      EntityUsage="Customer"
+      AliasName="ADDRESS_1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="City"
+      EntityAttrName="City"
+      EntityUsage="Customer"
+      AliasName="CITY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="State"
+      EntityAttrName="State"
+      EntityUsage="Customer"
+      AliasName="STATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ZipCode"
+      EntityAttrName="ZipCode"
+      EntityUsage="Customer"
+      AliasName="ZIP_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Aac"
+      EntityAttrName="Aac"
+      EntityUsage="Customer"
+      AliasName="AAC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CustomerId"
+      EntityAttrName="CustomerId"
+      EntityUsage="Customer"
+      AliasName="CUSTOMER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Address2"
+      EntityAttrName="Address2"
+      EntityUsage="Customer"
+      AliasName="ADDRESS_2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RouteId"
+      EntityAttrName="RouteId"
+      EntityUsage="Customer"
+      AliasName="ROUTE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RestrictShip"
+      IsNotNull="true"
+      EntityAttrName="RestrictShip"
+      EntityUsage="Customer"
+      AliasName="RESTRICT_SHIP" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Name"
+      IsNotNull="true"
+      EntityAttrName="Name"
+      EntityUsage="Customer"
+      AliasName="NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FloorLocationId"
+      EntityAttrName="FloorLocationId"
+      EntityUsage="Customer"
+      AliasName="FLOOR_LOCATION_ID" >
+   </ViewAttribute>
+</ViewObject>

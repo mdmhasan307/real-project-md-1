@@ -1,0 +1,322 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+
+    <af:switcher facetName="#{userbean.usersAdminAuthorizationStatus}" id="fmusersadminauthstatus">
+        <f:facet name="0">
+            <f:verbatim>
+                <script language="Javascript" type="text/javascript">
+                  //alert('Your session has expired!\nYou will be returned to the login screen.');
+                  console.log("A_SSDT detected expired/no session.");
+                  this.location.href = 'unauthenticated.html';
+                </script>
+            </f:verbatim>
+        </f:facet>
+        <f:facet name="-1">
+            <f:verbatim>
+                <script language="Javascript" type="text/javascript">
+                  this.location.href = 'unauthorized.html';
+                </script>
+            </f:verbatim>
+        </f:facet>
+        <f:facet name="1">
+
+
+            <af:subform id="SetupSystemDefaultsForm">
+                <af:spacer height="10" width="1"/>
+                <af:panelBox text="Setup System Defaults" id="boxSystemDefaults" showDisclosure="false">
+                    <af:separator/>
+                    <af:panelFormLayout id="panelfrmSystemDefaults">
+                        <af:panelGridLayout>
+                            <af:gridRow>
+                                <af:gridCell columnSpan="5">
+                                    <af:spacer height="10" width="10"/>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow>
+                                <af:gridCell>
+                                    <af:outputLabel value="Issue Cube Threshold" inlineStyle="font-weight:bold"/>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:inputText value="#{bindings.IssueCubeThreshold.inputValue}" required="true"
+                                                  columns="#{bindings.IssueCubeThreshold.displayWidth}">
+                                        <f:validator binding="#{bindings.IssueCubeThreshold.validator}"/>
+                                        <f:convertNumber groupingUsed="false" pattern="#{bindings.IssueCubeThreshold.format}"/>
+                                    </af:inputText>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:spacer width="15"/>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:outputLabel value="Disable Consolidation" inlineStyle="font-weight:bold"
+                                                    id="lblBypass"/>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:selectOneChoice value="#{bindings.SiteInfoView1PackingBypass.inputValue}"
+                                                        required="true" id="bypassFlag">
+                                        <f:selectItems value="#{bindings.SiteInfoView1PackingBypass.items}"/>
+                                    </af:selectOneChoice>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow>
+                                <af:gridCell>
+                                    <af:outputLabel value="Inventory Threshold Value" inlineStyle="font-weight:bold"/>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:inputText value="#{bindings.InventoryThresholdValue.inputValue}" required="true"
+                                                  columns="#{bindings.InventoryThresholdValue.displayWidth}">
+                                        <f:validator binding="#{bindings.InventoryThresholdValue.validator}"/>
+                                        <f:convertNumber groupingUsed="false"
+                                                         pattern="#{bindings.InventoryThresholdValue.format}"/>
+                                    </af:inputText>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:spacer width="15"/>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:outputLabel value="GCSS-MC?" inlineStyle="font-weight:bold" id="lblGcss"/>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:selectOneChoice value="#{bindings.SiteInfoView1IsGcssMc.inputValue}" required="true"
+                                                        id="gcssmcFlag" disabled="true">
+                                        <f:selectItems value="#{bindings.SiteInfoView1IsGcssMc.items}"/>
+                                    </af:selectOneChoice>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow>
+                                <af:gridCell>
+                                    <af:outputLabel value="Clear GCSS Queue (days)" id="lblGcssQueueDays" inlineStyle="font-weight:bold"/>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:panelGroupLayout layout="horizontal">
+                                        <af:spacer width="6"/>
+                                        <af:inputText value="#{bindings.GcssmcLogClear.inputValue}"
+                                                      columns="#{bindings.GcssmcLogClear.displayWidth}" shortDesc="Default 7 days"
+                                                      id="gcssLogClear">
+                                            <f:validator binding="#{bindings.GcssmcLogClear.validator}"/>
+                                            <f:convertNumber groupingUsed="false" pattern="#{bindings.GcssmcLogClear.format}"/>
+                                        </af:inputText>
+                                    </af:panelGroupLayout>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:spacer width="15"/>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:outputLabel value="Generate AS2" inlineStyle="font-weight:bold" id="lblAS2"/>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:selectOneChoice value="#{bindings.SiteInfoView1GenerateAs2.inputValue}" required="true"
+                                                        id="as2Flag">
+                                        <f:selectItems value="#{bindings.SiteInfoView1GenerateAs2.items}"/>
+                                    </af:selectOneChoice>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow>
+                                <af:gridCell>
+                                    <af:outputLabel value="Pending Stow Time (hour)" inlineStyle="font-weight:bold"
+                                                    id="lblPendingStowTime"/>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:inputText value="#{bindings.PendingStowTime.inputValue}" required="true"
+                                                  columns="#{bindings.PendingStowTime.displayWidth}">
+                                        <f:validator binding="#{bindings.PendingStowTime.validator}"/>
+                                        <f:convertNumber groupingUsed="false" pattern="#{bindings.PendingStowTime.format}"/>
+                                    </af:inputText>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:spacer width="15"/>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:outputLabel value="Clear Imports Log (days)" inlineStyle="font-weight:bold"
+                                                    id="lblImportsDays"/>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:panelGroupLayout layout="horizontal">
+                                        <af:spacer width="6"/>
+                                        <af:inputText value="#{bindings.RefLogClear.inputValue}" shortDesc="Default 1 day"
+                                                      columns="#{bindings.RefLogClear.displayWidth}" id="refLogClear">
+                                            <f:validator binding="#{bindings.RefLogClear.validator}"/>
+                                            <f:convertNumber groupingUsed="false" pattern="#{bindings.RefLogClear.format}"/>
+                                        </af:inputText>
+                                    </af:panelGroupLayout>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow>
+                                <af:gridCell>
+                                    <af:outputLabel value="Issue Weight Threshold" inlineStyle="font-weight:bold"/>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:inputText value="#{bindings.IssueWeightThreshold.inputValue}" required="true"
+                                                  columns="#{bindings.IssueWeightThreshold.displayWidth}">
+                                        <f:validator binding="#{bindings.IssueWeightThreshold.validator}"/>
+                                        <f:convertNumber groupingUsed="false"
+                                                         pattern="#{bindings.IssueWeightThreshold.format}"/>
+                                    </af:inputText>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:spacer width="15"/>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:outputLabel value="MHIF Range (GCSS)" id="lblMhifRange" inlineStyle="font-weight:bold"/>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:inputText value="#{bindings.MhifRange.inputValue}" required="true"
+                                                  columns="#{bindings.MhifRange.displayWidth}" id="mhifRange">
+                                        <f:validator binding="#{bindings.MhifRange.validator}"/>
+                                        <f:convertNumber groupingUsed="false" pattern="#{bindings.MhifRange.format}"/>
+                                    </af:inputText>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow>
+                                <af:gridCell>
+                                    <af:outputLabel value="Inventory Threshold Count" inlineStyle="font-weight:bold"/>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:inputText value="#{bindings.InventoryThresholdCount.inputValue}" required="true"
+                                                  columns="#{bindings.InventoryThresholdCount.displayWidth}">
+                                        <f:validator binding="#{bindings.InventoryThresholdCount.validator}"/>
+                                        <f:convertNumber groupingUsed="false"
+                                                         pattern="#{bindings.InventoryThresholdCount.format}"/>
+                                    </af:inputText>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:spacer width="15"/>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:outputLabel value="Interfaces On?" inlineStyle="font-weight:bold" id="lblInterfaces"/>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:selectOneChoice value="#{bindings.SiteInfoView1IsInterfacesOn.inputValue}"
+                                                        required="true" id="interfacesFlag">
+                                        <f:selectItems value="#{bindings.SiteInfoView1IsInterfacesOn.items}"/>
+                                    </af:selectOneChoice>
+                                </af:gridCell>
+                            </af:gridRow>
+
+                            <af:gridRow>
+                                <af:gridCell>
+                                    <af:outputLabel value="Security Banner Color" inlineStyle="font-weight:bold"
+                                                    id="lblClassificationColor"/>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:selectOneChoice binding="#{SysAdminBacking.classificationColor}" required="true"
+                                                        id="ClassificationColor">
+                                        <af:selectItem value="green" label="Green (Unclassified)"/>
+                                        <af:selectItem value="red" label="Red (Classified)"/>
+                                        <af:selectItem value="blue" label="Blue"/>
+                                        <af:selectItem value="orange" label="Orange"/>
+                                        <af:selectItem value="yellow" label="Yellow"/>
+                                    </af:selectOneChoice>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:spacer width="15"/>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:outputLabel value="MHIF Autorun" inlineStyle="font-weight:bold" id="lblMHIFAutorun"/>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:selectOneChoice binding="#{SysAdminBacking.MHIFAutorun}" required="true"
+                                                        id="MHIFAutoRunFlag">
+                                        <af:selectItem value="Y" label="Y"/>
+                                        <af:selectItem value="N" label="N"/>
+                                    </af:selectOneChoice>
+                                </af:gridCell>
+                            </af:gridRow>
+
+                            <af:gridRow>
+                                <af:gridCell>
+                                    <af:outputLabel value="Security Banner Text" inlineStyle="font-weight:bold" id="lblClassificationText"/>
+                                </af:gridCell>
+                                <af:gridCell columnSpan="4">
+                                    <af:inputText columns="100" maximumLength="500"
+                                                  binding="#{SysAdminBacking.classificationText}"
+                                                  contentStyle="text-transform:uppercase;"
+                                                  shortDesc="STRATIS Security Banner Text" id="ClassificationText">
+                                        <af:validateRegExp pattern="^[_A-Za-z0-9-.!?,)(\s/]{1,100}$"
+                                                           messageDetailNoMatch="Security banner text must not contain special characters"/>
+                                    </af:inputText>
+                                </af:gridCell>
+                            </af:gridRow>
+
+                            <af:gridRow>
+                                <af:gridCell columnSpan="5">
+                                    <af:spacer height="10" width="1"/>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow>
+                                <af:gridCell>
+                                    <af:outputLabel value="Help URL" inlineStyle="font-weight:bold" id="lblHelpURL"/>
+                                </af:gridCell>
+                                <af:gridCell columnSpan="4">
+                                    <af:inputText value="#{bindings.HelpUrl.inputValue}" columns="100" maximumLength="500"
+                                                  contentStyle="text-transform:uppercase;"
+                                                  shortDesc="STRATIS Help URL" id="helpUrl"/>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow>
+                                <af:gridCell columnSpan="5">
+                                    <af:spacer height="10" width="10"/>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow>
+                                <af:gridCell columnSpan="5">
+                                    <af:spacer height="10" width="10"/>
+                                    <af:button text="Submit" id="SaveButton_setupSysDefault" inlineStyle="width:50px"
+                                               actionListener="#{SysAdminBacking.saveSystemDefaults}" partialSubmit="false">
+                                        <af:setActionListener from="#{false}" to="#{userbean.resetHelpURL}"/>
+                                    </af:button>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow>
+                                <af:gridCell columnSpan="5">
+                                    <af:spacer height="10"/>
+                                </af:gridCell>
+                            </af:gridRow>
+                        </af:panelGridLayout>
+                    </af:panelFormLayout>
+                </af:panelBox>
+                <af:spacer height="10" width="1"/>
+                <af:panelBox text="System Settings" id="boxSystemSettings" showDisclosure="false">
+                    <af:separator/>
+                    <af:panelFormLayout id="panelfrmSystemSettings">
+                        <af:panelGridLayout>
+                            <af:gridRow>
+                                <af:gridCell columnSpan="5">
+                                    <af:spacer height="10" width="10"/>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow>
+                                <af:gridCell>
+                                    <af:outputLabel value="System UUID" inlineStyle="font-weight: bold;"/>
+                                </af:gridCell>
+                                <af:gridCell>
+                                    <af:outputText value="#{SysAdminBacking.systemUuid}" inlineStyle="white-space: nowrap;"/>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow>
+                                <af:gridCell columnSpan="5">
+                                    <af:spacer height="10" width="10"/>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow rendered="#{SysAdminBacking.systemUuidModifiable}">
+                                <af:gridCell columnSpan="5">
+                                    <af:spacer height="10" width="10"/>
+                                    <af:button text="Regenerate System UUID" id="RegenerateButton_systemUuid"
+                                               actionListener="#{SysAdminBacking.regenerateSystemUuid}" partialSubmit="false"
+                                               rendered="#{SysAdminBacking.systemUuidModifiable}">
+                                    </af:button>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow rendered="#{SysAdminBacking.systemUuidModifiable}">
+                                <af:gridCell columnSpan="5">
+                                    <af:spacer height="10"/>
+                                </af:gridCell>
+                            </af:gridRow>
+                        </af:panelGridLayout>
+                    </af:panelFormLayout>
+                </af:panelBox>
+                <af:spacer height="10"/>
+            </af:subform>
+        </f:facet>
+    </af:switcher>
+</jsp:root>

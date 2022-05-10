@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="Admin_WarehouseStorageBinPageDef" Package="mil.stratis.view.pageDefs" EnableTokenValidation="false">
+  <parameters/>
+  <executables>
+    <iterator id="LocationClassification_StorageBinView1Iterator" RangeSize="5"
+              Binds="LocationClassification_StorageBinView1" StateValidation="false"
+              DataControl="AppModuleDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="DividerTypeView1Iterator_StorageBin" RangeSize="-1"
+              Binds="DividerTypeView1_StorageBin" DataControl="AppModuleDataControl"
+              Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="LocationClassificationView1" IterBinding="LocationClassification_StorageBinView1Iterator">
+      <AttrNames>
+        <Item Value="Name"/>
+        <Item Value="Description"/>
+        <Item Value="LocClassificationId"/>
+        <Item Value="Length"/>
+        <Item Value="Width"/>
+        <Item Value="Height"/>
+        <Item Value="UsableCube"/>
+        <Item Value="UsableWeight"/>
+        <Item Value="MechanizableStorage"/>
+        <Item Value="DividerCode"/>
+        <Item Value="ImageFilename"/>
+        <Item Value="SlotCount"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="LocClassificationId" IterBinding="LocationClassification_StorageBinView1Iterator">
+      <AttrNames>
+        <Item Value="LocClassificationId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Length" IterBinding="LocationClassification_StorageBinView1Iterator">
+      <AttrNames>
+        <Item Value="Length"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Name" IterBinding="LocationClassification_StorageBinView1Iterator">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Description" IterBinding="LocationClassification_StorageBinView1Iterator">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Width" IterBinding="LocationClassification_StorageBinView1Iterator">
+      <AttrNames>
+        <Item Value="Width"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Height" IterBinding="LocationClassification_StorageBinView1Iterator">
+      <AttrNames>
+        <Item Value="Height"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UsableCube" IterBinding="LocationClassification_StorageBinView1Iterator">
+      <AttrNames>
+        <Item Value="UsableCube"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UsableWeight" IterBinding="LocationClassification_StorageBinView1Iterator">
+      <AttrNames>
+        <Item Value="UsableWeight"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="MechanizableStorage" IterBinding="LocationClassification_StorageBinView1Iterator">
+      <AttrNames>
+        <Item Value="MechanizableStorage"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="DividerCode" IterBinding="LocationClassification_StorageBinView1Iterator">
+      <AttrNames>
+        <Item Value="DividerCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImageFilename" IterBinding="LocationClassification_StorageBinView1Iterator">
+      <AttrNames>
+        <Item Value="ImageFilename"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="SlotCount" IterBinding="LocationClassification_StorageBinView1Iterator">
+      <AttrNames>
+        <Item Value="SlotCount"/>
+      </AttrNames>
+    </attributeValues>
+    <!-- DOES THIS GET USED?
+    <list id="LocationClassificationView1MechanizableStorage"
+          IterBinding="LocationClassification_StorageBinView1Iterator" ListOperMode="setAttribute" StaticList="true">
+      <AttrNames>
+        <Item Value="MechanizableStorage"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </list>
+    -->
+    <list id="LocationClassificationView1ImageFilename" IterBinding="LocationClassification_StorageBinView1Iterator"
+          ListOperMode="setAttribute" StaticList="true">
+      <AttrNames>
+        <Item Value="ImageFilename"/>
+      </AttrNames>
+    </list>
+    <action id="CreateInsert" IterBinding="LocationClassification_StorageBinView1Iterator"
+            InstanceName="StratisRootServiceDataControl.Root.AppModule1.LocationClassification_StorageBinView1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="ExecuteStorageBin" RequiresUpdateModel="true" Action="iteratorExecute"
+            IterBinding="LocationClassification_StorageBinView1Iterator"/>
+    <list id="LocationClassificationView1DividerTypeId" IterBinding="LocationClassification_StorageBinView1Iterator"
+          StaticList="false" ListOperMode="setAttribute" ListIter="DividerTypeView1Iterator_StorageBin">
+      <AttrNames>
+        <Item Value="DividerTypeId"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="DividerTypeId"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Name"/>
+      </ListDisplayAttrNames>
+    </list>
+  </bindings>
+</pageDefinition>

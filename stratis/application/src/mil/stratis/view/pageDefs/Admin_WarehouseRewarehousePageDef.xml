@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="Admin_WarehouseRewarehousePageDef" Package="mil.stratis.view.pageDefs" ControllerClass="#{backingrewarehouse}">
+  <parameters/>
+  <executables>
+    <iterator id="RewarehouseTempView1Iterator" RangeSize="10" Binds="Root.SysAdmin1.RewarehouseTempView1"
+              DataControl="StratisRootServiceDataControl" StateValidation="false" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="RewarehouseTempView1" IterBinding="RewarehouseTempView1Iterator">
+      <AttrNames>
+        <Item Value="Location"/>
+        <Item Value="LocationQTY"/>
+        <Item Value="InputQTY"/>
+        <Item Value="LocationCC"/>
+        <Item Value="NiinLocId"/>
+        <Item Value="DateofManufacture"/>
+        <Item Value="Expiration"/>
+        <Item Value="Niin"/>
+        <Item Value="NiinLocId"/>
+        <Item Value="NiinId"/>
+        <Item Value="Weight"/>
+        <Item Value="LocationId"/>
+        <Item Value="Locked"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="Locked" IterBinding="RewarehouseTempView1Iterator">
+      <AttrNames>
+        <Item Value="Locked"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

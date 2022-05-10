@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="11"/>
+    <jsp:setProperty name="userbean" property="selected2" value="0"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="WalkThru_Home"/>
+    <f:view>
+        <af:document title="STRATIS" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="185" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/HeaderMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll" id="pgl1">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGroupLayout id="pgl2">
+                                <af:panelBox text="Walk Thru Management" showDisclosure="false" id="pb1"
+                                             inlineStyle="width:469px; height:278px;">
+                                    <af:spacer width="10" height="10" id="s1"/>
+                                    <af:panelGroupLayout layout="horizontal" id="pgl3" partialTriggers="DocNum">
+                                        <af:inputText label="Document Number" binding="#{WalkThruBacking.docID}"
+                                                      inlineStyle="font-weight:bold;" contentStyle="text-transform:uppercase;"
+                                                      styleClass="#{ (empty bindings.DocumentNumber.inputValue) ? '' : 'ReadOnlyField'}"
+                                                      id="documentNumber" maximumLength="14"/>
+                                        <af:spacer width="2" height="10" id="s3"/>
+                                        <af:button text="Submit" id="addToStowListBtn"
+                                                   actionListener="#{WalkThruBacking.addToWalkThruQueue}" partialSubmit="false"/>
+                                    </af:panelGroupLayout>
+                                    <af:spacer width="10" height="15" id="s4"/>
+                                    <af:table value="#{bindings.WalkThruQueueVO1.collectionModel}" var="row"
+                                              rows="#{bindings.WalkThruQueueVO1.rangeSize}" immediate="true"
+                                              emptyText="#{bindings.WalkThruQueueVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              fetchSize="#{bindings.WalkThruQueueVO1.rangeSize}" rowBandingInterval="0"
+                                              selectedRowKeys="#{bindings.WalkThruQueueVO1.collectionModel.selectedRow}"
+                                              selectionListener="#{bindings.WalkThruQueueVO1.collectionModel.makeCurrent}"
+                                              rowSelection="single" id="DocNum" inlineStyle="height:140px;"
+                                              binding="#{WalkThruBacking.walkThruTable}" width="134">
+                                        <af:column sortProperty="#{bindings.WalkThruQueueVO1.hints.DocumentNumber.name}"
+                                                   sortable="true"
+                                                   headerText="#{bindings.WalkThruQueueVO1.hints.DocumentNumber.label}"
+                                                   id="c1">
+                                            <af:inputText value="#{row.bindings.DocumentNumber.inputValue}"
+                                                          label="#{bindings.WalkThruQueueVO1.hints.DocumentNumber.label}"
+                                                          required="#{bindings.WalkThruQueueVO1.hints.DocumentNumber.mandatory}"
+                                                          columns="#{bindings.WalkThruQueueVO1.hints.DocumentNumber.displayWidth}"
+                                                          maximumLength="#{bindings.WalkThruQueueVO1.hints.DocumentNumber.precision}"
+                                                          shortDesc="#{bindings.WalkThruQueueVO1.hints.DocumentNumber.tooltip}"
+                                                          id="it1">
+                                                <f:validator binding="#{row.bindings.DocumentNumber.validator}"/>
+                                            </af:inputText>
+                                        </af:column>
+                                    </af:table>
+                                    <af:toolbar id="t3">
+                                        <af:panelGroupLayout layout="horizontal" id="pgl4" partialTriggers="DocNum">
+                                            <af:button text="Delete" id="DeleteButton" inlineStyle="width:50px"
+                                                       accessKey="D" partialSubmit="false">
+                                                <af:showPopupBehavior popupId="confirmDelete" triggerType="action" align="afterStart"/>
+                                            </af:button>
+                                            <af:popup id="confirmDelete">
+                                                <af:dialog id="Confirm" title="Confirm" affirmativeTextAndAccessKey="Submit"
+                                                           dialogListener="#{WalkThruBacking.dialogListener}">
+                                                    <af:activeOutputText id="Delete" value="Are you sure you want to Delete?"/>
+                                                </af:dialog>
+                                            </af:popup>
+                                        </af:panelGroupLayout>
+                                    </af:toolbar>
+                                </af:panelBox>
+                                <af:spacer height="10" id="s2"/>
+                            </af:panelGroupLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6" id="s5"/>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

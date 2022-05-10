@@ -1,0 +1,366 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+
+    <jsp:useBean id="workloadbean" class="mil.stratis.view.session.Nav" scope="session"/>
+
+    <f:subview id="classificationHeader">
+        <jsp:include page="/ClassificationBanner.jspx"/>
+    </f:subview>
+    <af:switcher facetName="#{userbean.userWorkstationAccess}" id="fmisuserloggedin">
+        <f:facet name="-1">
+            <f:verbatim>
+                <script language="Javascript" type="text/javascript">
+                  //alert('Your session has expired!\nYou will be returned to the login screen.');
+                  console.log("Header main detected expired/no session.");
+                  this.location.href = 'unauthenticated.html';
+                </script>
+            </f:verbatim>
+        </f:facet>
+        <f:facet name="0">
+            <f:verbatim>
+                <script language="Javascript" type="text/javascript">
+                  //alert('Your session has expired!\nYou will be returned to the login screen.');
+                  console.log("Unauthorized access.");
+                  this.location.href = 'unauthorized.html';
+                </script>
+            </f:verbatim>
+        </f:facet>
+
+        <f:facet name="1">
+            <af:panelGridLayout id="hm_psl1"
+                                inlineStyle="background-repeat:no-repeat; background-image:url(resources/images/TopBar_Left_long_1260x66.jpg);">
+                <af:gridRow marginTop="10px" height="auto" id="hm_gr1">
+                    <af:gridCell marginStart="5px" width="27%" id="hm_gc1" halign="stretch">
+                        <af:spacer width="1" height="10" id="hm_s1"/>
+                    </af:gridCell>
+                    <af:gridCell marginStart="5px" width="40%" id="hm_gc2" halign="stretch">
+                        <af:panelGroupLayout layout="horizontal" id="hm_pgl2_doppleganger">
+                            <af:panelGroupLayout layout="vertical" halign="end" valign="top" id="hm_pgl3_doppleganger">
+                        <span style="font-size:16px; color:white;">
+                            <b><jsp:expression>workloadbean.getCurrentSiteName()</jsp:expression></b>
+                            </span>
+                            </af:panelGroupLayout>
+                        </af:panelGroupLayout>
+                    </af:gridCell>
+                    <af:gridCell width="33%" id="hm_gc3" halign="end">
+                        <af:panelGroupLayout layout="horizontal" id="hm_pgl22">
+                            <af:panelGroupLayout layout="vertical" halign="end" valign="top" id="hm_pgl21">
+
+                                <af:link text="Switch Workstation" rendered="#{userbean.loggedIn}"
+                                         disabled="false" action="#{userBackingBean.goSwitchWorkstation}"
+                                         inlineStyle="font-size: 10pt" id="cl15" immediate="true"/>
+
+
+                            </af:panelGroupLayout>
+                            <af:spacer width="20" height="10" id="hm_s10"/>
+                            <af:panelGroupLayout layout="vertical" valign="top" id="hm_pgl20">
+                                <af:outputText value="#{userbean.workstationName}"
+                                               rendered="#{userbean.loggedIn}" inlineStyle="font-size: 10pt"
+                                               id="ot6"/>
+
+                                <af:link text="Logout" rendered="#{userbean.loggedIn}"
+                                         disabled="false" action="#{userBackingBean.clearLogin}"
+                                         inlineStyle="font-size: 10pt" id="cl1"/>
+
+                            </af:panelGroupLayout>
+                        </af:panelGroupLayout>
+                    </af:gridCell>
+                </af:gridRow>
+                <af:gridRow id="hm_gr_main_nav">
+                    <af:gridCell halign="end" id="hm_gc4" columnSpan="3">
+                        <af:panelGroupLayout layout="horizontal" id="hm_pgl2" halign="left" inlineStyle="width:100%;">
+                            <!-- disabled="#{userbean.loginScreen}"  -->
+                            <af:navigationPane hint="tabs" id="hm_np1" inlineStyle="width:850px;margin-left: auto;" styleClass="navBar">
+                                <af:commandNavigationItem text="Home" selected="#{userbean.homeSelected}" rendered="true"
+                                                          disabled="#{userbean.loginScreen}" action="GoWarehouseHome"
+                                                          immediate="true" id="hm_cni2" styleClass="navTab">
+                                    <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                </af:commandNavigationItem>
+                                <af:commandNavigationItem text="Mobile"
+                                                          rendered="#{appConfig.smvEnabled}"
+                                                          disabled="#{userbean.loginScreen}" destination="/app/mobile"
+                                                          immediate="true" id="mobile" styleClass="navTab">
+                                    <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                </af:commandNavigationItem>
+                                <af:commandNavigationItem text="Admin" selected="#{userbean.adminSelected}"
+                                                          rendered="#{!userbean.adminDisabled}"
+                                                          disabled="#{userbean.adminDisabled}" action="GoAdmin" immediate="true"
+                                                          id="hm_cni3" styleClass="navTab">
+                                    <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                </af:commandNavigationItem>
+                                <af:commandNavigationItem text="Receiving" selected="#{userbean.receivingSelected}"
+                                                          rendered="#{!userbean.receiving}" disabled="#{userbean.receiving}"
+                                                          action="GoReceiving"
+                                                          immediate="true" id="hm_cni4" styleClass="navTab">
+                                    <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                </af:commandNavigationItem>
+                                <af:commandNavigationItem text="Stowing" selected="#{userbean.stowingSelected}"
+                                                          rendered="#{!userbean.stowing}"
+                                                          disabled="#{userbean.stowing}" action="GoStowing" immediate="true"
+                                                          id="hm_cni5" styleClass="navTab">
+                                    <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                </af:commandNavigationItem>
+                                <af:commandNavigationItem text="Picking" selected="#{userbean.pickingSelected}"
+                                                          rendered="#{!userbean.picking}"
+                                                          disabled="#{userbean.picking}" action="GoPicking" immediate="true"
+                                                          id="hm_cni6" styleClass="navTab">
+                                    <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                </af:commandNavigationItem>
+                                <af:commandNavigationItem text="Packing" selected="#{userbean.packingSelected}"
+                                                          rendered="#{!userbean.packing}"
+                                                          disabled="#{userbean.packing}" action="GoPacking" immediate="true"
+                                                          id="hm_cni7" styleClass="navTab">
+                                    <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                </af:commandNavigationItem>
+                                <af:commandNavigationItem text="Shipping" selected="#{userbean.shippingSelected}"
+                                                          rendered="#{!userbean.shipping}" disabled="#{userbean.shipping}"
+                                                          action="GoShipping"
+                                                          immediate="true" id="hm_cni8" styleClass="navTab">
+                                    <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                </af:commandNavigationItem>
+                                <af:commandNavigationItem text="Inventory" selected="#{userbean.inventorySelected}"
+                                                          rendered="#{!userbean.inventory}" disabled="#{userbean.inventory}"
+                                                          action="GoInventory"
+                                                          immediate="true" id="hm_cni9" styleClass="navTab">
+                                    <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                </af:commandNavigationItem>
+                                <af:commandNavigationItem text="Reports" selected="#{userbean.reportsSelected}" rendered="true"
+                                                          disabled="false" action="GoReports" immediate="true" id="hm_cni10"
+                                                          styleClass="navTab">
+                                    <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                </af:commandNavigationItem>
+                                <af:commandNavigationItem text="Re-Print" selected="#{userbean.printSelected}" rendered="true"
+                                                          disabled="#{userbean.print}" action="GoPrint" immediate="true"
+                                                          id="hm_cni11" styleClass="navTab">
+                                    <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                </af:commandNavigationItem>
+                                <af:commandNavigationItem text="Walk Thru" selected="#{userbean.walkThruSelected}" rendered="true"
+                                                          disabled="#{userbean.walkThru}" action="GoWalkThru" immediate="true"
+                                                          id="hm_cni12" styleClass="navTab">
+                                    <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                </af:commandNavigationItem>
+                            </af:navigationPane>
+                        </af:panelGroupLayout>
+                    </af:gridCell>
+                </af:gridRow>
+                <af:gridRow id="subnav">
+                    <af:gridCell columnSpan="3" id="hm_gc5">
+                        <af:panelGroupLayout layout="horizontal" id="pgl1">
+                            <af:toolbar id="t1">
+                                <af:group id="g1">
+                                    <af:link text="Home" rendered="#{userbean.homeSelected}"
+                                             inlineStyle="#{userbean.homeSelected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             disabled="true" id="hm_cl2"/>
+                                </af:group>
+                                <af:group id="g2"> <!-- These are white #FFFFFF by default changed them to something visible. -->
+                                    <!--<af:link text="DOD User Responsibilities" rendered="#{userbean.homeSelected}"
+                                        inlineStyle="#{userbean.homeSelected ? 'font-size:13px;font-weight:bold;color:#949494;text-decoration:underline' : ''}"
+                                                    action="dialog:DODUserResp"
+                                                    useWindow="true" windowHeight="500"
+                                                    windowWidth="600" id="hm_cl3"/>-->
+                                </af:group>
+                                <af:group id="g3">
+                                    <!--<af:link text="DOD Rules of Behavior" rendered="#{userbean.homeSelected}"
+                                                    inlineStyle="#{userbean.homeSelected ? 'font-size:13px;font-weight:bold;color:#949494;text-decoration:underline' : ''}"
+                                                    action="dialog:DODRules" useWindow="true" windowHeight="500"
+                                                    windowWidth="600" id="hm_cl4"/>-->
+                                </af:group>
+                                <af:group id="g4">
+                                    <!--<af:link text="DOD Warning Banner" rendered="#{userbean.homeSelected}"
+                                                    inlineStyle="#{userbean.homeSelected ? 'font-size:13px;font-weight:bold;color:#949494;text-decoration:underline' : ''}"
+                                                    action="dialog:DODWarningBanner"
+                                                    useWindow="true" windowHeight="500"
+                                                    windowWidth="600" id="hm_cl5"/>-->
+                                </af:group>
+                                <!-- Receiving -->
+                                <af:group id="g5">
+                                    <af:link text="General Receiving" rendered="#{userbean.receivingSelected}"
+                                             disabled="#{userbean.receiving_General or userbean.receiving_General_Selected}"
+                                             inlineStyle="#{userbean.receiving_General_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoReceivingGeneral" immediate="true" id="hm_cl6"/>
+                                </af:group>
+                                <af:group id="g6">
+                                    <af:link text="Cancel SID" rendered="#{userbean.receivingSelectedCancelSID}"
+                                             disabled="#{userbean.receiving_CancelSID or userbean.receiving_CancelSID_Selected}"
+                                             inlineStyle="#{userbean.receiving_CancelSID_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoReceivingCancelSID" immediate="true" id="hm_cl7"/>
+                                </af:group>
+                                <!-- Stowing -->
+                                <af:group id="g7">
+                                    <af:link text="Normal Stow" rendered="#{userbean.stowingSelected}"
+                                             disabled="#{userbean.stowing_Normal or userbean.stowing_Normal_Selected}"
+                                             inlineStyle="#{userbean.stowing_Normal_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoStowingNormal" immediate="true" id="hm_cl8"/>
+                                </af:group>
+                                <af:group id="g8">
+                                    <af:link text="ReAssign SID" rendered="#{userbean.stowingSelected}"
+                                             disabled="#{userbean.stowing_ReassignSid or userbean.stowing_ReassignSid_Selected}"
+                                             inlineStyle="#{userbean.stowing_ReassignSid_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoStowingReassignSID" immediate="true" id="hm_cl9"/>
+                                </af:group>
+                                <!-- Picking -->
+                                <af:group id="g9">
+                                    <af:link text="Normal Pick" rendered="#{userbean.pickingSelected}"
+                                             disabled="#{userbean.picking_Normal or userbean.picking_Normal_Selected}"
+                                             inlineStyle="#{userbean.picking_Normal_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="#{userbean.returnNormalPickingAction}" immediate="true"
+                                             id="hm_cl10"/>
+                                </af:group>
+                                <af:group id="g10">
+                                    <af:link text="Pick by AAC" rendered="#{userbean.pickingSelected}"
+                                             disabled="#{userbean.picking_AAC or userbean.picking_AAC_Selected}"
+                                             inlineStyle="#{userbean.picking_AAC_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoPickingAAC" immediate="true" id="hm_cl11"/>
+                                </af:group>
+                                <af:group id="g11">
+                                    <af:link text="Pick by Route" rendered="#{userbean.pickingSelected}"
+                                             disabled="#{userbean.picking_Route or userbean.picking_Route_Selected}"
+                                             inlineStyle="#{userbean.picking_Route_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoPickingRoute" immediate="true" id="hm_cl12"/>
+                                </af:group>
+                                <af:group id="g12">
+                                    <af:link text="Pick by Priority" rendered="#{userbean.pickingSelected}"
+                                             disabled="#{userbean.picking_Priority or userbean.picking_Priority_Selected}"
+                                             inlineStyle="#{userbean.picking_Priority_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoPickingPriority" immediate="true" id="hm_cl13"/>
+                                </af:group>
+                                <af:group id="g50">
+                                    <af:link text="Pick by WTQ" rendered="#{userbean.pickingSelected}"
+                                             disabled="#{userbean.picking_Wtq or userbean.picking_Wtq_Selected}"
+                                             inlineStyle="#{userbean.picking_Wtq_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoPickingWtq" immediate="true" id="hm_cl3"/>
+                                </af:group>
+                                <!-- Packing -->
+                                <af:group id="g13">
+                                    <af:link text="Normal Pack" rendered="#{userbean.packingSelected}"
+                                             disabled="#{userbean.packing_Normal or userbean.packing_Normal_Selected}"
+                                             inlineStyle="#{userbean.packing_Normal_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoPackingNormal" immediate="true" id="hm_cl14"/>
+                                </af:group>
+                                <af:group id="g14">
+                                    <af:link text="Close Carton" rendered="#{userbean.packingSelected}"
+                                             disabled="#{userbean.packing_Close or userbean.packing_Close_Selected}"
+                                             inlineStyle="#{userbean.packing_Close_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoPackingCloseCarton" immediate="true" id="hm_cl15"/>
+                                </af:group>
+                                <af:group id="g15">
+                                    <af:link text="Add Container" rendered="#{userbean.shippingSelected}"
+                                             disabled="#{userbean.shipping_AddContainer or userbean.shipping_AddContainer_Selected}"
+                                             inlineStyle="#{userbean.shipping_AddContainer_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoShippingContainer" immediate="true" id="hm_cl16"/>
+                                </af:group>
+                                <af:group id="g16">
+                                    <af:link text="Review Contents" rendered="#{userbean.shippingSelected}"
+                                             disabled="#{userbean.shipping_ReviewContents or userbean.shipping_ReviewContents_Selected}"
+                                             inlineStyle="#{userbean.shipping_ReviewContents_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoShippingReviewContents" immediate="true" id="hm_cl17"/>
+                                </af:group>
+                                <af:group id="g17">
+                                    <af:link text="Manifest a Shipment" rendered="#{userbean.shippingSelected}"
+                                             disabled="#{userbean.shipping_ManifestShipment or userbean.shipping_ManifestShipment_Selected}"
+                                             inlineStyle="#{userbean.shipping_ManifestShipment_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoShippingManifestshipment" immediate="true" id="hm_cl18"/>
+                                </af:group>
+                                <af:group id="g18">
+                                    <af:link text="Acknowledge Shipment" rendered="#{userbean.shippingSelected}"
+                                             disabled="#{userbean.shipping_AcknowledgeShip or userbean.shipping_AcknowledgeShip_Selected}"
+                                             inlineStyle="#{userbean.shipping_AcknowledgeShip_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoShippingAcknowledgeShipment" immediate="true" id="hm_cl19"/>
+                                </af:group>
+                                <af:group id="g19">
+                                    <af:link text="Remark AAC" rendered="#{userbean.shippingSelected}"
+                                             disabled="#{userbean.shipping_Remark_AAC or userbean.shipping_Remark_AAC_Selected}"
+                                             inlineStyle="#{userbean.shipping_Remark_AAC_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoShippingRemarkAAC" immediate="true" id="hm_cl20"/>
+                                </af:group>
+                                <af:group id="g20">
+                                    <af:link text="Relocate a pallet" rendered="#{userbean.shippingSelected}"
+                                             disabled="#{userbean.shipping_Relocate_Pallet or userbean.shipping_Relocate_Pallet_Selected}"
+                                             action="GoShippingRelocatePallet"
+                                             inlineStyle="#{userbean.shipping_Relocate_Pallet_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             immediate="true" id="hm_cl21"/>
+                                </af:group>
+                                <af:group id="g21">
+                                    <af:link text="Transshipment" rendered="#{userbean.shippingSelected}"
+                                             disabled="#{userbean.shipping_Transshipment or userbean.shipping_Transshipment_Selected}"
+                                             inlineStyle="#{userbean.shipping_Transshipment_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoShippingTransshipment" immediate="true" id="hm_cl22"/>
+                                </af:group>
+                                <af:group id="g22">
+                                    <af:link text="AAC Update" rendered="false"
+                                             disabled="#{userbean.shipping_Update_AAC or userbean.shipping_Update_AAC_Selected}"
+                                             inlineStyle="#{userbean.shipping_Update_AAC_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoShippingAACUpdate" immediate="true" id="hm_cl23"/>
+                                </af:group>
+                                <!-- Inventory -->
+                                <af:group id="g23">
+                                    <af:link text="Inventory" rendered="#{userbean.inventorySelected}"
+                                             disabled="#{userbean.inv_Inventory or userbean.inv_Inventory_Selected}"
+                                             inlineStyle="#{userbean.inv_Inventory_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="#{userbean.returnActionGoInventoryInventory}" immediate="true"
+                                             id="hm_cl24"/>
+                                </af:group>
+                                <af:group id="g24">
+                                    <af:link text="Location Survey" rendered="#{userbean.inventorySelected}"
+                                             disabled="#{userbean.inv_LocSurvay or userbean.inv_LocSurvay_Selected}"
+                                             inlineStyle="#{userbean.inv_LocSurvay_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="#{userbean.returnActionGoInventoryLocSurvey}" immediate="true"
+                                             id="hm_cl25"/>
+                                </af:group>
+                                <af:group id="g25">
+                                    <af:link text="Shelf Life" rendered="#{userbean.inventorySelected}"
+                                             disabled="#{userbean.inv_ShelfLife or userbean.inv_ShelfLife_Selected}"
+                                             inlineStyle="#{userbean.inv_ShelfLife_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="#{userbean.returnActionGoInventoryShelfLife}" immediate="true"
+                                             id="hm_cl26"/>
+                                </af:group>
+
+
+                                <af:group id="g39">
+                                    <af:link text="Reports" rendered="#{userbean.reportsSelected}"
+                                             disabled="#{userbean.inv_ShelfLife_Selected}"
+                                             inlineStyle="#{userbean.inv_ShelfLife_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoReports_Standard" immediate="true" id="hm_cl39"/>
+                                </af:group>
+
+                                <!-- Re-Print -->
+                                <af:group id="g36">
+                                    <af:link text="Re-Print" rendered="#{userbean.printSelected}"
+                                             inlineStyle="#{userbean.printSelected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             id="hm_cl35"/>
+                                </af:group>
+
+                                <af:group id="g37">
+                                    <af:link text="User Profile" rendered="#{userbean.userPrefSelected}"
+                                             inlineStyle="#{userbean.userPrefSelected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoUserInfo" disabled="#{userbean.userInfoSelected}" id="hm_cl36"/>
+                                </af:group>
+                                <af:group id="g38">
+                                    <af:link text="Welcome" rendered="#{userbean.loginScreen}"
+                                             inlineStyle="#{userbean.loginScreen ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             disabled="true" id="hm_cl37"/>
+                                </af:group>
+                            </af:toolbar>
+                        </af:panelGroupLayout>
+                    </af:gridCell>
+                </af:gridRow>
+                <af:gridRow marginBottom="4px" id="gr3">
+                    <af:gridCell halign="stretch" columnSpan="3"
+                                 inlineStyle="background-image:url(resources/images/tiny_boxes_bw.gif); background-repeat:repeat;"
+                                 id="hm_gc6">
+                        <af:spacer width="8" height="8" id="s2"/>
+                    </af:gridCell>
+                </af:gridRow>
+                <af:gridRow marginBottom="8px" id="hm_gr10" rendered="#{not empty userbean.warningShutdownMessage}">
+                    <af:gridCell id="hm_gc10">
+                        <af:outputText value="#{userbean.warningShutdownMessage}" inlineStyle="color:red; font-weight:bold;"
+                                       id="hm_ot10"/>
+                    </af:gridCell>
+                </af:gridRow>
+            </af:panelGridLayout>
+        </f:facet>
+    </af:switcher>
+    <af:resource type="javascript" source="/js/menuFix.js"/>
+</jsp:root>

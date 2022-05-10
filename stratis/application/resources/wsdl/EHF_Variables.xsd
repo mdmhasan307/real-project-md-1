@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://gcss.usmc.mil/common/ehf" targetNamespace="http://gcss.usmc.mil/common/ehf" elementFormDefault="qualified">
+  <xsd:element name="EHFparameters">
+    <xsd:annotation>
+      <xsd:documentation>Schema for properties to be passed into XSLT transformations.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="tracking_id" type="xsd:string"/>
+        <xsd:element name="source_system" type="xsd:string"/>
+        <xsd:element name="destination_system" type="xsd:string"/>
+        <xsd:element name="creation_date" type="xsd:dateTime"/>
+        <xsd:element name="last_updated_date" type="xsd:dateTime"/>
+        <xsd:element name="transaction_type" type="xsd:string"/>
+        <xsd:element name="rice_object_name" type="xsd:string"/>
+        <xsd:element name="status" type="xsd:string"/>
+        <xsd:element name="sub_status" type="xsd:string"/>
+        <xsd:element name="created_by" type="xsd:decimal"/>
+        <xsd:element name="application_id" type="xsd:decimal"/>
+        <xsd:element name="message_name" type="xsd:string"/>
+        <xsd:element name="message_description" type="xsd:string"/>
+        <xsd:element name="message_text" type="xsd:string"/>
+        <xsd:element name="src_total_records" type="xsd:decimal"/>
+        <xsd:element name="src_success_records" type="xsd:decimal"/>
+        <xsd:element name="src_failed_records" type="xsd:decimal"/>
+        <xsd:element name="dest_total_records" type="xsd:decimal"/>
+        <xsd:element name="dest_success_records" type="xsd:decimal"/>
+        <xsd:element name="dest_failed_records" type="xsd:decimal"/>
+        <xsd:element name="error_count" type="xsd:decimal"/>
+        <xsd:element name="staging_table_name" type="xsd:string"/>
+        <xsd:element name="procedure_name" type="xsd:string"/>
+        <xsd:element name="conc_request_id" type="xsd:decimal"/>
+        <xsd:element name="if_direction" type="xsd:string"/>
+        <xsd:element name="bpel_process_name" type="xsd:string"/>
+        <xsd:element name="bpel_process_revision" type="xsd:string"/>
+        <xsd:element name="bpel_domain" type="xsd:string"/>
+        <xsd:element name="bpel_instance_id" type="xsd:string"/>
+        <xsd:element name="bpel_midtier_instance" type="xsd:string"/>
+        <xsd:element name="bpel_process_url" type="xsd:string"/>
+        <xsd:element name="bpel_activity_name" type="xsd:string"/>
+        <xsd:element name="det_bpel_process_name" type="xsd:string"/>
+        <xsd:element name="det_bpel_process_revision" type="xsd:string"/>
+        <xsd:element name="det_bpel_domain" type="xsd:string"/>
+        <xsd:element name="det_bpel_instance_id" type="xsd:string"/>
+        <xsd:element name="det_bpel_midtier_instance" type="xsd:string"/>
+        <xsd:element name="det_bpel_process_url" type="xsd:string"/>
+        <xsd:element name="det_bpel_activity_name" type="xsd:string"/>
+        <xsd:element name="var_tracking_field_name_01" type="xsd:string"/>
+        <xsd:element name="var_tracking_field_value_01" type="xsd:string"/>
+        <xsd:element name="var_tracking_field_name_02" type="xsd:string"/>
+        <xsd:element name="var_tracking_field_value_02" type="xsd:string"/>
+        <xsd:element name="var_tracking_field_name_03" type="xsd:string"/>
+        <xsd:element name="var_tracking_field_value_03" type="xsd:string"/>
+        <xsd:element name="var_tracking_field_name_04" type="xsd:string"/>
+        <xsd:element name="var_tracking_field_value_04" type="xsd:string"/>
+        <xsd:element name="var_tracking_field_name_05" type="xsd:string"/>
+        <xsd:element name="var_tracking_field_value_05" type="xsd:string"/>
+        <xsd:element name="var_det_tracking_field_name_01" type="xsd:string"/>
+        <xsd:element name="var_det_tracking_field_value_01" type="xsd:string"/>
+        <xsd:element name="var_det_tracking_field_name_02" type="xsd:string"/>
+        <xsd:element name="var_det_tracking_field_value_02" type="xsd:string"/>
+        <xsd:element name="var_det_tracking_field_name_03" type="xsd:string"/>
+        <xsd:element name="var_det_tracking_field_value_03" type="xsd:string"/>
+        <xsd:element name="var_det_tracking_field_name_04" type="xsd:string"/>
+        <xsd:element name="var_det_tracking_field_value_04" type="xsd:string"/>
+        <xsd:element name="var_det_tracking_field_name_05" type="xsd:string"/>
+        <xsd:element name="var_det_tracking_field_value_05" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions name="I009_ShipmentReceiptsInbound"
+             targetNamespace="http://www.usmc.mil/schemas/1/if/I009_ShipmentReceiptsInbound"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="http://www.usmc.mil/schemas/1/if/I009_ShipmentReceiptsInbound"
+             xmlns:wsa="http://schemas.xmlsoap.org/ws/2003/03/addressing"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <import namespace="http://schemas.oracle.com/bpel/extension"
+          location="RuntimeFault.wsdl"/>
+  <types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+      <import namespace="http://www.usmc.mil/schemas/1/if/I009_ShipmentReceiptsInbound"
+              schemaLocation="I009_ShipmentReceiptsInbound.xsd"/>
+    </schema>
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="http://gcss.usmc.mil/common/ehf"
+                  schemaLocation="EHF_Variables.xsd"/>
+    </xsd:schema>
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="http://schemas.oracle.com/service/bpel/common"
+                  schemaLocation="xsltproperties.xsd"/>
+    </xsd:schema>
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="http://www.usmc.mil/schemas/1/if/stratis"
+                  schemaLocation="i009ShipmentReceiptsIn.xsd"/>
+    </xsd:schema>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+      <import namespace="http://schemas.xmlsoap.org/ws/2003/03/addressing"
+              schemaLocation="ws_addressing.xsd"/>
+    </schema>
+  </types>
+  <message name="I009_ShipmentReceiptsInboundCompressedRequestMessage">
+    <part name="payload"
+          element="tns:I009_ShipmentReceiptsInboundProcessCompressedRequest"/>
+  </message>
+  <message name="I009_ShipmentReceiptsInboundUncompressedRequestMessage">
+    <part name="payload"
+          element="tns:I009_ShipmentReceiptsInboundProcessUncompressedRequest"/>
+  </message>
+  <message name="I009_ShipmentReceiptsInboundResponseMessage">
+    <part name="payload"
+          element="tns:I009_ShipmentReceiptsInboundProcessResponse"/>
+  </message>
+  <message name="WSARelatesToHeader">
+    <part name="RelatesTo"
+          element="wsa:RelatesTo"/>
+  </message>
+  <message name="WSAMessageIDHeader">
+    <part name="MessageID"
+          element="wsa:MessageID"/>
+  </message>
+  <message name="WSAReplyToHeader">
+    <part name="ReplyTo"
+          element="wsa:ReplyTo"/>
+  </message>
+  <portType name="I009_ShipmentReceiptsInbound">
+    <operation name="initiateCompressed">
+      <input message="tns:I009_ShipmentReceiptsInboundCompressedRequestMessage"/>
+    </operation>
+    <operation name="initiateUncompressed">
+      <input message="tns:I009_ShipmentReceiptsInboundUncompressedRequestMessage"/>
+    </operation>
+  </portType>
+  <portType name="I009_ShipmentReceiptsInboundCallback">
+    <operation name="onResult">
+      <input message="tns:I009_ShipmentReceiptsInboundResponseMessage"/>
+    </operation>
+  </portType>
+  <binding name="I009_ShipmentReceiptsInboundBinding"
+           type="tns:I009_ShipmentReceiptsInbound">
+    <soap:binding style="document"
+                  transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="initiateCompressed">
+      <soap:operation style="document"
+                      soapAction="initiateCompressed"/>
+      <input>
+        <soap:header message="tns:WSAReplyToHeader"
+                     part="ReplyTo"
+                     use="literal"
+                     encodingStyle=""/>
+        <soap:header message="tns:WSAMessageIDHeader"
+                     part="MessageID"
+                     use="literal"
+                     encodingStyle=""/>
+        <soap:body use="literal"/>
+      </input>
+    </operation>
+    <operation name="initiateUncompressed">
+      <soap:operation style="document"
+                      soapAction="initiateUncompressed"/>
+      <input>
+        <soap:header message="tns:WSAReplyToHeader"
+                     part="ReplyTo"
+                     use="literal"
+                     encodingStyle=""/>
+        <soap:header message="tns:WSAMessageIDHeader"
+                     part="MessageID"
+                     use="literal"
+                     encodingStyle=""/>
+        <soap:body use="literal"/>
+      </input>
+    </operation>
+  </binding>
+  <binding name="I009_ShipmentReceiptsInboundCallbackBinding"
+           type="tns:I009_ShipmentReceiptsInboundCallback">
+    <soap:binding style="document"
+                  transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsp:PolicyReference xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+                         URI="#stratisPolicy"/>
+    <operation name="onResult">
+      <soap:operation style="document"
+                      soapAction="onResult"/>
+      <input>
+        <soap:header message="tns:WSARelatesToHeader"
+                     part="RelatesTo"
+                     use="literal"
+                     encodingStyle=""/>
+        <soap:body use="literal"/>
+      </input>
+    </operation>
+  </binding>
+  <service name="I009_ShipmentReceiptsInbound">
+    <port name="I009_ShipmentReceiptsInboundPort"
+          binding="tns:I009_ShipmentReceiptsInboundBinding">
+      <soap:address location="https://209.222.131.153:3443/gateway/services/I009ShipmentReceiptsIn"/>
+    </port>
+  </service>
+  <service name="I009_ShipmentReceiptsInboundCallbackService">
+    <port name="I009_ShipmentReceiptsInboundCallbackPort"
+          binding="tns:I009_ShipmentReceiptsInboundCallbackBinding">
+      <soap:address location="http://set.by.caller"/>
+    </port>
+  </service>
+  <plnk:partnerLinkType name="I009_ShipmentReceiptsInbound">
+    <plnk:role name="I009_ShipmentReceiptsInboundRequester">
+      <plnk:portType name="tns:I009_ShipmentReceiptsInboundCallback"/>
+    </plnk:role>
+    <plnk:role name="I009_ShipmentReceiptsInboundProvider">
+      <plnk:portType name="tns:I009_ShipmentReceiptsInbound"/>
+    </plnk:role>
+  </plnk:partnerLinkType>
+
+</definitions>

@@ -1,0 +1,306 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:stratis="taglib.mil.usmc.stratis">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="2"/>
+    <jsp:setProperty name="userbean" property="selected3" value="5"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="Admin_WarehouseChangeLoc"/>
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session" />
+    <jsp:setProperty name="logBean" property="page" value="Change Location"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="185" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6"/>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGroupLayout layout="vertical">
+                                <af:switcher id="switchPanels" facetName="#{WarehouseCCBacking.serialFlag}">
+                                    <f:facet name="false">
+                                        <af:panelGroupLayout>
+                                            <af:panelBox id="changeLocMainPanelBox"
+                                                         text="Warehouse Management - Change Location"
+                                                         showDisclosure="false">
+                                                <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                                                    <f:facet name="menus"/>
+                                                    <f:facet name="secondaryToolbar">
+                                                        <af:toolbar inlineStyle="padding:2px;">
+                                                            <af:inputText label="Location" columns="10"
+                                                                          id="txtFilterFromLocation" maximumLength="9"
+                                                                          contentStyle="text-transform:uppercase;"
+                                                                          binding="#{changelocbacking.fromLoc}"/>
+                                                            <af:spacer width="10"/>
+                                                            <af:inputText label="To Location" columns="10"
+                                                                          id="txtFilterToLocation" maximumLength="9"
+                                                                          inlineStyle="display:none"
+                                                                          binding="#{changelocbacking.toLoc}"/>
+                                                            <af:spacer width="10"/>
+                                                            <af:inputText label="NIIN" columns="10" id="txtFilterNIIN"
+                                                                          maximumLength="9"
+                                                                          contentStyle="text-transform:uppercase;"
+                                                                          binding="#{changelocbacking.niinSearch}"/>
+                                                            <af:spacer width="10"/>
+                                                            <af:spacer height="10"/>
+                                                            <af:button text="Filter" id="filterButton1"
+                                                                       actionListener="#{changelocbacking.verifyLocations}"
+                                                                       partialSubmit="false"/>
+                                                        </af:toolbar>
+                                                    </f:facet>
+                                                    <af:table value="#{bindings.ChangeLocationFromView1.collectionModel}"
+                                                              var="row"
+                                                              rows="#{bindings.ChangeLocationFromView1.rangeSize}"
+                                                              first="#{bindings.ChangeLocationFromView1.rangeStart}"
+                                                              emptyText="#{bindings.ChangeLocationFromView1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                              selectionListener="#{bindings.ChangeLocationFromView1.collectionModel.makeCurrent}"
+                                                              id="FromLocation"
+                                                              selectedRowKeys="#{bindings.ChangeLocationFromView1.collectionModel.selectedRow}"
+                                                              styleClass="AFStretchWidth" columnStretching="last"
+                                                              rowSelection="single">
+                                                        <af:column sortProperty="LocationLabel" sortable="true"
+                                                                   headerText="Location" width="70">
+                                                            <af:outputText value="#{row.LocationLabel}"/>
+                                                        </af:column>
+                                                        <af:column sortProperty="Niin" sortable="true" headerText="NIIN"
+                                                                   width="70">
+                                                            <af:outputText value="#{row.Niin}"/>
+                                                        </af:column>
+                                                        <af:column sortProperty="Nomenclature" sortable="true"
+                                                                   headerText="#{bindings.ChangeLocationFromView1.labels.Nomenclature}"
+                                                                   width="150">
+                                                            <af:outputText value="#{row.Nomenclature}"/>
+                                                        </af:column>
+                                                        <af:column sortProperty="Qty" sortable="false" headerText="QTY"
+                                                                   width="30">
+                                                            <af:outputText value="#{row.Qty}">
+                                                                <f:convertNumber groupingUsed="false"
+                                                                                 pattern="#{bindings.ChangeLocationFromView1.formats.Qty}"/>
+                                                            </af:outputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="Cc" sortable="false" headerText="CC"
+                                                                   width="20">
+                                                            <af:outputText value="#{row.Cc}"/>
+                                                        </af:column>
+                                                        <af:column sortProperty="DateOfManufacture" sortable="false"
+                                                                   headerText="DOM" width="70">
+                                                            <stratis:adfDateFormatter
+                                                                    value="#{row.DateOfManufacture}"/>
+                                                        </af:column>
+                                                        <af:column headerText="Expiration Date" width="70">
+                                                            <stratis:adfDateFormatter
+                                                                    value="#{row.ExpirationDate}"/>
+
+                                                        </af:column>
+                                                        <af:column sortProperty="Ui" sortable="false" headerText="UI"
+                                                                   width="10">
+                                                            <af:outputText value="#{row.Ui}"/>
+                                                        </af:column>
+                                                    </af:table>
+                                                </af:panelCollection>
+                                                <af:spacer height="10"/>
+                                                <af:panelBox text="From - To Location" showDisclosure="false">
+                                                    <af:separator/>
+                                                    <af:panelFormLayout>
+                                                        <af:inputText label="NIIN"
+                                                                      binding="#{changelocbacking.changeNiin}"
+                                                                      columns="11" maximumLength="9"
+                                                                      contentStyle="text-transform:uppercase;"/>
+                                                        <af:inputText label="From Location"
+                                                                      binding="#{changelocbacking.changeLocFrom}"
+                                                                      columns="11" maximumLength="9"
+                                                                      contentStyle="text-transform:uppercase;"/>
+                                                        <af:inputText label="To Location"
+                                                                      binding="#{changelocbacking.changeLocTo}"
+                                                                      columns="11" maximumLength="9"
+                                                                      contentStyle="text-transform:uppercase;"/>
+                                                        <af:inputText label="Quantity"
+                                                                      binding="#{changelocbacking.changeQty}"
+                                                                      columns="5" maximumLength="5"/>
+                                                        <f:facet name="footer">
+                                                            <af:toolbar>
+                                                                <af:button text="Update"
+                                                                           id="UpdateLocationButton"
+                                                                           actionListener="#{changelocbacking.updateQty}"
+                                                                           binding="#{changelocbacking.updateButton}"
+                                                                           inlineStyle="width:50px" partialSubmit="false"/>
+                                                                <af:button text="Cancel" id="BackTrackButton"
+                                                                           actionListener="#{changelocbacking.backtrack}"
+                                                                           inlineStyle="width:50px"
+                                                                           binding="#{changelocbacking.cancelButton}"
+                                                                           partialSubmit="false"/>
+                                                            </af:toolbar>
+                                                        </f:facet>
+                                                    </af:panelFormLayout>
+                                                </af:panelBox>
+                                            </af:panelBox>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                    <f:facet name="true">
+                                        <af:panelGroupLayout id="secondGroup" rendered="#{changelocbacking.serialFlag}">
+                                            <af:panelBorderLayout id="niinAddPanelBorder">
+                                                <af:panelFormLayout id="secondPanelForm"
+                                                                    rendered="#{changelocbacking.serialFlag}">
+                                                    <af:inputText label="FROM Location" labelStyle="font-weight:bold"
+                                                                  columns="100" id="location_label_from" disabled="true"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  value="#{processScope.from_location}"/>
+                                                    <af:inputText label="TO Location" labelStyle="font-weight:bold"
+                                                                  columns="100" id="location_label_to" disabled="true"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  value="#{processScope.to_location}"/>
+                                                    <af:inputText label="NIIN" labelStyle="font-weight:bold"
+                                                                  columns="100" id="niin" disabled="true"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  value="#{processScope.niin} - #{processScope.nomenclature}"/>
+                                                    <af:panelFormLayout inlineStyle="border-style:solid;">
+                                                        <af:outputText inlineStyle="color:rgb(0,0,255); font-weight:bold;"
+                                                                       value="Enter Serial or Lot Control Number(s)"/>
+                                                        <af:spacer width="10" height="15"/>
+                                                        <af:table value="#{bindings.SerialOrLotNumList1.collectionModel}"
+                                                                  var="row"
+                                                                  rows="#{bindings.SerialOrLotNumList1.rangeSize}"
+                                                                  first="#{bindings.SerialOrLotNumList1.rangeStart}"
+                                                                  emptyText="#{bindings.SerialOrLotNumList1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                                  selectionListener="#{bindings.SerialOrLotNumList1.collectionModel.makeCurrent}"
+                                                                  selectedRowKeys="#{bindings.SerialOrLotNumList1.collectionModel.selectedRow}"
+                                                                  rowSelection="single" styleClass="AFStretchWidth"
+                                                                  columnStretching="last">
+                                                            <af:column sortProperty="SerialOrLoNum" sortable="false"
+                                                                       headerText="Serial"
+                                                                       rendered="#{processScope.serialControlFlag == 'Y'}">
+                                                                <af:inputText value="#{row.SerialOrLoNum}" simple="true"
+                                                                              contentStyle="text-transform:uppercase;"
+                                                                              maximumLength="30"
+                                                                              required="#{bindings.SerialOrLotNumList1.attrDefs.SerialOrLoNum.mandatory}"
+                                                                              columns="20"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="LotConNum" sortable="false"
+                                                                       headerText="Lot Control"
+                                                                       rendered="#{processScope.lotControlFlag == 'Y'}">
+                                                                <af:inputText value="#{row.LotConNum}" simple="true"
+                                                                              contentStyle="text-transform:uppercase;"
+                                                                              maximumLength="30"
+                                                                              required="#{bindings.SerialOrLotNumList1.attrDefs.LotConNum.mandatory}"
+                                                                              columns="20"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="QtyLot" sortable="false"
+                                                                       headerText="Qty">
+                                                                <af:inputText value="#{row.QtyLot}" simple="true"
+                                                                              maximumLength="5"
+                                                                              required="#{changelocbacking.requireQtyFlag}"
+                                                                              columns="5"/>
+                                                            </af:column>
+                                                            <f:facet name="footer">
+                                                                <af:button text="Delete"
+                                                                           actionListener="#{changelocbacking.deleteSerialLotNum}"
+                                                                           id="btnDeleteSerial" partialSubmit="false"/>
+                                                            </f:facet>
+                                                        </af:table>
+                                                        <af:spacer width="10" height="10"/>
+                                                        <af:panelGroupLayout layout="horizontal"
+                                                                             rendered="#{bindings.SerialOrLotNumList1.estimatedRowCount &lt; processScope.qtyToBeChanged}">
+                                                            <af:inputText label="Serial Or Lot Control Num "
+                                                                          binding="#{changelocbacking.serialOrLotNum}"
+                                                                          inlineStyle="font-weight:bold;"
+                                                                          contentStyle="text-transform:uppercase;"
+                                                                          rendered="#{bindings.SerialOrLotNumList1.estimatedRowCount &lt; processScope.qtyToBeChanged}"
+                                                                          maximumLength="30"/>
+                                                            <af:spacer width="10" height="10"/>
+                                                            <af:toolbar>
+                                                                <af:button text="Add to List"
+                                                                           actionListener="#{changelocbacking.addSerialLotNum}"
+                                                                           rendered="#{bindings.SerialOrLotNumList1.estimatedRowCount &lt; processScope.qtyToBeChanged}"
+                                                                           id="btnAddSerial" partialSubmit="false"/>
+                                                            </af:toolbar>
+                                                        </af:panelGroupLayout>
+                                                        <!-- hidden buttons -->
+                                                        <af:button id="submitYesButton1_Javascript" text="Yes"
+                                                                   inlineStyle="display:none" partialSubmit="false"
+                                                                   actionListener="#{changelocbacking.btnReviewSubmitYes1}"/>
+                                                        <af:button id="submitNoButton1_Javascript" text="No"
+                                                                   inlineStyle="display:none" partialSubmit="false"
+                                                                   actionListener="#{changelocbacking.btnReviewSubmitNo1}"/>
+                                                        <af:button id="submitYesButton2_Javascript" text="Yes"
+                                                                   inlineStyle="display:none" partialSubmit="false"
+                                                                   actionListener="#{changelocbacking.btnReviewSubmitYes2}"/>
+                                                        <af:button id="submitNoButton2_Javascript" text="No"
+                                                                   inlineStyle="display:none" partialSubmit="false"
+                                                                   actionListener="#{changelocbacking.btnReviewSubmitNo2}"/>
+                                                        <f:facet name="footer"/>
+                                                    </af:panelFormLayout>
+                                                    <af:panelBox text="Conflict Message"
+                                                                 rendered="#{changelocbacking.hasConflict}"
+                                                                 showDisclosure="false">
+                                                        <af:outputText value="&lt;br>" escape="false"/>
+                                                        <af:panelGroupLayout layout="vertical">
+                                                            <af:outputLabel value="Would you like to Override the Current Location?"
+                                                                            inlineStyle="font-weight:bold"
+                                                                            id="overrideLocation"/>
+                                                            <af:toolbar>
+                                                                <af:button id="submitYesButton2" text="Yes"
+                                                                           inlineStyle="width:100px" partialSubmit="false"/>
+                                                                <af:button id="submitNoButton2" text="No"
+                                                                           inlineStyle="width:100px" partialSubmit="false"/>
+                                                            </af:toolbar>
+                                                        </af:panelGroupLayout>
+                                                    </af:panelBox>
+                                                    <af:toolbar>
+                                                        <af:button text="Save Change" accessKey="S"
+                                                                   id="secondCreateButton"
+                                                                   inlineStyle="width:180px"
+                                                                   actionListener="#{changelocbacking.saveChangeLocSerial}"
+                                                                   partialSubmit="false"/>
+                                                        <af:button text="Go Back" accessKey="G" id="backButton"
+                                                                   inlineStyle="width:180px" partialSubmit="false">
+                                                            <af:setActionListener from="#{false}"
+                                                                                  to="#{changelocbacking.serialFlag}"/>
+                                                            <af:setActionListener from="#{false}"
+                                                                                  to="#{changelocbacking.serialUpdateFlag}"/>
+                                                        </af:button>
+                                                        <af:button text="Cancel Change Loc" accessKey="C"
+                                                                   id="lastCancelButton"
+                                                                   inlineStyle="width:180px"
+                                                                   actionListener="#{changelocbacking.cancelChangeLocSerial}"
+                                                                   partialSubmit="false">
+                                                            <af:setActionListener from="#{false}"
+                                                                                  to="#{changelocbacking.serialFlag}"/>
+                                                            <af:setActionListener from="#{false}"
+                                                                                  to="#{changelocbacking.serialUpdateFlag}"/>
+                                                        </af:button>
+                                                    </af:toolbar>
+                                                </af:panelFormLayout>
+                                            </af:panelBorderLayout>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                </af:switcher>
+                            </af:panelGroupLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

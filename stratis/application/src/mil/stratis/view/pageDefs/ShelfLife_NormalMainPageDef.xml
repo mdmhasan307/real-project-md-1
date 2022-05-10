@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="ShelfLife_NormalMainPageDef"
+                ControllerClass="#{ShelfLifeAll}" Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="ShelfLifeVO1Iterator" RangeSize="-1" Binds="Root.InventoryModule1.ShelfLifeVO1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <attributeValues id="NiinId" IterBinding="ShelfLifeVO1Iterator">
+      <AttrNames>
+        <Item Value="NiinId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Niin" IterBinding="ShelfLifeVO1Iterator">
+      <AttrNames>
+        <Item Value="Niin"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Fsc" IterBinding="ShelfLifeVO1Iterator">
+      <AttrNames>
+        <Item Value="Fsc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NiinLocId" IterBinding="ShelfLifeVO1Iterator">
+      <AttrNames>
+        <Item Value="NiinLocId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ExpirationDate" IterBinding="ShelfLifeVO1Iterator">
+      <AttrNames>
+        <Item Value="ExpirationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Cc" IterBinding="ShelfLifeVO1Iterator">
+      <AttrNames>
+        <Item Value="Cc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ExpRemark" IterBinding="ShelfLifeVO1Iterator">
+      <AttrNames>
+        <Item Value="ExpRemark"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="OldUi" IterBinding="ShelfLifeVO1Iterator">
+      <AttrNames>
+        <Item Value="OldUi"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NsnRemark" IterBinding="ShelfLifeVO1Iterator">
+      <AttrNames>
+        <Item Value="NsnRemark"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Locked" IterBinding="ShelfLifeVO1Iterator">
+      <AttrNames>
+        <Item Value="Locked"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LocationLabel" IterBinding="ShelfLifeVO1Iterator">
+      <AttrNames>
+        <Item Value="LocationLabel"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LocLevel" IterBinding="ShelfLifeVO1Iterator">
+      <AttrNames>
+        <Item Value="LocLevel"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Bay" IterBinding="ShelfLifeVO1Iterator">
+      <AttrNames>
+        <Item Value="Bay"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Slot" IterBinding="ShelfLifeVO1Iterator">
+      <AttrNames>
+        <Item Value="Slot"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="WacId" IterBinding="ShelfLifeVO1Iterator">
+      <AttrNames>
+        <Item Value="WacId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="MechanizedFlag" IterBinding="ShelfLifeVO1Iterator">
+      <AttrNames>
+        <Item Value="MechanizedFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="WacNumber" IterBinding="ShelfLifeVO1Iterator">
+      <AttrNames>
+        <Item Value="WacNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="WarehouseId" IterBinding="ShelfLifeVO1Iterator">
+      <AttrNames>
+        <Item Value="WarehouseId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Building" IterBinding="ShelfLifeVO1Iterator">
+      <AttrNames>
+        <Item Value="Building"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Side" IterBinding="ShelfLifeVO1Iterator">
+      <AttrNames>
+        <Item Value="Side"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="DividerIndex" IterBinding="ShelfLifeVO1Iterator">
+      <AttrNames>
+        <Item Value="DividerIndex"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="DividerTypeId" IterBinding="ShelfLifeVO1Iterator">
+      <AttrNames>
+        <Item Value="DividerTypeId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NewExpirationDate" IterBinding="ShelfLifeVO1Iterator">
+      <AttrNames>
+        <Item Value="NewExpirationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Aisle" IterBinding="ShelfLifeVO1Iterator">
+      <AttrNames>
+        <Item Value="Aisle"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

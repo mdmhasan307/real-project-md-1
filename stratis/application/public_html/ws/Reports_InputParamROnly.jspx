@@ -1,0 +1,224 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="8"/>
+    <jsp:setProperty name="userbean" property="selected2" value="0"/>
+    <!-- Workload Detail (Picking Packing Shipping) -->
+    <af:panelGroupLayout layout="vertical" id="pgl1"
+                         rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Workload Detail (Picking Packing Shipping)'}">
+        <af:inputText label="WAC number" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.wacNumber}" id="it1"/>
+        <af:inputText label="NIIN" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.niin}" id="it2"/>
+        <af:inputText label="Status" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.status}" id="it3"/>
+        <af:inputText label="Document Number" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.docNumber}" id="it4"/>
+        <af:inputText label="Priority" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.priority}" id="it5"/>
+    </af:panelGroupLayout>
+    <!-- Workload Detail (Stowing) -->
+    <af:panelGroupLayout layout="vertical" id="pg2"
+                         rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Workload Detail (Stowing)'}">
+        <af:inputText label="WAC number" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.wacNumber}" id="it2_1"/>
+        <af:inputText label="Pack Area" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.packArea}" id="it2_2"/>
+    </af:panelGroupLayout>
+    <!-- Workload Detail (Expiring NIINs) -->
+    <af:panelGroupLayout layout="vertical" id="pg3"
+                         rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Workload Detail (Expiring NIINs)'}">
+        <af:inputText label="NIIN" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.niin}" id="it3_1"/>
+        <af:inputText label="WAC number" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.wacNumber}" id="it3_2"/>
+        <af:inputText label="Expiration Month and Year" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.expirationDate}" id="it3_3"/>
+    </af:panelGroupLayout>
+    <!-- Workload Detail (NSN Updates) -->
+    <af:panelGroupLayout layout="vertical" id="pg4"
+                         rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Workload Detail (NSN Updates)'}">
+        <af:inputText label="WAC number" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.wacNumber}" id="it4_1"/>
+        <af:inputText label="NIIN" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.niin}" id="it4_2"/>
+    </af:panelGroupLayout>
+    <!-- Workload Detail (Pending Inventories) -->
+    <af:panelGroupLayout layout="vertical" id="pg5"
+                         rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Workload Detail (Pending Inventories)'}">
+        <af:inputText label="WAC number" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.wacNumber}" id="it5_1"/>
+        <af:inputText label="NIIN" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.niin}" id="it5_2"/>
+        <af:inputText label="Pack Area" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.packArea}" id="it5_3"/>
+    </af:panelGroupLayout>
+    <!-- Recon Report Summary -->
+    <af:panelGroupLayout layout="vertical" id="pg6"
+                         rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Recon Report Summary'}">
+        <af:inputText label="Run Date" labelStyle="width: 120px;" readOnly="true"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.runDate}" id="it6"/>
+    </af:panelGroupLayout>
+    <!-- Onhand Serviceable Qty Details -->
+    <af:panelGroupLayout layout="vertical" id="pg7"
+                         rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Onhand Serviceable Qty Details'}">
+        <af:inputText label="Run Date" labelStyle="width: 120px;" readOnly="true"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.runDate}" id="it7"/>
+        <af:inputText label="NIIN" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.niin}" id="it7_2"/>
+    </af:panelGroupLayout>
+    <!-- Onhand Un-Serviceable Qty Details -->
+    <af:panelGroupLayout layout="vertical" id="pg8"
+                         rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Onhand Un-Serviceable Qty Details'}">
+        <af:inputText label="Run Date" labelStyle="width: 120px;" readOnly="true"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.runDate}" id="it8"/>
+        <af:inputText label="NIIN" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.niin}" id="it8_2"/>
+    </af:panelGroupLayout>
+    <!-- Onhand Serial Controlled Serviceable Qty Details -->
+    <af:panelGroupLayout layout="vertical" id="pg9"
+                         rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Onhand Serial Controlled Serviceable Qty Details'}">
+        <af:inputText label="Run Date" labelStyle="width: 120px;" readOnly="true"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.runDate}" id="it9"/>
+        <af:inputText label="NIIN" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.niin}" id="it9_2"/>
+    </af:panelGroupLayout>
+    <!-- Onhand Serial Controlled Un-Serviceable Qty Details -->
+    <af:panelGroupLayout layout="vertical" id="pg10"
+                         rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Onhand Serial Controlled Un-Serviceable Qty Details'}">
+        <af:inputText label="Run Date" labelStyle="width: 120px;" readOnly="true"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.runDate}" id="it10"/>
+        <af:inputText label="NIIN" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.niin}" id="it10_2"/>
+    </af:panelGroupLayout>
+    <!-- File Import Logs Report (DASF) -->
+    <af:panelGroupLayout layout="vertical" id="pg11"
+                         rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'File Import Logs Report (DASF)'}">
+        <af:inputText label="Import Date" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.importDate}" id="it11"/>
+    </af:panelGroupLayout>
+    <!-- File Import Logs Report (GABF) -->
+    <af:panelGroupLayout layout="vertical" id="pg12"
+                         rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'File Import Logs Report (GABF)'}">
+        <af:inputText label="Import Date" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.importDate}" id="it12"/>
+    </af:panelGroupLayout>
+    <!-- File Import Logs Report (GBOF) -->
+    <af:panelGroupLayout layout="vertical" id="pg13"
+                         rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'File Import Logs Report (GBOF)'}">
+        <af:inputText label="Import Date" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.importDate}" id="it13"/>
+    </af:panelGroupLayout>
+    <!-- File Import Logs Report (MATS) -->
+    <af:panelGroupLayout layout="vertical" id="pg14"
+                         rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'File Import Logs Report (MATS)'}">
+        <af:inputText label="Import Date" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.importDate}" id="it14"/>
+    </af:panelGroupLayout>
+    <!-- File Import Logs Report (MHIF) -->
+    <af:panelGroupLayout layout="vertical" id="pg15"
+                         rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'File Import Logs Report (MHIF)'}">
+        <af:inputText label="Import Date" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.importDate}" id="it15"/>
+    </af:panelGroupLayout>
+    <!-- DASF -->
+    <af:panelGroupLayout layout="vertical" id="pg17"
+                         rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'DASF'}">
+        <af:inputText label="NIIN" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.niin}" id="it17_1"/>
+        <af:inputText label="Document Number" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.docNumber}" id="it17_2"/>
+    </af:panelGroupLayout>
+    <!-- Interface Transactions -->
+    <af:panelGroupLayout layout="vertical" id="pg16"
+                         rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Interface Transactions'}">
+        <af:inputText label="Transaction Type" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.transactionType}" id="it16_1"/>
+        <af:inputText label="Document Number" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.docNumber}" id="it16_2"/>
+        <af:inputText label="Filter by Route" labelStyle="width: 120px;" readOnly="true"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.filterRoute}" id="it16_3"/>
+        <af:inputText label="NIIN" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.niin}" id="it16_4"/>
+        <af:inputText label="Filter by Unit Of Issue" labelStyle="width: 120px;" readOnly="true"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.filterUnitOfIssue}" id="it16_5"/>
+        <af:inputText label="Filter by Quantity" labelStyle="width: 120px;" readOnly="true"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.filterQty}" id="it16_6"/>
+        <af:inputText label="Filter by Condition Code" labelStyle="width: 120px;" readOnly="true"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.filterConditionCode}" id="it16_7"/>
+        <af:inputText label="Transaction Date" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.transactionDate}" id="it16_8"/>
+    </af:panelGroupLayout>
+    <!-- Active Receipt Report -->
+    <af:panelGroupLayout layout="vertical" id="gpReceipts_pg1"
+                         rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Active Receipt Report'}">
+        <af:inputText label="NIIN" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.niin}" id="gpReceipts_it1_1"/>
+        <af:inputText label="RCN" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.rcn}" id="gpReceipts_it1_2"/>
+    </af:panelGroupLayout>
+    <!-- Receipt History Report -->
+    <af:panelGroupLayout layout="vertical" id="gpReceipts_pg2"
+                         rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Receipt History Report'}">
+        <af:inputText label="Start Date" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.startDate}" id="gpReceipts_it2_1"/>
+        <af:inputText label="End Date" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.endDate}" id="gpReceipts_it2_2"/>
+        <af:inputText label="RCN" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.rcn}" id="gpReceipts_it2_3"/>
+        <af:inputText label="NIIN" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.niin}" id="gpReceipts_it2_4"/>
+    </af:panelGroupLayout>
+    <!-- Serial Lot Control Numbers Report -->
+    <af:panelGroupLayout layout="vertical" id="gpSLC_pg2"
+                         rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Serial Lot Control Numbers Report'}">
+        <af:inputText label="NIIN" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.niin}" id="gpSLC_it2_1"/>
+    </af:panelGroupLayout>
+    <!-- Shelf-Life Report -->
+    <af:panelGroupLayout layout="vertical" id="gpShelfLife_pg2"
+                         rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Shelf-Life Report'}">
+        <af:inputText label="NIIN" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.niin}" id="gpShelfLife_it2_1"/>
+        <af:inputText label="WAC number" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.wacNumber}" id="gpShelfLife_it2_2"/>
+        <af:inputText label="CC" labelStyle="width: 120px;" readOnly="true"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.cc}" id="gpShelfLife_it2_3"/>
+    </af:panelGroupLayout>
+    <!-- Inventory History Report -->
+    <af:panelGroupLayout layout="vertical" id="gpInventory_pg2"
+                         rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Inventory History Report'}">
+        <af:inputText label="Start Date no date means today" readOnly="true" labelStyle="width: 250px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.startDate}" id="gpInventory_it2_1"/>
+        <af:inputText label="End Date no date means today" readOnly="true" labelStyle="width: 250px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.endDate}" id="gpInventory_it2_2"/>
+        <af:inputText label="NIIN" readOnly="true" labelStyle="width: 250px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.niin}" id="gpInventory_it2_3"/>
+        <af:inputText label="WAC number" readOnly="true" labelStyle="width: 250px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.wacNumber}" id="gpInventory_it2_4"/>
+    </af:panelGroupLayout>
+    <!-- Employee Workload History -->
+    <af:panelGroupLayout layout="vertical" id="pg18"
+                         rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Employee Workload History'}">
+        <af:inputText label="Start Date no date means today" readOnly="true" labelStyle="width: 250px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.startDate}" id="it18_1"/>
+        <af:inputText label="End Date no date means today" readOnly="true" labelStyle="width: 250px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.endDate}" id="it18_2"/>
+        <af:inputText label="Last Name" readOnly="true" labelStyle="width: 250px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.lastName}" id="it18_3"/>
+    </af:panelGroupLayout>
+    <!-- Locator Deck -->
+    <af:panelGroupLayout layout="vertical" id="pg19"
+                         rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Locator Deck'}">
+        <af:inputText label="Condition Code (CC)" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.filterConditionCode}" id="it19_1"/>
+        <af:inputText label="Availability Flag" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.availabilityFlag}" id="it19_2"/>
+        <af:inputText label="Location/WAC" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.wacNumber}" id="it19_3"/>
+        <af:inputText label="NIIN" readOnly="true" labelStyle="width: 120px;"
+                      value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.niin}" id="it19_4"/>
+    </af:panelGroupLayout>
+</jsp:root>

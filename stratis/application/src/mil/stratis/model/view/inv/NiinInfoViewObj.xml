@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="NiinInfoViewObj"
+   Version="11.1.2.64.36"
+   SelectList="Niin_info.NIIN, 
+       Niin_info.NIIN_ID, 
+       Niin_info.NOMENCLATURE, 
+       Location.LOCATION_LABEL, 
+       Location.LOCATION_ID, 
+       InventoryItem.STATUS, 
+       InventoryItem.INVENTORY_ITEM_ID, 
+       Niin_info.UI, 
+       Niin_Location.NIIN_LOC_ID"
+   FromList="NIIN_INFO Niin_info, NIIN_LOCATION Niin_Location, LOCATION Location, INVENTORY_ITEM InventoryItem"
+   Where="((Niin_info.NIIN_ID = Niin_Location.NIIN_ID) AND (Niin_Location.LOCATION_ID = Location.LOCATION_ID)) AND  ((Niin_info.NIIN_ID = InventoryItem.NIIN_ID) AND (InventoryItem.NIIN_LOC_ID = Niin_Location.NIIN_LOC_ID))"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.inv.NiinInfoViewObjImpl"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="Niin_info"
+      Entity="mil.stratis.model.entity.site.NiinInfo"
+      ReadOnly="true" >
+   </EntityUsage>
+   <EntityUsage
+      Name="Niin_Location"
+      Entity="mil.stratis.model.entity.loc.NiinLocation"
+      SourceUsage="mil.stratis.model.view.inv.NiinInfoViewObj.Niin_info"
+      ReadOnly="true"
+      Reference="true" >
+   </EntityUsage>
+   <EntityUsage
+      Name="Location"
+      Entity="mil.stratis.model.entity.loc.Location"
+      SourceUsage="mil.stratis.model.view.inv.NiinInfoViewObj.Niin_Location"
+      ReadOnly="true"
+      Reference="true" >
+   </EntityUsage>
+   <EntityUsage
+      Name="InventoryItem"
+      Entity="mil.stratis.model.entity.inv.InventoryItem"
+      SourceUsage="mil.stratis.model.view.inv.NiinInfoViewObj.Location"
+      ReadOnly="true"
+      Reference="true" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="Niin"
+      IsUpdateable="false"
+      IsNotNull="true"
+      EntityAttrName="Niin"
+      EntityUsage="Niin_info"
+      AliasName="NIIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NiinId"
+      IsNotNull="true"
+      EntityAttrName="NiinId"
+      EntityUsage="Niin_info"
+      AliasName="NIIN_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Nomenclature"
+      EntityAttrName="Nomenclature"
+      EntityUsage="Niin_info"
+      AliasName="NOMENCLATURE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationLabel"
+      IsNotNull="true"
+      EntityAttrName="LocationLabel"
+      EntityUsage="Location"
+      AliasName="LOCATION_LABEL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationId"
+      IsNotNull="true"
+      EntityAttrName="LocationId"
+      EntityUsage="Location"
+      AliasName="LOCATION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Status"
+      EntityAttrName="Status"
+      EntityUsage="InventoryItem"
+      AliasName="STATUS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="InventoryItemId"
+      IsNotNull="true"
+      EntityAttrName="InventoryItemId"
+      EntityUsage="InventoryItem"
+      AliasName="INVENTORY_ITEM_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Ui"
+      EntityAttrName="Ui"
+      EntityUsage="Niin_info"
+      AliasName="UI" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NiinLocId"
+      IsNotNull="true"
+      PrecisionRule="true"
+      EntityAttrName="NiinLocId"
+      EntityUsage="Niin_Location"
+      AliasName="NIIN_LOC_ID"/>
+</ViewObject>

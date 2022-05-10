@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="WacTableView"
+   Version="11.1.2.64.36"
+   SelectList="WacTable.WAC_ID, 
+       WacTable.TASKS_PER_TRIP, 
+       WacTable.SIDS_PER_TRIP, 
+       WacTable.WAREHOUSE_ID, 
+       WacTable.WAC_NUMBER, 
+       WacTable.MECHANIZED_FLAG, 
+       WacTable.SECURE_FLAG, 
+       WacTable.BULK_AREA_NUMBER, 
+       WacTable.CAROUSEL_NUMBER, 
+       WarehouseTable.BUILDING, 
+       WarehouseTable.WAREHOUSE_ID AS WAREHOUSE_ID1, 
+       WacTable.CAROUSEL_CONTROLLER, 
+       WacTable.CAROUSEL_OFFSET, 
+       WacTable.CAROUSEL_MODEL, 
+       WacTable.PACK_AREA"
+   FromList="WAC WacTable, WAREHOUSE WarehouseTable"
+   Where="(WacTable.WAREHOUSE_ID = WarehouseTable.WAREHOUSE_ID)"
+   OrderBy="WacTable.WAC_NUMBER DESC"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.whsetup.WacTableViewImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="WacTable"
+      Entity="mil.stratis.model.entity.loc.Wac" >
+   </EntityUsage>
+   <EntityUsage
+      Name="WarehouseTable"
+      Entity="mil.stratis.model.entity.loc.Warehouse"
+      Association="mil.stratis.model.entity.associations.WacWarehouseFkAssoc"
+      AssociationEnd="mil.stratis.model.entity.associations.WacWarehouseFkAssoc.Warehouse"
+      SourceUsage="mil.stratis.model.view.whsetup.WacTableView.WacTable"
+      ReadOnly="true"
+      Reference="true" />
+   <ViewAttribute
+      Name="WacId"
+      IsNotNull="true"
+      EntityAttrName="WacId"
+      EntityUsage="WacTable"
+      AliasName="WAC_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TasksPerTrip"
+      EntityAttrName="TasksPerTrip"
+      EntityUsage="WacTable"
+      AliasName="TASKS_PER_TRIP" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SidsPerTrip"
+      EntityAttrName="SidsPerTrip"
+      EntityUsage="WacTable"
+      AliasName="SIDS_PER_TRIP" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WarehouseId"
+      IsNotNull="true"
+      EntityAttrName="WarehouseId"
+      EntityUsage="WacTable"
+      AliasName="WAREHOUSE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WacNumber"
+      IsUnique="true"
+      EntityAttrName="WacNumber"
+      EntityUsage="WacTable"
+      AliasName="WAC_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MechanizedFlag"
+      IsNotNull="true"
+      EntityAttrName="MechanizedFlag"
+      EntityUsage="WacTable"
+      AliasName="MECHANIZED_FLAG" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecureFlag"
+      IsNotNull="true"
+      EntityAttrName="SecureFlag"
+      EntityUsage="WacTable"
+      AliasName="SECURE_FLAG" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BulkAreaNumber"
+      EntityAttrName="BulkAreaNumber"
+      EntityUsage="WacTable"
+      AliasName="BULK_AREA_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CarouselNumber"
+      EntityAttrName="CarouselNumber"
+      EntityUsage="WacTable"
+      AliasName="CAROUSEL_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Building"
+      IsUnique="true"
+      IsNotNull="true"
+      EntityAttrName="Building"
+      EntityUsage="WarehouseTable"
+      AliasName="BUILDING" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WarehouseId1"
+      IsNotNull="true"
+      EntityAttrName="WarehouseId"
+      EntityUsage="WarehouseTable"
+      AliasName="WAREHOUSE_ID1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CarouselController"
+      EntityAttrName="CarouselController"
+      EntityUsage="WacTable"
+      AliasName="CAROUSEL_CONTROLLER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CarouselOffset"
+      EntityAttrName="CarouselOffset"
+      EntityUsage="WacTable"
+      AliasName="CAROUSEL_OFFSET" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CarouselModel"
+      EntityAttrName="CarouselModel"
+      EntityUsage="WacTable"
+      AliasName="CAROUSEL_MODEL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PackArea"
+      EntityAttrName="PackArea"
+      EntityUsage="WacTable"
+      AliasName="PACK_AREA" >
+   </ViewAttribute>
+</ViewObject>

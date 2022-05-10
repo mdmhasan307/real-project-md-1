@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="WalkThruAM"
+  Version="11.1.2.64.36"
+  ComponentClass="mil.stratis.model.services.WalkThruAMImpl"
+  ClearCacheOnRollback="true">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <ViewUsage
+      Name="WalkThruQueueVO1"
+      ViewObjectName="mil.stratis.model.view.walkThru.WalkThruQueueVO"/>
+  <Properties>
+    <CustomProperties>
+         <Property
+            Name="DATA_CONTROL_NAME"
+            Value="WalkThruAM_DataControl"/>
+      </CustomProperties>
+  </Properties>
+</AppModule>

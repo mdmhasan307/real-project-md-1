@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="EquipView"
+   Version="11.1.2.64.36"
+   SelectList="Equip.EQUIPMENT_NUMBER, 
+       Equip.COM_PORT_PRINTER_ID, 
+       Equip.COM_PORT_EQUIPMENT_ID, 
+       Equip.WAC_ID, 
+       Equip.NAME, 
+       Equip.DESCRIPTION, 
+       Equip.WAREHOUSE_ID, 
+       Equip.CURRENT_USER_ID, 
+       Equip.SHIPPING_AREA, 
+       Equip.PACKING_GROUP"
+   FromList="EQUIP Equip"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.pack.EquipViewImpl"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="Equip"
+      Entity="mil.stratis.model.entity.site.Equip" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="EquipmentNumber"
+      IsNotNull="true"
+      EntityAttrName="EquipmentNumber"
+      EntityUsage="Equip"
+      AliasName="EQUIPMENT_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ComPortPrinterId"
+      EntityAttrName="ComPortPrinterId"
+      EntityUsage="Equip"
+      AliasName="COM_PORT_PRINTER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ComPortEquipmentId"
+      EntityAttrName="ComPortEquipmentId"
+      EntityUsage="Equip"
+      AliasName="COM_PORT_EQUIPMENT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WacId"
+      EntityAttrName="WacId"
+      EntityUsage="Equip"
+      AliasName="WAC_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Name"
+      EntityAttrName="Name"
+      EntityUsage="Equip"
+      AliasName="NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Description"
+      EntityAttrName="Description"
+      EntityUsage="Equip"
+      AliasName="DESCRIPTION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WarehouseId"
+      IsNotNull="true"
+      EntityAttrName="WarehouseId"
+      EntityUsage="Equip"
+      AliasName="WAREHOUSE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CurrentUserId"
+      EntityAttrName="CurrentUserId"
+      EntityUsage="Equip"
+      AliasName="CURRENT_USER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ShippingArea"
+      EntityAttrName="ShippingArea"
+      EntityUsage="Equip"
+      AliasName="SHIPPING_AREA" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PackingGroup"
+      EntityAttrName="PackingGroup"
+      EntityUsage="Equip"
+      AliasName="PACKING_GROUP" >
+   </ViewAttribute>
+</ViewObject>

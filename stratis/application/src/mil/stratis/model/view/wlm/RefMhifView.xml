@@ -1,0 +1,234 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="RefMhifView"
+   Version="11.1.2.64.36"
+   SelectList="RefMhif.PRIME_FSC, 
+       RefMhif.PRIME_NIIN, 
+       RefMhif.PRIME_SMIC, 
+       RefMhif.RECORD_FSC, 
+       RefMhif.RECORD_NIIN, 
+       RefMhif.RECORD_SMIC, 
+       RefMhif.UNIT_OF_ISSUE, 
+       RefMhif.STORES_ACCOUNT_CODE, 
+       RefMhif.MANAGEMENT_ECHELON_CODE, 
+       RefMhif.SHELF_LIFE_CODE, 
+       RefMhif.UNIT_PRICE, 
+       RefMhif.RECOVERABILITY_CODE, 
+       RefMhif.ITEM_NAME_NOMENCLATURE, 
+       RefMhif.PHYSICAL_SECURITY_CODE, 
+       RefMhif.PHRASE_CODE, 
+       RefMhif.PMIC, 
+       RefMhif.CONTROLLED_ITEM_CODE, 
+       RefMhif.MATERIEL_IDENTIFICATION_CODE, 
+       RefMhif.PHYSICAL_CATEGORY_CODE, 
+       RefMhif.COMBAT_ESSENTIALLY_CODE, 
+       RefMhif.NONSYSTEM_ITEM_INDICATOR, 
+       RefMhif.MIMMS_MANAGED_CODE, 
+       RefMhif.ADPEC, 
+       RefMhif.SUBSTITUTE_NSN_COUNTER, 
+       RefMhif.DEMILITARIZATION_CODE, 
+       RefMhif.STANDARD_REPLACEMENT_PRICE, 
+       RefMhif.SSC_RIC, 
+       RefMhif.JDATE, 
+       RefMhif.ACQUISITION_ADVICE_CODE, 
+       RefMhif.REF_MHIF_ID"
+   FromList="REF_MHIF RefMhif"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.wlm.RefMhifViewImpl"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="RefMhif"
+      Entity="mil.stratis.model.entity.wlm.RefMhif" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="PrimeFsc"
+      EntityAttrName="PrimeFsc"
+      EntityUsage="RefMhif"
+      AliasName="PRIME_FSC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimeNiin"
+      EntityAttrName="PrimeNiin"
+      EntityUsage="RefMhif"
+      AliasName="PRIME_NIIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimeSmic"
+      EntityAttrName="PrimeSmic"
+      EntityUsage="RefMhif"
+      AliasName="PRIME_SMIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RecordFsc"
+      EntityAttrName="RecordFsc"
+      EntityUsage="RefMhif"
+      AliasName="RECORD_FSC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RecordNiin"
+      EntityAttrName="RecordNiin"
+      EntityUsage="RefMhif"
+      AliasName="RECORD_NIIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RecordSmic"
+      EntityAttrName="RecordSmic"
+      EntityUsage="RefMhif"
+      AliasName="RECORD_SMIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UnitOfIssue"
+      EntityAttrName="UnitOfIssue"
+      EntityUsage="RefMhif"
+      AliasName="UNIT_OF_ISSUE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StoresAccountCode"
+      EntityAttrName="StoresAccountCode"
+      EntityUsage="RefMhif"
+      AliasName="STORES_ACCOUNT_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ManagementEchelonCode"
+      EntityAttrName="ManagementEchelonCode"
+      EntityUsage="RefMhif"
+      AliasName="MANAGEMENT_ECHELON_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ShelfLifeCode"
+      EntityAttrName="ShelfLifeCode"
+      EntityUsage="RefMhif"
+      AliasName="SHELF_LIFE_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UnitPrice"
+      EntityAttrName="UnitPrice"
+      EntityUsage="RefMhif"
+      AliasName="UNIT_PRICE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RecoverabilityCode"
+      EntityAttrName="RecoverabilityCode"
+      EntityUsage="RefMhif"
+      AliasName="RECOVERABILITY_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ItemNameNomenclature"
+      EntityAttrName="ItemNameNomenclature"
+      EntityUsage="RefMhif"
+      AliasName="ITEM_NAME_NOMENCLATURE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PhysicalSecurityCode"
+      EntityAttrName="PhysicalSecurityCode"
+      EntityUsage="RefMhif"
+      AliasName="PHYSICAL_SECURITY_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PhraseCode"
+      EntityAttrName="PhraseCode"
+      EntityUsage="RefMhif"
+      AliasName="PHRASE_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Pmic"
+      EntityAttrName="Pmic"
+      EntityUsage="RefMhif"
+      AliasName="PMIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ControlledItemCode"
+      EntityAttrName="ControlledItemCode"
+      EntityUsage="RefMhif"
+      AliasName="CONTROLLED_ITEM_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MaterielIdentificationCode"
+      EntityAttrName="MaterielIdentificationCode"
+      EntityUsage="RefMhif"
+      AliasName="MATERIEL_IDENTIFICATION_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PhysicalCategoryCode"
+      EntityAttrName="PhysicalCategoryCode"
+      EntityUsage="RefMhif"
+      AliasName="PHYSICAL_CATEGORY_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CombatEssentiallyCode"
+      EntityAttrName="CombatEssentiallyCode"
+      EntityUsage="RefMhif"
+      AliasName="COMBAT_ESSENTIALLY_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NonsystemItemIndicator"
+      EntityAttrName="NonsystemItemIndicator"
+      EntityUsage="RefMhif"
+      AliasName="NONSYSTEM_ITEM_INDICATOR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MimmsManagedCode"
+      EntityAttrName="MimmsManagedCode"
+      EntityUsage="RefMhif"
+      AliasName="MIMMS_MANAGED_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Adpec"
+      EntityAttrName="Adpec"
+      EntityUsage="RefMhif"
+      AliasName="ADPEC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SubstituteNsnCounter"
+      EntityAttrName="SubstituteNsnCounter"
+      EntityUsage="RefMhif"
+      AliasName="SUBSTITUTE_NSN_COUNTER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DemilitarizationCode"
+      EntityAttrName="DemilitarizationCode"
+      EntityUsage="RefMhif"
+      AliasName="DEMILITARIZATION_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StandardReplacementPrice"
+      EntityAttrName="StandardReplacementPrice"
+      EntityUsage="RefMhif"
+      AliasName="STANDARD_REPLACEMENT_PRICE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SscRic"
+      EntityAttrName="SscRic"
+      EntityUsage="RefMhif"
+      AliasName="SSC_RIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Jdate"
+      EntityAttrName="Jdate"
+      EntityUsage="RefMhif"
+      AliasName="JDATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AcquisitionAdviceCode"
+      EntityAttrName="AcquisitionAdviceCode"
+      EntityUsage="RefMhif"
+      AliasName="ACQUISITION_ADVICE_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RefMhifId"
+      IsUpdateable="while_insert"
+      IsNotNull="true"
+      EntityAttrName="RefMhifId"
+      EntityUsage="RefMhif"
+      AliasName="REF_MHIF_ID" >
+   </ViewAttribute>
+</ViewObject>

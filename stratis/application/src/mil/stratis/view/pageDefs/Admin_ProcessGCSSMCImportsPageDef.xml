@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="Admin_ProcessGCSSMCImportsPageDef" 
+	Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="GCSSMCSiteInterfacesView1Iterator" RangeSize="10" Binds="Root.SysAdmin1.GCSSMCSiteInterfacesView1"
+              DataControl="StratisRootServiceDataControl" StateValidation="false" Refresh="ifNeeded"
+              ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="GCSSMCSiteInterfacesView1" IterBinding="GCSSMCSiteInterfacesView1Iterator">
+      <AttrNames>
+        <Item Value="InterfaceId"/>
+        <Item Value="InterfaceName"/>
+        <Item Value="LastImpexpDate"/>
+        <Item Value="Status"/>
+        <Item Value="TotalReady"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="InterfaceId" IterBinding="GCSSMCSiteInterfacesView1Iterator">
+      <AttrNames>
+        <Item Value="InterfaceId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Status" IterBinding="GCSSMCSiteInterfacesView1Iterator">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TotalReady" IterBinding="GCSSMCSiteInterfacesView1Iterator">
+      <AttrNames>
+        <Item Value="TotalReady"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="InterfaceName" IterBinding="GCSSMCSiteInterfacesView1Iterator">
+      <AttrNames>
+        <Item Value="InterfaceName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LastImpexpDate" IterBinding="GCSSMCSiteInterfacesView1Iterator">
+      <AttrNames>
+        <Item Value="LastImpexpDate"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="ExecuteSiteInterface" RequiresUpdateModel="true" Action="iteratorExecute"
+            IterBinding="GCSSMCSiteInterfacesView1Iterator"/>
+  </bindings>
+</pageDefinition>

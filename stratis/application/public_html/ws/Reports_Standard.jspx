@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="8"/>
+    <jsp:setProperty name="userbean" property="selected2" value="0"/>
+    <f:view>
+        <af:document title="Reports" id="dReportsStandard">
+            <af:form id="rn_f1">
+                <af:panelStretchLayout id="rn_psl1" topHeight="150" startWidth="24" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="rn_wrap_header">
+                            <jsp:include page="/ws/WS_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll" id="rn_pgl1">
+                            <af:panelBox text="REPORTS" id="rh_pg11" showDisclosure="false">
+                                <af:treeTable summary="text" rowBandingInterval="0" id="tt1" width="360"
+                                              value="#{viewScope.ReportTreeTableBean.reportNameVal}" var="node"
+                                              rowSelection="single" initiallyExpanded="false"
+                                              binding="#{viewScope.ReportTreeTableBean.treeTableBind}">
+                                    <f:facet name="nodeStamp">
+                                        <af:column headerText="Report Names" id="c1" width="355">
+                                            <af:outputText value="#{node.name}" id="ot1"
+                                                           inlineStyle="font-weight:bold;"/>
+                                        </af:column>
+                                    </f:facet>
+                                </af:treeTable>
+                                <af:spacer width="10" height="20" id="s2"/>
+                                <af:button text="Submit" id="b1"
+                                                  actionListener="#{viewScope.ReportTreeTableBean.getSelectedRowAction}"
+                                                  action="#{viewScope.ReportTreeTableBean.actionForwardStrForReport}"/>
+                                <af:spacer width="10" height="10" id="s3"/>
+                            </af:panelBox>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end"/>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

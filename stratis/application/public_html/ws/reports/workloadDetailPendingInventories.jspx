@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <!-- Workload Detail (Pending Inventories) -->
+    <af:table var="row" rowBandingInterval="1" id="t5_1" autoHeightRows="0"
+              styleClass="AFStretchWidth"
+              value="#{viewScope.ReportsQueryResultBean.reportColumnList}"
+              rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Workload Detail (Pending Inventories)'}">
+        <af:column sortable="false" headerText="WAC" id="c5_6">
+            <af:outputText value="#{row.wac}" id="ot5_6"/>
+        </af:column>
+        <af:column sortable="false" headerText="Location" id="c5_2">
+            <af:outputText value="#{row.pickLocation}" id="ot5_2"/>
+        </af:column>
+        <af:column sortable="false" headerText="Qty" id="c5_4"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.qty}" id="ot5_4"/>
+        </af:column>
+        <af:column sortable="false" headerText="NIIN" id="c5_3">
+            <af:outputText value="#{row.niin}" id="ot5_3"/>
+        </af:column>
+        <af:column sortable="false" headerText="Nomenclature" id="c5_10">
+            <af:outputText value="#{row.nomenclature}" id="ot5_10"/>
+        </af:column>
+        <af:column sortable="false" headerText="Inventory Type" id="c5_1" width="150">
+            <af:outputText value="#{row.inventoryType}" id="ot5_1"/>
+        </af:column>
+        <af:column sortable="false" headerText="Status" id="c5_5">
+            <af:outputText value="#{row.status}" id="ot5_5"/>
+        </af:column>
+        <af:column sortable="false" headerText="Assigned To User" id="c5_7">
+            <af:outputText value="#{row.assignedToUser}" id="ot5_7"/>
+        </af:column>
+    </af:table>
+</jsp:root>

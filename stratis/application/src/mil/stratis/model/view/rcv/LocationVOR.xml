@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="LocationVOR"
+   Version="11.1.2.64.36"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   ComponentClass="mil.stratis.model.view.rcv.LocationVORImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+      <Attr Name="_isExpertMode" Value="true" />
+   </DesignTime>
+   <Variable
+      Name="locLabelStr"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <Variable
+      Name="mechFlag"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <Variable
+      Name="secureFlag"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <Variable
+      Name="newWeight"
+      Kind="where"
+      Type="java.lang.Double"
+      DefaultValue="0.0" >
+   </Variable>
+   <Variable
+      Name="newCube"
+      Kind="where"
+      Type="java.lang.Double"
+      DefaultValue="0.0" >
+   </Variable>
+   <SQLQuery><![CDATA[
+SELECT 
+    Location.LOCATION_ID, 
+    Location.AISLE, 
+    Location.SIDE, 
+    Location.BAY, 
+    Location.LOC_LEVEL, 
+    Location.AVAILABILITY_FLAG, 
+    Location.LOCATION_LABEL, 
+    Location.SLOT, 
+    Location.WAC_ID, 
+    Location.LOCATION_HEADER_BIN_ID, 
+    Location.MECHANIZED_FLAG, 
+    Location.LOC_CLASSIFICATION_ID, 
+    Location.DIVIDER_INDEX 
+FROM 
+    LOCATION Location, wac w, location_classification lc, location_header lh, location_header_bin lhb
+WHERE 
+    w.wac_id = Location.wac_id and
+    Location.LOCATION_HEADER_BIN_ID = lhb.LOCation_HEADER_bin_ID(+) and
+    lhb.loc_header_id  = lh.loc_header_id (+) and
+    Location.LOC_CLASSIFICATION_ID = lc.LOC_CLASSIFICATION_ID (+) and
+    ((Location.MECHANIZED_FLAG = 'N') or
+     (((Location.weight + :newWeight) <= lc.usable_weight) and
+      ((Location.cube + :newCube) <= lc.usable_cube) and
+      ((lhb.weight + :newWeight) <= lhb.max_weight) and
+      ((lh.weight + :newWeight) <= lh.max_weight))) and 
+    w.mechanized_flag like  nvl(:mechFlag,'%') and
+    w.secure_flag like nvl(:secureFlag,'%') and
+    Location.LOCATION_LABEL LIKE  nvl(:locLabelStr,'%') AND 
+    Location.AVAILABILITY_FLAG = 'A' 
+order by Location.mechanized_flag desc
+   ]]></SQLQuery>
+   <EntityUsage
+      Name="Location"
+      Entity="mil.stratis.model.entity.loc.Location" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="LocationId"
+      IsNotNull="true"
+      EntityAttrName="LocationId"
+      EntityUsage="Location"
+      AliasName="LOCATION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Aisle"
+      IsUnique="true"
+      EntityAttrName="Aisle"
+      EntityUsage="Location"
+      AliasName="AISLE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Side"
+      IsUnique="true"
+      EntityAttrName="Side"
+      EntityUsage="Location"
+      AliasName="SIDE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Bay"
+      IsUnique="true"
+      IsNotNull="true"
+      EntityAttrName="Bay"
+      EntityUsage="Location"
+      AliasName="BAY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocLevel"
+      IsUnique="true"
+      IsNotNull="true"
+      EntityAttrName="LocLevel"
+      EntityUsage="Location"
+      AliasName="LOC_LEVEL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AvailabilityFlag"
+      IsNotNull="true"
+      EntityAttrName="AvailabilityFlag"
+      EntityUsage="Location"
+      AliasName="AVAILABILITY_FLAG" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationLabel"
+      IsNotNull="true"
+      EntityAttrName="LocationLabel"
+      EntityUsage="Location"
+      AliasName="LOCATION_LABEL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Slot"
+      IsUnique="true"
+      IsNotNull="true"
+      EntityAttrName="Slot"
+      EntityUsage="Location"
+      AliasName="SLOT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WacId"
+      IsUnique="true"
+      IsNotNull="true"
+      EntityAttrName="WacId"
+      EntityUsage="Location"
+      AliasName="WAC_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationHeaderBinId"
+      EntityAttrName="LocationHeaderBinId"
+      EntityUsage="Location"
+      AliasName="LOCATION_HEADER_BIN_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MechanizedFlag"
+      IsNotNull="true"
+      EntityAttrName="MechanizedFlag"
+      EntityUsage="Location"
+      AliasName="MECHANIZED_FLAG" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocClassificationId"
+      EntityAttrName="LocClassificationId"
+      EntityUsage="Location"
+      AliasName="LOC_CLASSIFICATION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Qty"
+      IsSelected="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="VIEW_ATTR"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DividerIndex"
+      EntityAttrName="DividerIndex"
+      EntityUsage="Location"
+      AliasName="DIVIDER_INDEX" >
+   </ViewAttribute>
+</ViewObject>

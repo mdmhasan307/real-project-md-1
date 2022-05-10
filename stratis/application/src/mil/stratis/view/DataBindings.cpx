@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="11.1.2.64.36" id="DataBindings"
+             SeparateXMLFiles="false" Package="mil.stratis.view" ClientType="Generic">
+    <pageMap>
+        <page path="/Login.jspx" usageId="mil_stratis_view_LoginPageDef"/>
+        <page path="/LoginContinued.jspx" usageId="mil_stratis_view_LoginContinuedPageDef"/>
+        <page path="/WarehouseHome.jspx" usageId="mil_stratis_view_WarehouseHomePageDef"/>
+        <page path="/ws/Receiving_General.jspx" usageId="mil_stratis_view_Receiving_GeneralPageDef"/>
+        <page path="/ws/Receiving_CancelSID.jspx" usageId="mil_stratis_view_Receiving_CancelSIDPageDef"/>
+        <page path="/ws/Picking_AAC.jspx" usageId="Picking_AACPageDef"/>
+        <page path="/ws/Picking_Route.jspx" usageId="Picking_RoutePageDef"/>
+        <page path="/ws/Picking_Priority.jspx" usageId="Picking_PriorityPageDef"/>
+        <page path="/ws/Picking_Normal.jspx" usageId="mil_stratis_view_Picking_NormalPageDef"/>
+        <page path="/ws/Picking_NormalMain.jspx" usageId="mil_stratis_view_Picking_NormalMainPageDef"/>
+        <page path="/ws/Picking_NormalNiinVer.jspx" usageId="mil_stratis_view_Picking_NormalNiinVerPageDef"/>
+        <page path="/ws/Receiving_CrossDock.jspx" usageId="mil_stratis_view_Receiving_CrossDockPageDef"/>
+        <page path="/ws/Receiving_GeneralDetail.jspx" usageId="mil_stratis_view_Receiving_GeneralDetailPageDef"/>
+        <page path="/ws/Receiving_Transshipment.jspx" usageId="mil_stratis_view_Receiving_TransshipmentPageDef"/>
+        <page path="/admin/Admin_UserManagement.jspx" usageId="Admin_UserManagementPageDef"/>
+        <page path="/admin/Admin_WarehouseBuildingSetup.jspx" usageId="Admin_WarehouseBuildingSetupPageDef"/>
+        <page path="/admin/Admin_ModifyUser.jspx" usageId="Admin_ModifyUserPageDef"/>
+        <page path="/admin/Admin_WarehouseWACSetup.jspx" usageId="Admin_WarehouseWACSetupPageDef"/>
+        <page path="/admin/Admin_WarehouseNonMechSetup.jspx" usageId="Admin_WarehouseNonMechSetupPageDef"/>
+        <page path="/admin/Admin_ModifyGroup.jspx" usageId="Admin_ModifyGroupPageDef"/>
+        <page path="/admin/Admin_WarehouseFloorLocationSetup.jspx" usageId="Admin_WarehouseFloorLocationSetupPageDef"/>
+        <page path="/admin/Admin_WarehouseRouteUpdate.jspx" usageId="Admin_WarehouseRouteUpdatePageDef"/>
+        <page path="/admin/Admin_WarehouseAACUpdate.jspx" usageId="Admin_WarehouseAACUpdatePageDef"/>
+        <page path="/admin/Admin_WarehouseNiinUpdate.jspx" usageId="Admin_WarehouseNiinUpdatePageDef"/>
+        <page path="/admin/Admin_WarehouseStorageBin.jspx" usageId="Admin_WarehouseStorageBinPageDef"/>
+        <page path="/admin/Admin_WarehouseMechSetup.jspx" usageId="Admin_WarehouseMechSetupPageDef"/>
+        <page path="/admin/Admin_WarehouseDividerSetup.jspx" usageId="Admin_WarehouseDividerSetupPageDef"/>
+        <page path="/admin/Admin_WarehouseComSetup.jspx" usageId="Admin_WarehouseComSetupPageDef"/>
+        <page path="/admin/Admin_WarehouseWorkstationSetup.jspx" usageId="Admin_WarehouseWorkstationSetupPageDef"/>
+        <page path="/admin/Admin_WarehouseConsoldationSetup.jspx" usageId="Admin_WarehouseConsoldationSetupPageDef"/>
+        <page path="/admin/Admin_InventorySchedule.jspx" usageId="Admin_InventorySchedulePageDef"/>
+        <page path="/admin/Admin_WarehouseChangeCC.jspx" usageId="Admin_WarehouseChangeCCPageDef"/>
+        <page path="/admin/Admin_InventoryReview.jspx" usageId="Admin_InventoryReviewPageDef"/>
+        <page path="/admin/Admin_WarehouseChangeLoc.jspx" usageId="Admin_WarehouseChangeLocPageDef"/>
+        <page path="/admin/Admin_InventoryManagement.jspx" usageId="Admin_InventoryManagementPageDef"/>
+        <page path="/admin/Admin_SystemAdmin.jspx" usageId="Admin_SystemAdminPageDef"/>
+        <page path="/admin/Admin_ExceptionProcessing.jspx" usageId="Admin_ExceptionProcessingPageDef"/>
+        <page path="/admin/Admin_WarehouseRewarehouse.jspx" usageId="Admin_WarehouseRewarehousePageDef"/>
+        <page path="/admin/Admin_WarehouseWalkThru.jspx" usageId="Admin_WarehouseWalkThruPageDef"/>
+        <page path="/admin/Admin_WarehouseShippingRouteUpdate.jspx"
+              usageId="Admin_WarehouseShippingRouteUpdatePageDef"/>
+        <page path="/admin/Admin_ProcessGCSSMCExports.jspx" usageId="Admin_ProcessGCSSMCExportsPageDef"/>
+        <page path="/admin/Admin_WarehouseNiinInquiry.jspx" usageId="Admin_WarehouseNiinInquiryPageDef"/>
+        <page path="/admin/Admin_ProcessGCSSMCImports.jspx" usageId="Admin_ProcessGCSSMCImportsPageDef"/>
+        <page path="/admin/Admin_SystemSetupGCSSMC.jspx" usageId="Admin_SystemSetupGCSSMCPageDef"/>
+        <page path="/admin/Admin_ProcessGCSSMCRecon.jspx" usageId="Admin_ProcessGCSSMCReconPageDef"/>
+        <page path="/admin/Admin_ProcessGCSSMCLogs.jspx" usageId="Admin_ProcessGCSSMCLogsPageDef"/>
+        <page path="/admin/Admin_NonMechRemoval.jspx" usageId="Admin_NonMechRemovalPageDef"/>
+        <page path="/admin/Admin_Home.jspx" usageId="Admin_HomePageDef"/>
+        <page path="/ws/Inventory_Home.jspx" usageId="mil_stratis_view_Inventory_HomePageDef"/>
+        <page path="/ws/InventoryItem_NormalMain.jspx" usageId="mil_stratis_view_InventoryItem_NormalMainPageDef"/>
+        <page path="/ws/InventoryLocSurvey_NormalMain.jspx" usageId="mil_stratis_view_InventoryLocSurvey_NormalMainPageDef"/>
+        <page path="/ws/ShelfLife_NormalMain.jspx" usageId="mil_stratis_view_ShelfLife_NormalMainPageDef"/>
+        <page path="/ws/Packing_CloseCarton.jspx" usageId="mil_stratis_view_Packing_CloseCartonPageDef"/>
+        <page path="/ws/Packing_Home.jspx" usageId="mil_stratis_view_Packing_HomePageDef"/>
+        <page path="/ws/Packing_Normal.jspx" usageId="mil_stratis_view_Packing_NormalPageDef"/>
+        <page path="/ws/Stowing_Normal.jspx" usageId="mil_stratis_view_Stowing_NormalPageDef"/>
+        <page path="/ws/Stowing_NormalLocation.jspx" usageId="mil_stratis_view_Stowing_NormalLocationPageDef"/>
+        <page path="/ws/Stowing_NormalNiinVer.jspx" usageId="mil_stratis_view_Stowing_NormalNiinVerPageDef"/>
+        <page path="/ws/Stowing_Reassign_SID.jspx" usageId="mil_stratis_view_Stowing_Reassign_SIDPageDef"/>
+        <page path="/ws/NiinDetail.jspx" usageId="mil_stratis_view_NiinDetailPageDef"/>
+        <page path="/ws/Shipping_AcknowledgeShipment.jspx" usageId="Shipping_AcknowledgeShipmentPageDef"/>
+        <page path="/ws/Shipping_Home.jspx" usageId="Shipping_HomePageDef"/>
+        <page path="/ws/Shipping_ManifestByAAC.jspx" usageId="Shipping_ManifestByAACPageDef"/>
+        <page path="/ws/Shipping_Manifestshipment.jspx" usageId="Shipping_ManifestshipmentPageDef"/>
+        <page path="/ws/Shipping_RelocatePallet.jspx" usageId="Shipping_RelocatePalletPageDef"/>
+        <page path="/ws/Shipping_RemarkAAC.jspx" usageId="Shipping_RemarkAACPageDef"/>
+        <page path="/ws/Shipping_ReviewContents.jspx" usageId="Shipping_ReviewContentsPageDef"/>
+        <page path="/ws/Shipping_Transshipment.jspx" usageId="Shipping_TransshipmentPageDef"/>
+        <page path="/ws/Reports_Home.jspx" usageId="Reports_HomePageDef"/>
+        <page path="/SlotImage" usageId="SlotImagePageDef"/>
+        <page path="/ws/WalkThru_Home.jspx" usageId="mil_stratis_view_WalkThru_HomePageDef"/>
+        <page path="/ws/Picking_Wtq.jspx" usageId="mil_stratis_view_Picking_WtqPageDef"/>
+    </pageMap>
+    <dataControlUsages>
+        <BC4JDataControl id="StratisRootServiceDataControl" Package="mil.stratis.model.services"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="StratisRootServiceDeploy" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="SysAdminDataControl1" Package="mil.stratis.model.services"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="SysAdminDeploy" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="AppModuleDataControl" Package="mil.stratis.model.services"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="AppModuleDeploy" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="ReceiptAMDataControl" Package="mil.stratis.model.services"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="ReceiptAMDeploy" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="InventoryModuleDataControl" Package="mil.stratis.model.services"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="InventoryModuleDeploy" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="WarehouseSetupDataControl" Package="mil.stratis.model.services"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="WarehouseSetupDeploy" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="InventorySetupModuleDataControl" Package="mil.stratis.model.services"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="InventorySetupModuleDeploy" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="PackingModuleDataControl" Package="mil.stratis.model.services"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="PackingModuleDeploy" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="ShippingServiceDataControl" Package="mil.stratis.model.services"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="ShippingServiceDeploy" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="PickingAMDataControl" Package="mil.stratis.model.services"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="PickingAMDeploy" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="WorkLoadManagerDataControl" Package="mil.stratis.model.services"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="WorkLoadManagerDeploy" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="ImportFilesDataControl" Package="mil.stratis.model.services"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="ImportFilesDeploy" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="TransactionsDataControl" Package="mil.stratis.model.services"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="TransactionsDeploy" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="StowingAMDataControl" Package="mil.stratis.model.services"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="StowingAMDeploy" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="SysAdminControl" Package="mil.stratis.model.services"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="SysAdminDeploy" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="GCSSMCTransactionsDataControl" Package="mil.stratis.model.services"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="GCSSMCTransactionsDeploy" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="LoginModuleDataControl" Package="mil.stratis.model.services"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="LoginModuleDeploy" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="walkThruDataControl" Package="mil.stratis.model.Model"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="walkThruLocal" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="WalkThruAMDataControl" Package="mil.stratis.model.services"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="WalkThruAMLocal" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+      
+    </dataControlUsages>
+    <pageDefinitionUsages>
+        <page id="mil_stratis_view_LoginPageDef" path="mil.stratis.view.pageDefs.LoginPageDef"/>
+        <page id="mil_stratis_view_LoginContinuedPageDef" path="mil.stratis.view.pageDefs.LoginContinuedPageDef"/>
+        <page id="mil_stratis_view_WarehouseHomePageDef" path="mil.stratis.view.pageDefs.WarehouseHomePageDef"/>
+        <page id="mil_stratis_view_Receiving_GeneralPageDef" path="mil.stratis.view.pageDefs.Receiving_GeneralPageDef"/>
+        <page id="mil_stratis_view_Page1PageDef" path="mil.stratis.view.pageDefs.Page1PageDef"/>
+        <page id="mil_stratis_view_Page2PageDef" path="mil.stratis.view.pageDefs.Page2PageDef"/>
+        <page id="mil_stratis_view_Receiving_CancelSIDPageDef"
+              path="mil.stratis.view.pageDefs.Receiving_CancelSIDPageDef"/>
+        <page id="mil_stratis_view_Receiving_CrossDockPageDef"
+              path="mil.stratis.view.pageDefs.Receiving_CrossDockPageDef"/>
+        <page id="mil_stratis_view_Receiving_GeneralDetailPageDef"
+              path="mil.stratis.view.pageDefs.Receiving_GeneralDetailPageDef"/>
+        <page id="mil_stratis_view_Picking_NormalPageDef" path="mil.stratis.view.pageDefs.Picking_NormalPageDef"/>
+        <page id="mil_stratis_view_Picking_NormalMainPageDef"
+              path="mil.stratis.view.pageDefs.Picking_NormalMainPageDef"/>
+        <page id="mil_stratis_view_Picking_NormalNiinVerPageDef"
+              path="mil.stratis.view.pageDefs.Picking_NormalNiinVerPageDef"/>
+        <page id="Picking_AACPageDef" path="mil.stratis.view.pageDefs.Picking_AACPageDef"/>
+        <page id="Picking_RoutePageDef" path="mil.stratis.view.pageDefs.Picking_RoutePageDef"/>
+        <page id="Picking_PriorityPageDef" path="mil.stratis.view.pageDefs.Picking_PriorityPageDef"/>
+        <page id="mil_stratis_view_Receiving_TransshipmentPageDef"
+              path="mil.stratis.view.pageDefs.Receiving_TransshipmentPageDef"/>
+        <page id="mil_stratis_view_Inventory_HomePageDef" path="mil.stratis.view.pageDefs.Inventory_HomePageDef"/>
+        <!-- ADMIN Pages -->
+        <page id="Admin_UserManagementPageDef" path="mil.stratis.view.pageDefs.Admin_UserManagementPageDef"/>
+        <page id="Admin_WarehouseBuildingSetupPageDef" path="mil.stratis.view.pageDefs.Admin_WarehouseBuildingSetupPageDef"/>
+        <page id="Admin_ModifyUserPageDef" path="mil.stratis.view.pageDefs.Admin_ModifyUserPageDef"/>
+        <page id="Admin_WarehouseWACSetupPageDef" path="mil.stratis.view.pageDefs.Admin_WarehouseWACSetupPageDef"/>
+        <page id="Admin_WarehouseNonMechSetupPageDef" path="mil.stratis.view.pageDefs.Admin_WarehouseNonMechSetupPageDef"/>
+        <page id="Admin_ModifyGroupPageDef" path="mil.stratis.view.pageDefs.Admin_ModifyGroupPageDef"/>
+        <page id="Admin_WarehouseFloorLocationSetupPageDef"
+              path="mil.stratis.view.pageDefs.Admin_WarehouseFloorLocationSetupPageDef"/>
+        <page id="Admin_WarehouseRouteUpdatePageDef" path="mil.stratis.view.pageDefs.Admin_WarehouseRouteUpdatePageDef"/>
+        <page id="Admin_WarehouseAACUpdatePageDef" path="mil.stratis.view.pageDefs.Admin_WarehouseAACUpdatePageDef"/>
+        <page id="Admin_WarehouseNiinUpdatePageDef" path="mil.stratis.view.pageDefs.Admin_WarehouseNiinUpdatePageDef"/>
+        <page id="Admin_WarehouseStorageBinPageDef" path="mil.stratis.view.pageDefs.Admin_WarehouseStorageBinPageDef"/>
+        <page id="Admin_WarehouseMechSetupPageDef" path="mil.stratis.view.pageDefs.Admin_WarehouseMechSetupPageDef"/>
+        <page id="Admin_WarehouseDividerSetupPageDef" path="mil.stratis.view.pageDefs.Admin_WarehouseDividerSetupPageDef"/>
+        <page id="Admin_WarehouseWorkstationSetupPageDef"
+              path="mil.stratis.view.pageDefs.Admin_WarehouseWorkstationSetupPageDef"/>
+        <page id="Admin_WarehouseComSetupPageDef" path="mil.stratis.view.pageDefs.Admin_WarehouseComSetupPageDef"/>
+        <page id="Admin_WarehouseConsoldationSetupPageDef"
+              path="mil.stratis.view.pageDefs.Admin_WarehouseConsoldationSetupPageDef"/>
+        <page id="Admin_InventorySchedulePageDef" path="mil.stratis.view.pageDefs.Admin_InventorySchedulePageDef"/>
+        <page id="Admin_WarehouseChangeCCPageDef" path="mil.stratis.view.pageDefs.Admin_WarehouseChangeCCPageDef"/>
+        <page id="Admin_InventoryReviewPageDef" path="mil.stratis.view.pageDefs.Admin_InventoryReviewPageDef"/>
+        <page id="Admin_WarehouseChangeLocPageDef" path="mil.stratis.view.pageDefs.Admin_WarehouseChangeLocPageDef"/>
+        <page id="Admin_InventoryManagementPageDef" path="mil.stratis.view.pageDefs.Admin_InventoryManagementPageDef"/>
+        <page id="Admin_SystemAdminPageDef" path="mil.stratis.view.pageDefs.Admin_SystemAdminPageDef"/>
+        <page id="Admin_ExceptionProcessingPageDef" path="mil.stratis.view.pageDefs.Admin_ExceptionProcessingPageDef"/>
+        <page id="Admin_WarehouseRewarehousePageDef" path="mil.stratis.view.pageDefs.Admin_WarehouseRewarehousePageDef"/>
+        <page id="Admin_WarehouseWalkThruPageDef" path="mil.stratis.view.pageDefs.Admin_WarehouseWalkThruPageDef"/>
+        <page id="Admin_WarehouseShippingRouteUpdatePageDef"
+              path="mil.stratis.view.pageDefs.Admin_WarehouseShippingRouteUpdatePageDef"/>
+        <page id="Admin_ProcessGCSSMCExportsPageDef" path="mil.stratis.view.pageDefs.Admin_ProcessGCSSMCExportsPageDef"/>
+        <page id="Admin_WarehouseNiinInquiryPageDef" path="mil.stratis.view.pageDefs.Admin_WarehouseNiinInquiryPageDef"/>
+        <page id="Admin_ProcessGCSSMCImportsPageDef" path="mil.stratis.view.pageDefs.Admin_ProcessGCSSMCImportsPageDef"/>
+        <page id="Admin_WarehouseNiinInquiryDialogPageDef"
+              path="mil.stratis.view.pageDefs.Admin_WarehouseNiinInquiryDialogPageDef"/>
+        <page id="Admin_SystemSetupGCSSMCPageDef" path="mil.stratis.view.pageDefs.Admin_SystemSetupGCSSMCPageDef"/>
+        <page id="Admin_ProcessGCSSMCReconPageDef" path="mil.stratis.view.pageDefs.Admin_ProcessGCSSMCReconPageDef"/>
+        <page id="Admin_ProcessGCSSMCLogsPageDef" path="mil.stratis.view.pageDefs.Admin_ProcessGCSSMCLogsPageDef"/>
+        <page id="Admin_NonMechRemovalPageDef" path="mil.stratis.view.pageDefs.Admin_NonMechRemovalPageDef"/>
+        <page id="Admin_HomePageDef" path="mil.stratis.view.pageDefs.Admin_HomePageDef"/>
+        <page id="mil_stratis_view_InventoryItem_NormalMainPageDef" path="mil.stratis.view.pageDefs.InventoryItem_NormalMainPageDef"/>
+        <page id="mil_stratis_view_InventoryLocSurvey_NormalMainPageDef" path="mil.stratis.view.pageDefs.InventoryLocSurvey_NormalMainPageDef"/>
+        <page id="mil_stratis_view_NiinDetailPageDef" path="mil.stratis.view.pageDefs.NiinDetailPageDef"/>
+        <page id="mil_stratis_view_ShelfLife_NormalMainPageDef" path="mil.stratis.view.pageDefs.ShelfLife_NormalMainPageDef"/>
+        <page id="mil_stratis_view_Packing_CloseCartonPageDef" path="mil.stratis.view.pageDefs.Packing_CloseCartonPageDef"/>
+        <page id="mil_stratis_view_Packing_HomePageDef" path="mil.stratis.view.pageDefs.Packing_HomePageDef"/>    
+        <page id="mil_stratis_view_Packing_NormalPageDef" path="mil.stratis.view.pageDefs.Packing_NormalPageDef"/>
+        <page id="mil_stratis_view_Stowing_NormalPageDef" path="mil.stratis.view.pageDefs.Stowing_NormalPageDef"/>
+        <page id="mil_stratis_view_Stowing_NormalLocationPageDef" path="mil.stratis.view.pageDefs.Stowing_NormalLocationPageDef"/>
+        <page id="mil_stratis_view_Stowing_NormalNiinVerPageDef" path="mil.stratis.view.pageDefs.Stowing_NormalNiinVerPageDef"/> 
+        <page id="mil_stratis_view_Stowing_Reassign_SIDPageDef" path="mil.stratis.view.pageDefs.Stowing_Reassign_SIDPageDef"/> 
+        <page id="Shipping_AcknowledgeShipmentPageDef" path="mil.stratis.view.pageDefs.Shipping_AcknowledgeShipmentPageDef"/>
+        <page id="Shipping_HomePageDef" path="mil.stratis.view.pageDefs.Shipping_HomePageDef"/>
+        <page id="Shipping_ManifestByAACPageDef" path="mil.stratis.view.pageDefs.Shipping_ManifestByAACPageDef"/>
+        <page id="Shipping_ManifestshipmentPageDef" path="mil.stratis.view.pageDefs.Shipping_ManifestshipmentPageDef"/>
+        <page id="Shipping_RelocatePalletPageDef" path="mil.stratis.view.pageDefs.Shipping_RelocatePalletPageDef"/>
+        <page id="Shipping_RemarkAACPageDef" path="mil.stratis.view.pageDefs.Shipping_RemarkAACPageDef"/>
+        <page id="Shipping_ReviewContentsPageDef" path="mil.stratis.view.pageDefs.Shipping_ReviewContentsPageDef"/>
+        <page id="Shipping_TransshipmentPageDef" path="mil.stratis.view.pageDefs.Shipping_TransshipmentPageDef"/>
+        <page id="Reports_HomePageDef" path="mil.stratis.view.pageDefs.Reports_HomePageDef"/>
+        <page id="SlotImagePageDef" path="mil.stratis.view.pageDefs.SlotImagePageDef"/>
+        <page id="mil_stratis_view_WalkThru_HomePageDef" path="mil.stratis.view.pageDefs.WalkThru_HomePageDef"/>
+        <page id="mil_stratis_view_Picking_WtqPageDef" path="mil.stratis.view.pageDefs.Picking_WtqPageDef"/>
+    </pageDefinitionUsages>
+</Application>

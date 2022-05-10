@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <!-- Serial Lot Control Numbers Report -->
+    <af:table var="row" rowBandingInterval="1" id="rg6t2_1" autoHeightRows="0"
+              styleClass="AFStretchWidth"
+              value="#{viewScope.ReportsQueryResultBean.reportColumnList}"
+              rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Serial Lot Control Numbers Report'}">
+        <af:column sortable="false" headerText="NIIN" id="rg6c2_1">
+            <af:outputText value="#{row.niin}" id="rg6ot2_1"/>
+        </af:column>
+        <af:column sortable="false" headerText="Nomenclature" id="rg6c2_2">
+            <af:outputText value="#{row.nomenclature}" id="rg6ot2_2"/>
+        </af:column>
+        <af:column sortable="false" headerText="CC" id="rg6c2_3">
+            <af:outputText value="#{row.cc}" id="rg6ot2_3"/>
+        </af:column>
+        <af:column sortable="false" headerText="NIIN Location Qty" id="rg6c2_4"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.qty}" id="rg6ot2_4"/>
+        </af:column>
+        <af:column sortable="false" headerText="Location" id="rg6c2_5">
+            <af:outputText value="#{row.location}" id="rg6ot2_5"/>
+        </af:column>
+        <af:column sortable="false" headerText="Serial Number" id="rg6c2_6">
+            <af:outputText value="#{row.serialNumber}" id="rg6ot2_6"/>
+        </af:column>
+        <af:column sortable="false" headerText="Lot Control Number" id="rg6c2_7">
+            <af:outputText value="#{row.lotControlNumber}" id="rg6ot2_7"/>
+        </af:column>
+        <af:column sortable="false" headerText="Issued Flag" id="rg6c2_8">
+            <af:outputText value="#{row.issuedFlag}" id="rg6ot2_8"/>
+        </af:column>
+        <af:column sortable="false" headerText="Serial Lot Qty" id="rg6c2_9"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.serialLotQty}" id="rg6ot2_9"/>
+        </af:column>
+    </af:table>
+</jsp:root>

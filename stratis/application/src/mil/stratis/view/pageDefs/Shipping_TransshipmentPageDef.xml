@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Shipping_TransshipmentPageDef"
+                Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="CustomerView1Iterator" RangeSize="1" Binds="Root.AppModule1.CustomerView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <invokeAction Binds="Create" id="invokeCreate" Refresh="prepareModel"
+                  RefreshCondition="${processScope.renderMiniAACForm and empty bindings.exceptionsList}"/>
+  </executables>
+  <bindings>
+    <action id="Create" RequiresUpdateModel="true" Action="createRow" IterBinding="CustomerView1Iterator"/>
+    <attributeValues id="Aac" IterBinding="CustomerView1Iterator">
+      <AttrNames>
+        <Item Value="Aac"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Name" IterBinding="CustomerView1Iterator">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Address1" IterBinding="CustomerView1Iterator">
+      <AttrNames>
+        <Item Value="Address1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Address2" IterBinding="CustomerView1Iterator">
+      <AttrNames>
+        <Item Value="Address2"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="City" IterBinding="CustomerView1Iterator">
+      <AttrNames>
+        <Item Value="City"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="State" IterBinding="CustomerView1Iterator">
+      <AttrNames>
+        <Item Value="State"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ZipCode" IterBinding="CustomerView1Iterator">
+      <AttrNames>
+        <Item Value="ZipCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="RestrictShip" IterBinding="CustomerView1Iterator">
+      <AttrNames>
+        <Item Value="RestrictShip"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Supported" IterBinding="CustomerView1Iterator">
+      <AttrNames>
+        <Item Value="Supported"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

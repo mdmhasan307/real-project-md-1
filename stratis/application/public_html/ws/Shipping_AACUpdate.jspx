@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:useBean id="backing_shipping" class="mil.stratis.view.shipping.ShippingBackingBean" scope="request"/>
+    <jsp:setProperty name="userbean" property="selected" value="5" />
+    <jsp:setProperty name="userbean" property="selected2" value="7" />
+    <jsp:scriptlet>
+        String ldcon = request.getParameter("ldcon");
+        String no_copies = request.getParameter("nocopies");
+        String autoprint = request.getParameter("autoprint");
+        if (ldcon != null)
+        {
+            if (autoprint == null) autoprint="1";
+            if (no_copies == null) no_copies = "1";
+            if (no_copies.equals("")) no_copies = "1";
+            out.print(backing_shipping.printManifest(ldcon, null, null, no_copies, autoprint, request));
+        }  else { }
+    </jsp:scriptlet>
+</jsp:root>

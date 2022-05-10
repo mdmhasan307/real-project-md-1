@@ -1,0 +1,369 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:useBean id="shuttlebean" class="mil.stratis.view.session.ShuttlePageBackingBeanBase" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="1"/>
+    <jsp:setProperty name="userbean" property="selected3" value="6"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="Admin_WarehouseMechSetup"/>
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session" />
+    <jsp:setProperty name="logBean" property="page" value="Mechanized Location"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="195" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <!--<af:panelGroupLayout layout="horizontal">-->
+                            <jsp:expression>shuttlebean.GetLocationClassificationList()</jsp:expression>
+                            <af:panelBox text="Warehouse Setup - Mechanized Setup" showDisclosure="false">
+                                <af:separator/>
+                                <af:outputText value="&lt;br>" escape="false"/>
+                                <af:switcher facetName="#{shuttlebean.screenState}">
+                                    <f:facet name="0">
+                                        <af:panelGroupLayout>
+                                            <af:navigationPane hint="tabs">
+                                                <af:commandNavigationItem text="Create Horizontal Carousel"
+                                                                          selected="true"/>
+                                                <af:commandNavigationItem text="Create Vertical Carousel"
+                                                                          actionListener="#{WarehouseSetupBacking.clearCarouselCreateRows}">
+                                                    <af:setActionListener from="#{1}"
+                                                                          to="#{shuttlebean.screenState}"/>
+                                                </af:commandNavigationItem>
+                                                <af:commandNavigationItem text="View Carousels">
+                                                    <af:setActionListener from="#{2}"
+                                                                          to="#{shuttlebean.screenState}"/>
+                                                </af:commandNavigationItem>
+                                            </af:navigationPane>
+
+                                            <af:panelBox>
+                                                <af:panelGroupLayout valign="top" layout="horizontal">
+
+                                                    <af:panelGroupLayout>
+                                                        <af:panelFormLayout>
+                                                            <af:outputText inlineStyle="font-weight:bold;"
+                                                                           value="WAC"/>
+                                                            <af:selectOneChoice value="#{bindings.WACID1.inputValue}"
+                                                                                valuePassThru="true"
+                                                                                id="wacId_h"
+                                                                                unselectedLabel="- Select -"
+                                                                                binding="#{WarehouseSetupBacking.wacIdHorizontal}">
+                                                                <f:selectItems value="#{shuttlebean.warehouseWACListMech_Horizontal}"/>
+                                                            </af:selectOneChoice>
+                                                            <af:outputText inlineStyle="font-weight:bold;"
+                                                                           value="Bays"/>
+                                                            <af:inputText value="#{bindings.GroupsPerLevel1.inputValue}"
+                                                                          columns="5"
+                                                                          maximumLength="5"
+                                                                          id="bays_h"
+                                                                          binding="#{WarehouseSetupBacking.baysHorizontal}">
+                                                                <f:validator binding="#{bindings.GroupsPerLevel1.validator}"/>
+                                                            </af:inputText>
+
+                                                        </af:panelFormLayout>
+                                                    </af:panelGroupLayout>
+
+                                                    <af:panelGroupLayout>
+                                                        <af:panelHeader text="New Carousel Levels"/>
+                                                        <af:panelGroupLayout layout="horizontal">
+                                                            <af:selectOneChoice value="#{bindings.LocationType1.inputValue}"
+                                                                                label="Bin Type"
+                                                                                id="binType_h"
+                                                                                unselectedLabel="- Select -"
+                                                                                binding="#{WarehouseSetupBacking.binTypeHorizontal}">
+                                                                <f:selectItems value="#{bindings.LocationType1.items}"/>
+                                                            </af:selectOneChoice>
+                                                            <af:button actionListener="#{bindings.AddNewCarouselLevel.execute}"
+                                                                       text="Add Level"
+                                                                       id="AddLevelButton"
+                                                                       inlineStyle="width:100px" partialSubmit="false"/>
+                                                            <af:spacer height="10"
+                                                                       width="10"/>
+                                                            <af:button actionListener="#{bindings.RemoveNewCarouselLevel.execute}"
+                                                                       text="Remove Level"
+                                                                       id="RemoveLevelButton"
+                                                                       inlineStyle="width:100px" partialSubmit="false"/>
+                                                            <!-- onclick="return resetBinImage('binType_h');" -->
+                                                        </af:panelGroupLayout>
+                                                        <af:panelGroupLayout layout="horizontal">
+                                                            <af:panelGroupLayout layout="scroll">
+                                                                <af:table id="HorizontalTable"
+                                                                          value="#{bindings.TempMechCreateRows1.collectionModel}"
+                                                                          var="row" width="250px"
+                                                                          rows="#{bindings.TempMechCreateRows1.rangeSize}"
+                                                                          first="#{bindings.TempMechCreateRows1.rangeStart}"
+                                                                          emptyText="#{bindings.TempMechCreateRows1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                                          selectionListener="#{bindings.TempMechCreateRows1.collectionModel.makeCurrent}"
+                                                                          selectedRowKeys="#{bindings.TempMechCreateRows1.collectionModel.selectedRow}"
+                                                                          columnStretching="last">
+                                                                    <af:column sortable="false" width="30"
+                                                                               headerText="Level">
+                                                                        <af:outputText value="#{row.index+1}"/>
+                                                                    </af:column>
+                                                                    <af:column sortProperty="LocationType"
+                                                                               sortable="false"
+                                                                               headerText="Type">
+                                                                        <af:panelGroupLayout layout="horizontal">
+                                                                            <af:outputText value="#{row.Name}"/>
+
+                                                                            <af:image
+                                                                                    source="../resources/images/bin_images/#{row.BinImage}"
+                                                                                    inlineStyle="width:40px; height:40px"
+                                                                                    clientComponent="true">
+                                                                                <af:clientListener type="mouseOver" method="mouseOverImg"/>
+                                                                            </af:image>
+                                                                            <af:spacer height="10" width="10"/>
+                                                                            <af:image source="/SlotImage?type=SLOT&amp;DI=#{row.DivideId}"
+                                                                                      inlineStyle="width:40px; height:40px"/>
+                                                                            <af:panelGroupLayout layout="vertical">
+                                                                                <af:outputText value="#{row.Length}"/>
+                                                                                <af:outputText value=" x "/>
+                                                                                <af:outputText value="#{row.Width}"/>
+                                                                                <af:outputText value=" x "/>
+                                                                                <af:outputText value="#{row.Height}"/>
+                                                                            </af:panelGroupLayout>
+                                                                        </af:panelGroupLayout>
+                                                                    </af:column>
+                                                                </af:table>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+
+                                                        <af:button actionListener="#{WarehouseSetupBacking.createHorizontalCarousel}"
+                                                                   text="Create Horizontal Carousel"
+                                                                   inlineStyle="width:200px"
+                                                                   id="CreateHorizontalButton" partialSubmit="false"/>
+                                                        <af:spacer height="10" width="10"/>
+                                                        <af:button actionListener="#{WarehouseSetupBacking.resetHorizontalCarousel}"
+                                                                   text="Reset All"
+                                                                   inlineStyle="width:200px"
+                                                                   id="ResetHorizontalButton" partialSubmit="false"/>
+                                                    </af:panelGroupLayout>
+                                                </af:panelGroupLayout>
+                                            </af:panelBox>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                    <f:facet name="1">
+                                        <af:panelGroupLayout>
+                                            <af:navigationPane hint="tabs">
+                                                <af:commandNavigationItem text="Create Horizontal Carousel"
+                                                                          actionListener="#{WarehouseSetupBacking.clearCarouselCreateRows}">
+                                                    <af:setActionListener from="#{0}"
+                                                                          to="#{shuttlebean.screenState}"/>
+                                                </af:commandNavigationItem>
+                                                <af:commandNavigationItem text="Create Vertical Carousel"
+                                                                          selected="true"/>
+                                                <af:commandNavigationItem text="View Carousels">
+                                                    <af:setActionListener from="#{2}"
+                                                                          to="#{shuttlebean.screenState}"/>
+                                                </af:commandNavigationItem>
+                                            </af:navigationPane>
+                                            <af:panelBox showDisclosure="false">
+                                                <af:panelGroupLayout valign="top" layout="horizontal">
+
+                                                    <af:panelGroupLayout>
+                                                        <af:panelFormLayout>
+                                                            <af:outputText inlineStyle="font-weight:bold;"
+                                                                           value="WAC"/>
+                                                            <af:selectOneChoice value="#{bindings.WACID2.inputValue}"
+                                                                                unselectedLabel="- Select -"
+                                                                                valuePassThru="true"
+                                                                                id="wacId_v"
+                                                                                binding="#{WarehouseSetupBacking.wacIdVertical}">
+                                                                <f:selectItems value="#{shuttlebean.warehouseWACListMech_Vertical}"/>
+                                                            </af:selectOneChoice>
+                                                        </af:panelFormLayout>
+                                                    </af:panelGroupLayout>
+                                                    <af:panelGroupLayout>
+                                                        <af:panelHeader text="New Carousel Levels"/>
+                                                        <af:panelGroupLayout layout="horizontal">
+                                                            <af:selectOneChoice value="#{bindings.LocationType2.inputValue}"
+                                                                                label="Bin Type"
+                                                                                id="binType_v"
+                                                                                unselectedLabel="- Select -"
+                                                                                binding="#{WarehouseSetupBacking.binTypeVertical}">
+                                                                <f:selectItems value="#{bindings.LocationType2.items}"/>
+                                                            </af:selectOneChoice>
+                                                            <af:button actionListener="#{bindings.AddNewVerticalCarouselLevel.execute}"
+                                                                       text="Add Level"
+                                                                       id="AddVerticalLevelButton"
+                                                                       inlineStyle="width:100px" partialSubmit="false"/>
+                                                            <af:spacer height="10"
+                                                                       width="10"/>
+                                                            <af:button actionListener="#{bindings.RemoveNewVerticalCarouselLevel.execute}"
+                                                                       text="Remove Level"
+                                                                       id="RemoveVerticalLevelButton"
+                                                                       inlineStyle="width:100px" partialSubmit="false"/>
+                                                        </af:panelGroupLayout>
+                                                        <af:panelGroupLayout layout="horizontal">
+                                                            <af:panelGroupLayout layout="scroll">
+                                                                <af:table id="VerticalTable"
+                                                                          value="#{bindings.TempMechCreateRows2.collectionModel}"
+                                                                          var="row"
+                                                                          rows="#{bindings.TempMechCreateRows2.rangeSize}"
+                                                                          first="#{bindings.TempMechCreateRows2.rangeStart}"
+                                                                          emptyText="#{bindings.TempMechCreateRows2.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                                          selectionListener="#{bindings.TempMechCreateRows2.collectionModel.makeCurrent}"
+                                                                          selectedRowKeys="#{bindings.TempMechCreateRows2.collectionModel.selectedRow}"
+                                                                          width="250px" columnStretching="last">
+                                                                    <af:column sortable="false"
+                                                                               headerText="Level" width="30">
+
+                                                                        <af:outputText value="#{row.index+1}"/>
+                                                                    </af:column>
+                                                                    <af:column sortProperty="LocationType"
+                                                                               sortable="false"
+                                                                               headerText="Type">
+                                                                        <af:panelGroupLayout layout="horizontal">
+                                                                            <af:outputText value="#{row.Name}"/>
+                                                                            <af:image
+                                                                                    source="../resources/images/bin_images/#{row.BinImage}"
+                                                                                    inlineStyle="width:40px; height:40px"/>
+                                                                            <!-- onmouseover="this.width=200;" onmouseout="this.width=40;"/> -->
+                                                                            <af:spacer height="10" width="10"/>
+                                                                            <af:image source="/SlotImage?type=SLOT&amp;DI=#{row.DivideId}"
+                                                                                      inlineStyle="width:40px; height:40px"/>
+                                                                            <!-- onmouseover="this.width=200;" onmouseout="this.width=40;"/> -->
+                                                                            <af:panelGroupLayout layout="vertical">
+                                                                                <af:outputText value="#{row.Length}"/>
+                                                                                <af:outputText value=" x "/>
+                                                                                <af:outputText value="#{row.Width}"/>
+                                                                                <af:outputText value=" x "/>
+                                                                                <af:outputText value="#{row.Height}"/>
+                                                                            </af:panelGroupLayout>
+                                                                        </af:panelGroupLayout>
+                                                                    </af:column>
+                                                                </af:table>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                        <af:toolbar>
+                                                            <af:button actionListener="#{WarehouseSetupBacking.createVerticalCarousel}"
+                                                                       text="Create Vertical Carousel"
+                                                                       inlineStyle="width:200px"
+                                                                       id="CreateVerticalButton" partialSubmit="false"/>
+                                                            <af:outputText value="&lt;br>"
+                                                                           escape="false"/>
+                                                            <af:button actionListener="#{WarehouseSetupBacking.resetVerticalCarousel}"
+                                                                       text="Reset All"
+                                                                       inlineStyle="width:200px"
+                                                                       id="ResetVerticalButton" partialSubmit="false"/>
+                                                        </af:toolbar>
+                                                    </af:panelGroupLayout>
+                                                </af:panelGroupLayout>
+                                            </af:panelBox>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                    <f:facet name="2">
+                                        <af:panelGroupLayout>
+                                            <af:navigationPane hint="tabs">
+                                                <af:commandNavigationItem text="Create Horizontal Carousel"
+                                                                          actionListener="#{WarehouseSetupBacking.clearCarouselCreateRows}">
+                                                    <af:setActionListener from="#{0}"
+                                                                          to="#{shuttlebean.screenState}"/>
+                                                </af:commandNavigationItem>
+                                                <af:commandNavigationItem text="Create Vertical Carousel"
+                                                                          actionListener="#{WarehouseSetupBacking.clearCarouselCreateRows}">
+                                                    <af:setActionListener from="#{1}"
+                                                                          to="#{shuttlebean.screenState}"/>
+                                                </af:commandNavigationItem>
+                                                <af:commandNavigationItem text="View Carousels"
+                                                                          selected="true"/>
+                                            </af:navigationPane>
+                                            <af:panelFormLayout>
+                                                <af:panelGroupLayout layout="horizontal">
+                                                    <af:selectOneChoice value="#{bindings.WacIDFilter.inputValue}"
+                                                                        label="WAC"
+                                                                        unselectedLabel="- Select -"
+                                                                        valuePassThru="true"
+                                                                        id="wacFilter">
+                                                        <f:selectItems value="#{shuttlebean.warehouseMechListOnly}"/>
+                                                    </af:selectOneChoice>
+                                                    <af:inputText value="#{bindings.LocationLabelFilter.inputValue}"
+                                                                  label="Location"
+                                                                  id="locationFilter"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  columns="14">
+                                                        <f:validator binding="#{bindings.LocationLabelFilter.validator}"/>
+                                                    </af:inputText>
+                                                    <af:button actionListener="#{bindings.FilterLocationData.execute}"
+                                                               text="Filter"
+                                                               id="FilterButton"
+                                                               disabled="#{!bindings.FilterLocationData.enabled}"
+                                                               partialSubmit="false"/>
+                                                </af:panelGroupLayout>
+                                            </af:panelFormLayout>
+                                            <af:table value="#{bindings.LocationViewWAC1.collectionModel}"
+                                                      var="row" width="500"
+                                                      rows="#{bindings.LocationViewWAC1.rangeSize}"
+                                                      first="#{bindings.LocationViewWAC1.rangeStart}"
+                                                      emptyText="#{bindings.LocationViewWAC1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                      selectionListener="#{bindings.LocationViewWAC1.collectionModel.makeCurrent}"
+                                                      id="LocationTable"
+                                                      selectedRowKeys="#{bindings.LocationViewWAC1.collectionModel.selectedRow}">
+                                                <af:column sortProperty="LocationLabel"
+                                                           sortable="true"
+                                                           headerText="Location">
+                                                    <af:outputText value="#{row.LocationLabel}"/>
+                                                </af:column>
+                                                <af:column sortProperty="WacNumber"
+                                                           sortable="false" width="50"
+                                                           headerText="WAC">
+                                                    <af:outputText value="#{row.WacNumber}"/>
+                                                </af:column>
+                                                <af:column sortProperty="Aisle" sortable="false"
+                                                           width="50" headerText="Aisle">
+                                                    <af:outputText value="#{row.Aisle}"/>
+                                                </af:column>
+                                                <af:column sortProperty="Bay" sortable="false"
+                                                           width="50" headerText="Bay">
+                                                    <af:outputText value="#{row.Bay}"/>
+                                                </af:column>
+                                                <af:column sortProperty="LocLevel"
+                                                           sortable="false" width="50"
+                                                           headerText="Level">
+                                                    <af:outputText value="#{row.LocLevel}"/>
+                                                </af:column>
+                                                <af:column sortProperty="Slot" sortable="false"
+                                                           width="50" headerText="Slot">
+                                                    <af:outputText value="#{row.Slot}"/>
+                                                </af:column>
+                                                <af:column sortProperty="AvailabilityFlag"
+                                                           sortable="true" width="50"
+                                                           headerText="Avail.">
+                                                    <af:outputText value="#{row.AvailabilityFlag}"/>
+                                                </af:column>
+                                            </af:table>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                </af:switcher>
+                            </af:panelBox>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6" id="s1"/>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

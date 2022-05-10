@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" scope="session" class="mil.stratis.view.user.UserInfo"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="7"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="Admin_ProcessGCSSMCExports"/>
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session" />
+    <jsp:setProperty name="logBean" property="page" value="GCSS-MC Exports"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="150" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6" id="s1"/>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll" id="pgl1">
+                            <af:messages id="m1" inline="true"/>
+                            <af:panelGridLayout id="pgl2">
+                                <af:gridRow id="gr1">
+                                    <af:gridCell valign="top" id="gc1">
+                                        <af:spacer height="20" width="0" id="s2"/>
+                                        <!-- Menu -->
+                                        <af:panelGroupLayout layout="horizontal" id="pgl3">
+                                            <af:panelGroupLayout layout="horizontal" id="pgl4">
+                                                <af:link text="GCSS-MC Exports" disabled="true" id="cl1"/>
+                                                <af:spacer width="4" height="0" id="s3"/>
+                                                |
+                                                <af:spacer width="4" height="0" id="s4"/>
+                                                <af:link text="GCSS-MC Imports"
+                                                         action="GoAdminProcessGCSSMCImports" id="linkImports"/>
+                                                <af:spacer width="4" height="0" id="s5"/>
+                                                |
+                                                <af:spacer width="4" height="0" id="s6"/>
+                                                <af:link text="GCSS-MC Recon" action="GoAdminProcessGCSSMCRecon"
+                                                         id="linkRecon"/>
+                                                <af:spacer width="4" height="0" id="s7"/>
+                                                |
+                                                <af:spacer width="4" height="0" id="s8"/>
+                                                <af:link text="GCSS-MC Logs" action="GoAdminProcessGCSSMCLogs"
+                                                         id="linkLogs"/>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                        <af:spacer width="10" height="10" id="s9"/>
+                                        <!-- New version -->
+                                        <af:panelBox text="Launch or Schedule Exports Page"
+                                                     inlineStyle="font-weight:bold;" showDisclosure="false" id="pb1">
+                                            <af:separator id="s10"/>
+                                            <af:panelFormLayout fieldWidth="500" id="pfl1">
+                                                <af:spacer width="0" height="10px" id="s11"/>
+                                                <af:selectOneChoice label="Select Export Type:" simple="false"
+                                                                    value="#{GCSSMCExportsBean.selectedType}"
+                                                                    immediate="true"
+                                                                    id="exportType"
+                                                                    autoSubmit="true"
+                                                                    valueChangeListener="#{GCSSMCExportsBean.selectedTypeValueChangeListener}"
+                                                                    binding="#{GCSSMCExportsBean.exportType}">
+                                                    <f:selectItem itemLabel="MHIF Request" itemValue="0" id="si1"/>
+                                                    <f:selectItem itemLabel="Immediate MHIF Request" itemValue="1"
+                                                                  id="si2"/>
+                                                </af:selectOneChoice>
+                                                <af:spacer width="0" height="10px" id="s12"/>
+
+                                                <af:inputText label="NIIN:" columns="10" partialTriggers="exportType"
+                                                              inlineStyle="font-weight:bold;" maximumLength="11"
+                                                              contentStyle="width:60px;"
+                                                              binding="#{GCSSMCExportsBean.mhifNiin}"
+                                                              disabled="#{GCSSMCExportsBean.selectedType eq 0}"
+                                                              id="it1"/>
+
+                                                <af:spacer width="0" height="10px" id="s13"/>
+                                                <af:button text="Submit Exports Manually"
+                                                           action="#{GCSSMCExportsBean.activateManualExport}"
+
+                                                           id="manualExportId"
+                                                           inlineStyle="margin-left: 25px;"
+                                                           partialSubmit="false"/>
+                                                <af:spacer width="0" height="10px" id="s14"/>
+                                            </af:panelFormLayout>
+                                        </af:panelBox>
+                                    </af:gridCell>
+                                </af:gridRow>
+                            </af:panelGridLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

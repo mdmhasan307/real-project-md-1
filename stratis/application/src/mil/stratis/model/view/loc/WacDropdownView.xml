@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="WacDropdownView"
+  Version="11.1.2.64.36"
+  SelectList="Wac.WAC_ID, 
+       Wac.CAROUSEL_NUMBER, 
+       Wac.BULK_AREA_NUMBER, 
+       Wac.TASKS_PER_TRIP, 
+       Wac.SIDS_PER_TRIP, 
+       Wac.WAREHOUSE_ID, 
+       Wac.MECHANIZED_FLAG"
+  FromList="WAC Wac"
+  Where="Wac.MECHANIZED_FLAG &lt;> 'N'"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="mil.stratis.model.view.loc.WacDropdownView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <EntityUsage
+    Name="Wac"
+    Entity="mil.stratis.model.entity.loc.Wac"/>
+  <ViewAttribute
+    Name="WacId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="WacId"
+    EntityUsage="Wac"
+    AliasName="WAC_ID"/>
+  <ViewAttribute
+    Name="CarouselNumber"
+    PrecisionRule="true"
+    EntityAttrName="CarouselNumber"
+    EntityUsage="Wac"
+    AliasName="CAROUSEL_NUMBER"/>
+  <ViewAttribute
+    Name="BulkAreaNumber"
+    PrecisionRule="true"
+    EntityAttrName="BulkAreaNumber"
+    EntityUsage="Wac"
+    AliasName="BULK_AREA_NUMBER"/>
+  <ViewAttribute
+    Name="TasksPerTrip"
+    PrecisionRule="true"
+    EntityAttrName="TasksPerTrip"
+    EntityUsage="Wac"
+    AliasName="TASKS_PER_TRIP"/>
+  <ViewAttribute
+    Name="SidsPerTrip"
+    PrecisionRule="true"
+    EntityAttrName="SidsPerTrip"
+    EntityUsage="Wac"
+    AliasName="SIDS_PER_TRIP"/>
+  <ViewAttribute
+    Name="WarehouseId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="WarehouseId"
+    EntityUsage="Wac"
+    AliasName="WAREHOUSE_ID"/>
+  <ViewAttribute
+    Name="MechanizedFlag"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="MechanizedFlag"
+    EntityUsage="Wac"
+    AliasName="MECHANIZED_FLAG"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="mil.stratis.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

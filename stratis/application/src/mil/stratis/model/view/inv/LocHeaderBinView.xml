@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="LocHeaderBinView"
+   Version="11.1.2.64.36"
+   SelectList="LocationHeaderBin.LOCATION_HEADER_BIN_ID, 
+       LocationHeaderBin.HEADER_TYPE, 
+       LocationHeaderBin.WEIGHT, 
+       LocationHeaderBin.BAY, 
+       LocationHeaderBin.LOC_LEVEL, 
+       LocationHeaderBin.AISLE, 
+       LocationHeaderBin.SIDE, 
+       LocationHeaderBin.LOC_HEADER_ID, 
+       LocationHeaderBin.CUBE, 
+       LocationHeaderBin.MAX_WEIGHT, 
+       LocationHeaderBin.CREATED_BY, 
+       LocationHeaderBin.CREATED_DATE, 
+       LocationHeaderBin.MODIFIED_BY, 
+       LocationHeaderBin.MODIFIED_DATE, 
+       LocationHeaderBin.MAX_CUBE, 
+       LocationHeaderBin.LOC_CLASSIFICATION_ID"
+   FromList="LOCATION_HEADER_BIN LocationHeaderBin"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.inv.LocHeaderBinViewImpl"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="LocationHeaderBin"
+      Entity="mil.stratis.model.entity.loc.LocationHeaderBin" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="LocationHeaderBinId"
+      IsNotNull="true"
+      EntityAttrName="LocationHeaderBinId"
+      EntityUsage="LocationHeaderBin"
+      AliasName="LOCATION_HEADER_BIN_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="HeaderType"
+      IsNotNull="true"
+      EntityAttrName="HeaderType"
+      EntityUsage="LocationHeaderBin"
+      AliasName="HEADER_TYPE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Weight"
+      IsNotNull="true"
+      EntityAttrName="Weight"
+      EntityUsage="LocationHeaderBin"
+      AliasName="WEIGHT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Bay"
+      IsNotNull="true"
+      EntityAttrName="Bay"
+      EntityUsage="LocationHeaderBin"
+      AliasName="BAY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocLevel"
+      IsNotNull="true"
+      EntityAttrName="LocLevel"
+      EntityUsage="LocationHeaderBin"
+      AliasName="LOC_LEVEL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Aisle"
+      IsNotNull="true"
+      EntityAttrName="Aisle"
+      EntityUsage="LocationHeaderBin"
+      AliasName="AISLE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Side"
+      IsNotNull="true"
+      EntityAttrName="Side"
+      EntityUsage="LocationHeaderBin"
+      AliasName="SIDE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocHeaderId"
+      EntityAttrName="LocHeaderId"
+      EntityUsage="LocationHeaderBin"
+      AliasName="LOC_HEADER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Cube"
+      EntityAttrName="Cube"
+      EntityUsage="LocationHeaderBin"
+      AliasName="CUBE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MaxWeight"
+      EntityAttrName="MaxWeight"
+      EntityUsage="LocationHeaderBin"
+      AliasName="MAX_WEIGHT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="LocationHeaderBin"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedDate"
+      IsNotNull="true"
+      EntityAttrName="CreatedDate"
+      EntityUsage="LocationHeaderBin"
+      AliasName="CREATED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedBy"
+      EntityAttrName="ModifiedBy"
+      EntityUsage="LocationHeaderBin"
+      AliasName="MODIFIED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedDate"
+      EntityAttrName="ModifiedDate"
+      EntityUsage="LocationHeaderBin"
+      AliasName="MODIFIED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MaxCube"
+      EntityAttrName="MaxCube"
+      EntityUsage="LocationHeaderBin"
+      AliasName="MAX_CUBE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocClassificationId"
+      IsNotNull="true"
+      EntityAttrName="LocClassificationId"
+      EntityUsage="LocationHeaderBin"
+      AliasName="LOC_CLASSIFICATION_ID" >
+   </ViewAttribute>
+</ViewObject>

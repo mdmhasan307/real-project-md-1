@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <!--classification bar -->
+    <af:panelGridLayout id="class_grid_layout" inlineStyle="background-color:#{SysAdminBacking.classificationBackgroundColor};text-align:center;">
+        <af:gridRow marginTop="5px" marginBottom="5px" height="auto" id="class_grid_row">
+            <af:gridCell width="100%" id="class_grid_cell" halign="stretch">
+                <af:outputLabel value="#{SysAdminBacking.classificationString}" id="class_text"
+                                inlineStyle="color:white;font-weight:bold;font-family:sans-serif"/>
+            </af:gridCell>
+        </af:gridRow>
+    </af:panelGridLayout>
+
+</jsp:root>

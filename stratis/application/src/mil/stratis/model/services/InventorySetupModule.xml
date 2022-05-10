@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<AppModule
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="InventorySetupModule"
+   Version="11.1.2.64.36"
+   ComponentClass="mil.stratis.model.services.InventorySetupModuleImpl"
+   LoadComponentsLazily="true" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+   </DesignTime>
+   <ViewUsage
+      Name="WacView1"
+      ViewObjectName="mil.stratis.model.view.invsetup.WacView"/>
+   <ViewUsage
+      Name="NIINAddTable1"
+      ViewObjectName="mil.stratis.model.view.invsetup.NIINAddTable"/>
+   <ViewUsage
+      Name="NIINFilterList1"
+      ViewObjectName="mil.stratis.model.view.invsetup.NIINFilterList"/>
+   <ViewUsage
+      Name="InventoryItemFilterView1"
+      ViewObjectName="mil.stratis.model.view.invsetup.InventoryItemFilterView"/>
+   <ViewUsage
+      Name="InventoryItemView1"
+      ViewObjectName="mil.stratis.model.view.invsetup.InventoryItemView"/>
+   <ViewUsage
+      Name="LocSurveyCreateView1"
+      ViewObjectName="mil.stratis.model.view.invsetup.LocSurveyCreateView"/>
+   <ViewUsage
+      Name="NiinLocationIdSearchView1"
+      ViewObjectName="mil.stratis.model.view.invsetup.NiinLocationIdSearchView"/>
+   <ViewUsage
+      Name="SiteInfoView1"
+      ViewObjectName="mil.stratis.model.view.site.SiteInfoView"/>
+   <ViewUsage
+      Name="NiinRetrieveView1"
+      ViewObjectName="mil.stratis.model.view.invsetup.NiinRetrieveView"/>
+   <ViewUsage
+      Name="InventoryView1"
+      ViewObjectName="mil.stratis.model.view.invsetup.InventoryView"/>
+   <ViewUsage
+      Name="InventoryItemView2"
+      ViewObjectName="mil.stratis.model.view.invsetup.InventoryItemView"/>
+   <ViewLinkUsage
+      Name="InventoryItemViewLink"
+      ViewLinkObjectName="mil.stratis.model.entity.link.InventoryItemViewLink"
+      SrcViewUsageName="mil.stratis.model.services.InventorySetupModule.InventoryView1"
+      DstViewUsageName="mil.stratis.model.services.InventorySetupModule.InventoryItemView2"
+      Reversed="false"/>
+   <AppModuleUsage
+      Name="WorkLoadManager1"
+      FullName="mil.stratis.model.services.WorkLoadManager"
+      SharedScope="0"/>
+   <Properties>
+      <CustomProperties>
+         <Property
+            Name="DATA_CONTROL_NAME"
+            Value="InventorySetupModuleDataControl"/>
+      </CustomProperties>
+   </Properties>
+</AppModule>

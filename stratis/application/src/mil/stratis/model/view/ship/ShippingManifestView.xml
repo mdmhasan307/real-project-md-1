@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="ShippingManifestView"
+   Version="11.1.2.64.36"
+   SelectList="ShippingManifest.SHIPPING_MANIFEST_ID, 
+       ShippingManifest.CUSTOMER_ID, 
+       ShippingManifest.LEAD_TCN, 
+       ShippingManifest.MANIFEST, 
+       ShippingManifest.FLOOR_LOCATION_ID, 
+       ShippingManifest.MANIFEST_DATE, 
+       ShippingManifest.PICKED_UP_FLAG, 
+       ShippingManifest.DELIVERED_FLAG, 
+       ShippingManifest.PICKED_UP_DATE, 
+       ShippingManifest.DELIVERED_DATE, 
+       ShippingManifest.CREATED_DATE, 
+       ShippingManifest.CREATED_BY, 
+       ShippingManifest.MODIFIED_DATE, 
+       ShippingManifest.MODIFIED_BY, 
+       ShippingManifest.MANIFEST_PRINT_DATE, 
+       ShippingManifest.DRIVER, 
+       ShippingManifest.MODE_OF_SHIPMENT, 
+       ShippingManifest.EQUIPMENT_NUMBER"
+   FromList="SHIPPING_MANIFEST ShippingManifest"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.ship.ShippingManifestViewImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="ShippingManifest"
+      Entity="mil.stratis.model.entity.ship.ShippingManifest" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="ShippingManifestId"
+      IsNotNull="true"
+      EntityAttrName="ShippingManifestId"
+      EntityUsage="ShippingManifest"
+      AliasName="SHIPPING_MANIFEST_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CustomerId"
+      IsNotNull="true"
+      EntityAttrName="CustomerId"
+      EntityUsage="ShippingManifest"
+      AliasName="CUSTOMER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LeadTcn"
+      IsUnique="true"
+      EntityAttrName="LeadTcn"
+      EntityUsage="ShippingManifest"
+      AliasName="LEAD_TCN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Manifest"
+      IsUnique="true"
+      EntityAttrName="Manifest"
+      EntityUsage="ShippingManifest"
+      AliasName="MANIFEST" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FloorLocationId"
+      IsUnique="true"
+      EntityAttrName="FloorLocationId"
+      EntityUsage="ShippingManifest"
+      AliasName="FLOOR_LOCATION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ManifestDate"
+      EntityAttrName="ManifestDate"
+      EntityUsage="ShippingManifest"
+      AliasName="MANIFEST_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PickedUpFlag"
+      IsNotNull="true"
+      EntityAttrName="PickedUpFlag"
+      EntityUsage="ShippingManifest"
+      AliasName="PICKED_UP_FLAG" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DeliveredFlag"
+      IsNotNull="true"
+      EntityAttrName="DeliveredFlag"
+      EntityUsage="ShippingManifest"
+      AliasName="DELIVERED_FLAG" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PickedUpDate"
+      EntityAttrName="PickedUpDate"
+      EntityUsage="ShippingManifest"
+      AliasName="PICKED_UP_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DeliveredDate"
+      EntityAttrName="DeliveredDate"
+      EntityUsage="ShippingManifest"
+      AliasName="DELIVERED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedDate"
+      IsNotNull="true"
+      EntityAttrName="CreatedDate"
+      EntityUsage="ShippingManifest"
+      AliasName="CREATED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="ShippingManifest"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedDate"
+      EntityAttrName="ModifiedDate"
+      EntityUsage="ShippingManifest"
+      AliasName="MODIFIED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedBy"
+      EntityAttrName="ModifiedBy"
+      EntityUsage="ShippingManifest"
+      AliasName="MODIFIED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ManifestPrintDate"
+      EntityAttrName="ManifestPrintDate"
+      EntityUsage="ShippingManifest"
+      AliasName="MANIFEST_PRINT_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Driver"
+      EntityAttrName="Driver"
+      EntityUsage="ShippingManifest"
+      AliasName="DRIVER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModeOfShipment"
+      EntityAttrName="ModeOfShipment"
+      EntityUsage="ShippingManifest"
+      AliasName="MODE_OF_SHIPMENT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EquipmentNumber"
+      EntityAttrName="EquipmentNumber"
+      EntityUsage="ShippingManifest"
+      AliasName="EQUIPMENT_NUMBER" >
+   </ViewAttribute>
+</ViewObject>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="RefUiView"
+  Version="11.1.2.64.36"
+  SelectList="RefUi.UI_CONV_FROM, 
+       RefUi.UI_CONV_TO, 
+       RefUi.CONVERSION_FACTOR, 
+       RefUi.REF_UI_ID"
+  FromList="REF_UI RefUi"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <EntityUsage
+    Name="RefUi"
+    Entity="mil.stratis.model.entity.wlm.RefUi"/>
+  <ViewAttribute
+    Name="UiConvFrom"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="UiConvFrom"
+    EntityUsage="RefUi"
+    AliasName="UI_CONV_FROM"/>
+  <ViewAttribute
+    Name="UiConvTo"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="UiConvTo"
+    EntityUsage="RefUi"
+    AliasName="UI_CONV_TO"/>
+  <ViewAttribute
+    Name="ConversionFactor"
+    PrecisionRule="true"
+    EntityAttrName="ConversionFactor"
+    EntityUsage="RefUi"
+    AliasName="CONVERSION_FACTOR"/>
+  <ViewAttribute
+    Name="RefUiId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="RefUiId"
+    EntityUsage="RefUi"
+    AliasName="REF_UI_ID"/>
+</ViewObject>

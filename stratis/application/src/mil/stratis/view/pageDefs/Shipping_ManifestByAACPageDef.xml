@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Shipping_ManifestByAACPageDef"
+                Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="TempManifestReview1Iterator" RangeSize="-1" Binds="Root.ShippingService1.TempManifestReview1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="TempManifestReview1" IterBinding="TempManifestReview1Iterator">
+      <AttrNames>
+        <Item Value="ShippingManifestId"/>
+        <Item Value="Manifest"/>
+        <Item Value="Aac"/>
+        <Item Value="FloorLocation"/>
+      </AttrNames>
+    </table>
+  </bindings>
+</pageDefinition>

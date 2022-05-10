@@ -1,0 +1,173 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:stratis="taglib.mil.usmc.stratis">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="4"/>
+    <jsp:setProperty name="userbean" property="selected2" value="-1"/>
+    <f:view>
+        <af:document title="STRATIS" id="d1">
+            <af:form id="main_form">
+                <af:panelStretchLayout id="psl1" startWidth="24" topHeight="135" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/HeaderMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout id="topGroup" layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGridLayout id="pgl1">
+                                <af:gridRow id="gr1">
+                                    <af:gridCell valign="top" id="gc1">
+                                        <f:subview id="svSidebar">
+                                            <jsp:include page="../SideBar.jspx"/>
+                                        </f:subview>
+                                    </af:gridCell>
+                                    <af:gridCell valign="top" id="gc2">
+                                        <!--<af:panelBox text="Pinload Information" inlineStyle="text-align:center;" id="pb1">-->
+                                        <af:panelGridLayout id="pgl2">
+                                            <af:gridRow id="gr2">
+                                                <af:gridCell id="gc3">
+                                                    <af:panelBox text="Pinload Report" inlineStyle="text-align:center;"
+                                                                 id="pb2">
+                                                        <af:panelFormLayout id="pfl1">
+                                                            <af:panelGridLayout id="pgl3">
+                                                                <af:gridRow id="gr3">
+                                                                    <af:gridCell id="gc4">
+                                                                        <af:table value="#{bindings.pinLoadReport1.collectionModel}"
+                                                                                  var="row"
+                                                                                  rows="#{bindings.pinLoadReport1.rangeSize}"
+                                                                                  first="#{bindings.pinLoadReport1.rangeStart}"
+                                                                                  emptyText="#{bindings.pinLoadReport1.viewable ? 'No Packing Stations Available' : 'Data Binding Error'}"
+                                                                                  id="tPnLdRt" width="500px">
+                                                                            <af:column sortProperty="Workstation"
+                                                                                       sortable="false"
+                                                                                       headerText="#{bindings.pinLoadReport1.labels.Workstation}"
+                                                                                       inlineStyle="text-align:left;"
+                                                                                       id="cWorkstation">
+                                                                                <af:outputText value="#{row.Workstation}"
+                                                                                               id="otWorkstation"/>
+                                                                            </af:column>
+                                                                            <af:column sortProperty="UnpackedPins"
+                                                                                       sortable="false"
+                                                                                       headerText="Unpacked PINS"
+                                                                                       inlineStyle="text-align:left;"
+                                                                                       id="cUnpackedPins">
+                                                                                <af:outputText value="#{row.UnpackedPins}"
+                                                                                               id="otUnpackedPins">
+                                                                                    <f:convertNumber groupingUsed="false"
+                                                                                                     pattern="#{bindings.pinLoadReport1.formats.UnpackedPins}"/>
+                                                                                </af:outputText>
+                                                                            </af:column>
+                                                                        </af:table>
+                                                                    </af:gridCell>
+                                                                </af:gridRow>
+                                                            </af:panelGridLayout>
+                                                        </af:panelFormLayout>
+                                                    </af:panelBox>
+                                                </af:gridCell>
+                                            </af:gridRow>
+                                            <af:gridRow id="gr4">
+                                                <af:gridCell id="gc5">
+                                                    <af:panelBox text="Pinload Detail Report"
+                                                                 inlineStyle="text-align:center;" id="pb3">
+                                                        <af:panelFormLayout id="pfl2">
+                                                            <af:panelGridLayout id="pgl4">
+                                                                <af:gridRow id="gr5">
+                                                                    <af:gridCell id="gc6">
+                                                                        <af:table value="#{bindings.pinLoadDetail1.collectionModel}"
+                                                                                  var="row"
+                                                                                  rows="#{bindings.pinLoadDetail1.rangeSize}"
+                                                                                  first="#{bindings.pinLoadDetail1.rangeStart}"
+                                                                                  emptyText="#{bindings.pinLoadDetail1.viewable ? 'No pending PINS for this Workstation' : 'Data Binding Error'}"
+                                                                                  id="pinloaddetailtable" width="500px"
+                                                                                  columnStretching="last">
+                                                                            <af:column sortProperty="Workstation"
+                                                                                       sortable="false"
+                                                                                       headerText="#{bindings.pinLoadDetail1.labels.Workstation}"
+                                                                                       width="100"
+                                                                                       inlineStyle="text-align:left;"
+                                                                                       id="cWorkstation2">
+                                                                                <af:outputText value="#{row.Workstation}"
+                                                                                               id="otWorkstation2"/>
+                                                                            </af:column>
+                                                                            <af:column sortProperty="PIN1"
+                                                                                       sortable="false" headerText="PIN"
+                                                                                       width="90"
+                                                                                       inlineStyle="text-align:left;"
+                                                                                       id="cPin1">
+                                                                                <af:outputText value="#{row.PIN1}"
+                                                                                               id="otPin1"/>
+                                                                            </af:column>
+                                                                            <af:column sortProperty="QTY1"
+                                                                                       sortable="false" headerText="QTY"
+                                                                                       width="40" id="cQty1">
+                                                                                <af:outputText value="#{row.QTY1}"
+                                                                                               inlineStyle="text-align:center;"
+                                                                                               id="otQty1">
+                                                                                    <f:convertNumber groupingUsed="false"
+                                                                                                     pattern="#{bindings.pinLoadDetail1.formats.QTY1}"/>
+                                                                                </af:outputText>
+                                                                            </af:column>
+                                                                            <af:column sortProperty="COL1"
+                                                                                       sortable="false" headerText="COL"
+                                                                                       width="40" id="cCol1">
+                                                                                <af:outputText value="#{row.COL1}"
+                                                                                               inlineStyle="text-align:center;"
+                                                                                               id="otCol1">
+                                                                                    <f:convertNumber groupingUsed="false"
+                                                                                                     pattern="#{bindings.pinLoadDetail1.formats.COL1}"/>
+                                                                                </af:outputText>
+                                                                            </af:column>
+                                                                            <af:column sortProperty="LEV1"
+                                                                                       sortable="false" headerText="LEV"
+                                                                                       width="40" id="cLev1">
+                                                                                <af:outputText value="#{row.LEV1}"
+                                                                                               inlineStyle="text-align:center;"
+                                                                                               id="otLev1">
+                                                                                    <f:convertNumber groupingUsed="false"
+                                                                                                     pattern="#{bindings.pinLoadDetail1.formats.LEV1}"/>
+                                                                                </af:outputText>
+                                                                            </af:column>
+                                                                            <af:column sortProperty="TimeOfPick"
+                                                                                       sortable="false"
+                                                                                       headerText="TIME OF PICK"
+                                                                                       id="cTimeOfPick">
+                                                                                <stratis:adfDateFormatter
+                                                                                        value="#{row.TimeOfPick}"
+                                                                                        pattern="${userbean.dateWithTimeFormatPattern}"/>
+                                                                            </af:column>
+                                                                        </af:table>
+                                                                    </af:gridCell>
+                                                                </af:gridRow>
+                                                            </af:panelGridLayout>
+                                                        </af:panelFormLayout>
+                                                    </af:panelBox>
+                                                </af:gridCell>
+                                            </af:gridRow>
+                                        </af:panelGridLayout>
+                                        <!--</af:panelBox>-->
+                                    </af:gridCell>
+                                </af:gridRow>
+                            </af:panelGridLayout>
+                            <f:subview id="lwrap_footer">
+                                <jsp:include page="../FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <af:spacer width="24" height="675"/>
+                    </f:facet>
+                    <f:facet name="end"/>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="PackingStationTableView"
+   Version="11.1.2.64.36"
+   SelectList="PackingStationTable.PACKING_STATION_ID, 
+       PackingStationTable.LEVELS, 
+       PackingStationTable.COLUMNS, 
+       PackingStationTable.TOTAL_ISSUES, 
+       PackingStationTable.NUMBER_OF_SLOTS_IN_USE, 
+       PackingStationTable.EQUIPMENT_NUMBER, 
+       EquipTable.NAME, 
+       EquipTable.EQUIPMENT_NUMBER AS EQUIPMENT_NUMBER1, 
+       EquipTable.DESCRIPTION"
+   FromList="PACKING_STATION PackingStationTable, EQUIP EquipTable"
+   Where="PackingStationTable.EQUIPMENT_NUMBER = EquipTable.EQUIPMENT_NUMBER and EquipTable.Description like &#39;%Consolidation%&#39;"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.whsetup.PackingStationTableViewImpl"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="PackingStationTable"
+      Entity="mil.stratis.model.entity.pack.PackingStation" >
+   </EntityUsage>
+   <EntityUsage
+      Name="EquipTable"
+      Entity="mil.stratis.model.entity.site.Equip"
+      Association="mil.stratis.model.entity.associations.PackingStationEquipFkAssoc"
+      AssociationEnd="mil.stratis.model.entity.associations.PackingStationEquipFkAssoc.Equip"
+      SourceUsage="mil.stratis.model.view.whsetup.PackingStationTableView.PackingStationTable"
+      ReadOnly="true"
+      Reference="true" >
+      <DesignTime>
+         <AttrArray Name="_srcAttributes">
+            <Item Value="mil.stratis.model.entity.pack.PackingStation.EquipmentNumber" />
+         </AttrArray>
+         <AttrArray Name="_dstAttributes">
+            <Item Value="mil.stratis.model.entity.site.Equip.EquipmentNumber" />
+         </AttrArray>
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="PackingStationId"
+      IsNotNull="true"
+      EntityAttrName="PackingStationId"
+      EntityUsage="PackingStationTable"
+      AliasName="PACKING_STATION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Levels"
+      IsNotNull="true"
+      EntityAttrName="Levels"
+      EntityUsage="PackingStationTable"
+      AliasName="LEVELS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Columns"
+      IsNotNull="true"
+      EntityAttrName="Columns"
+      EntityUsage="PackingStationTable"
+      AliasName="COLUMNS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TotalIssues"
+      EntityAttrName="TotalIssues"
+      EntityUsage="PackingStationTable"
+      AliasName="TOTAL_ISSUES" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NumberOfSlotsInUse"
+      EntityAttrName="NumberOfSlotsInUse"
+      EntityUsage="PackingStationTable"
+      AliasName="NUMBER_OF_SLOTS_IN_USE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EquipmentNumber"
+      IsUnique="true"
+      IsNotNull="true"
+      EntityAttrName="EquipmentNumber"
+      EntityUsage="PackingStationTable"
+      AliasName="EQUIPMENT_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Name"
+      EntityAttrName="Name"
+      EntityUsage="EquipTable"
+      AliasName="NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EquipmentNumber1"
+      IsNotNull="true"
+      EntityAttrName="EquipmentNumber"
+      EntityUsage="EquipTable"
+      AliasName="EQUIPMENT_NUMBER1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Description"
+      EntityAttrName="Description"
+      EntityUsage="EquipTable"
+      AliasName="DESCRIPTION" >
+   </ViewAttribute>
+</ViewObject>

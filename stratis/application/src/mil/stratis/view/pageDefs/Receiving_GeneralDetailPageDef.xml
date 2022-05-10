@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Receiving_GeneralDetailPageDef"
+                Package="mil.stratis.view.pageDefs" MsgBundleClass="mil.stratis.pageDefs.Receiving_GeneralDetailPageDefMsgBundle">
+  <parameters/>
+  <executables>
+    <iterator id="NiinInfoReceiptVView1Iterator" RangeSize="10" Binds="Root.ReceiptAM1.NiinInfoReceiptVView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="MasterDropDownCCVO1Iterator" RangeSize="-1" Binds="Root.ReceiptAM1.MasterDropDownCCVO1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="MasterDropDownPCVO1Iterator" RangeSize="-1" Binds="Root.ReceiptAM1.MasterDropDownPCVO1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="StowView2Iterator" RangeSize="-1" Binds="Root.ReceiptAM1.StowView2"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="LocationList1Iterator" RangeSize="-1" Binds="Root.WorkLoadManager1.LocationList1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="NiinInfoReceiptVView1StowView2" IterBinding="StowView2Iterator">
+      <AttrNames>
+        <Item Value="Sid"/>
+        <Item Value="QtyToBeStowed"/>
+        <Item Value="Rcn"/>
+        <Item Value="CreatedBy"/>
+        <Item Value="CreatedDate"/>
+        <Item Value="ModifiedBy"/>
+        <Item Value="ModifiedDate"/>
+        <Item Value="StowId"/>
+        <Item Value="Pid"/>
+        <Item Value="Status"/>
+        <Item Value="CancelReason"/>
+        <Item Value="ExpirationDate"/>
+        <Item Value="DateOfManufacture"/>
+        <Item Value="LocationId"/>
+        <Item Value="LocationLabel"/>
+        <Item Value="SerialNumber"/>
+        <Item Value="LotConNum"/>
+        <Item Value="CaseWeightQty"/>
+        <Item Value="PackedDate"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="NiinInfoReceiptVView1DocumentNumber" IterBinding="NiinInfoReceiptVView1Iterator">
+      <AttrNames>
+        <Item Value="DocumentNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NiinInfoReceiptVView1Niin" IterBinding="NiinInfoReceiptVView1Iterator">
+      <AttrNames>
+        <Item Value="Niin"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NiinInfoReceiptVView1Scc" IterBinding="NiinInfoReceiptVView1Iterator">
+      <AttrNames>
+        <Item Value="Scc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NiinInfoReceiptVView1Suffix" IterBinding="NiinInfoReceiptVView1Iterator">
+      <AttrNames>
+        <Item Value="Suffix"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NiinInfoReceiptVView1Fsc" IterBinding="NiinInfoReceiptVView1Iterator">
+      <AttrNames>
+        <Item Value="Fsc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NiinInfoReceiptVView1Cc" IterBinding="NiinInfoReceiptVView1Iterator">
+      <AttrNames>
+        <Item Value="Cc"/>
+      </AttrNames>
+    </attributeValues>
+    <list id="NiinInfoReceiptVView1MechNonMechFlag" IterBinding="NiinInfoReceiptVView1Iterator"
+          ListOperMode="setAttribute" StaticList="true">
+      <AttrNames>
+        <Item Value="MechNonMechFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </list>
+    <attributeValues id="NiinInfoReceiptVView1Pc" IterBinding="NiinInfoReceiptVView1Iterator">
+      <AttrNames>
+        <Item Value="Pc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NiinInfoReceiptVView1Ui" IterBinding="NiinInfoReceiptVView1Iterator">
+      <AttrNames>
+        <Item Value="Ui"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NiinInfoReceiptVView1ShelfLifeCode" IterBinding="NiinInfoReceiptVView1Iterator">
+      <AttrNames>
+        <Item Value="ShelfLifeCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NiinInfoReceiptVView1QuantityInducted" IterBinding="NiinInfoReceiptVView1Iterator">
+      <AttrNames>
+        <Item Value="QuantityInducted"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NiinInfoReceiptVView1TypeOfMaterial" IterBinding="NiinInfoReceiptVView1Iterator">
+      <AttrNames>
+        <Item Value="TypeOfMaterial"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NiinInfoReceiptVView1QuantityReleased" IterBinding="NiinInfoReceiptVView1Iterator">
+      <AttrNames>
+        <Item Value="QuantityReleased"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="StowView2QtyToBeStowed" IterBinding="StowView2Iterator">
+      <AttrNames>
+        <Item Value="QtyToBeStowed"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="StowView2ExpirationDate" IterBinding="StowView2Iterator">
+      <AttrNames>
+        <Item Value="ExpirationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="StowView2DateOfManufacture" IterBinding="StowView2Iterator">
+      <AttrNames>
+        <Item Value="DateOfManufacture"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="StowView2LotConNum" IterBinding="StowView2Iterator">
+      <AttrNames>
+        <Item Value="LotConNum"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="StowView2CaseWeightQty" IterBinding="StowView2Iterator">
+      <AttrNames>
+        <Item Value="CaseWeightQty"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="StowView2PackedDate" IterBinding="StowView2Iterator">
+      <AttrNames>
+        <Item Value="PackedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Rollback" InstanceName="ReceiptAMDataControl" DataControl="ReceiptAMDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <attributeValues id="NiinInfoReceiptVView1QuantityStowed" IterBinding="NiinInfoReceiptVView1Iterator">
+      <AttrNames>
+        <Item Value="QuantityStowed"/>
+      </AttrNames>
+    </attributeValues>
+    <table id="LocationList1" IterBinding="LocationList1Iterator">
+      <AttrNames>
+        <Item Value="WacId"/>
+        <Item Value="LocationId"/>
+        <Item Value="LocationLabel"/>
+        <Item Value="LocQty"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="StowView2SerialNumber" IterBinding="StowView2Iterator">
+      <AttrNames>
+        <Item Value="SerialNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NiinInfoReceiptVView1CodeValue" IterBinding="NiinInfoReceiptVView1Iterator">
+      <AttrNames>
+        <Item Value="CodeValue"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NiinInfoReceiptVView1SerialControlFlag" IterBinding="NiinInfoReceiptVView1Iterator">
+      <AttrNames>
+        <Item Value="SerialControlFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NiinInfoReceiptVView1LotControlFlag" IterBinding="NiinInfoReceiptVView1Iterator">
+      <AttrNames>
+        <Item Value="LotControlFlag"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>
+

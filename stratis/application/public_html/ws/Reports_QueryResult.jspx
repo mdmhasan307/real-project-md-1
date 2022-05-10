@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+>
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="8"/>
+    <jsp:setProperty name="userbean" property="selected2" value="0"/>
+    <f:view>
+        <af:document title="STRATIS Reports" id="dReportsNew">
+            <af:form id="rn_f1">
+                <af:panelStretchLayout id="rn_psl1" topHeight="150" startWidth="24" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="rn_wrap_header">
+                            <jsp:include page="/ws/WS_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll" id="rn_pgl1">
+                            <af:outputLabel value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName}"
+                                            inlineStyle="font-weight:bold" id="olReportInput1"/>
+                            <af:outputLabel value="#{viewScope.ReportsQueryResultBean.reportsInfoBean.reportTotals} records"
+                                            id="olReportInput2"/>
+                            <af:spacer width="10" height="10" id="s5"/>
+                            <f:subview id="rn_wrap_inputParameter">
+                                <jsp:include page="/ws/Reports_InputParamROnly.jspx"/>
+                            </f:subview>
+                            <af:spacer width="10" height="10" id="s6"/>
+                            <af:panelBox text="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName}"
+                                         id="rh_pg11" showDisclosure="false">
+
+                                <jsp:include page="/ws/reports/workloadDetailPickingPackingShipping.jspx"/>
+                                <jsp:include page="/ws/reports/workloadDetailStowing.jspx"/>
+                                <jsp:include page="/ws/reports/workloadDetailExpiringNiins.jspx"/>
+                                <jsp:include page="/ws/reports/workloadDetailNsnUpdates.jspx"/>
+                                <jsp:include page="/ws/reports/workloadDetailPendingInventories.jspx"/>
+                                <jsp:include page="/ws/reports/employeeWorkloadHistory.jspx"/>
+                                <jsp:include page="/ws/reports/recon.jspx"/>
+                                <jsp:include page="/ws/reports/onhandServiceableQtyDetails.jspx"/>
+                                <jsp:include page="/ws/reports/onhandUnserviceableQtyDetails.jspx"/>
+                                <jsp:include page="/ws/reports/onhandSerialControlledServiceableQtyDetails.jspx"/>
+                                <jsp:include page="/ws/reports/onhandSerialControlledUnserviceableQtyDetails.jspx"/>
+                                <jsp:include page="/ws/reports/dasf.jspx"/>
+                                <jsp:include page="/ws/reports/fileImportDasf.jspx"/>
+                                <jsp:include page="/ws/reports/fileImportGabf.jspx"/>
+                                <jsp:include page="/ws/reports/fileImportGbof.jspx"/>
+                                <jsp:include page="/ws/reports/fileImportMats.jspx"/>
+                                <jsp:include page="/ws/reports/fileImportMhif.jspx"/>
+                                <!-- FUTURE remove fileImportCourier if its no longer needed (its not called) -->
+                                <jsp:include page="/ws/reports/fileImportCourier.jspx"/>
+                                <jsp:include page="/ws/reports/interfaceTransactions.jspx"/>
+                                <jsp:include page="/ws/reports/activeReceipt.jspx"/>
+                                <jsp:include page="/ws/reports/receiptHistory.jspx"/>
+                                <jsp:include page="/ws/reports/serialLotControlNumbers.jspx"/>
+                                <jsp:include page="/ws/reports/shelfLife.jspx"/>
+                                <jsp:include page="/ws/reports/inventoryHistory.jspx"/>
+                                <jsp:include page="/ws/reports/locatorDeck.jspx"/>
+                                <af:toolbar id="tb1">
+                                    <af:button text="Export to CSV" id="cb1_1">
+                                        <af:fileDownloadActionListener
+                                                filename="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName}.csv"
+                                                contentType="text/plain; charset=utf-8"
+                                                method="#{viewScope.ReportsQueryResultBean.createCsvFile}"/>
+                                    </af:button>
+                                    <af:spacer width="10" height="10" id="s3"/>
+                                    <af:button text="Go Back to Input Parameters" id="b2"
+                                               action="GoReports_InputParam"/>
+                                </af:toolbar>
+                                <af:spacer width="10" height="10" id="s2"/>
+                            </af:panelBox>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end"/>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

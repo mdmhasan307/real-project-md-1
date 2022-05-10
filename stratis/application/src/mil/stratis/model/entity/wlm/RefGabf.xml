@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="RefGabf"
+   Version="11.1.2.64.36"
+   DBObjectType="table"
+   DBObjectName="REF_GABF"
+   AliasName="RefGabf"
+   BindingStyle="OracleName"
+   UseGlueCode="false"
+   >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Access" />
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_panelSchema" Value="table|alias" />
+   </DesignTime>
+   <Attribute
+      Name="PrimeNationalStockNumber"
+      Precision="15"
+      ColumnName="PRIME_NATIONAL_STOCK_NUMBER"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="15" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="RecordFsc"
+      Precision="4"
+      ColumnName="RECORD_FSC"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="RecordNiin"
+      Precision="9"
+      ColumnName="RECORD_NIIN"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="9" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="RecordSmic"
+      Precision="2"
+      ColumnName="RECORD_SMIC"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ActivityAddressCode"
+      Precision="6"
+      ColumnName="ACTIVITY_ADDRESS_CODE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="6" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="UnitOfIssue"
+      Precision="2"
+      ColumnName="UNIT_OF_ISSUE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="UnitPrice"
+      ColumnName="UNIT_PRICE"
+      SQLType="VARCHAR"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="StoresAccountCount"
+      Precision="1"
+      ColumnName="STORES_ACCOUNT_COUNT"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="MaterielIdentificationCode"
+      Precision="1"
+      ColumnName="MATERIEL_IDENTIFICATION_CODE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ControlledItemCode"
+      Precision="1"
+      ColumnName="CONTROLLED_ITEM_CODE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="NonsystemItemIndicator"
+      Precision="1"
+      ColumnName="NONSYSTEM_ITEM_INDICATOR"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="PhraseCode"
+      Precision="1"
+      ColumnName="PHRASE_CODE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="FamilyRelationCode"
+      Precision="1"
+      ColumnName="FAMILY_RELATION_CODE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ManagementEchelonCode"
+      Precision="2"
+      ColumnName="MANAGEMENT_ECHELON_CODE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ProvisioningDate"
+      Precision="5"
+      ColumnName="PROVISIONING_DATE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CldRequisitioningObjective"
+      Precision="5"
+      ColumnName="CLD_REQUISITIONING_OBJECTIVE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="5" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ReorderPoint"
+      Precision="7"
+      ColumnName="REORDER_POINT"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="RequisitioningObjective"
+      Precision="7"
+      ColumnName="REQUISITIONING_OBJECTIVE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="OnHandOpStockServiceable"
+      Precision="7"
+      ColumnName="ON_HAND_OP_STOCK_SERVICEABLE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="DueOperatingStock"
+      Precision="7"
+      ColumnName="DUE_OPERATING_STOCK"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="BackOrderQuantity"
+      Precision="7"
+      ColumnName="BACK_ORDER_QUANTITY"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="RequirementCode"
+      Precision="4"
+      ColumnName="REQUIREMENT_CODE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="OperationCode"
+      Precision="2"
+      ColumnName="OPERATION_CODE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="FixedLevel"
+      Precision="7"
+      ColumnName="FIXED_LEVEL"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ThirtyDayUsage"
+      Precision="7"
+      ColumnName="THIRTY_DAY_USAGE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="FloatRequisitionObjective"
+      Precision="5"
+      ColumnName="FLOAT_REQUISITION_OBJECTIVE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="5" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ExcessOnHand"
+      Precision="7"
+      ColumnName="EXCESS_ON_HAND"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ManagementValueFactor"
+      Precision="1"
+      ColumnName="MANAGEMENT_VALUE_FACTOR"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="OnHandUnserviceable"
+      Precision="7"
+      ColumnName="ON_HAND_UNSERVICEABLE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ProvisioningOnHand"
+      Precision="7"
+      ColumnName="PROVISIONING_ON_HAND"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ProvisioningDue"
+      Precision="7"
+      ColumnName="PROVISIONING_DUE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="NumberOfFirstReceipts"
+      Precision="3"
+      ColumnName="NUMBER_OF_FIRST_RECEIPTS"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="DaysOfFirstReceipts"
+      Precision="5"
+      ColumnName="DAYS_OF_FIRST_RECEIPTS"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="SupplySourceCode"
+      Precision="1"
+      ColumnName="SUPPLY_SOURCE_CODE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="FreezeCode"
+      Precision="1"
+      ColumnName="FREEZE_CODE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="FreezeDate"
+      Precision="4"
+      ColumnName="FREEZE_DATE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="LastTransactionDate"
+      Precision="4"
+      ColumnName="LAST_TRANSACTION_DATE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="AnalystCode"
+      Precision="1"
+      ColumnName="ANALYST_CODE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="TotalMountOutAllowance"
+      Precision="7"
+      ColumnName="TOTAL_MOUNT_OUT_ALLOWANCE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="MountOutQuantityInBlocks"
+      Precision="7"
+      ColumnName="MOUNT_OUT_QUANTITY_IN_BLOCKS"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="MountOutReserved"
+      Precision="7"
+      ColumnName="MOUNT_OUT_RESERVED"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="SpecialAllocance"
+      Precision="3"
+      ColumnName="SPECIAL_ALLOCANCE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="3" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Processed"
+      Precision="1"
+      ColumnName="PROCESSED"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="REF_GABF" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="RefGabfId"
+      IsUpdateable="while_insert"
+      DefaultValue="@0"
+      ColumnName="REF_GABF_ID"
+      SQLType="NUMERIC"
+      Domain="oracle.jbo.domain.DBSequence"
+      Type="oracle.jbo.domain.DBSequence"
+      ColumnType="NUMBER"
+      TableName="REF_GABF"
+      PrimaryKey="true"
+      RetrievedOnInsert="true" >
+      <DesignTime>
+         <Attr Name="_SequenceStart" Value="1" />
+         <Attr Name="_DisplaySize" Value="22" />
+         <Attr Name="_SequenceName" Value="ref_gabf_id_seq" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Timestamp"
+      ColumnName="TIMESTAMP"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Timestamp"
+      ColumnType="DATE"
+      TableName="REF_GABF"/>
+   <Attribute
+      Name="WarReserveQty"
+      ColumnName="WAR_RESERVE_QTY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="REF_GABF"/>
+   <Attribute
+      Name="OpcodeReserveQty"
+      ColumnName="OPCODE_RESERVE_QTY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="REF_GABF"/>
+   <Attribute
+      Name="ForecastQty"
+      ColumnName="FORECAST_QTY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="REF_GABF"/>
+   <Attribute
+      Name="StageQty"
+      ColumnName="STAGE_QTY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="REF_GABF"/>
+   <Attribute
+      Name="DockQty"
+      ColumnName="DOCK_QTY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="REF_GABF"/>
+   <Attribute
+      Name="RoQty"
+      ColumnName="RO_QTY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="REF_GABF"/>
+   <Key
+      Name="RefGabfPk"
+      PrimaryKey="true">
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="REF_GABF_PK"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.wlm.RefGabf.RefGabfId"/>
+      </AttrArray>
+   </Key>
+</Entity>

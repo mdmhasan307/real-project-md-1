@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<AppModule
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="StowingAM"
+   Version="11.1.2.64.36"
+   ComponentClass="mil.stratis.model.services.StowingAMImpl"
+   LoadComponentsLazily="true" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+   </DesignTime>
+   <ViewUsage
+      Name="ScannedStowLVO1"
+      ViewObjectName="mil.stratis.model.view.stow.ScannedStowLVO"/>
+   <ViewUsage
+      Name="StowingGenQryVO1"
+      ViewObjectName="mil.stratis.model.view.stow.StowingGenQryVO"/>
+   <ViewUsage
+      Name="StowingGenQryVOA"
+      ViewObjectName="mil.stratis.model.view.stow.StowingGenQryVO"/>
+   <ViewUsage
+      Name="StowingGenQryVOB"
+      ViewObjectName="mil.stratis.model.view.stow.StowingGenQryVO"/>
+   <ViewUsage
+      Name="StowRefuseQryVO1"
+      ViewObjectName="mil.stratis.model.view.stow.StowRefuseQryVO"/>
+   <ViewUsage
+      Name="StowLocVO1"
+      ViewObjectName="mil.stratis.model.view.stow.StowLocVO"/>
+   <ViewUsage
+      Name="StowByPassQryVO1"
+      ViewObjectName="mil.stratis.model.view.stow.StowByPassQryVO"/>
+   <AppModuleUsage
+      Name="WorkLoadManager1"
+      FullName="mil.stratis.model.services.WorkLoadManager"
+      SharedScope="0"/>
+   <Properties>
+      <CustomProperties>
+         <Property
+            Name="DATA_CONTROL_NAME"
+            Value="StowingAM_DataControl"/>
+      </CustomProperties>
+   </Properties>
+</AppModule>

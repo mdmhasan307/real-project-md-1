@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <!-- Inventory History Report -->
+    <af:table var="row" rowBandingInterval="1" id="rg8t2_1" autoHeightRows="0"
+              styleClass="AFStretchWidth"
+              value="#{viewScope.ReportsQueryResultBean.reportColumnList}"
+              rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Inventory History Report'}">
+        <af:column sortable="false" headerText="Completed Date" id="rg8c2_1" width="115">
+            <af:outputText value="#{row.completedDate}"/>
+        </af:column>
+        <af:column sortable="false" headerText="NIIN" id="rg8c2_2">
+            <af:outputText value="#{row.niin}" id="rg8ot2_2"/>
+        </af:column>
+        <af:column sortable="false" headerText="Nomenclature" id="rg8c2_3" width="150">
+            <af:outputText value="#{row.nomenclature}" id="rg8ot2_3"/>
+        </af:column>
+        <af:column sortable="false" headerText="Location" id="rg8c2_4">
+            <af:outputText value="#{row.location}" id="rg8ot2_4"/>
+        </af:column>
+        <af:column sortable="false" headerText="CC" id="rg8c2_5" width="25">
+            <af:outputText value="#{row.cc}" id="rg8ot2_5"/>
+        </af:column>
+        <af:column sortable="false" headerText="Qty" id="rg8c2_6"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.qty}" id="rg8ot2_6"/>
+        </af:column>
+        <af:column sortable="false" headerText="Pos. Adj." id="rg8c2_7"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.posAdj}" id="rg8ot2_7"/>
+        </af:column>
+        <af:column sortable="false" headerText="Neg. Adj." id="rg8c2_8"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.negAdj}" id="rg8ot2_8"/>
+        </af:column>
+        <af:column sortable="false" headerText="Employee" id="rg8c2_9">
+            <af:outputText value="#{row.employee}" id="rg8ot2_9"/>
+        </af:column>
+        <af:column sortable="false" headerText="Status" id="rg8c2_10" width="125">
+            <af:outputText value="#{row.status}" id="rg8ot2_10"/>
+        </af:column>
+        <af:column sortable="false" headerText="Price" id="rg8c2_11"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.price}" id="rg8ot2_11"/>
+        </af:column>
+        <af:column sortable="false" headerText="Total" id="rg8c2_12"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.priceTotal}" id="rg8ot2_12"/>
+        </af:column>
+    </af:table>
+</jsp:root>

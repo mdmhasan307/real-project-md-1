@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>mil.usmc.mls2.stratis</groupId>
+    <artifactId>stratis</artifactId>
+    <version>704.01.05</version>
+  </parent>
+
+  <name>stratis-exml-service</name>
+  <artifactId>exml-service</artifactId>
+  <packaging>jar</packaging>
+
+  <properties>
+    <!-- unique sources per module -->
+    <sonar.sources>${project.basedir}/src/main/,${project.basedir}/src/exmlservice/</sonar.sources>
+    <sonar.tests>${project.basedir}/src/test/</sonar.tests>
+  </properties>
+
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+
+    <resources>
+      <resource>
+        <directory>${basedir}</directory>
+        <includes>
+          <include>*</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/</directory>
+        <includes>
+          <include>**/*.*</include>
+        </includes>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
+    </resources>
+
+    <plugins>
+      <plugin>
+        <groupId>org.jvnet.jaxb2.maven2</groupId>
+        <artifactId>maven-jaxb2-plugin</artifactId>
+        <version>${maven-jaxb2-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>i009ShipmentReceiptsIn</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <schemaLanguage>WSDL</schemaLanguage>
+              <generatePackage>exmlservice.I009</generatePackage>
+              <generateDirectory>${project.build.directory}/generated-sources/xjc-i009ShipmentReceiptsIn</generateDirectory>
+              <schemaDirectory>${project.basedir}/src/exmlservice/RICE_INTF</schemaDirectory>
+              <schemaIncludes>
+                <include>i009ShipmentReceiptsIn.xsd</include>
+              </schemaIncludes>
+            </configuration>
+          </execution>
+          <execution>
+            <id>i033StratisInventoryOut</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <schemaLanguage>WSDL</schemaLanguage>
+              <generatePackage>exmlservice.I033</generatePackage>
+              <generateDirectory>${project.build.directory}/generated-sources/xjc-i033StratisInventoryOut</generateDirectory>
+              <schemaDirectory>${project.basedir}/src/exmlservice/RICE_INTF</schemaDirectory>
+              <schemaIncludes>
+                <include>i033StratisInventoryOut.xsd</include>
+              </schemaIncludes>
+            </configuration>
+          </execution>
+          <execution>
+            <id>i111StratisDueInsOut</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <schemaLanguage>WSDL</schemaLanguage>
+              <generatePackage>exmlservice.I111</generatePackage>
+              <generateDirectory>${project.build.directory}/generated-sources/xjc-i111StratisDueInsOut</generateDirectory>
+              <schemaDirectory>${project.basedir}/src/exmlservice/RICE_INTF</schemaDirectory>
+              <schemaIncludes>
+                <include>i111StratisDueInsOut.xsd</include>
+              </schemaIncludes>
+            </configuration>
+          </execution>
+          <execution>
+            <id>i112SalesOrderOut</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <schemaLanguage>WSDL</schemaLanguage>
+              <generatePackage>exmlservice.I112</generatePackage>
+              <generateDirectory>${project.build.directory}/generated-sources/xjc-i112SalesOrderOut</generateDirectory>
+              <schemaDirectory>${project.basedir}/src/exmlservice/RICE_INTF</schemaDirectory>
+              <schemaIncludes>
+                <include>i112SalesOrderOut.xsd</include>
+              </schemaIncludes>
+            </configuration>
+          </execution>
+          <execution>
+            <id>i136StratisItemMaster</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <schemaLanguage>WSDL</schemaLanguage>
+              <generatePackage>exmlservice.I136</generatePackage>
+              <generateDirectory>${project.build.directory}/generated-sources/xjc-i136StratisItemMaster</generateDirectory>
+              <schemaDirectory>${project.basedir}/src/exmlservice/RICE_INTF</schemaDirectory>
+              <schemaIncludes>
+                <include>i136StratisItemMaster.xsd</include>
+              </schemaIncludes>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+
+  </build>
+
+  <dependencies>
+    <!-- java 8/9+ jaxb (api) -->
+    <dependency>
+      <groupId>jakarta.xml.bind</groupId>
+      <artifactId>jakarta.xml.bind-api</artifactId>
+    </dependency>
+    <!-- java 8/9+ jaxb (runtime) -->
+    <dependency>
+      <groupId>org.glassfish.jaxb</groupId>
+      <artifactId>jaxb-runtime</artifactId>
+    </dependency>
+    <!-- java 8/9+: jaxws (ws api) -->
+    <dependency>
+      <groupId>jakarta.xml.ws</groupId>
+      <artifactId>jakarta.xml.ws-api</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.oracle.fmwshare</groupId>
+      <artifactId>xml</artifactId>
+      <version>12.2.1-3-0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.agiledelta</groupId>
+      <artifactId>efx</artifactId>
+      <version>3.0.0.13</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+  </dependencies>
+
+</project>

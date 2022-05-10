@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <!-- Employee Workload History -->
+    <af:table var="row" rowBandingInterval="1" id="t6_1" autoHeightRows="0"
+              styleClass="AFStretchWidth"
+              value="#{viewScope.ReportsQueryResultBean.stdReportColumnList}"
+              rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Employee Workload History'}">
+        <af:column sortable="false" headerText="Employee" id="c6_1" width="150">
+            <af:outputText value="#{row.employee}" id="ot6_1"/>
+        </af:column>
+        <af:column sortable="false" headerText="Receipts" id="c6_2"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.receipts}" id="ot6_2"/>
+        </af:column>
+        <af:column sortable="false" headerText="Receipts Dollar Value" id="c6_12"
+                   inlineStyle="text-align: right;" width="130">
+            <af:outputText value="#{row.receiptsDollarValue}" id="ot6_12"
+                           inlineStyle="text-align: right;"/>
+        </af:column>
+        <af:column sortable="false" headerText="Stows" id="c6_3"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.stows}" id="ot6_3"/>
+        </af:column>
+        <af:column sortable="false" headerText="Stows Dollar Value" id="c6_8"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.stowsDollarValue}" id="ot6_8"/>
+        </af:column>
+        <af:column sortable="false" headerText="Picks" id="c6_4"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.picks}" id="ot6_4"/>
+        </af:column>
+        <af:column sortable="false" headerText="Picks Dollar Value" id="c6_9"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.picksDollarValue}" id="ot6_9"/>
+        </af:column>
+        <af:column sortable="false" headerText="Packs" id="c6_5"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.packs}" id="ot6_5"/>
+        </af:column>
+        <af:column sortable="false" headerText="Packs Dollar Value" id="c6_10"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.packsDollarValue}" id="ot6_10"/>
+        </af:column>
+        <af:column sortable="false" headerText="Invs" id="c6_6"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.invs}" id="ot6_6"/>
+        </af:column>
+        <af:column sortable="false" headerText="Invs Dollar Value" id="c6_11"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.invsDollarValue}" id="ot6_11"/>
+        </af:column>
+        <af:column sortable="false" headerText="Totals" id="c6_7"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.totals}" id="ot6_7"/>
+        </af:column>
+    </af:table>
+
+</jsp:root>

@@ -1,0 +1,486 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:stratis="taglib.mil.usmc.stratis">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="6"/>
+    <jsp:setProperty name="userbean" property="selected2" value="0"/>
+
+    <f:view>
+        <af:document title="STRATIS" id="d1">
+            <af:form id="main_form">
+                <af:panelStretchLayout startWidth="25" topHeight="150" bottomHeight="25" id="psl1">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/HeaderMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout id="topGroup" layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGridLayout id="pgl1">
+                                <af:gridRow id="gr1">
+                                    <af:gridCell valign="top" id="gc1">
+                                        <f:subview id="svSideBar">
+                                            <jsp:include page="../SideBar.jspx"/>
+                                        </f:subview>
+                                    </af:gridCell>
+                                    <af:gridCell valign="top" id="gc2">
+                                        <f:facet name="footer"/>
+                                        <af:panelHeader text="Inventory - Verification" id="ph1">
+                                            <af:panelGroupLayout id="pgl2" layout="horizontal" valign="bottom">
+                                                <af:popup id="niinInfo" contentDelivery="lazyUncached">
+                                                    <af:dialog title="NIIN INFO" id="niinInfoDialog" type="ok">
+                                                        <af:table value="#{bindings.NiinInfoView1.collectionModel}"
+                                                                  var="row" rows="#{bindings.NiinInfoView1.rangeSize}"
+                                                                  emptyText="#{bindings.NiinInfoView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                                  fetchSize="#{bindings.NiinInfoView1.rangeSize}"
+                                                                  summary="niin summary"
+                                                                  rowBandingInterval="0" id="t1">
+                                                            <af:column sortProperty="#{bindings.NiinInfoView1.hints.NiinId.name}"
+                                                                       sortable="false" rowHeader="true"
+                                                                       headerText="#{bindings.NiinInfoView1.hints.NiinId.label}"
+                                                                       id="c1">
+                                                                <af:outputText value="#{row.NiinId}"
+                                                                               shortDesc="#{bindings.NiinInfoView1.hints.NiinId.tooltip}"
+                                                                               id="ot1"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.NiinInfoView1.hints.Fsc.name}"
+                                                                       sortable="false"
+                                                                       headerText="FSC"
+                                                                       id="c2">
+                                                                <af:outputText value="#{row.Fsc}"
+                                                                               shortDesc="#{bindings.NiinInfoView1.hints.Fsc.tooltip}"
+                                                                               id="ot2"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.NiinInfoView1.hints.Niin.name}"
+                                                                       sortable="false"
+                                                                       headerText="NIIN"
+                                                                       id="c3">
+                                                                <af:outputText value="#{row.Niin}"
+                                                                               shortDesc="#{bindings.NiinInfoView1.hints.Niin.tooltip}"
+                                                                               id="ot3"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.NiinInfoView1.hints.Nomenclature.name}"
+                                                                       sortable="false"
+                                                                       headerText="#{bindings.NiinInfoView1.hints.Nomenclature.label}"
+                                                                       id="c4">
+                                                                <af:outputText value="#{row.Nomenclature}"
+                                                                               shortDesc="#{bindings.NiinInfoView1.hints.Nomenclature.tooltip}"
+                                                                               id="ot4"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.NiinInfoView1.hints.ShelfLifeCode.name}"
+                                                                       sortable="false"
+                                                                       headerText="Shelf Life Code"
+                                                                       id="c5">
+                                                                <af:outputText value="#{row.ShelfLifeCode}"
+                                                                               shortDesc="#{bindings.NiinInfoView1.hints.ShelfLifeCode.tooltip}"
+                                                                               id="ot5"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.NiinInfoView1.hints.Scc.name}"
+                                                                       sortable="false"
+                                                                       headerText="SCC"
+                                                                       id="c6">
+                                                                <af:outputText value="#{row.Scc}"
+                                                                               shortDesc="#{bindings.NiinInfoView1.hints.Scc.tooltip}"
+                                                                               id="ot6"/>
+                                                            </af:column>
+                                                            <af:column
+                                                                    sortProperty="#{bindings.NiinInfoView1.hints.ShelfLifeExtension.name}"
+                                                                    sortable="false"
+                                                                    headerText="Shelf Life Code"
+                                                                    id="c7">
+                                                                <af:outputText value="#{row.ShelfLifeExtension}"
+                                                                               shortDesc="#{bindings.NiinInfoView1.hints.ShelfLifeExtension.tooltip}"
+                                                                               id="ot7"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.NiinInfoView1.hints.Cube.name}"
+                                                                       sortable="false"
+                                                                       headerText="#{bindings.NiinInfoView1.hints.Cube.label}"
+                                                                       id="c8">
+                                                                <af:outputText value="#{row.Cube}"
+                                                                               shortDesc="#{bindings.NiinInfoView1.hints.Cube.tooltip}"
+                                                                               id="ot8"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.NiinInfoView1.hints.Weight.name}"
+                                                                       sortable="false"
+                                                                       headerText="#{bindings.NiinInfoView1.hints.Weight.label}"
+                                                                       id="c9">
+                                                                <af:outputText value="#{row.Weight}"
+                                                                               shortDesc="#{bindings.NiinInfoView1.hints.Weight.tooltip}"
+                                                                               id="ot9"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.NiinInfoView1.hints.Price.name}"
+                                                                       sortable="false"
+                                                                       headerText="#{bindings.NiinInfoView1.hints.Price.label}"
+                                                                       id="c10">
+                                                                <af:outputText value="#{row.Price}"
+                                                                               shortDesc="#{bindings.NiinInfoView1.hints.Price.tooltip}"
+                                                                               id="ot10"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.NiinInfoView1.hints.ActivityDate.name}"
+                                                                       sortable="false"
+                                                                       headerText="#{bindings.NiinInfoView1.hints.ActivityDate.label}"
+                                                                       id="c11">
+                                                                <stratis:adfDateFormatter value="#{row.ActivityDate}"
+                                                                                          pattern="${userbean.dateFormatPattern}"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.NiinInfoView1.hints.SupplyClass.name}"
+                                                                       sortable="false"
+                                                                       headerText="#{bindings.NiinInfoView1.hints.SupplyClass.label}"
+                                                                       id="c12">
+                                                                <af:outputText value="#{row.SupplyClass}"
+                                                                               shortDesc="#{bindings.NiinInfoView1.hints.SupplyClass.tooltip}"
+                                                                               id="ot12"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.NiinInfoView1.hints.TypeOfMaterial.name}"
+                                                                       sortable="false"
+                                                                       headerText="#{bindings.NiinInfoView1.hints.TypeOfMaterial.label}"
+                                                                       id="c13">
+                                                                <af:outputText value="#{row.TypeOfMaterial}"
+                                                                               shortDesc="#{bindings.NiinInfoView1.hints.TypeOfMaterial.tooltip}"
+                                                                               id="ot13"/>
+                                                            </af:column>
+                                                            <af:column
+                                                                    sortProperty="#{bindings.NiinInfoView1.hints.InventoryThreshold.name}"
+                                                                    sortable="false"
+                                                                    headerText="#{bindings.NiinInfoView1.hints.InventoryThreshold.label}"
+                                                                    id="c14">
+                                                                <af:outputText value="#{row.InventoryThreshold}"
+                                                                               shortDesc="#{bindings.NiinInfoView1.hints.InventoryThreshold.tooltip}"
+                                                                               id="ot14"/>
+                                                            </af:column>
+                                                        </af:table>
+                                                    </af:dialog>
+                                                </af:popup>
+                                                <af:spacer width="10" height="10" id="s1"/>
+                                                <af:panelGroupLayout id="pgl3">
+                                                    <af:panelGroupLayout layout="horizontal" id="pgl4">
+                                                        <af:inputText label="#{bindings.NiinLocId.label}"
+                                                                      value="#{bindings.NiinLocId.inputValue}"
+                                                                      styleClass="ReadOnlyField"
+                                                                      columns="#{bindings.NiinLocId.displayWidth}"
+                                                                      readOnly="true" id="itNiinLocId"/>
+                                                        <af:spacer width="10" height="10" id="s2"/>
+                                                        <af:inputText label="#{bindings.InventoryItemId.label}"
+                                                                      value="#{bindings.InventoryItemId.inputValue}"
+                                                                      styleClass="ReadOnlyField"
+                                                                      columns="#{bindings.InventoryItemId.displayWidth}"
+                                                                      readOnly="true" id="itIinventoryItemId"/>
+                                                    </af:panelGroupLayout>
+                                                    <af:panelGroupLayout layout="horizontal" id="pgl5">
+                                                        <af:inputText label="#{bindings.Niin.label}"
+                                                                      value="#{bindings.Niin.inputValue}"
+                                                                      styleClass="ReadOnlyField"
+                                                                      columns="#{bindings.Niin.displayWidth}"
+                                                                      readOnly="true" rendered="false" id="itNiin"/>
+                                                        <af:spacer width="10" height="10" id="s3"/>
+                                                        <af:inputText label="#{bindings.LocationLabel.label}"
+                                                                      value="#{bindings.LocationLabel.inputValue}"
+                                                                      styleClass="ReadOnlyField"
+                                                                      columns="#{bindings.LocationLabel.displayWidth}"
+                                                                      readOnly="true" id="it1LocationLabel"/>
+                                                    </af:panelGroupLayout>
+                                                    <af:panelGroupLayout layout="horizontal" id="pgl6">
+                                                        <af:inputText label="#{bindings.Nomenclature.label}"
+                                                                      value="#{bindings.Nomenclature.inputValue}"
+                                                                      styleClass="ReadOnlyField"
+                                                                      columns="#{bindings.Nomenclature.displayWidth}"
+                                                                      readOnly="true" id="itNomen"/>
+                                                        <af:spacer width="10" height="10" id="s4"/>
+                                                        <af:spacer width="10" height="10" id="s5"/>
+                                                    </af:panelGroupLayout>
+                                                    <af:panelGroupLayout layout="horizontal" id="pgl7">
+                                                        <af:inputText label="#{bindings.Side.label}"
+                                                                      value="#{bindings.Side.inputValue}"
+                                                                      styleClass="ReadOnlyField"
+                                                                      columns="#{bindings.Side.displayWidth}"
+                                                                      readOnly="true" id="itSide"/>
+                                                        <af:inputText label="#{bindings.Bay.label}"
+                                                                      value="#{bindings.Bay.inputValue}"
+                                                                      styleClass="ReadOnlyField"
+                                                                      columns="#{bindings.Bay.displayWidth}" readOnly="true"
+                                                                      id="itBay"/>
+                                                        <af:inputText label="#{bindings.LocLevel.label}"
+                                                                      value="#{bindings.LocLevel.inputValue}"
+                                                                      styleClass="ReadOnlyField"
+                                                                      columns="#{bindings.LocLevel.displayWidth}"
+                                                                      readOnly="true" id="itLocLevel"/>
+                                                    </af:panelGroupLayout>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout id="pgl8">
+                                                    <af:inputText label="Current NIIN Location"
+                                                                  value="#{bindings.LocationLabel.inputValue}"
+                                                                  readOnly="true" id="itNiinlocation"/>
+                                                    <af:panelGroupLayout id="pg185" layout="horizontal">
+                                                        <af:inputText label="#{bindings.Side.label}"
+                                                                      value="#{bindings.Side.inputValue}" readOnly="true"
+                                                                      id="itSideLabel"/>
+                                                        <af:spacer width="5" height="10" id="s19"/>
+                                                        <af:inputText label="#{bindings.Bay.label}"
+                                                                      value="#{bindings.Bay.inputValue}" readOnly="true"
+                                                                      id="itlabel"/>
+                                                        <af:spacer width="5" height="10" id="s20"/>
+                                                        <af:inputText label="#{bindings.LocLevel.label}"
+                                                                      value="#{bindings.LocLevel.inputValue}"
+                                                                      readOnly="true" id="itLocLevel2"/>
+                                                        <af:spacer width="5" height="10" id="s21"/>
+                                                        <af:inputText label="#{bindings.Slot.label}"
+                                                                      value="#{bindings.Slot.inputValue}" readOnly="true"
+                                                                      id="it2"/>
+                                                    </af:panelGroupLayout>
+                                                    <af:image
+                                                            source="/SlotImage?type=SLOT&amp;DI=#{bindings.DividerTypeId.inputValue}&amp;SI=#{bindings.DividerIndex.inputValue}"
+                                                            id="iDivider" shortDesc="slot image"/>
+                                                </af:panelGroupLayout>
+                                            </af:panelGroupLayout>
+                                            <af:switcher facetName="#{InventoryItemAll.expObj}" id="sInvItemAll">
+                                                <f:facet name="0">
+                                                    <af:panelFormLayout inlineStyle="border-style:solid;" id="pfl4">
+                                                        <af:panelGroupLayout layout="horizontal" id="pgl9">
+                                                            <af:inputText label="Location"
+                                                                          validator="#{InventoryItemAll.locationValidator}"
+                                                                          columns="10"
+                                                                          inlineStyle="font-weight:bold;text-transform:uppercase;"
+                                                                          binding="#{InventoryItemAll.scanLocLabel}"
+                                                                          id="itLocation"/>
+                                                        </af:panelGroupLayout>
+                                                        <af:spacer width="10" height="10" id="s6"/>
+                                                        <af:panelGroupLayout layout="horizontal" id="pgl10">
+                                                            <af:button text="Submit"
+                                                                       action="#{InventoryItemAll.actionForwardStrForInventoryItemNormalOnSubmit}"
+                                                                       id="inventoryItemNormalSubmitId" partialSubmit="false"/>
+                                                            <af:spacer width="10" height="10" id="s7"/>
+                                                            <af:button text="ByPass"
+                                                                       id="inventoryItemNormalCancelId"
+                                                                       action="#{InventoryItemAll.actionForwardStrForInventoryItemNormalOnByPass}"
+                                                                       immediate="true"
+                                                                       partialSubmit="false"/>
+                                                        </af:panelGroupLayout>
+                                                        <f:facet name="footer"/>
+                                                    </af:panelFormLayout>
+                                                </f:facet>
+                                                <f:facet name="1">
+                                                    <af:panelGroupLayout id="pgl11">
+                                                        <af:panelFormLayout inlineStyle="border-style:solid;" id="pfl5">
+                                                            <af:spacer width="10" height="10" id="s8"/>
+                                                            <af:outputText value="NIIN Verification"
+                                                                           inlineStyle="font-weight:bold;"
+                                                                           id="otNiinVerification"/>
+                                                            <af:panelGroupLayout layout="horizontal" id="pgl12">
+                                                                <af:panelFormLayout inlineStyle="border-style:solid;"
+                                                                                    id="pfl6">
+                                                                    <af:panelGroupLayout layout="horizontal" id="pgl13">
+                                                                        <af:inputText label="Enter last two digits of NIIN"
+                                                                                      columns="2"
+                                                                                      validator="#{InventoryItemAll.niinLastTwoValidation}"
+                                                                                      inlineStyle="font-weight:bold;"
+                                                                                      binding="#{InventoryItemAll.enterNiinLastTwoDigits}"
+                                                                                      maximumLength="2"
+                                                                                      id="it1LastTwoNiin"/>
+                                                                        <af:link actionListener="#{InventoryItemAll.lookupNiins}"
+                                                                                 partialSubmit="true"
+                                                                                 immediate="true"
+                                                                                 id="cGoNiinDetail"
+                                                                                 icon="/resources/images/view_image.gif">
+                                                                            <!--af:image source="/resources/images/view_image.gif" id="i1" shortDesc="view image"/-->
+                                                                            <af:showPopupBehavior popupId="niinInfo" triggerType="click"/>
+                                                                        </af:link>
+                                                                    </af:panelGroupLayout>
+                                                                </af:panelFormLayout>
+                                                            </af:panelGroupLayout>
+                                                            <af:spacer width="10" height="10" id="s9"/>
+                                                            <af:panelGroupLayout layout="horizontal" id="pgl14">
+                                                                <af:button text="Submit"
+                                                                           action="#{InventoryItemAll.actionForwardStrForInventoryItemNormalNiinVerOnSubmit}"
+                                                                           id="inventoryItemNormalNiinVerSubmitId" partialSubmit="false"/>
+                                                                <af:spacer width="10" height="10" id="s10"/>
+                                                                <af:button text="ByPass"
+                                                                           action="#{InventoryItemAll.actionForwardStrForInventoryItemNormalOnByPass}"
+                                                                           id="inventoryItemExpNormalNiinVerCancelId"
+                                                                           partialSubmit="false"/>
+                                                            </af:panelGroupLayout>
+                                                            <f:facet name="footer"/>
+                                                        </af:panelFormLayout>
+                                                    </af:panelGroupLayout>
+                                                </f:facet>
+                                                <f:facet name="2">
+                                                    <af:panelGroupLayout id="pgl15">
+                                                        <af:panelFormLayout inlineStyle="border-style:solid;" id="pfl7">
+                                                            <af:spacer width="10" height="10" id="s11"/>
+                                                            <af:outputText value="Quantity Verification"
+                                                                           inlineStyle="font-weight:bold;"
+                                                                           id="otQtyVerification"/>
+                                                            <af:panelGroupLayout layout="horizontal" id="pgl16">
+                                                                <af:panelFormLayout inlineStyle="border-style:solid;"
+                                                                                    id="pfl8">
+                                                                    <f:facet name="footer"/>
+                                                                    <af:outputText value="Please perform inventory count."
+                                                                                   inlineStyle="color:rgb(0,0,255); font-weight:bold;"
+                                                                                   id="otPlsPerformCnt"/>
+                                                                    <af:panelGroupLayout layout="horizontal" id="pgl17">
+                                                                        <af:inputText label="Enter Quantity" columns="6"
+                                                                                      validator="#{InventoryItemAll.inventoryQtyValidation}"
+                                                                                      inlineStyle="font-weight:bold;"
+                                                                                      binding="#{InventoryItemAll.enterQty}"
+                                                                                      maximumLength="6"
+                                                                                      id="itEnterInvQty">
+                                                                            <f:validator validatorId="javax.faces.LongRange"/>
+                                                                        </af:inputText>
+                                                                        <af:spacer width="10" height="10" id="s12"/>
+                                                                        <af:inputText label="Reconfirm Quantity"
+                                                                                      rendered="#{InventoryItemAll.enterQty.value >= 0}"
+                                                                                      inlineStyle="font-weight:bold;"
+                                                                                      columns="6"
+                                                                                      validator="#{InventoryItemAll.reEnteredQtyValidation}"
+                                                                                      binding="#{InventoryItemAll.reEnterQty}"
+                                                                                      immediate="true"
+                                                                                      id="itReconfirmQty">
+                                                                            <f:validator validatorId="javax.faces.LongRange"/>
+                                                                        </af:inputText>
+                                                                    </af:panelGroupLayout>
+                                                                    <af:panelGroupLayout rendered="#{InventoryItemAll.srlChoice>=1}"
+                                                                                         id="pgl18">
+                                                                        <af:spacer width="10" height="10" id="s13"/>
+                                                                        <af:panelFormLayout inlineStyle="border-style:solid;"
+                                                                                            id="pfl9">
+                                                                            <af:outputText
+                                                                                    inlineStyle="color:rgb(0,0,255); font-weight:bold;"
+                                                                                    value="Enter Serial Number(s) for this NIIN in this Location"
+                                                                                    id="otEnterSer"/>
+                                                                            <af:spacer width="10" height="15" id="s14"/>
+                                                                            <af:button text="Delete"
+                                                                                       actionListener="#{InventoryItemAll.deleteSrlLotNumFromList}"
+                                                                                       id="srLDelId"
+                                                                                       partialSubmit="false"/>
+                                                                            <af:table
+                                                                                    value="#{bindings.SerialOrLotNumListInv1.collectionModel}"
+                                                                                    var="row"
+                                                                                    rows="#{bindings.SerialOrLotNumListInv1.rangeSize}"
+                                                                                    first="#{bindings.SerialOrLotNumListInv1.rangeStart}"
+                                                                                    emptyText="#{bindings.SerialOrLotNumListInv1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                                                    selectionListener="#{bindings.SerialOrLotNumListInv1.collectionModel.makeCurrent}"
+                                                                                    selectedRowKeys="#{bindings.SerialOrLotNumListInv1.collectionModel.selectedRow}"
+                                                                                    rowSelection="single" autoHeightRows="3"
+                                                                                    id="tSrOrLt">
+                                                                                <af:column sortProperty="SerialNumber"
+                                                                                           rendered="#{InventoryItemAll.srlChoice le 2}"
+                                                                                           sortable="false"
+                                                                                           headerText="#{bindings.SerialOrLotNumListInv1.labels.SerialNumber}"
+                                                                                           id="cSerNum"
+                                                                                           rowHeader="true">
+                                                                                    <af:inputText value="#{row.SerialNumber}"
+                                                                                                  simple="true"
+                                                                                                  required="#{bindings.SerialOrLotNumListInv1.attrDefs.SerialNumber.mandatory}"
+                                                                                                  columns="35"
+                                                                                                  maximumLength="30"
+                                                                                                  id="itSerNum" readOnly="true"/>
+                                                                                </af:column>
+                                                                                <af:column sortProperty="LotConNum"
+                                                                                           rendered="#{InventoryItemAll.srlChoice ge 2}"
+                                                                                           sortable="false"
+                                                                                           headerText="#{bindings.SerialOrLotNumListInv1.labels.LotConNum}"
+                                                                                           id="cConNum">
+                                                                                    <af:inputText value="#{row.LotConNum}"
+                                                                                                  simple="true"
+                                                                                                  required="#{bindings.SerialOrLotNumListInv1.attrDefs.LotConNum.mandatory}"
+                                                                                                  columns="35"
+                                                                                                  maximumLength="30"
+                                                                                                  id="itLotConNum"/>
+                                                                                </af:column>
+                                                                                <af:column sortProperty="QtyLot"
+                                                                                           sortable="false"
+                                                                                           headerText="#{bindings.SerialOrLotNumListInv1.labels.QtyLot}"
+                                                                                           id="cQtyLot">
+                                                                                    <af:inputText value="#{row.QtyLot}"
+                                                                                                  simple="true"
+                                                                                                  required="#{bindings.SerialOrLotNumListInv1.attrDefs.QtyLot.mandatory}"
+                                                                                                  columns="6"
+                                                                                                  maximumLength="4"
+                                                                                                  id="itQtyLot" readOnly="true"/>
+                                                                                </af:column>
+                                                                            </af:table>
+                                                                            <af:spacer width="10" height="10" id="s15"/>
+                                                                            <af:panelFormLayout id="pfl10">
+                                                                                <af:panelGroupLayout layout="horizontal"
+                                                                                                     id="pgl19">
+                                                                                    <af:panelGroupLayout id="pgl195">
+                                                                                        <af:inputText label="Serial Number     "
+                                                                                                      binding="#{InventoryItemAll.serialNumber}"
+                                                                                                      rendered="#{InventoryItemAll.srlChoice le 2}"
+                                                                                                      inlineStyle="font-weight:bold;"
+                                                                                                      contentStyle="text-transform:uppercase;"
+                                                                                                      columns="12"
+                                                                                                      maximumLength="30"
+                                                                                                      id="itSerNum2"/>
+                                                                                        <af:panelGroupLayout id="pgl196"
+                                                                                                             layout="horizontal">
+                                                                                            <af:inputText label="Serial Range from "
+                                                                                                          binding="#{InventoryItemAll.startSerial}"
+                                                                                                          rendered="#{InventoryItemAll.srlChoice le 2}"
+                                                                                                          inlineStyle="font-weight:bold;"
+                                                                                                          contentStyle="text-transform:uppercase;"
+                                                                                                          columns="12"
+                                                                                                          maximumLength="30"
+                                                                                                          id="itSerialRange"/>
+                                                                                            <af:inputText label="to "
+                                                                                                          binding="#{InventoryItemAll.endSerial}"
+                                                                                                          rendered="#{InventoryItemAll.srlChoice le 2}"
+                                                                                                          inlineStyle="font-weight:bold;"
+                                                                                                          contentStyle="text-transform:uppercase;"
+                                                                                                          columns="12"
+                                                                                                          maximumLength="30"
+                                                                                                          id="it1"/>
+                                                                                        </af:panelGroupLayout>
+                                                                                    </af:panelGroupLayout>
+                                                                                    <af:button text="Add to the List"
+                                                                                               actionListener="#{InventoryItemAll.addSrlLotNumList}"
+                                                                                               id="srLSubmitId1" partialSubmit="false"/>
+                                                                                </af:panelGroupLayout>
+                                                                            </af:panelFormLayout>
+                                                                            <f:facet name="footer"/>
+                                                                        </af:panelFormLayout>
+                                                                    </af:panelGroupLayout>
+                                                                </af:panelFormLayout>
+                                                            </af:panelGroupLayout>
+                                                            <af:spacer width="10" height="10" id="s17"/>
+                                                            <af:panelGroupLayout id="pgl21">
+                                                                <af:button text="Submit"
+                                                                           action="#{InventoryItemAll.actionForwardStrForInventoryItemNormalQtyVerOnSubmit}"
+                                                                           id="inventoryItemNormalQtyVerSubmitId" partialSubmit="false"/>
+                                                                <af:spacer width="10" height="10" id="s18"/>
+                                                                <af:button text="ByPass"
+                                                                           action="#{InventoryItemAll.actionForwardStrForInventoryItemNormalOnByPass}"
+                                                                           id="inventoryItemExpNormalQtyVerCancelId" partialSubmit="false"/>
+                                                            </af:panelGroupLayout>
+                                                            <f:facet name="footer"/>
+                                                        </af:panelFormLayout>
+                                                    </af:panelGroupLayout>
+                                                </f:facet>
+                                            </af:switcher>
+                                        </af:panelHeader>
+                                    </af:gridCell>
+                                </af:gridRow>
+
+                            </af:panelGridLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="../FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <af:spacer width="24" height="675"/>
+                    </f:facet>
+                    <f:facet name="end"/>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+
+    </f:view>
+</jsp:root>

@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<AppModule
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="ShippingService"
+   Version="11.1.2.64.36"
+   ComponentClass="mil.stratis.model.services.ShippingServiceImpl"
+   LoadComponentsLazily="true" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+   </DesignTime>
+   <ViewUsage
+      Name="AllLDCON"
+      ViewObjectName="mil.stratis.model.view.ship.LDCONList"/>
+   <ViewUsage
+      Name="ShippedTo"
+      ViewObjectName="mil.stratis.model.view.ship.UnrestrictedCustomersList"/>
+   <ViewUsage
+      Name="ListContainers_Remark"
+      ViewObjectName="mil.stratis.model.view.ship.UndeliveredContainersList"/>
+   <ViewUsage
+      Name="RemarkTo"
+      ViewObjectName="mil.stratis.model.view.ship.UnrestrictedCustomersList"/>
+   <ViewUsage
+      Name="ListBarcodeInfo"
+      ViewObjectName="mil.stratis.model.view.ship.ConsolidationBarcodeInfoList"/>
+   <ViewUsage
+      Name="AllShippingFloors_Manifest"
+      ViewObjectName="mil.stratis.model.view.ship.UnmanifestedFloorsList"/>
+   <ViewUsage
+      Name="UndeliveredLDCONList"
+      ViewObjectName="mil.stratis.model.view.ship.UndeliveredManifestedLDCONList"/>
+   <ViewUsage
+      Name="printLDCONList"
+      ViewObjectName="mil.stratis.model.view.ship.UndeliveredManifestedLDCONList"/>
+   <ViewUsage
+      Name="printContainerList"
+      ViewObjectName="mil.stratis.model.view.ship.UndeliveredManifestedLeadTCNList"/>
+   <ViewUsage
+      Name="printAACList"
+      ViewObjectName="mil.stratis.model.view.ship.UndeliveredManifestedAACList"/>
+   <ViewUsage
+      Name="ListPallets"
+      ViewObjectName="mil.stratis.model.view.ship.UndeliveredManifestedLDCONList"/>
+   <ViewUsage
+      Name="ListContainers_Consolidate"
+      ViewObjectName="mil.stratis.model.view.ship.UndeliveredUnmanifestedContainersList"/>
+   <ViewUsage
+      Name="AllCustomers_Consolidate"
+      ViewObjectName="mil.stratis.model.view.ship.UnmanifestedCustomersList"/>
+   <ViewUsage
+      Name="TransshipmentReceiptView1"
+      ViewObjectName="mil.stratis.model.view.rcv.ReceiptView"/>
+   <ViewUsage
+      Name="ShippingManifestView1"
+      ViewObjectName="mil.stratis.model.view.ship.ShippingManifestView"/>
+   <ViewUsage
+      Name="ListBarcodeInfo_INNER"
+      ViewObjectName="mil.stratis.model.view.ship.ConsolidationBarcodeInfoList_INNER"/>
+   <ViewUsage
+      Name="AllFloors_Pallet"
+      ViewObjectName="mil.stratis.model.view.ship.AllFloors"/>
+   <ViewUsage
+      Name="TempManifestReview1"
+      ViewObjectName="mil.stratis.model.view.ship.TempManifestReview"/>
+   <ViewUsage
+      Name="UnprocessBarcodeRptView1"
+      ViewObjectName="mil.stratis.model.view.ship.UnprocessBarcodeRptView"/>
+   <ViewUsage
+      Name="ManifestedTodayRptView1"
+      ViewObjectName="mil.stratis.model.view.ship.ManifestedTodayRptView"/>
+   <ViewUsage
+      Name="UnmanifestRptView1"
+      ViewObjectName="mil.stratis.model.view.ship.UnmanifestRptView"/>
+   <ViewUsage
+      Name="AllShippingAacs_Manifest"
+      ViewObjectName="mil.stratis.model.view.ship.UnmanifestedAacsList"/>
+   <AppModuleUsage
+      Name="ImportFiles1"
+      FullName="mil.stratis.model.services.ImportFiles"
+      SharedScope="0"/>
+   <Properties>
+      <CustomProperties>
+         <Property
+            Name="DATA_CONTROL_NAME"
+            Value="ShippingServiceDataControl"/>
+      </CustomProperties>
+   </Properties>
+</AppModule>

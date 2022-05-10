@@ -1,0 +1,4 @@
+
+-- Insert a baseline record and value into SETTINGS_SYSTEM.SYSTEM_UUID table to ensure the table is in a valid state.
+INSERT INTO INNOV.SETTINGS_SYSTEM (ID, SYSTEM_UUID) VALUES (SYS_GUID(), HEXTORAW('00000000000000001111000000000004'));
+COMMIT;

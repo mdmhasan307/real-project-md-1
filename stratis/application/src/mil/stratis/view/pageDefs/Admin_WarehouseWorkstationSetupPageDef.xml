@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="Admin_WarehouseWorkstationSetupPageDef" Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator Binds="EquipView1_Workstation" RangeSize="25" DataControl="AppModuleDataControl"
+              StateValidation="false" id="EquipView1_WorkstationIterator"  Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <searchRegion Binds="EquipView1_WorkstationIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="EquipView1_WorkstationQuery"/>
+    <iterator Binds="WorkstationTypeView1" RangeSize="25" DataControl="WarehouseSetupDataControl"
+              id="WorkstationTypeView1Iterator"/>
+    <iterator Binds="EquipPackGroupView1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="EquipPackGroupView1Iterator"/>
+    <iterator id="WacTableMechView1_WorkstationIterator" RangeSize="-1"
+              Binds="Root.WarehouseSetup1.WacTableMechView1_Workstation" DataControl="StratisRootServiceDataControl"
+              Refresh="ifNeeded"/>
+    <invokeAction id="refreshWAC" Refresh="ifNeeded" Binds="ExecuteWithParams"/>
+    <!-- -->
+    <iterator id="AllComPortView1Iterator" RangeSize="-1" Binds="AllComPortView1"
+              DataControl="AppModuleDataControl" Refresh="ifNeeded"/>
+    <!-- -->
+    <iterator id="WarehouseViewAll1Iterator_Workstation" RangeSize="-1"
+              Binds="WarehouseViewAll1_Workstation" DataControl="WarehouseSetupDataControl"
+              Refresh="ifNeeded"/>
+    <!-- Added for legacy -->        
+  </executables>
+  <bindings>
+    <tree IterBinding="EquipView1_WorkstationIterator" id="EquipView1_Workstation">
+      <nodeDefinition DefName="mil.stratis.model.view.site.EquipView" Name="EquipView1_Workstation0">
+        <AttrNames>
+          <Item Value="Name"/>
+          <Item Value="Description"/>
+          <Item Value="WacNumber"/>
+          <Item Value="WarehouseId"/>
+          <Item Value="Building"/>
+          <Item Value="ShippingArea"/>
+          <Item Value="PackingGroup"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="EquipView1_WorkstationIterator" id="Name">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EquipView1_WorkstationIterator" id="Description">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EquipView1_WorkstationIterator" id="Building">
+      <AttrNames>
+        <Item Value="Building"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EquipView1_WorkstationIterator" id="WacNumber">
+      <AttrNames>
+        <Item Value="WacNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EquipView1_WorkstationIterator" id="ComPortEquipmentId">
+      <AttrNames>
+        <Item Value="ComPortEquipmentId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EquipView1_WorkstationIterator" id="ComPortPrinterId">
+      <AttrNames>
+        <Item Value="ComPortPrinterId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EquipView1_WorkstationIterator" id="EquipmentNumber">
+      <AttrNames>
+        <Item Value="EquipmentNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EquipView1_WorkstationIterator" id="HasCubiscan">
+      <AttrNames>
+        <Item Value="HasCubiscan"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EquipView1_WorkstationIterator" id="WarehouseId">
+      <AttrNames>
+        <Item Value="WarehouseId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EquipView1_WorkstationIterator" id="ShippingArea">
+      <AttrNames>
+        <Item Value="ShippingArea"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EquipView1_WorkstationIterator" id="ComName">
+      <AttrNames>
+        <Item Value="ComName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EquipView1_WorkstationIterator" id="ComName2_1">
+      <AttrNames>
+        <Item Value="ComName2_1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EquipView1_WorkstationIterator" id="PackingGroup">
+      <AttrNames>
+        <Item Value="PackingGroup"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EquipView1_WorkstationIterator" id="PrinterName">
+      <AttrNames>
+        <Item Value="PrinterName"/>
+      </AttrNames>
+    </attributeValues>
+    <list id="EquipView1HasCubiscan" IterBinding="EquipView1_WorkstationIterator"
+          StaticList="true">
+      <AttrNames>
+        <Item Value="HasCubiscan"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </list>
+    <list IterBinding="WorkstationTypeView1Iterator" ListOperMode="navigation" ListIter="WorkstationTypeView1Iterator"
+          id="WorkstationTypeView1" DTSupportsMRU="true" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="WorkstationName"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="EquipPackGroupView1Iterator" ListOperMode="navigation" ListIter="EquipPackGroupView1Iterator"
+          id="EquipPackGroupView1" DTSupportsMRU="true" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="PackArea"/>
+      </AttrNames>
+    </list>
+    <!-- Legacy -->
+     <list id="EquipView1PackGroupList" IterBinding="EquipView1_WorkstationIterator" StaticList="false" ListOperMode="setAttribute"
+          ListIter="EquipPackGroupView1Iterator">
+      <AttrNames>
+        <Item Value="PackingGroup"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="PackArea"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="PackArea"/>
+      </ListDisplayAttrNames>
+    </list>
+    <!-- -->
+    <list id="EquipView1WacId" IterBinding="EquipView1_WorkstationIterator" StaticList="false" ListOperMode="setAttribute"
+          ListIter="WacTableMechView1_WorkstationIterator">
+      <AttrNames>
+        <Item Value="WacId"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="WacId"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="WacNumber"/>
+      </ListDisplayAttrNames>
+    </list>
+    <!-- -->
+    <list id="EquipView1ComPortEquipmentId" IterBinding="EquipView1_WorkstationIterator" StaticList="false"
+          ListOperMode="setAttribute" ListIter="AllComPortView1Iterator">
+      <AttrNames>
+        <Item Value="ComPortEquipmentId"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="ComPortId"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Name"/>
+      </ListDisplayAttrNames>
+    </list>
+    <!-- -->
+     <list id="EquipView1WarehouseId" IterBinding="EquipView1_WorkstationIterator" StaticList="false" ListOperMode="setAttribute"
+          ListIter="WarehouseViewAll1Iterator_Workstation">
+      <AttrNames>
+        <Item Value="WarehouseId"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="WarehouseId"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Building"/>
+      </ListDisplayAttrNames>
+    </list>
+    <list id="EquipView1Description" IterBinding="EquipView1_WorkstationIterator"
+          StaticList="true">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Receiving Station"/>
+        <Item Value="Stow / Issue Station"/>
+        <Item Value="Packing Station - Consolidation"/>
+        <Item Value="Packing Station - Single"/>
+        <Item Value="Shipping Station"/>
+        <Item Value="Stratis Admin Station"/>
+        <Item Value="Dummy Terminal"/>
+      </ValueList>
+    </list>
+
+    <!-- Legacy -->
+    <action IterBinding="EquipView1_WorkstationIterator" id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+     <action id="ExecuteWithParams" IterBinding="WacTableMechView1_WorkstationIterator"
+            InstanceName="StratisRootServiceDataControl.Root.WarehouseSetup1.WacTableMechView1_Workstation"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="executeWithParams">
+      <NamedData NDName="WAREHOUSE_ID" NDType="java.lang.String" NDValue="${bindings.WarehouseId}" />
+    </action>
+  </bindings>
+</pageDefinition>

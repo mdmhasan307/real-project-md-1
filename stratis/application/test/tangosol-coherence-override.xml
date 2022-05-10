@@ -1,0 +1,10 @@
+<?xml version='1.0'?>
+
+<coherence>
+    <cluster-config>
+        <member-identity>
+            <cluster-name system-property="tangosol.coherence.cluster">
+                MyCluster</cluster-name>
+        </member-identity>
+    </cluster-config>
+</coherence>

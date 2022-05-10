@@ -1,0 +1,970 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <view id="Login">
+    <page>/Login.jspx</page>
+  </view>
+  <view id="LoginContinued">
+    <page>/LoginContinued.jspx</page>
+  </view>
+  <view id="WarehouseHome">
+    <page>/WarehouseHome.jspx</page>
+  </view>
+  <view id="Receiving_Home">
+    <page>/ws/Receiving_Home.jspx</page>
+  </view>
+  <view id="Receiving_General">
+    <page>/ws/Receiving_General.jspx</page>
+  </view>
+  <view id="Receiving_EnterSerial">
+    <page>/ws/Receiving_EnterSerial.jspx</page>
+  </view>
+  <view id="Receiving_CrossDock">
+    <page>/ws/Receiving_CrossDock.jspx</page>
+  </view>
+  <view id="Receiving_CancelSID">
+    <page>/ws/Receiving_CancelSID.jspx</page>
+  </view>
+  <view id="Picking_Home">
+    <page>/ws/Picking_Home.jspx</page>
+  </view>
+  <view id="Picking_Normal">
+    <page>/ws/Picking_Normal.jspx</page>
+  </view>
+  <view id="Picking_NormalMain">
+    <page>/ws/Picking_NormalMain.jspx</page>
+  </view>
+  <view id="Picking_NormalNiinVer">
+    <page>/ws/Picking_NormalNiinVer.jspx</page>
+  </view>
+  <view id="Picking_Priority">
+    <page>/ws/Picking_Priority.jspx</page>
+  </view>
+  <view id="Picking_Wtq">
+    <page>/ws/Picking_Wtq.jspx</page>
+  </view>
+  <view id="Picking_Route">
+    <page>/ws/Picking_Route.jspx</page>
+  </view>
+  <view id="Picking_UIDialog">
+    <page>/ws/Picking_UIDialog.jspx</page>
+  </view>
+  <view id="Picking_AAC">
+    <page>/ws/Picking_AAC.jspx</page>
+  </view>
+  <view id="Admin_ExceptionProcessing">
+    <page>/admin/Admin_ExceptionProcessing.jspx</page>
+  </view>
+  <view id="Admin_Home">
+    <page>/admin/Admin_Home.jspx</page>
+  </view>
+  <view id="Admin_InventoryManagement">
+    <page>/admin/Admin_InventoryManagement.jspx</page>
+  </view>
+  <view id="Admin_InventoryReview">
+    <page>/admin/Admin_InventoryReview.jspx</page>
+  </view>
+  <view id="Admin_InventorySchedule">
+    <page>/admin/Admin_InventorySchedule.jspx</page>
+  </view>
+  <view id="Admin_ModifyGroup">
+    <page>/admin/Admin_ModifyGroup.jspx</page>
+  </view>
+  <view id="Admin_ModifyUser">
+    <page>/admin/Admin_ModifyUser.jspx</page>
+  </view>
+  <view id="Admin_NonMechRemoval">
+    <page>/admin/Admin_NonMechRemoval.jspx</page>
+  </view>
+  <view id="Admin_ProcessGCSSMCExports">
+    <page>/admin/Admin_ProcessGCSSMCExports.jspx</page>
+  </view>
+  <view id="Admin_ProcessGCSSMCImports">
+    <page>/admin/Admin_ProcessGCSSMCImports.jspx</page>
+  </view>
+  <view id="Admin_ProcessGCSSMCLogs">
+    <page>/admin/Admin_ProcessGCSSMCLogs.jspx</page>
+  </view>
+  <view id="Admin_ProcessGCSSMCRecon">
+    <page>/admin/Admin_ProcessGCSSMCRecon.jspx</page>
+  </view>
+  <view id="Admin_SystemAdmin">
+    <page>/admin/Admin_SystemAdmin.jspx</page>
+  </view>
+  <view id="Admin_SystemSetupGCSSMC">
+    <page>/admin/Admin_SystemSetupGCSSMC.jspx</page>
+  </view>
+  <view id="Admin_UserManagement">
+    <page>/admin/Admin_UserManagement.jspx</page>
+  </view>
+  <view id="Admin_WarehouseAACUpdate">
+    <page>/admin/Admin_WarehouseAACUpdate.jspx</page>
+  </view>
+  <view id="Admin_WarehouseBuildingSetup">
+    <page>/admin/Admin_WarehouseBuildingSetup.jspx</page>
+  </view>
+  <view id="Admin_WarehouseChangeCC">
+    <page>/admin/Admin_WarehouseChangeCC.jspx</page>
+  </view>
+  <view id="Admin_WarehouseChangeLoc">
+    <page>/admin/Admin_WarehouseChangeLoc.jspx</page>
+  </view>
+  <view id="Admin_WarehouseComSetup">
+    <page>/admin/Admin_WarehouseComSetup.jspx</page>
+  </view>
+  <view id="Admin_WarehouseConsoldationSetup">
+    <page>/admin/Admin_WarehouseConsoldationSetup.jspx</page>
+  </view>
+  <view id="Admin_WarehouseDividerSetup">
+    <page>/admin/Admin_WarehouseDividerSetup.jspx</page>
+  </view>
+  <view id="Admin_WarehouseFloorLocationSetup">
+    <page>/admin/Admin_WarehouseFloorLocationSetup.jspx</page>
+  </view>
+  <view id="Admin_WarehouseManagement">
+    <page>/admin/Admin_WarehouseManagement.jspx</page>
+  </view>
+  <view id="Admin_WarehouseMechSetup">
+    <page>/admin/Admin_WarehouseMechSetup.jspx</page>
+  </view>
+  <view id="Admin_WarehouseNiinInquiry">
+    <page>/admin/Admin_WarehouseNiinInquiry.jspx</page>
+  </view>
+  <view id="Admin_WarehouseNiinUpdate">
+    <page>/admin/Admin_WarehouseNiinUpdate.jspx</page>
+  </view>
+  <view id="Admin_WarehouseNonMechSetup">
+    <page>/admin/Admin_WarehouseNonMechSetup.jspx</page>
+  </view>
+  <view id="Admin_WarehouseRewarehouse">
+    <page>/admin/Admin_WarehouseRewarehouse.jspx</page>
+  </view>
+  <view id="Admin_WarehouseRouteUpdate">
+    <page>/admin/Admin_WarehouseRouteUpdate.jspx</page>
+  </view>
+  <view id="Admin_WarehouseSetup">
+    <page>/admin/Admin_WarehouseSetup.jspx</page>
+  </view>
+  <view id="Admin_WarehouseShippingRouteUpdate">
+    <page>/admin/Admin_WarehouseShippingRouteUpdate.jspx</page>
+  </view>
+  <view id="Admin_WarehouseStorageBin">
+    <page>/admin/Admin_WarehouseStorageBin.jspx</page>
+  </view>
+  <view id="Admin_WarehouseWACSetup">
+    <page>/admin/Admin_WarehouseWACSetup.jspx</page>
+  </view>
+  <view id="Admin_WarehouseWalkThru">
+    <page>/admin/Admin_WarehouseWalkThru.jspx</page>
+  </view>
+  <view id="Admin_WarehouseWorkstationSetup">
+    <page>/admin/Admin_WarehouseWorkstationSetup.jspx</page>
+  </view>
+  <view id="NiinDetail">
+    <page>/ws/NiinDetail.jspx</page>
+  </view>
+  <view id="Shipping_Home">
+    <page>/ws/Shipping_Home.jspx</page>
+  </view>
+  <view id="Shipping_AACUpdate">
+    <page>/ws/Shipping_AACUpdate.jspx</page>
+  </view>
+  <view id="Shipping_AcknowledgeShipment">
+    <page>/ws/Shipping_AcknowledgeShipment.jspx</page>
+  </view>
+  <view id="Shipping_AddContainer">
+    <page>/ws/Shipping_AddContainer.jspx</page>
+  </view>
+  <view id="Shipping_ManifestByAAC">
+    <page>/ws/Shipping_ManifestByAAC.jspx</page>
+  </view>
+  <view id="Shipping_Manifestshipment">
+    <page>/ws/Shipping_Manifestshipment.jspx</page>
+  </view>
+  <view id="Shipping_RelocatePallet">
+    <page>/ws/Shipping_RelocatePallet.jspx</page>
+  </view>
+  <view id="Shipping_RemarkAAC">
+    <page>/ws/Shipping_RemarkAAC.jspx</page>
+  </view>
+  <view id="Shipping_ReviewContents">
+    <page>/ws/Shipping_ReviewContents.jspx</page>
+  </view>
+  <view id="Shipping_Transshipment">
+    <page>/ws/Shipping_Transshipment.jspx</page>
+  </view>
+  <view id="Receiving_GeneralDetail">
+    <page>/ws/Receiving_GeneralDetail.jspx</page>
+  </view>
+  <view id="Inventory_Home">
+    <page>/ws/Inventory_Home.jspx</page>
+  </view>
+  <view id="InventoryItem_NormalMain">
+    <page>/ws/InventoryItem_NormalMain.jspx</page>
+  </view>
+  <view id="InventoryLocSurvey_NormalMain">
+    <page>/ws/InventoryLocSurvey_NormalMain.jspx</page>
+  </view>
+  <view id="ShelfLife_NormalMain">
+    <page>/ws/ShelfLife_NormalMain.jspx</page>
+  </view>
+  <view id="Packing_Home">
+    <page>/ws/Packing_Home.jspx</page>
+  </view>
+  <view id="Packing_Normal">
+    <page>/ws/Packing_Normal.jspx</page>
+  </view>
+  <view id="Packing_CloseCarton">
+    <page>/ws/Packing_CloseCarton.jspx</page>
+  </view>
+  <view id="Stowing_Home">
+    <page>/ws/Stowing_Home.jspx</page>
+  </view>
+  <view id="Stowing_Normal">
+    <page>/ws/Stowing_Normal.jspx</page>
+  </view>
+  <view id="Stowing_NormalLocation">
+    <page>/ws/Stowing_NormalLocation.jspx</page>
+  </view>
+  <view id="Stowing_NormalNiinVer">
+    <page>/ws/Stowing_NormalNiinVer.jspx</page>
+  </view>
+  <view id="Stowing_Reassign_SID">
+    <page>/ws/Stowing_Reassign_SID.jspx</page>
+  </view>
+  <view id="Print_Home">
+    <page>/ws/Print_Home.jspx</page>
+  </view>
+  <view id="Reports_Home">
+    <page>/ws/Reports_Home.jspx</page>
+  </view>
+  <view id="Reports_Standard">
+    <page>/ws/Reports_Standard.jspx</page>
+  </view>
+  <view id="Reports_InputParam">
+    <page>/ws/Reports_InputParam.jspx</page>
+  </view>
+  <view id="Reports_QueryResult">
+    <page>/ws/Reports_QueryResult.jspx</page>
+  </view>
+  <view id="SwitchWorkstation">
+    <page>/SwitchWorkstation.jspx</page>
+  </view>
+  <view id="Receiving_Transshipment">
+    <page>/ws/Receiving_Transshipment.jspx</page>
+  </view>
+  <view id="WalkThru_Home">
+    <page>/ws/WalkThru_Home.jspx</page>
+  </view>
+  <control-flow-rule id="__4">
+    <from-activity-id>*</from-activity-id>
+    <control-flow-case id="__7">
+      <from-outcome>GoLogin</from-outcome>
+      <to-activity-id>Login</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__21">
+      <from-outcome>GoWarehouseHome</from-outcome>
+      <to-activity-id>WarehouseHome</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__5">
+      <from-outcome>GoReceiving</from-outcome>
+      <to-activity-id>Receiving_Home</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__10">
+      <from-outcome>GoAdmin</from-outcome>
+      <to-activity-id>Admin_Home</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__12">
+      <from-outcome>GoAdminSystemSetupGCSSMC</from-outcome>
+      <to-activity-id>Admin_SystemSetupGCSSMC</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__13">
+      <from-outcome>GoPicking</from-outcome>
+      <to-activity-id>Picking_Home</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__14">
+      <from-outcome>GoPickingNormalMain</from-outcome>
+      <to-activity-id>Picking_NormalMain</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__15">
+      <from-outcome>GoPickingNormal</from-outcome>
+      <to-activity-id>Picking_Normal</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__16">
+      <from-outcome>GoPickingPriority</from-outcome>
+      <to-activity-id>Picking_Priority</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__116">
+      <from-outcome>GoPickingWtq</from-outcome>
+      <to-activity-id>Picking_Wtq</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__17">
+      <from-outcome>GoPickingRoute</from-outcome>
+      <to-activity-id>Picking_Route</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__18">
+      <from-outcome>GoPickingNormalNiinVer</from-outcome>
+      <to-activity-id>Picking_NormalNiinVer</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__22">
+      <from-outcome>GoPickingAAC</from-outcome>
+      <to-activity-id>Picking_AAC</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__23">
+      <from-outcome>GoReceivingCancelSID</from-outcome>
+      <to-activity-id>Receiving_CancelSID</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__24">
+      <from-outcome>GoReceivingGeneral</from-outcome>
+      <to-activity-id>Receiving_General</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__26">
+      <from-outcome>GoReceivingEnterSerial</from-outcome>
+      <to-activity-id>Receiving_EnterSerial</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__27">
+      <from-outcome>GoReceivingGeneralCrossDock</from-outcome>
+      <to-activity-id>Receiving_CrossDock</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__29">
+      <from-outcome>dialog:GoNiinDetail</from-outcome>
+      <to-activity-id>NiinDetail</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__30">
+      <from-outcome>GoNiinDetail</from-outcome>
+      <to-activity-id>NiinDetail</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__25">
+      <from-outcome>GoAdminWarehouseSetup</from-outcome>
+      <to-activity-id>Admin_WarehouseSetup</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__28">
+      <from-outcome>GoAdminWarehouseManagement</from-outcome>
+      <to-activity-id>Admin_WarehouseManagement</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__31">
+      <from-outcome>GoAdminUserManagement</from-outcome>
+      <to-activity-id>Admin_UserManagement</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__32">
+      <from-outcome>GoAdminExceptionProcessing</from-outcome>
+      <to-activity-id>Admin_ExceptionProcessing</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__33">
+      <from-outcome>GoAdminInventoryManagement</from-outcome>
+      <to-activity-id>Admin_InventoryManagement</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__34">
+      <from-outcome>GoAdminSystemAdmin</from-outcome>
+      <to-activity-id>Admin_SystemAdmin</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__35">
+      <from-outcome>GoShipping</from-outcome>
+      <to-activity-id>Shipping_Home</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__36">
+      <from-outcome>GoShippingAACUpdate</from-outcome>
+      <to-activity-id>Shipping_AACUpdate</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__37">
+      <from-outcome>GoShippingAcknowledgeShipment</from-outcome>
+      <to-activity-id>Shipping_AcknowledgeShipment</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__38">
+      <from-outcome>GoShippingContainer</from-outcome>
+      <to-activity-id>Shipping_AddContainer</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__39">
+      <from-outcome>GoShippingContainerMultiple</from-outcome>
+      <to-activity-id>Shipping_AddContainerMultiple</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__40">
+      <from-outcome>GoShippingManifestshipment</from-outcome>
+      <to-activity-id>Shipping_Manifestshipment</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__41">
+      <from-outcome>GoShippingManifestByAAC</from-outcome>
+      <to-activity-id>Shipping_ManifestByAAC</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__42">
+      <from-outcome>GoShippingRelocatePallet</from-outcome>
+      <to-activity-id>Shipping_RelocatePallet</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__43">
+      <from-outcome>GoShippingRemarkAAC</from-outcome>
+      <to-activity-id>Shipping_RemarkAAC</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__44">
+      <from-outcome>GoShippingReviewContents</from-outcome>
+      <to-activity-id>Shipping_ReviewContents</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__45">
+      <from-outcome>GoShippingTransshipment</from-outcome>
+      <to-activity-id>Shipping_Transshipment</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__48">
+      <from-outcome>GoReceivingGeneralDetail</from-outcome>
+      <to-activity-id>Receiving_GeneralDetail</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__46">
+      <from-outcome>GoAdminWarehouseStorageBin</from-outcome>
+      <to-activity-id>Admin_WarehouseStorageBin</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__47">
+      <from-outcome>GoAdminWarehouseDividerSetup</from-outcome>
+      <to-activity-id>Admin_WarehouseDividerSetup</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__49">
+      <from-outcome>GoAdminWarehouseWACSetup</from-outcome>
+      <to-activity-id>Admin_WarehouseWACSetup</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__50">
+      <from-outcome>GoAdminWarehouseBuildingSetup</from-outcome>
+      <to-activity-id>Admin_WarehouseBuildingSetup</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__51">
+      <from-outcome>GoAdminWarehouseMechSetup</from-outcome>
+      <to-activity-id>Admin_WarehouseMechSetup</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__52">
+      <from-outcome>GoAdminWarehouseNonMechSetup</from-outcome>
+      <to-activity-id>Admin_WarehouseNonMechSetup</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__53">
+      <from-outcome>GoAdminWarehouseWorkstationSetup</from-outcome>
+      <to-activity-id>Admin_WarehouseWorkstationSetup</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__54">
+      <from-outcome>GoAdminWarehouseComSetup</from-outcome>
+      <to-activity-id>Admin_WarehouseComSetup</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__55">
+      <from-outcome>GoAdminWarehouseConsolationSetup</from-outcome>
+      <to-activity-id>Admin_WarehouseConsoldationSetup</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__56">
+      <from-outcome>GoAdminWarehouseFloorLocationSetup</from-outcome>
+      <to-activity-id>Admin_WarehouseFloorLocationSetup</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__57">
+      <from-outcome>GoAdminInventoryReview</from-outcome>
+      <to-activity-id>Admin_InventoryReview</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__58">
+      <from-outcome>GoAdminInventorySchedule</from-outcome>
+      <to-activity-id>Admin_InventorySchedule</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__59">
+      <from-outcome>GoAdminModifyGroup</from-outcome>
+      <to-activity-id>Admin_ModifyGroup</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__60">
+      <from-outcome>GoAdminModifyUser</from-outcome>
+      <to-activity-id>Admin_ModifyUser</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__61">
+      <from-outcome>GoAdminNonMechRemoval</from-outcome>
+      <to-activity-id>Admin_NonMechRemoval</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__62">
+      <from-outcome>GoAdminProcessGCSSMCExports</from-outcome>
+      <to-activity-id>Admin_ProcessGCSSMCExports</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__63">
+      <from-outcome>GoAdminProcessGCSSMCImports</from-outcome>
+      <to-activity-id>Admin_ProcessGCSSMCImports</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__64">
+      <from-outcome>GoAdminProcessGCSSMCLogs</from-outcome>
+      <to-activity-id>Admin_ProcessGCSSMCLogs</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__65">
+      <from-outcome>GoAdminProcessGCSSMCRecon</from-outcome>
+      <to-activity-id>Admin_ProcessGCSSMCRecon</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__68">
+      <from-outcome>GoAdminWarehouseAACUpdate</from-outcome>
+      <to-activity-id>Admin_WarehouseAACUpdate</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__69">
+      <from-outcome>GoAdminWarehouseChangeCC</from-outcome>
+      <to-activity-id>Admin_WarehouseChangeCC</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__70">
+      <from-outcome>GoAdminWarehouseChangeLoc</from-outcome>
+      <to-activity-id>Admin_WarehouseChangeLoc</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__71">
+      <from-outcome>GoAdminWarehouseNiinInquiry</from-outcome>
+      <to-activity-id>Admin_WarehouseNiinInquiry</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__72">
+      <from-outcome>GoAdminWarehouseNiinUpdate</from-outcome>
+      <to-activity-id>Admin_WarehouseNiinUpdate</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__73">
+      <from-outcome>GoAdminWarehouseReStowSid</from-outcome>
+      <to-activity-id>Admin_WarehouseReStowSid</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__74">
+      <from-outcome>GoAdminWarehouseRewarehouse</from-outcome>
+      <to-activity-id>Admin_WarehouseRewarehouse</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__75">
+      <from-outcome>GoAdminWarehouseRouteUpdate</from-outcome>
+      <to-activity-id>Admin_WarehouseRouteUpdate</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__76">
+      <from-outcome>GoAdminWarehouseShippingRouteUpdate</from-outcome>
+      <to-activity-id>Admin_WarehouseShippingRouteUpdate</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__77">
+      <from-outcome>GoAdminWarehouseWalkThru</from-outcome>
+      <to-activity-id>Admin_WarehouseWalkThru</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__78">
+      <from-outcome>GoPickingHome</from-outcome>
+      <to-activity-id>Picking_Home</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="____1">
+      <from-outcome>GoPickingUIDialog</from-outcome>
+      <to-activity-id>InventoryLocSurvey_NormalMain</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__81">
+      <from-outcome>GoInventory</from-outcome>
+      <to-activity-id>Inventory_Home</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__82">
+      <from-outcome>GoInventoryInventory</from-outcome>
+      <to-activity-id>InventoryItem_NormalMain</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__83">
+      <from-outcome>GoInventoryLocSurvey</from-outcome>
+      <to-activity-id>InventoryLocSurvey_NormalMain</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__84">
+      <from-outcome>GoInventoryShelfLife</from-outcome>
+      <to-activity-id>ShelfLife_NormalMain</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__19">
+      <from-outcome>GoPacking</from-outcome>
+      <to-activity-id>Packing_Home</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__79">
+      <from-outcome>GoPackingCloseCarton</from-outcome>
+      <to-activity-id>Packing_CloseCarton</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__80">
+      <from-outcome>GoPackingNormal</from-outcome>
+      <to-activity-id>Packing_Normal</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__85">
+      <from-outcome>GoStowing</from-outcome>
+      <to-activity-id>Stowing_Home</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__86">
+      <from-outcome>GoStowingReassignSID</from-outcome>
+      <to-activity-id>Stowing_Reassign_SID</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__87">
+      <from-outcome>GoStowingNormal</from-outcome>
+      <to-activity-id>Stowing_Normal</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__88">
+      <from-outcome>GoStowingNormalLocation</from-outcome>
+      <to-activity-id>Stowing_NormalLocation</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__89">
+      <from-outcome>GoStowingHome</from-outcome>
+      <to-activity-id>Stowing_Home</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__90">
+      <from-outcome>GoStowingNormalNiinVer</from-outcome>
+      <to-activity-id>Stowing_NormalNiinVer</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__91">
+      <from-outcome>GoPrint</from-outcome>
+      <to-activity-id>Print_Home</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__92">
+      <from-outcome>GoReports</from-outcome>
+      <to-activity-id>Reports_Home</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__104">
+      <from-outcome>GoReports_Standard</from-outcome>
+      <to-activity-id>Reports_Standard</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__105">
+      <from-outcome>GoReports_InputParam</from-outcome>
+      <to-activity-id>Reports_InputParam</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__106">
+      <from-outcome>GoReports_QueryResult</from-outcome>
+      <to-activity-id>Reports_QueryResult</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__100">
+      <from-outcome>GoWorkstation</from-outcome>
+      <to-activity-id>SwitchWorkstation</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__101">
+      <from-outcome>GoRemoveNonMech</from-outcome>
+      <to-activity-id>Admin_NonMechRemoval</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__102">
+      <from-outcome>GoReceivingGeneralTransshipment</from-outcome>
+      <to-activity-id>Receiving_Transshipment</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__103">
+      <from-outcome>GoWalkThru</from-outcome>
+      <to-activity-id>WalkThru_Home</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <managed-bean id="__1">
+    <managed-bean-name>userbean</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.user.UserInfo</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__2">
+    <managed-bean-name>userBackingBean</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.user.UserBacking</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+    <managed-property>
+      <property-name>userInfo</property-name>
+      <value>#{userbean}</value>
+    </managed-property>
+  </managed-bean>
+  <managed-bean id="__3">
+    <managed-bean-name>sessionBean</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.session.SessionBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+    <managed-property>
+      <property-name>userInfo</property-name>
+      <value>#{userbean}</value>
+    </managed-property>
+  </managed-bean>
+  <managed-bean id="__6">
+    <managed-bean-name>navigationBean</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.session.NavigationBag</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__8">
+    <managed-bean-name>backing_app_ReceiptGeneral</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.receiving.ReceiptGeneral</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    <managed-property id="__9">
+      <property-name>bindings</property-name>
+      <value>#{bindings}</value>
+    </managed-property>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>shuttlebean</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.session.ShuttlePageBackingBeanBase</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>ReceivingGeneralDetail</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.receiving.ReceiptGeneral</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>backing_Admin_ModifyGroup</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.admin.Admin_ModifyGroup</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>invmgmtbacking</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.inventory.InventoryMgmtBacking</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    <managed-property>
+      <property-name>userInfo</property-name>
+      <value>#{userbean}</value>
+    </managed-property>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>consolbean</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.pack.ConsolBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>backing_shippingContainer</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.shipping.ShippingAddContainer</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>backing_shippingReview</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.shipping.ShippingReview</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>backing_shipping</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.shipping.ShippingBackingBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>PickingNormal</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.pick.PickingAll</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>PickingAll</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.pick.PickingAll</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>StowingNormal</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.stow.StowingAll</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>ShelfLifeAll</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.inventory.ShelfLifeAll</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>footerbean</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.session.Nav</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>StowingAll</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.stow.StowingAll</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>WarehouseCCBacking</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.admin.warehouse.ChangeCCBacking</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>SysAdminBacking</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.admin.SystemAdminBacking</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+    <managed-property>
+      <property-name>userInfo</property-name>
+      <value>#{userbean}</value>
+    </managed-property>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>changelocbacking</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.admin.warehouse.ChangeLocationBacking</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>I1348bean</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.print.OneThreeFourEightInfo</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>backing_transshipment</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.shipping.TransshipmentHandler</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>barcodebean</managed-bean-name>
+    <managed-bean-class>mil.stratis.jai.BarcodeCreator</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>backingrewarehouse</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.admin.warehouse.RewarehouseBacking</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>backingwalkthru</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.admin.warehouse.WalkThruBacking</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>niinUpdateBean</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.admin.warehouse.NiinUpdateBacking</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>WarehouseSetupBacking</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.admin.warehouse.WarehouseSetupBacking</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>ExceptionBacking</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.admin.ExceptionBacking</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+    <managed-property>
+      <property-name>userInfo</property-name>
+      <value>#{userbean}</value>
+    </managed-property>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>backing_Admin_ModifyUser</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.admin.Admin_ModifyUser</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>ReprintBacking</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.print.ReprintBacking</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>AdminSetupBacking</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.admin.AdminSetupBacking</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>backing_AACUpdate</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.admin.warehouse.AACUpdateBacking</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>InvLoadBean</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.inventory.InventoryLoad</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>InventoryItemAll</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.inventory.InventoryItemAll</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>LocSurveyAll</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.inventory.LocSurveyAll</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>niinInquiryBean</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.admin.warehouse.NiinInquiryBacking</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>GCSSMCExportsBean</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.admin.GCSSMCExports</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>reconBean</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.admin.GCSSMCRecon</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>refLogBean</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.admin.GCSSMCLogs</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>GCSSMCImportsBean</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.admin.GCSSMCImports</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>inventorybean</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.inventory.InventoryInfo</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>loginBacking</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.login.LoginController</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>backing_1348History</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.print.One348History</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    <!--oracle-jdev-comment:managed-bean-jsp-link:11348History.jspx-->
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>backing_Admin_NonMechRemoval</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.admin.warehouse.Admin_NonMechRemoval</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    <!--oracle-jdev-comment:managed-bean-jsp-link:1admin/Admin_NonMechRemoval.jspx-->
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>shippingHomeBean</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.shipping.ShippingHomeBean</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>HisonReportBacking</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.reports.HisonReportBacking</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>ReportTreeTableBean</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.reports.ReportTreeTableBean</managed-bean-class>
+    <managed-bean-scope>view</managed-bean-scope>
+    <managed-property>
+      <property-name>reportsInfoBean</property-name>
+      <!--property-class>mil.stratis.view.reports.ReportsInfo</property-class-->
+      <value>#{ReportsInfoBean}</value>
+    </managed-property>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>ReportsInputParamBean</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.reports.ReportsInputParam</managed-bean-class>
+    <managed-bean-scope>view</managed-bean-scope>
+    <managed-property>
+      <property-name>reportsInfoBean</property-name>
+      <value>#{ReportsInfoBean}</value>
+    </managed-property>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>ReportsQueryResultBean</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.reports.ReportsQueryResult</managed-bean-class>
+    <managed-bean-scope>view</managed-bean-scope>
+    <managed-property>
+      <property-name>reportsInfoBean</property-name>
+      <value>#{ReportsInfoBean}</value>
+    </managed-property>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>ReportsInfoBean</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.reports.ReportsInfo</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>taskFlowExceptionBean</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.session.TaskFlowExceptionHandler</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>pageLevelPhaseListener</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.session.PageLevelPhaseListener</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>WalkThruBacking</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.walkThru.WalkThruBacking</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__93">
+    <managed-bean-name>WorkstationSetupBacking</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.admin.warehouse.WorkstationSetupBacking</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__94">
+    <managed-bean-name>FloorLocationBacking</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.admin.warehouse.FloorLocationBacking</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__95">
+    <managed-bean-name>StorageSetupBacking</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.admin.warehouse.StorageSetupBacking</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__96">
+    <managed-bean-name>WacSetupBacking</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.admin.warehouse.WacSetupBacking</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__97">
+    <managed-bean-name>BuildingSetupBacking</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.admin.warehouse.BuildingSetupBacking</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__98">
+    <managed-bean-name>ConsolidationSetupBacking</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.admin.warehouse.ConsolidationSetupBacking</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__99">
+    <managed-bean-name>ComSetupBacking</managed-bean-name>
+    <managed-bean-class>mil.stratis.view.admin.warehouse.ComSetupBacking</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+</adfc-config>

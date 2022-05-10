@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="GCSSMCSiteInterfacesView"
+   Version="11.1.2.64.36"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   ComponentClass="mil.stratis.model.view.sysadm.GCSSMCSiteInterfacesViewImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+      <Attr Name="_isExpertMode" Value="true"/>
+   </DesignTime>
+   <SQLQuery><![CDATA[
+select s.*, nvl(g.c,0) as total_ready  from site_interfaces s, (select count(*) as c, interface_name from gcssmc_imports_data where status='READY' group by interface_name) g where s.interface_name=g.interface_name(+) and s.interface_name in ('MHIF', 'MATS', 'GBOF', 'DASF', 'GABF') order by s.interface_name
+   ]]></SQLQuery>
+   <EntityUsage
+      Name="SiteInterfaces"
+      Entity="mil.stratis.model.entity.wlm.SiteInterfaces" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="InterfaceId"
+      EntityAttrName="InterfaceId"
+      EntityUsage="SiteInterfaces"
+      AliasName="INTERFACE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="InterfaceName"
+      EntityAttrName="InterfaceName"
+      EntityUsage="SiteInterfaces"
+      AliasName="INTERFACE_NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FileName"
+      EntityAttrName="FileName"
+      EntityUsage="SiteInterfaces"
+      AliasName="FILE_NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FilePath"
+      EntityAttrName="FilePath"
+      EntityUsage="SiteInterfaces"
+      AliasName="FILE_PATH" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastFtpDate"
+      EntityAttrName="LastFtpDate"
+      EntityUsage="SiteInterfaces"
+      AliasName="LAST_FTP_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastImpexpDate"
+      EntityAttrName="LastImpexpDate"
+      EntityUsage="SiteInterfaces"
+      AliasName="LAST_IMPEXP_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ConnectionId"
+      EntityAttrName="ConnectionId"
+      EntityUsage="SiteInterfaces"
+      AliasName="CONNECTION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Status"
+      EntityAttrName="Status"
+      EntityUsage="SiteInterfaces"
+      AliasName="STATUS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TotalReady"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="TOTAL_READY"
+      Expression="TOTAL_READY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <AttrArray Name="KeyAttributes">
+      <Item Value="InterfaceId" />
+   </AttrArray>
+</ViewObject>

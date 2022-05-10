@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Admin_InventoryReviewPageDef"
+                Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="InventoryItemFilterView1Iterator" RangeSize="19"
+              Binds="Root.InventorySetupModule1.InventoryItemFilterView1" DataControl="StratisRootServiceDataControl"
+              StateValidation="false" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="InventoryView1Iterator" RangeSize="10" Binds="Root.InventorySetupModule1.InventoryView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="InventoryItemView2Iterator" RangeSize="10" Binds="Root.InventorySetupModule1.InventoryItemView2"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <action id="ExecuteFilter" IterBinding="InventoryItemFilterView1Iterator"
+            InstanceName="StratisRootServiceDataControl.Root.InventorySetupModule1.InventoryItemFilterView1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <table id="InventoryItemFilterView1" IterBinding="InventoryItemFilterView1Iterator">
+      <AttrNames>
+        <Item Value="InventoryItemId"/>
+        <Item Value="CumNegAdj"/>
+        <Item Value="CumPosAdj"/>
+        <Item Value="NumCounts"/>
+        <Item Value="NumCounted"/>
+        <Item Value="Status"/>
+        <Item Value="LocationLabel"/>
+        <Item Value="LocationId"/>
+        <Item Value="Niin"/>
+        <Item Value="NiinId"/>
+        <Item Value="InventoryId"/>
+        <Item Value="NiinLocId"/>
+        <Item Value="Qty"/>
+        <Item Value="Ui"/>
+        <Item Value="Price"/>
+        <Item Value="Nomenclature"/>
+        <Item Value="Description"/>
+        <Item Value="CreatedDate"/>
+        <Item Value="NiinLocQty"/>
+      </AttrNames>
+    </table>
+    <action id="ExecuteInventory" IterBinding="InventoryView1Iterator"
+            InstanceName="StratisRootServiceDataControl.Root.InventorySetupModule1.InventoryView1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <action id="ExecuteItem" IterBinding="InventoryItemView2Iterator"
+            InstanceName="StratisRootServiceDataControl.Root.InventorySetupModule1.InventoryItemView2"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="iteratorExecute"/>
+  </bindings>
+</pageDefinition>

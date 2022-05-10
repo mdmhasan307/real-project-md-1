@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+          
+<af:switcher facetName="#{userbean.usersAdminAuthorizationStatus}" id="fmusersadminauthstatus">
+<f:facet name="0">
+    <f:verbatim>
+        <script language="Javascript" type="text/javascript">
+            //alert('Your session has expired!\nYou will be returned to the login screen.');
+            console.log("A_SNT detected expired/no session.");
+            this.location.href = 'unauthenticated.html';
+        </script>
+    </f:verbatim>
+</f:facet>
+<f:facet name="-1">
+    <f:verbatim>
+        <script language="Javascript" type="text/javascript">
+            this.location.href = 'unauthorized.html';
+        </script>
+    </f:verbatim>
+</f:facet>
+<f:facet name="1">
+
+
+    <af:subform id="SystemShutdownForm">
+        <af:spacer height="10" width="1"/>
+        <af:panelBox text="System Warning Message" showDisclosure="false">
+            <af:separator />
+            <af:spacer height="10" width="1"/>
+            <af:inputText value="#{bindings.ShutdownWarningMessage.inputValue}" label="System Warning Message"
+                          inlineStyle="font-weight:bold" required="#{bindings.ShutdownWarningMessage.mandatory}"
+                          maximumLength="100" columns="50">
+                <af:validateRegExp pattern="^[_A-Za-z0-9-.!?\s]{1,100}$" messageDetailNoMatch="System Warning Message must not contain special characters"/>
+            </af:inputText>
+            <af:spacer height="10" width="1"/>
+            <af:panelGroupLayout layout="horizontal">
+                <af:spacer width="10" height="1"/>
+                <af:button actionListener="#{bindings.Commit.execute}" text="Send Warning Message"
+                                  id="SendShutdownWarningMessage">
+                    <af:setActionListener from="#{bindings.ShutdownWarningMessage.inputValue}"
+                                          to="#{userbean.warningShutdownMessage}"/>
+                </af:button>
+                <af:spacer width="10" height="1"/>
+                <af:button actionListener="#{bindings.Commit.execute}" text="Clear Warning Message"
+                                  id="SendShutdownWarningMessage_Clear" partialSubmit="false">
+                    <af:setActionListener from="" to="#{userbean.warningShutdownMessage}"/>
+                    <af:setActionListener from="" to="#{bindings.ShutdownWarningMessage.inputValue}"/>
+                </af:button>
+            </af:panelGroupLayout>
+            <af:spacer height="20" width="1"/>
+        </af:panelBox>
+        <af:spacer height="10" width="1"/>
+        <af:panelBox text="Notify of Immediate System Shutdown" showDisclosure="false">
+            <af:separator />
+            <af:inputText value="#{bindings.SiteInfoView1ShutdownMessage.inputValue}" label="Shutdown Message"
+                          contentStyle="text-transform:uppercase;"
+                          inlineStyle="font-weight:bold" required="#{bindings.SiteInfoView1ShutdownMessage.mandatory}"
+                          maximumLength="100" columns="50">
+                <af:validateRegExp pattern="^[_A-Za-z0-9-.!?\s]{1,100}$" messageDetailNoMatch="System Shutdown Message must not contain special characters"/>
+            </af:inputText>
+            <af:outputText value="&lt;br>" escape="false"/>
+            <af:panelGroupLayout layout="horizontal">
+                <af:spacer width="10" height="1"/>
+                <af:button actionListener="#{bindings.Commit.execute}" text="Shutdown System and Send Message"
+                                  id="SendShutdownMessage">
+                    <af:setActionListener from="#{userbean.userId}"
+                                          to="#{bindings.SiteInfoView1ShutdownUserId.inputValue}"/>
+                </af:button>
+                <af:spacer width="10" height="1"/>
+                <af:button actionListener="#{bindings.Commit.execute}" text="Clear Shutdown Message"
+                                  id="SendShutdownMessage_Clear" partialSubmit="false">
+                    <af:setActionListener from="" to="#{bindings.SiteInfoView1ShutdownMessage.inputValue}"/>
+                    <af:setActionListener from="#{null}" to="#{bindings.SiteInfoView1ShutdownUserId.inputValue}"/>
+                </af:button>
+            </af:panelGroupLayout>
+            <af:spacer height="20" width="1"/>
+        </af:panelBox>
+        <af:spacer height="10" />
+    </af:subform>
+</f:facet>
+</af:switcher>
+</jsp:root>

@@ -1,0 +1,741 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="8"/>
+    <jsp:setProperty name="userbean" property="selected2" value="0"/>
+    <f:view>
+        <af:document title="STRATIS Reports" id="dReportsNew">
+            <af:form id="rn_f1">
+                <af:panelStretchLayout id="rn_psl1" topHeight="150" startWidth="24" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="rn_wrap_header">
+                            <jsp:include page="/ws/WS_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll" id="rn_pgl1">
+                            <af:panelBox text="REPORT INPUT PARAMETER" id="rh_pg11" showDisclosure="false">
+                                <af:outputText value="*	Indicates required field" id="ot100"
+                                               inlineStyle="font-weight:bold;"/>
+                                <af:spacer height="20" id="s5"/>
+                                <!-- Workload Detail (Picking Packing Shipping) -->
+                                <af:panelFormLayout id="pfl"
+                                                    rendered="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName == 'Workload Detail (Picking Packing Shipping)'}">
+                                    <af:panelGroupLayout layout="vertical" id="pgl1">
+                                        <af:outputLabel value="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName}"
+                                                        inlineStyle="font-weight:bold" id="olReportInput1"/>
+                                        <af:inputText label="Enter WAC number, partial value, or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.wacNumber}"
+                                                      id="it1"/>
+                                        <af:inputText label="Enter NIIN or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.niin}"
+                                                      id="it2"/>
+                                        <af:inputText label="Enter Status or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.status}"
+                                                      id="it3"/>
+                                        <af:inputText label="Enter Document Number or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.docNumber}"
+                                                      id="it4"/>
+                                        <af:inputText label="Enter Priority or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.priority}"
+                                                      id="it5"/>
+                                    </af:panelGroupLayout>
+                                </af:panelFormLayout>
+                                <!-- Workload Detail (Stowing) -->
+                                <af:panelFormLayout id="pf2"
+                                                    rendered="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName == 'Workload Detail (Stowing)'}">
+                                    <af:panelGroupLayout layout="vertical" id="pg2">
+                                        <af:outputLabel value="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName}"
+                                                        inlineStyle="font-weight:bold" id="olReportInput2"/>
+                                        <af:inputText label="Enter WAC number, partial value, or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.wacNumber}"
+                                                      id="it2_1"/>
+                                        <af:inputText label="Enter Pack Area, partial value, or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.packArea}"
+                                                      id="it2_2"/>
+                                    </af:panelGroupLayout>
+                                </af:panelFormLayout>
+                                <!-- Workload Detail (Expiring NIINs) -->
+                                <af:panelFormLayout id="pf3"
+                                                    rendered="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName == 'Workload Detail (Expiring NIINs)'}">
+                                    <af:panelGroupLayout layout="vertical" id="pg3">
+                                        <af:outputLabel value="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName}"
+                                                        inlineStyle="font-weight:bold" id="olReportInput3"/>
+                                        <af:inputText label="Enter NIIN or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.niin}"
+                                                      id="it3_1"/>
+                                        <af:inputText label="Enter WAC number, partial value, or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.wacNumber}"
+                                                      id="it3_2"/>
+                                        <af:inputText label="Enter Expiration Month and Year ('MON-YYYY')"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.expirationDate}"
+                                                      id="it3_3"/>
+                                    </af:panelGroupLayout>
+                                </af:panelFormLayout>
+                                <!-- Workload Detail (NSN Updates) -->
+                                <af:panelFormLayout id="pf4"
+                                                    rendered="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName == 'Workload Detail (NSN Updates)'}">
+                                    <af:panelGroupLayout layout="vertical" id="pg4">
+                                        <af:outputLabel value="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName}"
+                                                        inlineStyle="font-weight:bold" id="olReportInput4"/>
+                                        <af:inputText label="Enter WAC number, partial value, or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.wacNumber}"
+                                                      id="it4_1"/>
+                                        <af:inputText label="Enter NIIN or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.niin}"
+                                                      id="it4_2"/>
+                                    </af:panelGroupLayout>
+                                </af:panelFormLayout>
+                                <!-- Workload Detail (Pending Inventories) -->
+                                <af:panelFormLayout id="pf5"
+                                                    rendered="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName == 'Workload Detail (Pending Inventories)'}">
+                                    <af:panelGroupLayout layout="vertical" id="pg5">
+                                        <af:outputLabel value="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName}"
+                                                        inlineStyle="font-weight:bold" id="olReportInput5"/>
+                                        <af:inputText label="Enter WAC number, partial value, or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.wacNumber}"
+                                                      id="it5_1"/>
+                                        <af:inputText label="Enter NIIN or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.niin}"
+                                                      id="it5_2"/>
+                                        <af:inputText label="Enter Pack Area, partial value, or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.packArea}"
+                                                      id="it5_3"/>
+                                    </af:panelGroupLayout>
+                                </af:panelFormLayout>
+                                <!-- Recon Report Summary -->
+                                <af:panelFormLayout id="pf6"
+                                                    rendered="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName == 'Recon Report Summary'}">
+                                    <af:panelGroupLayout layout="vertical" id="pg6">
+                                        <af:outputLabel value="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName}"
+                                                        inlineStyle="font-weight:bold" id="olReportInput6"/>
+                                        <af:panelGroupLayout layout="horizontal" id="pg6_1">
+                                            <af:inputText label="* Please Enter the Run Date" labelStyle="width: 300px;"
+                                                          value="#{viewScope.ReportsInputParamBean.reportsInfoBean.runDate}"
+                                                          id="it6">
+                                            </af:inputText>
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="p1">
+                                                <af:dialog id="d2" contentWidth="200"
+                                                           dialogListener="#{viewScope.ReportsInputParamBean.getRunDateSelected}">
+                                                    <af:outputText value="Lookup Window" id="ot1"/>
+                                                    <af:table var="row" rowBandingInterval="1" id="t1_1"
+                                                              styleClass="AFStretchWidth"
+                                                              value="#{viewScope.ReportsInputParamBean.runDateList}"
+                                                              rowSelection="single"
+                                                              binding="#{viewScope.ReportsInputParamBean.runDateTableBind}"
+                                                              rendered="true">
+                                                        <af:column sortable="false" headerText="Run Date Lookup" id="c1"
+                                                                   width="190">
+                                                            <af:outputText value="#{row.runDate}" id="odt1"/>
+                                                        </af:column>
+                                                    </af:table>
+                                                    <f:facet name="buttonBar"/>
+                                                </af:dialog>
+                                            </af:popup>
+                                            <af:button text="lookup" id="b200">
+                                                <af:showPopupBehavior popupId="p1"/>
+                                            </af:button>
+                                        </af:panelGroupLayout>
+                                    </af:panelGroupLayout>
+                                </af:panelFormLayout>
+                                <!-- Onhand Serviceable Qty Details -->
+                                <af:panelFormLayout id="pf7"
+                                                    rendered="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName == 'Onhand Serviceable Qty Details'}">
+                                    <af:panelGroupLayout layout="vertical" id="pg7">
+                                        <af:outputLabel value="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName}"
+                                                        inlineStyle="font-weight:bold" id="olReportInput7"/>
+                                        <af:panelGroupLayout layout="horizontal" id="pg7_1">
+                                            <af:inputText label="* Please Enter the Run Date" labelStyle="width: 300px;"
+                                                          value="#{viewScope.ReportsInputParamBean.reportsInfoBean.runDate}"
+                                                          id="it7"/>
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="p7">
+                                                <af:dialog id="d7" contentWidth="200"
+                                                           dialogListener="#{viewScope.ReportsInputParamBean.getRunDateSelected}">
+                                                    <af:outputText value="Lookup Window" id="ot7"/>
+                                                    <af:table var="row" rowBandingInterval="1" id="t7_1"
+                                                              styleClass="AFStretchWidth"
+                                                              value="#{viewScope.ReportsInputParamBean.runDateList}"
+                                                              rowSelection="single"
+                                                              binding="#{viewScope.ReportsInputParamBean.runDateTableBind}"
+                                                              rendered="true">
+                                                        <af:column sortable="false" headerText="Run Date Lookup"
+                                                                   id="c7_1_1" width="190">
+                                                            <af:outputText value="#{row.runDate}" id="odt7_1_1"/>
+                                                        </af:column>
+                                                    </af:table>
+                                                    <f:facet name="buttonBar"/>
+                                                </af:dialog>
+                                            </af:popup>
+                                            <af:button text="lookup" id="b7_1_1">
+                                                <af:showPopupBehavior popupId="p7"/>
+                                            </af:button>
+                                        </af:panelGroupLayout>
+                                        <af:inputText label="Enter NIIN or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.niin}"
+                                                      id="it7_2"/>
+                                    </af:panelGroupLayout>
+                                </af:panelFormLayout>
+                                <!-- Onhand Un-Serviceable Qty Details -->
+                                <af:panelFormLayout id="pf8"
+                                                    rendered="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName == 'Onhand Un-Serviceable Qty Details'}">
+                                    <af:panelGroupLayout layout="vertical" id="pg8">
+                                        <af:outputLabel value="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName}"
+                                                        inlineStyle="font-weight:bold" id="olReportInput8"/>
+                                        <af:panelGroupLayout layout="horizontal" id="pg8_1">
+                                            <af:inputText label="* Please Enter the Run Date" labelStyle="width: 300px;"
+                                                          value="#{viewScope.ReportsInputParamBean.reportsInfoBean.runDate}"
+                                                          id="it8"/>
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="p8">
+                                                <af:dialog id="d8" contentWidth="200"
+                                                           dialogListener="#{viewScope.ReportsInputParamBean.getRunDateSelected}">
+                                                    <af:outputText value="Lookup Window" id="ot8_1_1"/>
+                                                    <af:table var="row" rowBandingInterval="1" id="t8_1_1"
+                                                              styleClass="AFStretchWidth"
+                                                              value="#{viewScope.ReportsInputParamBean.runDateList}"
+                                                              rowSelection="single"
+                                                              binding="#{viewScope.ReportsInputParamBean.runDateTableBind}"
+                                                              rendered="true">
+                                                        <af:column sortable="false" headerText="Run Date Lookup"
+                                                                   id="c8_1_1" width="190">
+                                                            <af:outputText value="#{row.runDate}" id="odt8_1_1"/>
+                                                        </af:column>
+                                                    </af:table>
+                                                    <f:facet name="buttonBar"/>
+                                                </af:dialog>
+                                            </af:popup>
+                                            <af:button text="lookup" id="b8_1_1">
+                                                <af:showPopupBehavior popupId="p8"/>
+                                            </af:button>
+                                        </af:panelGroupLayout>
+                                        <af:inputText label="Enter NIIN or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.niin}"
+                                                      id="it8_2"/>
+                                    </af:panelGroupLayout>
+                                </af:panelFormLayout>
+                                <!-- Onhand Serial Controlled Serviceable Qty Details -->
+                                <af:panelFormLayout id="pf9"
+                                                    rendered="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName == 'Onhand Serial Controlled Serviceable Qty Details'}">
+                                    <af:panelGroupLayout layout="vertical" id="pg9">
+                                        <af:outputLabel value="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName}"
+                                                        inlineStyle="font-weight:bold" id="olReportInput9"/>
+                                        <af:panelGroupLayout layout="horizontal" id="pg9_1">
+                                            <af:inputText label="* Please Enter the Run Date" labelStyle="width: 300px;"
+                                                          value="#{viewScope.ReportsInputParamBean.reportsInfoBean.runDate}"
+                                                          id="it9"/>
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="p9">
+                                                <af:dialog id="d9" contentWidth="200"
+                                                           dialogListener="#{viewScope.ReportsInputParamBean.getRunDateSelected}">
+                                                    <af:outputText value="Lookup Window" id="ot9_1_1"/>
+                                                    <af:table var="row" rowBandingInterval="1" id="t9_1_1"
+                                                              styleClass="AFStretchWidth"
+                                                              value="#{viewScope.ReportsInputParamBean.runDateList}"
+                                                              rowSelection="single"
+                                                              binding="#{viewScope.ReportsInputParamBean.runDateTableBind}"
+                                                              rendered="true">
+                                                        <af:column sortable="false" headerText="Run Date Lookup"
+                                                                   id="c9_1_1" width="190">
+                                                            <af:outputText value="#{row.runDate}" id="odt9_1_1"/>
+                                                        </af:column>
+                                                    </af:table>
+                                                    <f:facet name="buttonBar"/>
+                                                </af:dialog>
+                                            </af:popup>
+                                            <af:button text="lookup" id="b9_1_1">
+                                                <af:showPopupBehavior popupId="p9"/>
+                                            </af:button>
+                                        </af:panelGroupLayout>
+                                        <af:inputText label="Enter NIIN or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.niin}"
+                                                      id="it9_2"/>
+                                    </af:panelGroupLayout>
+                                </af:panelFormLayout>
+                                <!-- Onhand Serial Controlled Un-Serviceable Qty Details -->
+                                <af:panelFormLayout id="pf10"
+                                                    rendered="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName == 'Onhand Serial Controlled Un-Serviceable Qty Details'}">
+                                    <af:panelGroupLayout layout="vertical" id="pg10">
+                                        <af:outputLabel value="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName}"
+                                                        inlineStyle="font-weight:bold" id="olReportInput10"/>
+                                        <af:panelGroupLayout layout="horizontal" id="pg10_1">
+                                            <af:inputText label="* Please Enter the Run Date" labelStyle="width: 300px;"
+                                                          value="#{viewScope.ReportsInputParamBean.reportsInfoBean.runDate}"
+                                                          id="it10"/>
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="p10">
+                                                <af:dialog id="d10" contentWidth="200"
+                                                           dialogListener="#{viewScope.ReportsInputParamBean.getRunDateSelected}">
+                                                    <af:outputText value="Lookup Window" id="ot10_1_1"/>
+                                                    <af:table var="row" rowBandingInterval="1" id="t10_1_1"
+                                                              styleClass="AFStretchWidth"
+                                                              value="#{viewScope.ReportsInputParamBean.runDateList}"
+                                                              rowSelection="single"
+                                                              binding="#{viewScope.ReportsInputParamBean.runDateTableBind}"
+                                                              rendered="true">
+                                                        <af:column sortable="false" headerText="Run Date Lookup"
+                                                                   id="c10_1_1" width="190">
+                                                            <af:outputText value="#{row.runDate}" id="odt10_1_1"/>
+                                                        </af:column>
+                                                    </af:table>
+                                                    <f:facet name="buttonBar"/>
+                                                </af:dialog>
+                                            </af:popup>
+                                            <af:button text="lookup" id="b10_1_1">
+                                                <af:showPopupBehavior popupId="p10"/>
+                                            </af:button>
+                                        </af:panelGroupLayout>
+                                        <af:inputText label="Enter NIIN or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.niin}"
+                                                      id="it10_2"/>
+                                    </af:panelGroupLayout>
+                                </af:panelFormLayout>
+                                <!-- File Import Logs Report (DASF) -->
+                                <af:panelFormLayout id="pf11"
+                                                    rendered="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName == 'File Import Logs Report (DASF)'}">
+                                    <af:panelGroupLayout layout="vertical" id="pg11">
+                                        <af:outputLabel value="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName}"
+                                                        inlineStyle="font-weight:bold" id="olReportInput11"/>
+                                        <af:panelGroupLayout layout="horizontal" id="pg11_1">
+                                            <af:inputText label="Enter Import Date or leave blank for all (Date Format: dd-MMM-yyyy)"
+                                                          labelStyle="width: 300px;"
+                                                          value="#{viewScope.ReportsInputParamBean.reportsInfoBean.importDate}"
+                                                          validator="#{viewScope.ReportsInputParamBean.importDateValidator}"
+                                                          id="it11"/>
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="p11_6_1">
+                                                <af:dialog id="d11_1" contentWidth="200"
+                                                           dialogListener="#{viewScope.ReportsInputParamBean.getImportDateSelected}">
+                                                    <af:outputText value="Lookup Window" id="ot11_6_1"/>
+                                                    <af:table var="row" rowBandingInterval="1" id="t11_6_1"
+                                                              styleClass="AFStretchWidth"
+                                                              value="#{viewScope.ReportsInputParamBean.importDateList}"
+                                                              rowSelection="single"
+                                                              binding="#{viewScope.ReportsInputParamBean.importDateTableBind}"
+                                                              rendered="true">
+                                                        <af:column sortable="false" headerText="Import Date Lookup"
+                                                                   id="c11_6_1" width="190">
+                                                            <af:outputText value="#{row.importDate}" id="odt11_6_1"/>
+                                                        </af:column>
+                                                    </af:table>
+                                                    <f:facet name="buttonBar"/>
+                                                </af:dialog>
+                                            </af:popup>
+                                            <af:button text="lookup" id="b11_6_1" partialSubmit="true">
+                                                <af:showPopupBehavior triggerType="click" popupId="p11_6_1"/>
+                                            </af:button>
+                                        </af:panelGroupLayout>
+                                    </af:panelGroupLayout>
+                                </af:panelFormLayout>
+                                <!-- File Import Logs Report (GABF) -->
+                                <af:panelFormLayout id="pf12"
+                                                    rendered="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName == 'File Import Logs Report (GABF)'}">
+                                    <af:panelGroupLayout layout="vertical" id="pg12">
+                                        <af:outputLabel value="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName}"
+                                                        inlineStyle="font-weight:bold" id="olReportInput12"/>
+                                        <af:panelGroupLayout layout="horizontal" id="pg12_1">
+                                            <af:inputText label="Enter Import Date or leave blank for all (Date Format: dd-MMM-yyyy)"
+                                                          labelStyle="width: 300px;"
+                                                          value="#{viewScope.ReportsInputParamBean.reportsInfoBean.importDate}"
+                                                          validator="#{viewScope.ReportsInputParamBean.importDateValidator}"
+                                                          id="it12"/>
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="p12_6_1">
+                                                <af:dialog id="d12_1" contentWidth="200"
+                                                           dialogListener="#{viewScope.ReportsInputParamBean.getImportDateSelected}">
+                                                    <af:outputText value="Lookup Window" id="ot12_6_1"/>
+                                                    <af:table var="row" rowBandingInterval="1" id="t12_6_1"
+                                                              styleClass="AFStretchWidth"
+                                                              value="#{viewScope.ReportsInputParamBean.importDateList}"
+                                                              rowSelection="single"
+                                                              binding="#{viewScope.ReportsInputParamBean.importDateTableBind}"
+                                                              rendered="true">
+                                                        <af:column sortable="false" headerText="Import Date Lookup"
+                                                                   id="c12_6_1" width="190">
+                                                            <af:outputText value="#{row.importDate}" id="odt12_6_1"/>
+                                                        </af:column>
+                                                    </af:table>
+                                                    <f:facet name="buttonBar"/>
+                                                </af:dialog>
+                                            </af:popup>
+                                            <af:button text="lookup" id="b12_6_1" partialSubmit="true">
+                                                <af:showPopupBehavior triggerType="click" popupId="p12_6_1"/>
+                                            </af:button>
+                                        </af:panelGroupLayout>
+                                    </af:panelGroupLayout>
+                                </af:panelFormLayout>
+                                <!-- File Import Logs Report (GBOF) -->
+                                <af:panelFormLayout id="pf13"
+                                                    rendered="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName == 'File Import Logs Report (GBOF)'}">
+                                    <af:panelGroupLayout layout="vertical" id="pg13">
+                                        <af:outputLabel value="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName}"
+                                                        inlineStyle="font-weight:bold" id="olReportInput13"/>
+                                        <af:panelGroupLayout layout="horizontal" id="pg13_1">
+                                            <af:inputText label="Enter Import Date or leave blank for all (Date Format: dd-MMM-yyyy)"
+                                                          labelStyle="width: 300px;"
+                                                          value="#{viewScope.ReportsInputParamBean.reportsInfoBean.importDate}"
+                                                          validator="#{viewScope.ReportsInputParamBean.importDateValidator}"
+                                                          id="it13"/>
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="p13_6_1">
+                                                <af:dialog id="d13_1" contentWidth="200"
+                                                           dialogListener="#{viewScope.ReportsInputParamBean.getImportDateSelected}">
+                                                    <af:outputText value="Lookup Window" id="ot13_6_1"/>
+                                                    <af:table var="row" rowBandingInterval="1" id="t13_6_1"
+                                                              styleClass="AFStretchWidth"
+                                                              value="#{viewScope.ReportsInputParamBean.importDateList}"
+                                                              rowSelection="single"
+                                                              binding="#{viewScope.ReportsInputParamBean.importDateTableBind}"
+                                                              rendered="true">
+                                                        <af:column sortable="false" headerText="Import Date Lookup"
+                                                                   id="c13_6_1" width="190">
+                                                            <af:outputText value="#{row.importDate}" id="odt13_6_1"/>
+                                                        </af:column>
+                                                    </af:table>
+                                                    <f:facet name="buttonBar"/>
+                                                </af:dialog>
+                                            </af:popup>
+                                            <af:button text="lookup" id="b13_6_1" partialSubmit="true">
+                                                <af:showPopupBehavior triggerType="click" popupId="p13_6_1"/>
+                                            </af:button>
+                                        </af:panelGroupLayout>
+                                    </af:panelGroupLayout>
+                                </af:panelFormLayout>
+                                <!-- File Import Logs Report (MATS) -->
+                                <af:panelFormLayout id="pf14"
+                                                    rendered="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName == 'File Import Logs Report (MATS)'}">
+                                    <af:panelGroupLayout layout="vertical" id="pg14">
+                                        <af:outputLabel value="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName}"
+                                                        inlineStyle="font-weight:bold" id="olReportInput14"/>
+                                        <af:panelGroupLayout layout="horizontal" id="pg14_1">
+                                            <af:inputText label="Enter Import Date or leave blank for all (Date Format: dd-MMM-yyyy)"
+                                                          labelStyle="width: 300px;"
+                                                          value="#{viewScope.ReportsInputParamBean.reportsInfoBean.importDate}"
+                                                          validator="#{viewScope.ReportsInputParamBean.importDateValidator}"
+                                                          id="it14"/>
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="p14_6_1">
+                                                <af:dialog id="d14_1" contentWidth="200"
+                                                           dialogListener="#{viewScope.ReportsInputParamBean.getImportDateSelected}">
+                                                    <af:outputText value="Lookup Window" id="ot14_6_1"/>
+                                                    <af:table var="row" rowBandingInterval="1" id="t14_6_1"
+                                                              styleClass="AFStretchWidth"
+                                                              value="#{viewScope.ReportsInputParamBean.importDateList}"
+                                                              rowSelection="single"
+                                                              binding="#{viewScope.ReportsInputParamBean.importDateTableBind}"
+                                                              rendered="true">
+                                                        <af:column sortable="false" headerText="Import Date Lookup"
+                                                                   id="c14_6_1" width="190">
+                                                            <af:outputText value="#{row.importDate}" id="odt14_6_1"/>
+                                                        </af:column>
+                                                    </af:table>
+                                                    <f:facet name="buttonBar"/>
+                                                </af:dialog>
+                                            </af:popup>
+                                            <af:button text="lookup" id="b14_6_1" partialSubmit="true">
+                                                <af:showPopupBehavior triggerType="click" popupId="p14_6_1"/>
+                                            </af:button>
+                                        </af:panelGroupLayout>
+                                    </af:panelGroupLayout>
+                                </af:panelFormLayout>
+                                <!-- File Import Logs Report (MHIF) -->
+                                <af:panelFormLayout id="pf15"
+                                                    rendered="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName == 'File Import Logs Report (MHIF)'}">
+                                    <af:panelGroupLayout layout="vertical" id="pg15">
+                                        <af:outputLabel value="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName}"
+                                                        inlineStyle="font-weight:bold" id="olReportInput15"/>
+                                        <af:panelGroupLayout layout="horizontal" id="pg15_1">
+                                            <af:inputText label="Enter Import Date or leave blank for all (Date Format: dd-MMM-yyyy)"
+                                                          labelStyle="width: 300px;"
+                                                          value="#{viewScope.ReportsInputParamBean.reportsInfoBean.importDate}"
+                                                          validator="#{viewScope.ReportsInputParamBean.importDateValidator}"
+                                                          id="it15"/>
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="p15_6_1">
+                                                <af:dialog id="d15_1" contentWidth="200"
+                                                           dialogListener="#{viewScope.ReportsInputParamBean.getImportDateSelected}">
+                                                    <af:outputText value="Lookup Window" id="ot15_6_1"/>
+                                                    <af:table var="row" rowBandingInterval="1" id="t15_6_1"
+                                                              styleClass="AFStretchWidth"
+                                                              value="#{viewScope.ReportsInputParamBean.importDateList}"
+                                                              rowSelection="single"
+                                                              binding="#{viewScope.ReportsInputParamBean.importDateTableBind}"
+                                                              rendered="true">
+                                                        <af:column sortable="false" headerText="Import Date Lookup"
+                                                                   id="c15_6_1" width="190">
+                                                            <af:outputText value="#{row.importDate}" id="odt15_6_1"/>
+                                                        </af:column>
+                                                    </af:table>
+                                                    <f:facet name="buttonBar"/>
+                                                </af:dialog>
+                                            </af:popup>
+                                            <af:button text="lookup" id="b15_6_1" partialSubmit="true">
+                                                <af:showPopupBehavior triggerType="click" popupId="p15_6_1"/>
+                                            </af:button>
+                                        </af:panelGroupLayout>
+                                    </af:panelGroupLayout>
+                                </af:panelFormLayout>
+                                <!-- DASF -->
+                                <af:panelFormLayout id="pf17"
+                                                    rendered="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName == 'DASF'}">
+                                    <af:panelGroupLayout layout="vertical" id="pg17">
+                                        <af:outputLabel value="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName}"
+                                                        inlineStyle="font-weight:bold" id="olReportInput17"/>
+                                        <af:inputText label="Enter NIIN or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.niin}"
+                                                      id="it17_1"/>
+                                        <af:inputText label="Enter Document Number, partial value, or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.docNumber}"
+                                                      id="it17_2"/>
+                                    </af:panelGroupLayout>
+                                </af:panelFormLayout>
+                                <!-- Interface Transactions -->
+                                <af:panelFormLayout id="pf16"
+                                                    rendered="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName == 'Interface Transactions'}">
+                                    <af:panelGroupLayout layout="vertical" id="pg16">
+                                        <af:outputLabel value="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName}"
+                                                        inlineStyle="font-weight:bold" id="olReportInput16"/>
+                                        <af:inputText label="Enter Transaction Type or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.transactionType}"
+                                                      id="it16_1"/>
+                                        <af:inputText label="Enter Document Number, partial value, or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.docNumber}"
+                                                      id="it16_2"/>
+                                        <af:inputText label="Filter by Route" labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.filterRoute}"
+                                                      id="it16_3"/>
+                                        <af:inputText label="Enter NIIN or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.niin}"
+                                                      id="it16_4"/>
+                                        <af:inputText label="Filter by Unit Of Issue" labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.filterUnitOfIssue}"
+                                                      id="it16_5"/>
+                                        <af:inputText label="Filter by Quantity" labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.filterQty}"
+                                                      id="it16_6"/>
+                                        <af:inputText label="Filter by Condition Code" labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.filterConditionCode}"
+                                                      id="it16_7"/>
+                                        <af:panelGroupLayout layout="horizontal" id="pg6_6_1">
+                                            <af:inputText label="Enter Transaction Date or leave blank for all (Date Format: dd-MMM-yyyy)"
+                                                          id="it16_8" labelStyle="padding-left: 70px; width: 230px;"
+                                                          value="#{viewScope.ReportsInputParamBean.reportsInfoBean.transactionDate}"
+                                                          validator="#{viewScope.ReportsInputParamBean.transactionDateValidator}"/>
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="p6_6_1">
+                                                <af:dialog id="d6_1" contentWidth="200"
+                                                           dialogListener="#{viewScope.ReportsInputParamBean.getTransactionDateSelected}">
+                                                    <af:outputText value="Lookup Window" id="ot6_6_1"/>
+                                                    <af:table var="row" rowBandingInterval="1" id="t6_6_1"
+                                                              styleClass="AFStretchWidth"
+                                                              value="#{viewScope.ReportsInputParamBean.transactionDateList}"
+                                                              rowSelection="single"
+                                                              binding="#{viewScope.ReportsInputParamBean.transactionDateTableBind}"
+                                                              rendered="true">
+                                                        <af:column sortable="false" headerText="Transaction Date Lookup"
+                                                                   id="c6_6_1" width="190">
+                                                            <af:outputText value="#{row.transactionDate}"
+                                                                           id="odt6_6_1"/>
+                                                        </af:column>
+                                                    </af:table>
+                                                    <f:facet name="buttonBar"/>
+                                                </af:dialog>
+                                            </af:popup>
+                                            <af:button text="lookup" id="b6_6_1" partialSubmit="true">
+                                                <af:showPopupBehavior triggerType="click" popupId="p6_6_1"/>
+                                            </af:button>
+                                        </af:panelGroupLayout>
+                                    </af:panelGroupLayout>
+                                </af:panelFormLayout>
+                                <!-- Active Receipt Report -->
+                                <af:panelFormLayout id="gpReceipts_pf1"
+                                                    rendered="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName == 'Active Receipt Report'}">
+                                    <af:panelGroupLayout layout="vertical" id="gpReceipts_pg1">
+                                        <af:outputLabel value="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName}"
+                                                        inlineStyle="font-weight:bold" id="gpReceipts_olReportInput1"/>
+                                        <af:inputText label="Enter NIIN or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.niin}"
+                                                      id="gpReceipts_it1_1"/>
+                                        <af:inputText label="Enter RCN or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.rcn}"
+                                                      id="gpReceipts_it1_2"/>
+                                    </af:panelGroupLayout>
+                                </af:panelFormLayout>
+                                <!-- Receipt History Report -->
+                                <af:panelFormLayout id="gpReceipts_pf2"
+                                                    rendered="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName == 'Receipt History Report'}">
+                                    <af:panelGroupLayout layout="vertical" id="gpReceipts_pg2">
+                                        <af:outputLabel value="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName}"
+                                                        inlineStyle="font-weight:bold" id="gpReceipts_olReportInput2"/>
+                                        <af:inputText label="Start Date or leave blank for today (Date Format: dd-MMM-yyyy)"
+                                                      labelStyle="padding-left: 50px; width: 250px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.startDate}"
+                                                      validator="#{viewScope.ReportsInputParamBean.startDateValidator}"
+                                                      id="gpReceipts_it2_1"/>
+                                        <af:inputText label="End Date or leave blank for today (Date Format: dd-MMM-yyyy)"
+                                                      labelStyle="padding-left: 50px; width: 250px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.endDate}"
+                                                      validator="#{viewScope.ReportsInputParamBean.endDateValidator}"
+                                                      id="gpReceipts_it2_2"/>
+                                        <af:inputText label="Enter RCN or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.rcn}"
+                                                      id="gpReceipts_it2_3"/>
+                                        <af:inputText label="Enter NIIN or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.niin}"
+                                                      id="gpReceipts_it2_4"/>
+                                    </af:panelGroupLayout>
+                                </af:panelFormLayout>
+                                <!-- Serial Lot Control Numbers Report -->
+                                <af:panelFormLayout id="gpSLC_pf2"
+                                                    rendered="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName == 'Serial Lot Control Numbers Report'}">
+                                    <af:panelGroupLayout layout="vertical" id="gpSLC_pg2">
+                                        <af:outputLabel value="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName}"
+                                                        inlineStyle="font-weight:bold" id="gpSLC_olReportInput2"/>
+                                        <af:inputText label="Enter NIIN or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.niin}"
+                                                      id="gpSLC_it2_1"/>
+                                    </af:panelGroupLayout>
+                                </af:panelFormLayout>
+                                <!-- Shelf-Life Report -->
+                                <af:panelFormLayout id="gpShelfLife_pf2"
+                                                    rendered="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName == 'Shelf-Life Report'}">
+                                    <af:panelGroupLayout layout="vertical" id="gpShelfLife_pg2">
+                                        <af:outputLabel value="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName}"
+                                                        inlineStyle="font-weight:bold" id="gpShelfLife_olReportInput2"/>
+                                        <af:inputText label="Enter NIIN or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.niin}"
+                                                      id="gpShelfLife_it2_1"/>
+                                        <af:inputText label="Enter WAC or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.wacNumber}"
+                                                      id="gpShelfLife_it2_2"/>
+                                        <af:inputText label="Enter CC or leave blank for all" labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.cc}"
+                                                      id="gpShelfLife_it2_3"/>
+                                    </af:panelGroupLayout>
+                                </af:panelFormLayout>
+                                <!-- Inventory History Report -->
+                                <af:panelFormLayout id="gpInventory_pf2"
+                                                    rendered="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName == 'Inventory History Report'}">
+                                    <af:panelGroupLayout layout="vertical" id="gpInventory_pg2">
+                                        <af:outputLabel value="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName}"
+                                                        inlineStyle="font-weight:bold" id="gpInventory_olReportInput2"/>
+                                        <af:inputText label="Start Date or leave blank for today (Date Format: dd-MMM-yyyy)"
+                                                      labelStyle="padding-left: 50px; width: 250px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.startDate}"
+                                                      validator="#{viewScope.ReportsInputParamBean.startDateValidator}"
+                                                      id="gpInventory_it2_1"/>
+                                        <af:inputText label="End Date or leave blank for today (Date Format: dd-MMM-yyyy)"
+                                                      labelStyle="padding-left: 70px; width: 230px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.endDate}"
+                                                      validator="#{viewScope.ReportsInputParamBean.endDateValidator}"
+                                                      id="gpInventory_it2_2"/>
+                                        <af:inputText label="NIIN"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.niin}"
+                                                      id="gpInventory_it2_3"/>
+                                        <af:inputText label="WAC"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.wacNumber}"
+                                                      id="gpInventory_it2_4"/>
+                                    </af:panelGroupLayout>
+                                </af:panelFormLayout>
+                                <!-- Employee Workload History -->
+                                <af:panelFormLayout id="pf18"
+                                                    rendered="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName == 'Employee Workload History'}">
+                                    <af:panelGroupLayout layout="vertical" id="pg18">
+                                        <af:outputLabel value="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName}"
+                                                        inlineStyle="font-weight:bold" id="olReportInput18"/>
+                                        <af:inputText label="Start Date or leave blank for today (Date Format: dd-MMM-yyyy)"
+                                                      labelStyle="padding-left: 50px; width: 250px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.startDate}"
+                                                      validator="#{viewScope.ReportsInputParamBean.startDateValidator}"
+                                                      id="it18_1"/>
+                                        <af:inputText label="End Date or leave blank for today (Date Format: dd-MMM-yyyy)"
+                                                      labelStyle="padding-left: 70px; width: 230px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.endDate}"
+                                                      validator="#{viewScope.ReportsInputParamBean.endDateValidator}"
+                                                      id="it18_2"/>
+                                        <af:inputText label="Last Name"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.lastName}"
+                                                      id="it18_3">
+                                            <f:validateRegex pattern="^$ || [a-zA-Z% '.-]+"/>
+                                        </af:inputText>
+                                    </af:panelGroupLayout>
+                                </af:panelFormLayout>
+                                <!-- Locator Deck -->
+                                <af:panelFormLayout id="pf19"
+                                                    rendered="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName == 'Locator Deck'}">
+                                    <af:panelGroupLayout layout="vertical" id="pg19">
+                                        <af:outputLabel value="#{viewScope.ReportsInputParamBean.reportsInfoBean.targetReportName}"
+                                                        inlineStyle="font-weight:bold" id="olReportInput19"/>
+                                        <af:inputText label="Enter Condition Code (CC) or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.filterConditionCode}"
+                                                      id="it19_1"/>
+                                        <af:inputText label="Enter Availability Flag (A / U) or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.availabilityFlag}"
+                                                      id="it19_2"/>
+                                        <af:inputText label="Enter Location or WAC (C01%) or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.wacNumber}"
+                                                      id="it19_3"/>
+                                        <af:inputText label="Enter NIIN or leave blank for all"
+                                                      labelStyle="width: 300px;"
+                                                      value="#{viewScope.ReportsInputParamBean.reportsInfoBean.niin}"
+                                                      id="it19_4"/>
+                                    </af:panelGroupLayout>
+                                </af:panelFormLayout>
+                                <af:spacer width="10" height="20" id="s2"/>
+                                <af:button text="Submit" id="b1"
+                                           actionListener="#{viewScope.ReportsInputParamBean.validateInputParameters}"
+                                           action="#{viewScope.ReportsInputParamBean.goToNextPage}"/>
+                                <af:spacer width="10" height="10" id="s3"/>
+                                <af:button text="Go Back to Report List" id="b2" action="GoReports_Standard" immediate="true"/>
+                                <af:spacer width="10" height="10" id="s4"/>
+                            </af:panelBox>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end"/>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

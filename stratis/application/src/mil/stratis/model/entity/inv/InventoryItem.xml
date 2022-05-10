@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="InventoryItem"
+   Version="11.1.2.64.36"
+   DBObjectType="table"
+   DBObjectName="INVENTORY_ITEM"
+   AliasName="InventoryItem"
+   BindingStyle="OracleName"
+   BatchThreshold="1"
+   UseGlueCode="false">
+   <DesignTime>
+      <Attr Name="_panelSchema" Value="table|alias" />
+   </DesignTime>
+   <Attribute
+      Name="InventoryItemId"
+      ColumnName="INVENTORY_ITEM_ID"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="INVENTORY_ITEM"
+      PrimaryKey="true" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="NiinId"
+      ColumnName="NIIN_ID"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="INVENTORY_ITEM" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="NiinLocId"
+      ColumnName="NIIN_LOC_ID"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="INVENTORY_ITEM" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="InventoryId"
+      ColumnName="INVENTORY_ID"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="INVENTORY_ITEM" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="NumCounts"
+      Precision="6"
+      Scale="0"
+      ColumnName="NUM_COUNTS"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="INVENTORY_ITEM" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CumNegAdj"
+      ColumnName="CUM_NEG_ADJ"
+      SQLType="NUMERIC"
+      Type="java.lang.Integer"
+      ColumnType="NUMBER"
+      TableName="INVENTORY_ITEM"
+      Precision="6"
+      Scale="0">
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CumPosAdj"
+      ColumnName="CUM_POS_ADJ"
+      SQLType="NUMERIC"
+      Type="java.lang.Integer"
+      ColumnType="NUMBER"
+      TableName="INVENTORY_ITEM"
+      Precision="6"
+      Scale="0">
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="NumCounted"
+      Precision="6"
+      Scale="0"
+      ColumnName="NUM_COUNTED"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="INVENTORY_ITEM" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      ColumnName="CREATED_BY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="INVENTORY_ITEM" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CreatedDate"
+      ColumnName="CREATED_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="INVENTORY_ITEM" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ModifiedBy"
+      ColumnName="MODIFIED_BY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="INVENTORY_ITEM" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ModifiedDate"
+      ColumnName="MODIFIED_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="INVENTORY_ITEM" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="InvType"
+      Precision="10"
+      ColumnName="INV_TYPE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="INVENTORY_ITEM" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="WacId"
+      ColumnName="WAC_ID"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="INVENTORY_ITEM" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Priority"
+      Precision="1"
+      ColumnName="PRIORITY"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="INVENTORY_ITEM" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Status"
+      Precision="30"
+      ColumnName="STATUS"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="INVENTORY_ITEM" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="TransactionType"
+      Precision="3"
+      ColumnName="TRANSACTION_TYPE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="INVENTORY_ITEM" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="3" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="NiinLocQty"
+      Precision="6"
+      Scale="0"
+      ColumnName="NIIN_LOC_QTY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="INVENTORY_ITEM" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="AssignToUser"
+      Precision="6"
+      Scale="0"
+      ColumnName="ASSIGN_TO_USER"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="INVENTORY_ITEM" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="BypassCount"
+      IsNotNull="true"
+      DefaultValue="0"
+      Precision="6"
+      Scale="0"
+      ColumnName="BYPASS_COUNT"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="INVENTORY_ITEM" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CompletedBy"
+      Precision="6"
+      Scale="0"
+      ColumnName="COMPLETED_BY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="INVENTORY_ITEM" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CompletedDate"
+      ColumnName="COMPLETED_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="INVENTORY_ITEM" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ReleasedBy"
+      ColumnName="RELEASED_BY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="INVENTORY_ITEM" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ReleasedDate"
+      ColumnName="RELEASED_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="INVENTORY_ITEM" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="LocationId"
+      ColumnName="LOCATION_ID"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="INVENTORY_ITEM"/>
+   <AccessorAttribute
+      Name="Inventory"
+      Association="mil.stratis.model.entity.associations.InventoryItemInvFkAssoc"
+      AssociationEnd="mil.stratis.model.entity.associations.InventoryItemInvFkAssoc.Inventory"
+      AssociationOtherEnd="mil.stratis.model.entity.associations.InventoryItemInvFkAssoc.InventoryItem"
+      Type="mil.stratis.model.entity.inv.InventoryImpl"
+      IsUpdateable="true">
+   </AccessorAttribute>
+   <AccessorAttribute
+      Name="NiinInfo"
+      Association="mil.stratis.model.entity.associations.InventoryItemNiinFkAssoc"
+      AssociationEnd="mil.stratis.model.entity.associations.InventoryItemNiinFkAssoc.NiinInfo"
+      AssociationOtherEnd="mil.stratis.model.entity.associations.InventoryItemNiinFkAssoc.InventoryItem"
+      Type="mil.stratis.model.entity.site.NiinInfoImpl"
+      IsUpdateable="true">
+   </AccessorAttribute>
+   <AccessorAttribute
+      Name="NiinLocation"
+      Association="mil.stratis.model.entity.associations.InventoryItemNiinLocFkAssoc"
+      AssociationEnd="mil.stratis.model.entity.associations.InventoryItemNiinLocFkAssoc.NiinLocation"
+      AssociationOtherEnd="mil.stratis.model.entity.associations.InventoryItemNiinLocFkAssoc.InventoryItem"
+      Type="mil.stratis.model.entity.loc.NiinLocationImpl"
+      IsUpdateable="true">
+   </AccessorAttribute>
+   <Key
+      Name="InventoryItemChk1" >
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="INVENTORY_ITEM_CHK1"/>
+         <Attr Name="_checkCondition"
+            Value="(CUM_NEG_ADJ = 0 AND CUM_POS_ADJ > 0) OR (CUM_NEG_ADJ > 0 AND CUM_POS_ADJ = 0) OR (CUM_NEG_ADJ = 0 AND CUM_POS_ADJ = 0)"/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="InventoryItemChk2" >
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="INVENTORY_ITEM_CHK2"/>
+         <Attr Name="_checkCondition" Value="NUM_COUNTS >= 0 AND NUM_COUNTED >= 0 AND NIIN_LOC_QTY >= 0"/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="InventoryItemPk"
+      PrimaryKey="true" >
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="INVENTORY_ITEM_PK"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.inv.InventoryItem.InventoryItemId" />
+      </AttrArray>
+   </Key>
+   <Key
+      Name="InventoryItemInvFk" >
+      <DesignTime>
+         <Attr Name="_isCascadeDelete" Value="true"/>
+         <Attr Name="_referencedKey" Value="INVENTORY_PK"/>
+         <Attr Name="_isForeign" Value="true"/>
+         <Attr Name="_DBObjectName" Value="INVENTORY_ITEM_INV_FK"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.inv.InventoryItem.InventoryId" />
+      </AttrArray>
+   </Key>
+   <Key
+      Name="InventoryItemLocationFk1">
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="LOCATION_PK"/>
+         <Attr Name="_isForeign" Value="true"/>
+         <Attr Name="_DBObjectName" Value="INVENTORY_ITEM_LOCATION_FK1"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.inv.InventoryItem.LocationId"/>
+      </AttrArray>
+   </Key>
+   <Key
+      Name="InventoryItemNiinFk" >
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="NIIN_INFO_PK"/>
+         <Attr Name="_isForeign" Value="true"/>
+         <Attr Name="_DBObjectName" Value="INVENTORY_ITEM_NIIN_FK"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.inv.InventoryItem.NiinId" />
+      </AttrArray>
+   </Key>
+   <Key
+      Name="InventoryItemNiinLocFk" >
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="NIIN_LOCATION_PK"/>
+         <Attr Name="_isForeign" Value="true"/>
+         <Attr Name="_DBObjectName" Value="INVENTORY_ITEM_NIIN_LOC_FK"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.inv.InventoryItem.NiinLocId" />
+      </AttrArray>
+   </Key>
+   <Key
+      Name="InventoryItemUsersFk1" >
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="USERS_PK"/>
+         <Attr Name="_isForeign" Value="true"/>
+         <Attr Name="_DBObjectName" Value="INVENTORY_ITEM_USERS_FK1"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.inv.InventoryItem.CreatedBy" />
+      </AttrArray>
+   </Key>
+   <Key
+      Name="InventoryItemUsersFk2" >
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="USERS_PK"/>
+         <Attr Name="_isForeign" Value="true"/>
+         <Attr Name="_DBObjectName" Value="INVENTORY_ITEM_USERS_FK2"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.inv.InventoryItem.ModifiedBy" />
+      </AttrArray>
+   </Key>
+   <Key
+      Name="InventoryItemUsersFk3" >
+      <DesignTime>
+         <Attr Name="_isForeign" Value="true"/>
+         <Attr Name="_DBObjectName" Value="INVENTORY_ITEM_USERS_FK3"/>
+         <Attr Name="_referencedKey" Value="USERS_PK"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.inv.InventoryItem.AssignToUser" />
+      </AttrArray>
+   </Key>
+   <Key
+      Name="InventoryItemUsersFk4" >
+      <DesignTime>
+         <Attr Name="_isForeign" Value="true"/>
+         <Attr Name="_DBObjectName" Value="INVENTORY_ITEM_USERS_FK4"/>
+         <Attr Name="_referencedKey" Value="USERS_PK"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.inv.InventoryItem.CompletedBy" />
+      </AttrArray>
+   </Key>
+</Entity>

@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="1"/>
+    <jsp:setProperty name="userbean" property="selected3" value="10"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="Admin_WarehouseConsoldationSetup"/>
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session" />
+    <jsp:setProperty name="logBean" property="page" value="Consolidation Triwall"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="195" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGroupLayout layout="vertical">
+                                <af:panelBox text="Warehouse Setup - Consolidation Triwall Setup"
+                                             showDisclosure="false">
+                                    <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                                        <f:facet name="secondaryToolbar">
+                                            <af:toolbar inlineStyle="padding:2px;" id="t1">
+                                                <af:button actionListener="#{bindings.CreateInsert.execute}"
+                                                                  text="Create" id="CreateButton"
+                                                                  inlineStyle="width:50px" accessKey="C"
+                                                                  disabled="#{(!ConsolidationSetupBacking.consolidationFlag) and (bindings.PackingStationTable1.estimatedRowCount > 0)}"
+                                                                  partialSubmit="false">
+                                                    <af:setActionListener from="#{false}"
+                                                                          to="#{ConsolidationSetupBacking.consolidationFlag}"/>
+                                                    <af:setActionListener from="#{false}"
+                                                                          to="#{ConsolidationSetupBacking.consolidationRefresh}"/>
+                                                </af:button>
+                                                <af:group id="g1">
+                                                    <af:button text="Delete" id="DeleteButton" accessKey="D"
+                                                                      inlineStyle="width:50px"
+                                                                      disabled="#{!ConsolidationSetupBacking.consolidationFlag}"
+                                                                      partialSubmit="false">
+                                                        <af:showPopupBehavior popupId="confirmDelete" triggerType="action" align="afterStart"/> 
+                                                    </af:button>
+                                                    <af:popup id="confirmDelete">
+                                                        <af:dialog id="Confirm" title="Confirm" affirmativeTextAndAccessKey="Submit"
+                                                            dialogListener="#{ConsolidationSetupBacking.dialogListener}">
+                                                            <af:activeOutputText id="Delete" value="Are you sure you want to Delete?"/>
+                                                        </af:dialog>                                                        
+                                                    </af:popup>
+                                                </af:group>
+                                            </af:toolbar>
+                                        </f:facet>
+                                        <af:table value="#{bindings.PackingStationTable1.collectionModel}" var="row"
+                                                  rows="#{bindings.PackingStationTable1.rangeSize}"
+                                                  first="#{bindings.PackingStationTable1.rangeStart}"
+                                                  emptyText="#{bindings.PackingStationTable1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                  selectionListener="#{bindings.PackingStationTable1.collectionModel.makeCurrent}"
+                                                  id="PackingTable"
+                                                  binding="#{ConsolidationSetupBacking.consolidationTable}"
+                                                  selectedRowKeys="#{bindings.PackingStationTable1.collectionModel.selectedRow}"
+                                                  rowSelection="single" styleClass="AFStretchWidth"
+                                                  columnStretching="last">
+                                            <af:column sortProperty="Name" sortable="true"
+                                                       inlineStyle="text-align:center;"
+                                                       headerText="#{bindings.PackingStationTable1.labels.Name}"
+                                                       width="110">
+                                                <af:outputText value="#{row.Name}"/>
+                                            </af:column>
+                                            <af:column sortProperty="Description" sortable="true"
+                                                       inlineStyle="text-align:center;"
+                                                       headerText="#{bindings.PackingStationTable1.labels.Description}"
+                                                       width="110">
+                                                <af:outputText value="#{row.Description}"/>
+                                            </af:column>
+                                            <af:column sortProperty="Levels" sortable="false" width="75"
+                                                       headerText="#{bindings.PackingStationTable1.labels.Levels}">
+                                                <af:outputText value="#{row.Levels}">
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.PackingStationTable1.formats.Levels}"/>
+                                                </af:outputText>
+                                            </af:column>
+                                            <af:column sortProperty="Columns" sortable="false" width="100"
+                                                       headerText="#{bindings.PackingStationTable1.labels.Columns}">
+                                                <af:outputText value="#{row.Columns}">
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.PackingStationTable1.formats.Columns}"/>
+                                                </af:outputText>
+                                            </af:column>
+                                            <f:facet name="footer"/>
+                                        </af:table>
+                                    </af:panelCollection>
+                                    <!-- onclick="return confirm('Are you sure you want to permanently delete this Consolidation Triwall?');"/> -->
+                                    <af:spacer height="10"/>
+                                    <af:panelBox text="Consolidation Triwall Setup Details"
+                                                 id="consolidationSetupPanelBox"
+                                                 rendered="#{bindings.PackingStationTable1.estimatedRowCount > 0}"
+                                                 showDisclosure="false">
+                                        <af:panelFormLayout partialTriggers="pc1:PackingTable">
+                                            <af:panelGroupLayout>
+                                                <af:panelGroupLayout layout="horizontal">
+                                                        <af:outputLabel value="Workstation"
+                                                                        inlineStyle="font-weight:bold"/>
+                                                        <af:selectOneChoice value="#{bindings.equipList.inputValue}"
+                                                                            binding="#{ConsolidationSetupBacking.consolidationWorkstations}"
+                                                                            id="consolidationWorkstationsSelectOne"
+                                                                            rendered="#{!ConsolidationSetupBacking.consolidationFlag}"
+                                                                            shortDesc="Required Consolidation Triwall"
+                                                                            label = "Required Consolidation Triwall">
+                                                            <f:selectItems value="#{bindings.equipList.items}"/>
+                                                        </af:selectOneChoice>
+                                                        <af:inputText value="#{bindings.ConsolidationTriwallName.inputValue}"
+                                                                      id="consolidationWorkstationSelectOne_h"
+                                                                      
+                                                                      columns="30" readOnly="true"
+                                                                      styleClass="ReadOnlyField"
+                                                                      rendered="#{ConsolidationSetupBacking.consolidationFlag}"/>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout layout="horizontal">
+                                                        <af:outputLabel value="Levels" inlineStyle="font-weight:bold"/>
+                                                        <af:inputText value="#{bindings.Levels1.inputValue}" columns="5"
+                                                                      id="consolidationLevels"
+                                                                      label="Required Levels (must be positive number)"
+                                                                      shortDesc="Required Levels (must be positive number)"
+                                                                      rendered="#{!ConsolidationSetupBacking.consolidationFlag}"
+                                                                      binding="#{ConsolidationSetupBacking.consolidationLevels}"/>
+                                                        <af:inputText value="#{bindings.Levels1.inputValue}" columns="5"
+                                                                      id="consolidationLevels_h"
+                                                                      
+                                                                      rendered="#{ConsolidationSetupBacking.consolidationFlag}"
+                                                                      styleClass="ReadOnlyField" readOnly="true"/>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout layout="horizontal">
+                                                    <af:outputLabel value="Columns" inlineStyle="font-weight:bold"/>
+                                                        <af:inputText value="#{bindings.Columns1.inputValue}"
+                                                                      columns="5" id="consolidationColumns"
+                                                                      label="Required Columns (must be positive number)"
+                                                                      shortDesc="Required Columns (must be positive number)"
+                                                                      rendered="#{!ConsolidationSetupBacking.consolidationFlag}"
+                                                                      binding="#{ConsolidationSetupBacking.consolidationColumns}"/>
+                                                        <af:inputText value="#{bindings.Columns1.inputValue}"
+                                                                      columns="5" id="consolidationColumns_h"
+                                                                      
+                                                                      rendered="#{ConsolidationSetupBacking.consolidationFlag}"
+                                                                      styleClass="ReadOnlyField" readOnly="true"/>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout layout="horizontal">
+                                                        <af:toolbar rendered="#{!ConsolidationSetupBacking.consolidationFlag}">
+                                                            <af:button actionListener="#{ConsolidationSetupBacking.submitSaveConsolidation}"
+                                                                              text="Submit" accessKey="S"
+                                                                              inlineStyle="width:50px" id="SaveButton" partialSubmit="false"/>
+                                                            <af:resetButton text="Reset" accessKey="R" id="ResetButton"
+                                                                            inlineStyle="width:50px"/>
+                                                            <af:button actionListener="#{ConsolidationSetupBacking.submitCancelConsolidation}"
+                                                                              text="Cancel" accessKey="a"
+                                                                              inlineStyle="width:50px"
+                                                                              id="CancelButton"
+                                                                              immediate="true" partialSubmit="false"/>
+                                                        </af:toolbar>
+                                                </af:panelGroupLayout>
+                                            </af:panelGroupLayout>
+                                        </af:panelFormLayout>
+                                    </af:panelBox>
+                                </af:panelBox>
+                            </af:panelGroupLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6" id="s1"/>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

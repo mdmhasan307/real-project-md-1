@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="FloorLocationView"
+  Version="11.1.2.64.36"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  OrderBy="FLOOR_LOCATION_ID ASC">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <SQLQuery><![CDATA[SELECT FloorLocation.FLOOR_LOCATION_ID, 
+       FloorLocation.FLOOR_LOCATION, 
+       FloorLocation.ROUTE_ID, 
+       ShippingRoute.ROUTE_ID ROUTE_ID1,
+       ShippingRoute.ROUTE_NAME ROUTE_NAME
+FROM FLOOR_LOCATION FloorLocation 
+LEFT JOIN SHIPPING_ROUTE ShippingRoute
+ON FloorLocation.ROUTE_ID = ShippingRoute.ROUTE_ID]]></SQLQuery>
+  <EntityUsage
+    Name="FloorLocation"
+    Entity="mil.stratis.model.entity.ship.FloorLocation"/>
+  <EntityUsage
+    Name="ShippingRoute"
+    Entity="mil.stratis.model.entity.ship.ShippingRoute"
+    SourceUsage="mil.stratis.model.view.ship.FloorLocationView.FloorLocation"
+    ReadOnly="true"
+    Reference="true"
+    DeleteParticipant="false"/>
+  <ViewAttribute
+    Name="FloorLocationId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="FloorLocationId"
+    EntityUsage="FloorLocation"
+    AliasName="FLOOR_LOCATION_ID"
+    IsUpdateable="while_insert"/>
+  <ViewAttribute
+    Name="FloorLocation1"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="FloorLocation"
+    EntityUsage="FloorLocation"
+    AliasName="FLOOR_LOCATION"/>
+  <ViewAttribute
+    Name="RouteId"
+    PrecisionRule="true"
+    EntityAttrName="RouteId"
+    EntityUsage="FloorLocation"
+    AliasName="ROUTE_ID"/>
+  <ViewAttribute
+    Name="RouteId1"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.math.BigInteger"
+    ColumnType="NUMBER"
+    AliasName="ROUTE_ID1"
+    Expression="ROUTE_ID1"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="RouteName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ROUTE_NAME"
+    Expression="ROUTE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+</ViewObject>

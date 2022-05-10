@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" 
+                id="Admin_ProcessGCSSMCReconPageDef" Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="NiinInfoView_CC_Change3Iterator" RangeSize="10" Binds="Root.AppModule1.NiinInfoView_CC_Change3"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <variableIterator id="variables" Refresh="ifNeeded">
+      <variable Type="java.lang.String" Name="FilterNIINRecon_NIIN" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="FilterNIINRecon_Nomenclature" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="FilterNIINRecon_Location" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="FilterNIINRecon_SecureFlag" IsQueriable="false"/>
+    </variableIterator>
+  </executables>
+  <bindings>
+    <!-- ORIGINAL TABLE -->
+    <table id="NiinInfoView_CC_Change3" IterBinding="NiinInfoView_CC_Change3Iterator">
+      <AttrNames>
+        <Item Value="NiinId"/>
+        <Item Value="Niin"/>
+        <Item Value="Nomenclature"/>
+        <Item Value="Fsc"/>
+        <Item Value="Ui"/>
+        <Item Value="SerialControlFlag"/>
+        <Item Value="LotControlFlag"/>
+        <Item Value="ShelfLifeCode"/>
+        <Item Value="ShelfLifeExtension"/>
+      </AttrNames>
+    </table>
+    <!-- ORIGINAL TABLE -->
+    <attributeValues id="SerialControlFlag" IterBinding="NiinInfoView_CC_Change3Iterator">
+      <AttrNames>
+        <Item Value="SerialControlFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LotControlFlag" IterBinding="NiinInfoView_CC_Change3Iterator">
+      <AttrNames>
+        <Item Value="LotControlFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FilterNIINRecon" MethodName="filterNIINRecon" RequiresUpdateModel="true" Action="invokeMethod"
+                  IsViewObjectMethod="false" DataControl="StratisRootServiceDataControl"
+                  InstanceName="StratisRootServiceDataControl.dataProvider.Root.AppModule1">
+      <NamedData NDName="NIINQry" NDType="java.lang.String" NDValue="${bindings.FilterNIINRecon_NIIN}"/>
+      <NamedData NDName="NomenclatureQry" NDType="java.lang.String" NDValue="${bindings.FilterNIINRecon_Nomenclature}"/>
+    </methodAction>
+    <attributeValues id="NIINQry" IterBinding="variables">
+      <AttrNames>
+        <Item Value="FilterNIINRecon_NIIN"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NomenclatureQry" IterBinding="variables">
+      <AttrNames>
+        <Item Value="FilterNIINRecon_Nomenclature"/>
+      </AttrNames>
+    </attributeValues>
+    <!-- END ORIG -->
+  </bindings>
+</pageDefinition>

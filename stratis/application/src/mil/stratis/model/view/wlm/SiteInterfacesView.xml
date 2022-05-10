@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="SiteInterfacesView"
+  Version="11.1.2.64.36"
+  SelectList="SiteInterfaces.INTERFACE_ID, 
+       SiteInterfaces.INTERFACE_NAME, 
+       SiteInterfaces.FILE_NAME, 
+       SiteInterfaces.FILE_PATH, 
+       SiteInterfaces.LAST_FTP_DATE, 
+       SiteInterfaces.LAST_IMPEXP_DATE, 
+       SiteInterfaces.CONNECTION_ID, 
+       SiteInterfaces.STATUS"
+  FromList="SITE_INTERFACES SiteInterfaces"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <EntityUsage
+    Name="SiteInterfaces"
+    Entity="mil.stratis.model.entity.wlm.SiteInterfaces"/>
+  <ViewAttribute
+    Name="InterfaceId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="InterfaceId"
+    EntityUsage="SiteInterfaces"
+    AliasName="INTERFACE_ID"/>
+  <ViewAttribute
+    Name="InterfaceName"
+    PrecisionRule="true"
+    EntityAttrName="InterfaceName"
+    EntityUsage="SiteInterfaces"
+    AliasName="INTERFACE_NAME"/>
+  <ViewAttribute
+    Name="FileName"
+    PrecisionRule="true"
+    EntityAttrName="FileName"
+    EntityUsage="SiteInterfaces"
+    AliasName="FILE_NAME"/>
+  <ViewAttribute
+    Name="FilePath"
+    PrecisionRule="true"
+    EntityAttrName="FilePath"
+    EntityUsage="SiteInterfaces"
+    AliasName="FILE_PATH"/>
+  <ViewAttribute
+    Name="LastFtpDate"
+    PrecisionRule="true"
+    EntityAttrName="LastFtpDate"
+    EntityUsage="SiteInterfaces"
+    AliasName="LAST_FTP_DATE"/>
+  <ViewAttribute
+    Name="LastImpexpDate"
+    PrecisionRule="true"
+    EntityAttrName="LastImpexpDate"
+    EntityUsage="SiteInterfaces"
+    AliasName="LAST_IMPEXP_DATE"/>
+  <ViewAttribute
+    Name="ConnectionId"
+    PrecisionRule="true"
+    EntityAttrName="ConnectionId"
+    EntityUsage="SiteInterfaces"
+    AliasName="CONNECTION_ID"/>
+  <ViewAttribute
+    Name="Status"
+    PrecisionRule="true"
+    EntityAttrName="Status"
+    EntityUsage="SiteInterfaces"
+    AliasName="STATUS"/>
+</ViewObject>

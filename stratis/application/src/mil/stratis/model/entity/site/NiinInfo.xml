@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="NiinInfo"
+  Version="11.1.2.64.36"
+  DBObjectType="SYNONYM"
+  DBObjectName="NIIN_INFO"
+  AliasName="NiinInfo"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="mil.stratis.model.entity.site.NiinInfoImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="NiinId"
+    ColumnName="NIIN_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.DBSequence"
+    ColumnType="NUMBER"
+    TableName="NIIN_INFO"
+    PrimaryKey="true"
+    IsUpdateable="while_insert"
+    DefaultValue="@0"
+    Domain="oracle.jbo.domain.DBSequence"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_SequenceName" Value="NIIN_ID_SEQ"/>
+      <Attr Name="_SequenceStart" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Niin"
+    IsNotNull="true"
+    Precision="9"
+    ColumnName="NIIN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="NIIN_INFO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="9"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Nomenclature"
+    Precision="100"
+    ColumnName="NOMENCLATURE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="NIIN_INFO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Cube"
+    IsNotNull="true"
+    ColumnName="CUBE"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="NIIN_INFO"/>
+  <Attribute
+    Name="Price"
+    IsNotNull="true"
+    ColumnName="PRICE"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="NIIN_INFO"/>
+  <Attribute
+    Name="ActivityDate"
+    ColumnName="ACTIVITY_DATE"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="NIIN_INFO"/>
+  <Attribute
+    Name="Tamcn"
+    Precision="6"
+    ColumnName="TAMCN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="NIIN_INFO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="6"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="SupplyClass"
+    Precision="2"
+    ColumnName="SUPPLY_CLASS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="NIIN_INFO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TypeOfMaterial"
+    Precision="1"
+    ColumnName="TYPE_OF_MATERIAL"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="NIIN_INFO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CognizanceCode"
+    Precision="10"
+    ColumnName="COGNIZANCE_CODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="NIIN_INFO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="PartNumber"
+    Precision="20"
+    ColumnName="PART_NUMBER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="NIIN_INFO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Ui"
+    Precision="2"
+    ColumnName="UI"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="NIIN_INFO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CageCode"
+    Precision="9"
+    ColumnName="CAGE_CODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="NIIN_INFO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="9"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Fsc"
+    Precision="4"
+    ColumnName="FSC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="NIIN_INFO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ShelfLifeCode"
+    Precision="1"
+    ColumnName="SHELF_LIFE_CODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="NIIN_INFO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Weight"
+    IsNotNull="true"
+    ColumnName="WEIGHT"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="NIIN_INFO"/>
+  <Attribute
+    Name="Length"
+    IsNotNull="true"
+    ColumnName="LENGTH"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="NIIN_INFO"/>
+  <Attribute
+    Name="Width"
+    IsNotNull="true"
+    ColumnName="WIDTH"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="NIIN_INFO"/>
+  <Attribute
+    Name="Height"
+    IsNotNull="true"
+    ColumnName="HEIGHT"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="NIIN_INFO"/>
+  <Attribute
+    Name="ShelfLifeExtension"
+    ColumnName="SHELF_LIFE_EXTENSION"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="NIIN_INFO"/>
+  <Attribute
+    Name="Scc"
+    Precision="1"
+    ColumnName="SCC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="NIIN_INFO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="InventoryThreshold"
+    IsNotNull="true"
+    Precision="1"
+    ColumnName="INVENTORY_THRESHOLD"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="NIIN_INFO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="SassyBalance"
+    Precision="6"
+    Scale="0"
+    ColumnName="SASSY_BALANCE"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="NIIN_INFO"/>
+  <Attribute
+    Name="RoThreshold"
+    Precision="6"
+    Scale="0"
+    ColumnName="RO_THRESHOLD"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="NIIN_INFO"/>
+  <Attribute
+    Name="Smic"
+    Precision="2"
+    ColumnName="SMIC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="NIIN_INFO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="SerialControlFlag"
+    IsNotNull="true"
+    Precision="1"
+    ColumnName="SERIAL_CONTROL_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="NIIN_INFO"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LotControlFlag"
+    IsNotNull="true"
+    Precision="1"
+    ColumnName="LOT_CONTROL_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="NIIN_INFO"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="NewNsn"
+    Precision="13"
+    ColumnName="NEW_NSN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="NIIN_INFO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="13"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CreatedBy"
+    ColumnName="CREATED_BY"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="NIIN_INFO"/>
+  <Attribute
+    Name="ModifiedBy"
+    ColumnName="MODIFIED_BY"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="NIIN_INFO"/>
+  <Attribute
+    Name="LastMhifUpdateDate"
+    ColumnName="LAST_MHIF_UPDATE_DATE"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="NIIN_INFO"/>
+  <Attribute
+    Name="DemilCode"
+    Precision="1"
+    ColumnName="DEMIL_CODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="NIIN_INFO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="InventoryItem"
+    Association="mil.stratis.model.entity.associations.InventoryItemNiinFkAssoc"
+    AssociationEnd="mil.stratis.model.entity.associations.InventoryItemNiinFkAssoc.InventoryItem"
+    AssociationOtherEnd="mil.stratis.model.entity.associations.InventoryItemNiinFkAssoc.NiinInfo"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="NiinLocation"
+    Association="mil.stratis.model.entity.associations.NiinInfoFkAssoc"
+    AssociationEnd="mil.stratis.model.entity.associations.NiinInfoFkAssoc.NiinLocation"
+    AssociationOtherEnd="mil.stratis.model.entity.associations.NiinInfoFkAssoc.NiinInfo"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="Receipt"
+    Association="mil.stratis.model.entity.associations.ReceiptNiinFkAssoc"
+    AssociationEnd="mil.stratis.model.entity.associations.ReceiptNiinFkAssoc.Receipt"
+    AssociationOtherEnd="mil.stratis.model.entity.associations.ReceiptNiinFkAssoc.NiinInfo"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="Ck10niinInfo">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="CK10NIIN_INFO"/>
+      <Attr Name="_checkCondition" Value="SERIAL_CONTROL_FLAG IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="Ck11niinInfo">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="CK11NIIN_INFO"/>
+      <Attr Name="_checkCondition" Value="LOT_CONTROL_FLAG IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="Ck12niinInfo">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="CK12NIIN_INFO"/>
+      <Attr Name="_checkCondition" Value="LAST_MHIF_UPDATE_DATE IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="Ck1niinInfo">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="CK1NIIN_INFO"/>
+      <Attr Name="_checkCondition" Value="NIIN_ID IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="Ck2niinInfo">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="CK2NIIN_INFO"/>
+      <Attr Name="_checkCondition" Value="NIIN IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="Ck3niinInfo">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="CK3NIIN_INFO"/>
+      <Attr Name="_checkCondition" Value="CUBE IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="Ck4niinInfo">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="CK4NIIN_INFO"/>
+      <Attr Name="_checkCondition" Value="PRICE IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="Ck5niinInfo">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="CK5NIIN_INFO"/>
+      <Attr Name="_checkCondition" Value="WEIGHT IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="Ck6niinInfo">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="CK6NIIN_INFO"/>
+      <Attr Name="_checkCondition" Value="LENGTH IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="Ck7niinInfo">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="CK7NIIN_INFO"/>
+      <Attr Name="_checkCondition" Value="WIDTH IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="Ck8niinInfo">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="CK8NIIN_INFO"/>
+      <Attr Name="_checkCondition" Value="HEIGHT IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="Ck9niinInfo">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="CK9NIIN_INFO"/>
+      <Attr Name="_checkCondition" Value="INVENTORY_THRESHOLD IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="NiinInfoChk1">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="NIIN_INFO_CHK1"/>
+      <Attr Name="_checkCondition"
+        Value="INVENTORY_THRESHOLD IN ('Y', 'N') AND SERIAL_CONTROL_FLAG IN ('Y', 'N') AND LOT_CONTROL_FLAG IN ('Y', 'N')"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="NiinInfoChk2">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="NIIN_INFO_CHK2"/>
+      <Attr Name="_checkCondition"
+        Value="CUBE > 0 AND (((((PRICE >= 0 AND WEIGHT > 0) AND LENGTH > 0) AND WIDTH > 0) AND HEIGHT > 0) AND SHELF_LIFE_EXTENSION >= 0) AND SASSY_BALANCE >= 0 AND RO_THRESHOLD >= 0"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="NiinInfoPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="NIIN_INFO_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.site.NiinInfo.NiinId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="NiinInfoUk">
+    <DesignTime>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="NIIN_INFO_UK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.site.NiinInfo.Niin"/>
+    </AttrArray>
+  </Key>
+</Entity>

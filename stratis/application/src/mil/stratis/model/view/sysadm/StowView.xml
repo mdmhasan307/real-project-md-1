@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="StowView"
+   Version="11.1.2.64.36"
+   SelectList="Stow.SID, 
+       Stow.QTY_TO_BE_STOWED, 
+       Stow.RCN, 
+       Stow.CREATED_BY, 
+       Stow.CREATED_DATE, 
+       Stow.MODIFIED_BY, 
+       Stow.MODIFIED_DATE, 
+       Stow.STOW_ID, 
+       Stow.PID, 
+       Stow.STATUS, 
+       Stow.CANCEL_REASON, 
+       Stow.EXPIRATION_DATE, 
+       Stow.DATE_OF_MANUFACTURE, 
+       Stow.LOCATION_ID, 
+       Stow.LOT_CON_NUM, 
+       Stow.CASE_WEIGHT_QTY, 
+       Stow.PACKED_DATE, 
+       Stow.SERIAL_NUMBER, 
+       Stow.STOW_QTY, 
+       Stow.SCAN_IND, 
+       Stow.BYPASS_COUNT"
+   FromList="STOW Stow"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.sysadm.StowViewImpl"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="Stow"
+      Entity="mil.stratis.model.entity.rcv.Stow" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="Sid"
+      IsNotNull="true"
+      EntityAttrName="Sid"
+      EntityUsage="Stow"
+      AliasName="SID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="QtyToBeStowed"
+      IsNotNull="true"
+      EntityAttrName="QtyToBeStowed"
+      EntityUsage="Stow"
+      AliasName="QTY_TO_BE_STOWED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Rcn"
+      EntityAttrName="Rcn"
+      EntityUsage="Stow"
+      AliasName="RCN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="Stow"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedDate"
+      EntityAttrName="CreatedDate"
+      EntityUsage="Stow"
+      AliasName="CREATED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedBy"
+      EntityAttrName="ModifiedBy"
+      EntityUsage="Stow"
+      AliasName="MODIFIED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedDate"
+      EntityAttrName="ModifiedDate"
+      EntityUsage="Stow"
+      AliasName="MODIFIED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StowId"
+      IsUpdateable="while_insert"
+      IsNotNull="true"
+      EntityAttrName="StowId"
+      EntityUsage="Stow"
+      AliasName="STOW_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Pid"
+      EntityAttrName="Pid"
+      EntityUsage="Stow"
+      AliasName="PID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Status"
+      EntityAttrName="Status"
+      EntityUsage="Stow"
+      AliasName="STATUS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CancelReason"
+      EntityAttrName="CancelReason"
+      EntityUsage="Stow"
+      AliasName="CANCEL_REASON" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ExpirationDate"
+      EntityAttrName="ExpirationDate"
+      EntityUsage="Stow"
+      AliasName="EXPIRATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DateOfManufacture"
+      EntityAttrName="DateOfManufacture"
+      EntityUsage="Stow"
+      AliasName="DATE_OF_MANUFACTURE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationId"
+      EntityAttrName="LocationId"
+      EntityUsage="Stow"
+      AliasName="LOCATION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LotConNum"
+      EntityAttrName="LotConNum"
+      EntityUsage="Stow"
+      AliasName="LOT_CON_NUM" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CaseWeightQty"
+      EntityAttrName="CaseWeightQty"
+      EntityUsage="Stow"
+      AliasName="CASE_WEIGHT_QTY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PackedDate"
+      EntityAttrName="PackedDate"
+      EntityUsage="Stow"
+      AliasName="PACKED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SerialNumber"
+      EntityAttrName="SerialNumber"
+      EntityUsage="Stow"
+      AliasName="SERIAL_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StowQty"
+      EntityAttrName="StowQty"
+      EntityUsage="Stow"
+      AliasName="STOW_QTY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ScanInd"
+      IsNotNull="true"
+      EntityAttrName="ScanInd"
+      EntityUsage="Stow"
+      AliasName="SCAN_IND" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BypassCount"
+      EntityAttrName="BypassCount"
+      EntityUsage="Stow"
+      AliasName="BYPASS_COUNT" >
+   </ViewAttribute>
+</ViewObject>

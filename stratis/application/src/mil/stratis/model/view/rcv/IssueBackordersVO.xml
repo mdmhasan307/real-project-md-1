@@ -1,0 +1,541 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="IssueBackordersVO"
+   Version="11.1.2.64.36"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   ComponentClass="mil.stratis.model.view.rcv.IssueBackordersVOImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   Passivate="All"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+      <Attr Name="_isExpertMode" Value="true" />
+   </DesignTime>
+   <Variable
+      Name="rcnStr"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <SQLQuery><![CDATA[
+SELECT 
+    i.SCN, 
+    i.ISSUE_PRIORITY_GROUP, 
+    i.DOCUMENT_NUMBER idocument_number, 
+    i.STATUS, 
+    i.MODIFIED_BY, 
+    i.MODIFIED_DATE, 
+    r.RCN, 
+    r.DOCUMENT_NUMBER rdocument_number, 
+    r.SUFFIX rsuffix, 
+    r.CC, 
+    r.PROJECT_CODE, 
+    r.QUANTITY_BACKORDERED, 
+    nf.FSC, 
+    nf.NIIN, 
+    nf.NIIN_ID, 
+    nf.PART_NUMBER, 
+    nf.UI, 
+    nf.SCC, 
+    i.QTY iqty,
+    i.SUFFIX isuffix,
+    r.QUANTITY_INDUCTED,
+    r.QUANTITY_RELEASED,
+    (nvl(r.QUANTITY_INDUCTED,0) - nvl(r.QUANTITY_RELEASED,0)) AVAIL_QTY, nvl(nf.SERIAL_CONTROL_FLAG,'N') SERIAL_CONTROL_FLAG, nvl(nf.LOT_CONTROL_FLAG,'N') LOT_CONTROL_FLAG
+FROM 
+    ISSUE i, 
+    NIIN_INFO nf, 
+    RECEIPT r 
+WHERE 
+    r.NIIN_ID = i.NIIN_ID AND i.NIIN_ID = nf.NIIN_ID AND r.RCN = :rcnStr AND i.STATUS = 'BACKORDER' and i.rcn is null 
+ORDER BY 
+    i.ISSUE_PRIORITY_GROUP asc
+   ]]></SQLQuery>
+   <ViewAttribute
+      Name="Scn"
+      IsPersistent="false"
+      Precision="10"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SCN"
+      Expression="SCN"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="8" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Scn_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="8" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IssuePriorityGroup"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ISSUE_PRIORITY_GROUP"
+      Expression="ISSUE_PRIORITY_GROUP"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IdocumentNumber"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="IDOCUMENT_NUMBER"
+      Expression="IDOCUMENT_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="19" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="IdocumentNumber_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Status"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="STATUS"
+      Expression="STATUS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedBy"
+      IsPersistent="false"
+      Precision="6"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="MODIFIED_BY"
+      Expression="MODIFIED_BY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="MODIFIED_DATE"
+      Expression="MODIFIED_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Rcn"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="RCN"
+      Expression="RCN"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RdocumentNumber"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="RDOCUMENT_NUMBER"
+      Expression="RDOCUMENT_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="RdocumentNumber_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="18" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Rsuffix"
+      IsPersistent="false"
+      Precision="3"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="RSUFFIX"
+      Expression="RSUFFIX"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="3" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Rsuffix_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="1" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Cc"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CC"
+      Expression="CC"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Cc_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="1" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectCode"
+      IsPersistent="false"
+      Precision="3"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROJECT_CODE"
+      Expression="PROJECT_CODE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="3" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="ProjectCode_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="3" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="QuantityBackordered"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="QUANTITY_BACKORDERED"
+      Expression="QUANTITY_BACKORDERED"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="6" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Fsc"
+      IsPersistent="false"
+      Precision="4"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="FSC"
+      Expression="FSC"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Fsc_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="4" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Niin"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="NIIN"
+      Expression="NIIN"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="9" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="Niin_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NiinId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="NIIN_ID"
+      Expression="NIIN_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PartNumber"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PART_NUMBER"
+      Expression="PART_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="PartNumber_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Ui"
+      IsPersistent="false"
+      Precision="2"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="UI"
+      Expression="UI"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Ui_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="2" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Scc"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SCC"
+      Expression="SCC"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="1" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="Scc_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Iqty"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="6"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="IQTY"
+      Expression="IQTY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="6" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="Iqty_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Isuffix"
+      IsPersistent="false"
+      Precision="10"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ISUFFIX"
+      Expression="ISUFFIX"
+      SQLType="VARCHAR" >
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Isuffix_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="1" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="QuantityInducted"
+      IsPersistent="false"
+      Type="java.lang.String"
+      ColumnType="NUMBER"
+      AliasName="QUANTITY_INDUCTED"
+      Expression="QUANTITY_INDUCTED"
+      SQLType="VARCHAR" >
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="6" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="QuantityInducted_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="QuantityReleased"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="QUANTITY_RELEASED"
+      Expression="QUANTITY_RELEASED"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="6" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="QuantityReleased_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AvailQty"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="AVAIL_QTY"
+      Expression="AVAIL_QTY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SerialControlFlag"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SERIAL_CONTROL_FLAG"
+      Expression="SERIAL_CONTROL_FLAG"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LotControlFlag"
+      IsPersistent="false"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="LOT_CONTROL_FLAG"
+      Expression="LOT_CONTROL_FLAG"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <AttrArray Name="KeyAttributes">
+      <Item Value="Scn" />
+   </AttrArray>
+   <ResourceBundle >
+      <JavaResourceBundle
+         MsgBundleClass="mil.stratis.model.view.rcv.common.IssueBackordersVORowImplMsgBundle" >
+      </JavaResourceBundle>
+   </ResourceBundle>
+</ViewObject>

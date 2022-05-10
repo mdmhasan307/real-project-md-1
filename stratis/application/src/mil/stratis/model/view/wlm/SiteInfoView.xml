@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="SiteInfoView"
+   Version="11.1.2.64.36"
+   SelectList="SiteInfo.SITE_ID, 
+       SiteInfo.SUPPLY_CENTER_NAME, 
+       SiteInfo.CITY, 
+       SiteInfo.STATE, 
+       SiteInfo.ZIP_CODE, 
+       SiteInfo.AAC, 
+       SiteInfo.CONUS_OCUNUS_FLAG, 
+       SiteInfo.ROUTING_ID, 
+       SiteInfo.BULK_THRESHOLD, 
+       SiteInfo.PACKING_BYPASS, 
+       SiteInfo.SINGLE_ITEM_CUBE, 
+       SiteInfo.SINGLE_ITEM_WEIGHT, 
+       SiteInfo.GENERATE_AS2, 
+       SiteInfo.ISSUE_CUBE_THRESHOLD, 
+       SiteInfo.ISSUE_WEIGHT_THRESHOLD, 
+       SiteInfo.INVENTORY_THRESHOLD_VALUE, 
+       SiteInfo.INVENTORY_THRESHOLD_COUNT, 
+       SiteInfo.PACKING_CONSOL_SCAN_COUNT, 
+       SiteInfo.SHUTDOWN_MESSAGE, 
+       SiteInfo.DOC_SERIAL_NUMBER"
+   FromList="SITE_INFO SiteInfo"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.wlm.SiteInfoViewImpl"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="SiteInfo"
+      Entity="mil.stratis.model.entity.site.SiteInfo" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="SiteId"
+      IsNotNull="true"
+      EntityAttrName="SiteId"
+      EntityUsage="SiteInfo"
+      AliasName="SITE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SupplyCenterName"
+      IsNotNull="true"
+      EntityAttrName="SupplyCenterName"
+      EntityUsage="SiteInfo"
+      AliasName="SUPPLY_CENTER_NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="City"
+      IsNotNull="true"
+      EntityAttrName="City"
+      EntityUsage="SiteInfo"
+      AliasName="CITY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="State"
+      IsNotNull="true"
+      EntityAttrName="State"
+      EntityUsage="SiteInfo"
+      AliasName="STATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ZipCode"
+      EntityAttrName="ZipCode"
+      EntityUsage="SiteInfo"
+      AliasName="ZIP_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Aac"
+      EntityAttrName="Aac"
+      EntityUsage="SiteInfo"
+      AliasName="AAC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ConusOcunusFlag"
+      EntityAttrName="ConusOcunusFlag"
+      EntityUsage="SiteInfo"
+      AliasName="CONUS_OCUNUS_FLAG" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RoutingId"
+      EntityAttrName="RoutingId"
+      EntityUsage="SiteInfo"
+      AliasName="ROUTING_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BulkThreshold"
+      EntityAttrName="BulkThreshold"
+      EntityUsage="SiteInfo"
+      AliasName="BULK_THRESHOLD" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PackingBypass"
+      IsNotNull="true"
+      EntityAttrName="PackingBypass"
+      EntityUsage="SiteInfo"
+      AliasName="PACKING_BYPASS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SingleItemCube"
+      EntityAttrName="SingleItemCube"
+      EntityUsage="SiteInfo"
+      AliasName="SINGLE_ITEM_CUBE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SingleItemWeight"
+      EntityAttrName="SingleItemWeight"
+      EntityUsage="SiteInfo"
+      AliasName="SINGLE_ITEM_WEIGHT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="GenerateAs2"
+      IsNotNull="true"
+      EntityAttrName="GenerateAs2"
+      EntityUsage="SiteInfo"
+      AliasName="GENERATE_AS2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IssueCubeThreshold"
+      EntityAttrName="IssueCubeThreshold"
+      EntityUsage="SiteInfo"
+      AliasName="ISSUE_CUBE_THRESHOLD" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IssueWeightThreshold"
+      EntityAttrName="IssueWeightThreshold"
+      EntityUsage="SiteInfo"
+      AliasName="ISSUE_WEIGHT_THRESHOLD" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="InventoryThresholdValue"
+      EntityAttrName="InventoryThresholdValue"
+      EntityUsage="SiteInfo"
+      AliasName="INVENTORY_THRESHOLD_VALUE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="InventoryThresholdCount"
+      EntityAttrName="InventoryThresholdCount"
+      EntityUsage="SiteInfo"
+      AliasName="INVENTORY_THRESHOLD_COUNT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PackingConsolScanCount"
+      EntityAttrName="PackingConsolScanCount"
+      EntityUsage="SiteInfo"
+      AliasName="PACKING_CONSOL_SCAN_COUNT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ShutdownMessage"
+      EntityAttrName="ShutdownMessage"
+      EntityUsage="SiteInfo"
+      AliasName="SHUTDOWN_MESSAGE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocSerialNumber"
+      IsNotNull="true"
+      EntityAttrName="DocSerialNumber"
+      EntityUsage="SiteInfo"
+      AliasName="DOC_SERIAL_NUMBER" >
+   </ViewAttribute>
+</ViewObject>

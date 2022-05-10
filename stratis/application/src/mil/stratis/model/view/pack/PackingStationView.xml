@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PackingStationView"
+  Version="11.1.2.64.36"
+  SelectList="PackingStation.PACKING_STATION_ID, 
+       PackingStation.LEVELS, 
+       PackingStation.COLUMNS, 
+       PackingStation.TOTAL_ISSUES, 
+       PackingStation.NUMBER_OF_SLOTS_IN_USE, 
+       PackingStation.EQUIPMENT_NUMBER"
+  FromList="STRATIS.PACKING_STATION PackingStation"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <EntityUsage
+    Name="PackingStation"
+    Entity="mil.stratis.model.entity.pack.PackingStation"/>
+  <ViewAttribute
+    Name="PackingStationId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="PackingStationId"
+    EntityUsage="PackingStation"
+    AliasName="PACKING_STATION_ID"/>
+  <ViewAttribute
+    Name="Levels"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Levels"
+    EntityUsage="PackingStation"
+    AliasName="LEVELS"/>
+  <ViewAttribute
+    Name="Columns"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Columns"
+    EntityUsage="PackingStation"
+    AliasName="COLUMNS"/>
+  <ViewAttribute
+    Name="TotalIssues"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="TotalIssues"
+    EntityUsage="PackingStation"
+    AliasName="TOTAL_ISSUES"/>
+  <ViewAttribute
+    Name="NumberOfSlotsInUse"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="NumberOfSlotsInUse"
+    EntityUsage="PackingStation"
+    AliasName="NUMBER_OF_SLOTS_IN_USE"/>
+  <ViewAttribute
+    Name="EquipmentNumber"
+    PrecisionRule="true"
+    EntityAttrName="EquipmentNumber"
+    EntityUsage="PackingStation"
+    AliasName="EQUIPMENT_NUMBER"/>
+</ViewObject>

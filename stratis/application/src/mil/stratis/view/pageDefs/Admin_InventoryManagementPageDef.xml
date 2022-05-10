@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="Admin_InventoryManagementPageDef" Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="InventoryView1Iterator" RangeSize="10" Binds="Root.InventorySetupModule1.InventoryView1"
+              DataControl="StratisRootServiceDataControl" StateValidation="false" Refresh="ifNeeded"
+              ChangeEventPolicy="none"/>
+    <iterator id="InventoryItemView2Iterator" RangeSize="10" Binds="Root.InventorySetupModule1.InventoryItemView2"
+              DataControl="StratisRootServiceDataControl" StateValidation="false" Refresh="ifNeeded"
+              ChangeEventPolicy="none"/>
+    <iterator id="InventoryItemFilterView1Iterator" RangeSize="19"
+              Binds="Root.InventorySetupModule1.InventoryItemFilterView1" DataControl="StratisRootServiceDataControl"
+              StateValidation="false" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="InventoryView1" IterBinding="InventoryView1Iterator">
+      <AttrNames>
+        <Item Value="InventoryId"/>
+        <Item Value="RequestDate"/>
+        <Item Value="Description"/>
+        <Item Value="Status"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="Status" IterBinding="InventoryView1Iterator">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <table id="InventoryItemView2" IterBinding="InventoryItemView2Iterator">
+      <AttrNames>
+        <Item Value="InventoryItemId"/>
+        <Item Value="NiinId"/>
+        <Item Value="NiinLocId"/>
+        <Item Value="InventoryId"/>
+        <Item Value="NumCounts"/>
+        <Item Value="CumNegAdj"/>
+        <Item Value="CumPosAdj"/>
+        <Item Value="NumCounted"/>
+        <Item Value="CreatedBy"/>
+        <Item Value="CreatedDate"/>
+        <Item Value="ModifiedBy"/>
+        <Item Value="ModifiedDate"/>
+        <Item Value="InvType"/>
+        <Item Value="WacId"/>
+        <Item Value="Priority"/>
+        <Item Value="Status"/>
+        <Item Value="Niin"/>
+        <Item Value="NiinId1"/>
+        <Item Value="Qty"/>
+        <Item Value="NiinLocId1"/>
+        <Item Value="LocationLabel"/>
+        <Item Value="LocationId"/>
+        <Item Value="TransactionType"/>
+        <Item Value="NiinLocQty"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="ItemStatus" IterBinding="InventoryItemView2Iterator">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TransactionType" IterBinding="InventoryItemView2Iterator">
+      <AttrNames>
+        <Item Value="TransactionType"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Execute" IterBinding="InventoryView1Iterator"
+            InstanceName="StratisRootServiceDataControl.Root.InventorySetupModule1.InventoryView1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <action id="ExecuteItem" IterBinding="InventoryItemView2Iterator"
+            InstanceName="StratisRootServiceDataControl.Root.InventorySetupModule1.InventoryItemView2"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <action id="ExecuteFilter" IterBinding="InventoryItemFilterView1Iterator"
+            InstanceName="StratisRootServiceDataControl.Root.InventorySetupModule1.InventoryItemFilterView1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="iteratorExecute"/>
+  </bindings>
+</pageDefinition>

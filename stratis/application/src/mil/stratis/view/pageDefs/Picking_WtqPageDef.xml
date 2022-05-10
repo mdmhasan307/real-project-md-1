@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Picking_WtqPageDef"
+                ControllerClass="#{PickingAll}" Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="PickingByWalkThruVO1Iterator" Binds="Root.PickingAM1.PickingByWalkThruVO1" 
+              RangeSize="25" DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="PickingByWalkThruVO1" IterBinding="PickingByWalkThruVO1Iterator">
+      <AttrNames>
+        <Item Value="DocumentNumber"/>
+      </AttrNames>
+    </table>
+  </bindings>
+</pageDefinition>
+

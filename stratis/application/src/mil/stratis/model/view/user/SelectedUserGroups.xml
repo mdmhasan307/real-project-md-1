@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="SelectedUserGroups"
+  Version="11.1.2.64.36"
+  SelectList="Groups.GROUP_NAME, 
+       Groups.GROUP_ID, 
+       Groups.GROUP_RIGHTS, 
+       Users.USER_ID, 
+       UserGroups.USER_ID AS USER_ID1, 
+       UserGroups.GROUP_ID AS GROUP_ID1"
+  FromList="GROUPS Groups, USERS Users, USER_GROUPS UserGroups"
+  Where="UserGroups.USER_ID = Users.USER_ID AND
+Groups.GROUP_ID = UserGroups.GROUP_ID AND 
+UserGroups.USER_ID =: SelectedUserID"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="mil.stratis.model.view.user.SelectedUserGroups_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="SelectedUserID"
+    Kind="where"
+    Type="java.lang.Long"/>
+  <EntityUsage
+    Name="Groups"
+    Entity="mil.stratis.model.entity.site.Groups"/>
+  <EntityUsage
+    Name="Users"
+    Entity="mil.stratis.model.entity.user.Users"
+    SourceUsage="mil.stratis.model.view.user.SelectedUserGroups.Groups"
+    ReadOnly="true"
+    Reference="true"
+    DeleteParticipant="false"/>
+  <EntityUsage
+    Name="UserGroups"
+    Entity="mil.stratis.model.entity.user.UserGroups"
+    Association="mil.stratis.model.entity.associations.UserGroupFkAssoc"
+    AssociationEnd="mil.stratis.model.entity.associations.UserGroupFkAssoc.UserGroups"
+    SourceUsage="mil.stratis.model.view.user.SelectedUserGroups.Groups"
+    ReadOnly="true"
+    Reference="true"
+    DeleteParticipant="false"
+    JoinType="INNER JOIN">
+    <DesignTime>
+      <AttrArray Name="_srcAttributes">
+        <Item Value="mil.stratis.model.entity.site.Groups.GroupId"/>
+      </AttrArray>
+      <AttrArray Name="_dstAttributes">
+        <Item Value="mil.stratis.model.entity.user.UserGroups.GroupId"/>
+      </AttrArray>
+    </DesignTime>
+  </EntityUsage>
+  <ViewAttribute
+    Name="GroupName"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="GroupName"
+    EntityUsage="Groups"
+    AliasName="GROUP_NAME"/>
+  <ViewAttribute
+    Name="GroupId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="GroupId"
+    EntityUsage="Groups"
+    AliasName="GROUP_ID"/>
+  <ViewAttribute
+    Name="GroupRights"
+    PrecisionRule="true"
+    EntityAttrName="GroupRights"
+    EntityUsage="Groups"
+    AliasName="GROUP_RIGHTS"/>
+  <ViewAttribute
+    Name="UserId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="UserId"
+    EntityUsage="Users"
+    AliasName="USER_ID"/>
+  <ViewAttribute
+    Name="UserId1"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="UserId"
+    EntityUsage="UserGroups"
+    AliasName="USER_ID1">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="GroupId1"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="GroupId"
+    EntityUsage="UserGroups"
+    AliasName="GROUP_ID1">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="GroupId"/>
+    <Item Value="UserId"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="mil.stratis.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

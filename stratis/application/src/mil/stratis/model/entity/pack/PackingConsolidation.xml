@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="PackingConsolidation"
+   Version="11.1.2.64.36"
+   DBObjectType="table"
+   DBObjectName="PACKING_CONSOLIDATION"
+   AliasName="PackingConsolidation"
+   BindingStyle="OracleName"
+   UseGlueCode="false"
+   >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Access" />
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_panelSchema" Value="table|alias" />
+   </DesignTime>
+   <Attribute
+      Name="PackingConsolidationId"
+      IsUpdateable="while_insert"
+      DefaultValue="@0"
+      ColumnName="PACKING_CONSOLIDATION_ID"
+      SQLType="NUMERIC"
+      Domain="oracle.jbo.domain.DBSequence"
+      Type="oracle.jbo.domain.DBSequence"
+      ColumnType="NUMBER"
+      TableName="PACKING_CONSOLIDATION"
+      PrimaryKey="true"
+      RetrievedOnInsert="true" >
+      <DesignTime>
+         <Attr Name="_SequenceStart" Value="2500" />
+         <Attr Name="_DisplaySize" Value="22" />
+         <Attr Name="_SequenceName" Value="PACKING_CONSOLIDATION_ID_SEQ" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ConsolidationCube"
+      IsNotNull="true"
+      ColumnName="CONSOLIDATION_CUBE"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="PACKING_CONSOLIDATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ConsolidationWeight"
+      IsNotNull="true"
+      ColumnName="CONSOLIDATION_WEIGHT"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="PACKING_CONSOLIDATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CloseCarton"
+      Precision="1"
+      ColumnName="CLOSE_CARTON"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="PACKING_CONSOLIDATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="PackLocationBarcode"
+      Precision="10"
+      ColumnName="PACK_LOCATION_BARCODE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="PACKING_CONSOLIDATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="PackingStationId"
+      IsUnique="true"
+      ColumnName="PACKING_STATION_ID"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="PACKING_CONSOLIDATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="PackColumn"
+      IsUnique="true"
+      IsNotNull="true"
+      ColumnName="PACK_COLUMN"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="PACKING_CONSOLIDATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="PackLevel"
+      IsUnique="true"
+      IsNotNull="true"
+      ColumnName="PACK_LEVEL"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="PACKING_CONSOLIDATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="NumberOfIssues"
+      IsNotNull="true"
+      ColumnName="NUMBER_OF_ISSUES"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="PACKING_CONSOLIDATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CustomerId"
+      ColumnName="CUSTOMER_ID"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="PACKING_CONSOLIDATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ConsolidationBarcode"
+      IsUnique="true"
+      Precision="20"
+      ColumnName="CONSOLIDATION_BARCODE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="PACKING_CONSOLIDATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CreatedBy"
+      ColumnName="CREATED_BY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="PACKING_CONSOLIDATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ModifiedBy"
+      ColumnName="MODIFIED_BY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="PACKING_CONSOLIDATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CreatedDate"
+      ColumnName="CREATED_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="PACKING_CONSOLIDATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ModifiedDate"
+      ColumnName="MODIFIED_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="PACKING_CONSOLIDATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="PartialRelease"
+      Precision="1"
+      ColumnName="PARTIAL_RELEASE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="PACKING_CONSOLIDATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="IssuePriorityGroup"
+      Precision="1"
+      ColumnName="ISSUE_PRIORITY_GROUP"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="PACKING_CONSOLIDATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="PackedDate"
+      ColumnName="PACKED_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="PACKING_CONSOLIDATION"/>
+   <Attribute
+      Name="PackedBy"
+      Precision="6"
+      Scale="0"
+      ColumnName="PACKED_BY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="PACKING_CONSOLIDATION"/>
+   <AccessorAttribute
+      Name="Picking"
+      Association="mil.stratis.model.entity.associations.PickingPackConsolFkAssoc"
+      AssociationEnd="mil.stratis.model.entity.associations.PickingPackConsolFkAssoc.Picking"
+      AssociationOtherEnd="mil.stratis.model.entity.associations.PickingPackConsolFkAssoc.PackingConsolidation"
+      Type="oracle.jbo.RowIterator"
+      IsUpdateable="false"/>
+   <Key
+      Name="PackingConsolidationChk1" >
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="PACKING_CONSOLIDATION_CHK1"/>
+         <Attr Name="_checkCondition" Value="CLOSE_CARTON IN ('N', 'Y')"/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="PackingConsolidationChk2" >
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="PACKING_CONSOLIDATION_CHK2"/>
+         <Attr Name="_checkCondition" Value="PARTIAL_RELEASE IN ('Y', 'N')"/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="PackingConsolidationChk3" >
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="PACKING_CONSOLIDATION_CHK3"/>
+         <Attr Name="_checkCondition"
+            Value="CONSOLIDATION_CUBE >= 0 AND (CONSOLIDATION_WEIGHT >= 0 AND PACK_COLUMN >= 0) AND PACK_LEVEL >= 0 AND NUMBER_OF_ISSUES >= 0"/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="PackingConsolidationPk"
+      PrimaryKey="true">
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="PACKING_CONSOLIDATION_PK"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.pack.PackingConsolidation.PackingConsolidationId"/>
+      </AttrArray>
+   </Key>
+   <Key
+      Name="PackingConsolidationUk1" >
+      <DesignTime>
+         <Attr Name="_isUnique" Value="true"/>
+         <Attr Name="_DBObjectName" Value="PACKING_CONSOLIDATION_UK1"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.pack.PackingConsolidation.ConsolidationBarcode" />
+      </AttrArray>
+   </Key>
+   <Key
+      Name="PackingConsolidationCustFk" >
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="CUSTOMER_PK"/>
+         <Attr Name="_isForeign" Value="true"/>
+         <Attr Name="_DBObjectName" Value="PACKING_CONSOLIDATION_CUST_FK"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.pack.PackingConsolidation.CustomerId" />
+      </AttrArray>
+   </Key>
+</Entity>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Packing_CloseCartonPageDef"
+                Package="mil.stratis.view.pageDefs" ControllerClass="#{consolbean}">
+  <parameters/>
+  <executables>
+    <iterator id="cartonView1Iterator" RangeSize="10" Binds="Root.PackingModule1.CartonView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="cartonView1" IterBinding="cartonView1Iterator">
+      <AttrNames>
+        <Item Value="BinLocation"/>
+        <Item Value="PackLocationBarcode"/>
+        <Item Value="NumberOfIssues"/>
+        <Item Value="ConsolidationCube"/>
+        <Item Value="ConsolidationWeight"/>
+        <Item Value="CustomerAac"/>
+        <Item Value="PackingConsolidationId"/>
+      </AttrNames>
+    </table>
+  </bindings>
+</pageDefinition>

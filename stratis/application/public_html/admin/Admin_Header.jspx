@@ -1,0 +1,407 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+
+    <jsp:useBean id="workloadbean" class="mil.stratis.view.session.Nav" scope="session"/>
+
+    <f:subview id="classificationHeader">
+        <jsp:include page="/ClassificationBanner.jspx"/>
+    </f:subview>
+
+    <af:switcher facetName="#{userbean.usersAdminAuthorizationStatus}" id="fmusersadminauthstatus">
+        <f:facet name="0">
+            <f:verbatim>
+                <script language="Javascript" type="text/javascript">
+                  //alert('Your session has expired!\nYou will be returned to the login screen.');
+                  console.log("Admin header detected expired/no session.");
+                  this.location.href = 'unauthenticated.html';
+                </script>
+            </f:verbatim>
+        </f:facet>
+        <f:facet name="-1">
+            <f:verbatim>
+                <script language="Javascript" type="text/javascript">
+                  this.location.href = 'unauthorized.html';
+                </script>
+            </f:verbatim>
+        </f:facet>
+        <f:facet name="1">
+            <af:panelGridLayout id="hm_psl1"
+                                inlineStyle="background-repeat:no-repeat; background-image:url(resources/images/TopBar_Left_long_1260x66.jpg);">
+                <af:gridRow marginTop="10px" height="auto" id="hm_gr1">
+                    <af:gridCell marginStart="5px" width="27%" id="hm_gc1" halign="stretch">
+                        <af:spacer width="1" height="10" id="hm_s1"/>
+                    </af:gridCell>
+                    <af:gridCell marginStart="5px" width="40%" id="hm_gc2" halign="stretch">
+                        <af:panelGroupLayout layout="horizontal" id="hm_pgl2_doppleganger">
+                            <af:panelGroupLayout layout="vertical" halign="end" valign="top" id="hm_pgl3_doppleganger">
+                        <span style="font-size:16px; color:white;">
+                            <b><jsp:expression>workloadbean.getCurrentSiteName()</jsp:expression></b>
+                        </span>
+                            </af:panelGroupLayout>
+                        </af:panelGroupLayout>
+                    </af:gridCell>
+                    <af:gridCell width="33%" id="hm_gc3" halign="end">
+                        <af:panelGroupLayout layout="horizontal" id="pgl2">
+                            <af:panelGroupLayout layout="vertical" halign="end" valign="top" id="pgl3">
+
+                                <af:link text="Switch Workstation" rendered="#{userbean.loggedIn}"
+                                         disabled="false" action="#{userBackingBean.goSwitchWorkstation}"
+                                         inlineStyle="font-size: 10pt" id="cl15" immediate="true"/>
+                                <!--
+                                <af:goLink text="User Preferences" rendered="true" destination=""
+                                           inlineStyle="font-weight:bold; color:Black;" targetFrame="_blank"
+                                           id="header_main_prefURL" disabled="true"/>
+                                -->
+                                <af:goLink text="Help" rendered="true" destination="#{userbean.helpURL}"
+                                           inlineStyle="font-weight:bold" targetFrame="_blank" id="hm_helpURL"/>
+
+                            </af:panelGroupLayout>
+                            <af:spacer width="20" height="10" id="s6"/>
+                            <af:panelGroupLayout layout="vertical" valign="top" id="pgl4">
+                                <af:outputText value="#{userbean.workstationName}" rendered="#{userbean.loggedIn}"
+                                               inlineStyle="font-size: 10pt" id="ot6"/>
+                                <af:link text="Logout" rendered="#{userbean.loggedIn}" disabled="false"
+                                         action="#{userBackingBean.clearLogin}" inlineStyle="font-size: 10pt" id="cl1"/>
+                            </af:panelGroupLayout>
+                        </af:panelGroupLayout>
+                    </af:gridCell>
+                </af:gridRow>
+                <af:gridRow id="hm_gr_main_nav">
+                    <af:gridCell halign="end" id="hm_gc4" columnSpan="3">
+                        <af:panelGroupLayout layout="horizontal" id="hm_pgl2" halign="left" inlineStyle="width:100%;">
+                            <!-- disabled="#{userbean.loginScreen}"  -->
+                            <af:navigationPane hint="tabs" id="hm_np1" inlineStyle="width:850px;margin-left: auto;" styleClass="navBar">
+                                <af:commandNavigationItem text="Home" selected="#{userbean.homeSelected}" rendered="true"
+                                                          disabled="#{userbean.loginScreen}" action="GoWarehouseHome"
+                                                          immediate="true" id="hm_cni2" styleClass="navTab">
+                                    <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                </af:commandNavigationItem>
+                                <af:commandNavigationItem text="Mobile"
+                                                          rendered="#{appConfig.smvEnabled}"
+                                                          disabled="#{userbean.loginScreen}" destination="/app/mobile"
+                                                          immediate="true" id="mobile" styleClass="navTab">
+                                    <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                </af:commandNavigationItem>
+                                <af:commandNavigationItem text="Admin" selected="#{userbean.adminSelected}"
+                                                          rendered="#{!userbean.adminDisabled}"
+                                                          disabled="#{userbean.adminDisabled}" action="GoAdmin" immediate="true"
+                                                          id="hm_cni3" styleClass="navTab">
+                                    <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                </af:commandNavigationItem>
+                                <af:commandNavigationItem text="Receiving" selected="#{userbean.receivingSelected}"
+                                                          rendered="#{!userbean.receiving}" disabled="#{userbean.receiving}"
+                                                          action="GoReceiving"
+                                                          immediate="true" id="hm_cni4" styleClass="navTab">
+                                    <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                </af:commandNavigationItem>
+                                <af:commandNavigationItem text="Picking" selected="#{userbean.pickingSelected}"
+                                                          rendered="#{!userbean.picking}"
+                                                          disabled="#{userbean.picking}" action="GoPicking" immediate="true"
+                                                          id="hm_cni6" styleClass="navTab">
+                                    <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                </af:commandNavigationItem>
+                                <af:commandNavigationItem text="Stowing" selected="#{userbean.stowingSelected}"
+                                                          rendered="#{!userbean.stowing}"
+                                                          disabled="#{userbean.stowing}" action="GoStowing" immediate="true"
+                                                          id="hm_cni5" styleClass="navTab">
+                                    <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                </af:commandNavigationItem>
+                                <af:commandNavigationItem text="Packing" selected="#{userbean.packingSelected}"
+                                                          rendered="#{!userbean.packing}"
+                                                          disabled="#{userbean.packing}" action="GoPacking" immediate="true"
+                                                          id="hm_cni7" styleClass="navTab">
+                                    <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                </af:commandNavigationItem>
+                                <af:commandNavigationItem text="Shipping" selected="#{userbean.shippingSelected}"
+                                                          rendered="#{!userbean.shipping}" disabled="#{userbean.shipping}"
+                                                          action="GoShipping"
+                                                          immediate="true" id="hm_cni8" styleClass="navTab">
+                                    <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                </af:commandNavigationItem>
+                                <af:commandNavigationItem text="Inventory" selected="#{userbean.inventorySelected}"
+                                                          rendered="#{!userbean.inventory}" disabled="#{userbean.inventory}"
+                                                          action="GoInventory"
+                                                          immediate="true" id="hm_cni9" styleClass="navTab">
+                                    <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                </af:commandNavigationItem>
+                                <af:commandNavigationItem text="Reports" selected="#{userbean.reportsSelected}" rendered="true"
+                                                          disabled="false" action="GoReports" immediate="true" id="hm_cni10"
+                                                          styleClass="navTab">
+                                    <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                </af:commandNavigationItem>
+                                <af:commandNavigationItem text="Re-Print" selected="#{userbean.printSelected}" rendered="true"
+                                                          disabled="#{userbean.print}" action="GoPrint" immediate="true"
+                                                          id="hm_cni11" styleClass="navTab">
+                                    <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                </af:commandNavigationItem>
+                                <af:commandNavigationItem text="Walk Thru" selected="#{userbean.walkThruSelected}" rendered="true"
+                                                          disabled="#{userbean.walkThru}" action="GoWalkThru" immediate="true"
+                                                          id="hm_cni12" styleClass="navTab">
+                                    <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                </af:commandNavigationItem>
+                            </af:navigationPane>
+                        </af:panelGroupLayout>
+                    </af:gridCell>
+                </af:gridRow>
+                <af:gridRow id="subnav">
+                    <af:gridCell columnSpan="3" id="hm_gc5">
+                        <af:panelGroupLayout layout="horizontal" id="pgl1">
+                            <af:toolbar id="t1">
+
+                                <!-- Admin Header only needs the relavent navigation -->
+                                <af:group id="g26">
+                                    <af:link text="System Setup" rendered="#{userbean.adminSelected}"
+                                             disabled="#{userbean.admin_SystemSetup or userbean.admin_SystemSetup_Selected}"
+                                             inlineStyle="#{userbean.admin_SystemSetup_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoAdminSystemSetupGCSSMC" immediate="true" id="hm_cl27">
+                                        <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                    </af:link>
+                                </af:group>
+                                <af:group id="g27">
+                                    <af:link text="Warehouse Setup" rendered="#{userbean.adminSelected}"
+                                             disabled="#{userbean.admin_WarehouseSetup or userbean.admin_WarehouseSetup_Selected}"
+                                             inlineStyle="#{userbean.admin_WarehouseSetup_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoAdminWarehouseSetup" immediate="true" id="hm_cl28">
+                                        <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                    </af:link>
+                                </af:group>
+                                <af:group id="g28">
+                                    <af:link text="Warehouse Management" rendered="#{userbean.adminSelected}"
+                                             disabled="#{userbean.admin_WarehouseManage or userbean.admin_WarehouseManage_Selected}"
+                                             inlineStyle="#{userbean.admin_WarehouseManage_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoAdminWarehouseManagement" immediate="true" id="hm_cl29">
+                                        <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                    </af:link>
+                                </af:group>
+                                <af:group id="g29">
+                                    <af:link text="User Management" rendered="#{userbean.adminSelected}"
+                                             disabled="#{userbean.admin_UserManage or userbean.admin_UserManage_Selected}"
+                                             inlineStyle="#{userbean.admin_UserManage_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoAdminUserManagement" immediate="true" id="hm_cl30">
+                                        <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                    </af:link>
+                                </af:group>
+                                <af:group id="g30">
+                                    <af:link text="Exception Processing" rendered="#{userbean.adminSelected}"
+                                             disabled="#{userbean.admin_ExceptionHandle or userbean.admin_ExceptionHandle_Selected}"
+                                             inlineStyle="#{userbean.admin_ExceptionHandle_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoAdminExceptionProcessing" immediate="true" id="hm_cl31">
+                                        <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                    </af:link>
+                                </af:group>
+                                <af:group id="g31">
+                                    <af:link text="Inventory Management" rendered="#{userbean.adminSelected}"
+                                             disabled="#{userbean.admin_InventoryManage or userbean.admin_InventoryManage_Selected}"
+                                             inlineStyle="#{userbean.admin_InventoryManage_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoAdminInventoryManagement" immediate="true" id="hm_cl32">
+                                        <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                    </af:link>
+                                </af:group>
+                                <af:group id="g32">
+                                    <af:link text="Interfaces" rendered="#{userbean.adminSelected}"
+                                             disabled="#{userbean.admin_SystemAdminInterfaces or userbean.admin_SystemAdminInterfaces_Selected}"
+                                             inlineStyle="#{userbean.admin_SystemAdminInterfaces_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoAdminProcessGCSSMCExports" immediate="true" id="hm_cl33">
+                                        <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                    </af:link>
+                                </af:group>
+                                <af:group id="g33">
+                                    <af:link text="System Admin" rendered="#{userbean.adminSelected}"
+                                             disabled="#{userbean.admin_SystemAdmin or userbean.admin_SystemAdmin_Selected}"
+                                             inlineStyle="#{userbean.admin_SystemAdmin_Selected ? 'font-size:13px;font-weight:bold;color:#FFCC66;text-decoration:underline' : ''}"
+                                             action="GoAdminSystemAdmin" immediate="true" id="hm_cl34">
+                                        <af:setActionListener from="#{1}" to="#{userbean.cleanDirtyTransaction}"/>
+                                    </af:link>
+                                </af:group>
+                            </af:toolbar>
+                        </af:panelGroupLayout>
+                    </af:gridCell>
+                </af:gridRow>
+                <af:gridRow marginBottom="4px" id="gr3">
+                    <af:gridCell halign="stretch" columnSpan="3"
+                                 inlineStyle="background-image:url(resources/images/tiny_boxes_bw.gif); background-repeat:repeat;"
+                                 id="hm_gc6">
+                        <af:spacer width="8" height="8" id="s2"/>
+                    </af:gridCell>
+                </af:gridRow>
+                <af:gridRow marginBottom="8px" id="hm_gr10" rendered="#{not empty userbean.warningShutdownMessage}">
+                    <af:gridCell id="hm_gc10">
+                        <af:outputText value="#{userbean.warningShutdownMessage}" inlineStyle="color:red; font-weight:bold;"
+                                       id="hm_ot10"/>
+                    </af:gridCell>
+                </af:gridRow>
+                <af:gridRow id="gr1">
+                    <af:gridCell id="gc1">
+                        <!-- This is where nav goes for tier 3 items. -->
+                        <!-- Warehouse Setup -->
+                        <af:panelGridLayout id="tl4" rendered="#{userbean.admin_WarehouseSetup_Selected}">
+                            <af:gridRow id="rl7">
+                                <af:gridCell id="cf10">
+                                    <af:panelGroupLayout layout="horizontal" id="pgl5">
+                                        <af:toolbar id="t2">
+                                            <af:group id="g39">
+                                                <af:link text="Home" action="GoAdminWarehouseSetup" immediate="true"
+                                                         disabled="#{userbean.admin_WS_Home_Selected}" id="cni1"/>
+                                            </af:group>
+                                            <af:group id="g40">
+                                                <af:link text="Storage Bin" action="GoAdminWarehouseStorageBin"
+                                                         immediate="true"
+                                                         disabled="#{userbean.admin_WS_StorageBin_Selected}" id="cni12"
+                                                         inlineStyle="white-space:nowrap;"/>
+                                            </af:group>
+                                            <af:group id="g41">
+                                                <af:link text="Divider Type" action="GoAdminWarehouseDividerSetup"
+                                                         immediate="true"
+                                                         disabled="#{userbean.admin_WS_DividerType_Selected}"
+                                                         id="cni13" inlineStyle="white-space:nowrap;"/>
+                                            </af:group>
+                                            <af:group id="g42">
+                                                <af:link text="WAC" action="GoAdminWarehouseWACSetup" immediate="true"
+                                                         disabled="#{userbean.admin_WS_WAC_Selected}" id="cni14"/>
+                                            </af:group>
+                                            <af:group id="g43">
+                                                <af:link text="Building" action="GoAdminWarehouseBuildingSetup"
+                                                         immediate="true"
+                                                         disabled="#{userbean.admin_WS_Building_Selected}" id="cni15"/>
+                                            </af:group>
+                                            <af:group id="g44">
+                                                <af:link text="Mechanized Location" action="GoAdminWarehouseMechSetup"
+                                                         immediate="true" inlineStyle="white-space:nowrap;"
+                                                         disabled="#{userbean.admin_WS_MechanizedLocation_Selected}"
+                                                         id="cni16"/>
+                                            </af:group>
+                                            <af:group id="g45">
+                                                <af:link text="Non-Mechanized Location"
+                                                         action="GoAdminWarehouseNonMechSetup" immediate="true"
+                                                         disabled="#{userbean.admin_WS_NonMechanizedLocation_Selected}"
+                                                         inlineStyle="white-space:nowrap;"
+                                                         id="cni17"/>
+                                            </af:group>
+                                            <af:group id="g46">
+                                                <af:link text="Workstation" action="GoAdminWarehouseWorkstationSetup"
+                                                         immediate="true"
+                                                         disabled="#{userbean.admin_WS_Workstation_Selected}"
+                                                         id="cni18"/>
+                                            </af:group>
+                                            <af:group id="g47">
+                                                <af:link text="Ports" action="GoAdminWarehouseComSetup" immediate="true"
+                                                         disabled="#{userbean.admin_WS_Ports_Selected}" id="cni19"/>
+                                            </af:group>
+                                            <af:group id="g48">
+                                                <af:link text="Consolidation Triwall"
+                                                         action="GoAdminWarehouseConsolationSetup" immediate="true"
+                                                         disabled="#{userbean.admin_WS_ConsolidationTriwall_Selected}"
+                                                         inlineStyle="white-space:nowrap;"
+                                                         id="cni20"/>
+                                            </af:group>
+                                            <af:group id="g49">
+                                                <af:link text="Shipping Floor Location"
+                                                         action="GoAdminWarehouseFloorLocationSetup" immediate="true"
+                                                         disabled="#{userbean.admin_WS_ShippingFloorLocation_Selected}"
+                                                         inlineStyle="white-space:nowrap;"
+                                                         id="cni21"/>
+                                            </af:group>
+                                        </af:toolbar>
+                                    </af:panelGroupLayout>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow id="rl8">
+                                <af:gridCell id="cf11"
+                                             inlineStyle="background-image:url(resources/images/tiny_boxes_bw.gif); background-repeat:repeat;">
+                                    <!-- <af:image source="/resources/images/tiny_boxes_bw.gif" inlineStyle="background-repeat:repeat;" /> -->
+                                    <af:spacer width="930" height="8" id="s4"/>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow id="rl9">
+                                <af:gridCell id="gc2">
+                                    <af:spacer width="0" height="20" id="s1"/>
+                                </af:gridCell>
+                            </af:gridRow>
+                        </af:panelGridLayout>
+                        <!-- Warehouse Management -->
+                        <af:panelGridLayout rendered="#{userbean.admin_WarehouseManage_Selected}" id="tl5">
+                            <af:gridRow id="rl10">
+                                <af:gridCell id="cf12">
+                                    <af:panelGroupLayout layout="horizontal" id="pgl6">
+                                        <af:toolbar id="t3">
+                                            <af:group id="g50">
+                                                <af:link text="Home" action="GoAdminWarehouseManagement" immediate="true"
+                                                         disabled="#{userbean.admin_WM_Home_Selected}" id="cni22"/>
+                                            </af:group>
+                                            <af:group id="g51">
+                                                <af:link text="NIIN Update" action="GoAdminWarehouseNiinUpdate"
+                                                         immediate="true" inlineStyle="white-space:nowrap;"
+                                                         disabled="#{userbean.admin_WM_NIINUpdate_Selected}" id="cni23"/>
+                                            </af:group>
+                                            <af:group id="g52">
+                                                <af:link text="NIIN Inquiry" action="GoAdminWarehouseNiinInquiry"
+                                                         immediate="true" inlineStyle="white-space:nowrap;"
+                                                         disabled="#{userbean.admin_WM_NIINInquiry_Selected}"
+                                                         id="cni24"/>
+                                            </af:group>
+                                            <af:group id="g53">
+                                                <af:link text="Rewarehouse" action="GoAdminWarehouseRewarehouse"
+                                                         immediate="true"
+                                                         disabled="#{userbean.admin_WM_Rewarehouse_Selected}"
+                                                         id="cni25"/>
+                                            </af:group>
+                                            <af:group id="g54">
+                                                <af:link text="Change CC" action="GoAdminWarehouseChangeCC"
+                                                         immediate="true" inlineStyle="white-space:nowrap;"
+                                                         disabled="#{userbean.admin_WM_ChangeCC_Selected}" id="cni26"/>
+                                            </af:group>
+                                            <af:group id="g55">
+                                                <af:link text="Change Location" action="GoAdminWarehouseChangeLoc"
+                                                         immediate="true" inlineStyle="white-space:nowrap;"
+                                                         disabled="#{userbean.admin_WM_ChangeLocation_Selected}"
+                                                         id="cni27"/>
+                                            </af:group>
+                                            <af:group id="g56">
+                                                <af:link text="AAC Update" action="GoAdminWarehouseAACUpdate"
+                                                         immediate="true" inlineStyle="white-space:nowrap;"
+                                                         disabled="#{userbean.admin_WM_AACUpdate_Selected}" id="cni28"/>
+                                            </af:group>
+                                            <af:group id="g57">
+                                                <af:link text="Walk Thru" action="GoAdminWarehouseWalkThru"
+                                                         immediate="true" inlineStyle="white-space:nowrap;"
+                                                         disabled="#{userbean.admin_WM_WalkThru_Selected}" id="cni29"/>
+                                            </af:group>
+                                            <af:group id="g58">
+                                                <af:link text="Route (RIC) Update" action="GoAdminWarehouseRouteUpdate"
+                                                         immediate="true" inlineStyle="white-space:nowrap;"
+                                                         disabled="#{userbean.admin_WM_RICUpdate_Selected}" id="cni30"/>
+                                            </af:group>
+                                            <af:group id="g59">
+                                                <af:link text="Shipping Route Update"
+                                                         inlineStyle="white-space:nowrap;"
+                                                         action="GoAdminWarehouseShippingRouteUpdate" immediate="true"
+                                                         disabled="#{userbean.admin_WM_ShipRouteUpdate_Selected}"
+                                                         id="cni31"/>
+                                            </af:group>
+                                        </af:toolbar>
+                                    </af:panelGroupLayout>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow id="rl11">
+                                <af:gridCell
+                                        inlineStyle="background-image:url(../resources/images/tiny_boxes_bw.gif); background-repeat:repeat;"
+                                        id="cf13">
+                                    <af:spacer height="8" width="830" id="s5"/>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow id="rl12">
+                                <af:gridCell id="gc3">
+                                    <!-- <af:spacer width="0" height="20" id="s3"/> -->
+                                    <af:separator/>
+                                </af:gridCell>
+                            </af:gridRow>
+                        </af:panelGridLayout>
+                    </af:gridCell>
+                </af:gridRow>
+            </af:panelGridLayout>
+        </f:facet>
+    </af:switcher>
+    <af:resource type="javascript" source="/js/menuFix.js"/>
+</jsp:root>

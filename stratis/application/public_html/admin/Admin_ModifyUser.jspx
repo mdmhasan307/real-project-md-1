@@ -1,0 +1,237 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:stratis="taglib.mil.usmc.stratis"
+>
+
+    <af:switcher facetName="#{userbean.usersAdminAuthorizationStatus}" id="fmusersadminauthstatus">
+        <f:facet name="0">
+            <f:verbatim>
+                <script language="Javascript" type="text/javascript">
+                  //alert('Your session has expired!\nYou will be returned to the login screen.');
+                  console.log("A_MU detected expired/no session.");
+                  this.location.href = 'unauthenticated.html';
+                </script>
+            </f:verbatim>
+        </f:facet>
+        <f:facet name="-1">
+            <f:verbatim>
+                <script language="Javascript" type="text/javascript">
+                  this.location.href = 'unauthorized.html';
+                </script>
+            </f:verbatim>
+        </f:facet>
+        <f:facet name="1">
+
+            <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+            <jsp:setProperty name="userbean" property="debugMessage" value="Admin_UserManagement"/>
+            <af:subform id="moduser">
+                <af:spacer height="10" width="1" id="s5"/>
+                <af:panelBox text="User Management" showDisclosure="false" id="pb1">
+                    <af:separator id="s1"/>
+                    <af:panelGroupLayout id="pgl1">
+                        <af:outputLabel value="FOR OFFICIAL USE ONLY" inlineStyle="color:blue;font-weight:bold;font-size:large"
+                                        id="ol1"/>
+                        <af:spacer height="10" id="s2"/>
+                        <af:panelGroupLayout layout="horizontal" id="pgl2" visible="#{backing_Admin_ModifyUser.userFlag}">
+                            <af:inputText label="Username" id="filterUsername" columns="50" maximumLength="50"
+                                          contentStyle="text-transform:uppercase;"
+                                          value="#{bindings.UsernameQry.inputValue}"></af:inputText>
+                            <af:spacer width="10" id="s3"/>
+                            <af:inputText label="Last Name" id="filterLastName" columns="20" maximumLength="50"
+                                          contentStyle="text-transform:uppercase;"
+                                          value="#{bindings.LastNameQry.inputValue}"></af:inputText>
+                            <af:spacer width="10" id="s4"/>
+
+                            <af:button actionListener="#{bindings.FilterUserData.execute}" text="Filter"
+                                       id="FilterButton"/>
+
+
+                        </af:panelGroupLayout>
+                        <af:spacer height="10" id="s6"/>
+                        <af:table value="#{bindings.CompleteUserList1.collectionModel}" var="row"
+                                  summary="User info"
+                                  rows="#{bindings.CompleteUserList1.rangeSize}"
+                                  emptyText="#{bindings.CompleteUserList1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.CompleteUserList1.rangeSize}" rowBandingInterval="0"
+                                  selectedRowKeys="#{bindings.CompleteUserList1.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.CompleteUserList1.collectionModel.makeCurrent}"
+                                  rowSelection="single" id="users" partialTriggers="::CreateButton ::FilterButton"
+                                  styleClass="AFStretchWidth" columnStretching="last"
+                                  binding="#{backing_Admin_ModifyUser.adminUserMgmtTable}"
+                                  visible="#{backing_Admin_ModifyUser.userFlag}"
+                                  autoHeightRows="5">
+                            <af:column sortProperty="#{bindings.CompleteUserList1.hints.Username.name}" sortable="true"
+                                       headerText="#{bindings.CompleteUserList1.hints.Username.label}" id="c1" rowHeader="unstyled">
+                                <af:outputText value="#{row.Username}"
+                                               shortDesc="#{bindings.CompleteUserList1.hints.Username.tooltip}" id="ot1"/>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.CompleteUserList1.hints.LastName.name}" sortable="true"
+                                       headerText="#{bindings.CompleteUserList1.hints.LastName.label}" id="c2">
+                                <af:outputText value="#{row.LastName}"
+                                               shortDesc="#{bindings.CompleteUserList1.hints.LastName.tooltip}" id="ot2"/>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.CompleteUserList1.hints.LastLogin.name}" sortable="true"
+                                       headerText="#{bindings.CompleteUserList1.hints.LastLogin.label}" id="c3">
+                                <stratis:adfDateFormatter value="#{row.LastLogin}"
+                                                          pattern="${userbean.dateWithTimeFormatPattern}"/>
+                            </af:column>
+                        </af:table>
+                        <!-- End of users table -->
+                        <!-- Start of tool bar -->
+                        <af:separator id="s7"/>
+                        <af:toolbar id="t1">
+                            <af:button actionListener="#{backing_Admin_ModifyUser.submitCreateUser}" text="Create" id="CreateButton"
+                                       accessKey="C"
+                                       disabled="#{!backing_Admin_ModifyUser.userFlag}"
+                                       partialSubmit="false">
+                                <af:setActionListener from="#{false}" to="#{backing_Admin_ModifyUser.userFlag}"/>
+                            </af:button>
+                            <af:button actionListener="#{backing_Admin_ModifyUser.submitUpdateUser}" text="Update"
+                                       id="UpdateButton" accessKey="U" disabled="#{!backing_Admin_ModifyUser.userFlag}"
+                                       partialSubmit="false"/>
+                            <af:button text="Delete" id="DeleteButton" accessKey="D" disabled="#{!backing_Admin_ModifyUser.userFlag}"
+                                       immediate="true" partialSubmit="false">
+                                <af:showPopupBehavior popupId="confirmDelete" triggerType="action" align="afterStart"/>
+                            </af:button>
+                            <af:popup id="confirmDelete">
+                                <af:dialog id="Confirm" title="Confirm" affirmativeTextAndAccessKey="Submit"
+                                           dialogListener="#{backing_Admin_ModifyUser.dialogListener}">
+                                    <af:activeOutputText id="Delete" value="Are you sure you want to Delete?"/>
+                                </af:dialog>
+                            </af:popup>
+                        </af:toolbar>
+                        <af:separator id="s8"/>
+                        <!-- End of tool bar -->
+                        <!-- Edit Form -->
+                        <!-- Edit Form -->
+                        <!-- Start edit/display form -->
+                        <af:panelBox text="User Details"
+                                     showDisclosure="false" id="pb2">
+                            <af:panelFormLayout partialTriggers="users" id="pfl1">
+                                <af:inputText label="Username" labelStyle="font-weight:bold;"
+                                              value="#{bindings.Username.inputValue}" columns="50"
+                                              shortDesc="Required Username of user (6-10 alphanumeric characters)"
+                                              rendered="#{!backing_Admin_ModifyUser.newFlag}"
+                                              binding="#{backing_Admin_ModifyUser.userUsername}"
+                                              maximumLength="50" readOnly="true"
+                                              id="it1"/>
+                                <af:inputText label="First Name" labelStyle="font-weight:bold;"
+                                              columns="25" maximumLength="15"
+                                              value="#{bindings.FirstName.inputValue}"
+                                              shortDesc="Required First name of user (max 15 characters)"
+                                              styleClass="#{backing_Admin_ModifyUser.userReadOnlyStyle}"
+                                              rendered="#{backing_Admin_ModifyUser.userFlag}"
+                                              readOnly="true" id="it2"/>
+                                <af:inputText label="First Name" labelStyle="font-weight:bold;"
+                                              columns="25" maximumLength="15"
+                                              contentStyle="text-transform:uppercase;"
+                                              shortDesc="Required First name of user (max 15 characters)"
+                                              binding="#{backing_Admin_ModifyUser.userFirstname}"
+                                              styleClass="#{backing_Admin_ModifyUser.userReadOnlyStyle}"
+                                              rendered="#{!backing_Admin_ModifyUser.userFlag}" id="it3"/>
+                                <af:inputText label="Middle Name" value="#{bindings.MiddleName.inputValue}" columns="23"
+                                              maximumLength="20"
+                                              shortDesc="Middle name of user (max 20 characters)"
+                                              styleClass="#{backing_Admin_ModifyUser.userReadOnlyStyle}"
+                                              rendered="#{backing_Admin_ModifyUser.userFlag}"
+                                              readOnly="true" id="it4"/>
+                                <af:inputText label="Middle Name" columns="23"
+                                              maximumLength="20" binding="#{backing_Admin_ModifyUser.userMiddlename}"
+                                              shortDesc="Middle name of user (max 20 characters)"
+                                              styleClass="#{backing_Admin_ModifyUser.userReadOnlyStyle}"
+                                              contentStyle="text-transform:uppercase;"
+                                              rendered="#{!backing_Admin_ModifyUser.userFlag}"
+                                              id="it45"/>
+                                <!-- Last Name -->
+                                <af:inputText label="Last Name" labelStyle="font-weight:bold;"
+                                              value="#{bindings.LastName.inputValue}" columns="50" maximumLength="50"
+                                              shortDesc="Required Last name of user (50 characters)"
+                                              styleClass="#{backing_Admin_ModifyUser.userReadOnlyStyle}"
+                                              readOnly="true" id="it5"
+                                              rendered="#{backing_Admin_ModifyUser.userFlag}"/>
+                                <af:inputText label="Last Name" labelStyle="font-weight:bold;"
+                                              columns="50" maximumLength="50"
+                                              contentStyle="text-transform:uppercase;"
+                                              binding="#{backing_Admin_ModifyUser.userLastname}"
+                                              shortDesc="Required Last name of user (50 characters)"
+                                              styleClass="#{backing_Admin_ModifyUser.userReadOnlyStyle}"
+                                              rendered="#{!backing_Admin_ModifyUser.userFlag}"
+                                              id="it55"/>
+                                <!-- Status -->
+                                <af:selectOneChoice label="Status" labelStyle="font-weight:bold;"
+                                                    binding="#{backing_Admin_ModifyUser.userStatus}"
+                                                    disabled="#{!backing_Admin_ModifyUser.newFlag and (bindings.Username.inputValue == 'stratis' or bindings.Username.inputValue == 'STRATIS')}"
+                                                    visible="#{!backing_Admin_ModifyUser.userFlag}"
+                                                    id="soc1">
+                                    <af:selectItem value="ACTIVE" label="ACTIVE"/>
+                                    <af:selectItem value="NON-ACTIVE" label="NON-ACTIVE"/>
+                                </af:selectOneChoice>
+                                <af:inputText label="Status" labelStyle="font-weight:bold;"
+                                              value="#{bindings.Status.inputValue}" columns="13"
+                                              styleClass="#{backing_Admin_ModifyUser.userReadOnlyStyle}" readOnly="true"
+                                              rendered="#{backing_Admin_ModifyUser.userFlag}" id="it6"/>
+
+                                <!-- Locked -->
+                                <af:spacer width="10" id="s14"/>
+                                <af:outputLabel value="#{bindings.Locked.inputValue == 'Y' ? 'LOCKED' : ''}"
+                                                inlineStyle="font-weight:bold;color:red" id="ol8"/>
+                                <!-- CAC -->
+                                <af:inputText label="CAC" labelStyle="font-weight:bold;"
+                                              columns="20" maximumLength="10"
+                                              shortDesc="CAC Serial Number of user (max 10 alphanumeric characters)"
+                                              secret="true" id="cacNumber" binding="#{backing_Admin_ModifyUser.userCac}"
+                                              rendered="#{!backing_Admin_ModifyUser.userFlag}"/>
+                                <af:inputText label="CAC" labelStyle="font-weight:bold;"
+                                              value="#{bindings.CacNumber.inputValue == '' ? '' : '*****'}" columns="10"
+                                              styleClass="#{backing_Admin_ModifyUser.userReadOnlyStyle}" readOnly="true"
+                                              id="h_cacNumber" rendered="#{backing_Admin_ModifyUser.userFlag}"/>
+                                <!-- User Type -->
+                                <af:selectManyShuttle id="UserTypeShuttle" size="5"
+                                                      shortDesc="Choose from the Available User Types to apply to this user"
+                                                      value="#{backing_Admin_ModifyUser.selectedTypeValues}"
+                                                      leadingHeader="Available Types" trailingHeader="Selected Types"
+                                                      styleClass="#{backing_Admin_ModifyUser.userReadOnlyStyle}"
+                                                      rendered="#{!backing_Admin_ModifyUser.userFlag}"
+                                                      readOnly="#{backing_Admin_ModifyUser.userFlag}"
+                                                      binding="#{backing_Admin_ModifyUser.typeShuttle}"
+                                                      disabled="#{!backing_Admin_ModifyUser.newFlag and (bindings.Username.inputValue == 'stratis' or bindings.Username.inputValue == 'STRATIS')}">
+                                    <f:selectItems value="#{backing_Admin_ModifyUser.allTypeItems}" id="si2"/>
+                                </af:selectManyShuttle>
+                                <af:button actionListener="#{backing_Admin_ModifyUser.submitUpdateUserType}"
+                                           text="Update User Types" id="UpdateUsers"
+                                           accessKey="U" rendered="#{!backing_Admin_ModifyUser.userFlag}" partialSubmit="false"/>
+                                <af:inputText value="#{backing_Admin_ModifyUser.defaultTypes}" columns="40"
+                                              rows="#{backing_Admin_ModifyUser.defaultTypeROWS}" label="Required User Types(s)"
+                                              readOnly="true" inlineStyle="background-color:#CCCCCC"
+                                              visible="#{backing_Admin_ModifyUser.userFlag}" id="userTypes_h"/>
+                                <af:selectManyShuttle id="UserGroupShuttle" size="10"
+                                                      shortDesc="Choose from the Available Groups to apply to this user"
+                                                      value="#{backing_Admin_ModifyUser.selectedValues}"
+                                                      leadingHeader="Available Groups" trailingHeader="Selected Groups"
+                                                      valueChangeListener="#{backing_Admin_ModifyUser.refreshSelectedList}"
+                                                      styleClass="#{backing_Admin_ModifyUser.userReadOnlyStyle}"
+                                                      rendered="#{!backing_Admin_ModifyUser.userFlag}"
+                                                      readOnly="#{backing_Admin_ModifyUser.userFlag}"
+                                                      binding="#{backing_Admin_ModifyUser.groupShuttle}"
+                                                      disabled="#{!backing_Admin_ModifyUser.newFlag and (bindings.Username.inputValue == 'stratis' or bindings.Username.inputValue == 'STRATIS')}">
+                                    <f:selectItems value="#{backing_Admin_ModifyUser.allItems}" id="si3"/>
+                                </af:selectManyShuttle>
+                                <af:inputText value="#{backing_Admin_ModifyUser.defaultGroups}" columns="40"
+                                              rows="#{backing_Admin_ModifyUser.defaultUserROWS}" label="Required User Group(s)"
+                                              readOnly="true" inlineStyle="background-color:#CCCCCC"
+                                              visible="#{backing_Admin_ModifyUser.userFlag}" id="userPrivileges_h"/>
+                                <af:toolbar id="panelButtonBar1" rendered="#{!backing_Admin_ModifyUser.userFlag}">
+                                    <af:button actionListener="#{backing_Admin_ModifyUser.submitSaveUser}" text="Submit"
+                                               inlineStyle="width:50px" id="SaveButton" accessKey="S" partialSubmit="false"/>
+                                    <af:button actionListener="#{backing_Admin_ModifyUser.submitCancelUser}"
+                                               text="Cancel" inlineStyle="width:50px" id="CancelButton" accessKey="a" immediate="true"
+                                               partialSubmit="false"/>
+                                </af:toolbar>
+                            </af:panelFormLayout>
+                        </af:panelBox>
+                    </af:panelGroupLayout>
+                </af:panelBox>
+            </af:subform>
+        </f:facet>
+    </af:switcher>
+</jsp:root>

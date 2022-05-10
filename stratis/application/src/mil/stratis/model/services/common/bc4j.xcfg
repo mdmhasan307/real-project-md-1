@@ -1,0 +1,478 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig version="11.1" xmlns="http://xmlns.oracle.com/bc4j/configuration">
+
+  <!-- this is the 704 patch 8 configuration for bc4j, tuned to try to reduce or eliminate bugs due to activation/passivation of Application Modules. -->
+
+  <!-- AppModule: is used as a root AM -->
+  <AppModuleConfigBag ApplicationName="mil.stratis.model.services.AppModule">
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" DeployPlatform="LOCAL"
+                     jbo.project="mil.stratis.model.Model"
+                     name="AppModuleShared" ApplicationName="mil.stratis.model.services.AppModule">
+      <AM-Pooling jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1"
+                  jbo.ampool.dynamicjdbccredentials="false" jbo.ampool.isuseexclusive="false"
+                  jbo.ampool.maxpoolsize="100"
+                  jbo.ampool.resetnontransactionalstate="false"
+                  jbo.ampool.timetolive="1800000"
+                  jbo.ampool.minavailablesize="0"
+                  jbo.recyclethreshold="100"
+      />
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.AppModule"/>
+    </AppModuleConfig>
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" name="AppModuleDeploy" DeployPlatform="LOCAL"
+                     oracle.jbo.usemds="false" jbo.project="mil.stratis.model.Model" oracle.adfm.usemds="false"
+                     ApplicationName="mil.stratis.model.services.AppModule">
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.AppModule"/>
+      <Custom
+          jbo.envinfoprovider="mil.stratis.view.util.DynamicEnvInfoProvider"/>
+    </AppModuleConfig>
+  </AppModuleConfigBag>
+
+  <!-- StratisRootService: is used as a root AM -->
+  <AppModuleConfigBag ApplicationName="mil.stratis.model.services.StratisRootService" default="StratisRootServiceDeploy">
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" DeployPlatform="LOCAL"
+                     jbo.project="mil.stratis.model.Model" name="StratisRootServiceShared"
+                     ApplicationName="mil.stratis.model.services.StratisRootService">
+      <AM-Pooling jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.ampool.dynamicjdbccredentials="false"
+                  jbo.ampool.resetnontransactionalstate="false"
+                  jbo.ampool.timetolive="1800000"
+                  jbo.ampool.minavailablesize="0"
+                  jbo.recyclethreshold="100"
+      />
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.StratisRootService"/>
+    </AppModuleConfig>
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" name="StratisRootServiceDeploy" DeployPlatform="LOCAL"
+                     oracle.jbo.usemds="false" jbo.project="mil.stratis.model.Model" oracle.adfm.usemds="false"
+                     ApplicationName="mil.stratis.model.services.StratisRootService">
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.StratisRootService"/>
+      <Custom jbo.envinfoprovider="mil.stratis.view.util.DynamicEnvInfoProvider"/>
+    </AppModuleConfig>
+  </AppModuleConfigBag>
+
+  <!-- WorkLoadManager: only used as a nested AM -->
+  <AppModuleConfigBag ApplicationName="mil.stratis.model.services.WorkLoadManager">
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" DeployPlatform="LOCAL"
+                     jbo.project="mil.stratis.model.Model" name="WorkLoadManagerShared"
+                     ApplicationName="mil.stratis.model.services.WorkLoadManager">
+      <AM-Pooling jbo.doconnectionpooling="true"
+                  jbo.txn.disconnect_level="1"
+                  jbo.ampool.dynamicjdbccredentials="false"
+                  jbo.ampool.isuseexclusive="false"
+                  jbo.ampool.maxpoolsize="1"
+                  jbo.ampool.resetnontransactionalstate="false"
+                  jbo.ampool.timetolive="1800000"
+                  jbo.ampool.minavailablesize="0"
+                  jbo.recyclethreshold="100"
+      />
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.WorkLoadManager"/>
+    </AppModuleConfig>
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" name="WorkLoadManagerDeploy" DeployPlatform="LOCAL"
+                     oracle.jbo.usemds="false" jbo.project="mil.stratis.model.Model" oracle.adfm.usemds="false"
+                     ApplicationName="mil.stratis.model.services.WorkLoadManager">
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.WorkLoadManager"/>
+      <Custom jbo.envinfoprovider="mil.stratis.view.util.DynamicEnvInfoProvider"/>
+    </AppModuleConfig>
+  </AppModuleConfigBag>
+
+  <!-- GCSSMCTransactions: only used as a nested AM -->
+  <AppModuleConfigBag ApplicationName="mil.stratis.model.services.GCSSMCTransactions"
+                      default="GCSSMCTransactionsDeploy">
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" name="GCSSMCTransactionsShared" DeployPlatform="LOCAL"
+                     jbo.project="mil.stratis.model.Model" ApplicationName="mil.stratis.model.services.GCSSMCTransactions">
+      <AM-Pooling jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.ampool.dynamicjdbccredentials="false"
+                  jbo.ampool.resetnontransactionalstate="false"
+                  jbo.ampool.timetolive="1800000"
+                  jbo.ampool.minavailablesize="0"
+                  jbo.recyclethreshold="100"
+      />
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.GCSSMCTransactions"/>
+    </AppModuleConfig>
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" name="GCSSMCTransactionsDeploy" DeployPlatform="LOCAL"
+                     oracle.jbo.usemds="false" jbo.project="mil.stratis.model.Model" oracle.adfm.usemds="false"
+                     ApplicationName="mil.stratis.model.services.GCSSMCTransactions">
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.GCSSMCTransactions"/>
+      <Custom jbo.envinfoprovider="mil.stratis.view.util.DynamicEnvInfoProvider"/>
+    </AppModuleConfig>
+  </AppModuleConfigBag>
+
+  <!-- ImportFiles: only used as a nested AM -->
+  <AppModuleConfigBag ApplicationName="mil.stratis.model.services.ImportFiles">
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" DeployPlatform="LOCAL"
+                     jbo.project="mil.stratis.model.Model" name="ImportFilesShared"
+                     ApplicationName="mil.stratis.model.services.ImportFiles">
+      <AM-Pooling jbo.doconnectionpooling="true"
+                  jbo.txn.disconnect_level="1"
+                  jbo.ampool.dynamicjdbccredentials="false"
+                  jbo.ampool.isuseexclusive="false"
+                  jbo.ampool.maxpoolsize="1"
+                  jbo.ampool.resetnontransactionalstate="false"
+                  jbo.ampool.timetolive="1800000"
+                  jbo.ampool.minavailablesize="0"
+                  jbo.recyclethreshold="100"
+      />
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.ImportFiles"/>
+    </AppModuleConfig>
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" name="ImportFilesDeploy" DeployPlatform="LOCAL"
+                     oracle.jbo.usemds="false" jbo.project="mil.stratis.model.Model" oracle.adfm.usemds="false"
+                     ApplicationName="mil.stratis.model.services.ImportFiles">
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.ImportFiles"/>
+      <Custom jbo.envinfoprovider="mil.stratis.view.util.DynamicEnvInfoProvider"/>
+    </AppModuleConfig>
+  </AppModuleConfigBag>
+
+  <!-- InventoryModule: only used as a nested AM -->
+  <AppModuleConfigBag ApplicationName="mil.stratis.model.services.InventoryModule">
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" DeployPlatform="LOCAL"
+                     jbo.project="mil.stratis.model.Model" name="InventoryModuleShared"
+                     ApplicationName="mil.stratis.model.services.InventoryModule">
+      <AM-Pooling jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.ampool.dynamicjdbccredentials="false"
+                  jbo.ampool.isuseexclusive="false"
+                  jbo.ampool.maxpoolsize="1"
+                  jbo.ampool.resetnontransactionalstate="false"
+                  jbo.ampool.timetolive="1800000"
+                  jbo.ampool.minavailablesize="0"
+                  jbo.recyclethreshold="100"
+      />
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.InventoryModule"/>
+    </AppModuleConfig>
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" name="InventoryModuleDeploy" DeployPlatform="LOCAL"
+                     oracle.jbo.usemds="false" jbo.project="mil.stratis.model.Model" oracle.adfm.usemds="false"
+                     ApplicationName="mil.stratis.model.services.InventoryModule">
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.InventoryModule"/>
+      <Custom jbo.envinfoprovider="mil.stratis.view.util.DynamicEnvInfoProvider"/>
+    </AppModuleConfig>
+  </AppModuleConfigBag>
+
+  <!-- PickingAM: only used as a nested AM -->
+  <AppModuleConfigBag ApplicationName="mil.stratis.model.services.PickingAM">
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1"
+                     DeployPlatform="LOCAL"
+
+                     jbo.project="mil.stratis.model.Model"
+                     name="PickingAMShared"
+                     ApplicationName="mil.stratis.model.services.PickingAM">
+
+      <AM-Pooling jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.ampool.dynamicjdbccredentials="false"
+                  jbo.ampool.isuseexclusive="false"
+                  jbo.ampool.maxpoolsize="1"
+                  jbo.ampool.resetnontransactionalstate="false"
+                  jbo.ampool.timetolive="1800000"
+                  jbo.ampool.minavailablesize="0"
+                  jbo.recyclethreshold="100"
+      />
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.PickingAM"/>
+    </AppModuleConfig>
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1"
+                     name="PickingAMDeploy"
+                     DeployPlatform="LOCAL"
+                     oracle.jbo.usemds="false"
+                     jbo.project="mil.stratis.model.Model"
+                     oracle.adfm.usemds="false"
+                     ApplicationName="mil.stratis.model.services.PickingAM">
+
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.PickingAM"/>
+      <Custom
+          jbo.envinfoprovider="mil.stratis.view.util.DynamicEnvInfoProvider"/>
+    </AppModuleConfig>
+  </AppModuleConfigBag>
+
+  <!-- InventorySetupModule: only used as a nested AM -->
+  <Custom
+      jbo.envinfoprovider="mil.stratis.view.util.DynamicEnvInfoProvider"/>
+  <AppModuleConfigBag ApplicationName="mil.stratis.model.services.InventorySetupModule">
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" name="InventorySetupModuleShared"
+                     ApplicationName="mil.stratis.model.services.InventorySetupModule" jbo.project="mil.stratis.model.Model"
+                     DeployPlatform="LOCAL">
+      <AM-Pooling jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1"
+                  jbo.ampool.resetnontransactionalstate="false" jbo.ampool.dynamicjdbccredentials="false"
+                  jbo.ampool.timetolive="1800000"
+                  jbo.ampool.minavailablesize="0"
+                  jbo.recyclethreshold="100"
+      />
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.InventorySetupModule"/>
+    </AppModuleConfig>
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" name="InventorySetupModuleDeploy" DeployPlatform="LOCAL"
+                     oracle.jbo.usemds="false" jbo.project="mil.stratis.model.Model" oracle.adfm.usemds="false"
+                     ApplicationName="mil.stratis.model.services.InventorySetupModule">
+      <AM-Pooling jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1"
+                  jbo.ampool.resetnontransactionalstate="false" jbo.ampool.dynamicjdbccredentials="false"
+                  jbo.ampool.timetolive="1800000"
+                  jbo.ampool.minavailablesize="0"
+                  jbo.recyclethreshold="100"
+      />
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.InventorySetupModule"/>
+      <Custom
+          jbo.envinfoprovider="mil.stratis.view.util.DynamicEnvInfoProvider"/>
+    </AppModuleConfig>
+  </AppModuleConfigBag>
+
+  <!-- LoginModule: only used as a nested AM -->
+  <AppModuleConfigBag ApplicationName="mil.stratis.model.services.LoginModule" default="LoginModuleDeploy">
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" DeployPlatform="LOCAL"
+                     jbo.project="mil.stratis.model.Model" name="LoginModuleShared"
+                     ApplicationName="mil.stratis.model.services.LoginModule">
+      <AM-Pooling jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.ampool.dynamicjdbccredentials="false"
+                  jbo.ampool.resetnontransactionalstate="false"
+                  jbo.ampool.timetolive="1800000"
+                  jbo.ampool.minavailablesize="0"
+                  jbo.recyclethreshold="100"
+      />
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.LoginModule"/>
+    </AppModuleConfig>
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" name="LoginModuleDeploy"
+                     DeployPlatform="LOCAL" oracle.jbo.usemds="false" jbo.project="mil.stratis.model.Model" oracle.adfm.usemds="false"
+                     ApplicationName="mil.stratis.model.services.LoginModule">
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.LoginModule"/>
+      <Custom
+          jbo.envinfoprovider="mil.stratis.view.util.DynamicEnvInfoProvider"/>
+    </AppModuleConfig>
+  </AppModuleConfigBag>
+
+  <!-- PackingModule: only used as a nested AM -->
+  <AppModuleConfigBag ApplicationName="mil.stratis.model.services.PackingModule" default="PackingModuleDeploy">
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" name="PackingModuleShared"
+                     ApplicationName="mil.stratis.model.services.PackingModule" jbo.project="mil.stratis.model.Model"
+                     DeployPlatform="LOCAL">
+      <AM-Pooling jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.ampool.resetnontransactionalstate="false"
+                  jbo.ampool.dynamicjdbccredentials="false"
+                  jbo.ampool.timetolive="1800000"
+                  jbo.ampool.minavailablesize="0"
+                  jbo.recyclethreshold="100"
+      />
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.PackingModule"/>
+    </AppModuleConfig>
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" name="PackingModuleDeploy" DeployPlatform="LOCAL"
+                     oracle.jbo.usemds="false" jbo.project="mil.stratis.model.Model" oracle.adfm.usemds="false"
+                     ApplicationName="mil.stratis.model.services.PackingModule">
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.PackingModule"/>
+      <Custom
+          jbo.envinfoprovider="mil.stratis.view.util.DynamicEnvInfoProvider"/>
+    </AppModuleConfig>
+  </AppModuleConfigBag>
+
+  <!-- RcvHomeAM: only used as a nested AM -->
+  <AppModuleConfigBag ApplicationName="mil.stratis.model.services.RcvHomeAM" default="RcvHomeAMLocal">
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" name="RcvHomeAMShared"
+                     ApplicationName="mil.stratis.model.services.RcvHomeAM" jbo.project="mil.stratis.model.Model" DeployPlatform="LOCAL">
+      <AM-Pooling jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.ampool.resetnontransactionalstate="false"
+                  jbo.ampool.dynamicjdbccredentials="false"
+                  jbo.ampool.timetolive="1800000"
+                  jbo.ampool.minavailablesize="0"
+                  jbo.recyclethreshold="100"
+      />
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.RcvHomeAM"/>
+    </AppModuleConfig>
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" DeployPlatform="LOCAL" oracle.jbo.usemds="false"
+                     jbo.project="mil.stratis.model.Model" oracle.adfm.usemds="false" name="RcvHomeAMLocal"
+                     ApplicationName="mil.stratis.model.services.RcvHomeAM">
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.RcvHomeAM"/>
+      <Custom
+          jbo.envinfoprovider="mil.stratis.view.util.DynamicEnvInfoProvider"/>
+    </AppModuleConfig>
+  </AppModuleConfigBag>
+
+  <!-- ReceiptAM: is used as a root application module
+      Receiving_GeneralDetailPageDef.xml
+      Receiving_CancelSIDPageDef.xml
+      Receiving_GeneralPageDef.xml
+  -->
+  <AppModuleConfigBag ApplicationName="mil.stratis.model.services.ReceiptAM" default="ReceiptAMDeploy">
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" name="ReceiptAMShared"
+                     ApplicationName="mil.stratis.model.services.ReceiptAM" jbo.project="mil.stratis.model.Model" DeployPlatform="LOCAL">
+      <AM-Pooling jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1"
+                  jbo.ampool.resetnontransactionalstate="false" jbo.ampool.dynamicjdbccredentials="false"
+                  jbo.ampool.timetolive="1800000"
+                  jbo.ampool.minavailablesize="0"
+                  jbo.recyclethreshold="100"
+      />
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.ReceiptAM"/>
+    </AppModuleConfig>
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" name="ReceiptAMDeploy" DeployPlatform="LOCAL"
+                     oracle.jbo.usemds="false" jbo.project="mil.stratis.model.Model" oracle.adfm.usemds="false"
+                     ApplicationName="mil.stratis.model.services.ReceiptAM">
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.ReceiptAM"/>
+      <Custom
+          jbo.envinfoprovider="mil.stratis.view.util.DynamicEnvInfoProvider"/>
+    </AppModuleConfig>
+  </AppModuleConfigBag>
+
+  <!-- ShippingService: is used as a root AM
+    Shipping_ManifestshipmentPageDef.xml
+  -->
+  <AppModuleConfigBag ApplicationName="mil.stratis.model.services.ShippingService" default="ShippingServiceDeploy">
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" name="ShippingServiceShared"
+                     ApplicationName="mil.stratis.model.services.ShippingService" jbo.project="mil.stratis.model.Model"
+                     DeployPlatform="LOCAL">
+      <AM-Pooling jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.ampool.resetnontransactionalstate="false"
+                  jbo.ampool.dynamicjdbccredentials="false"
+                  jbo.ampool.timetolive="1800000"
+                  jbo.ampool.minavailablesize="0"
+                  jbo.recyclethreshold="100"
+      />
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.ShippingService"/>
+    </AppModuleConfig>
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" name="ShippingServiceDeploy" DeployPlatform="LOCAL"
+                     oracle.jbo.usemds="false" jbo.project="mil.stratis.model.Model" oracle.adfm.usemds="false"
+                     ApplicationName="mil.stratis.model.services.ShippingService">
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.ShippingService"/>
+      <Custom
+          jbo.envinfoprovider="mil.stratis.view.util.DynamicEnvInfoProvider"/>
+    </AppModuleConfig>
+  </AppModuleConfigBag>
+
+  <!-- StowingAM: only used as a nested AM -->
+  <AppModuleConfigBag ApplicationName="mil.stratis.model.services.StowingAM" default="StowingAMDeploy">
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" name="StowingAMShared"
+                     ApplicationName="mil.stratis.model.services.StowingAM" jbo.project="mil.stratis.model.Model" DeployPlatform="LOCAL">
+      <AM-Pooling jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.ampool.resetnontransactionalstate="false"
+                  jbo.ampool.dynamicjdbccredentials="false"
+                  jbo.ampool.timetolive="1800000"
+                  jbo.ampool.minavailablesize="0"
+                  jbo.recyclethreshold="100"
+      />
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.StowingAM"/>
+    </AppModuleConfig>
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" name="StowingAMDeploy" DeployPlatform="LOCAL"
+                     oracle.jbo.usemds="false" jbo.project="mil.stratis.model.Model" oracle.adfm.usemds="false"
+                     ApplicationName="mil.stratis.model.services.StowingAM">
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.StowingAM"/>
+      <Custom
+          jbo.envinfoprovider="mil.stratis.view.util.DynamicEnvInfoProvider"/>
+    </AppModuleConfig>
+  </AppModuleConfigBag>
+
+  <!-- StowingAM: is used as a root AM
+     Admin_SystemAdminInterfacesPageDef.xml
+  -->
+  <Custom
+      jbo.envinfoprovider="mil.stratis.view.util.DynamicEnvInfoProvider"/>
+  <AppModuleConfigBag ApplicationName="mil.stratis.model.services.SysAdmin" default="SysAdminDeploy">
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" name="SysAdminShared"
+                     ApplicationName="mil.stratis.model.services.SysAdmin" jbo.project="mil.stratis.model.Model" DeployPlatform="LOCAL">
+      <AM-Pooling jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.ampool.resetnontransactionalstate="false"
+                  jbo.ampool.dynamicjdbccredentials="false"
+                  jbo.ampool.timetolive="1800000"
+                  jbo.ampool.minavailablesize="0"
+                  jbo.recyclethreshold="100"
+      />
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.SysAdmin"/>
+    </AppModuleConfig>
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" name="SysAdminDeploy" DeployPlatform="LOCAL"
+                     oracle.jbo.usemds="false" jbo.project="mil.stratis.model.Model" oracle.adfm.usemds="false"
+                     ApplicationName="mil.stratis.model.services.SysAdmin">
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.SysAdmin"/>
+      <Custom
+          jbo.envinfoprovider="mil.stratis.view.util.DynamicEnvInfoProvider"/>
+    </AppModuleConfig>
+  </AppModuleConfigBag>
+
+  <!-- Transactions: only used as a nested AM -->
+  <AppModuleConfigBag ApplicationName="mil.stratis.model.services.Transactions" default="TransactionsDeploy">
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" name="TransactionsShared"
+                     ApplicationName="mil.stratis.model.services.Transactions" jbo.project="mil.stratis.model.Model" DeployPlatform="LOCAL">
+      <AM-Pooling jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.ampool.resetnontransactionalstate="false"
+                  jbo.ampool.dynamicjdbccredentials="false"
+                  jbo.ampool.timetolive="1800000"
+                  jbo.ampool.minavailablesize="0"
+                  jbo.recyclethreshold="100"
+      />
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.Transactions"/>
+    </AppModuleConfig>
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" name="TransactionsDeploy" DeployPlatform="LOCAL"
+                     oracle.jbo.usemds="false" jbo.project="mil.stratis.model.Model" oracle.adfm.usemds="false"
+                     ApplicationName="mil.stratis.model.services.Transactions">
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.Transactions"/>
+      <Custom
+          jbo.envinfoprovider="mil.stratis.view.util.DynamicEnvInfoProvider"/>
+    </AppModuleConfig>
+  </AppModuleConfigBag>
+
+  <!-- WarehouseSetup: is used as a root AM
+     Admin_SystemAdminInterfacesPageDef.xml
+     Admin_WarehouseWACSetupPageDef.xml
+     Admin_WarehouseWorkstationSetupPageDef.xml
+  -->
+  <AppModuleConfigBag ApplicationName="mil.stratis.model.services.WarehouseSetup" default="WarehouseSetupDeploy">
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" DeployPlatform="LOCAL"
+                     jbo.project="mil.stratis.model.Model" name="WarehouseSetupShared"
+                     ApplicationName="mil.stratis.model.services.WarehouseSetup">
+      <AM-Pooling jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.ampool.dynamicjdbccredentials="false"
+                  jbo.ampool.resetnontransactionalstate="false"
+                  jbo.ampool.timetolive="1800000"
+                  jbo.ampool.minavailablesize="0"
+                  jbo.recyclethreshold="100"
+      />
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.WarehouseSetup"/>
+    </AppModuleConfig>
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" name="WarehouseSetupDeploy" DeployPlatform="LOCAL"
+                     oracle.jbo.usemds="false" jbo.project="mil.stratis.model.Model" oracle.adfm.usemds="false"
+                     ApplicationName="mil.stratis.model.services.WarehouseSetup">
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.WarehouseSetup"/>
+      <Custom
+          jbo.envinfoprovider="mil.stratis.view.util.DynamicEnvInfoProvider"/>
+    </AppModuleConfig>
+  </AppModuleConfigBag>
+
+  <!-- WalkThruAM: is used as a root AM
+    WalkThru_HomePageDef.xm
+  -->
+  <AppModuleConfigBag ApplicationName="mil.stratis.model.services.WalkThruAM">
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" name="WalkThruAMLocal"
+                     jbo.project="mil.stratis.model.Model"
+                     ApplicationName="mil.stratis.model.services.WalkThruAM" DeployPlatform="LOCAL">
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.WalkThruAM"/>
+      <Custom
+          jbo.envinfoprovider="mil.stratis.view.util.DynamicEnvInfoProvider"/>
+    </AppModuleConfig>
+    <AppModuleConfig jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" name="WalkThruAMShared"
+                     jbo.project="mil.stratis.model.Model"
+                     ApplicationName="mil.stratis.model.services.WalkThruAM" DeployPlatform="LOCAL">
+      <AM-Pooling jbo.doconnectionpooling="true"
+                  jbo.txn.disconnect_level="1"
+                  jbo.ampool.maxpoolsize="100"
+                  jbo.ampool.isuseexclusive="false"
+                  jbo.ampool.timetolive="1800000"
+                  jbo.ampool.minavailablesize="0"
+                  jbo.recyclethreshold="100"
+      />
+      <Database jbo.doconnectionpooling="true" jbo.txn.disconnect_level="1" jbo.TypeMapEntries="OracleApps"/>
+      <Security AppModuleJndiName="mil.stratis.model.services.WalkThruAM"/>
+      <Custom
+          jbo.envinfoprovider="mil.stratis.view.util.DynamicEnvInfoProvider"/>
+    </AppModuleConfig>
+  </AppModuleConfigBag>
+</BC4JConfig>

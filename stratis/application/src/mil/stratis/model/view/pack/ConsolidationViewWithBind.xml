@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="ConsolidationViewWithBind"
+   Version="11.1.2.64.36"
+   SelectList="PackingConsolidation.PACKING_CONSOLIDATION_ID, 
+       PackingConsolidation.CONSOLIDATION_CUBE, 
+       PackingConsolidation.CONSOLIDATION_WEIGHT, 
+       PackingConsolidation.CLOSE_CARTON, 
+       PackingConsolidation.PACK_LOCATION_BARCODE, 
+       PackingConsolidation.PACKING_STATION_ID, 
+       PackingConsolidation.PACK_COLUMN, 
+       PackingConsolidation.PACK_LEVEL, 
+       PackingConsolidation.NUMBER_OF_ISSUES, 
+       PackingConsolidation.CUSTOMER_ID, 
+       PackingConsolidation.CONSOLIDATION_BARCODE, 
+       PackingConsolidation.MODIFIED_BY, 
+       PackingConsolidation.PARTIAL_RELEASE, 
+       PackingConsolidation.ISSUE_PRIORITY_GROUP"
+   FromList="PACKING_CONSOLIDATION PackingConsolidation"
+   Where="PackingConsolidation.PACKING_CONSOLIDATION_ID = :consolId"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.pack.ConsolidationViewWithBindImpl"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <Variable
+      Name="consolId"
+      Kind="where"
+      Type="oracle.jbo.domain.Number" >
+   </Variable>
+   <EntityUsage
+      Name="PackingConsolidation"
+      Entity="mil.stratis.model.entity.pack.PackingConsolidation" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="PackingConsolidationId"
+      IsUpdateable="while_insert"
+      IsNotNull="true"
+      EntityAttrName="PackingConsolidationId"
+      EntityUsage="PackingConsolidation"
+      AliasName="PACKING_CONSOLIDATION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ConsolidationCube"
+      IsNotNull="true"
+      DefaultValue="0"
+      EntityAttrName="ConsolidationCube"
+      EntityUsage="PackingConsolidation"
+      AliasName="CONSOLIDATION_CUBE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ConsolidationWeight"
+      IsNotNull="true"
+      DefaultValue="0"
+      EntityAttrName="ConsolidationWeight"
+      EntityUsage="PackingConsolidation"
+      AliasName="CONSOLIDATION_WEIGHT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CloseCarton"
+      IsNotNull="true"
+      EntityAttrName="CloseCarton"
+      EntityUsage="PackingConsolidation"
+      AliasName="CLOSE_CARTON" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PackLocationBarcode"
+      EntityAttrName="PackLocationBarcode"
+      EntityUsage="PackingConsolidation"
+      AliasName="PACK_LOCATION_BARCODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PackingStationId"
+      IsUnique="true"
+      IsNotNull="true"
+      EntityAttrName="PackingStationId"
+      EntityUsage="PackingConsolidation"
+      AliasName="PACKING_STATION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PackColumn"
+      DefaultValue="0"
+      EntityAttrName="PackColumn"
+      EntityUsage="PackingConsolidation"
+      AliasName="PACK_COLUMN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PackLevel"
+      DefaultValue="0"
+      EntityAttrName="PackLevel"
+      EntityUsage="PackingConsolidation"
+      AliasName="PACK_LEVEL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NumberOfIssues"
+      IsNotNull="true"
+      DefaultValue="0"
+      EntityAttrName="NumberOfIssues"
+      EntityUsage="PackingConsolidation"
+      AliasName="NUMBER_OF_ISSUES" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CustomerId"
+      EntityAttrName="CustomerId"
+      EntityUsage="PackingConsolidation"
+      AliasName="CUSTOMER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ConsolidationBarcode"
+      EntityAttrName="ConsolidationBarcode"
+      EntityUsage="PackingConsolidation"
+      AliasName="CONSOLIDATION_BARCODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedBy"
+      EntityAttrName="ModifiedBy"
+      EntityUsage="PackingConsolidation"
+      AliasName="MODIFIED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PartialRelease"
+      EntityAttrName="PartialRelease"
+      EntityUsage="PackingConsolidation"
+      AliasName="PARTIAL_RELEASE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IssuePriorityGroup"
+      EntityAttrName="IssuePriorityGroup"
+      EntityUsage="PackingConsolidation"
+      AliasName="ISSUE_PRIORITY_GROUP" >
+   </ViewAttribute>
+</ViewObject>

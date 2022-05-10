@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ComStopBits"
+  Version="11.1.2.64.36"
+  DBObjectType="SYNONYM"
+  DBObjectName="STRATIS.COMSTOPBITS_LU"
+  AliasName="ComStopBits"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <Attribute
+    Name="ComstopbitsId"
+    ColumnName="COMSTOPBITS_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="STRATIS.COMSTOPBITS_LU"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_SequenceName" Value="SEQ_COMSTOPBITS_LU"/>
+      <Attr Name="_SequenceStart" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ComstopbitsValue"
+    Precision="3"
+    Scale="2"
+    ColumnName="COMSTOPBITS_VALUE"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="STRATIS.COMSTOPBITS_LU"/>
+  <Attribute
+    Name="ComstopbitsDescn"
+    Precision="50"
+    ColumnName="COMSTOPBITS_DESCN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="STRATIS.COMSTOPBITS_LU">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TransTs"
+    ColumnName="TRANS_TS"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="STRATIS.COMSTOPBITS_LU"/>
+  <Attribute
+    Name="ModById"
+    ColumnName="MOD_BY_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="STRATIS.COMSTOPBITS_LU"/>
+  <Key
+    Name="ComstopbitsPrimaryKey"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="COMSTOPBITS_PRIMARY_KEY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.ref.ComStopBits.ComstopbitsId"/>
+    </AttrArray>
+  </Key>
+</Entity>

@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="NiinLocation"
+   Version="11.1.2.64.36"
+   DBObjectType="table"
+   DBObjectName="NIIN_LOCATION"
+   AliasName="NiinLocation"
+   BindingStyle="OracleName"
+   UseGlueCode="false"
+   RowClass="mil.stratis.model.entity.loc.NiinLocationImpl">
+   <DesignTime>
+      <Attr Name="_panelSchema" Value="table|alias" />
+      <Attr Name="_codeGenFlag2" Value="Access"/>
+      <Attr Name="_isCodegen" Value="true"/>
+   </DesignTime>
+   <Attribute
+      Name="NiinLocId"
+      ColumnName="NIIN_LOC_ID"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.DBSequence"
+      ColumnType="NUMBER"
+      TableName="NIIN_LOCATION"
+      PrimaryKey="true"
+      IsUpdateable="while_insert"
+      DefaultValue="@0"
+      Domain="oracle.jbo.domain.DBSequence"
+      RetrievedOnInsert="true">
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+         <Attr Name="_SequenceName" Value="NIIN_LOC_ID_SEQ"/>
+         <Attr Name="_SequenceStart" Value="1"/>
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="NiinId"
+      IsUnique="true"
+      IsNotNull="true"
+      ColumnName="NIIN_ID"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="NIIN_LOCATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="LocationId"
+      IsUnique="true"
+      IsNotNull="true"
+      ColumnName="LOCATION_ID"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="NIIN_LOCATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Qty"
+      IsNotNull="true"
+      Precision="6"
+      Scale="0"
+      ColumnName="QTY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="NIIN_LOCATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ExpirationDate"
+      ColumnName="EXPIRATION_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="NIIN_LOCATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="DateOfManufacture"
+      ColumnName="DATE_OF_MANUFACTURE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="NIIN_LOCATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Cc"
+      Precision="1"
+      ColumnName="CC"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="NIIN_LOCATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Locked"
+      IsNotNull="true"
+      Precision="1"
+      ColumnName="LOCKED"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="NIIN_LOCATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CreatedBy"
+      Precision="6"
+      Scale="0"
+      ColumnName="CREATED_BY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="NIIN_LOCATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CreatedDate"
+      ColumnName="CREATED_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="NIIN_LOCATION"
+      IsNotNull="true">
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ModifiedBy"
+      Precision="6"
+      Scale="0"
+      ColumnName="MODIFIED_BY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="NIIN_LOCATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ModifiedDate"
+      ColumnName="MODIFIED_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="NIIN_LOCATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ProjectCode"
+      Precision="3"
+      ColumnName="PROJECT_CODE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="NIIN_LOCATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="3" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Pc"
+      Precision="2"
+      ColumnName="PC"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="NIIN_LOCATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="LastInvDate"
+      ColumnName="LAST_INV_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="NIIN_LOCATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CaseWeightQty"
+      ColumnName="CASE_WEIGHT_QTY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="NIIN_LOCATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="LotConNum"
+      Precision="30"
+      ColumnName="LOT_CON_NUM"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="NIIN_LOCATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="SerialNumber"
+      Precision="30"
+      ColumnName="SERIAL_NUMBER"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="NIIN_LOCATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="PackedDate"
+      ColumnName="PACKED_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="NIIN_LOCATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="NumExtents"
+      ColumnName="NUM_EXTENTS"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="NIIN_LOCATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="NumCounts"
+      ColumnName="NUM_COUNTS"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="NIIN_LOCATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="UnderAudit"
+      Precision="1"
+      ColumnName="UNDER_AUDIT"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="NIIN_LOCATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="OldUi"
+      Precision="2"
+      ColumnName="OLD_UI"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="NIIN_LOCATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="NsnRemark"
+      IsNotNull="true"
+      Precision="1"
+      ColumnName="NSN_REMARK"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="NIIN_LOCATION" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ExpRemark"
+      IsNotNull="true"
+      Precision="1"
+      ColumnName="EXP_REMARK"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="NIIN_LOCATION">
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1"/>
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="OldQty"
+      Precision="6"
+      Scale="0"
+      ColumnName="OLD_QTY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="NIIN_LOCATION"/>
+   <Attribute
+      Name="RecallFlag"
+      IsNotNull="true"
+      Precision="1"
+      ColumnName="RECALL_FLAG"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="NIIN_LOCATION">
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1"/>
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="RecallDate"
+      ColumnName="RECALL_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="NIIN_LOCATION"/>
+   <AccessorAttribute
+      Name="Location"
+      Association="mil.stratis.model.entity.associations.NiinLocLocationFkAssoc"
+      AssociationEnd="mil.stratis.model.entity.associations.NiinLocLocationFkAssoc.Location"
+      AssociationOtherEnd="mil.stratis.model.entity.associations.NiinLocLocationFkAssoc.NiinLocation"
+      Type="mil.stratis.model.entity.loc.LocationImpl"
+      IsUpdateable="true">
+   </AccessorAttribute>
+   <AccessorAttribute
+      Name="NiinInfo"
+      Association="mil.stratis.model.entity.associations.NiinInfoFkAssoc"
+      AssociationEnd="mil.stratis.model.entity.associations.NiinInfoFkAssoc.NiinInfo"
+      AssociationOtherEnd="mil.stratis.model.entity.associations.NiinInfoFkAssoc.NiinLocation"
+      Type="mil.stratis.model.entity.site.NiinInfoImpl"
+      IsUpdateable="true"/>
+   <AccessorAttribute
+      Name="InventoryItem"
+      Association="mil.stratis.model.entity.associations.InventoryItemNiinLocFkAssoc"
+      AssociationEnd="mil.stratis.model.entity.associations.InventoryItemNiinLocFkAssoc.InventoryItem"
+      AssociationOtherEnd="mil.stratis.model.entity.associations.InventoryItemNiinLocFkAssoc.NiinLocation"
+      Type="oracle.jbo.RowIterator"
+      IsUpdateable="false"/>
+   <AccessorAttribute
+      Name="Picking"
+      Association="mil.stratis.model.entity.associations.PickingNiinLocFkAssoc"
+      AssociationEnd="mil.stratis.model.entity.associations.PickingNiinLocFkAssoc.Picking"
+      AssociationOtherEnd="mil.stratis.model.entity.associations.PickingNiinLocFkAssoc.NiinLocation"
+      Type="oracle.jbo.RowIterator"
+      IsUpdateable="false"/>
+   <Key
+      Name="Ck1niinLocation">
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="CK1NIIN_LOCATION"/>
+         <Attr Name="_checkCondition" Value="NIIN_LOC_ID IS NOT NULL"/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="Ck2niinLocation">
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="CK2NIIN_LOCATION"/>
+         <Attr Name="_checkCondition" Value="NIIN_ID IS NOT NULL"/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="Ck3niinLocation">
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="CK3NIIN_LOCATION"/>
+         <Attr Name="_checkCondition" Value="LOCATION_ID IS NOT NULL"/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="Ck4niinLocation">
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="CK4NIIN_LOCATION"/>
+         <Attr Name="_checkCondition" Value="QTY IS NOT NULL"/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="Ck5niinLocation">
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="CK5NIIN_LOCATION"/>
+         <Attr Name="_checkCondition" Value="LOCKED IS NOT NULL"/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="Ck6niinLocation">
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="CK6NIIN_LOCATION"/>
+         <Attr Name="_checkCondition" Value="CREATED_DATE IS NOT NULL"/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="Ck7niinLocation">
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="CK7NIIN_LOCATION"/>
+         <Attr Name="_checkCondition" Value="NSN_REMARK IS NOT NULL"/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="Ck8niinLocation">
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="CK8NIIN_LOCATION"/>
+         <Attr Name="_checkCondition" Value="EXP_REMARK IS NOT NULL"/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="Ck9niinLocation">
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="CK9NIIN_LOCATION"/>
+         <Attr Name="_checkCondition" Value="RECALL_FLAG IS NOT NULL"/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="NiinLocationChk1" >
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="NIIN_LOCATION_CHK1"/>
+         <Attr Name="_checkCondition"
+            Value="QTY >= 0 AND (OLD_QTY >= 0 AND NUM_COUNTS >= 0) AND NUM_EXTENTS >= 0 AND CASE_WEIGHT_QTY >= 0"/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="NiinLocationChk2" >
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="NIIN_LOCATION_CHK2"/>
+         <Attr Name="_checkCondition" Value="LOCKED IN ('Y', 'N')"/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="NiinLocationChk3" >
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="NIIN_LOCATION_CHK3"/>
+         <Attr Name="_checkCondition" Value="NSN_REMARK IN ('Y', 'N')"/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="NiinLocationChk4">
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="NIIN_LOCATION_CHK4"/>
+         <Attr Name="_checkCondition" Value="EXP_REMARK IN ('Y', 'N')"/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="NiinLocationChk5" >
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="NIIN_LOCATION_CHK5"/>
+         <Attr Name="_checkCondition" Value="UNDER_AUDIT IN ('Y', 'N')"/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="NiinLocationChk6">
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="NIIN_LOCATION_CHK6"/>
+         <Attr Name="_checkCondition" Value="RECALL_FLAG IN ('Y', 'N')"/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="NiinLocationCreatedDateCheck">
+      <DesignTime>
+         <Attr Name="_isNotNull" Value="true"/>
+         <Attr Name="_DBObjectName" Value="NIIN_LOCATION_CREATED_DATE_CHE"/>
+         <Attr Name="_checkCondition" Value='"CREATED_DATE" IS NOT NULL'/>
+         <Attr Name="_isCheck" Value="true"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.loc.NiinLocation.CreatedDate"/>
+      </AttrArray>
+   </Key>
+   <Key
+      Name="NiinLocationPk"
+      PrimaryKey="true">
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="NIIN_LOCATION_PK"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.loc.NiinLocation.NiinLocId"/>
+      </AttrArray>
+   </Key>
+   <Key
+      Name="NiinLocationUk1" >
+      <DesignTime>
+         <Attr Name="_isUnique" Value="true"/>
+         <Attr Name="_DBObjectName" Value="NIIN_LOCATION_UK1"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.loc.NiinLocation.NiinId" />
+         <Item Value="mil.stratis.model.entity.loc.NiinLocation.LocationId" />
+      </AttrArray>
+   </Key>
+   <Key
+      Name="NiinInfoFk" >
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="NIIN_INFO_PK"/>
+         <Attr Name="_isForeign" Value="true"/>
+         <Attr Name="_DBObjectName" Value="NIIN_INFO_FK"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.loc.NiinLocation.NiinId" />
+      </AttrArray>
+   </Key>
+   <Key
+      Name="NiinLocationLocFk">
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="LOCATION_PK"/>
+         <Attr Name="_isForeign" Value="true"/>
+         <Attr Name="_DBObjectName" Value="NIIN_LOCATION_LOC_FK"/>
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.loc.NiinLocation.LocationId"/>
+      </AttrArray>
+   </Key>
+</Entity>
+

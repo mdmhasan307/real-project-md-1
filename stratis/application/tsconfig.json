@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "sourceMap": false,
+    "strictNullChecks": true,
+    "diagnostics": false,
+    "charset": "utf8",
+    "removeComments": true,
+    // MUST set to true to avoid HMR issues
+    "lib": [
+      "dom",
+      "es5",
+      "scripthost",
+      "es2015.promise"
+    ]
+  },
+  "exclude": [
+    "target",
+    "archive",
+    "build",
+    "node_modules"
+  ]
+}

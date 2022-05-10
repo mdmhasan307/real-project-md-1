@@ -1,0 +1,369 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:stratis="taglib.mil.usmc.stratis">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="6"/>
+    <jsp:setProperty name="userbean" property="selected2" value="1"/>
+    <f:view>
+        <af:document title="STRATIS" id="d1">
+            <af:form id="main_form">
+                <af:panelStretchLayout startWidth="25" topHeight="150" bottomHeight="25" id="psl1">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/HeaderMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout id="topGroup" layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGridLayout id="pgl1">
+                                <af:gridRow id="gr1">
+                                    <af:gridCell valign="top" id="gc1">
+                                        <f:subview id="svSideBar">
+                                            <jsp:include page="../SideBar.jspx"/>
+                                        </f:subview>
+                                    </af:gridCell>
+                                    <af:gridCell valign="top" id="gc2">
+                                        <af:panelGroupLayout id="pg115" layout="horizontal">
+                                            <af:panelFormLayout id="pfl1">
+                                                <f:facet name="footer"/>
+                                                <af:panelHeader text="Location Survey" id="ph1">
+                                                    <af:panelGroupLayout id="pgl2">
+                                                        <af:panelFormLayout id="pfl2">
+                                                            <af:spacer width="10" height="10" id="s1"/>
+                                                            <af:panelGroupLayout id="pgl3">
+                                                                <af:outputText inlineStyle="font-weight:bold;"
+                                                                               value="NIIN(s) Info at Current Location "
+                                                                               id="otNiinAtLoc"/>
+                                                                <af:table summary="NIIN(s) Info at Current Location"
+                                                                          value="#{bindings.NIINLocDetailsVO1.collectionModel}"
+                                                                          var="row"
+                                                                          rows="#{bindings.NIINLocDetailsVO1.rangeSize}"
+                                                                          first="#{bindings.NIINLocDetailsVO1.rangeStart}"
+                                                                          emptyText="#{bindings.NIINLocDetailsVO1.viewable ? 'No rows yet.' : 'No rows yet.'}"
+                                                                          id="tNnLcDtl" autoHeightRows="5" width="315px">
+                                                                    <af:column sortProperty="Nomenclature" sortable="false"
+                                                                               headerText="#{bindings.NIINLocDetailsVO1.labels.Nomenclature}"
+                                                                               noWrap="false" id="cNomenClature">
+                                                                        <af:outputText value="#{row.Nomenclature}" id="itNomenclature"/>
+                                                                    </af:column>
+                                                                    <af:column sortProperty="Qty" sortable="false"
+                                                                               headerText="#{bindings.NIINLocDetailsVO1.labels.Qty}"
+                                                                               noWrap="false" id="cLocDetails">
+                                                                        <af:outputText value="#{row.Qty}" id="itQty"/>
+                                                                    </af:column>
+                                                                    <af:column sortProperty="ExpirationDate" sortable="false"
+                                                                               headerText="#{bindings.NIINLocDetailsVO1.labels.ExpirationDate}"
+                                                                               noWrap="false" id="cExpDt">
+                                                                        <stratis:adfDateFormatter value="#{row.ExpirationDate}"/>
+                                                                    </af:column>
+                                                                </af:table>
+                                                            </af:panelGroupLayout>
+                                                            <af:spacer width="10" height="10" id="s2"/>
+                                                            <af:panelGroupLayout layout="horizontal" id="pgl4">
+                                                                <af:panelFormLayout inlineStyle="border-style:solid;" id="pfl3">
+                                                                    <af:panelGroupLayout layout="horizontal" id="pgl5">
+                                                                        <af:outputText inlineStyle="font-weight:bold;"
+                                                                                       value="Location Details" id="otLocDet"/>
+                                                                    </af:panelGroupLayout>
+                                                                    <af:inputText label="Location"
+                                                                                  value="#{bindings.LocationLabel.inputValue}"
+                                                                                  styleClass="ReadOnlyField" id="itLoc"
+                                                                                  columns="#{bindings.LocationLabel.displayWidth}"
+                                                                                  disabled="true"/>
+                                                                </af:panelFormLayout>
+                                                            </af:panelGroupLayout>
+                                                            <af:panelGroupLayout layout="horizontal" id="pgl6">
+                                                                <af:inputText label="#{bindings.Side.label}"
+                                                                              value="#{bindings.Side.inputValue}"
+                                                                              styleClass="ReadOnlyField" id="itSide"
+                                                                              columns="#{bindings.Side.displayWidth}"
+                                                                              disabled="true"/>
+                                                                <af:inputText label="#{bindings.Bay.label}"
+                                                                              value="#{bindings.Bay.inputValue}"
+                                                                              styleClass="ReadOnlyField" id="itBay"
+                                                                              columns="#{bindings.Bay.displayWidth}"
+                                                                              disabled="true"/>
+                                                                <af:inputText label="#{bindings.LocLevel.label}"
+                                                                              value="#{bindings.LocLevel.inputValue}"
+                                                                              styleClass="ReadOnlyField" id="itLocLevel"
+                                                                              columns="#{bindings.LocLevel.displayWidth}"
+                                                                              disabled="true"/>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelFormLayout>
+                                                        <af:spacer width="10" height="10" id="s3"/>
+                                                        <af:switcher facetName="#{LocSurveyAll.expObj}" id="sExpObj">
+                                                            <f:facet name="0">
+                                                                <af:panelGroupLayout id="pgl7">
+                                                                    <af:panelFormLayout inlineStyle="border-style:solid;"
+                                                                                        id="pfl4">
+                                                                        <af:panelGroupLayout layout="horizontal" id="pgl8">
+                                                                            <af:inputText label="Location"
+                                                                                          validator="#{LocSurveyAll.locationValidator}"
+                                                                                          columns="10"
+                                                                                          inlineStyle="font-weight:bold;"
+                                                                                          contentStyle="text-transform:uppercase;"
+                                                                                          binding="#{LocSurveyAll.scanLocLabel}"
+                                                                                          maximumLength="9" id="it1"/>
+                                                                        </af:panelGroupLayout>
+                                                                        <af:spacer width="10" height="10" id="s4"/>
+                                                                        <af:panelGroupLayout layout="horizontal" id="pgl9">
+                                                                            <af:button text="Submit"
+                                                                                       action="#{LocSurveyAll.actionForwardStrForLocSurveyNormalOnSubmit}"
+                                                                                       id="locSurveyNormalSubmitId" partialSubmit="false"/>
+                                                                            <af:spacer width="10" height="10" id="s5"/>
+                                                                            <af:button text="ByPass"
+                                                                                       id="locSurveyNormalCancelId"
+                                                                                       action="#{LocSurveyAll.actionForwardStrForLocSurveyNormalOnByPass}"
+                                                                                       immediate="true"
+                                                                                       partialSubmit="false"/>
+                                                                        </af:panelGroupLayout>
+                                                                        <f:facet name="footer"/>
+                                                                    </af:panelFormLayout>
+                                                                </af:panelGroupLayout>
+                                                            </f:facet>
+                                                            <f:facet name="1">
+                                                                <af:panelGroupLayout id="pgl10">
+                                                                    <af:spacer width="10" height="10" id="s6"/>
+                                                                    <af:panelFormLayout inlineStyle="border-style:solid;"
+                                                                                        id="pfl5">
+                                                                        <af:outputText inlineStyle="font-weight:bold;"
+                                                                                       value="Enter NIIN(s) found at this location"
+                                                                                       id="otNiinsFound"/>
+                                                                        <af:spacer width="10" height="15" id="s7"/>
+                                                                        <af:panelGroupLayout layout="horizontal" id="pgl11">
+                                                                            <af:inputText label="NIIN "
+                                                                                          binding="#{LocSurveyAll.scanNIINLabel}"
+                                                                                          inlineStyle="font-weight:bold;"
+                                                                                          contentStyle="text-transform:uppercase;"
+                                                                                          maximumLength="9" id="itScanNiinLabel"/>
+                                                                            <af:spacer width="10" height="10" id="s8"/>
+                                                                            <af:panelGroupLayout layout="horizontal" id="pgl12">
+                                                                                <af:button text="Add to the NIIN List"
+                                                                                           actionListener="#{LocSurveyAll.addScannedNIINToNiinLocList}"
+                                                                                           id="locSurveyNormalSubmitId1"
+                                                                                           partialSubmit="false"/>
+                                                                            </af:panelGroupLayout>
+                                                                        </af:panelGroupLayout>
+                                                                        <af:spacer width="10" height="5" id="s9"/>
+                                                                        <af:panelFormLayout id="pfl6">
+                                                                            <af:outputText inlineStyle="font-weight:bold;"
+                                                                                           value="NIIN(s) List" id="otNiinList"/>
+                                                                            <af:table summary="NIIN(s) List"
+                                                                                      value="#{bindings.NiinLocVO1.collectionModel}"
+                                                                                      var="row"
+                                                                                      rows="#{bindings.NiinLocVO1.rangeSize}"
+                                                                                      first="#{bindings.NiinLocVO1.rangeStart}"
+                                                                                      emptyText="#{bindings.NiinLocVO1.viewable ? 'No rows yet.' : 'No rows yet.'}"
+                                                                                      id="tNnLst" autoHeightRows="5">
+                                                                                <af:column sortProperty="Niin" sortable="false"
+                                                                                           headerText="#{bindings.NiinLocVO1.labels.Niin}"
+                                                                                           id="cNiin">
+                                                                                    <af:inputText value="#{row.Niin}"
+                                                                                                  simple="true"
+                                                                                                  required="#{bindings.NiinLocVO1.attrDefs.Niin.mandatory}"
+                                                                                                  columns="#{bindings.NiinLocVO1.attrHints.Niin.displayWidth}"
+                                                                                                  id="itNiin" readOnly="true"/>
+                                                                                </af:column>
+                                                                                <af:column sortProperty="Comments"
+                                                                                           sortable="false"
+                                                                                           headerText="#{bindings.NiinLocVO1.labels.Comments}"
+                                                                                           noWrap="false" id="cComments" width="190">
+                                                                                    <af:inputText value="#{row.Comments}"
+                                                                                                  simple="true"
+                                                                                                  required="#{bindings.NiinLocVO1.attrDefs.Comments.mandatory}"
+                                                                                                  columns="250"
+                                                                                                  rows="3" id="itComments" readOnly="true"/>
+                                                                                </af:column>
+                                                                            </af:table>
+                                                                        </af:panelFormLayout>
+                                                                        <af:spacer width="10" height="10" id="s10"/>
+                                                                        <af:panelGroupLayout id="pgl13">
+                                                                            <af:button text="Submit"
+                                                                                       action="#{LocSurveyAll.actionForwardForStartAddNewNIINs}"
+                                                                                       id="inventoryItemNormalCancelId"
+                                                                                       partialSubmit="false"/>
+                                                                            <af:spacer width="10" height="10" id="s11"/>
+                                                                            <af:button text="ByPass"
+                                                                                       action="#{LocSurveyAll.actionForwardStrForLocSurveyNormalOnByPass}"
+                                                                                       id="locSurveyNormalCancelId1" partialSubmit="false"/>
+                                                                        </af:panelGroupLayout>
+                                                                        <f:facet name="footer"/>
+                                                                    </af:panelFormLayout>
+                                                                </af:panelGroupLayout>
+                                                            </f:facet>
+                                                            <f:facet name="2">
+                                                                <af:panelGroupLayout id="pgl14">
+                                                                    <af:panelFormLayout inlineStyle="border-style:solid;"
+                                                                                        id="pfl7">
+                                                                        <af:spacer width="10" height="10" id="s12"/>
+                                                                        <af:outputText value="NIIN Details"
+                                                                                       inlineStyle="font-weight:bold;"
+                                                                                       id="ot1"/>
+                                                                        <af:panelGroupLayout id="pgl15">
+                                                                            <af:panelFormLayout inlineStyle="border-style:solid;"
+                                                                                                id="pfl8">
+                                                                                <f:facet name="footer"/>
+                                                                                <af:outputText
+                                                                                        value="#{bindings.NiinLocVO1Comments.inputValue}"
+                                                                                        inlineStyle="color:rgb(0,0,255); font-weight:bold;"
+                                                                                        id="otComments"/>
+                                                                                <af:inputText label="#{bindings.NiinLocVO1Niin.label}"
+                                                                                              value="#{bindings.NiinLocVO1Niin.inputValue}"
+                                                                                              styleClass="ReadOnlyField"
+                                                                                              columns="#{bindings.NiinLocVO1Niin.displayWidth}"
+                                                                                              disabled="true" id="itNiin2"/>
+                                                                                <af:selectOneChoice label="CC (A or F)"
+                                                                                                    inlineStyle="font-weight:bold;"
+                                                                                                    value="#{bindings.NiinLocVO1Cc.inputValue}"
+                                                                                                    required="#{bindings.NiinLocVO1Cc.mandatory}"
+                                                                                                    rendered="#{(bindings.NiinLocVO1NewRow.inputValue == 'Y')}"
+                                                                                                    id="socNiinLoc">
+                                                                                    <af:selectItem label="A" value="A"
+                                                                                                   id="si1"/>
+                                                                                    <af:selectItem label="F" value="F"
+                                                                                                   id="si2"/>
+                                                                                </af:selectOneChoice>
+                                                                                <af:inputText value="#{bindings.NiinLocVO1Qty.inputValue}"
+                                                                                              label="#{bindings.NiinLocVO1Qty.label}"
+                                                                                              required="#{bindings.NiinLocVO1Qty.mandatory}"
+                                                                                              inlineStyle="font-weight:bold;"
+                                                                                              columns="#{bindings.NiinLocVO1Qty.displayWidth}"
+                                                                                              maximumLength="6"
+                                                                                              rendered="#{(bindings.NiinLocVO1NewRow.inputValue == 'Z')}"
+                                                                                              id="itQty2">
+                                                                                    <f:validator
+                                                                                            binding="#{bindings.NiinLocVO1Qty.validator}"/>
+                                                                                    <f:convertNumber groupingUsed="false"
+                                                                                                     pattern="#{bindings.NiinLocVO1Qty.format}"/>
+                                                                                    <f:validator validatorId="javax.faces.LongRange"/>
+                                                                                </af:inputText>
+                                                                                <af:inputText value="#{bindings.NiinLocVO1Cc.inputValue}"
+                                                                                              label="#{bindings.NiinLocVO1Cc.label}"
+                                                                                              required="#{bindings.NiinLocVO1Cc.mandatory}"
+                                                                                              columns="#{bindings.NiinLocVO1Cc.displayWidth}"
+                                                                                              rendered="false"
+                                                                                              maximumLength="1" id="itCc">
+                                                                                    <f:validator
+                                                                                            binding="#{bindings.NiinLocVO1Cc.validator}"/>
+                                                                                </af:inputText>
+                                                                                <af:inputText
+                                                                                        value="#{bindings.NiinLocVO1ExpirationDate.inputValue}"
+                                                                                        label="Exp. Date (MMYYYY format)"
+                                                                                        inlineStyle="font-weight:bold;"
+                                                                                        required="#{bindings.NiinLocVO1ExpirationDate.mandatory}"
+                                                                                        columns="#{bindings.NiinLocVO1ExpirationDate.displayWidth}"
+                                                                                        maximumLength="6"
+                                                                                        rendered="#{(bindings.NiinLocVO1NewRow.inputValue == 'Y')}"
+                                                                                        id="itExpDate">
+                                                                                    <f:validator
+                                                                                            binding="#{bindings.NiinLocVO1ExpirationDate.validator}"/>
+                                                                                </af:inputText>
+                                                                            </af:panelFormLayout>
+                                                                        </af:panelGroupLayout>
+                                                                        <af:spacer width="10" height="10" id="s13"/>
+                                                                        <af:panelGroupLayout id="pgl16">
+                                                                            <af:button text="Next / All Done"
+                                                                                       action="#{LocSurveyAll.actionForwardForStartAddNewNIINs}"
+                                                                                       id="locSurveyNormalAddNewNIINs"
+                                                                                       partialSubmit="false"/>
+                                                                            <af:spacer width="10" height="10" id="s14"/>
+                                                                            <af:button text="Delete NIIN"
+                                                                                       action="#{LocSurveyAll.actionForwardForDeleteNIIN}"
+                                                                                       id="locSurveyNormalDeleteNIIN"
+                                                                                       partialSubmit="false"/>
+                                                                        </af:panelGroupLayout>
+                                                                        <af:spacer width="10" height="10" id="s15"/>
+                                                                        <af:panelGroupLayout id="pgl17">
+                                                                            <af:button text="Go Back NIIN(s) List"
+                                                                                       action="#{LocSurveyAll.actionForwardForGoBackToNIINList}"
+                                                                                       id="locSurveyNormalQtyVerSubmitId2"
+                                                                                       partialSubmit="false"/>
+                                                                            <af:spacer width="10" height="10" id="s16"/>
+                                                                            <af:button text="ByPass"
+                                                                                       action="#{LocSurveyAll.actionForwardStrForLocSurveyNormalOnByPass}"
+                                                                                       id="locSurveyNormalQtyVerCancelId2"
+                                                                                       partialSubmit="false"/>
+                                                                        </af:panelGroupLayout>
+                                                                        <f:facet name="footer"/>
+                                                                    </af:panelFormLayout>
+                                                                </af:panelGroupLayout>
+                                                            </f:facet>
+                                                            <f:facet name="3">
+                                                                <af:panelGroupLayout id="pgl18">
+                                                                    <af:panelFormLayout inlineStyle="border-style:solid;"
+                                                                                        id="pfl9">
+                                                                        <af:panelGroupLayout layout="horizontal" id="pgl19">
+                                                                            <af:outputText value="Are you sure this location is empty ?"
+                                                                                           inlineStyle="color:rgb(0,0,255); font-weight:bold;"
+                                                                                           id="ot2"/>
+                                                                        </af:panelGroupLayout>
+                                                                        <af:spacer width="10" height="10" id="s17"/>
+                                                                        <af:panelGroupLayout layout="horizontal" id="pgl20">
+                                                                            <af:button text="Submit"
+                                                                                       action="#{LocSurveyAll.actionForwardStrForLocationEmpty}"
+                                                                                       id="locSurveyNormalLocEmptyId"
+                                                                                       partialSubmit="false"/>
+                                                                            <af:spacer width="10" height="10" id="s18"/>
+                                                                            <af:button text="Cancel"
+                                                                                       action="#{LocSurveyAll.actionForwardStrForResetExp}"
+                                                                                       id="locSurveyNormalResetExpId"
+                                                                                       partialSubmit="false"/>
+                                                                        </af:panelGroupLayout>
+                                                                        <f:facet name="footer"/>
+                                                                    </af:panelFormLayout>
+                                                                </af:panelGroupLayout>
+                                                            </f:facet>
+                                                        </af:switcher>
+                                                    </af:panelGroupLayout>
+                                                </af:panelHeader>
+                                            </af:panelFormLayout>
+                                            <af:panelFormLayout id="pfl10">
+                                                <f:facet name="footer"/>
+                                                <af:panelGroupLayout valign="top" layout="horizontal" id="pgl21">
+                                                    <af:inputText label="Current NIIN Location"
+                                                                  value="#{bindings.LocationLabel.inputValue}" readOnly="true"
+                                                                  id="itCurrentLoc"/>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout valign="top" layout="horizontal" id="pgl22">
+                                                    <af:inputText label="#{bindings.Side.label}"
+                                                                  value="#{bindings.Side.inputValue}" readOnly="true" id="itSide2"/>
+                                                    <af:spacer width="5" height="10" id="s20"/>
+                                                    <af:inputText label="#{bindings.Bay.label}"
+                                                                  value="#{bindings.Bay.inputValue}" readOnly="true" id="itBay2"/>
+                                                    <af:spacer width="5" height="10" id="s19"/>
+                                                    <af:inputText label="#{bindings.LocLevel.label}"
+                                                                  value="#{bindings.LocLevel.inputValue}" readOnly="true"
+                                                                  id="itLocLevel2"/>
+                                                    <af:spacer width="5" height="10" id="s21"/>
+                                                    <af:inputText label="#{bindings.Slot.label}"
+                                                                  value="#{bindings.Slot.inputValue}" readOnly="true" id="itSlot"/>
+                                                </af:panelGroupLayout>
+                                                <af:image shortDesc="Get Slot Image"
+                                                          source="/SlotImage?type=SLOT&amp;DI=#{bindings.DividerTypeId.inputValue}&amp;SI=#{bindings.DividerIndex.inputValue}"
+                                                          id="iGetSlot"/>
+                                            </af:panelFormLayout>
+                                        </af:panelGroupLayout>
+                                    </af:gridCell>
+                                </af:gridRow>
+                            </af:panelGridLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="../FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <af:spacer width="24" height="675" id="s22"/>
+                    </f:facet>
+                    <f:facet name="end"/>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="DocumentTypeView"
+  Version="11.1.2.64.36"
+  SelectList="DocumentType.DOCUMENT_ID, 
+       DocumentType.DESCRIPTION"
+  FromList="DOCUMENT_TYPE DocumentType"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <EntityUsage
+    Name="DocumentType"
+    Entity="mil.stratis.model.entity.wlm.DocumentType"/>
+  <ViewAttribute
+    Name="DocumentId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="DocumentId"
+    EntityUsage="DocumentType"
+    AliasName="DOCUMENT_ID"/>
+  <ViewAttribute
+    Name="Description"
+    PrecisionRule="true"
+    EntityAttrName="Description"
+    EntityUsage="DocumentType"
+    AliasName="DESCRIPTION"/>
+</ViewObject>

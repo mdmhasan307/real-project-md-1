@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<!-- ** Date: 23 Nov 2009 **
+     ** 1.0: Khudiram Barik   - Initial
+     ** 1.1: Achille Brighton - Updated i137 Schema
+This is the master schema containing all the GCSS-MC RICE Schema (XSD) definitions and will be used by eXML.
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+            xmlns="http://www.usmc.mil/schemas/1" 
+            targetNamespace="http://www.usmc.mil/schemas/1" elementFormDefault="qualified"  version="$Revision:   2.0  $">
+
+       <xsd:import namespace="http://www.usmc.mil/schemas/1/if/stratis" schemaLocation="./i111StratisDueInsOut.xsd"/> 
+       <xsd:import namespace="http://www.usmc.mil/schemas/1/if/stratis" schemaLocation="./i136StratisItemMaster.xsd"/>
+       <xsd:import namespace="http://www.usmc.mil/schemas/1/if/stratis" schemaLocation="./i112SalesOrderOut.xsd"/>
+       <xsd:import namespace="http://www.usmc.mil/schemas/1/if/stratis" schemaLocation="./i137SubinventoryTransferOut.xsd"/>
+       <xsd:import namespace="http://www.usmc.mil/schemas/1/if/stratis" schemaLocation="./i009ShipmentReceiptsIn.xsd"/>
+       <xsd:import namespace="http://www.usmc.mil/schemas/1/if/stratis" schemaLocation="./i033StratisInventoryOut.xsd" />
+</xsd:schema> 

@@ -1,0 +1,235 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:h="http://java.sun.com/jsf/html">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="1"/>
+    <jsp:setProperty name="userbean" property="selected3" value="11"/>
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session" />
+    <jsp:setProperty name="logBean" property="page" value="Shipping Floor Location"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="195" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll" id="pgl1">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGroupLayout layout="vertical" id="pgl2">
+                                <af:panelBox text="Warehouse Setup - Floor Location Setup" showDisclosure="false"
+                                             id="pb1">
+                                    <af:separator/>
+                                    <af:panelCollection id="pc1">
+                                        <f:facet name="menus"/>
+                                        <f:facet name="toolbar"/>
+                                        <f:facet name="statusbar"/>
+                                        <f:facet name="secondaryToolbar">
+                                            <af:toolbar inlineStyle="padding:2px;" id="t1">
+                                                <!--
+                                                <af:inputText value="#{bindings.FloorQry.inputValue}" label="Floor"
+                                                              id="filterFloor" columns="20" maximumLength="50"
+                                                              contentStyle="text-transform:uppercase;">
+                                                    <f:validator binding="#{bindings.FloorQry.validator}"/>
+                                                </af:inputText>
+                                                <af:spacer width="10"/>
+                                                
+                                                <af:button actionListener="#{bindings.FilterFloorData.execute}"
+                                                                  text="Filter" id="FilterButton"
+                                                                  disabled="#{!bindings.FilterFloorData.enabled}" partialSubmit="false"/>
+                                                -->
+                                                <af:button actionListener="#{bindings.CreateInsert.execute}"
+                                                           text="Create" id="CreateButton" partialSubmit="false"
+                                                           inlineStyle="width:50px" accessKey="C"
+                                                           disabled="#{(!FloorLocationBacking.floorLocationFlag) and (bindings.FloorLocationView1.estimatedRowCount > 0)}">
+                                                    <af:setActionListener from="#{false}"
+                                                                          to="#{FloorLocationBacking.floorLocationFlag}"/>
+                                                    <af:setActionListener from="#{false}"
+                                                                          to="#{FloorLocationBacking.floorLocationRefresh}"/>
+                                                </af:button>
+                                                <af:button actionListener="#{FloorLocationBacking.submitUpdateFloorLocation}"
+                                                           text="Update" id="UpdateButton"
+                                                           inlineStyle="width:50px" accessKey="U"
+                                                           disabled="#{!FloorLocationBacking.floorLocationFlag}"
+                                                           partialSubmit="false"/>
+                                                <af:group>
+                                                    <af:button text="Delete" id="DeleteButton"
+                                                               inlineStyle="width:50px" accessKey="D"
+                                                               disabled="#{!FloorLocationBacking.floorLocationFlag}"
+                                                               partialSubmit="false">
+                                                        <af:showPopupBehavior popupId="confirmDelete" triggerType="action"
+                                                                              align="afterStart"/>
+                                                    </af:button>
+                                                    <af:popup id="confirmDelete">
+                                                        <af:dialog id="Confirm" title="Confirm" affirmativeTextAndAccessKey="Submit"
+                                                                   dialogListener="#{FloorLocationBacking.dialogListener}">
+                                                            <af:activeOutputText id="Delete" value="Are you sure you want to Delete?"/>
+                                                        </af:dialog>
+                                                    </af:popup>
+                                                </af:group>
+                                            </af:toolbar>
+                                        </f:facet>
+                                        <!-- Floor Location Table -->
+                                        <af:table value="#{bindings.SingleFloorLocationView1.collectionModel}" var="row"
+                                                  styleClass="AFStretchWidth" columnStretching="last"
+                                                  rows="#{bindings.SingleFloorLocationView1.rangeSize}"
+                                                  emptyText="#{bindings.SingleFloorLocationView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.SingleFloorLocationView1.rangeSize}"
+                                                  rowBandingInterval="0"
+                                                  filterModel="#{bindings.SingleFloorLocationView1Query.queryDescriptor}"
+                                                  queryListener="#{bindings.SingleFloorLocationView1Query.processQuery}"
+                                                  filterVisible="false" varStatus="vs"
+                                                  selectedRowKeys="#{bindings.SingleFloorLocationView1.collectionModel.selectedRow}"
+                                                  selectionListener="#{bindings.SingleFloorLocationView1.collectionModel.makeCurrent}"
+                                                  rowSelection="single" id="floor" partialTriggers="::CreateButton"
+                                                  binding="#{FloorLocationBacking.floorLocationTable}">
+                                            <af:column sortProperty="#{bindings.SingleFloorLocationView1.hints.FloorLocation1.name}"
+                                                       filterable="true" sortable="true"
+                                                       headerText="#{bindings.SingleFloorLocationView1.hints.FloorLocation1.label}"
+                                                       id="c1">
+                                                <af:outputText value="#{row.FloorLocation1}"
+                                                               shortDesc="#{bindings.SingleFloorLocationView1.hints.FloorLocation1.tooltip}"
+                                                               id="ot1"/>
+                                            </af:column>
+                                        </af:table>
+                                        <!-- 
+                                        <af:table value="#{bindings.FloorLocationView1.collectionModel}" var="row"
+                                                  width="400" rows="#{bindings.FloorLocationView1.rangeSize}"
+                                                  first="#{bindings.FloorLocationView1.rangeStart}"
+                                                  emptyText="#{bindings.FloorLocationView1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                  filterModel="#{bindings.FloorLocationView1.queryDescriptor}"
+                                                  selectionListener="#{bindings.FloorLocationView1.collectionModel.makeCurrent}"
+                                                  id="floor2"
+                                                  binding="#{FloorLocationBacking.floorLocationTable}"
+                                                  selectedRowKeys="#{bindings.FloorLocationView1.collectionModel.selectedRow}"
+                                                  rowSelection="single">
+                                            <af:column sortProperty="FloorLocation1" sortable="true" filterable="true"
+                                                       headerText="Floor Location" inlineStyle="text-align:center;">
+                                                <af:outputText value="#{row.FloorLocation1}"/>
+                                            </af:column>
+                                            <f:facet name="footer"/>
+                                        </af:table> -->
+                                    </af:panelCollection>
+                                    <af:spacer height="20"/>
+                                    <af:panelBox text="Floor Location Setup Details" id="floorLocationSetupPanelBox"
+                                                 rendered="#{bindings.FloorLocationView1.estimatedRowCount > 0}"
+                                                 shortDesc="false" showDisclosure="false">
+                                        <af:separator/>
+                                        <af:panelFormLayout partialTriggers="pc1:floor">
+                                            <af:panelGridLayout>
+                                                <af:gridRow>
+                                                    <af:gridCell columnSpan="3">
+                                                        <af:outputText value="&lt;br>" escape="false"/>
+                                                    </af:gridCell>
+                                                </af:gridRow>
+                                                <af:gridRow>
+                                                    <af:gridCell>
+                                                        <af:outputLabel value="Floor Location"
+                                                                        inlineStyle="font-weight:bold;"/>
+                                                    </af:gridCell>
+                                                    <af:gridCell>
+                                                        <af:spacer width="10"/>
+                                                    </af:gridCell>
+                                                    <af:gridCell>
+                                                        <af:inputText value="#{bindings.FloorLocation1.inputValue}"
+                                                                      binding="#{FloorLocationBacking.floorLocation}"
+                                                                      columns="#{bindings.FloorLocation1.displayWidth}"
+                                                                      maximumLength="5" id="floorLocation_Name"
+                                                                      contentStyle="text-transform:uppercase;"
+                                                                      shortDesc="Required Floor Location name (max 5 alphanumeric)"
+                                                                      rendered="#{!FloorLocationBacking.floorLocationFlag}"/>
+                                                        <af:inputText value="#{bindings.FloorLocation1.inputValue}"
+                                                                      columns="#{bindings.FloorLocation1.displayWidth}"
+                                                                      label="Required Floor Location name (max 5 alphanumeric)"
+                                                                      id="floorLocation_Name_h" readOnly="true"
+                                                                      styleClass="ReadOnlyField"
+                                                                      rendered="#{FloorLocationBacking.floorLocationFlag}"/>
+                                                    </af:gridCell>
+                                                </af:gridRow>
+                                                <af:gridRow>
+                                                    <af:gridCell columnSpan="3">
+                                                        <af:spacer height="10"/>
+                                                    </af:gridCell>
+                                                </af:gridRow>
+                                                <af:gridRow>
+                                                    <af:gridCell valign="top">
+                                                        <af:outputLabel value="Building(s) Currently in Use"/>
+                                                        <af:outputText value="&lt;br>" escape="false"/>
+                                                    </af:gridCell>
+                                                    <af:gridCell columnSpan="3" valign="top">
+                                                        <af:spacer width="20"/>
+                                                        <h:inputTextarea value="#{FloorLocationBacking.floorInUseBuildings}"
+                                                                         rows="#{FloorLocationBacking.floorDefaultBuildingsCOLS}"
+                                                                         cols="40" title="Warehouses in use"
+                                                                         id="inuse_building_h" readonly="true"
+                                                                         style="background-color:#CCCCCC"/>
+                                                    </af:gridCell>
+                                                </af:gridRow>
+                                                <af:gridRow>
+                                                    <af:gridCell valign="top">
+                                                        <af:outputLabel value="Building(s)"
+                                                                        rendered="#{!FloorLocationBacking.floorLocationFlag}"/>
+                                                        <af:spacer height="10"/>
+                                                    </af:gridCell>
+                                                    <af:gridCell columnSpan="3" valign="top">
+                                                        <af:spacer width="20"/>
+                                                        <af:selectManyShuttle value="#{FloorLocationBacking.selectedFLOORValues}"
+                                                                              id="selectFloorShuttle"
+                                                                              valueChangeListener="#{FloorLocationBacking.refreshFLOORSelectedList}"
+                                                                              leadingHeader="Available Warehouses"
+                                                                              trailingHeader="Selected Warehouses"
+                                                                              binding="#{FloorLocationBacking.shuttleFLOORs}"
+                                                                              shortDesc="Optional Select Default Warehouse(s)"
+                                                                              rendered="#{!FloorLocationBacking.floorLocationFlag}"
+                                                                              size="10">
+                                                            <f:selectItems value="#{FloorLocationBacking.allFLOORItems}"/>
+                                                        </af:selectManyShuttle>
+                                                    </af:gridCell>
+                                                </af:gridRow>
+                                                <af:gridRow>
+                                                    <af:gridCell columnSpan="3">
+                                                        <af:toolbar rendered="#{!FloorLocationBacking.floorLocationFlag}">
+                                                            <af:outputText value="&lt;br>" escape="false"/>
+                                                            <af:button actionListener="#{FloorLocationBacking.submitSaveFloorLocation}"
+                                                                       text="Submit" id="SaveButton" accessKey="S"
+                                                                       inlineStyle="width:50px" partialSubmit="false"/>
+                                                            <af:resetButton text="Reset" accessKey="R" id="ResetButton"
+                                                                            inlineStyle="width:50px"/>
+                                                            <af:button actionListener="#{FloorLocationBacking.submitCancelFloorLocation}"
+                                                                       text="Cancel" id="CancelButton"
+                                                                       accessKey="a" inlineStyle="width:50px" partialSubmit="false"/>
+                                                        </af:toolbar>
+                                                    </af:gridCell>
+                                                </af:gridRow>
+                                            </af:panelGridLayout>
+                                        </af:panelFormLayout>
+                                    </af:panelBox>
+                                </af:panelBox>
+                            </af:panelGroupLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6" id="s1"/>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

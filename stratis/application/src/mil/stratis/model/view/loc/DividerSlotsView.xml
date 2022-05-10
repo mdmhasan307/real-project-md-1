@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="DividerSlotsView"
+   Version="11.1.2.64.36"
+   SelectList="DividerSlots.DIVIDER_SLOTS_ID, 
+       DividerSlots.DIVIDER_TYPE_ID, 
+       DividerSlots.ROW_NUMBER, 
+       DividerSlots.COLUMN_NUMBER, 
+       DividerSlots.LENGTH, 
+       DividerSlots.SELECT_INDEX, 
+       DividerSlots.WIDTH, 
+       DividerSlots.DISPLAY_POSITION"
+   FromList="DIVIDER_SLOTS DividerSlots"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.loc.DividerSlotsViewImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Full"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="DividerSlots"
+      Entity="mil.stratis.model.entity.loc.DividerSlots" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="DividerSlotsId"
+      EntityAttrName="DividerSlotsId"
+      EntityUsage="DividerSlots"
+      AliasName="DIVIDER_SLOTS_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DividerTypeId"
+      EntityAttrName="DividerTypeId"
+      EntityUsage="DividerSlots"
+      AliasName="DIVIDER_TYPE_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RowNumber"
+      EntityAttrName="RowNumber"
+      EntityUsage="DividerSlots"
+      AliasName="ROW_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ColumnNumber"
+      EntityAttrName="ColumnNumber"
+      EntityUsage="DividerSlots"
+      AliasName="COLUMN_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Length"
+      EntityAttrName="Length"
+      EntityUsage="DividerSlots"
+      AliasName="LENGTH" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SelectIndex"
+      EntityAttrName="SelectIndex"
+      EntityUsage="DividerSlots"
+      AliasName="SELECT_INDEX" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Width"
+      EntityAttrName="Width"
+      EntityUsage="DividerSlots"
+      AliasName="WIDTH" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DisplayPosition"
+      EntityAttrName="DisplayPosition"
+      EntityUsage="DividerSlots"
+      AliasName="DISPLAY_POSITION" >
+   </ViewAttribute>
+</ViewObject>

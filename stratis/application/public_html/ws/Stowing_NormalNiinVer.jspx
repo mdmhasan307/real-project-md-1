@@ -1,0 +1,467 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:stratis="taglib.mil.usmc.stratis">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="2"/>
+    <jsp:setProperty name="userbean" property="selected2" value="0"/>
+    <f:view>
+        <af:document title="STRATIS Stowing - NIIN Verification" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="25" topHeight="150" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="pn_wrap_header">
+                            <jsp:include page="/ws/WS_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout id="topGroup" layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <!--af:form id="f1"-->
+                            <af:panelHeader text="Stowing - NIIN Verification" id="ph1">
+                                <af:panelGroupLayout layout="horizontal" id="pgl3" valign="bottom">
+                                    <af:popup id="niinInfo" contentDelivery="lazyUncached">
+                                        <af:dialog title="NIIN INFO" id="niinInfoDialog" type="ok">
+                                            <af:table value="#{bindings.NiinInfoView1.collectionModel}" var="row"
+                                                      rows="#{bindings.NiinInfoView1.rangeSize}"
+                                                      emptyText="#{bindings.NiinInfoView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                      fetchSize="#{bindings.NiinInfoView1.rangeSize}"
+                                                      rowBandingInterval="0" id="t1">
+                                                <af:column sortProperty="#{bindings.NiinInfoView1.hints.Fsc.name}"
+                                                           sortable="false"
+                                                           headerText="FSC"
+                                                           id="c4">
+                                                    <af:outputText value="#{row.Fsc}"
+                                                                   shortDesc="#{bindings.NiinInfoView1.hints.Fsc.tooltip}"
+                                                                   id="ot2"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.NiinInfoView1.hints.Niin.name}"
+                                                           sortable="false"
+                                                           headerText="NIIN"
+                                                           id="c5">
+                                                    <af:outputText value="#{row.Niin}"
+                                                                   shortDesc="#{bindings.NiinInfoView1.hints.Niin.tooltip}"
+                                                                   id="ot3"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.NiinInfoView1.hints.Ui.name}"
+                                                           sortable="false"
+                                                           headerText="UI"
+                                                           id="c6">
+                                                    <af:outputText value="#{row.Ui}"
+                                                                   shortDesc="#{bindings.NiinInfoView1.hints.Ui.tooltip}"
+                                                                   id="ot4"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.NiinInfoView1.hints.Nomenclature.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.NiinInfoView1.hints.Nomenclature.label}"
+                                                           id="c7">
+                                                    <af:outputText value="#{row.Nomenclature}"
+                                                                   shortDesc="#{bindings.NiinInfoView1.hints.Nomenclature.tooltip}"
+                                                                   id="ot5"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.NiinInfoView1.hints.ShelfLifeCode.name}"
+                                                           sortable="false"
+                                                           headerText="Shelf Life Code"
+                                                           id="c8">
+                                                    <af:outputText value="#{row.ShelfLifeCode}"
+                                                                   shortDesc="#{bindings.NiinInfoView1.hints.ShelfLifeCode.tooltip}"
+                                                                   id="ot6"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.NiinInfoView1.hints.Scc.name}"
+                                                           sortable="false"
+                                                           headerText="SCC"
+                                                           id="c9">
+                                                    <af:outputText value="#{row.Scc}"
+                                                                   shortDesc="#{bindings.NiinInfoView1.hints.Scc.tooltip}"
+                                                                   id="ot7"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.NiinInfoView1.hints.SerialControlFlag.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.NiinInfoView1.hints.SerialControlFlag.label}"
+                                                           id="c10">
+                                                    <af:outputText value="#{row.SerialControlFlag}"
+                                                                   shortDesc="#{bindings.NiinInfoView1.hints.SerialControlFlag.tooltip}"
+                                                                   id="ot8"/>
+                                                </af:column>
+                                            </af:table>
+                                        </af:dialog>
+                                    </af:popup>
+                                    <af:panelGroupLayout layout="vertical" rendered="true" id="pgl4">
+                                        <af:spacer width="10" height="10" id="s1"/>
+                                        <af:panelGroupLayout layout="horizontal" id="pgl5">
+                                            <af:panelFormLayout inlineStyle="border-style:solid;" id="pfl3">
+                                                <af:outputText value="Stow Information" inlineStyle="font-weight:bold;"
+                                                               id="otStowInfo"/>
+                                                <af:panelGroupLayout layout="horizontal" id="pgl6">
+                                                    <af:panelFormLayout id="pfl4">
+                                                        <af:inputText label="SID"
+                                                                      value="#{bindings.Sid.inputValue}"
+                                                                      styleClass="ReadOnlyField"
+                                                                      columns="#{bindings.Sid.displayWidth}"
+                                                                      readOnly="true" id="itSid"/>
+                                                        <af:inputText label="#{bindings.DocumentId.label}"
+                                                                      value="#{bindings.DocumentId.inputValue}"
+                                                                      styleClass="ReadOnlyField"
+                                                                      columns="#{bindings.DocumentId.displayWidth}"
+                                                                      readOnly="true" id="itDocId"/>
+                                                        <af:inputText label="UI"
+                                                                      value="#{bindings.Ui.inputValue}"
+                                                                      styleClass="ReadOnlyField"
+                                                                      columns="#{bindings.Ui.displayWidth}"
+                                                                      readOnly="true" id="itUi"/>
+                                                    </af:panelFormLayout>
+                                                    <af:panelFormLayout id="pfl5">
+                                                        <af:panelLabelAndMessage label="Expiration Date">
+                                                            <stratis:adfDateFormatter value="#{bindings.SexpDate.inputValue}"
+                                                                                      shiftZone="false"/>
+                                                        </af:panelLabelAndMessage>
+                                                        <af:inputText label="#{bindings.Rcc.label}"
+                                                                      value="#{bindings.Rcc.inputValue}"
+                                                                      styleClass="ReadOnlyField"
+                                                                      columns="#{bindings.Rcc.displayWidth}"
+                                                                      readOnly="true" id="itRcc"/>
+                                                    </af:panelFormLayout>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout layout="horizontal" id="pgl7">
+                                                    <af:inputText label="Nomen"
+                                                                  value="#{bindings.Nomenclature.inputValue}"
+                                                                  styleClass="ReadOnlyField"
+                                                                  columns="#{bindings.Nomenclature.displayWidth}"
+                                                                  readOnly="true" id="itNomen"/>
+                                                </af:panelGroupLayout>
+                                                <af:outputText value="Quantity" inlineStyle="font-weight:bold;"
+                                                               id="otQuantity"/>
+                                                <af:panelGroupLayout layout="horizontal" rendered="true" id="pgl8">
+                                                    <af:panelFormLayout id="pfl6">
+                                                        <af:inputText label="#{bindings.QtyToBeStowed.label}"
+                                                                      value="#{bindings.QtyToBeStowed.inputValue}"
+                                                                      styleClass="ReadOnlyField"
+                                                                      columns="#{bindings.QtyToBeStowed.displayWidth}"
+                                                                      readOnly="true" id="itQtyToBeStowed">
+                                                            <f:convertNumber groupingUsed="false"
+                                                                             pattern="#{bindings.QtyToBeStowed.format}"/>
+                                                        </af:inputText>
+                                                    </af:panelFormLayout>
+                                                    <af:panelFormLayout id="pfl7">
+                                                        <af:inputText label="Qty Stowed" rendered="true"
+                                                                      value="#{bindings.StowQty.inputValue}"
+                                                                      styleClass="ReadOnlyField"
+                                                                      columns="#{bindings.StowQty.displayWidth}"
+                                                                      readOnly="true" id="itStowQty">
+                                                            <f:convertNumber groupingUsed="false"
+                                                                             pattern="#{bindings.StowQty.format}"/>
+                                                        </af:inputText>
+                                                    </af:panelFormLayout>
+                                                </af:panelGroupLayout>
+                                            </af:panelFormLayout>
+                                            <af:panelGroupLayout id="pgl33">
+                                                <af:inputText label="Current Stow Location"
+                                                              value="#{bindings.LocationLabel.inputValue}"
+                                                              readOnly="true" id="itCurStowLoc"/>
+                                                <af:panelGroupLayout id="pgl335" layout="horizontal">
+                                                    <af:inputText label="#{bindings.Side.label}"
+                                                                  value="#{bindings.Side.inputValue}" readOnly="true"
+                                                                  id="itSide"/>
+                                                    <af:spacer width="5" height="10" id="s15"/>
+                                                    <af:inputText label="#{bindings.Bay.label}"
+                                                                  value="#{bindings.Bay.inputValue}" readOnly="true"
+                                                                  id="itBay"/>
+                                                    <af:spacer width="5" height="10" id="s16"/>
+                                                    <af:inputText label="#{bindings.LocLevel.label}"
+                                                                  value="#{bindings.LocLevel.inputValue}"
+                                                                  readOnly="true" id="itLocLevel"/>
+                                                    <af:spacer width="5" height="10" id="s17"/>
+                                                    <af:inputText label="#{bindings.Slot.label}"
+                                                                  value="#{bindings.Slot.inputValue}" readOnly="true"
+                                                                  id="itSlot"/>
+                                                </af:panelGroupLayout>
+                                                <af:image shortDesc=""
+                                                          source="/SlotImage?type=SLOT&amp;DI=#{bindings.DividerTypeId.inputValue}&amp;SI=#{bindings.DividerIndex.inputValue}"
+                                                          id="i1"/>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                    </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                                <af:spacer width="10" height="10" id="s3"/>
+                                <af:outputText value="Verification" inlineStyle="font-weight:bold;" id="otVer"/>
+                                <af:panelGroupLayout layout="horizontal" id="pgl9" halign="left">
+                                    <af:panelFormLayout inlineStyle="border-style:solid;" id="pfl8">
+                                        <af:panelGroupLayout layout="vertical" id="pg195">
+                                            <af:panelGroupLayout layout="horizontal" id="pgl10" halign="left">
+                                                <af:inputText label="Last two digits of NIIN" columns="2"
+                                                              validator="#{StowingAll.niinLastTwoValidation}"
+                                                              inlineStyle="font-weight:bold;"
+                                                              binding="#{StowingAll.enterNiinLastTwoDigits}"
+                                                              maximumLength="2" id="itLastTwoNiin"/>
+                                                <af:link actionListener="#{StowingAll.lookupNiins}"
+                                                         partialSubmit="true" immediate="true" id="clLookupNiins"
+                                                         icon="/resources/images/view_image.gif">
+                                                    <!--af:image shortDesc="" source="/resources/images/view_image.gif"
+                                                              id="iViewImage"/-->
+                                                    <af:showPopupBehavior popupId="niinInfo" triggerType="click"/>
+                                                </af:link>
+                                            </af:panelGroupLayout>
+                                            <af:inputText label="Scan Item Label" columns="10" rendered="false"
+                                                          inlineStyle="font-weight:bold;" id="itScanItemLabel"/>
+                                            <af:inputText label="Quantity Stowed" columns="6"
+                                                          validator="#{StowingAll.stowQtyValidation}"
+                                                          inlineStyle="font-weight:bold;"
+                                                          binding="#{StowingAll.enterQtyStowed}" maximumLength="6"
+                                                          id="itStowQtyValidation">
+                                            </af:inputText>
+                                        </af:panelGroupLayout>
+                                    </af:panelFormLayout>
+                                </af:panelGroupLayout>
+                                <af:spacer width="10" height="10" id="s4"/>
+                                <af:switcher facetName="#{StowingAll.expObj}" id="s5">
+                                    <f:facet name="0">
+                                        <af:panelGroupLayout id="pgl11">
+                                            <af:toolbar id="t2">
+                                                <af:button text="Submit"
+                                                           action="#{StowingAll.actionForwardStrForStowingNormalNiinVerOnSubmit}"
+                                                           id="cbSubmit" partialSubmit="false"/>
+                                                <af:button text="Re-Locate"
+                                                           action="#{StowingAll.actionForwardStrForStowingNormalNiinVerOnRefuse}"
+                                                           actionListener="#{StowingAll.assignExpObj}"
+                                                           id="cbReLoc" partialSubmit="false" immediate="true"/>
+                                                <af:button text="Location Full"
+                                                           action="#{StowingAll.actionForwardStrForStowingNormalNiinVerOnLocationFull}"
+                                                           rendered="false" id="cLocationFull" partialSubmit="false"/>
+                                                <af:button text="Bypass"
+                                                           action="#{StowingAll.actionForwardStrForStowingNormalNiinVerOnByPass}"
+                                                           actionListener="#{StowingAll.assignExpObjForByPass}"
+                                                           id="cbBypassStow" partialSubmit="false" immediate="true"/>
+                                            </af:toolbar>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                </af:switcher>
+                                <af:switcher facetName="#{StowingAll.expObj}" id="s6">
+                                    <f:facet name="1">
+                                        <af:panelGroupLayout id="pgl12">
+                                            <af:selectOneChoice value="#{bindings.StowRefuseList.inputValue}"
+                                                                label="Select Refuse Reason" rendered="true"
+                                                                id="stowRefuseEid" valuePassThru="true"
+                                                                inlineStyle="font-weight:bold;">
+                                                <f:selectItems value="#{bindings.StowRefuseList.items}"
+                                                               id="siStowRefuseList"/>
+                                            </af:selectOneChoice>
+                                            <af:panelGroupLayout id="pgl13">
+                                                <af:toolbar id="t3">
+                                                    <af:button text="Submit"
+                                                               action="#{StowingAll.actionForwardStrForStowingNormalNiinVerOnRefuseDone}"
+                                                               id="cbDone" partialSubmit="false" immediate="true"/>
+                                                    <af:button text="Cancel"
+                                                               action="#{StowingAll.actionForwardStrForStowingNormalNiinVerOnCancel}"
+                                                               id="cbCancel" partialSubmit="false" immediate="true"/>
+                                                </af:toolbar>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                </af:switcher>
+                                <af:switcher facetName="#{StowingAll.expObj}" id="s7">
+                                    <f:facet name="2">
+                                        <af:panelGroupLayout id="pgl14">
+                                            <af:panelGroupLayout layout="horizontal" id="pgl15">
+                                                <af:outputText value="Selecting Location and  "
+                                                               inlineStyle="font-weight:bold;"
+                                                               id="otSelectingLocation"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="10" height="10" id="s8"/>
+                                            <af:panelGroupLayout layout="horizontal" id="pgl16">
+                                                <af:inputText label="Enter Stow Area"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              id="newLocLabelId" maximumLength="9" rendered="true"
+                                                              columns="9" binding="#{StowingAll.stowArea}"/>
+                                                <af:outputText value="(optional)"
+                                                               inlineStyle="font-style:italic; font-weight:lighter;"
+                                                               id="ot1"/>
+                                                <af:spacer width="10" height="10" id="s9"/>
+                                                <af:button text="Get Locations" id="getLocId"
+                                                           actionListener="#{StowingAll.BuildLocationList}"
+                                                           partialSubmit="false" immediate="true"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="10" height="20" id="s10"/>
+                                            <af:panelGroupLayout layout="horizontal" id="pgl17">
+                                                <af:table value="#{bindings.LocationList1.collectionModel}" var="row"
+                                                          rows="#{bindings.LocationList1.rangeSize}"
+                                                          first="#{bindings.LocationList1.rangeStart}"
+                                                          emptyText="#{bindings.LocationList1.viewable ? 'No rows.' : 'No rows retrieved.'}"
+                                                          selectionListener="#{bindings.LocationList1.collectionModel.makeCurrent}"
+                                                          selectedRowKeys="#{bindings.LocationList1.collectionModel.selectedRow}"
+                                                          rowSelection="single" id="tLL1" autoHeightRows="5">
+                                                    <af:column sortProperty="LocationId" sortable="false"
+                                                               headerText="#{bindings.LocationList1.labels.LocationId}"
+                                                               id="c1">
+                                                        <af:inputText value="#{row.LocationId}"
+                                                                      required="#{bindings.LocationList1.attrDefs.LocationId.mandatory}"
+                                                                      columns="#{bindings.LocationList1.attrHints.LocationId.displayWidth}"
+                                                                      readOnly="true" id="itLocationId">
+                                                            <f:convertNumber groupingUsed="false"
+                                                                             pattern="#{bindings.LocationList1.formats.LocationId}"/>
+                                                        </af:inputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="LocationLabel" sortable="false"
+                                                               headerText="#{bindings.LocationList1.labels.LocationLabel}"
+                                                               id="c2">
+                                                        <af:inputText value="#{row.LocationLabel}" simple="true"
+                                                                      required="#{bindings.LocationList1.attrDefs.LocationLabel.mandatory}"
+                                                                      columns="#{bindings.LocationList1.attrHints.LocationLabel.displayWidth}"
+                                                                      readOnly="true" id="itLocationlabel"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="LocQty" sortable="false"
+                                                               headerText="On-Hand Qty" id="c3">
+                                                        <af:inputText value="#{row.LocQty}"
+                                                                      required="#{bindings.LocationList1.attrDefs.LocQty.mandatory}"
+                                                                      columns="#{bindings.LocationList1.attrHints.LocQty.displayWidth}"
+                                                                      readOnly="true" id="itLocQty">
+                                                            <f:convertNumber groupingUsed="false"
+                                                                             pattern="#{bindings.LocationList1.formats.LocQty}"/>
+                                                        </af:inputText>
+                                                    </af:column>
+                                                </af:table>
+                                                <af:toolbar id="t4">
+                                                    <af:button text="Update"
+                                                               action="#{StowingAll.getActionForward}"
+                                                               actionListener="#{StowingAll.UpdateStowLocation}"
+                                                               id="cbUpdate" partialSubmit="false" immediate="true"/>
+                                                    <af:button text="Cancel"
+                                                               action="#{StowingAll.actionForwardStrForStowingNormalNiinVerOnCancel}"
+                                                               id="cbCancel1" partialSubmit="false" immediate="true"/>
+                                                </af:toolbar>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                </af:switcher>
+                                <af:switcher facetName="#{StowingAll.expObj}" id="s11">
+                                    <f:facet name="3">
+                                        <af:panelGroupLayout id="pgl18">
+                                            <af:panelGroupLayout layout="horizontal" id="pgl19">
+                                                <af:outputText
+                                                        value="Quantity stowed value is less than requested Stow Quantity. Do you want to stow remaining in different location?"
+                                                        inlineStyle="color:rgb(0,0,255); font-weight:bold;"
+                                                        id="otQtyIsLessThanRequested"/>
+                                            </af:panelGroupLayout>
+                                            <af:panelGroupLayout id="pgl20">
+                                                <af:toolbar id="t5">
+                                                    <af:button text="Yes"
+                                                               action="#{StowingAll.actionForwardStrForStowingNormalNiinVerOnQtyDone}"
+                                                               id="cbYes" partialSubmit="false"/>
+                                                    <af:button text="No"
+                                                               actionListener="#{StowingAll.assignExpObj7}"
+                                                               id="cbNo" partialSubmit="false"/>
+                                                </af:toolbar>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                </af:switcher>
+                                <af:switcher facetName="#{StowingAll.expObj}" id="s12">
+                                    <f:facet name="4">
+                                        <af:panelGroupLayout id="pgl21">
+                                            <af:panelGroupLayout layout="horizontal" id="pgl22">
+                                                <af:outputText value="Is the location full?"
+                                                               inlineStyle="color:rgb(0,0,255); font-weight:bold;"
+                                                               id="otLocFull"/>
+                                            </af:panelGroupLayout>
+                                            <af:panelGroupLayout id="pgl23">
+                                                <af:toolbar id="t6">
+                                                    <af:button text="Yes"
+                                                               action="#{StowingAll.actionForwardStrForStowingNormalNiinVerOnQtyDone}"
+                                                               id="cbYes2" partialSubmit="false"/>
+                                                    <af:button text="No"
+                                                               action="#{StowingAll.actionForwardStrForStowingNormalNiinVerOnCancel}"
+                                                               id="cbNo2" partialSubmit="false" immediate="true"/>
+                                                </af:toolbar>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                </af:switcher>
+                                <af:switcher facetName="#{StowingAll.expObj}" id="s13">
+                                    <f:facet name="5">
+                                        <af:panelGroupLayout id="pgl24">
+                                            <af:panelGroupLayout layout="horizontal" id="pgl25">
+                                                <af:outputText value="Please perform inventory count."
+                                                               inlineStyle="color:rgb(0,0,255); font-weight:bold;"
+                                                               id="otPlsPerformCount"/>
+                                            </af:panelGroupLayout>
+                                            <af:panelGroupLayout layout="horizontal" id="pgl26">
+                                                <af:inputText label="Available Qty" inlineStyle="font-weight:bold;"
+                                                              columns="6" binding="#{StowingAll.availQty}"
+                                                              id="itAvailQty"/>
+                                                <af:spacer width="10" height="10" id="s14"/>
+                                                <af:inputText label="Reconfirm Available Qty"
+                                                              inlineStyle="font-weight:bold;" columns="6"
+                                                              binding="#{StowingAll.availQtyR}" id="itReconfirmQty"/>
+                                            </af:panelGroupLayout>
+                                            <af:panelGroupLayout id="pgl27">
+                                                <af:toolbar id="t7">
+                                                    <af:button text="Done"
+                                                               action="#{StowingAll.actionForwardStrForStowingNormalNiinVerOnInvQtyDone}"
+                                                               id="cbDone2" partialSubmit="false"/>
+                                                    <af:button text="No"
+                                                               action="#{StowingAll.actionForwardStrForStowingNormalNiinVerOnCancel}"
+                                                               rendered="false" id="cbNo3" partialSubmit="false" immediate="true"/>
+                                                </af:toolbar>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                    <f:facet name="6">
+                                        <af:panelGroupLayout id="pgl28">
+                                            <af:selectOneChoice value="#{bindings.StowByPassList.inputValue}"
+                                                                label="Select Bypass Reason" rendered="true"
+                                                                id="stowByPassEid" valuePassThru="true"
+                                                                inlineStyle="font-weight:bold;">
+                                                <f:selectItems value="#{bindings.StowByPassList.items}"
+                                                               id="siStowByPassEid"/>
+                                            </af:selectOneChoice>
+                                            <af:panelGroupLayout id="pgl29">
+                                                <af:toolbar id="t8">
+                                                    <af:button text="Submit"
+                                                               action="#{StowingAll.actionForwardStrForStowingNormalNiinVerOnByPassDone}"
+                                                               id="expSObj2" partialSubmit="false" immediate="true"/>
+                                                    <af:button text="Cancel"
+                                                               action="#{StowingAll.actionForwardStrForStowingNormalNiinVerOnCancel}"
+                                                               id="expNObj2" partialSubmit="false" immediate="true"/>
+                                                </af:toolbar>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                    <f:facet name="7">
+                                        <af:panelGroupLayout id="pgl30">
+                                            <af:panelGroupLayout layout="horizontal" id="pgl31">
+                                                <af:outputText value="Do you want to submit loss to supervisor?"
+                                                               inlineStyle="color:rgb(0,0,255); font-weight:bold;"
+                                                               id="otSubmitSupervisor"/>
+                                            </af:panelGroupLayout>
+                                            <af:panelGroupLayout id="pgl32">
+                                                <af:toolbar id="t9">
+                                                    <af:button text="Yes"
+                                                               action="#{StowingAll.actionForwardStrForStowingNormalNiinVerOnQtyDone}"
+                                                               id="cbYes3" partialSubmit="false"/>
+                                                    <af:button text="No"
+                                                               action="#{StowingAll.actionForwardStrForStowingNormalNiinVerOnCancel}"
+                                                               actionListener="#{StowingAll.showQtyStowedErrorMessage}"
+                                                               id="cbNo4" partialSubmit="false" immediate="true"/>
+                                                </af:toolbar>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                </af:switcher>
+                            </af:panelHeader>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="../FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <!-- End center facet -->
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="start"/>
+                    <f:facet name="end"/>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="DividerSlotsByTypeView"
+  Version="11.1.2.64.36"
+  SelectList="DividerSlots.DIVIDER_SLOTS_ID, 
+       DividerSlots.DIVIDER_TYPE_ID, 
+       DividerSlots.ROW_NUMBER, 
+       DividerSlots.COLUMN_NUMBER, 
+       DividerSlots.LENGTH, 
+       DividerSlots.SELECT_INDEX, 
+       DividerSlots.WIDTH, 
+       DividerSlots.DISPLAY_POSITION"
+  FromList="DIVIDER_SLOTS DividerSlots"
+  Where="DIVIDER_TYPE_ID =: SlotType"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  ComponentClass="mil.stratis.model.view.loc.DividerSlotsByTypeViewImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="mil.stratis.model.view.loc.DividerSlotsByTypeView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="SlotType"
+    Kind="where"
+    Type="oracle.jbo.domain.Number"/>
+  <EntityUsage
+    Name="DividerSlots"
+    Entity="mil.stratis.model.entity.loc.DividerSlots"/>
+  <ViewAttribute
+    Name="DividerSlotsId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="DividerSlotsId"
+    EntityUsage="DividerSlots"
+    AliasName="DIVIDER_SLOTS_ID"/>
+  <ViewAttribute
+    Name="DividerTypeId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="DividerTypeId"
+    EntityUsage="DividerSlots"
+    AliasName="DIVIDER_TYPE_ID"/>
+  <ViewAttribute
+    Name="RowNumber"
+    PrecisionRule="true"
+    EntityAttrName="RowNumber"
+    EntityUsage="DividerSlots"
+    AliasName="ROW_NUMBER"/>
+  <ViewAttribute
+    Name="ColumnNumber"
+    PrecisionRule="true"
+    EntityAttrName="ColumnNumber"
+    EntityUsage="DividerSlots"
+    AliasName="COLUMN_NUMBER"/>
+  <ViewAttribute
+    Name="Length"
+    PrecisionRule="true"
+    EntityAttrName="Length"
+    EntityUsage="DividerSlots"
+    AliasName="LENGTH"/>
+  <ViewAttribute
+    Name="SelectIndex"
+    PrecisionRule="true"
+    EntityAttrName="SelectIndex"
+    EntityUsage="DividerSlots"
+    AliasName="SELECT_INDEX"/>
+  <ViewAttribute
+    Name="Width"
+    PrecisionRule="true"
+    EntityAttrName="Width"
+    EntityUsage="DividerSlots"
+    AliasName="WIDTH"/>
+  <ViewAttribute
+    Name="DisplayPosition"
+    PrecisionRule="true"
+    EntityAttrName="DisplayPosition"
+    EntityUsage="DividerSlots"
+    AliasName="DISPLAY_POSITION"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="mil.stratis.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

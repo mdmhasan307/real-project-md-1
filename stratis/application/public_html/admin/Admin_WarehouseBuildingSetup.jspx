@@ -1,0 +1,200 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="1"/>
+    <jsp:setProperty name="userbean" property="selected3" value="5"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="Admin_WarehouseBuildingSetup"/>
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session" />
+    <jsp:setProperty name="logBean" property="page" value="Building"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="d1">
+            <af:resource type="javascript" source="/js/warehouse_setup.js"/>
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="195" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6"/>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGroupLayout layout="vertical">
+                                <af:panelBox text="Warehouse Setup - Building Setup" showDisclosure="false">
+                                    <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                                        <f:facet name="secondaryToolbar">
+                                            <af:toolbar inlineStyle="padding:2px;" id="t1">
+                                                <af:button actionListener="#{BuildingSetupBacking.submitCreateBuilding}"
+                                                           text="Create" accessKey="C" id="CreateButton"
+                                                           disabled="#{(BuildingSetupBacking.buildingFlag)}"
+                                                           inlineStyle="width:50px" partialSubmit="false">
+                                                    <af:setActionListener from="#{true}"
+                                                                          to="#{BuildingSetupBacking.buildingFlag}"/>
+                                                    <af:setActionListener from="#{false}"
+                                                                          to="#{BuildingSetupBacking.buildingRefresh}"/>
+                                                    <af:setActionListener from="#{true}"
+                                                                          to="#{BuildingSetupBacking.newFlag}"/>
+                                                </af:button>
+                                                <af:button actionListener="#{BuildingSetupBacking.submitUpdateBuilding}"
+                                                           text="Update" accessKey="U" id="UpdateButton"
+                                                           disabled="#{BuildingSetupBacking.buildingFlag}"
+                                                           inlineStyle="width:50px" partialSubmit="false"/>
+                                                <af:group id="g1">
+                                                    <af:button text="Delete" accessKey="D" id="DeleteButton"
+                                                               disabled="#{BuildingSetupBacking.buildingFlag}"
+                                                               inlineStyle="width:50px" partialSubmit="false">
+                                                        <af:showPopupBehavior popupId="confirmDelete" triggerType="action"
+                                                                              align="afterStart"/>
+                                                    </af:button>
+                                                    <af:popup id="confirmDelete">
+                                                        <af:dialog id="Confirm" title="Confirm" affirmativeTextAndAccessKey="Submit"
+                                                                   dialogListener="#{BuildingSetupBacking.dialogListener}">
+                                                            <af:activeOutputText id="Delete" value="Are you sure you want to Delete?"/>
+                                                        </af:dialog>
+                                                    </af:popup>
+                                                </af:group>
+                                            </af:toolbar>
+                                        </f:facet>
+                                        <af:table value="#{bindings.WarehouseView1.collectionModel}" var="row"
+                                                  styleClass="AFStretchWidth" columnStretching="last"
+                                                  rows="#{bindings.WarehouseView1.rangeSize}"
+                                                  first="#{bindings.WarehouseView1.rangeStart}"
+                                                  emptyText="#{bindings.WarehouseView1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                  selectionListener="#{bindings.WarehouseView1.collectionModel.makeCurrent}"
+                                                  id="BuildingTable" binding="#{BuildingSetupBacking.buildingTable}"
+                                                  selectedRowKeys="#{bindings.WarehouseView1.collectionModel.selectedRow}"
+                                                  rowSelection="single"
+                                                  autoHeightRows="5">
+                                            <af:column sortProperty="Building" sortable="true"
+                                                       headerText="#{bindings.WarehouseView1.labels.Building}">
+                                                <af:outputText value="#{row.Building}"/>
+                                            </af:column>
+                                            <af:column sortProperty="Description" sortable="false"
+                                                       headerText="Description">
+                                                <af:outputText value="#{row.Description}"/>
+                                            </af:column>
+                                            <af:column sortProperty="Complex" sortable="false"
+                                                       headerText="#{bindings.WarehouseView1.labels.Complex}">
+                                                <af:outputText value="#{row.Complex}"/>
+                                            </af:column>
+                                            <f:facet name="footer"/>
+                                        </af:table>
+                                    </af:panelCollection>
+                                    <af:spacer height="10"/>
+                                    <af:panelBox text="Building Setup Details" id="buildingSetupPanelBox"
+                                                 rendered="#{bindings.WarehouseView1.estimatedRowCount > 0}"
+                                                 showDisclosure="false">
+                                        <af:separator/>
+                                        <af:panelFormLayout partialTriggers="pc1:BuildingTable" rows="6"
+                                                            labelWidth="100px" fieldWidth="200px">
+                                            <af:inputText label="Building" value="#{bindings.Building1.inputValue}"
+                                                          columns="5" id="building_num" maximumLength="5" required="true"
+                                                          showRequired="false" requiredMessageDetail="Building is required."
+                                                          shortDesc="Required Warehouse Building Number"
+                                                          readOnly="#{!BuildingSetupBacking.newFlag}"
+                                                          binding="#{BuildingSetupBacking.buildingNumber}"
+                                                          contentStyle="text-transform:uppercase;"/>
+                                            <af:inputText label="Complex" value="#{bindings.Complex1.inputValue}"
+                                                          columns="5" id="complex"
+                                                          binding="#{BuildingSetupBacking.buildingComplex}"
+                                                          maximumLength="1" shortDesc="Optional Building Complex"
+                                                          readOnly="#{!BuildingSetupBacking.buildingFlag}"
+                                                          contentStyle="text-transform:uppercase;"/>
+                                            <af:inputText label="Description"
+                                                          value="#{bindings.WarehouseView1Description.inputValue}"
+                                                          columns="20" id="desc" maximumLength="100"
+                                                          shortDesc="Optional Description of building"
+                                                          contentStyle="text-transform:uppercase;"
+                                                          readOnly="#{!BuildingSetupBacking.buildingFlag}"
+                                                          binding="#{BuildingSetupBacking.buildingDescription}"/>
+                                            <af:selectOneChoice label="Site" required="true" showRequired="false"
+                                                                requiredMessageDetail="Site is required."
+                                                                value="#{bindings.WarehouseView1SiteId.inputValue}"
+                                                                id="siteSelectOne"
+                                                                shortDesc="Site to which this building belongs"
+                                                                binding="#{BuildingSetupBacking.buildingSite}"
+                                                                readOnly="#{!BuildingSetupBacking.buildingFlag}">
+                                                <f:selectItems value="#{bindings.WarehouseView1SiteId.items}"/>
+                                            </af:selectOneChoice>
+                                            <af:inputText label="Carrier Name"
+                                                          value="#{bindings.CarrierName1.inputValue}" columns="31"
+                                                          id="building_CarrierName" maximumLength="29"
+                                                          shortDesc="Optional Carrier Name"
+                                                          contentStyle="text-transform:uppercase;"
+                                                          readOnly="#{!BuildingSetupBacking.buildingFlag}"
+                                                          binding="#{BuildingSetupBacking.buildingCarrierName}"/>
+                                            <af:inputText label="LDCON Prefix"
+                                                          value="#{bindings.LocalDeliveryPrefix1.inputValue}" required="true"
+                                                          showRequired="false" requiredMessageDetail="LDCON Prefix is required."
+                                                          columns="5" id="building_ldconprefix" maximumLength="3"
+                                                          shortDesc="Local Delivery Prefix required (max 3 alphanumeric)"
+                                                          readOnly="#{!BuildingSetupBacking.buildingFlag}"
+                                                          binding="#{BuildingSetupBacking.buildingLDCONPrefix}"
+                                                          contentStyle="text-transform:uppercase;"/>
+                                            <af:inputText label="LDCON Suffix"
+                                                          value="#{bindings.LocalDeliverySuffix1.inputValue}"
+                                                          columns="5" id="building_ldconsuffix" maximumLength="5"
+                                                          inlineStyle="display:none"
+                                                          binding="#{BuildingSetupBacking.buildingLDCONSuffix}"/>
+                                            <f:facet name="footer">
+                                                <af:panelGroupLayout>
+                                                    <f:facet name="separator">
+                                                        <af:spacer width="500" height="10"/>
+                                                    </f:facet>
+                                                    <af:toolbar rendered="#{BuildingSetupBacking.buildingFlag}">
+                                                        <af:group>
+                                                            <af:button actionListener="#{BuildingSetupBacking.submitSaveBuilding}"
+                                                                       text="Submit" accessKey="S"
+                                                                       inlineStyle="width:50px" id="SaveButton" partialSubmit="false"/>
+                                                        </af:group>
+                                                        <af:group>
+                                                            <af:button actionListener="#{BuildingSetupBacking.submitResetBuilding}"
+                                                                       text="Reset" accessKey="R"
+                                                                       inlineStyle="width:50px"
+                                                                       rendered="#{not empty bindings.WarehouseId.inputValue}"
+                                                                       id="ResetButton" partialSubmit="false"/>
+                                                        </af:group>
+                                                        <af:group>
+                                                            <af:resetButton text="Reset" accessKey="R" id="ResetButton2"
+                                                                            rendered="#{empty bindings.WarehouseId.inputValue}"
+                                                                            inlineStyle="width:50px"/>
+                                                        </af:group>
+                                                        <af:group>
+                                                            <af:button actionListener="#{BuildingSetupBacking.submitCancelBuilding}"
+                                                                       text="Cancel" accessKey="a"
+                                                                       inlineStyle="width:50px"
+                                                                       id="CancelButton" immediate="true" partialSubmit="false"/>
+                                                        </af:group>
+                                                    </af:toolbar>
+                                                </af:panelGroupLayout>
+                                            </f:facet>
+                                        </af:panelFormLayout>
+                                    </af:panelBox>
+                                </af:panelBox>
+                            </af:panelGroupLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="ErrorLVO"
+   Version="11.1.2.64.36"
+   SelectList="Error.EID, 
+       Error.ERROR_CODE, 
+       Error.ERROR_DESCRIPTION, 
+       Error.SECURITY_LEVEL"
+   FromList="ERROR Error"
+   Where="(Error.ERROR_CODE like nvl(:errorCodeStr,&#39;%&#39;))"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.wlm.ErrorLVOImpl"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <Variable
+      Name="errorCodeStr"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <EntityUsage
+      Name="Error"
+      Entity="mil.stratis.model.entity.wlm.Error" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="Eid"
+      IsNotNull="true"
+      EntityAttrName="Eid"
+      EntityUsage="Error"
+      AliasName="EID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ErrorCode"
+      IsNotNull="true"
+      EntityAttrName="ErrorCode"
+      EntityUsage="Error"
+      AliasName="ERROR_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ErrorDescription"
+      EntityAttrName="ErrorDescription"
+      EntityUsage="Error"
+      AliasName="ERROR_DESCRIPTION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SecurityLevel"
+      EntityAttrName="SecurityLevel"
+      EntityUsage="Error"
+      AliasName="SECURITY_LEVEL" >
+   </ViewAttribute>
+</ViewObject>

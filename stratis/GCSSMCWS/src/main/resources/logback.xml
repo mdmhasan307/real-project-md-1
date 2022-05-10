@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+    <resetJUL>true</resetJUL>
+  </contextListener>
+  <!-- =========================================================================================================== -->
+  <!-- PROPERTIES -->
+  <!-- =========================================================================================================== -->
+  <property name="LOG_PATH" value="${LOG_PATH:-${java.io.tmpdir:-/tmp}}/"/>
+
+  <!-- =========================================================================================================== -->
+  <!-- APPENDERS -->
+  <!-- =========================================================================================================== -->
+  <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <charset>UTF-8</charset>
+      <Pattern>%d %-4relative [%thread] %-5level %logger{35} - %msg%n</Pattern>
+    </encoder>
+    <withJansi>true</withJansi>
+  </appender>
+  <appender name="core" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_PATH}gcss.json</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- daily rollover -->
+      <fileNamePattern>${LOG_PATH}gcss.%d{yyyy-MM-dd}.json</fileNamePattern>
+      <!-- keep 30 days -->
+      <maxHistory>30</maxHistory>
+      <totalSizeCap>3GB</totalSizeCap>
+    </rollingPolicy>
+    <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+      <providers>
+        <timestamp/>
+        <version/>
+        <mdc/>
+        <logLevel/>
+        <message/>
+        <callerData>
+          <fieldName>caller</fieldName>
+          <classFieldName>class</classFieldName>
+          <methodFieldName>method</methodFieldName>
+          <fileFieldName>file</fileFieldName>
+          <lineFieldName>line</lineFieldName>
+        </callerData>
+        <stackTrace/>
+      </providers>
+    </encoder>
+  </appender>
+  <!-- =========================================================================================================== -->
+  <!-- LOGGERS -->
+  <!-- =========================================================================================================== -->
+  <logger name="gcssmcws" level="info" additivity="false">
+    <appender-ref ref="core"/>
+  </logger>
+  <logger name="mil.stratis" level="info" additivity="false">
+    <appender-ref ref="core"/>
+  </logger>
+  <logger name="oracle" level="info" additivity="false">
+    <appender-ref ref="core"/>
+  </logger>
+  <logger name="com.sun.xml" level="info" additivity="false">
+    <appender-ref ref="core"/>
+  </logger>
+  <logger name="org.apache" level="info" additivity="false">
+    <appender-ref ref="core"/>
+  </logger>
+
+  <logger name="org.apache.activemq" level="info" additivity="false">
+    <appender-ref ref="core"/>
+  </logger>
+  <logger name="org.apache.activemq.audit" level="info" additivity="false">
+    <appender-ref ref="core"/>
+  </logger>
+
+  <root level="info">
+    <appender-ref ref="console"/>
+  </root>
+</configuration>

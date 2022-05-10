@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="6"/>
+    <f:view>
+        <af:document title="STRATIS" id="d1">
+            <af:messages id="m1"/>
+            <af:form id="main_form">
+                <af:panelStretchLayout id="psl1" startWidth="24" topHeight="150" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/HeaderMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout id = "pgl11">
+                        <af:panelGridLayout id="pgl1">
+                            <af:gridRow id="gr1">
+                                <af:gridCell valign="top" id="gc2">
+                                    <af:panelGridLayout id="pgl2">
+                                        <af:gridRow id="gr2">
+                                            <af:gridCell valign="top" id="gc3">
+                                                <af:panelHeader text="Items Pending Location Survey" id="ph1">
+                                                    <af:table summary="Items Pending Location Survey"
+                                                              value="#{bindings.LocSurveyVO1.collectionModel}" var="row"
+                                                              rows="#{bindings.LocSurveyVO1.rangeSize}"
+                                                              first="#{bindings.LocSurveyVO1.rangeStart}"
+                                                              emptyText="#{bindings.LocSurveyVO1.viewable ? 'No Pending Work.' : 'Access Denied.'}"
+                                                              id="tLocSvy">
+                                                        <af:column sortProperty="LocationLabel" sortable="false" rowHeader="unstyled"
+                                                                   headerText="LOCATION" id="cLoc">
+                                                            <af:outputText value="#{row.LocationLabel}"
+                                                                           id="otLocLabel"/>
+                                                        </af:column>
+                                                    </af:table>
+                                                </af:panelHeader>
+                                            </af:gridCell>
+                                            <af:gridCell valign="top" id="gc4">
+                                                <af:panelHeader text="Items Pending Inventory"
+                                                                id="phItemPendingInventory">
+                                                    <af:table summary="Items Pending Inventory"
+                                                              value="#{bindings.InventoryItemVO1.collectionModel}"
+                                                              var="row" rows="#{bindings.InventoryItemVO1.rangeSize}"
+                                                              first="#{bindings.InventoryItemVO1.rangeStart}"
+                                                              emptyText="#{bindings.InventoryItemVO1.viewable ? 'No Pending Work.' : 'Access Denied.'}"
+                                                              id="tItmInv" width="400px">
+                                                        <af:column sortProperty="Niin" sortable="false"
+                                                                   headerText="NIIN" id="cNiin">
+                                                            <af:outputText value="#{row.Niin}" id="otNiin"/>
+                                                        </af:column>
+                                                        <af:column sortProperty="LocationLabel" sortable="false"
+                                                                   headerText="LOCATION" id="cLocLabel">
+                                                            <af:outputText value="#{row.LocationLabel}" id="otLoc"/>
+                                                        </af:column>
+                                                        <af:column sortProperty="Nomenclature" sortable="false"
+                                                                   headerText="NOMENCLATURE" id="cNomen" width="150px">
+                                                            <af:outputText value="#{row.Nomenclature}" id="otNomen"/>
+                                                        </af:column>
+                                                    </af:table>
+                                                </af:panelHeader>
+                                            </af:gridCell>
+                                        </af:gridRow>
+                                    </af:panelGridLayout>
+                                </af:gridCell>
+                            </af:gridRow>
+                        </af:panelGridLayout>
+                        <f:subview id="wrap_footer">
+                            <jsp:include page="/FooterMain.jspx"/>
+                        </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_sidebar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end"/>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

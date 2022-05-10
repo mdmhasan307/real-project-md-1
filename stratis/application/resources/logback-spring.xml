@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+    <resetJUL>true</resetJUL>
+  </contextListener>
+
+  <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+  <!-- =========================================================================================================== -->
+  <!-- PROPERTIES -->
+  <!-- =========================================================================================================== -->
+  <property name="LOG_PATH" value="${LOG_PATH:-${java.io.tmpdir:-/tmp}}/"/>
+  <property name="CRLF_CONSOLE_LOG_PATTERN"
+            value="${CRLF_CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %crlf(%m) %n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+
+  <!-- =========================================================================================================== -->
+  <!-- CONVERSIONS -->
+  <!-- =========================================================================================================== -->
+  <!-- CONVERSION RULE FOR LOG FORGING PREVENTION -->
+  <!-- owasp converter has security vulnerabilities as of 1.1.8 (last updated Mar-2018) -->
+  <!--
+  <conversionRule conversionWord="crlf" converterClass="org.owasp.security.logging.mask.CRLFConverter"/>
+  -->
+  <!-- Custom implementation of CRLF Converter -->
+  <conversionRule conversionWord="crlf" converterClass="mil.usmc.mls2.stratis.core.infrastructure.configuration.CRLFConverter"/>
+
+  <!-- =========================================================================================================== -->
+  <!-- APPENDERS -->
+  <!-- =========================================================================================================== -->
+  <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>${CRLF_CONSOLE_LOG_PATTERN}</pattern>
+    </encoder>
+    <withJansi>true</withJansi>
+  </appender>
+  <appender name="core" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_PATH}stratis.json</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- daily rollover -->
+      <fileNamePattern>${LOG_PATH}stratis.%d{yyyy-MM-dd}.json</fileNamePattern>
+      <!-- keep 30 days -->
+      <maxHistory>30</maxHistory>
+      <totalSizeCap>3GB</totalSizeCap>
+    </rollingPolicy>
+    <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+      <providers>
+        <timestamp/>
+        <version/>
+        <mdc/>
+        <logLevel/>
+        <message/>
+        <callerData>
+          <fieldName>caller</fieldName>
+          <classFieldName>class</classFieldName>
+          <methodFieldName>method</methodFieldName>
+          <fileFieldName>file</fileFieldName>
+          <lineFieldName>line</lineFieldName>
+        </callerData>
+        <stackTrace/>
+      </providers>
+    </encoder>
+  </appender>
+  <appender name="db" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_PATH}stratis_db.json</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- daily rollover -->
+      <fileNamePattern>${LOG_PATH}stratis_db.%d{yyyy-MM-dd}.json</fileNamePattern>
+      <!-- keep 30 days -->
+      <maxHistory>30</maxHistory>
+      <totalSizeCap>1GB</totalSizeCap>
+    </rollingPolicy>
+    <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+      <providers>
+        <timestamp/>
+        <version/>
+        <mdc/>
+        <logLevel/>
+        <message/>
+        <callerData>
+          <fieldName>caller</fieldName>
+          <classFieldName>class</classFieldName>
+          <methodFieldName>method</methodFieldName>
+          <fileFieldName>file</fileFieldName>
+          <lineFieldName>line</lineFieldName>
+        </callerData>
+        <stackTrace/>
+      </providers>
+    </encoder>
+  </appender>
+  <appender name="esb" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_PATH}stratis_esb.json</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- daily rollover -->
+      <fileNamePattern>${LOG_PATH}stratis_esb.%d{yyyy-MM-dd}.json</fileNamePattern>
+      <!-- keep 30 days -->
+      <maxHistory>30</maxHistory>
+      <totalSizeCap>1GB</totalSizeCap>
+    </rollingPolicy>
+    <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+      <providers>
+        <timestamp/>
+        <version/>
+        <mdc/>
+        <logLevel/>
+        <message/>
+        <callerData>
+          <fieldName>caller</fieldName>
+          <classFieldName>class</classFieldName>
+          <methodFieldName>method</methodFieldName>
+          <fileFieldName>file</fileFieldName>
+          <lineFieldName>line</lineFieldName>
+        </callerData>
+        <stackTrace/>
+      </providers>
+    </encoder>
+  </appender>
+
+  <appender name="adf" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_PATH}stratis_adf.json</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- daily rollover -->
+      <fileNamePattern>${LOG_PATH}stratis_adf.%d{yyyy-MM-dd}.json</fileNamePattern>
+      <!-- keep 30 days -->
+      <maxHistory>30</maxHistory>
+      <totalSizeCap>1GB</totalSizeCap>
+    </rollingPolicy>
+    <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+      <providers>
+        <timestamp/>
+        <version/>
+        <mdc/>
+        <logLevel/>
+        <message/>
+        <callerData>
+          <fieldName>caller</fieldName>
+          <classFieldName>class</classFieldName>
+          <methodFieldName>method</methodFieldName>
+          <fileFieldName>file</fileFieldName>
+          <lineFieldName>line</lineFieldName>
+        </callerData>
+        <stackTrace/>
+      </providers>
+    </encoder>
+  </appender>
+  <appender name="jobs" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_PATH}stratis_jobs.json</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- daily rollover -->
+      <fileNamePattern>${LOG_PATH}stratis_jobs.%d{yyyy-MM-dd}.json</fileNamePattern>
+      <!-- keep 30 days -->
+      <maxHistory>30</maxHistory>
+      <totalSizeCap>1GB</totalSizeCap>
+    </rollingPolicy>
+    <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+      <providers>
+        <timestamp/>
+        <version/>
+        <mdc/>
+        <logLevel/>
+        <message/>
+        <callerData>
+          <fieldName>caller</fieldName>
+          <classFieldName>class</classFieldName>
+          <methodFieldName>method</methodFieldName>
+          <fileFieldName>file</fileFieldName>
+          <lineFieldName>line</lineFieldName>
+        </callerData>
+        <stackTrace/>
+      </providers>
+    </encoder>
+  </appender>
+  <!-- =========================================================================================================== -->
+  <!-- LOGGERS -->
+  <!-- =========================================================================================================== -->
+  <logger name="mil.usmc.mls2.stratis.core.infrastructure.jobs" level="info" additivity="false">
+    <appender-ref ref="jobs"/>
+  </logger>
+
+  <!-- ===================================== -->
+  <!-- ADF Log file for when we convert adf classes to use slf4j -->
+  <!-- ===================================== -->
+  <logger name="mil.stratis" level="info">
+    <appender-ref ref="adf"/>
+  </logger>
+
+  <logger name="oracle.adf.share.ADFContext" level="error">
+    <appender-ref ref="adf"/>
+  </logger>
+
+  <logger name="oracle.adfinternal" level="warn">
+    <appender-ref ref="adf"/>
+  </logger>
+  <logger name="com.oracle.coherence" level="warn">
+    <appender-ref ref="adf"/>
+  </logger>
+  <logger name="oracle.dfw" level="warn">
+    <appender-ref ref="adf"/>
+  </logger>
+  <logger name="oracle.dfw.framework" level="OFF"/>
+
+  <logger name="org.apache.myfaces" level="warn">
+    <appender-ref ref="adf"/>
+  </logger>
+  <logger name="com.sun.faces" level="warn">
+    <appender-ref ref="adf"/>
+  </logger>
+  <logger name="com.tangosol" level="warn">
+    <appender-ref ref="adf"/>
+  </logger>
+
+
+  <logger name="com.mysema.query" level="warn" additivity="false">
+    <appender-ref ref="db"/>
+    <appender-ref ref="console"/>
+  </logger>
+  <logger name="mil.usmc.mls2.stratis.core.infrastructure.transaction.CustomJpaTransactionManager" level="info" additivity="false">
+    <appender-ref ref="db"/>
+    <appender-ref ref="console"/>
+  </logger>
+
+  <logger name="oracle.jdbc" level="warn">
+    <appender-ref ref="db"/>
+    <appender-ref ref="console"/>
+  </logger>
+  <logger name="oracle.ucp" level="warn">
+    <appender-ref ref="db"/>
+    <appender-ref ref="console"/>
+  </logger>
+
+  <logger name="org.springframework" level="warn"/>
+
+  <logger name="org.springframework.beans.factory.support.DefaultListableBeanFactory" level="warn"/>
+  <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="warn"/>
+  <logger name="org.springframework.orm.jpa" level="warn" additivity="false">
+    <appender-ref ref="db"/>
+    <appender-ref ref="console"/>
+  </logger>
+  <logger name="org.springframework.transaction" level="warn" additivity="false">
+    <appender-ref ref="db"/>
+    <appender-ref ref="console"/>
+  </logger>
+  <logger name="org.hibernate" level="warn" additivity="false">
+    <appender-ref ref="db"/>
+    <appender-ref ref="console"/>
+  </logger>
+
+  <logger name="org.hibernate.event.internal.DefaultFlushEntityEventListener" level="warn" additivity="false">
+    <appender-ref ref="console"/>
+  </logger>
+
+  <logger name="org.hibernate.SQL" level="warn" additivity="false">
+    <appender-ref ref="db"/>
+  </logger>
+
+  <logger name="org.hibernate.type.descriptor.sql" level="warn" additivity="false">
+    <appender-ref ref="db"/>
+  </logger>
+
+  <logger name="org.apache.activemq" level="warn" additivity="false">
+    <appender-ref ref="esb"/>
+    <appender-ref ref="console"/>
+  </logger>
+  <logger name="org.apache.activemq.audit" level="warn" additivity="false">
+    <appender-ref ref="esb"/>
+    <appender-ref ref="console"/>
+  </logger>
+  <logger name="org.apache.camel" level="warn" additivity="false">
+    <appender-ref ref="esb"/>
+    <appender-ref ref="console"/>
+  </logger>
+
+  <!--  <logger name="oracle.adf.share.config.MDSConfigFactory" level="error" additivity="false">-->
+  <!--    <appender-ref ref="console"/>-->
+  <!--    <appender-ref ref="db"/>-->
+  <!--  </logger>-->
+
+  <!-- =========================================================================================================== -->
+  <!-- PROFILE CONFIGURATION -->
+  <!-- =========================================================================================================== -->
+  <springProfile name="dev,qa">
+    <logger name="mil.stratis" level="debug"/>
+    <logger name="mil.usmc.mls2.stratis" level="debug"/>
+    <logger name="mil.usmc.mls2.stratis.commons" level="info"/>
+    <root level="info">
+      <appender-ref ref="core"/>
+      <appender-ref ref="console"/>
+    </root>
+  </springProfile>
+  <springProfile name="test,staging,prod">
+    <appender name="console" class="ch.qos.logback.core.helpers.NOPAppender"/>
+    <root level="info">
+      <appender-ref ref="core"/>
+    </root>
+  </springProfile>
+
+</configuration>

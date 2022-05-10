@@ -1,0 +1,335 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="PackingModule"
+   Version="11.1.2.64.36"
+   ComponentClass="mil.stratis.model.services.PackingModuleImpl"
+   ComponentInterface="mil.stratis.model.services.common.PackingModule"
+   ClientProxyName="mil.stratis.model.services.client.PackingModuleClient"
+   LoadComponentsLazily="true" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+   </DesignTime>
+   <Properties >
+      <CustomProperties>
+         <Property Name ="DATA_CONTROL_NAME" Value ="PackingModuleDataControl1" />
+      </CustomProperties>
+   </Properties>
+   <ViewUsage
+      Name="PickingView1"
+      ViewObjectName="mil.stratis.model.view.pack.PickingView" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PackingStation1"
+      ViewObjectName="mil.stratis.model.view.pack.PackingStation" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PackingIssuesView1"
+      ViewObjectName="mil.stratis.model.view.pack.PackingIssuesView" >
+   </ViewUsage>
+   <ViewUsage
+      Name="IsSecure1"
+      ViewObjectName="mil.stratis.model.view.pack.IsSecure" >
+   </ViewUsage>
+   <ViewUsage
+      Name="ConsolidationView1"
+      ViewObjectName="mil.stratis.model.view.pack.ConsolidationView" >
+   </ViewUsage>
+   <ViewUsage
+      Name="BypassThresholdView1"
+      ViewObjectName="mil.stratis.model.view.pack.BypassThresholdView" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PinList1"
+      ViewObjectName="mil.stratis.model.view.pack.PinList" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PinList2"
+      ViewObjectName="mil.stratis.model.view.pack.PinList" >
+   </ViewUsage>
+   <ViewUsage
+      Name="ConsolidationViewWithBind1"
+      ViewObjectName="mil.stratis.model.view.pack.ConsolidationViewWithBind" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PickingViewWithBind1"
+      ViewObjectName="mil.stratis.model.view.pack.PickingViewWithBind" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PinLoadReport1"
+      ViewObjectName="mil.stratis.model.view.pack.PinLoadReport" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PinLoadDetail1"
+      ViewObjectName="mil.stratis.model.view.pack.PinLoadDetail" >
+   </ViewUsage>
+   <ViewUsage
+      Name="EquipView1"
+      ViewObjectName="mil.stratis.model.view.pack.EquipView" >
+   </ViewUsage>
+   <ViewUsage
+      Name="ShippingView1"
+      ViewObjectName="mil.stratis.model.view.wlm.ShippingView" >
+   </ViewUsage>
+   <ViewUsage
+      Name="CartonView1"
+      ViewObjectName="mil.stratis.model.view.pack.CartonView" >
+   </ViewUsage>
+   <AppModuleUsage
+      Name="WorkLoadManager1"
+      FullName="mil.stratis.model.services.WorkLoadManager"
+      SharedScope="0" >
+   </AppModuleUsage>
+   <ClientInterface >
+      <Method
+         Name="isConsolStation"
+         MethodName="isConsolStation" >
+         <Return
+            Type="boolean" >
+         </Return>
+         <Parameter
+            Name="workstationId"
+            Type="int" >
+         </Parameter>
+      </Method>
+      <Method
+         Name="clearPINList"
+         MethodName="clearPINList" >
+         <Return
+            Type="void" >
+         </Return>
+      </Method>
+      <Method
+         Name="getPINcountForSCN"
+         MethodName="getPINcountForSCN" >
+         <Return
+            Type="int" >
+         </Return>
+         <Parameter
+            Name="scanList"
+            Type="java.util.ArrayList" >
+         </Parameter>
+         <Parameter
+            Name="scn"
+            Type="java.lang.String" >
+         </Parameter>
+      </Method>
+      <Method
+         Name="processPINList"
+         MethodName="processPINList" >
+         <Return
+            Type="java.util.HashSet" >
+         </Return>
+         <Parameter
+            Name="scanList"
+            Type="java.util.ArrayList" >
+         </Parameter>
+         <Parameter
+            Name="scnSet"
+            Type="java.util.HashSet" >
+         </Parameter>
+      </Method>
+      <Method
+         Name="refreshPINLoadDetail"
+         MethodName="refreshPINLoadDetail" >
+         <Return
+            Type="void" >
+         </Return>
+         <Parameter
+            Name="wId"
+            Type="int" >
+         </Parameter>
+      </Method>
+      <Method
+         Name="addPIN"
+         MethodName="addPIN" >
+         <Return
+            Type="int" >
+         </Return>
+         <Parameter
+            Name="pin"
+            Type="java.lang.String" >
+         </Parameter>
+         <Parameter
+            Name="iWorkstationId"
+            Type="int" >
+         </Parameter>
+      </Method>
+      <Method
+         Name="getWorkstationName"
+         MethodName="getWorkstationName" >
+         <Return
+            Type="java.lang.String" >
+         </Return>
+         <Parameter
+            Name="wId"
+            Type="int" >
+         </Parameter>
+      </Method>
+      <Method
+         Name="createConsolidationBarcode"
+         MethodName="createConsolidationBarcode" >
+         <Return
+            Type="java.lang.String" >
+         </Return>
+      </Method>
+      <Method
+         Name="getBinColAndLev"
+         MethodName="getBinColAndLev" >
+         <Return
+            Type="java.lang.String" >
+         </Return>
+         <Parameter
+            Name="consolId"
+            Type="int" >
+         </Parameter>
+      </Method>
+      <Method
+         Name="getLocationBarcode"
+         MethodName="getLocationBarcode" >
+         <Return
+            Type="java.lang.String" >
+         </Return>
+         <Parameter
+            Name="consolId"
+            Type="int" >
+         </Parameter>
+      </Method>
+      <Method
+         Name="getConsolIdByPin"
+         MethodName="getConsolIdByPin" >
+         <Return
+            Type="int" >
+         </Return>
+         <Parameter
+            Name="pin"
+            Type="java.lang.String" >
+         </Parameter>
+      </Method>
+      <Method
+         Name="autoCloseCarton"
+         MethodName="autoCloseCarton" >
+         <Return
+            Type="int" >
+         </Return>
+         <Parameter
+            Name="consolId"
+            Type="int" >
+         </Parameter>
+         <Parameter
+            Name="userId"
+            Type="int" >
+         </Parameter>
+      </Method>
+      <Method
+         Name="closeCarton"
+         MethodName="closeCarton" >
+         <Return
+            Type="int" >
+         </Return>
+         <Parameter
+            Name="consolId"
+            Type="int" >
+         </Parameter>
+         <Parameter
+            Name="userId"
+            Type="int" >
+         </Parameter>
+      </Method>
+      <Method
+         Name="packConsolidatedIssue"
+         MethodName="packConsolidatedIssue" >
+         <Return
+            Type="boolean" >
+         </Return>
+         <Parameter
+            Name="consolId"
+            Type="int" >
+         </Parameter>
+         <Parameter
+            Name="userId"
+            Type="int" >
+         </Parameter>
+      </Method>
+      <Method
+         Name="reAssignCarton"
+         MethodName="reAssignCarton" >
+         <Return
+            Type="int" >
+         </Return>
+         <Parameter
+            Name="consolId"
+            Type="int" >
+         </Parameter>
+         <Parameter
+            Name="newConsolId"
+            Type="int" >
+         </Parameter>
+         <Parameter
+            Name="userId"
+            Type="int" >
+         </Parameter>
+      </Method>
+      <Method
+         Name="manualCloseCarton"
+         MethodName="manualCloseCarton" >
+         <Return
+            Type="boolean" >
+         </Return>
+         <Parameter
+            Name="consolId"
+            Type="int" >
+         </Parameter>
+         <Parameter
+            Name="userId"
+            Type="int" >
+         </Parameter>
+      </Method>
+      <Method
+         Name="clearCartonList"
+         MethodName="clearCartonList" >
+         <Return
+            Type="void" >
+         </Return>
+      </Method>
+      <Method
+         Name="displayCartons"
+         MethodName="displayCartons" >
+         <Return
+            Type="void" >
+         </Return>
+         <Parameter
+            Name="iWorkstationId"
+            Type="int" >
+         </Parameter>
+      </Method>
+      <Method
+         Name="clearPackList"
+         MethodName="clearPackList" >
+         <Return
+            Type="void" >
+         </Return>
+         <Parameter
+            Name="iWorkstationId"
+            Type="int" >
+         </Parameter>
+         <Parameter
+            Name="isCancel"
+            Type="int" >
+         </Parameter>
+      </Method>
+      <Method
+         Name="fillPackingList"
+         MethodName="fillPackingList" >
+         <Return
+            Type="java.util.ArrayList" >
+         </Return>
+         <Parameter
+            Name="scanList"
+            Type="java.util.ArrayList" >
+         </Parameter>
+      </Method>
+   </ClientInterface>
+</AppModule>

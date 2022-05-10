@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Admin_WarehouseComSetupPageDef"
+                Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="ComPortView1Iterator" RangeSize="5" Binds="Root.AppModule1.ComPortView1"
+              DataControl="StratisRootServiceDataControl" StateValidation="false" Refresh="ifNeeded" />
+  </executables>
+  <bindings>
+    <table id="ComPortView1" IterBinding="ComPortView1Iterator">
+      <AttrNames>
+        <Item Value="ComPortId"/>
+        <Item Value="Name"/>
+        <Item Value="BaudRate"/>
+        <Item Value="Parity"/>
+        <Item Value="Fparity"/>
+        <Item Value="ByteSize"/>
+        <Item Value="StopBits"/>
+        <Item Value="ComName"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="ComPortId" IterBinding="ComPortView1Iterator">
+      <AttrNames>
+        <Item Value="ComPortId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Name" IterBinding="ComPortView1Iterator">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ComName" IterBinding="ComPortView1Iterator">
+      <AttrNames>
+        <Item Value="ComName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="BaudRate" IterBinding="ComPortView1Iterator">
+      <AttrNames>
+        <Item Value="BaudRate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="StopBits" IterBinding="ComPortView1Iterator">
+      <AttrNames>
+        <Item Value="StopBits"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ByteSize" IterBinding="ComPortView1Iterator">
+      <AttrNames>
+        <Item Value="ByteSize"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Fparity" IterBinding="ComPortView1Iterator">
+      <AttrNames>
+        <Item Value="Fparity"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Parity" IterBinding="ComPortView1Iterator">
+      <AttrNames>
+        <Item Value="Parity"/>
+      </AttrNames>
+    </attributeValues>
+    <list id="ComPortView1BaudRate" IterBinding="ComPortView1Iterator" ListOperMode="setAttribute" StaticList="true">
+      <AttrNames>
+        <Item Value="BaudRate"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="110"/>
+        <Item Value="300"/>
+        <Item Value="1200"/>
+        <Item Value="2400"/>
+        <Item Value="4800"/>
+        <Item Value="9600"/>
+        <Item Value="19200"/>
+        <Item Value="38400"/>
+        <Item Value="57600"/>
+        <Item Value="115200"/>
+        <Item Value="230400"/>
+        <Item Value="460800"/>
+        <Item Value="921600"/>
+      </ValueList>
+    </list>
+    <list id="ComPortView1Parity" IterBinding="ComPortView1Iterator" ListOperMode="setAttribute" StaticList="true">
+      <AttrNames>
+        <Item Value="Parity"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Even"/>
+        <Item Value="Odd"/>
+        <Item Value="None"/>
+        <Item Value="Mark"/>
+        <Item Value="Space"/>
+      </ValueList>
+    </list>
+    <list id="ComPortView1ByteSize" IterBinding="ComPortView1Iterator" ListOperMode="setAttribute" StaticList="true">
+      <AttrNames>
+        <Item Value="ByteSize"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="8"/>
+        <Item Value="7"/>
+        <Item Value="6"/>
+        <Item Value="5"/>
+      </ValueList>
+    </list>
+    <list id="ComPortView1StopBits" IterBinding="ComPortView1Iterator" ListOperMode="setAttribute" StaticList="true">
+      <AttrNames>
+        <Item Value="StopBits"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="1"/>
+        <Item Value="1.5"/>
+        <Item Value="2"/>
+      </ValueList>
+    </list>
+    <list id="ComNameList" IterBinding="ComPortView1Iterator" ListOperMode="setAttribute" StaticList="true">
+      <AttrNames>
+        <Item Value="ComName"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="COM1"/>
+        <Item Value="LPT1"/>
+        <Item Value="COM2"/>
+        <Item Value="LPT2"/>
+      </ValueList>
+    </list>
+     <action IterBinding="ComPortView1Iterator" id="CreateInsert" RequiresUpdateModel="true"
+                Action="createInsertRow"/>
+    <action id="ExecuteComPort" RequiresUpdateModel="true" Action="iteratorExecute" IterBinding="ComPortView1Iterator"/>
+  </bindings>
+</pageDefinition>

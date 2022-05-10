@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:stratis="taglib.mil.usmc.stratis">
+    <!-- FUTURE verify where this file is used/called from.  No references found.  is it needed?  -->
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:switcher facetName="#{userbean.userWorkstationAccess}" id="fmisuserloggedin">
+            <f:facet name="-1">
+                <f:verbatim>
+                    <script language="Javascript" type="text/javascript">
+                      //alert('Your session has expired!\nYou will be returned to the login screen.');
+                      console.log("NiiNDetail detected expired/no session.");
+                      this.location.href = 'unauthenticated.html';
+                    </script>
+                </f:verbatim>
+            </f:facet>
+            <f:facet name="0">
+            <f:verbatim>
+                <script language="Javascript" type="text/javascript">
+                    //alert('Your session has expired!\nYou will be returned to the login screen.');
+                    console.log("Unauthorized access.");
+                    this.location.href = 'unauthorized.html';
+                </script>
+            </f:verbatim>
+        </f:facet>
+
+            <f:facet name="1">
+                <af:document title="NIIN INFORMATION" id="d1">
+                    <af:messages id="m1"/>
+                    <af:form id="f1">
+                        <af:table value="#{bindings.NiinInfoView1.collectionModel}" var="row"
+                                  rows="#{bindings.NiinInfoView1.rangeSize}" first="#{bindings.NiinInfoView1.rangeStart}"
+                                  emptyText="#{bindings.NiinInfoView1.viewable ? 'No rows yet.' : 'Access Denied.'}">
+                            <af:column sortProperty="NiinId" sortable="false" headerText="#{bindings.NiinInfoView1.labels.NiinId}">
+                                <af:outputText value="#{row.NiinId}"/>
+                            </af:column>
+                            <af:column sortProperty="Fsc" sortable="false" headerText="#{bindings.NiinInfoView1.labels.Fsc}">
+                                <af:outputText value="#{row.Fsc}"/>
+                            </af:column>
+                            <af:column sortProperty="Niin" sortable="false" headerText="#{bindings.NiinInfoView1.labels.Niin}">
+                                <af:outputText value="#{row.Niin}"/>
+                            </af:column>
+                            <af:column sortProperty="Ui" sortable="false" headerText="#{bindings.NiinInfoView1.labels.Ui}">
+                                <af:outputText value="#{row.Ui}"/>
+                            </af:column>
+                            <af:column sortProperty="Nomenclature" sortable="false"
+                                       headerText="#{bindings.NiinInfoView1.labels.Nomenclature}">
+                                <af:outputText value="#{row.Nomenclature}"/>
+                            </af:column>
+                            <af:column sortProperty="ShelfLifeCode" sortable="false"
+                                       headerText="#{bindings.NiinInfoView1.labels.ShelfLifeCode}">
+                                <af:outputText value="#{row.ShelfLifeCode}"/>
+                            </af:column>
+                            <af:column sortProperty="Scc" sortable="false" headerText="#{bindings.NiinInfoView1.labels.Scc}">
+                                <af:outputText value="#{row.Scc}"/>
+                            </af:column>
+                            <af:column sortProperty="ShelfLifeExtension" sortable="false"
+                                       headerText="#{bindings.NiinInfoView1.labels.ShelfLifeExtension}">
+                                <af:outputText value="#{row.ShelfLifeExtension}">
+                                    <f:convertNumber groupingUsed="false" pattern="#{bindings.NiinInfoView1.formats.ShelfLifeExtension}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column sortProperty="Cube" sortable="false" headerText="#{bindings.NiinInfoView1.labels.Cube}">
+                                <af:outputText value="#{row.Cube}">
+                                    <f:convertNumber groupingUsed="false" pattern="#{bindings.NiinInfoView1.formats.Cube}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column sortProperty="Weight" sortable="false" headerText="#{bindings.NiinInfoView1.labels.Weight}">
+                                <af:outputText value="#{row.Weight}">
+                                    <f:convertNumber groupingUsed="false" pattern="#{bindings.NiinInfoView1.formats.Weight}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column sortProperty="Price" sortable="false" headerText="#{bindings.NiinInfoView1.labels.Price}">
+                                <af:outputText value="#{row.Price}">
+                                    <f:convertNumber groupingUsed="false" pattern="#{bindings.NiinInfoView1.formats.Price}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column sortProperty="ActivityDate" sortable="false"
+                                       headerText="#{bindings.NiinInfoView1.labels.ActivityDate}">
+                                <stratis:adfDateFormatter value="#{row.ActivityDate}"
+                                                          pattern="${userbean.dateFormatPattern}"/>
+                            </af:column>
+                            <af:column sortProperty="Tamcn" sortable="false" rendered="false"
+                                       headerText="#{bindings.NiinInfoView1.labels.Tamcn}">
+                                <af:outputText value="#{row.Tamcn}"/>
+                            </af:column>
+                            <af:column sortProperty="SupplyClass" sortable="false"
+                                       headerText="#{bindings.NiinInfoView1.labels.SupplyClass}">
+                                <af:outputText value="#{row.SupplyClass}"/>
+                            </af:column>
+                            <af:column sortProperty="TypeOfMaterial" sortable="false"
+                                       headerText="#{bindings.NiinInfoView1.labels.TypeOfMaterial}">
+                                <af:outputText value="#{row.TypeOfMaterial}"/>
+                            </af:column>
+                            <af:column sortProperty="CognizanceCode" sortable="false" rendered="false"
+                                       headerText="#{bindings.NiinInfoView1.labels.CognizanceCode}">
+                                <af:outputText value="#{row.CognizanceCode}"/>
+                            </af:column>
+                            <af:column sortProperty="PartNumber" sortable="false" rendered="false"
+                                       headerText="#{bindings.NiinInfoView1.labels.PartNumber}">
+                                <af:outputText value="#{row.PartNumber}"/>
+                            </af:column>
+                            <af:column sortProperty="CageCode" sortable="false" rendered="false"
+                                       headerText="#{bindings.NiinInfoView1.labels.CageCode}">
+                                <af:outputText value="#{row.CageCode}"/>
+                            </af:column>
+                            <af:column sortProperty="InventoryThreshold" sortable="false"
+                                       headerText="#{bindings.NiinInfoView1.labels.InventoryThreshold}">
+                                <af:outputText value="#{row.InventoryThreshold}"/>
+                            </af:column>
+                            <af:column sortProperty="Length" sortable="false" rendered="false"
+                                       headerText="#{bindings.NiinInfoView1.labels.Length}">
+                                <af:outputText value="#{row.Length}">
+                                    <f:convertNumber groupingUsed="false" pattern="#{bindings.NiinInfoView1.formats.Length}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column sortProperty="Width" sortable="false" rendered="false"
+                                       headerText="#{bindings.NiinInfoView1.labels.Width}">
+                                <af:outputText value="#{row.Width}">
+                                    <f:convertNumber groupingUsed="false" pattern="#{bindings.NiinInfoView1.formats.Width}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column sortProperty="Height" sortable="false" rendered="false"
+                                       headerText="#{bindings.NiinInfoView1.labels.Height}">
+                                <af:outputText value="#{row.Height}">
+                                    <f:convertNumber groupingUsed="false" pattern="#{bindings.NiinInfoView1.formats.Height}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column sortProperty="SassyBalance" sortable="false" rendered="false"
+                                       headerText="#{bindings.NiinInfoView1.labels.SassyBalance}">
+                                <af:outputText value="#{row.SassyBalance}">
+                                    <f:convertNumber groupingUsed="false" pattern="#{bindings.NiinInfoView1.formats.SassyBalance}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column sortProperty="RoThreshold" sortable="false" rendered="false"
+                                       headerText="#{bindings.NiinInfoView1.labels.RoThreshold}">
+                                <af:outputText value="#{row.RoThreshold}">
+                                    <f:convertNumber groupingUsed="false" pattern="#{bindings.NiinInfoView1.formats.RoThreshold}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column sortProperty="Smic" sortable="false" rendered="false"
+                                       headerText="#{bindings.NiinInfoView1.labels.Smic}">
+                                <af:outputText value="#{row.Smic}"/>
+                            </af:column>
+                        </af:table>
+                        <af:panelGridLayout>
+                            <af:gridRow>
+                                <af:gridCell halign="center">
+                                    <af:button text="Submit" actionListener="#{PickingAll.niinOk}" partialSubmit="false"/>
+                                </af:gridCell>
+                            </af:gridRow>
+                        </af:panelGridLayout>
+                    </af:form>
+                </af:document>
+            </f:facet>
+        </af:switcher>
+    </f:view>
+</jsp:root>

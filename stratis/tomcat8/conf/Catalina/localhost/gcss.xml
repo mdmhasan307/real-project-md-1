@@ -1,0 +1,29 @@
+<Context swallowOutput="true">
+
+  <Resource name="jdbc/STRATDBSVRDS"
+            auth="SERVLET"
+            factory="mil.stratis.common.db.EncryptedDataSourceFactory"
+            type="oracle.ucp.jdbc.PoolDataSource"
+            connectionFactoryClassName="oracle.jdbc.pool.OracleDataSource"
+            url="jdbc:oracle:thin:@//10.10.30.12:1521/STRATCPEN"
+            user="stratis"
+            password="ENC(xXfT0s+Zm3m3enUKyutzUlQnO1oOD42M)"
+            connectionPoolName="STRATISwsPool"
+
+            loginTimeout="10"
+            initialPoolSize="1"
+            minPoolSize="1"
+            maxPoolSize="50"
+            inactiveConnectionTimeout="120"
+            maxConnectionReuseTime="300"
+            validateConnectionOnBorrow="true"
+            sqlForValidateConnection="select 1 from DUAL"
+  />
+
+  <Environment name="ws.keystore.path" type="java.lang.String" value="/opt/app/stratis/conf/tomcat/ssl/ws/stratiskeystore.jks"/>
+  <Environment name="ws.keystore.password" type="java.lang.String"
+               value="ENC(bY9B0olRNe2bexNR+mJalIB2bKlS56sU)"/> <!-- encrypt [smokeONTHEwater321]-->
+  <Environment name="ws.keystore.alias" type="java.lang.String" value="stratis"/>
+  <Environment name="ws.truststore.path" type="java.lang.String" value="/opt/app/stratis/conf/tomcat/ssl/ws/stratistrust.jks"/>
+  <Environment name="ws.truststore.password" type="java.lang.String" value="ENC(bY9B0olRNe2bexNR+mJalIB2bKlS56sU)"/>
+</Context>

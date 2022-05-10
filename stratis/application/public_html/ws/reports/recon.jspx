@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <!-- Recon Report Summary -->
+    <af:table var="row" rowBandingInterval="1" id="t7_1" autoHeightRows="0"
+              styleClass="AFStretchWidth"
+              value="#{viewScope.ReportsQueryResultBean.reconReportColumnList}"
+              rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Recon Report Summary'}">
+        <af:column sortable="false" headerText="NIIN Field" id="c7_1" width="150">
+            <af:outputText value="#{row.niin}" id="ot7_1"/>
+        </af:column>
+        <af:column sortable="false" headerText="# Matching" id="c7_2"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.matchingNum}" id="ot7_2"/>
+        </af:column>
+        <af:column sortable="false" headerText="# Unmatching" id="c7_3"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.unmatchingNum}" id="ot7_3"/>
+        </af:column>
+    </af:table>
+</jsp:root>

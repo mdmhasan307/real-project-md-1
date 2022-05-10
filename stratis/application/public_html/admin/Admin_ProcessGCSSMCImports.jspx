@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:stratis="taglib.mil.usmc.stratis"
+>
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="7"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="Admin_ProcessGCSSMCImports"/>
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session" />
+    <jsp:setProperty name="logBean" property="page" value="GCSS-MC Imports"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="150" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6"/>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGridLayout>
+                                <af:gridRow>
+                                    <af:gridCell valign="top">
+                                        <af:spacer height="20" width="0"/>
+                                        <af:panelGroupLayout layout="horizontal">
+                                            <af:panelGroupLayout layout="horizontal">
+                                                <af:link text="GCSS-MC Exports"
+                                                         action="GoAdminProcessGCSSMCExports" id="linkExports"/>
+                                                <af:spacer width="4" height="0"/>
+                                                |
+                                                <af:spacer width="4" height="0"/>
+                                                <af:link text="GCSS-MC Imports" disabled="true"/>
+                                                <af:spacer width="4" height="0"/>
+                                                |
+                                                <af:spacer width="4" height="0"/>
+                                                <af:link text="GCSS-MC Recon" action="GoAdminProcessGCSSMCRecon"
+                                                         id="linkRecon"/>
+                                                <af:spacer width="4" height="0"/>
+                                                |
+                                                <af:spacer width="4" height="0"/>
+                                                <af:link text="GCSS-MC Logs" action="GoAdminProcessGCSSMCLogs"
+                                                         id="linkLogs"/>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                        <af:spacer width="10" height="10"/>
+                                        <af:panelBox text="GCSS-MC Interfaces Page" id="panelBox_fileInterfaces"
+                                                     inlineStyle="font-weight:bold;" showDisclosure="false">
+                                            <af:spacer height="0" width="500"/>
+                                            <af:panelGridLayout>
+                                                <af:gridRow>
+                                                    <af:gridCell>
+                                                        <af:spacer width="500" height="10"/>
+                                                    </af:gridCell>
+                                                </af:gridRow>
+                                                <af:gridRow>
+                                                    <af:gridCell>
+                                                        <af:table id="FileTable"
+                                                                  value="#{bindings.GCSSMCSiteInterfacesView1.collectionModel}"
+                                                                  var="row"
+                                                                  rows="#{bindings.GCSSMCSiteInterfacesView1.rangeSize}"
+                                                                  first="#{bindings.GCSSMCSiteInterfacesView1.rangeStart}"
+                                                                  emptyText="#{bindings.GCSSMCSiteInterfacesView1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                                  selectionListener="#{bindings.GCSSMCSiteInterfacesView1.collectionModel.makeCurrent}"
+                                                                  binding="#{GCSSMCImportsBean.importTable}"
+                                                                  selectedRowKeys="#{bindings.GCSSMCSiteInterfacesView1.collectionModel.selectedRow}"
+                                                                  rowSelection="single"
+                                                                  inlineStyle="height:140px;"
+                                                                  styleClass="AFStretchWidth"
+                                                                  clientComponent="true"
+                                                                  columnStretching="last">
+                                                            <af:column sortProperty="Interface Name" sortable="false"
+                                                                       headerText="Interface Name" width="195" rowHeader="true">
+                                                                <af:outputText value="#{row.InterfaceName}"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="Last Process Date" sortable="false"
+                                                                       headerText="Last Process Date" width="145">
+                                                                <stratis:adfDateFormatter value="#{row.LastImpexpDate}"
+                                                                                          pattern="${userbean.dateWithTimeFormatPattern}"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="Status" sortable="false"
+                                                                       headerText="Status" width="200"
+                                                                       minimumWidth="200">
+                                                                <af:outputText value="#{row.Status}"
+                                                                               inlineStyle="text-transform:uppercase;"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="TotalReady" sortable="false"
+                                                                       headerText="Total Ready" width="76">
+                                                                <af:outputText value="#{row.TotalReady}"/>
+                                                            </af:column>
+                                                        </af:table>
+                                                    </af:gridCell>
+                                                </af:gridRow>
+                                                <af:gridRow>
+                                                    <af:gridCell>
+                                                        <af:spacer width="500" height="10"/>
+                                                    </af:gridCell>
+                                                </af:gridRow>
+                                                <af:gridRow>
+                                                    <af:gridCell>
+                                                        <af:spacer width="20" height="0"/>
+                                                        <af:button id="InterfaceImport"
+                                                                   text="Import Selected"
+                                                                   actionListener="#{GCSSMCImportsBean.importAction}"
+                                                                   disabled="false"
+                                                                   partialSubmit="true">
+                                                        </af:button>
+                                                    </af:gridCell>
+                                                </af:gridRow>
+                                                <af:gridRow>
+                                                    <af:gridCell>
+                                                        <af:spacer width="500" height="10"/>
+                                                    </af:gridCell>
+                                                </af:gridRow>
+                                                <af:gridRow>
+                                                    <af:gridCell>
+                                                        <af:outputText id="StatusMessage"
+                                                                       value=""
+                                                                       clientComponent="true"
+                                                                       partialTriggers="::InterfaceImport"
+                                                                       binding="#{GCSSMCImportsBean.importMessage}"/>
+                                                        <!--Using a hidden field because I don't know the proper hook for after view created-->
+                                                        <af:spacer width="10" height="10"/>
+                                                        <af:outputText binding="#{GCSSMCImportsBean.viewCreated}"
+                                                                       visible="false"/>
+                                                    </af:gridCell>
+                                                </af:gridRow>
+                                            </af:panelGridLayout>
+                                        </af:panelBox>
+                                    </af:gridCell>
+                                </af:gridRow>
+                            </af:panelGridLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

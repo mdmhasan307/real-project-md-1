@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ComPort"
+  Version="11.1.2.64.36"
+  DBObjectType="SYNONYM"
+  DBObjectName="COM_PORT"
+  AliasName="ComPort"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <Attribute
+    Name="ComPortId"
+    ColumnName="COM_PORT_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.DBSequence"
+    ColumnType="NUMBER"
+    TableName="COM_PORT"
+    PrimaryKey="true"
+    IsUpdateable="while_insert"
+    DefaultValue="@0"
+    Domain="oracle.jbo.domain.DBSequence"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_SequenceName" Value="COM_PORT_ID_SEQ"/>
+      <Attr Name="_SequenceStart" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Name"
+    IsNotNull="true"
+    Precision="100"
+    ColumnName="NAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="COM_PORT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="BaudRate"
+    ColumnName="BAUD_RATE"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="COM_PORT"/>
+  <Attribute
+    Name="Parity"
+    Precision="15"
+    ColumnName="PARITY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="COM_PORT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Fparity"
+    IsNotNull="true"
+    Precision="1"
+    ColumnName="FPARITY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="COM_PORT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ByteSize"
+    ColumnName="BYTE_SIZE"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="COM_PORT"/>
+  <Attribute
+    Name="StopBits"
+    Precision="15"
+    ColumnName="STOP_BITS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="COM_PORT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ComName"
+    Precision="20"
+    ColumnName="COM_NAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="COM_PORT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="Equip1"
+    Association="mil.stratis.model.entity.associations.ComEquipFkAssoc"
+    AssociationEnd="mil.stratis.model.entity.associations.ComEquipFkAssoc.Equip1"
+    AssociationOtherEnd="mil.stratis.model.entity.associations.ComEquipFkAssoc.ComPort1"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="Ck1comPort">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="CK1COM_PORT"/>
+      <Attr Name="_checkCondition" Value="COM_PORT_ID IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="Ck2comPort">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="CK2COM_PORT"/>
+      <Attr Name="_checkCondition" Value="NAME IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="Ck3comPort">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="CK3COM_PORT"/>
+      <Attr Name="_checkCondition" Value="FPARITY IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="ComPortChk1">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="COM_PORT_CHK1"/>
+      <Attr Name="_checkCondition" Value="BAUD_RATE >= 0 AND BYTE_SIZE >= 0"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="ComPortPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="COM_PORT_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.site.ComPort.ComPortId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="ComPortUk1">
+    <DesignTime>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="COM_PORT_UK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.site.ComPort.Name"/>
+    </AttrArray>
+  </Key>
+</Entity>

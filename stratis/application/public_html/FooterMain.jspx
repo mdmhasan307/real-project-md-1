@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:stratis="taglib.mil.usmc.stratis"
+>
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:useBean id="workloadbean" class="mil.stratis.view.session.Nav" scope="session"/>
+    <jsp:useBean id="userBackingBean" class="mil.stratis.view.user.UserBacking" scope="session"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="FooterMain"/>
+    <!-- Set bottom height to 75 -->
+    <af:panelGroupLayout id="fmpgl1">
+        <af:panelGroupLayout layout="horizontal" id="fmpgl4">
+            <af:spacer width="12" id="fms5"/>
+            <!--<af:outputText value="#{userbean.specialMessage}"
+                           inlineStyle="color:rgb(0,0,255); font-weight:bold;" id="fmot2" />-->
+        </af:panelGroupLayout>
+        <af:spacer height="5" id="fms4"/>
+        <af:panelGroupLayout layout="horizontal" id="fmpgl2">
+            <af:spacer width="12" id="fms3"/>
+            <jsp:expression>workloadbean.getWorkloadWACStatus()</jsp:expression>
+            <jsp:expression>workloadbean.outputSystemStatus()</jsp:expression>
+            <jsp:expression>workloadbean.kickoutuser()</jsp:expression>
+        </af:panelGroupLayout>
+        <af:panelGroupLayout layout="horizontal" id="fmpgl5">
+            <af:spacer width="12"/>
+            Last Login:
+            <stratis:adfDateFormatter value="#{userbean.previousLogin}"
+                                      pattern="${userbean.dateWithTimeFormatPattern}"/>
+            <af:spacer width="24"/>
+            <af:outputText value="TimeZone: #{userbean.siteTimeZone}" id="siteInfoTimeZone"/>
+            <af:spacer width="24"/>
+            <af:outputText value="Version: #{userbean.stratisVersion}" id="fmot1"/>
+        </af:panelGroupLayout>
+        <af:spacer height="5" id="fms1"/>
+        <af:switcher facetName="#{footerbean.footerMainSwitcher}" id="fmss2">
+            <f:facet name="0">
+                <f:verbatim>
+                    <script language="Javascript" type="text/javascript">
+                      //alert('Your session has expired!\nYou will be returned to the login screen.');
+                      console.log('Footer detected expired/no session.')
+                      this.location.href = 'unauthenticated.html'
+                    </script>
+                </f:verbatim>
+            </f:facet>
+            <f:facet name="1">
+            </f:facet>
+            <f:facet name="2">
+                <af:panelGroupLayout id="shutdownGroup">
+                    <af:inputText id="shutdownmsg" clientComponent="true" value="#{workloadbean.shutDownMsg}" simple="true"/>
+                    <f:verbatim>
+                        <script language="Javascript" type="text/javascript">
+                          var msg = document.getElementById('wrap_footer:shutdownmsg::content')
+                          var msgtxt = ''
+                          if (msg != null) {
+                            msgtxt = msg.innerHTML
+                          }
+                          alert(msgtxt + '\nSystem will be shutdown immediately.')
+                          this.location.href = '\\'
+                        </script>
+                    </f:verbatim>
+                </af:panelGroupLayout>
+            </f:facet>
+        </af:switcher>
+        <af:switcher defaultFacet="#{userbean.forceredirect}" id="fms55">
+            <f:facet name="0"/>
+            <f:facet name="1">
+                <jsp:expression>userbean.getForceForwardPage()</jsp:expression>
+            </f:facet>
+        </af:switcher>
+        <af:panelGridLayout id="fmstl2">
+            <af:gridRow id="fmsrl5">
+                <af:gridCell id="fmscf5">
+                    <!-- are we using the comm -->
+                    <af:switcher defaultFacet="#{userbean.useprintcom}" id="fmss6">
+                        <f:facet name="1">
+                            <af:panelGroupLayout id="fm_pgl1">
+                                <af:outputText id="fmsot3">This is comm facet.</af:outputText>
+                                <f:verbatim>&lt;applet height="1" width="1" code="comapplet.COMApplet.class"</f:verbatim>
+                                <f:verbatim>archive="</f:verbatim><af:outputText
+                                    value="#{userbean.url}"/><f:verbatim>/applet/SCOMApplet.jar" &gt;</f:verbatim>
+                                <f:verbatim>&lt;param name="permissions" value="all-permissions" /&gt;</f:verbatim>
+                                <f:verbatim>&lt;param name="codebase_lookup" value="false" /&gt;</f:verbatim>
+                                <f:verbatim>&lt;param name="port" value="</f:verbatim>
+                                <af:outputText value="#{userbean.returncomport}"/>
+                                <f:verbatim>"/&gt;</f:verbatim>
+                                <f:verbatim>&lt;param name="str" value="</f:verbatim>
+                                <af:outputText value="#{userbean.printcomstring}"/>
+                                <f:verbatim>"/&gt;</f:verbatim>
+                                <f:verbatim>&lt;param name="debug" value="true"/&gt;</f:verbatim>
+                                <f:verbatim>&lt;param name="baud" value="</f:verbatim>
+                                <af:outputText value="#{userbean.returncombaud}"/>
+                                <f:verbatim>"/&gt;</f:verbatim>
+                                <f:verbatim>&lt;param name="parity" value="</f:verbatim>
+                                <af:outputText value="#{userbean.returncomparity}"/>
+                                <f:verbatim>"/&gt;</f:verbatim>
+                                <f:verbatim>&lt;param name="stopbits" value="</f:verbatim>
+                                <af:outputText value="#{userbean.returncomstopbits}"/>
+                                <f:verbatim>"/&gt;</f:verbatim>
+                                <f:verbatim>&lt;/applet&gt;</f:verbatim>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                    </af:switcher>
+
+                    <af:switcher defaultFacet="#{userbean.useHTMLPrint}" id="fmss42">
+                        <f:facet name="true">
+                            <af:panelGroupLayout id="fm_pgl42">
+                                <script language="Javascript" type="text/javascript">
+                                    window.open('/stratis/app/mobile/print/print-label', 'PrintWindow');
+                                </script>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                    </af:switcher>
+
+                </af:gridCell>
+                <af:gridCell id="fmscf6">
+                    <!-- are we using the comm -->
+                    <af:switcher defaultFacet="#{userbean.useprintcom2}" id="fmss7">
+                        <f:facet name="1">
+                            <af:panelGroupLayout>
+                                <af:outputText id="fmsot4">This is comm2 facet</af:outputText>
+                                <f:verbatim>&lt;applet height="1" width="1" code="comapplet.COMApplet.class"</f:verbatim>
+                                <f:verbatim>archive="</f:verbatim><af:outputText
+                                    value="#{userbean.url}"/><f:verbatim>/applet/SCOMApplet.jar" &gt;</f:verbatim>
+                                <f:verbatim>&lt;param name="permissions" value="all-permissions" /&gt;</f:verbatim>
+                                <f:verbatim>&lt;param name="codebase_lookup" value="false" /&gt;</f:verbatim>
+                                <f:verbatim>&lt;param name="port" value="</f:verbatim>
+                                <af:outputText value="#{userbean.returncomport2}"/>
+                                <f:verbatim>"/&gt;</f:verbatim>
+                                <f:verbatim>&lt;param name="str" value="</f:verbatim>
+                                <af:outputText value="#{userbean.printcomstring2}"/>
+                                <f:verbatim>"/&gt;</f:verbatim>
+                                <f:verbatim>&lt;param name="debug" value="true"/&gt;</f:verbatim>
+                                <f:verbatim>&lt;param name="baud" value="</f:verbatim>
+                                <af:outputText value="#{userbean.returncombaud2}"/>
+                                <f:verbatim>"/&gt;</f:verbatim>
+                                <f:verbatim>&lt;param name="parity" value="</f:verbatim>
+                                <af:outputText value="#{userbean.returncomparity2}"/>
+                                <f:verbatim>"/&gt;</f:verbatim>
+                                <f:verbatim>&lt;param name="stopbits" value="</f:verbatim>
+                                <af:outputText value="#{userbean.returncomstopbits2}"/>
+                                <f:verbatim>"/&gt;</f:verbatim>
+                                <f:verbatim>&lt;/applet&gt;</f:verbatim>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                    </af:switcher>
+                </af:gridCell>
+                <af:gridCell id="fmscf7">
+                    <af:switcher defaultFacet="#{userbean.useprintframe}" id="fmss8">
+                        <f:facet name="1">
+                            <af:panelGroupLayout>
+                                <af:outputText id="fmsot5">This is print facet.</af:outputText>
+                                <jsp:scriptlet>
+                                    userbean.setSiteContextPath(request.getContextPath());
+                                    userbean.setSiteServerName(request.getServerName());
+                                    userbean.setSiteProtocol(request.getProtocol());
+                                    userbean.setSiteServerPort(request.getServerPort());
+                                    userbean.setSiteURL(request.getRequestURL().toString());
+                                </jsp:scriptlet>
+                                <f:verbatim>&lt;applet height="1" width="1" code="comapplet.WinPrintApplet.class"</f:verbatim>
+                                <f:verbatim>archive="</f:verbatim><af:outputText
+                                    value="#{userbean.url}"/><f:verbatim>/applet/WinPrintApplet.jar" &gt;</f:verbatim>
+                                <f:verbatim>&lt;param name="noCopies" value="1"/&gt;</f:verbatim>
+                                <f:verbatim>&lt;param name="codebase_lookup" value="false" /&gt;</f:verbatim>
+                                <f:verbatim>&lt;param name="url" value="</f:verbatim>
+                                <af:outputText value="#{userbean.winPrintURL}"/>
+                                <f:verbatim>"/&gt;</f:verbatim>
+                                <f:verbatim>&lt;param name="orientation" value="</f:verbatim>
+                                <af:outputText value="#{userbean.winPrintOrientation}"/>
+                                <f:verbatim>"/&gt;</f:verbatim>
+                                <f:verbatim>&lt;param name="debug" value="true"/&gt;</f:verbatim>
+                                <f:verbatim>&lt;/applet&gt;</f:verbatim>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                    </af:switcher>
+                </af:gridCell>
+            </af:gridRow>
+        </af:panelGridLayout>
+    </af:panelGroupLayout>
+    <!-- Since every page will have the classification banner on it, this was a central place to add the eventNotifier instead of needing to add it on dozens of files. -->
+    <jsp:include page="/eventNotifier.jspx"/>
+</jsp:root>

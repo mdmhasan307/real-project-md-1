@@ -1,0 +1,48 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+##files for typescript compilation
+node_modules
+package-lock.json
+
+## jDeveloper ##
+.adf
+.data
+*.class
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+### Stuff ###
+.DS_Folder
+/efxsdklic.jar
+
+### Metro Generated ###
+GCSSMCWS/overlays/
+application/overlays/
+application/public_html/META-INF/context.xml
+
+/src/META-INF/persistence.xml
+
+/config/
+
+/conf/container/sources/application/stratis.war

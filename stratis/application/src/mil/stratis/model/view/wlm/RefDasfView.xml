@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="RefDasfView"
+   Version="11.1.2.64.36"
+   SelectList="RefDasf.DOCUMENT_NUMBER, 
+       RefDasf.ROUTING_IDENTIFIER_CODE, 
+       RefDasf.RECORD_FSC, 
+       RefDasf.RECORD_NIIN, 
+       RefDasf.RECORD_SMIC, 
+       RefDasf.UNIT_OF_ISSUE, 
+       RefDasf.UNIT_PRICE, 
+       RefDasf.QUANTITY_INVOICED, 
+       RefDasf.SUPPLEMENTARY_ADDRESS, 
+       RefDasf.SIGNAL_CODE, 
+       RefDasf.FUND_CODE, 
+       RefDasf.DISTRIBUTION_CODE, 
+       RefDasf.PROJECT_CODE, 
+       RefDasf.PRIORITY_DESIGNATOR_CODE, 
+       RefDasf.HOST_SYSTEM, 
+       RefDasf.QUANTITY_DUE, 
+       RefDasf.REF_DASF_ID"
+   FromList="REF_DASF RefDasf"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.wlm.RefDasfViewImpl"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="RefDasf"
+      Entity="mil.stratis.model.entity.wlm.RefDasf" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="DocumentNumber"
+      EntityAttrName="DocumentNumber"
+      EntityUsage="RefDasf"
+      AliasName="DOCUMENT_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RoutingIdentifierCode"
+      EntityAttrName="RoutingIdentifierCode"
+      EntityUsage="RefDasf"
+      AliasName="ROUTING_IDENTIFIER_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RecordFsc"
+      EntityAttrName="RecordFsc"
+      EntityUsage="RefDasf"
+      AliasName="RECORD_FSC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RecordNiin"
+      EntityAttrName="RecordNiin"
+      EntityUsage="RefDasf"
+      AliasName="RECORD_NIIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RecordSmic"
+      EntityAttrName="RecordSmic"
+      EntityUsage="RefDasf"
+      AliasName="RECORD_SMIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UnitOfIssue"
+      EntityAttrName="UnitOfIssue"
+      EntityUsage="RefDasf"
+      AliasName="UNIT_OF_ISSUE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UnitPrice"
+      EntityAttrName="UnitPrice"
+      EntityUsage="RefDasf"
+      AliasName="UNIT_PRICE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="QuantityInvoiced"
+      EntityAttrName="QuantityInvoiced"
+      EntityUsage="RefDasf"
+      AliasName="QUANTITY_INVOICED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SupplementaryAddress"
+      EntityAttrName="SupplementaryAddress"
+      EntityUsage="RefDasf"
+      AliasName="SUPPLEMENTARY_ADDRESS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SignalCode"
+      EntityAttrName="SignalCode"
+      EntityUsage="RefDasf"
+      AliasName="SIGNAL_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FundCode"
+      EntityAttrName="FundCode"
+      EntityUsage="RefDasf"
+      AliasName="FUND_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DistributionCode"
+      EntityAttrName="DistributionCode"
+      EntityUsage="RefDasf"
+      AliasName="DISTRIBUTION_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectCode"
+      EntityAttrName="ProjectCode"
+      EntityUsage="RefDasf"
+      AliasName="PROJECT_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PriorityDesignatorCode"
+      EntityAttrName="PriorityDesignatorCode"
+      EntityUsage="RefDasf"
+      AliasName="PRIORITY_DESIGNATOR_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="HostSystem"
+      EntityAttrName="HostSystem"
+      EntityUsage="RefDasf"
+      AliasName="HOST_SYSTEM" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="QuantityDue"
+      EntityAttrName="QuantityDue"
+      EntityUsage="RefDasf"
+      AliasName="QUANTITY_DUE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RefDasfId"
+      IsUpdateable="while_insert"
+      EntityAttrName="RefDasfId"
+      EntityUsage="RefDasf"
+      AliasName="REF_DASF_ID" >
+   </ViewAttribute>
+</ViewObject>

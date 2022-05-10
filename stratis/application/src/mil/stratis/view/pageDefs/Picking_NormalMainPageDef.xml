@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Picking_NormalMainPageDef"
+                ControllerClass="#{PickingAll}" Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="PickingGenQryVO1Iterator" RangeSize="-1" Binds="Root.PickingAM1.PickingGenQryVO1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="PickByPassQryVO1Iterator" RangeSize="-1" Binds="Root.PickingAM1.PickByPassQryVO1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="ErrorLVO1Iterator" RangeSize="-1" Binds="Root.WorkLoadManager1.ErrorLVO1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <attributeValues id="Scn" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Scn"/>
+      </AttrNames>
+    </attributeValues>
+     <attributeValues id="LocationLabel" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="LocationLabel"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Side" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Side"/>
+      </AttrNames>
+    </attributeValues>
+     <attributeValues id="Bay" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Bay"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Slot" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Slot"/>
+      </AttrNames>
+    </attributeValues>
+     <attributeValues id="LocLevel" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="LocLevel"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="DividerIndex" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="DividerIndex"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="DividerTypeId" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="DividerTypeId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Aisle" IterBinding="PickingGenQryVO1Iterator">
+      <AttrNames>
+        <Item Value="Aisle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ErrorLVO1Iterator" id="Eid">
+      <AttrNames>
+        <Item Value="Eid"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ErrorCode" IterBinding="ErrorLVO1Iterator">
+      <AttrNames>
+        <Item Value="ErrorCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ErrorDescription" IterBinding="ErrorLVO1Iterator">
+      <AttrNames>
+        <Item Value="ErrorDescription"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="SecurityLevel" IterBinding="ErrorLVO1Iterator">
+      <AttrNames>
+        <Item Value="SecurityLevel"/>
+      </AttrNames>
+    </attributeValues>
+    <list ListOperMode="navigation" IterBinding="PickByPassQryVO1Iterator" id="PickByPassList">
+      <AttrNames>
+        <Item Value="ErrorDescription"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="Eid"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="ErrorDescription"/>
+      </ListDisplayAttrNames>
+    </list>
+  </bindings>
+</pageDefinition>

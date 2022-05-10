@@ -1,0 +1,37 @@
+-- Insert into MLS2_SITES
+-- (SITE_ID, SITE_NAME, DESCN, TRANS_TS, MOD_BY_ID,
+--  DB_LINK_NAME)
+-- Values ('00000000111100000000000000000001', 'CLNC', 'Camp Lejeune, NC, USA',
+--         TO_TIMESTAMP('1/31/2020 6:21:18.845174 PM', 'fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS.FF AM'), 1,
+--         'dbl_stratclnc');
+-- Insert into MLS2_SITES
+-- (SITE_ID, SITE_NAME, DESCN, TRANS_TS, MOD_BY_ID,
+--  DB_LINK_NAME)
+-- Values ('00000000111100000000000000000002', 'BIC', 'Blount Island, FL, USA',
+--         TO_TIMESTAMP('1/31/2020 6:22:08.059164 PM', 'fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS.FF AM'), 1,
+--         'dbl_stratbic');
+-- Insert into MLS2_SITES
+-- (SITE_ID, SITE_NAME, DESCN, TRANS_TS, MOD_BY_ID,
+--  DB_LINK_NAME)
+-- Values ('00000000111100000000000000000003', 'CPEN', 'Camp Pendleton, CA, USA',
+--         TO_TIMESTAMP('1/31/2020 6:23:30.552717 PM', 'fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS.FF AM'), 1,
+--         'dbl_stratcpen');
+-- Insert into MLS2_SITES
+-- (SITE_ID, SITE_NAME, DESCN, TRANS_TS, MOD_BY_ID,
+--  DB_LINK_NAME)
+-- Values ('00000000111100000000000000000004', 'MCBH', 'Marine Corps Base Hawaii, Kaneohe Bay, USA',
+--         TO_TIMESTAMP('1/31/2020 6:24:29.524887 PM', 'fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS.FF AM'), 1,
+--         'dbl_stratmcbh');
+-- Insert into MLS2_SITES
+-- (SITE_ID, SITE_NAME, DESCN, TRANS_TS, MOD_BY_ID,
+--  DB_LINK_NAME)
+-- Values ('00000000111100000000000000000005', 'OKI', 'Camp KNSR, Okinawa, Japan',
+--         TO_TIMESTAMP('1/31/2020 6:25:37.111918 PM', 'fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS.FF AM'), 1,
+--         'dbl_stratoki');
+-- Insert into MLS2_SITES
+-- (SITE_ID, SITE_NAME, DESCN, TRANS_TS, MOD_BY_ID,
+--  DB_LINK_NAME)
+-- Values ('00000000111100000000000000000006', 'ESD', 'Expeditionary Support Division, 29 Palms, CA, USA',
+--         TO_TIMESTAMP('5/20/2020 12:00:00.000000 AM', 'fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS.FF AM'), 1,
+--         'dbl_stratesd');
+-- COMMIT;

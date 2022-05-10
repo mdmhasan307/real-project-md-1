@@ -1,0 +1,361 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="RefGbofView"
+   Version="11.1.2.64.36"
+   SelectList="RefGbof.PRIME_NSN, 
+       RefGbof.ACTIVITY_ADDRESS_CODE, 
+       RefGbof.PROCESS_SEQUENCE_CODE, 
+       RefGbof.DATE_BACK_ORDERED, 
+       RefGbof.DOCUMENT_IDENTIFIER_CODE, 
+       RefGbof.ROUTING_IDENTIFIER_CODE, 
+       RefGbof.MEDIA_AND_STATUS_CODE, 
+       RefGbof.NATIONAL_STOCK_NUMBER, 
+       RefGbof.UNIT_OF_ISSUE, 
+       RefGbof.TRANSACTION_QUANTITY, 
+       RefGbof.DOCUMENT_NUMBER, 
+       RefGbof.DEMAND_CODE, 
+       RefGbof.SUPPLEMENTARY_ADDRESS, 
+       RefGbof.SIGNAL_CODE, 
+       RefGbof.FUND_CODE, 
+       RefGbof.DISTRIBUTION_CODE, 
+       RefGbof.PROJECT_CODE, 
+       RefGbof.PRIORITY_DESIGNATOR_CODE, 
+       RefGbof.REQUIRED_DELIVERY_DATE, 
+       RefGbof.ADVICE_CODE, 
+       RefGbof.CONTROL_CODE, 
+       RefGbof.PASS_CONTROL_CODE, 
+       RefGbof.COST_CODE, 
+       RefGbof.TYPE_UNIT_CODE, 
+       RefGbof.CROSS_SUPPORT_GROUP_CODE, 
+       RefGbof.LOADED_UNIT_MIMMS_CODE, 
+       RefGbof.LOAD_DATE_INDICATOR, 
+       RefGbof.TRANSACTION_DATE, 
+       RefGbof.NONSYSTEM_ITEM_INDICATOR, 
+       RefGbof.ORIGINAL_DOC_ID_CODE, 
+       RefGbof.TRANSACTION_ROUTING_CODE, 
+       RefGbof.EXTENSION_QUANTITY, 
+       RefGbof.MIMMS_MANAGED_CODE, 
+       RefGbof.COMBAT_ESSENTIALITY_CODE, 
+       RefGbof.EXTENSION_UNIT_PRICE, 
+       RefGbof.EXTENSION_STATUS_CODE, 
+       RefGbof.STORES_ACCOUNT_CODE, 
+       RefGbof.MATERIEL_IDENTIFICATION_CODE, 
+       RefGbof.CONTROLLED_ITEM_CODE, 
+       RefGbof.TOTAL_BACK_ORDER_INDICATOR, 
+       RefGbof.PENDING_FUNDS_FIELD, 
+       RefGbof.ANALYST_CODE, 
+       RefGbof.PDRI, 
+       RefGbof.EXCEPTION_CODE, 
+       RefGbof.LAST_TRANSACTION_CODE, 
+       RefGbof.MRP_SERVICE_CODE, 
+       RefGbof.REF_GBOF_ID, 
+       RefGbof.SMIC"
+   FromList="REF_GBOF RefGbof"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.wlm.RefGbofViewImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="RefGbof"
+      Entity="mil.stratis.model.entity.wlm.RefGbof" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="PrimeNsn"
+      EntityAttrName="PrimeNsn"
+      EntityUsage="RefGbof"
+      AliasName="PRIME_NSN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ActivityAddressCode"
+      EntityAttrName="ActivityAddressCode"
+      EntityUsage="RefGbof"
+      AliasName="ACTIVITY_ADDRESS_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProcessSequenceCode"
+      EntityAttrName="ProcessSequenceCode"
+      EntityUsage="RefGbof"
+      AliasName="PROCESS_SEQUENCE_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DateBackOrdered"
+      EntityAttrName="DateBackOrdered"
+      EntityUsage="RefGbof"
+      AliasName="DATE_BACK_ORDERED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocumentIdentifierCode"
+      EntityAttrName="DocumentIdentifierCode"
+      EntityUsage="RefGbof"
+      AliasName="DOCUMENT_IDENTIFIER_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RoutingIdentifierCode"
+      EntityAttrName="RoutingIdentifierCode"
+      EntityUsage="RefGbof"
+      AliasName="ROUTING_IDENTIFIER_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MediaAndStatusCode"
+      EntityAttrName="MediaAndStatusCode"
+      EntityUsage="RefGbof"
+      AliasName="MEDIA_AND_STATUS_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NationalStockNumber"
+      EntityAttrName="NationalStockNumber"
+      EntityUsage="RefGbof"
+      AliasName="NATIONAL_STOCK_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UnitOfIssue"
+      EntityAttrName="UnitOfIssue"
+      EntityUsage="RefGbof"
+      AliasName="UNIT_OF_ISSUE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TransactionQuantity"
+      EntityAttrName="TransactionQuantity"
+      EntityUsage="RefGbof"
+      AliasName="TRANSACTION_QUANTITY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocumentNumber"
+      EntityAttrName="DocumentNumber"
+      EntityUsage="RefGbof"
+      AliasName="DOCUMENT_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DemandCode"
+      EntityAttrName="DemandCode"
+      EntityUsage="RefGbof"
+      AliasName="DEMAND_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SupplementaryAddress"
+      EntityAttrName="SupplementaryAddress"
+      EntityUsage="RefGbof"
+      AliasName="SUPPLEMENTARY_ADDRESS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SignalCode"
+      EntityAttrName="SignalCode"
+      EntityUsage="RefGbof"
+      AliasName="SIGNAL_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FundCode"
+      EntityAttrName="FundCode"
+      EntityUsage="RefGbof"
+      AliasName="FUND_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DistributionCode"
+      EntityAttrName="DistributionCode"
+      EntityUsage="RefGbof"
+      AliasName="DISTRIBUTION_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectCode"
+      EntityAttrName="ProjectCode"
+      EntityUsage="RefGbof"
+      AliasName="PROJECT_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PriorityDesignatorCode"
+      EntityAttrName="PriorityDesignatorCode"
+      EntityUsage="RefGbof"
+      AliasName="PRIORITY_DESIGNATOR_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RequiredDeliveryDate"
+      EntityAttrName="RequiredDeliveryDate"
+      EntityUsage="RefGbof"
+      AliasName="REQUIRED_DELIVERY_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AdviceCode"
+      EntityAttrName="AdviceCode"
+      EntityUsage="RefGbof"
+      AliasName="ADVICE_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ControlCode"
+      EntityAttrName="ControlCode"
+      EntityUsage="RefGbof"
+      AliasName="CONTROL_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PassControlCode"
+      EntityAttrName="PassControlCode"
+      EntityUsage="RefGbof"
+      AliasName="PASS_CONTROL_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CostCode"
+      EntityAttrName="CostCode"
+      EntityUsage="RefGbof"
+      AliasName="COST_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TypeUnitCode"
+      EntityAttrName="TypeUnitCode"
+      EntityUsage="RefGbof"
+      AliasName="TYPE_UNIT_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CrossSupportGroupCode"
+      EntityAttrName="CrossSupportGroupCode"
+      EntityUsage="RefGbof"
+      AliasName="CROSS_SUPPORT_GROUP_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LoadedUnitMimmsCode"
+      EntityAttrName="LoadedUnitMimmsCode"
+      EntityUsage="RefGbof"
+      AliasName="LOADED_UNIT_MIMMS_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LoadDateIndicator"
+      EntityAttrName="LoadDateIndicator"
+      EntityUsage="RefGbof"
+      AliasName="LOAD_DATE_INDICATOR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TransactionDate"
+      EntityAttrName="TransactionDate"
+      EntityUsage="RefGbof"
+      AliasName="TRANSACTION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NonsystemItemIndicator"
+      EntityAttrName="NonsystemItemIndicator"
+      EntityUsage="RefGbof"
+      AliasName="NONSYSTEM_ITEM_INDICATOR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OriginalDocIdCode"
+      EntityAttrName="OriginalDocIdCode"
+      EntityUsage="RefGbof"
+      AliasName="ORIGINAL_DOC_ID_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TransactionRoutingCode"
+      EntityAttrName="TransactionRoutingCode"
+      EntityUsage="RefGbof"
+      AliasName="TRANSACTION_ROUTING_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ExtensionQuantity"
+      EntityAttrName="ExtensionQuantity"
+      EntityUsage="RefGbof"
+      AliasName="EXTENSION_QUANTITY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MimmsManagedCode"
+      EntityAttrName="MimmsManagedCode"
+      EntityUsage="RefGbof"
+      AliasName="MIMMS_MANAGED_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CombatEssentialityCode"
+      EntityAttrName="CombatEssentialityCode"
+      EntityUsage="RefGbof"
+      AliasName="COMBAT_ESSENTIALITY_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ExtensionUnitPrice"
+      EntityAttrName="ExtensionUnitPrice"
+      EntityUsage="RefGbof"
+      AliasName="EXTENSION_UNIT_PRICE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ExtensionStatusCode"
+      EntityAttrName="ExtensionStatusCode"
+      EntityUsage="RefGbof"
+      AliasName="EXTENSION_STATUS_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StoresAccountCode"
+      EntityAttrName="StoresAccountCode"
+      EntityUsage="RefGbof"
+      AliasName="STORES_ACCOUNT_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MaterielIdentificationCode"
+      EntityAttrName="MaterielIdentificationCode"
+      EntityUsage="RefGbof"
+      AliasName="MATERIEL_IDENTIFICATION_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ControlledItemCode"
+      EntityAttrName="ControlledItemCode"
+      EntityUsage="RefGbof"
+      AliasName="CONTROLLED_ITEM_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TotalBackOrderIndicator"
+      EntityAttrName="TotalBackOrderIndicator"
+      EntityUsage="RefGbof"
+      AliasName="TOTAL_BACK_ORDER_INDICATOR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PendingFundsField"
+      EntityAttrName="PendingFundsField"
+      EntityUsage="RefGbof"
+      AliasName="PENDING_FUNDS_FIELD" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AnalystCode"
+      EntityAttrName="AnalystCode"
+      EntityUsage="RefGbof"
+      AliasName="ANALYST_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Pdri"
+      EntityAttrName="Pdri"
+      EntityUsage="RefGbof"
+      AliasName="PDRI" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ExceptionCode"
+      EntityAttrName="ExceptionCode"
+      EntityUsage="RefGbof"
+      AliasName="EXCEPTION_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastTransactionCode"
+      EntityAttrName="LastTransactionCode"
+      EntityUsage="RefGbof"
+      AliasName="LAST_TRANSACTION_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MrpServiceCode"
+      EntityAttrName="MrpServiceCode"
+      EntityUsage="RefGbof"
+      AliasName="MRP_SERVICE_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RefGbofId"
+      IsUpdateable="while_insert"
+      IsNotNull="true"
+      EntityAttrName="RefGbofId"
+      EntityUsage="RefGbof"
+      AliasName="REF_GBOF_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Smic"
+      EntityAttrName="Smic"
+      EntityUsage="RefGbof"
+      AliasName="SMIC" >
+   </ViewAttribute>
+</ViewObject>

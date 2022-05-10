@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Packing_HomePageDef"
+                Package="mil.stratis.view.pageDefs" ControllerClass="#{consolbean}">
+  <parameters/>
+  <executables>
+    <iterator id="pinLoadDetail1Iterator" RangeSize="10" Binds="Root.PackingModule1.PinLoadDetail1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="pinLoadReport1Iterator" RangeSize="10" Binds="Root.PackingModule1.PinLoadReport1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="pinLoadDetail1" IterBinding="pinLoadDetail1Iterator">
+      <AttrNames>
+        <Item Value="Workstation"/>
+        <Item Value="PIN1"/>
+        <Item Value="QTY1"/>
+        <Item Value="COL1"/>
+        <Item Value="LEV1"/>
+        <Item Value="TimeOfPick"/>
+      </AttrNames>
+    </table>
+    <table id="pinLoadReport1" IterBinding="pinLoadReport1Iterator">
+      <AttrNames>
+        <Item Value="Workstation"/>
+        <Item Value="UnpackedPins"/>
+      </AttrNames>
+    </table>
+  </bindings>
+</pageDefinition> 
+

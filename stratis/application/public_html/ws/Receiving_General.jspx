@@ -1,0 +1,546 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:h="http://java.sun.com/jsf/html">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="1"/>
+    <jsp:setProperty name="userbean" property="selected2" value="0"/>
+    <f:view>
+        <af:document title="Receiving_General" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout startWidth="25" topHeight="150" bottomHeight="25" id="psl1">
+                    <f:facet name="start">
+                        <f:subview id="rg_wrap_sidebar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="top">
+                        <f:subview id="rg_wrap_header">
+                            <jsp:include page="/ws/WS_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll" id="pgl1">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <!-- ZSL 12/2017 moved location to fix the application hanging problem while traversing the menu tabs -->
+                            <!--af:form id="f1"-->
+                            <af:panelGroupLayout layout="vertical" id="pgl2">
+                                <!-- START TOP PANEL -->
+                                <!-- <af:panelHeader text="Receiving" id="ph1"> -->
+                                <af:outputLabel value="Receiving" inlineStyle="font-weight:bold;" id="ol2"/>
+                                <af:separator id="s1"/>
+                                <af:spacer height="5" id="s2"/>
+                                <af:panelBox text="Capture Receipt Information" showDisclosure="false" id="pb1">
+                                    <af:separator id="s3"/>
+                                    <af:spacer height="10" id="s39"/>
+                                    <h:panelGrid id="panelBoxGrid" columns="3" cellspacing="0" summary="">
+                                        <af:panelBox text="Scan 2D Barcode" showDisclosure="false" id="pb2">
+                                            <af:separator id="s4"/>
+                                            <af:spacer height="5" id="s5"/>
+                                            <af:outputLabel for="twoDScnStr" id="ol33"/>
+                                            <!-- Does this casuse any shift? -->
+                                            <af:inputText rows="4" id="twoDScnStr"
+                                                          contentStyle="text-transform:uppercase;"
+                                                          binding="#{backing_app_ReceiptGeneral.twoDScnStr}"
+                                                          columns="75" inlineStyle="text-transform:uppercase;"/>
+                                            <af:spacer height="40" id="s6"/>
+                                        </af:panelBox>
+                                        <af:panelGroupLayout layout="horizontal" id="pgl3">
+                                            <af:spacer width="25" id="s7"/>
+                                            <af:outputLabel value="OR" inlineStyle="font-weight:bold;" id="ol1"/>
+                                            <af:spacer width="25" id="s8"/>
+                                        </af:panelGroupLayout>
+                                        <af:panelBox text="Scan or Enter Barcodes" showDisclosure="false" id="pb3">
+                                            <af:separator id="s9"/>
+                                            <af:spacer height="5" id="s10"/>
+                                            <af:panelFormLayout id="pfl2">
+                                                <af:inputText label="Doc Num / Doc Suffix" columns="20" id="docNumSuStr"
+                                                              binding="#{backing_app_ReceiptGeneral.docAndSuStr}"
+                                                              maximumLength="14" contentStyle="text-transform:uppercase;"
+                                                              value="">
+                                                    <!--
+                                                        <af:clientListener method="javascript:tabNext1(document.getElementById('docNumSuStr'),15, document.getElementById('nsnStr'));"
+                                                                           type="keyDown"/>
+                                                                    -->
+                                                </af:inputText>
+                                                <af:inputText label="NSN" columns="15"
+                                                              inlineStyle="padding:inherit;"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              id="nsnStr" binding="#{backing_app_ReceiptGeneral.nsnStr}"
+                                                              maximumLength="15" value="">
+                                                    <!--
+                                                        <af:clientListener method="javascript:tabNext1(document.getElementById('nsnStr'),15, document.getElementById('niinRiInfoStr'));"
+                                                                           type="keyDown"/>
+                                                                    -->
+                                                </af:inputText>
+                                                <af:inputText label="RI From/UI/Quantity/CC/COG/Unit Price" columns="20"
+                                                              inlineStyle="padding:inherit;"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              id="niinRiInfoStr"
+                                                              binding="#{backing_app_ReceiptGeneral.riQUiPrStr}"
+                                                              maximumLength="24" value="">
+                                                    <!--
+                                                        <af:clientListener method="javascript:tabNext1(document.getElementById('niinRiInfoStr'),20, document.getElementById('createButton'));"
+                                                                           type="keyDown"/>
+                                                                    -->
+                                                </af:inputText>
+                                                <af:spacer height="5" id="s11"/>
+                                                <af:selectBooleanCheckbox id="chkPartialShipment"
+                                                                          binding="#{backing_app_ReceiptGeneral.chkPartialShipment}"
+                                                                          label="Partial Shipment?"
+                                                                          inlineStyle="#{backing_app_ReceiptGeneral.displayNone}"/>
+                                                <f:facet name="footer"/>
+                                            </af:panelFormLayout>
+                                            <af:spacer height="10" id="s12"/>
+                                        </af:panelBox>
+                                    </h:panelGrid>
+                                    <af:spacer height="10" id="s13"/>
+                                    <af:toolbar id="t1">
+                                        <af:button id="readDimWt" text="Read Dim. And Wt." immediate="true"
+                                                          action="#{backing_app_ReceiptGeneral.getCubiscanReading}"
+                                                          rendered="false" partialSubmit="false"></af:button>
+                                        <af:spacer width="10" id="s14"/>
+                                        <af:button text="Continue" actionListener="#{bindings.Rollback.execute}"
+                                                          action="#{backing_app_ReceiptGeneral.commandButton_action}"
+                                                          partialSubmit="#{backing_app_ReceiptGeneral.uiDialog}"
+                                                          useWindow="#{backing_app_ReceiptGeneral.uiDialog}"
+                                                          windowHeight="300" windowWidth="600" id="createButton"
+                                                          launchListener="#{backing_app_ReceiptGeneral.handleUIDialogLaunch}"></af:button>
+                                        <af:spacer width="10" id="s15"/>
+                                        <af:button id="btnClear" actionListener="#{bindings.Rollback.execute}"
+                                                          text="Cancel" immediate="true" action="GoReceivingGeneral" partialSubmit="false">
+                                            <af:resetActionListener/>
+                                        </af:button>
+                                    </af:toolbar>
+                                </af:panelBox>
+                                <!-- </af:panelHeader> -->
+                                <!-- END OF TOP PANEL -->
+                                <!-- START BOTTOM PANEL -->
+                                <af:panelBox text="Detail Panel" showDisclosure="false" id="pb4"
+                                             rendered="#{backing_app_ReceiptGeneral.inProgress}">
+                                    <af:separator id="s16"/>
+                                    <af:panelGroupLayout layout="vertical" id="pgl4">
+                                        <h:panelGrid id="panelBoxGrid2" columns="3" cellspacing="0" summary="">
+                                            <af:panelBox text="Identification" showDisclosure="false" id="pb5">
+                                                <af:separator id="s17"/>
+                                                <af:spacer height="5" width="300" id="s18"/>
+                                                <af:panelGroupLayout layout="horizontal" id="pgl5">
+                                                    <!-- columns="#{bindings.ReceiptView1DocumentNumber.displayWidth}" styleClass="ReadOnlyField"  -->
+                                                    <!-- #{bindings.ReceiptView1DocumentNumber.label} -->
+                                                    <af:panelGroupLayout layout="vertical" halign="start" valign="top"
+                                                                         id="pgl6">
+                                                        <!-- #{bindings.ReceiptView1DocumentNumber.inputValue} -->
+                                                        <af:outputLabel value="Document Number" for="itDocNum"
+                                                                        id="ol3"/>
+                                                        <af:inputText id="itDocNum"
+                                                                      value="#{bindings.ReceiptView1DocumentNumber.inputValue}"
+                                                                      columns="20" styleClass="ReadOnlyField"
+                                                                      readOnly="true" inlineStyle="font-weight:bold;"/>
+                                                    </af:panelGroupLayout>
+                                                </af:panelGroupLayout>
+                                            </af:panelBox>
+                                            <af:spacer width="10" id="s19"/>
+                                            <af:panelBox text="NIIN Information" showDisclosure="false" id="pb6">
+                                                <af:separator id="s20"/>
+                                                <af:spacer height="5" width="400" id="s21"/>
+                                                <af:panelGroupLayout layout="horizontal" id="pgl8">
+                                                    <af:panelGroupLayout layout="vertical" halign="start" id="pgl9">
+                                                        <af:outputLabel value="FSC" for="itFsc" id="ol5"/>
+                                                        <af:inputText id="itFsc"
+                                                                      value="#{bindings.NiinInfoLVO2Fsc.inputValue}"
+                                                                      styleClass="ReadOnlyField" readOnly="true"
+                                                                      columns="#{bindings.NiinInfoLVO2Fsc.displayWidth}"/>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer width="10" id="s35"/>
+                                                    <af:panelGroupLayout layout="vertical" halign="start" id="pgl10">
+                                                        <af:outputLabel value="NIIN" for="itNiin" id="ol6"/>
+                                                        <af:inputText id="itNiin" readOnly="true"
+                                                                      styleClass="ReadOnlyField"
+                                                                      value="#{bindings.NiinInfoLVO2Niin.inputValue}"
+                                                                      columns="#{bindings.NiinInfoLVO2Niin.displayWidth}"/>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer width="10" id="s36"/>
+                                                    <af:panelGroupLayout layout="vertical" halign="start" id="pgl11">
+                                                        <af:outputLabel value="UI" for="itNiinUI" id="ol7"/>
+                                                        <af:inputText id="itNiinUI" styleClass="ReadOnlyField"
+                                                                      readOnly="true"
+                                                                      value="#{bindings.NiinInfoLVO2Ui.inputValue}"
+                                                                      columns="#{bindings.NiinInfoLVO2Ui.displayWidth}"/>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer width="10" id="s37"/>
+                                                    <af:panelGroupLayout layout="vertical" halign="start" id="pgl12">
+                                                        <af:outputLabel value="Price" for="itPrice" id="ol8"/>
+                                                        <af:inputText id="itPrice"
+                                                                      value="#{bindings.NiinInfoLVO2Price.inputValue}"
+                                                                      styleClass="ReadOnlyField" readOnly="true"
+                                                                      columns="#{bindings.NiinInfoLVO2Price.displayWidth}"/>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer width="10" id="s38"/>
+                                                    <af:panelGroupLayout layout="vertical" halign="start" id="pgl13">
+                                                        <af:outputLabel value="Nomenclature" for="itNomen" id="ol9"/>
+                                                        <af:inputText id="itNomen"
+                                                                      value="#{bindings.NiinInfoLVO2Nomenclature.inputValue}"
+                                                                      readOnly="true" styleClass="ReadOnlyField"
+                                                                      columns="#{bindings.NiinInfoLVO2Nomenclature.displayWidth}"/>
+                                                    </af:panelGroupLayout>
+                                                </af:panelGroupLayout>
+                                            </af:panelBox>
+                                        </h:panelGrid>
+                                        <h:panelGrid id="panelBoxGrid3" columns="3" cellspacing="0" summary="">
+                                            <af:panelBox text="Categorization" showDisclosure="false" id="pb7">
+                                                <af:separator id="s22"/>
+                                                <af:spacer height="5" id="s23"/>
+                                                <af:panelGroupLayout layout="horizontal" id="pgl14">
+                                                    <af:panelGroupLayout layout="vertical" halign="start" id="pgl15">
+                                                        <af:outputLabel value="CC" for="socCc" id="ol10"/>
+                                                        <af:selectOneChoice value="#{bindings.ReceiptView1Cc.inputValue}"
+                                                                            id="socCc">
+                                                            <f:selectItems value="#{bindings.ReceiptView1Cc.items}"
+                                                                           id="siCc"/>
+                                                        </af:selectOneChoice>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer width="10" id="s40"/>
+                                                    <af:panelGroupLayout layout="vertical" halign="start" id="pgl16">
+                                                        <af:outputLabel value="Shelf Life Code" for="itShelfLife"
+                                                                        id="ol11"/>
+                                                        <af:inputText value="#{bindings.ReceiptView1ShelfLifeCode.inputValue}"
+                                                                      required="#{bindings.ReceiptView1ShelfLifeCode.mandatory}"
+                                                                      inlineStyle="font-weight:bold;"
+                                                                      columns="#{bindings.ReceiptView1ShelfLifeCode.displayWidth}"
+                                                                      maximumLength="1" id="itShelfLife">
+                                                            <f:validator binding="#{bindings.ReceiptView1ShelfLifeCode.validator}"/>
+                                                        </af:inputText>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer width="10" id="s41"/>
+                                                    <af:panelGroupLayout layout="vertical" halign="start" id="pgl17">
+                                                        <af:outputLabel value="Project Code" for="itProjCode"
+                                                                        id="ol12"/>
+                                                        <af:inputText value="#{bindings.ReceiptView1ProjectCode1.inputValue}"
+                                                                      required="#{bindings.ReceiptView1ProjectCode1.mandatory}"
+                                                                      columns="#{bindings.ReceiptView1ProjectCode1.displayWidth}"
+                                                                      maximumLength="3"
+                                                                      contentStyle="text-transform:uppercase;"
+                                                                      id="itProjCode">
+                                                            <f:validator binding="#{bindings.ReceiptView1ProjectCode1.validator}"/>
+                                                        </af:inputText>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer width="10" id="s42"/>
+                                                    <af:panelGroupLayout layout="vertical" halign="start" id="pgl18">
+                                                        <af:outputLabel value="Purpose Code" for="socPurposeCode"
+                                                                        id="ol13"/>
+                                                        <af:selectOneChoice value="#{bindings.ReceiptView1Pc.inputValue}"
+                                                                            id="socPurposeCode">
+                                                            <f:selectItems value="#{bindings.ReceiptView1Pc.items}"
+                                                                           id="siPurposeCode"/>
+                                                        </af:selectOneChoice>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer width="10" id="s43"/>
+                                                    <af:panelGroupLayout layout="vertical" halign="start" id="pgl19">
+                                                        <af:outputLabel value="Cognizance Code" for="socCogCode"
+                                                                        id="ol14"/>
+                                                        <af:selectOneChoice value="#{bindings.ReceiptView1CognizanceCode.inputValue}"
+                                                                            id="socCogCode">
+                                                            <f:selectItems value="#{bindings.ReceiptView1CognizanceCode.items}"
+                                                                           id="siCogCode"/>
+                                                        </af:selectOneChoice>
+                                                    </af:panelGroupLayout>
+                                                </af:panelGroupLayout>
+                                            </af:panelBox>
+                                            <af:spacer width="10" id="s24"/>
+                                            <af:panelBox text="Unit Issue Info" showDisclosure="false" id="pb8">
+                                                <af:separator id="s25"/>
+                                                <af:spacer height="5" id="s26"/>
+                                                <af:panelGroupLayout layout="horizontal" id="pgl20">
+                                                    <af:panelGroupLayout layout="vertical" halign="start" id="pgl21">
+                                                        <af:outputLabel value="UI" for="itUi"
+                                                                        rendered="#{backing_app_ReceiptGeneral.uiSame != true}"
+                                                                        id="ol15"/>
+                                                        <af:inputText value="#{bindings.ReceiptView1Ui.inputValue}"
+                                                                      simple="true"
+                                                                      required="#{bindings.ReceiptView1Ui.mandatory}"
+                                                                      columns="#{bindings.ReceiptView1Ui.displayWidth}"
+                                                                      contentStyle="text-transform:uppercase;"
+                                                                      readOnly="false"
+                                                                      rendered="#{backing_app_ReceiptGeneral.uiSame != true}"
+                                                                      id="itUi">
+                                                            <f:validator binding="#{bindings.ReceiptView1Ui.validator}"/>
+                                                        </af:inputText>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer width="10"
+                                                               rendered="#{backing_app_ReceiptGeneral.uiSame != true}"
+                                                               id="s44"/>
+                                                    <af:panelGroupLayout layout="vertical" halign="start" id="pgl22">
+                                                        <af:outputLabel value="UI" for="itUi2"
+                                                                        rendered="#{backing_app_ReceiptGeneral.uiSame == true}"
+                                                                        id="ol16"/>
+                                                        <af:inputText rendered="#{backing_app_ReceiptGeneral.uiSame == true}"
+                                                                      value="#{bindings.ReceiptView1Ui.inputValue}"
+                                                                      columns="#{bindings.ReceiptView1Ui.displayWidth}"
+                                                                      styleClass="ReadOnlyField" readOnly="true"
+                                                                      id="itUi2"/>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer width="10" id="s46"/>
+                                                    <af:panelGroupLayout layout="vertical" halign="start" id="pgl25">
+                                                        <af:outputLabel value="UI Price" for="itUiPrice" id="ol18"/>
+                                                        <af:inputText rendered="true"
+                                                                      value="#{bindings.ReceiptView1Price.inputValue}"
+                                                                      columns="#{bindings.ReceiptView1Price.displayWidth}"
+                                                                      styleClass="ReadOnlyField" readOnly="true"
+                                                                      id="itUiPrice"/>
+                                                    </af:panelGroupLayout>
+                                                </af:panelGroupLayout>
+                                            </af:panelBox>
+                                        </h:panelGrid>
+                                        <h:panelGrid id="panelBoxGrid4" columns="3" cellspacing="0" summary="">
+                                            <af:panelBox text="Quantity &amp; RI" showDisclosure="false" id="pb9">
+                                                <af:separator id="s27"/>
+                                                <af:spacer height="5" id="s28"/>
+                                                <af:panelGroupLayout layout="horizontal" id="pgl23">
+                                                    <af:spacer width="10"
+                                                               rendered="#{backing_app_ReceiptGeneral.uiDiff == true}"
+                                                               id="s45"/>
+                                                    <af:panelGroupLayout layout="vertical" halign="start"
+                                                                         rendered="#{backing_app_ReceiptGeneral.uiDiff == true}"
+                                                                         id="pgl24">
+                                                        <af:outputLabel value="Qty Invoiced" for="itQtyInvoiced"
+                                                                        inlineStyle="white-space:nowrap;" id="ol17"/>
+                                                        <af:inputText value="#{bindings.ReceiptView1QuantityInvoiced.inputValue}"
+                                                                      required="#{bindings.ReceiptView1QuantityInvoiced.mandatory}"
+                                                                      columns="#{bindings.ReceiptView1QuantityInvoiced.displayWidth}"
+                                                                      readOnly="false"
+                                                                      rendered="#{backing_app_ReceiptGeneral.uiDiff == true}"
+                                                                      id="itQtyInvoiced">
+                                                            <af:validateLongRange/>
+                                                            <f:validator binding="#{bindings.ReceiptView1QuantityInvoiced.validator}"/>
+                                                            <f:convertNumber groupingUsed="false"
+                                                                             pattern="#{bindings.ReceiptView1QuantityInvoiced.format}"/>
+                                                        </af:inputText>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer width="10"
+                                                               rendered="#{backing_app_ReceiptGeneral.uiDiff != true}"
+                                                               id="s47"/>
+                                                    <af:panelGroupLayout layout="vertical" halign="start"
+                                                                         rendered="#{backing_app_ReceiptGeneral.uiDiff != true}"
+                                                                         id="pgl26">
+                                                        <af:outputLabel value="Qty Invoiced" for="itInvoiceReadOnly"
+                                                                        inlineStyle="white-space:nowrap;" id="ol19"/>
+                                                        <af:inputText rendered="#{backing_app_ReceiptGeneral.uiDiff != true}"
+                                                                      value="#{bindings.ReceiptView1QuantityInvoiced.inputValue}"
+                                                                      columns="#{bindings.ReceiptView1QuantityInvoiced.displayWidth}"
+                                                                      styleClass="ReadOnlyField" readOnly="true"
+                                                                      id="itInvoiceReadOnly"/>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer width="10" id="s48"/>
+                                                    <af:panelGroupLayout layout="vertical" halign="start" id="pgl27">
+                                                        <af:outputLabel value="Qty Received" for="itQtyReceived"
+                                                                        id="ol20" inlineStyle="font-weight:bold;"/>
+                                                        <af:inputText columns="12"
+                                                                      value="#{backing_app_ReceiptGeneral.quantityReceived}"
+                                                                      valueChangeListener="#{backing_app_ReceiptGeneral.AssignQuantityReceived}"
+                                                                      maximumLength="5" id="itQtyReceived">
+                                                            <af:validateRegExp pattern="[0-9]{1,5}" messageDetailNoMatch="Qty must be a whole number."/>
+                                                        </af:inputText>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer width="10" id="s49"/>
+                                                    <af:panelGroupLayout layout="vertical" halign="start" id="pgl28">
+                                                        <af:outputLabel value="Qty Inducted" for="itQtyInducted"
+                                                                        id="ol21" inlineStyle="font-weight:bold;"/>
+                                                        <af:inputText value="#{bindings.ReceiptView1QuantityInducted.inputValue}"
+                                                                      required="#{bindings.ReceiptView1QuantityInducted.mandatory}"
+                                                                      columns="#{bindings.ReceiptView1QuantityInducted.displayWidth}"
+                                                                      maximumLength="5" id="itQtyInducted" validator = "#{backing_app_ReceiptGeneral.qtyInvValidation}" >
+                                                            <!--<af:validateLongRange />-->
+                                                        </af:inputText>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer width="10" id="s50"/>
+                                                    <af:panelGroupLayout layout="vertical" halign="start" id="pgl29">
+                                                        <af:outputLabel value="RI" for="itRi" id="ol22" inlineStyle="font-weight:bold;"/>
+                                                        <af:inputText value="#{bindings.ReceiptView1Ri.inputValue}"
+                                                                      inlineStyle="padding:inherit;"
+                                                                      contentStyle="text-transform:uppercase;"
+                                                                      required="#{bindings.ReceiptView1Ri.mandatory}"
+                                                                      id="itRi">
+                                                            <af:validateRegExp pattern="[a-zA-Z0-9]{3}" messageDetailNoMatch="RI Field only allows alphanumeric characters."/>
+                                                        </af:inputText>
+                                                    </af:panelGroupLayout>
+                                                </af:panelGroupLayout>
+                                            </af:panelBox>
+                                            <af:spacer width="10" id="s29"/>
+                                            <af:panelBox text="Shipping Info" showDisclosure="false" id="pb10">
+                                                <af:separator id="s30"/>
+                                                <af:spacer height="5" id="s31"/>
+                                                <af:panelGroupLayout layout="horizontal" id="pgl30">
+                                                    <af:panelGroupLayout layout="vertical" halign="start" id="pgl31">
+                                                        <af:outputLabel value="Ship To" for="itShipTo" id="ol23"/>
+                                                        <af:inputText value="#{bindings.ReceiptView1Consignee.inputValue}"
+                                                                      inlineStyle="padding:inherit;"
+                                                                      contentStyle="text-transform:uppercase;"
+                                                                      required="#{bindings.ReceiptView1Consignee.mandatory}"
+                                                                      columns="#{bindings.ReceiptView1Consignee.displayWidth}"
+                                                                      maximumLength="6" id="itShipTo">
+                                                            <f:validator binding="#{bindings.ReceiptView1Consignee.validator}"/>
+                                                        </af:inputText>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer width="10" id="s51"/>
+                                                    <af:panelGroupLayout layout="vertical" halign="start" id="pgl32">
+                                                        <af:outputLabel value="Shipped From" for="itShippedFrom"
+                                                                        id="ol24"/>
+                                                        <af:inputText value="#{bindings.ReceiptView1ShippedFrom.inputValue}"
+                                                                      inlineStyle="padding:inherit;"
+                                                                      contentStyle="text-transform:uppercase;"
+                                                                      required="#{bindings.ReceiptView1ShippedFrom.mandatory}"
+                                                                      columns="#{bindings.ReceiptView1ShippedFrom.displayWidth}"
+                                                                      maximumLength="6" id="itShippedFrom">
+                                                            <f:validator binding="#{bindings.ReceiptView1ShippedFrom.validator}"/>
+                                                        </af:inputText>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer width="10" id="s52"/>
+                                                    <af:panelGroupLayout layout="vertical" halign="start" id="pgl33">
+                                                        <af:outputLabel value="Supplementary Address"
+                                                                        for="itSuppAddress" id="ol25"/>
+                                                        <af:inputText value="#{bindings.ReceiptView1SupplementaryAddress.inputValue}"
+                                                                      inlineStyle="padding:inherit;"
+                                                                      contentStyle="text-transform:uppercase;"
+                                                                      required="#{bindings.ReceiptView1SupplementaryAddress.mandatory}"
+                                                                      columns="#{bindings.ReceiptView1SupplementaryAddress.displayWidth}"
+                                                                      maximumLength="6" id="itSuppAddress">
+                                                            <f:validator binding="#{bindings.ReceiptView1SupplementaryAddress.validator}"/>
+                                                        </af:inputText>
+                                                    </af:panelGroupLayout>
+                                                </af:panelGroupLayout>
+                                            </af:panelBox>
+                                        </h:panelGrid>
+                                        <h:panelGrid id="panelBoxGrid5" columns="1" cellspacing="0" summary="">
+                                            <af:panelBox text="Location / Weight / Cube Information"
+                                                         showDisclosure="false" id="pb11">
+                                                <af:separator id="s32"/>
+                                                <af:spacer height="5" id="s33"/>
+                                                <af:panelGroupLayout layout="horizontal" id="pgl34">
+                                                    <af:spacer width="10" id="s53"/>
+                                                    <af:panelGroupLayout layout="vertical" halign="start" id="pgl35">
+                                                        <af:outputLabel value="Bulk Location Only"
+                                                                        for="socMechNonMechFlag" id="ol26"/>
+                                                        <af:selectOneChoice value="#{bindings.ReceiptView1MechNonMechFlag.inputValue}"
+                                                                            id="socMechNonMechFlag">
+                                                            <f:selectItems value="#{bindings.ReceiptView1MechNonMechFlag.items}"
+                                                                           id="siMechNonMechFlag"/>
+                                                        </af:selectOneChoice>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer width="10" id="s54"/>
+                                                    <af:panelGroupLayout layout="vertical" halign="start" id="pgl36">
+                                                        <af:outputLabel value="Qty Measured" for="qtyMeasuredId"
+                                                                        id="ol27"/>
+                                                        <af:inputText value="#{bindings.ReceiptView1QuantityMeasured.inputValue}"
+                                                                      required="#{bindings.ReceiptView1QuantityMeasured.mandatory}"
+                                                                      columns="#{bindings.ReceiptView1QuantityMeasured.displayWidth}"
+                                                                      maximumLength="5" id="qtyMeasuredId"
+                                                                      autoSubmit="true">
+                                                            <af:validateLongRange/>
+                                                            <f:validator binding="#{bindings.ReceiptView1QuantityMeasured.validator}"/>
+                                                            <f:convertNumber groupingUsed="false"
+                                                                             pattern="#{bindings.ReceiptView1QuantityMeasured.format}"/>
+                                                        </af:inputText>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer width="10" id="s55"/>
+                                                    <af:panelGroupLayout layout="vertical" halign="start" id="pgl37">
+                                                        <af:outputLabel value="Weight" for="weightId" id="ol28"/>
+                                                        <af:inputText value="#{bindings.ReceiptView1Weight.inputValue}"
+                                                                      required="#{bindings.ReceiptView1Weight.mandatory}"
+                                                                      columns="#{bindings.ReceiptView1Weight.displayWidth}"
+                                                                      maximumLength="7" id="weightId">
+                                                            <f:validator binding="#{bindings.ReceiptView1Weight.validator}"/>
+                                                            <f:convertNumber groupingUsed="false"
+                                                                             pattern="#{bindings.ReceiptView1Weight.format}"/>
+                                                        </af:inputText>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer width="10" id="s56"/>
+                                                    <af:panelGroupLayout layout="vertical" halign="start" id="pgl38">
+                                                        <af:outputLabel value="Length" for="lengthId" id="ol29"/>
+                                                        <af:inputText value="#{bindings.ReceiptView1Length.inputValue}"
+                                                                      required="#{bindings.ReceiptView1Length.mandatory}"
+                                                                      columns="#{bindings.ReceiptView1Length.displayWidth}"
+                                                                      maximumLength="7" id="lengthId">
+                                                            <f:validator binding="#{bindings.ReceiptView1Length.validator}"/>
+                                                            <f:convertNumber groupingUsed="false"
+                                                                             pattern="#{bindings.ReceiptView1Length.format}"/>
+                                                        </af:inputText>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer width="10" id="s57"/>
+                                                    <af:panelGroupLayout layout="vertical" halign="start" id="pgl39">
+                                                        <af:outputLabel value="Width" for="widthId" id="ol30"/>
+                                                        <af:inputText value="#{bindings.ReceiptView1Width.inputValue}"
+                                                                      required="#{bindings.ReceiptView1Width.mandatory}"
+                                                                      columns="#{bindings.ReceiptView1Width.displayWidth}"
+                                                                      maximumLength="7" id="widthId">
+                                                            <f:validator binding="#{bindings.ReceiptView1Width.validator}"/>
+                                                            <f:convertNumber groupingUsed="false"
+                                                                             pattern="#{bindings.ReceiptView1Width.format}"/>
+                                                        </af:inputText>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer width="10" id="s58"/>
+                                                    <af:panelGroupLayout layout="vertical" halign="start" id="pgl40">
+                                                        <af:outputLabel value="Height" for="heightId" id="ol31"/>
+                                                        <af:inputText value="#{bindings.ReceiptView1Height.inputValue}"
+                                                                      required="#{bindings.ReceiptView1Height.mandatory}"
+                                                                      columns="#{bindings.ReceiptView1Height.displayWidth}"
+                                                                      maximumLength="7" id="heightId">
+                                                            <f:validator binding="#{bindings.ReceiptView1Height.validator}"/>
+                                                            <f:convertNumber groupingUsed="false"
+                                                                             pattern="#{bindings.ReceiptView1Height.format}"/>
+                                                        </af:inputText>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer width="10" id="s59"/>
+                                                    <af:panelGroupLayout layout="vertical" halign="start" id="pgl41">
+                                                        <af:outputLabel value="Cube" for="itCube" id="ol32"/>
+                                                        <af:inputText id="itCube"
+                                                                      value="#{bindings.ReceiptView1Cube.inputValue}"
+                                                                      readOnly="true" styleClass="ReadOnlyField"
+                                                                      columns="9"/>
+                                                    </af:panelGroupLayout>
+                                                </af:panelGroupLayout>
+                                            </af:panelBox>
+                                        </h:panelGrid>
+                                    </af:panelGroupLayout>
+                                    <af:spacer height="10" id="s60"/>
+                                    <af:toolbar id="t2">
+                                        <af:button text="Save Receipt"
+                                                          action="#{backing_app_ReceiptGeneral.getForwardAction}"
+                                                          actionListener="#{backing_app_ReceiptGeneral.SaveReceipt}"
+                                                          id="saveReceiptButton" partialSubmit="false"/>
+                                        <af:spacer width="10" id="s61"/>
+                                        <af:button actionListener="#{bindings.Rollback.execute}" text="Cancel"
+                                                          immediate="true" action="GoReceivingGeneral" id="cbClear"
+                                                          partialSubmit="false">
+                                            <af:resetActionListener/>
+                                        </af:button>
+                                    </af:toolbar>
+                                </af:panelBox>
+                                <af:popup id="popupDasf" binding="#{backing_app_ReceiptGeneral.popupDasf}" childCreation="immediate" clientComponent="true" autoCancel="disabled">
+                                    <af:dialog title="DASF Quantity Overage" id="niinInfoDialog" type="none" contentWidth="400" clientComponent="true" dialogListener="#{backing_app_ReceiptGeneral.deleteItem}">
+                                        <af:outputText value="The quantity being received is greater than the quantity on the DASF - Would you like to receive excess qty as a D6A" id="popupText" clientComponent="true"/>
+                                        <f:facet name="buttonBar">
+                                            <af:panelGroupLayout layout="horizontal">
+                                                <af:commandButton text="Yes" id="yes" actionListener="#{backing_app_ReceiptGeneral.dialogYes}" action="#{backing_app_ReceiptGeneral.getForwardAction}" partialSubmit="false"/>
+                                                <af:commandButton text="No" id="no" actionListener="#{backing_app_ReceiptGeneral.dialogNo}" partialSubmit="true"/>
+                                            </af:panelGroupLayout>
+                                        </f:facet>
+                                    </af:dialog>
+                                </af:popup>
+                                <!-- END OF BOTTOM PANEL -->
+                            </af:panelGroupLayout>
+                            <!--/af:form-->
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="../FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

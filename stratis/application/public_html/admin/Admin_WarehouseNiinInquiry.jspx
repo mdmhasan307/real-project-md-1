@@ -1,0 +1,468 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:stratis="taglib.mil.usmc.stratis">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="2"/>
+    <jsp:setProperty name="userbean" property="selected3" value="2"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="Admin_WarehouseNiinInquiry"/>
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session" />
+    <jsp:setProperty name="logBean" property="page" value="NIIN Inquiry"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="185" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll" id="pgl1">
+                            <af:messages id="m1" inline="true"/>
+                            <af:panelGroupLayout layout="vertical" id="pgl2">
+                                <af:panelBox id="niinInquiryMainPanel" text="Warehouse Management - NIIN Inquiry"
+                                             showDisclosure="false">
+                                    <af:panelGroupLayout layout="vertical" id="pgl3">
+                                        <af:switcher id="switchPanels" facetName="#{niinInquiryBean.niinInquiryFlag}">
+                                            <f:facet name="false">
+                                                <af:panelGroupLayout rendered="#{!niinInquiryBean.niinInquiryFlag}"
+                                                                     id="firstGroup"
+                                                                     partialTriggers="secondCreateButton secondUpdateButton">
+                                                    <af:panelFormLayout id="filterPanelForm"
+                                                                        rendered="#{!niinInquiryBean.niinInquiryFlag}">
+                                                        <af:toolbar inlineStyle="padding:5px;">
+                                                            <af:inputText value="#{bindings.NIINQry.inputValue}"
+                                                                          label="NIIN" id="filterNIIN"
+                                                                          required="#{bindings.NIINQry.mandatory}"
+                                                                          columns="10" maximumLength="9"
+                                                                          contentStyle="text-transform:uppercase;"
+                                                                          binding="#{niinInquiryBean.txtNiinFilter}">
+                                                                <f:validator binding="#{bindings.NIINQry.validator}"/>
+                                                            </af:inputText>
+                                                            <af:spacer width="10"/>
+                                                            <af:inputText value="#{bindings.NomenclatureQry.inputValue}"
+                                                                          label="Nomenclature"
+                                                                          contentStyle="text-transform:uppercase;"
+                                                                          id="filterNomenclature"
+                                                                          required="#{bindings.NomenclatureQry.mandatory}"
+                                                                          columns="10" maximumLength="100"
+                                                                          binding="#{niinInquiryBean.txtNomenclatureFilter}"/>
+                                                            <af:spacer width="10"/>
+                                                            <af:button actionListener="#{bindings.FilterNIINInquiry.execute}"
+                                                                       text="Filter" id="FilterButton"
+                                                                       disabled="#{!bindings.FilterNIINInquiry.enabled}"
+                                                                       partialSubmit="false">
+                                                                <af:setActionListener from="#{false}"
+                                                                                      to="#{niinInquiryBean.niinInquiryFlag}"/>
+                                                            </af:button>
+                                                        </af:toolbar>
+                                                    </af:panelFormLayout>
+                                                    <af:switcher id="switchTables"
+                                                                 facetName="#{niinInquiryBean.niinInquiryFilterFlag}">
+                                                        <f:facet name="false">
+                                                            <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                                                                <af:table value="#{bindings.NiinInfoView_CC_Change2.collectionModel}"
+                                                                          var="row"
+                                                                          rows="#{bindings.NiinInfoView_CC_Change2.rangeSize}"
+                                                                          first="#{bindings.NiinInfoView_CC_Change2.rangeStart}"
+                                                                          emptyText="#{bindings.NiinInfoView_CC_Change2.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                                          selectionListener="#{bindings.NiinInfoView_CC_Change2.collectionModel.makeCurrent}"
+                                                                          id="NIINTable"
+                                                                          binding="#{niinInquiryBean.niinTable}"
+                                                                          selectedRowKeys="#{bindings.NiinInfoView_CC_Change2.collectionModel.selectedRow}"
+                                                                          rowSelection="single"
+                                                                          styleClass="AFStretchWidth"
+                                                                          columnStretching="last">
+                                                                    <af:column sortProperty="Fsc" sortable="true"
+                                                                               headerText="FSC">
+                                                                        <af:outputText value="#{row.Fsc}"/>
+                                                                    </af:column>
+                                                                    <af:column sortProperty="Niin" sortable="true"
+                                                                               headerText="NIIN">
+                                                                        <af:outputText value="#{row.Niin}"/>
+                                                                    </af:column>
+                                                                    <af:column sortProperty="Nomenclature"
+                                                                               sortable="true"
+                                                                               headerText="#{bindings.NiinInfoView_CC_Change2.labels.Nomenclature}">
+                                                                        <af:outputText value="#{row.Nomenclature}"/>
+                                                                    </af:column>
+                                                                    <af:column sortProperty="ShelfLifeCode"
+                                                                               sortable="false"
+                                                                               headerText="Shelf Life Code">
+                                                                        <af:outputText value="#{row.ShelfLifeCode}"/>
+                                                                    </af:column>
+                                                                    <af:column sortProperty="SerialControlFlag"
+                                                                               sortable="true" headerText="Serial?">
+                                                                        <af:outputText value="#{row.SerialControlFlag}"/>
+                                                                    </af:column>
+                                                                    <af:column sortProperty="LotControlFlag"
+                                                                               sortable="true"
+                                                                               headerText="Lot Controlled?">
+                                                                        <af:outputText value="#{row.LotControlFlag}"/>
+                                                                    </af:column>
+                                                                </af:table>
+                                                            </af:panelCollection>
+                                                        </f:facet>
+                                                    </af:switcher>
+                                                    <!-- Ends switchNiinTable switcher  -->
+                                                    <af:outputText value="&lt;br>" escape="false"/>
+                                                    <!-- only show for GCSS -->
+                                                    <af:panelGroupLayout id="transactionPanelGroup"
+                                                                         partialTriggers="pc1:NIINTable"
+                                                                         rendered="false">
+                                                        <af:panelFormLayout id="transactionPanelForm">
+                                                            <af:panelGroupLayout layout="horizontal">
+                                                                <af:inputText columns="11" id="immed_qty_transaction"
+                                                                              label="Transaction Quantity"
+                                                                              maximumLength="5" showRequired="false"
+                                                                              shortDesc="Required Transaction Quantity (must be positive numeric)"
+                                                                              binding="#{niinInquiryBean.txtImmedQtyTrans}"/>
+                                                                <af:spacer width="10"/>
+                                                                <af:selectOneChoice unselectedLabel="- Select - "
+                                                                                    id="selectTransaction"
+                                                                                    shortDesc="Required Transaction DIC"
+                                                                                    showRequired="false"
+                                                                                    binding="#{niinInquiryBean.selectImmedQtyTrans}">
+                                                                    <f:selectItem itemLabel="D8B" itemValue="D8B"/>
+                                                                    <f:selectItem itemLabel="D8Z" itemValue="D8Z"/>
+                                                                    <f:selectItem itemLabel="D9B" itemValue="D9B"/>
+                                                                    <f:selectItem itemLabel="D9Z" itemValue="D9Z"/>
+                                                                </af:selectOneChoice>
+                                                                <af:spacer width="10"/>
+                                                                <af:selectOneChoice unselectedLabel="- Select - "
+                                                                                    id="selectTransactionCC" label="CC"
+                                                                                    shortDesc="Required Transaction CC"
+                                                                                    showRequired="false"
+                                                                                    binding="#{niinInquiryBean.selectImmedCCTrans}">
+                                                                    <f:selectItem itemLabel="A" itemValue="A"/>
+                                                                    <f:selectItem itemLabel="F" itemValue="F"/>
+                                                                </af:selectOneChoice>
+                                                            </af:panelGroupLayout>
+                                                            <af:button actionListener="#{niinInquiryBean.submitImmedQtyTrans}"
+                                                                       text="Create Immediate Transaction For Quantity"
+                                                                       partialTriggers="pc1:NIINTable"
+                                                                       disabled="#{(!niinInquiryBean.gcssmcFlag) or (bindings.SerialControlFlag.inputValue == 'Y' or bindings.LotControlFlag.inputValue == 'Y')}"
+                                                                       id="immedCreateButton" partialSubmit="false"/>
+                                                            <!-- onclick="javascript:this.disabled=true;"/> -->
+                                                        </af:panelFormLayout>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer height="10"/>
+                                                    <af:panelGroupLayout id="firstPanelForm"
+                                                                         rendered="#{!niinInquiryBean.niinInquiryFlag}">
+                                                        <af:panelCollection id="pc2" styleClass="AFStretchWidth">
+                                                            <af:table id="NiinLocationTable"
+                                                                      value="#{bindings['NiinLoc_LocationView_CC_Change2'].collectionModel}"
+                                                                      var="row"
+                                                                      rows="#{bindings['NiinLoc_LocationView_CC_Change2'].rangeSize}"
+                                                                      first="#{bindings['NiinLoc_LocationView_CC_Change2'].rangeStart}"
+                                                                      emptyText="#{bindings['NiinLoc_LocationView_CC_Change2'].viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                                      selectionListener="#{bindings['NiinLoc_LocationView_CC_Change2'].collectionModel.makeCurrent}"
+                                                                      partialTriggers=":pc1:NIINTable"
+                                                                      binding="#{niinInquiryBean.niinLocationTable}"
+                                                                      selectedRowKeys="#{bindings['NiinLoc_LocationView_CC_Change2'].collectionModel.selectedRow}"
+                                                                      rowSelection="single" styleClass="AFStretchWidth"
+                                                                      columnStretching="last"
+                                                                      autoHeightRows="5">
+                                                                <af:column sortProperty="LocationLabel" sortable="true"
+                                                                           headerText="Location">
+                                                                    <af:outputText value="#{row.LocationLabel}"/>
+                                                                </af:column>
+                                                                <af:column sortProperty="Qty" sortable="false"
+                                                                           headerText="#{bindings['NiinLoc_LocationView_CC_Change2'].labels.Qty}">
+                                                                    <af:outputText value="#{row.Qty}">
+                                                                        <f:convertNumber groupingUsed="false"
+                                                                                         pattern="#{bindings['NiinLoc_LocationView_CC_Change2'].formats.Qty}"/>
+                                                                    </af:outputText>
+                                                                </af:column>
+                                                                <af:column sortProperty="ExpirationDate"
+                                                                           sortable="false" headerText="Expiration Date"
+                                                                           width="100">
+                                                                    <stratis:adfDateFormatter
+                                                                            value="#{row.ExpirationDate}"
+                                                                            pattern="${userbean.dateFormatPattern}"
+                                                                            shiftZone="false"/>
+                                                                </af:column>
+                                                                <af:column sortProperty="DateOfManufacture"
+                                                                           sortable="false" headerText="DOM"
+                                                                           width="100">
+                                                                    <stratis:adfDateFormatter
+                                                                            value="#{row.DateOfManufacture}"
+                                                                            pattern="${userbean.dateFormatPattern}"
+                                                                            shiftZone="false"/>
+                                                                </af:column>
+                                                                <af:column sortProperty="Cc" sortable="false"
+                                                                           headerText="CC">
+                                                                    <af:outputText value="#{row.Cc}"/>
+                                                                </af:column>
+                                                            </af:table>
+                                                        </af:panelCollection>
+                                                        <af:toolbar inlineStyle="padding:5px;">
+                                                            <af:button text="Update Existing Location"
+                                                                       accessKey="U" id="UpdateButton"
+                                                                       inlineStyle="width:150px"
+                                                                       actionListener="#{niinInquiryBean.addNiinInquiryParams}"
+                                                                       disabled="false"
+                                                                       partialTriggers="#{niinInquiryBean.niinLocationTable}"
+                                                                       partialSubmit="false">
+                                                                <!-- NiinLocationTable -->
+                                                                <af:setActionListener from="#{true}"
+                                                                                      to="#{niinInquiryBean.niinInquiryFlag}"/>
+                                                                <af:setActionListener from="#{true}"
+                                                                                      to="#{niinInquiryBean.niinInquiryUpdateFlag}"/>
+                                                                <af:setActionListener
+                                                                        from="#{(bindings.SerialControlFlag.inputValue == 'Y' or bindings.LotControlFlag.inputValue == 'Y')}"
+                                                                        to="#{niinInquiryBean.niinInquirySerialFlag}"/>
+                                                                <!--do not allow edit of serials-->
+                                                            </af:button>
+                                                        </af:toolbar>
+                                                        <af:spacer width="10" height="10"/>
+                                                        <af:panelCollection id="pc3" styleClass="AFStretchWidth">
+                                                            <af:table
+                                                                    value="#{bindings['NiinLoc_LocationView_CC_Change2NIINSerialNumbers1'].collectionModel}"
+                                                                    var="row"
+                                                                    rows="#{bindings['NiinLoc_LocationView_CC_Change2NIINSerialNumbers1'].rangeSize}"
+                                                                    first="#{bindings['NiinLoc_LocationView_CC_Change2NIINSerialNumbers1'].rangeStart}"
+                                                                    emptyText="#{bindings['NiinLoc_LocationView_CC_Change2NIINSerialNumbers1'].viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                                    partialTriggers=":pc1:NIINTable"
+                                                                    styleClass="AFStretchWidth"
+                                                                    columnStretching="last"
+                                                                    autoHeightRows="5">
+                                                                <af:column sortProperty="SerialNumber" sortable="true"
+                                                                           headerText="Serial Number" width="100">
+                                                                    <af:outputText value="#{row.SerialNumber}"/>
+                                                                </af:column>
+                                                                <af:column sortProperty="LocationLabel" sortable="true"
+                                                                           headerText="Location" width="100">
+                                                                    <af:outputText value="#{row.LocationLabel}"/>
+                                                                </af:column>
+                                                                <af:column sortProperty="Cc" sortable="true"
+                                                                           headerText="CC"
+                                                                           inlineStyle="text-align:center;">
+                                                                    <af:outputText value="#{row.Cc}"/>
+                                                                </af:column>
+                                                                <af:column sortProperty="ExpirationDate" sortable="true"
+                                                                           headerText="Expiration Date"
+                                                                           inlineStyle="text-align:center;">
+                                                                    <stratis:adfDateFormatter
+                                                                            value="#{row.ExpirationDate}"
+                                                                            pattern="${userbean.dateFormatPattern}"
+                                                                            shiftZone="false"/>
+                                                                </af:column>
+                                                                <af:column sortProperty="IssuedFlag" sortable="true"
+                                                                           headerText="Issued"
+                                                                           inlineStyle="text-align:center;">
+                                                                    <af:outputText value="#{row.IssuedFlag}"/>
+                                                                </af:column>
+                                                            </af:table>
+                                                        </af:panelCollection>
+                                                    </af:panelGroupLayout>
+                                                </af:panelGroupLayout>
+                                            </f:facet>
+                                            <f:facet name="true">
+                                                <af:panelGroupLayout id="secondGroup"
+                                                                     rendered="#{niinInquiryBean.niinInquiryFlag}">
+                                                    <af:panelBorderLayout id="niinAddPanelBorder">
+                                                        <af:panelFormLayout id="secondPanelForm"
+                                                                            rendered="#{niinInquiryBean.niinInquiryUpdateFlag}">
+                                                            <af:inputText label="NIIN" labelStyle="font-weight:bold"
+                                                                          columns="100" id="niin" disabled="true"
+                                                                          shortDesc="Required NIIN (must be 9 numeric)"
+                                                                          contentStyle="text-transform:uppercase;"
+                                                                          binding="#{niinInquiryBean.txtNiin}"
+                                                                          value="#{processScope.niin} - #{processScope.nomenclature}"/>
+                                                            <af:inputText label="Quantity" labelStyle="font-weight:bold"
+                                                                          columns="11" id="qty2" maximumLength="9"
+                                                                          disabled="true"
+                                                                          value="#{processScope.orig_qty}"/>
+                                                            <af:inputText label="New Quantity"
+                                                                          labelStyle="font-weight:bold" columns="11"
+                                                                          id="qty" maximumLength="9"
+                                                                          showRequired="false"
+                                                                          shortDesc="Required Quantity (must be positive numeric)"
+                                                                          binding="#{niinInquiryBean.txtQty}"
+                                                                          value="#{processScope.qty}"/>
+                                                            <af:inputDate label="Expiration Date" id="exp"
+                                                                          shortDesc="Required Expiration Date"
+                                                                          binding="#{niinInquiryBean.txtExpDate}"
+                                                                          value="#{processScope.expDate}"
+                                                                          disabled="#{niinInquiryBean.niinInquirySerialFlag}">
+                                                                <f:convertDateTime dateStyle="short"
+                                                                                   pattern="yyyy-MM-dd"/>
+                                                            </af:inputDate>
+                                                            <af:inputDate label="Date of Manufacture" id="dom"
+                                                                          shortDesc="Required Date of Manufacture"
+                                                                          binding="#{niinInquiryBean.txtDOM}"
+                                                                          value="#{processScope.dom}" disabled="true">
+                                                                <f:convertDateTime dateStyle="short"
+                                                                                   pattern="yyyy-MM-dd"/>
+                                                            </af:inputDate>
+                                                            <af:inputText label="Location" labelStyle="font-weight:bold"
+                                                                          columns="11" id="locationLabel"
+                                                                          disabled="true"
+                                                                          shortDesc="Required Location label"
+                                                                          contentStyle="text-transform:uppercase;"
+                                                                          value="#{processScope.locationLabel}"
+                                                                          binding="#{niinInquiryBean.txtLocation}"/>
+                                                            <af:selectOneChoice label="Condition Code"
+                                                                                labelStyle="font-weight:bold"
+                                                                                unselectedLabel="- Select - "
+                                                                                id="selectCC"
+                                                                                shortDesc="Required Condition Code (CC)"
+                                                                                showRequired="false"
+                                                                                binding="#{niinInquiryBean.selectCC}"
+                                                                                value="#{processScope.cc}"
+                                                                                disabled="true">
+                                                                <f:selectItem itemLabel="A" itemValue="A"/>
+                                                                <f:selectItem itemLabel="F" itemValue="F"/>
+                                                            </af:selectOneChoice>
+                                                            <af:selectOneChoice label="Under Audit?"
+                                                                                unselectedLabel="- Select - "
+                                                                                id="selectAudit" disabled="true"
+                                                                                shortDesc="Required Audit Flag"
+                                                                                showRequired="false"
+                                                                                binding="#{niinInquiryBean.selectAudit}"
+                                                                                value="#{processScope.underAudit}">
+                                                                <f:selectItem itemLabel="Y" itemValue="Y"/>
+                                                                <f:selectItem itemLabel="N" itemValue="N"/>
+                                                            </af:selectOneChoice>
+                                                            <af:selectOneChoice label="Locked?"
+                                                                                unselectedLabel="- Select - "
+                                                                                id="selectLocked" disabled="true"
+                                                                                shortDesc="Required Locked Flag"
+                                                                                showRequired="false"
+                                                                                binding="#{niinInquiryBean.selectLocked}"
+                                                                                value="#{processScope.locked}">
+                                                                <f:selectItem itemLabel="Y" itemValue="Y"/>
+                                                                <f:selectItem itemLabel="N" itemValue="N"/>
+                                                            </af:selectOneChoice>
+                                                            <af:outputLabel value=""/>
+                                                            <af:toolbar>
+                                                                <af:button text="Save Quantity To Location"
+                                                                           accessKey="S" id="secondCreateButton"
+                                                                           inlineStyle="width:180px"
+                                                                           actionListener="#{niinInquiryBean.submitSaveNiinLocation}"
+                                                                           partialSubmit="false"/>
+                                                                <af:button text="Cancel" accessKey="C"
+                                                                           id="secondUpdateButton"
+                                                                           inlineStyle="width:180px"
+                                                                           partialSubmit="false">
+                                                                    <af:setActionListener from="#{false}"
+                                                                                          to="#{niinInquiryBean.niinInquiryFlag}"/>
+                                                                    <af:setActionListener from="#{false}"
+                                                                                          to="#{niinInquiryBean.niinInquiryUpdateFlag}"/>
+                                                                    <af:setActionListener from="#{false}"
+                                                                                          to="#{niinInquiryBean.niinInquirySerialFlag}"/>
+                                                                </af:button>
+                                                            </af:toolbar>
+                                                        </af:panelFormLayout>
+                                                        <af:panelGroupLayout id="serialPanelForm"
+                                                                             rendered="#{niinInquiryBean.niinInquirySerialFlag}">
+                                                            <af:inputText label="NIIN" labelStyle="font-weight:bold"
+                                                                          columns="100" id="niinSerial" disabled="true"
+                                                                          shortDesc="Required NIIN (must be 9 numeric)"
+                                                                          contentStyle="text-transform:uppercase;"
+                                                                          binding="#{niinInquiryBean.txtNiinSerial}"
+                                                                          value="#{processScope.niin} - #{processScope.nomenclature}"/>
+                                                            <af:panelFormLayout inlineStyle="border-style:solid;">
+                                                                <af:outputText inlineStyle="color:rgb(0,0,255); font-weight:bold;"
+                                                                               value="Serial Numbers for this NIIN"/>
+                                                                <af:spacer width="10" height="15"/>
+                                                                <af:table value="#{bindings.SerialOrLotNumList1.collectionModel}"
+                                                                          var="row"
+                                                                          rows="#{bindings.SerialOrLotNumList1.rangeSize}"
+                                                                          first="#{bindings.SerialOrLotNumList1.rangeStart}"
+                                                                          emptyText="#{bindings.SerialOrLotNumList1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                                          selectionListener="#{bindings.SerialOrLotNumList1.collectionModel.makeCurrent}"
+                                                                          binding="#{niinInquiryBean.serialTable}"
+                                                                          id="serialTable"
+                                                                          selectedRowKeys="#{bindings.SerialOrLotNumList1.collectionModel.selectedRow}"
+                                                                          rowSelection="single"
+                                                                          columnStretching="last"
+                                                                          autoHeightRows="5" width="250px">
+                                                                    <af:column sortProperty="SerialOrLoNum"
+                                                                               sortable="false" headerText="Serial"
+                                                                               rendered="#{processScope.serialFlag == 'Y'}" width="200px">
+                                                                        <af:inputText value="#{row.SerialOrLoNum}"
+                                                                                      simple="true"
+                                                                                      contentStyle="text-transform:uppercase;"
+                                                                                      maximumLength="30"
+                                                                                      required="#{bindings.SerialOrLotNumList1.attrDefs.SerialOrLoNum.mandatory}"
+                                                                                      columns="20" readOnly="true"/>
+                                                                    </af:column>
+                                                                    <af:column sortProperty="QtyLot"
+                                                                               sortable="false" headerText="Qty">
+                                                                        <af:inputText value="#{row.QtyLot}"
+                                                                                      simple="true"
+                                                                                      maximumLength="5"
+                                                                                      required="#{niinInquiryBean.requireQtyFlag}"
+                                                                                      columns="5" readOnly="true"/>
+                                                                    </af:column>
+                                                                </af:table>
+                                                                <af:button text="Delete" id="btnDeleteSerial" partialSubmit="false">
+                                                                    <af:showPopupBehavior popupId="confirmDelete" triggerType="action"
+                                                                                          align="afterStart"/>
+                                                                </af:button>
+                                                                <af:popup id="confirmDelete">
+                                                                    <af:dialog id="Confirm" title="Confirm"
+                                                                               affirmativeTextAndAccessKey="Submit"
+                                                                               dialogListener="#{niinInquiryBean.dialogListener}">
+                                                                        <af:activeOutputText id="Delete"
+                                                                                             value="Are you sure you want to Delete?"/>
+                                                                    </af:dialog>
+                                                                </af:popup>
+                                                                <af:inputText label="Serial Num "
+                                                                              binding="#{niinInquiryBean.serialOrLotNum}"
+                                                                              inlineStyle="font-weight:bold;"
+                                                                              contentStyle="text-transform:uppercase;"
+                                                                              maximumLength="30" id="txtSerial"/>
+                                                                <af:inputText label="Serial Range from "
+                                                                              binding="#{niinInquiryBean.startSerial}"
+                                                                              inlineStyle="font-weight:bold;"
+                                                                              contentStyle="text-transform:uppercase;"
+                                                                              maximumLength="30" id="txtstartSerial"/>
+                                                                <af:inputText label="to "
+                                                                              binding="#{niinInquiryBean.endSerial}"
+                                                                              inlineStyle="font-weight:bold;"
+                                                                              contentStyle="text-transform:uppercase;"
+                                                                              maximumLength="30" id="txtendSerial"/>
+                                                                <af:toolbar>
+                                                                    <af:button text="Add to List"
+                                                                               actionListener="#{niinInquiryBean.addSerialLotNum}"
+                                                                               id="btnAddSerial" partialSubmit="false"/>
+                                                                    <af:spacer width="10" height="10"/>
+                                                                </af:toolbar>
+                                                            </af:panelFormLayout>
+                                                        </af:panelGroupLayout>
+                                                    </af:panelBorderLayout>
+                                                </af:panelGroupLayout>
+                                            </f:facet>
+                                        </af:switcher>
+                                    </af:panelGroupLayout>
+                                </af:panelBox>
+                            </af:panelGroupLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6" id="s1"/>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

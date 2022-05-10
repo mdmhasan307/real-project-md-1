@@ -1,0 +1,405 @@
+---
+# STRATIS APPLICATION MODULE
+# https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+
+server:
+  ajp:
+    enabled: false
+    port: 8009
+    redirectPort: 8443
+    secretRequired: true
+    # not required unless secretRequired is true
+    secret: <placeholder>
+  compression:
+    enabled: true
+    mime-types: 'text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json'
+    min-response-size: 1024
+  error:
+    path: /errorPage
+    whitelabel:
+      enabled: false
+  port: ${port:8080}
+  servlet:
+    application-display-name: 'Stratis'
+    context-path: /stratis
+
+camel:
+  springboot:
+    # keep auto-startup enabled (issues otherwise)
+    auto-startup: true
+
+management:
+  endpoints:
+    enabled-by-default: false
+    jmx:
+      exposure:
+        include: '*'
+    web:
+      exposure:
+        include: health
+    endpoint:
+      auditevents:
+        enabled: false
+      httptrace:
+        enabled: false
+      liquibase:
+        enabled: false
+      sessions:
+        enabled: false
+      shutdown:
+        enabled: false
+
+spring:
+  application:
+    name: Stratis
+  cache:
+    type: hazelcast
+  datasource:
+    url: <placeholder>
+    username: stratis
+    password: <placeholder>
+    driver-class-name: oracle.jdbc.OracleDriver
+  flyway:
+    enabled: false
+    url: <placeholder>
+    user: <placeholder>
+    password: <placeholder>
+    locations: classpath:db/migration
+    schemas: <placeholder>
+    table: <placeholder>
+    out-of-order: false
+    validate-on-migrate: false
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false  # use textual representation which provides formatting consistency across DateTime and LocalDate objects by forcing ISO format
+      write_enums_using_to_string: false
+      indent_output: false
+      # default-property-inclusion=non_null
+    deserialization:
+      accept_empty_string_as_null_object: true
+      accept_single_value_as_array: true
+      fail_on_unknown_properties: false
+    parser:
+      allow_unquoted_field_names: true
+      allow_comments: true
+  jms:
+    pub-sub-domain: true
+  jmx:
+    enabled: true
+  jpa:
+    # spring now recommends auto-detection, however...
+    #   to address a startup lag of 1+ minutes, must explicitly set the following:
+    #   database: oracle (or equivalent
+    #   database-platform: org.hibernate.dialect.Oracle12cDialect (or equivalent)
+    #   hibernate.temp.use_jdbc_metadata_defaults: false
+    database: oracle
+    database-platform: org.hibernate.dialect.Oracle12cDialect
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    properties:
+      hibernate:
+        integration:
+          envers:
+            enabled: false
+        default_batch_fetch_size: 16
+        default_schema: stratis
+        generate_statistics: false
+        max_fetch_depth: 3
+        use_sql_comments: false
+        order_inserts: true
+        order_updates: true
+        hazelcast:
+          instance_name: 'local-hazelcast'
+          use_native_client: true
+          region:
+            factory_class: com.hazelcast.hibernate.HazelcastCacheRegionFactory
+        jdbc:
+          batch_size: 50
+          fetch_size: 500
+          batch_versioned_data: true
+          use_streams_for_binary: true
+        listeners:
+          envers:
+            autoRegister: false
+        query:
+          substitutions: yes 'Y', no 'N'
+        temp:
+          use_jdbc_metadata_defaults: false
+      org:
+        hibernate:
+          envers:
+            audit_table_suffix: _AUD
+            store_data_at_delete: true
+      jadira:
+        usertype:
+          autoRegisterUserTypes: true
+          javaZone: jvm
+          databaseZone: jvm
+    show-sql: false
+  jta:
+    enabled: false # defaults true (now used to toggle jta/non-jta state)
+  main:
+    banner-mode: console
+    log-startup-info: true
+  # messages:
+  #   basename: messages/messages
+  mvc:
+    async:
+      # FUTURE this is temporary to prevent StreamingResponseBody timeouts (processed as async)
+      request-timeout: 3600000
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  output:
+    ansi:
+      enabled: always
+  profiles:
+    active: prod
+  quartz:
+    auto-startup: true
+    job-store-type: jdbc
+    overwrite-existing-jobs: false
+    properties:
+      org:
+        quartz:
+          jobStore:
+            class: org.quartz.impl.jdbcjobstore.JobStoreCMT
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.oracle.OracleDelegate
+            tablePrefix: INNOV.QRTZ_
+            dataSource: dataSource
+            misfireThreshold: 6000000
+            isClustered: false
+          scheduler:
+            instanceId: ${stratis.app.instance-id}
+            jmx:
+              export: true
+            skipUpdateCheck: true
+    wait-for-jobs-to-complete-on-shutdown: false
+    scheduler-name: 'stratisQuartzScheduler'
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 0
+      max-file-size: 15MB
+      max-request-size: 15MB
+  sql:
+    init:
+      enabled: false
+
+# NOTE: maxConnectionReuseTime should be lower than that of any firewall rule
+jdbc:
+  initialPoolSize: 5
+  minPoolSize: 5
+  maxPoolSize: 50
+  abandonedConnectionTimeout: 3600 # (3600s = 1hr) to support long running legacy operations / jobs (long running stored procedures show as abandoned since theres no activity)
+  timeToLiveConnectionTimeout: 3600  # (3600s = 1hr) to support long running legacy operations / jobs
+  inactiveConnectionTimeout: 1800  # 1800 = 30 minutes
+  timeoutCheckInterval: 20
+  maxConnectionReuseTime: 0
+  connectionWaitTimeout: 20
+  # maxStatements caching overrides implicitStatementCacheSize if maxStatements is defined
+  # maxStatements: 0
+  implicitStatementCacheSize: 200
+  validateConnectionOnBorrow: true
+  secondsToTrustIdleConnection: 0  # secondsToTrustIdleConnection -> 0, 30, 60, 120
+  loginTimeout: 10     #adf uses this
+
+stratis:
+  app:
+  # environment-id: <DEFINE EXTERNALLY>
+  # instance-id: <DEFINE EXTERNALLY>
+  barcodeImagePath:
+    legacy: /opt/app/stratis/scratch/barcodes/img/
+    innovation: /data/storage/local/barcodes/img/
+  amsCmosPath:
+    legacy: /opt/app/stratis/scratch/interfaces/
+    innovation: /data/storage/local/interfaces/
+  session:
+    timeout:
+      admin: 10
+      user: 15
+      mats: 30
+  print:
+    applet: true
+  esb:
+    jmx-enabled: false
+  logging:
+    crlfEncoding:
+      enabled: true
+  datasource:
+    baseurl: <placeholder>
+    COMMON:
+      default_schema: INNOV
+      url: <placeholder>
+      username: INNOV
+      password: <placeholder>
+      flyway:
+        username: system
+        password: <placeholder>
+        locations: classpath:db/migration/STRATCOMMON
+        schemas: <placeholder>
+        table: STRATCOMMON_DB_VERSION
+        enabled: true
+    STRATIS:
+      flyway:
+        default_schema: SGA
+        username: system
+        locations: classpath:db/migration/STRATIS
+        table: STRATIS_DB_VERSION
+        enabled: true
+  http:
+    request:
+      attribute:
+        certificate: javax.servlet.request.X509Certificate
+      header:
+        certificate: javax.servlet.request.X509Certificate
+  inventory:
+    runInForeground: false
+    useObjectConversionsInThreadedMode: true
+  integration:
+    caching:
+      clusters:
+        app:
+          cluster-name: stratis-app-${stratis.app.environment-id}
+          addresses:
+            - 127.0.0.1:60070
+        mls2-share:
+          cluster-name: mls2-share-${stratis.app.environment-id}
+          addresses:
+            - 127.0.0.1:60020
+      connection:
+        initial-backoff-millis: 1000
+        max-backoff-millis: 60000
+        multiplier: 1.05
+        connect-timeout-millis: -1
+        jitter: 0.2
+      jmx-enabled: true
+      outbound-ports:
+        - 33000-35000
+    messaging:
+      broker-url: <placeholder>
+      retry-interval: 1000 # ms
+      retry-interval-multiplier: 1
+      max-retry-interval: 60000 # ms
+      initial-connect-attempts: 1
+      reconnect-attempts: 0
+      block-on-acknowledge: true # default: false
+      block-on-durable-send: true # default: true
+      block-on-non-durable-send: true # default: false
+      call-timeout: 30000 # ms (default: 30000ms)
+      connection-ttl: 300000 # 5 minutes (default: 60000ms)
+      std:
+        pool:
+          enabled: false # do not use a pool for DMLC-based implementations (Spring/Camel)
+          max-connections: 1
+          anonymous-producers: true
+          idle-timeout: 240000 # 4 minutes
+    mls2:
+      rest:
+        hmac:
+          key: mls2system
+          secret: defsecret
+          enforce: false
+      default:
+        client:
+          connect-timeout-seconds: 30
+          read-timeout-seconds: 900
+          key-store-file: ws/keys/mls2-ws-keystore.jks
+          key-store-type: JKS
+          key-store-alias: mls2-app
+          key-material-enabled: true
+          trust-material-trust-all: true
+          trust-store-file: ws/keys/mls2-ws-truststore.jks
+          trust-store-type: JKS
+  local:
+    caching:
+      instance-name: stratis-local-${stratis.app.instance-id}
+      port: 60201
+      jmx-enabled: true
+      management:
+        enabled: false
+        url:
+    messaging:
+      jmx-enabled: true
+  jobs:
+    i009Export:
+      enabled: true
+      frequency: 5000
+    ucp:
+      enabled: true
+      frequency: 120000
+  startup:
+    validateSettingsSystem: true
+  smv:
+    enabled: true
+    switchWorkstation:
+      userRole:
+        enabled: true
+    receiving:
+      enabled: true
+    shipping:
+      enabled: true
+    picking:
+      enabled: true
+    stowing:
+      enabled: true
+    inventory:
+      enabled: true
+    locationSurvey:
+      enabled: true
+    shelfLife:
+      enabled: true
+    printTest:
+      enabled: false
+    javascriptPrinting:
+      enabled: false
+  sortOrder: default
+  ws:
+    gcss:
+      disabled: false
+
+---
+# ======================================================================================================================
+# DEV PROFILE
+# ======================================================================================================================
+spring:
+  profiles: dev
+  jpa:
+    show-sql: false
+
+logging:
+  file:
+    path: logs
+
+---
+# ======================================================================================================================
+# TEST PROFILE  (unit testing, automated integration testing only)
+# ======================================================================================================================
+spring:
+  profiles: test
+
+---
+# ======================================================================================================================
+# QA PROFILE
+# ======================================================================================================================
+spring:
+  profiles: qa
+
+logging:
+  file:
+    path: logs
+
+---
+# ======================================================================================================================
+# STAGING PROFILE
+# ======================================================================================================================
+spring:
+  profiles: staging
+
+---
+# ======================================================================================================================
+# PROD PROFILE
+# ======================================================================================================================
+spring:
+  profiles: prod

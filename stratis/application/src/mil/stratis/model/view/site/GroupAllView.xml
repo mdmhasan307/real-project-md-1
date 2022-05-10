@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="GroupAllView"
+  Version="11.1.2.64.36"
+  SelectList="Groups.GROUP_ID, 
+       Groups.GROUP_NAME, 
+       Groups.GROUP_RIGHTS, 
+       Groups.VISIBLE"
+  FromList="GROUPS Groups"
+  Where="VISIBLE = 'Y' AND GROUP_NAME &lt;> 'POWER USER'"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="mil.stratis.model.view.site.GroupAllView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <EntityUsage
+    Name="Groups"
+    Entity="mil.stratis.model.entity.site.Groups"/>
+  <ViewAttribute
+    Name="GroupId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="GroupId"
+    EntityUsage="Groups"
+    AliasName="GROUP_ID"/>
+  <ViewAttribute
+    Name="GroupName"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="GroupName"
+    EntityUsage="Groups"
+    AliasName="GROUP_NAME"/>
+  <ViewAttribute
+    Name="GroupRights"
+    PrecisionRule="true"
+    EntityAttrName="GroupRights"
+    EntityUsage="Groups"
+    AliasName="GROUP_RIGHTS"/>
+  <ViewAttribute
+    Name="Visible"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Visible"
+    EntityUsage="Groups"
+    AliasName="VISIBLE"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="mil.stratis.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

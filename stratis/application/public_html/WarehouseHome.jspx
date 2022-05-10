@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:useBean id="workloadbean" class="mil.stratis.view.session.Nav" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="0"/>
+    <jsp:setProperty name="userbean" property="selected2" value="0"/>
+    <f:view>
+        <af:document title="Login.jspx" id="d1">
+            <af:form id="main_form">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="150" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="login_wrap_header">
+                            <jsp:include page="/HeaderMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll" id="pgl4">
+                            <af:messages id="m1" inline="true"/>
+                            <af:panelGridLayout id="pgl2">
+                                <af:gridRow id="gr2">
+                                    <af:gridCell id="gc1">
+                                        <af:spacer width="800" height="20" id="s1"/>
+                                    </af:gridCell>
+                                </af:gridRow>
+                                <af:gridRow id="gr1">
+                                    <af:gridCell id="gc2">
+                                        <af:outputText value="Welcome #{userbean.displayName}" id="ot1"/>
+                                        <af:switcher defaultFacet="#{userbean.nonmech}" id="switchHome">
+                                            <f:facet name="0">
+                                                <!-- non mech -->
+                                                <af:panelGroupLayout id="mainGroup">
+                                                    <af:outputFormatted id="of1">
+                                                        You have logged into a workstation that does not have a
+                                                        mechanized WAC associated with it.
+                                                        <br/>
+                                                        Therefore your permissions to Stow, Pick and Inventory have been
+                                                        disabled if applicable.
+                                                    </af:outputFormatted>
+                                                </af:panelGroupLayout>
+                                            </f:facet>
+                                            <f:facet name="2">
+                                                <af:panelGroupLayout id="nowacgroup">
+                                                    <af:outputFormatted id="of2">
+                                                        You have logged into a workstation that does not have a
+                                                        mechanized WAC associated with it.
+                                                        <br/>
+                                                        Therefore your permissions to Stow, Pick and Inventory have been
+                                                        disabled if applicable.
+                                                    </af:outputFormatted>
+                                                </af:panelGroupLayout>
+                                            </f:facet>
+                                        </af:switcher>
+                                    </af:gridCell>
+                                </af:gridRow>
+                                <af:gridRow id="gr4">
+                                    <af:gridCell id="gc4" halign="center">
+                                        <jsp:expression>workloadbean.getWorkloadWACFull()</jsp:expression>
+                                    </af:gridCell>
+                                </af:gridRow>
+                            </af:panelGridLayout>
+                            <af:spacer height="20" id="s3"/>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6" id="s2"/>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

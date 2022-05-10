@@ -1,0 +1,505 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:useBean id="invmgmtbacking" class="mil.stratis.view.inventory.InventoryMgmtBacking" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="6"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="Admin_InventorySchedule"/>
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session"/>
+    <jsp:setProperty name="logBean" property="page" value="Inventory Sechdule"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="d1">
+
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="150" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer id="s1" width="6"/>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout id="pg1" layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:spacer height="5"/>
+
+                            <af:panelBox id="pb1" text="Inventory Management - Schedule">
+                                <af:panelGroupLayout id="pg2" layout="horizontal">
+                                    <af:link id="scheduleLink" text="Scheduled Inventory"
+                                             action="GoAdminInventoryManagement"/>
+                                    <af:outputText id="out2" value="&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;"
+                                                   escape="false"/>
+                                    <af:link id="releaseLink" text="Review &amp; Release Inventories"
+                                             action="GoAdminInventoryReview"
+                                             actionListener="#{invmgmtbacking.refreshInventoryItems}"
+                                             disabled="#{userbean.admin_INVM_ReviewRelease}"/>
+                                </af:panelGroupLayout>
+                                <af:switcher id="inventorySwitch" facetName="#{invmgmtbacking.inventoryscreenState}">
+                                    <f:facet name="1">
+                                        <af:panelGroupLayout id="pg3">
+                                            <af:navigationPane id="invPane" hint="tabs">
+                                                <af:commandNavigationItem id="locationItem" text="Create Location Survey"
+                                                                          actionListener="#{invmgmtbacking.surveyInventoryState}"
+                                                                          selected="true"/>
+                                                <af:commandNavigationItem id="inventoryItem" text="Create Inventory"
+                                                                          actionListener="#{invmgmtbacking.createInventoryState}"/>
+                                            </af:navigationPane>
+                                            <af:panelBox id="pb2">
+                                                <af:panelFormLayout id="pfl1">
+                                                    <af:panelGroupLayout id="pgl4" layout="horizontal"
+                                                                         valign="bottom">
+                                                        <af:panelGroupLayout id="pgl5" layout="vertical">
+                                                            <af:outputLabel id="outStartLoc" value="Starting Location"
+                                                                            inlineStyle="font-weight:bold"/>
+                                                            <af:inputText id="inStartLoc" binding="#{invmgmtbacking.startloctext}"
+                                                                          contentStyle="text-transform:uppercase;"
+                                                                          maximumLength="9"
+                                                                          columns="12"/>
+                                                        </af:panelGroupLayout>
+                                                        <af:spacer id="s2" width="15"/>
+                                                        <af:panelGroupLayout id="pgl6" layout="vertical">
+                                                            <af:outputLabel id="outEndLoc" value="Ending Location"
+                                                                            inlineStyle="font-weight:bold"/>
+                                                            <af:inputText id="inEndLoc" binding="#{invmgmtbacking.endloctext}"
+                                                                          columns="12"
+                                                                          maximumLength="9"
+                                                                          contentStyle="text-transform:uppercase;"/>
+                                                        </af:panelGroupLayout>
+                                                        <af:spacer id="s3" width="15"/>
+                                                        <af:toolbar id="t1">
+                                                            <af:button id="cmdAddList" actionListener="#{invmgmtbacking.findLOCMatches}"
+                                                                       text="Add to List" partialSubmit="false"/>
+                                                        </af:toolbar>
+                                                    </af:panelGroupLayout>
+                                                </af:panelFormLayout>
+                                                <af:table id="tblLocS"
+                                                          value="#{bindings.LocSurveyCreateView1.collectionModel}"
+                                                          var="row"
+                                                          rows="#{bindings.LocSurveyCreateView1.rangeSize}"
+                                                          first="#{bindings.LocSurveyCreateView1.rangeStart}"
+                                                          emptyText="#{bindings.LocSurveyCreateView1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                          selectionListener="#{bindings.LocSurveyCreateView1.collectionModel.makeCurrent}"
+                                                          selectedRowKeys="#{bindings.LocSurveyCreateView1.collectionModel.selectedRow}"
+                                                          rowSelection="single"
+                                                          width="325px">
+                                                    <af:column id="startLoc"
+                                                               sortProperty="StartLoc"
+                                                               sortable="false"
+                                                               headerText="Start Location">
+                                                        <af:outputText id="outColStart" value="#{row.StartLoc}"/>
+                                                    </af:column>
+                                                    <af:column id="EndLoc"
+                                                               sortProperty="EndLoc"
+                                                               sortable="false"
+                                                               headerText="End Location">
+                                                        <af:outputText id="outColEnd" value="#{row.EndLoc}"/>
+                                                    </af:column>
+                                                    <af:column id="TotalLoc"
+                                                               sortProperty="TotalLocations"
+                                                               sortable="false"
+                                                               headerText="Total Locations">
+                                                        <af:outputText id="outColTot" value="#{row.TotalLocations}">
+                                                            <f:convertNumber groupingUsed="false"
+                                                                             pattern="#{bindings.LocSurveyCreateView1.formats.TotalLocations}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                </af:table>
+                                                <af:panelGroupLayout id="pgl7" layout="horizontal">
+                                                    <af:button id="createLocSurvey"
+                                                               actionListener="#{invmgmtbacking.submitCreateLocSurveyRecord}"
+                                                               text="Create"
+                                                               action="GoAdminInventoryManagement" partialSubmit="true"/>
+                                                    <af:button id="createAllLocSurvey"
+                                                               actionListener="#{invmgmtbacking.submitCreateLocSurveyRecords}"
+                                                               text="Create All"
+                                                               action="GoAdminInventoryManagement" partialSubmit="true"/>
+                                                    <af:button id="deleteLocSurvey"
+                                                               actionListener="#{bindings.DeleteCurrentRowLocSurvey.execute}"
+                                                               text="Delete" partialSubmit="false"/>
+                                                    <af:button id="deleteAllLocSurvey"
+                                                               actionListener="#{invmgmtbacking.submitClearLocSurveyRecords}"
+                                                               text="Delete All" partialSubmit="false"/>
+                                                </af:panelGroupLayout>
+                                            </af:panelBox>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                    <f:facet name="2">
+                                        <af:panelGroupLayout id="pgl8">
+                                            <af:navigationPane hint="tabs" id="np1">
+                                                <af:commandNavigationItem id="cmdLocSurvey" text="Create Location Survey"
+                                                                          actionListener="#{invmgmtbacking.surveyInventoryState}"/>
+                                                <af:commandNavigationItem id="cmdInvSurvey"
+                                                                          text="Create Inventory"
+                                                                          actionListener="#{invmgmtbacking.createInventoryState}"
+                                                                          selected="true"/>
+                                            </af:navigationPane>
+                                            <af:panelBox id="pb3">
+                                                <af:switcher id="invSwitcher" facetName="#{invmgmtbacking.inventorybuttonState}">
+                                                    <f:facet name="0">
+                                                        <af:panelGroupLayout id="pgl9" layout="horizontal">
+                                                            <af:panelGroupLayout id="pgl195">
+                                                                <af:outputText id="outInventoryBy1" value="Add Inventory By:"/><br/>
+                                                                <af:button id="cmdExpire" text="Expiration Date"
+                                                                           disabled="true"
+                                                                           inlineStyle="width:180px;" partialSubmit="false"/>
+                                                                <af:outputText id="s4" value="&lt;br>"
+                                                                               escape="false"/>
+                                                                <af:button id="cmdNIIN" text="NIIN"
+                                                                           inlineStyle="width:180px;" partialSubmit="false">
+                                                                    <af:setActionListener from="#{invmgmtbacking.inventorybuttonState+1}"
+                                                                                          to="#{invmgmtbacking.inventorybuttonState}"/>
+                                                                </af:button>
+                                                                <af:outputText id="s5" value="&lt;br>"
+                                                                               escape="false"/>
+                                                                <af:button id="cmdWAC" text="WAC"
+                                                                           inlineStyle="width:180px;" partialSubmit="false">
+                                                                    <af:setActionListener from="#{invmgmtbacking.inventorybuttonState+2}"
+                                                                                          to="#{invmgmtbacking.inventorybuttonState}"/>
+                                                                </af:button>
+                                                                <af:outputText id="s6" value="&lt;br>"
+                                                                               escape="false"/>
+                                                                <af:button id="cmdLastCounted" text="Last Counted"
+                                                                           inlineStyle="width:180px;" partialSubmit="false">
+                                                                    <af:setActionListener from="#{invmgmtbacking.inventorybuttonState+3}"
+                                                                                          to="#{invmgmtbacking.inventorybuttonState}"/>
+                                                                </af:button>
+                                                                <af:outputText id="s7" value="&lt;br>"
+                                                                               escape="false"/>
+                                                                <af:button id="cmdLocation" text="Location"
+                                                                           inlineStyle="width:180px;" partialSubmit="false">
+                                                                    <af:setActionListener from="#{invmgmtbacking.inventorybuttonState+4}"
+                                                                                          to="#{invmgmtbacking.inventorybuttonState}"/>
+                                                                </af:button>
+                                                            </af:panelGroupLayout>
+                                                            <af:panelGroupLayout id="pgl196">
+                                                                <af:selectManyShuttle id="shuttleExpiration"
+                                                                                      leadingHeader="Available Options"
+                                                                                      trailingHeader="Selected Options"
+                                                                                      valueChangeListener="#{invmgmtbacking.refreshExpireSelectedList}"
+                                                                                      binding="#{invmgmtbacking.shuttleExpiration}">
+                                                                    <af:selectItem label="1 Week"
+                                                                                   value="7"/>
+                                                                    <af:selectItem label="2 Weeks"
+                                                                                   value="14"/>
+                                                                    <af:selectItem label="3 Weeks"
+                                                                                   value="21"/>
+                                                                    <af:selectItem label="30 Days"
+                                                                                   value="30"/>
+                                                                </af:selectManyShuttle>
+                                                                <af:button id="cmdCreateExpInv" text="Create Inventory"
+                                                                           actionListener="#{invmgmtbacking.submitCreateInventoryBySelectedDates}"
+                                                                           action="GoAdminInventoryManagement" partialSubmit="true"/>
+                                                                <af:separator id="s8"/>
+                                                                <af:panelFormLayout id="pfl2">
+                                                                    <af:inputDate id="dateExp" value="#{bindings.experationdate.inputValue}"
+                                                                                  label="Expiration on or before"
+                                                                                  contentStyle="text-transform:uppercase;"
+                                                                                  required="#{bindings.experationdate.mandatory}"
+                                                                                  binding="#{invmgmtbacking.byDateExpirationDate}">
+                                                                        <f:validator binding="#{bindings.experationdate.validator}"/>
+                                                                        <f:convertDateTime pattern="#{bindings.experationdate.format}"/>
+                                                                    </af:inputDate>
+                                                                    <!-- cellPadding="2" cellSpacing="2" -->
+                                                                    <af:button id="createExpDate"
+                                                                               actionListener="#{invmgmtbacking.submitCreateInventoryByDate}"
+                                                                               text="Create Inventory By Date Given"
+                                                                               action="GoAdminInventoryManagement" partialSubmit="true"/>
+                                                                </af:panelFormLayout>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                    <f:facet name="1">
+                                                        <af:panelGroupLayout id="pgl95" layout="horizontal">
+                                                            <af:panelGroupLayout id="pgl10">
+                                                                <af:outputText id="outInventoryBy2" value="Add Inventory By:"/><br/>
+                                                                <af:button id="cmdExpire2" text="Expiration Date"
+                                                                           inlineStyle="width:180px;" partialSubmit="false">
+                                                                    <af:setActionListener from="#{invmgmtbacking.inventorybuttonState-1}"
+                                                                                          to="#{invmgmtbacking.inventorybuttonState}"/>
+                                                                </af:button>
+                                                                <af:outputText id="s9" value="&lt;br>"
+                                                                               escape="false"/>
+                                                                <af:button id="cmdNIIN2" text="NIIN"
+                                                                           disabled="true"
+                                                                           inlineStyle="width:180px;" partialSubmit="false"/>
+                                                                <af:outputText value="&lt;br>"
+                                                                               escape="false"/>
+                                                                <af:button id="cmdWAC2" text="WAC"
+                                                                           inlineStyle="width:180px;" partialSubmit="false">
+                                                                    <af:setActionListener from="#{invmgmtbacking.inventorybuttonState+1}"
+                                                                                          to="#{invmgmtbacking.inventorybuttonState}"/>
+                                                                </af:button>
+                                                                <af:outputText id="s10" value="&lt;br>"
+                                                                               escape="false"/>
+                                                                <af:button id="cmdLastCount2" text="Last Counted"
+                                                                           inlineStyle="width:180px;" partialSubmit="false">
+                                                                    <af:setActionListener from="#{invmgmtbacking.inventorybuttonState+2}"
+                                                                                          to="#{invmgmtbacking.inventorybuttonState}"/>
+                                                                </af:button>
+                                                                <af:outputText id="s11" value="&lt;br>"
+                                                                               escape="false"/>
+                                                                <af:button id="cmdLocation2" text="Location"
+                                                                           inlineStyle="width:180px;" partialSubmit="false">
+                                                                    <af:setActionListener from="#{invmgmtbacking.inventorybuttonState+3}"
+                                                                                          to="#{invmgmtbacking.inventorybuttonState}"/>
+                                                                </af:button>
+                                                            </af:panelGroupLayout>
+                                                            <af:panelGroupLayout id="pgl105">
+                                                                <af:panelFormLayout id="pfl3">
+                                                                    <af:panelGroupLayout id="pgl12" layout="horizontal" valign="bottom">
+                                                                        <af:panelGroupLayout id="pgl13" layout="vertical">
+                                                                            <af:outputText id="outStartNIIN" value="Starting NIIN"
+                                                                                           inlineStyle="font-weight:bold"/>
+                                                                            <af:inputText id="inStartNIIN"
+                                                                                          binding="#{invmgmtbacking.startniintext}"
+                                                                                          columns="10"
+                                                                                          maximumLength="9"/>
+                                                                        </af:panelGroupLayout>
+                                                                        <af:panelGroupLayout id="pgl14" layout="vertical">
+                                                                            <af:outputText id="outEndNIIN" value="Ending NIIN"
+                                                                                           inlineStyle="font-weight:bold"/>
+                                                                            <af:inputText id="inEndNIIN"
+                                                                                          binding="#{invmgmtbacking.endniintext}"
+                                                                                          columns="10"
+                                                                                          maximumLength="9"/>
+                                                                        </af:panelGroupLayout>
+                                                                        <af:button id="cmdFindNIIN"
+                                                                                   actionListener="#{invmgmtbacking.findNIINMatches}"
+                                                                                   text="Find"
+                                                                                   disabled="false" partialSubmit="false"/>
+                                                                    </af:panelGroupLayout>
+                                                                </af:panelFormLayout>
+                                                                <af:selectManyShuttle value="#{invmgmtbacking.selectedNIINValues}"
+                                                                                      id="selectNIINShuttle"
+                                                                                      valueChangeListener="#{invmgmtbacking.refreshNIINSelectedList}"
+                                                                                      leadingHeader="Available NIINs"
+                                                                                      trailingHeader="Selected NIINs"
+                                                                                      binding="#{invmgmtbacking.shuttleNIINs}"
+                                                                                      size="10">
+                                                                    <f:selectItems value="#{invmgmtbacking.allNIINItems}"/>
+                                                                </af:selectManyShuttle>
+                                                                <af:button text="Create Inventory"
+                                                                           id="AddNIINButton"
+                                                                           actionListener="#{invmgmtbacking.createNIINInventory}"
+                                                                           action="GoAdminInventoryManagement" partialSubmit="true"/>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                    <f:facet name="2">
+                                                        <af:panelGroupLayout id="pgl15" layout="horizontal">
+                                                            <af:panelGroupLayout id="pgl155">
+                                                                <af:outputText id="outInventoryBy3" value="Add Inventory By:"/><br/>
+                                                                <af:button id="cmdExpireDate3" text="Expiration Date"
+                                                                           inlineStyle="width:180px;" partialSubmit="false">
+                                                                    <af:setActionListener from="#{invmgmtbacking.inventorybuttonState-2}"
+                                                                                          to="#{invmgmtbacking.inventorybuttonState}"/>
+                                                                </af:button>
+                                                                <af:outputText id="s12" value="&lt;br>"
+                                                                               escape="false"/>
+                                                                <af:button id="cmdNIIN3" text="NIIN"
+                                                                           inlineStyle="width:180px;" partialSubmit="false">
+                                                                    <af:setActionListener from="#{invmgmtbacking.inventorybuttonState-1}"
+                                                                                          to="#{invmgmtbacking.inventorybuttonState}"/>
+                                                                </af:button>
+                                                                <af:outputText id="s13" value="&lt;br>"
+                                                                               escape="false"/>
+                                                                <af:button id="cmdWAC3" text="WAC"
+                                                                           disabled="true"
+                                                                           inlineStyle="width:180px;" partialSubmit="false"/>
+                                                                <af:outputText id="s14" value="&lt;br>"
+                                                                               escape="false"/>
+                                                                <af:button id="cmdLastCounted3" text="Last Counted"
+                                                                           inlineStyle="width:180px;" partialSubmit="false">
+                                                                    <af:setActionListener from="#{invmgmtbacking.inventorybuttonState+1}"
+                                                                                          to="#{invmgmtbacking.inventorybuttonState}"/>
+                                                                </af:button>
+                                                                <af:outputText id="s15" value="&lt;br>"
+                                                                               escape="false"/>
+                                                                <af:button id="cmdLocation3" text="Location"
+                                                                           inlineStyle="width:180px;" partialSubmit="false">
+                                                                    <af:setActionListener from="#{invmgmtbacking.inventorybuttonState+2}"
+                                                                                          to="#{invmgmtbacking.inventorybuttonState}"/>
+                                                                </af:button>
+                                                            </af:panelGroupLayout>
+                                                            <af:panelGroupLayout id="pgl156">
+                                                                <af:selectManyShuttle value="#{invmgmtbacking.selectedValues}"
+                                                                                      id="selectManyShuttle1"
+                                                                                      valueChangeListener="#{invmgmtbacking.refreshSelectedList}"
+                                                                                      leadingHeader="Available WACs"
+                                                                                      trailingHeader="Selected WACs"
+                                                                                      binding="#{invmgmtbacking.shuttleWACs}"
+                                                                                      size="10">
+                                                                    <f:selectItems value="#{invmgmtbacking.allItems}"/>
+                                                                </af:selectManyShuttle>
+                                                                <af:spacer id="s16" height="10"/>
+                                                                <af:selectBooleanCheckbox id="chkLast360"
+                                                                                          label="Last Counted 360 Only?"
+                                                                                          binding="#{invmgmtbacking.chkLast360}"/>
+                                                                <af:spacer height="10"/>
+                                                                <af:button id="cmdCreateInv2" text="Create Inventory"
+                                                                           actionListener="#{invmgmtbacking.createWacInventory}"
+                                                                           action="GoAdminInventoryManagement" partialSubmit="true"/>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                    <f:facet name="3">
+                                                        <af:panelGroupLayout id="pgl16" layout="horizontal">
+                                                            <af:panelGroupLayout id="pgl165">
+                                                                <af:outputText id="outInventoryBy4" value="Add Inventory By:"/><br/>
+                                                                <af:button id="cmdExpDate4" text="Expiration Date"
+                                                                           inlineStyle="width:180px;" partialSubmit="false">
+                                                                    <af:setActionListener from="#{invmgmtbacking.inventorybuttonState-3}"
+                                                                                          to="#{invmgmtbacking.inventorybuttonState}"/>
+                                                                </af:button>
+                                                                <af:outputText id="s17" value="&lt;br>"
+                                                                               escape="false"/>
+                                                                <af:button id="cmdNIIN4" text="NIIN"
+                                                                           inlineStyle="width:180px;" partialSubmit="false">
+                                                                    <af:setActionListener from="#{invmgmtbacking.inventorybuttonState-2}"
+                                                                                          to="#{invmgmtbacking.inventorybuttonState}"/>
+                                                                </af:button>
+                                                                <af:outputText id="s18" value="&lt;br>"
+                                                                               escape="false"/>
+                                                                <af:button id="cmdWAC4" text="WAC"
+                                                                           inlineStyle="width:180px;" partialSubmit="false">
+                                                                    <af:setActionListener from="#{invmgmtbacking.inventorybuttonState-1}"
+                                                                                          to="#{invmgmtbacking.inventorybuttonState}"/>
+                                                                </af:button>
+                                                                <af:outputText id="s19" value="&lt;br>"
+                                                                               escape="false"/>
+                                                                <af:button id="cmdLastCounted4" text="Last Counted"
+                                                                           disabled="true"
+                                                                           inlineStyle="width:180px;" partialSubmit="false"/>
+                                                                <af:outputText id="s20" value="&lt;br>"
+                                                                               escape="false"/>
+                                                                <af:button id="cmdLocation4" text="Location"
+                                                                           inlineStyle="width:180px;" partialSubmit="false">
+                                                                    <af:setActionListener from="#{invmgmtbacking.inventorybuttonState+1}"
+                                                                                          to="#{invmgmtbacking.inventorybuttonState}"/>
+                                                                </af:button>
+                                                            </af:panelGroupLayout>
+                                                            <af:panelGroupLayout id="pgl166">
+                                                                <af:selectManyShuttle leadingHeader="Available Options"
+                                                                                      trailingHeader="Selected Options"
+                                                                                      valueChangeListener="#{invmgmtbacking.refreshCountSelectedList}"
+                                                                                      binding="#{invmgmtbacking.shuttleLastCounted}">
+                                                                    <af:selectItem label="30 Days" value="30"/>
+                                                                    <af:selectItem label="60 Days" value="60"/>
+                                                                    <af:selectItem label="3 Months" value="90"/>
+                                                                    <af:selectItem label="6 Months" value="180"/>
+                                                                    <af:selectItem label="9 Months" value="270"/>
+                                                                    <af:selectItem label="12 Months" value="360"/>
+                                                                </af:selectManyShuttle>
+                                                                <af:button text="Create Inventory"
+                                                                           actionListener="#{invmgmtbacking.createLastCountInventory}"
+                                                                           action="GoAdminInventoryManagement" partialSubmit="true"/>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                    <f:facet name="4">
+                                                        <af:panelGroupLayout id="pgl17" layout="horizontal">
+                                                            <af:panelGroupLayout id="pgl175">
+
+                                                                <af:outputText id="outInventoryBy5" value="Add Inventory By:"/><br/>
+                                                                <af:button id="cmdExpirationDate5" text="Expiration Date"
+                                                                           inlineStyle="width:180px;" partialSubmit="false">
+                                                                    <af:setActionListener from="#{invmgmtbacking.inventorybuttonState-4}"
+                                                                                          to="#{invmgmtbacking.inventorybuttonState}"/>
+                                                                </af:button>
+                                                                <af:outputText id="s21" value="&lt;br>"
+                                                                               escape="false"/>
+                                                                <af:button id="cmdNIIN5" text="NIIN"
+                                                                           inlineStyle="width:180px;" partialSubmit="false">
+                                                                    <af:setActionListener from="#{invmgmtbacking.inventorybuttonState-3}"
+                                                                                          to="#{invmgmtbacking.inventorybuttonState}"/>
+                                                                </af:button>
+                                                                <af:outputText id="s22" value="&lt;br>"
+                                                                               escape="false"/>
+                                                                <af:button id="cmdWAC5" text="WAC"
+                                                                           inlineStyle="width:180px;" partialSubmit="false">
+                                                                    <af:setActionListener from="#{invmgmtbacking.inventorybuttonState-2}"
+                                                                                          to="#{invmgmtbacking.inventorybuttonState}"/>
+                                                                </af:button>
+                                                                <af:outputText id="s23" value="&lt;br>"
+                                                                               escape="false"/>
+                                                                <af:button id="cmdLastCounted5" text="Last Counted"
+                                                                           inlineStyle="width:180px;" partialSubmit="false">
+                                                                    <af:setActionListener from="#{invmgmtbacking.inventorybuttonState-1}"
+                                                                                          to="#{invmgmtbacking.inventorybuttonState}"/>
+                                                                </af:button>
+                                                                <af:outputText id="s24" value="&lt;br>"
+                                                                               escape="false"/>
+                                                                <af:button id="cmdLocation5" text="Location"
+                                                                           disabled="true"
+                                                                           inlineStyle="width:180px;" partialSubmit="false"/>
+                                                            </af:panelGroupLayout>
+                                                            <af:panelGroupLayout id="pgl1176">
+                                                                <af:panelFormLayout id="pfl6">
+                                                                    <af:panelGroupLayout id="pgl18" layout="horizontal"
+                                                                                         valign="bottom">
+                                                                        <af:panelGroupLayout id="pgl19" layout="vertical">
+                                                                            <af:outputLabel id="lblStartLocation"
+                                                                                            value="Starting Location"
+                                                                                            inlineStyle="font-weight:bold"/>
+                                                                            <af:inputText binding="#{invmgmtbacking.txtByStartLocation}"
+                                                                                          columns="12"
+                                                                                          maximumLength="9"
+                                                                                          contentStyle="text-transform:uppercase;"
+                                                                                          id="txtStartLocation"/>
+                                                                        </af:panelGroupLayout>
+                                                                        <af:spacer id="s25" width="15"/>
+                                                                        <af:panelGroupLayout id="pgl20" layout="vertical">
+                                                                            <af:outputLabel id="lblEndLocation"
+                                                                                            value="Ending Location"
+                                                                                            inlineStyle="font-weight:bold"/>
+                                                                            <af:inputText binding="#{invmgmtbacking.txtByEndLocation}"
+                                                                                          columns="12"
+                                                                                          maximumLength="9"
+                                                                                          contentStyle="text-transform:uppercase;"
+                                                                                          id="txtEndLocation"/>
+                                                                        </af:panelGroupLayout>
+                                                                    </af:panelGroupLayout>
+                                                                    <af:spacer height="15" id="s26"/>
+                                                                    <af:toolbar id="t2">
+                                                                        <af:button actionListener="#{invmgmtbacking.submitByRangeLocations}"
+                                                                                   id="btnSubmitRangeLocations"
+                                                                                   text="Create Inventory"
+                                                                                   action="GoAdminInventoryManagement"
+                                                                                   partialSubmit="true"/>
+                                                                    </af:toolbar>
+                                                                </af:panelFormLayout>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                </af:switcher>
+                                            </af:panelBox>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                </af:switcher>
+                            </af:panelBox>
+                            <af:outputText id="s27" value="&lt;br>" escape="false"/>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

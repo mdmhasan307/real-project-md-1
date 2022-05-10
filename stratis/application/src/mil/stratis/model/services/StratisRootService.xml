@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<AppModule
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="StratisRootService"
+   Version="11.1.2.64.36"
+   ComponentClass="mil.stratis.model.services.StratisRootServiceImpl" >
+   <DesignTime>
+      <Attr Name="_superClassName" Value="mil.stratis.model.services.StratisApplicationModuleImpl" />
+      <Attr Name="_isCodegen" Value="true" />
+   </DesignTime>
+   <AppModuleUsage
+      Name="AppModule1"
+      FullName="mil.stratis.model.services.AppModule"
+      SharedScope="0"/>
+   <AppModuleUsage
+      Name="GCSSMCTransactions1"
+      FullName="mil.stratis.model.services.GCSSMCTransactions"
+      SharedScope="0"/>
+   <AppModuleUsage
+      Name="ImportFiles1"
+      FullName="mil.stratis.model.services.ImportFiles"
+      SharedScope="0"/>
+   <AppModuleUsage
+      Name="InventoryModule1"
+      FullName="mil.stratis.model.services.InventoryModule"
+      SharedScope="0"/>
+   <AppModuleUsage
+      Name="InventorySetupModule1"
+      FullName="mil.stratis.model.services.InventorySetupModule"
+      SharedScope="0"/>
+   <AppModuleUsage
+      Name="PackingModule1"
+      FullName="mil.stratis.model.services.PackingModule"
+      SharedScope="0"/>
+   <AppModuleUsage
+      Name="PickingAM1"
+      FullName="mil.stratis.model.services.PickingAM"
+      SharedScope="0"/>
+   <AppModuleUsage
+      Name="RcvHomeAM1"
+      FullName="mil.stratis.model.services.RcvHomeAM"
+      SharedScope="0"/>
+   <AppModuleUsage
+      Name="ReceiptAM1"
+      FullName="mil.stratis.model.services.ReceiptAM"
+      SharedScope="0"/>
+   <AppModuleUsage
+      Name="ShippingService1"
+      FullName="mil.stratis.model.services.ShippingService"
+      SharedScope="0"/>
+   <AppModuleUsage
+      Name="StowingAM1"
+      FullName="mil.stratis.model.services.StowingAM"
+      SharedScope="0"/>
+   <AppModuleUsage
+      Name="SysAdmin1"
+      FullName="mil.stratis.model.services.SysAdmin"
+      SharedScope="0"/>
+   <AppModuleUsage
+      Name="Transactions1"
+      FullName="mil.stratis.model.services.Transactions"
+      SharedScope="0"/>
+   <AppModuleUsage
+      Name="WarehouseSetup1"
+      FullName="mil.stratis.model.services.WarehouseSetup"
+      SharedScope="0"/>
+   <AppModuleUsage
+      Name="WorkLoadManager1"
+      FullName="mil.stratis.model.services.WorkLoadManager"
+      SharedScope="0"/>
+   <AppModuleUsage
+      Name="LoginModule1"
+      FullName="mil.stratis.model.services.LoginModule"
+      SharedScope="0"/>
+   <AppModuleUsage
+      Name="WalkThruAM1"
+      FullName="mil.stratis.model.services.WalkThruAM"
+      SharedScope="0" />
+   <Properties>
+      <CustomProperties>
+         <Property
+            Name="DATA_CONTROL_NAME"
+            Value="StratisRootServiceDataControl"/>
+      </CustomProperties>
+   </Properties>
+</AppModule>

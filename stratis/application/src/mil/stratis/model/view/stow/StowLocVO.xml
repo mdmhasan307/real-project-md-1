@@ -1,0 +1,500 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="StowLocVO"
+   Version="11.1.2.64.36"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   ComponentClass="mil.stratis.model.view.stow.StowLocVOImpl"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+      <Attr Name="_isExpertMode" Value="true" />
+   </DesignTime>
+   <Variable
+      Name="sidStr"
+      Kind="where"
+      Type="java.lang.String"
+      DefaultValue="x" >
+   </Variable>
+   <SQLQuery><![CDATA[SELECT 
+    Stow.SID, 
+    Stow.QTY_TO_BE_STOWED, 
+    Stow.RCN, 
+    Stow.CREATED_BY, 
+    Stow.CREATED_DATE, 
+    Stow.MODIFIED_BY, 
+    Stow.MODIFIED_DATE, 
+    Stow.STOW_ID, 
+    Stow.PID, 
+    Stow.STATUS, 
+    Stow.CANCEL_REASON, 
+    Stow.EXPIRATION_DATE, 
+    Stow.DATE_OF_MANUFACTURE, 
+    Stow.LOT_CON_NUM, 
+    Stow.CASE_WEIGHT_QTY, 
+    Stow.PACKED_DATE, 
+    Location.LOCATION_LABEL, 
+    Stow.LOCATION_ID, 
+    Location.LOCATION_ID AS LOCATION_ID1,
+    Stow.SERIAL_NUMBER,
+    Stow.STOW_QTY
+FROM 
+    STOW Stow, 
+    LOCATION Location 
+WHERE 
+    Stow.LOCATION_ID = Location.LOCATION_ID
+ and Stow.SID = :sidStr
+ and (Stow.STATUS = 'STOW READY' OR Stow.STATUS = 'STOW BYPASS1')
+ORDER BY 
+    Stow.SID DESC]]></SQLQuery>
+   <ViewAttribute
+      Name="Sid"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="19"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SID"
+      Expression="SID"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="19" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Sid_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="9" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="QtyToBeStowed"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="QTY_TO_BE_STOWED"
+      Expression="QTY_TO_BE_STOWED"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+         <Attr Name="_diagramName" Value="Stow Qty"/>
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="QtyToBeStowed_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="6" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Rcn"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="RCN"
+      Expression="RCN"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="9" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="Rcn_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="CREATED_BY"
+      Expression="CREATED_BY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedDate"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="CREATED_DATE"
+      Expression="CREATED_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedBy"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="MODIFIED_BY"
+      Expression="MODIFIED_BY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="MODIFIED_DATE"
+      Expression="MODIFIED_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StowId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="STOW_ID"
+      Expression="STOW_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Pid"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PID"
+      Expression="PID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Status"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="STATUS"
+      Expression="STATUS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Status_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="15" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CancelReason"
+      IsPersistent="false"
+      Precision="100"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CANCEL_REASON"
+      Expression="CANCEL_REASON"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="100" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ExpirationDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="EXPIRATION_DATE"
+      Expression="EXPIRATION_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+         <Attr Name="_diagramName" Value="EXPD"/>
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="12" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="ExpirationDate_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DateOfManufacture"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="DATE_OF_MANUFACTURE"
+      Expression="DATE_OF_MANUFACTURE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+         <Attr Name="_diagramName" Value="DOM"/>
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="DateOfManufacture_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="12" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LotConNum"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="LOT_CON_NUM"
+      Expression="LOT_CON_NUM"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="10" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CaseWeightQty"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="CASE_WEIGHT_QTY"
+      Expression="CASE_WEIGHT_QTY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="10" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PackedDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="PACKED_DATE"
+      Expression="PACKED_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="12" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationLabel"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="9"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="LOCATION_LABEL"
+      Expression="LOCATION_LABEL"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="9" />
+         <Attr Name="_diagramName" Value="Location"/>
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="LocationLabel_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="9" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationId"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="LOCATION_ID"
+      Expression="LOCATION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationId1"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="38"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="LOCATION_ID1"
+      Expression="LOCATION_ID1"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SerialNumber"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SERIAL_NUMBER"
+      Expression="SERIAL_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+         <Attr Name="_diagramName" Value="Serial"/>
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="10" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StowQty"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Type="java.lang.String"
+      ColumnType="NUMBER"
+      AliasName="STOW_QTY"
+      Expression="STOW_QTY"
+      SQLType="VARCHAR" >
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="6" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="StowQty_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   <ViewCriteria
+      Name="StowLocVOCriteria"
+      ViewObjectName="mil.stratis.model.view.stow.StowLocVO"
+      Conjunction="AND">
+      <Properties>
+         <CustomProperties>
+            <Property
+               Name="displayOperators"
+               Value="InAdvancedMode"/>
+            <Property
+               Name="autoExecute"
+               Value="false"/>
+            <Property
+               Name="allowConjunctionOverride"
+               Value="true"/>
+            <Property
+               Name="showInList"
+               Value="true"/>
+            <Property
+               Name="mode"
+               Value="Basic"/>
+         </CustomProperties>
+      </Properties>
+      <ViewCriteria
+         Name="StowLocVOSubCriteria1_1"
+         ViewObjectName="mil.stratis.model.view.stow.StowLocVO"
+         Conjunction="AND">
+         <ViewCriteriaRow
+            Name="StowLocVOSubCriteria1_1_row_0"
+            UpperColumns="1">
+            <ViewCriteriaItemCompound
+               ViewAttribute="Status">
+               <ViewCriteria
+                  Name="StowLocVOCriteria_StowLocVOSubCriteria1_1_StowLocVOSubCriteria1_1_row_0_Status_itemHolder"
+                  ViewObjectName="mil.stratis.model.view.stow.StowLocVO"
+                  Conjunction="OR">
+                  <ViewCriteriaRow
+                     Name="StowLocVOCriteria_StowLocVOSubCriteria1_1_StowLocVOSubCriteria1_1_row_0_Status_itemHolder_row_0"
+                     Conjunction="AND">
+                     <ViewCriteriaItem
+                        Name="Status"
+                        ViewAttribute="Status"
+                        Operator="="
+                        Conjunction="AND"
+                        Value="STOW READY"
+                        Required="Optional"/>
+                  </ViewCriteriaRow>
+                  <ViewCriteriaRow
+                     Name="StowLocVOCriteria_StowLocVOSubCriteria1_1_StowLocVOSubCriteria1_1_row_0_Status_itemHolder_row_1"
+                     Conjunction="AND">
+                     <ViewCriteriaItem
+                        Name="StowLocVOCriteria_StowLocVOSubCriteria1_1_StowLocVOSubCriteria1_1_row_0_Status_StowLocVOCriteria_StowLocVOSubCriteria1_1_StowLocVOSubCriteria1_1_row_0_Status_itemHolder_StowLocVOCriteria_StowLocVOSubCriteria1_1_StowLocVOSubCriteria1_1_row_0_Status_itemHolder_row_1_Status"
+                        ViewAttribute="Status"
+                        Operator="="
+                        Conjunction="AND"
+                        Value="STOW BYPASS1"
+                        Required="Optional"/>
+                  </ViewCriteriaRow>
+               </ViewCriteria>
+            </ViewCriteriaItemCompound>
+         </ViewCriteriaRow>
+      </ViewCriteria>
+   </ViewCriteria>
+   <ResourceBundle >
+      <JavaResourceBundle
+         MsgBundleClass="mil.stratis.model.view.stow.common.StowLocVORowImplMsgBundle" >
+      </JavaResourceBundle>
+   </ResourceBundle>
+</ViewObject>

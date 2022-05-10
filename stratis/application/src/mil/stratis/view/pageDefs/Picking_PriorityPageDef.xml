@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Picking_PriorityPageDef"
+                ControllerClass="#{PickingAll}" Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="PickingByPriorityQryVO1Iterator" RangeSize="-1" Binds="Root.PickingAM1.PickingByPriorityQryVO1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="PickingByPriorityQryVO1" IterBinding="PickingByPriorityQryVO1Iterator">
+      <AttrNames>
+        <Item Value="IssuePriorityGroup"/>
+        <Item Value="PriorityName"/>
+      </AttrNames>
+    </table>
+  </bindings>
+</pageDefinition>

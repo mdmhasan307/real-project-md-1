@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+  <jsp:output omit-xml-declaration="true" doctype-root-element="HTML"
+              doctype-system="http://www.w3.org/TR/html4/loose.dtd"
+              doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN"/>
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+  <html>
+    <head>
+      <meta http-equiv="Content-Type"
+            content="text/html; charset=windows-1252"/>
+      <title>STRATIS Communications Applet</title>
+    </head>
+    <body>
+    <!--<jsp:scriptlet>
+        // setup the com
+        userbean.updateComSettings(request.getParameter("port"), request.getParameter("equip")); 
+        
+        String str = request.getParameter("str");
+        String port =  userbean.getReturncomport();
+      
+        String baud = userbean.getReturncombaud();
+        String parity = userbean.getReturncomparity();
+    
+        String stopbits = userbean.getReturncomstopbits();       
+        
+        //String fparity = request.getParameter("fparity"); // not used
+    </jsp:scriptlet>-->
+    <jsp:scriptlet>
+        // setup the com
+        //userbean.updateComSettings(request.getParameter("port"), request.getParameter("equip")); 
+        
+        String str = "1";
+        String port =  "7003";
+      
+        String baud = "5600";
+        String parity = "1";
+    
+        String stopbits = "1";       
+        
+        //String fparity = request.getParameter("fparity"); // not used
+    </jsp:scriptlet>
+
+    <jsp:plugin type="applet" codebase="." code="comapplet.COMApplet" archive="comm.jar,SCOMApplet.jar">
+        <jsp:params>
+            <jsp:param name="port" value="&lt;%= port %>"/>
+            <jsp:param name="str" value="&lt;%= str %>"/>
+            <jsp:param name="debug" value="true"/>
+         
+            <jsp:param name="baud" value="&lt;%= baud %>"/>
+       
+            <jsp:param name="parity" value="&lt;%= parity %>"/>
+            <jsp:param name="stopbits" value="&lt;%= stopbits %>"/>
+            
+        </jsp:params>
+        <jsp:fallback>
+            <p>This browser does not support Applets.</p>
+        </jsp:fallback>
+    </jsp:plugin>
+    
+    </body>
+  </html>
+</jsp:root>

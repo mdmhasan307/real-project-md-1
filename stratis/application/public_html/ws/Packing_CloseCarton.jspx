@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:useBean id="consolbean" class="mil.stratis.view.pack.ConsolBean" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="4"/>
+    <jsp:setProperty name="userbean" property="selected2" value="1"/>
+    <f:view>
+        <af:document title="STRATIS" id="d1">
+            <af:form id="main_form">
+                <af:panelStretchLayout startWidth="25" topHeight="150" bottomHeight="25" id="psl1">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/HeaderMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout id="topGroup" layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGridLayout id="pgl1">
+                                <af:gridRow id="gr1">
+                                    <af:gridCell valign="top" id="gc1">
+                                        <f:subview id="svSideBar">
+                                            <jsp:include page="../SideBar.jspx"/>
+                                        </f:subview>
+                                    </af:gridCell>
+                                    <af:gridCell valign="top" id="gc2">
+                                        <f:verbatim>
+                                            <br/>
+                                        </f:verbatim>
+                                        <!--<af:panelBox text="Close Carton" inlineStyle="text-align:center;" id="pb1">-->
+                                        <af:panelGridLayout id="pgl2">
+                                            <af:gridRow id="gr2">
+                                                <af:gridCell id="gc3">
+                                                    <f:verbatim>
+                                                        <br/>
+                                                    </f:verbatim>
+                                                    <af:panelBox text="Current Open Cartons at this Packing Station"
+                                                                 inlineStyle="text-align:center;width:500px;" id="pb2">
+                                                        <af:panelGridLayout id="pgl3">
+                                                            <af:gridRow id="gr3">
+                                                                <af:gridCell id="gc4">
+                                                                    <f:verbatim>
+                                                                        <br/>
+                                                                    </f:verbatim>
+                                                                    <af:button id="cmdCloseCarton"
+                                                                               text="Close Carton"
+                                                                               actionListener="#{consolbean.closeCarton}"
+                                                                               partialSubmit="false"/>
+                                                                    <af:table summary="Current Open Cartons"
+                                                                              value="#{bindings.cartonView1.collectionModel}"
+                                                                              var="row"
+                                                                              rows="#{bindings.cartonView1.rangeSize}"
+                                                                              first="#{bindings.cartonView1.rangeStart}"
+                                                                              emptyText="#{bindings.cartonView1.viewable ? 'No open cartons at this station.' : 'Access Denied.'}"
+                                                                              binding="#{consolbean.cartonTable}"
+                                                                              rowSelection="single" id="tCrtnVw"
+                                                                              width="450px">
+                                                                        <af:column sortProperty="BinLocation"
+                                                                                   sortable="false"
+                                                                                   headerText="Bin Location"
+                                                                                   id="cBinLocation">
+                                                                            <af:outputText value="#{row.BinLocation}"
+                                                                                           id="otBinLocation"/>
+                                                                        </af:column>
+                                                                        <af:column sortProperty="PackLocationBarcode"
+                                                                                   sortable="false"
+                                                                                   headerText="Location Barcode"
+                                                                                   id="cLocationBarcode">
+                                                                            <af:outputText value="#{row.PackLocationBarcode}"
+                                                                                           id="otPackLocation"/>
+                                                                        </af:column>
+                                                                        <af:column sortProperty="NumberOfIssues"
+                                                                                   sortable="false"
+                                                                                   headerText="Number of Issues"
+                                                                                   id="cNumOfIssues">
+                                                                            <af:outputText value="#{row.NumberOfIssues}"
+                                                                                           id="otNumberOfIssues">
+                                                                                <f:convertNumber groupingUsed="false"/>
+                                                                            </af:outputText>
+                                                                        </af:column>
+                                                                        <af:column sortProperty="ConsolidationCube"
+                                                                                   sortable="false"
+                                                                                   headerText="Total Cube"
+                                                                                   id="cConsolidationCube">
+                                                                            <af:outputText value="#{row.ConsolidationCube}"
+                                                                                           id="otConsolidationCube">
+                                                                                <f:convertNumber groupingUsed="false"/>
+                                                                            </af:outputText>
+                                                                        </af:column>
+                                                                        <af:column sortProperty="ConsolidationWeight"
+                                                                                   sortable="false"
+                                                                                   headerText="Total Weight"
+                                                                                   id="cConsolidationWeight">
+                                                                            <af:outputText value="#{row.ConsolidationWeight}"
+                                                                                           id="otConsolidationWeight">
+                                                                                <f:convertNumber groupingUsed="false"/>
+                                                                            </af:outputText>
+                                                                        </af:column>
+                                                                        <af:column sortProperty="CustomerAac"
+                                                                                   sortable="false"
+                                                                                   headerText="Carton AAC"
+                                                                                   id="cCustomerAac">
+                                                                            <af:outputText value="#{row.CustomerAac}"
+                                                                                           id="otCustomerAac"/>
+                                                                        </af:column>
+                                                                    </af:table>
+                                                                    <af:outputText value="#{consolbean.cartonoutputmessage}"
+                                                                                   inlineStyle="color:rgb(128,0,0); font-size:larger;"
+                                                                                   id="otCartonOutputMessage"/>
+                                                                </af:gridCell>
+                                                            </af:gridRow>
+                                                        </af:panelGridLayout>
+                                                    </af:panelBox>
+                                                </af:gridCell>
+                                            </af:gridRow>
+                                        </af:panelGridLayout>
+                                        <!--</af:panelBox>-->
+                                    </af:gridCell>
+                                </af:gridRow>
+                            </af:panelGridLayout>
+                            <f:subview id="lwrap_footer">
+                                <jsp:include page="../FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <af:spacer width="24" height="675"/>
+                    </f:facet>
+                    <f:facet name="end"/>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

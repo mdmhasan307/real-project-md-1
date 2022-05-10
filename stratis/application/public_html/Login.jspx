@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="workloadbean" class="mil.stratis.view.session.Nav" scope="session"/>
+    <style>
+        .noSmvBackground {
+            background-image: url(resources/images/STRATIS_Login.jpg);
+        }
+
+        .smvBackground {
+            background-image: url(resources/images/STRATIS_LOGIN_SMV.jpg);
+        }
+    </style>
+    <f:view>
+        <af:document title="Login.jspx" id="d1">
+            <!--classification bar -->
+            <af:messages id="m1"/>
+
+            <af:resource type="javascript" source="/js/login.js"/>
+            <trh:script id="script1">
+                <![CDATA[
+                        showDOD_Banner();
+                    ]]>
+            </trh:script>
+            <f:subview id="classificationHeader">
+                <jsp:include page="/ClassificationBanner.jspx"/>
+            </f:subview>
+            <af:form id="f1">
+                <input type="hidden" id="smvEn" value="${appConfig.smvEnabled}"/>
+                <af:panelGridLayout id="hm_psl1"
+                                    inlineStyle="background-repeat:no-repeat;">
+
+                    <af:switcher facetName="#{userBackingBean.disallowLoginDueToNoPivAuthCert}" id="floginallowedwithcac">
+                        <f:facet name="true">
+                            <af:gridRow marginTop="334px" marginBottom="289px" id="gr1flog">
+                                <af:gridCell id="gc4flog">
+                                </af:gridCell>
+                                <af:gridCell id="gc1flog">
+                                    <af:panelGroupLayout layout="horizontal" id="pglNoPivAuthCert"
+                                                         inlineStyle="margin-left:250px; margin-right:540px">
+                                        <f:verbatim>
+                                            <div style="padding:10px;margin-left:50px;margin-top:-130px;
+                                    width:475px;background-color:#DCDCDC;opacity:0.85;">
+                                                <h2>No PIV Authentication Certificate was found.</h2>
+                                                <br/>
+                                                Ensure that your CAC is inserted into your smart card reader and that you have a valid PIV Authentication Certificate.
+                                                These certificates are required for login as of January 31, 2020.
+                                                <br/><br/>
+                                                If your CAC is inserted, you can try the following:
+                                                <ul><br/>
+                                                    <li>Close your internet browser.</li>
+                                                    <li>Open Internet Explorer, and go to the Tools - Internet Options - Content tab.</li>
+                                                    <li>Click the 'Clear SSL State' button.</li>
+                                                    <li>Close the Internet Options popup.</li>
+                                                    <li>Navigate back to the STRATIS website.</li>
+                                                    <li>You should be prompted to Select a Certificate -
+                                                        <br/><br/>
+                                                        On this popup, you need to select the certificate where the Issuer is a "<b>DOD ID CA</b>" certificate.
+                                                        <br/><br/>
+                                                        You will not be able to login to STRATIS if you select a certificate issued by a "<b>DOD EMAIL CA</b>".
+                                                        <br/><br/>
+                                                    </li>
+                                                    <li>
+                                                        After you have selected your certificate (issued by a "DOD ID CA"), click OK, and you should be able to log in to STRATIS.
+                                                    </li>
+                                                    <li>If you need further assistance, please visit <a
+                                                            href="https://mls2support.com/">https://www.mls2support.com/</a></li>
+                                                </ul>
+                                            </div>
+                                        </f:verbatim>
+                                    </af:panelGroupLayout>
+                                </af:gridCell>
+                            </af:gridRow>
+                        </f:facet>
+                        <f:facet name="false">
+                            <af:gridRow marginTop="334px" marginBottom="289px" id="gr1">
+                                <af:gridCell id="gc4">
+                                </af:gridCell>
+                                <af:gridCell id="gc1">
+                                    <af:panelFormLayout id="pfl1" inlineStyle="margin-left:385px;margin-right:540px;">
+                                        <af:inputText label="Label 1" id="it1" value="#{userBackingBean.userstring}"
+                                                      simple="true" inlineStyle="border-color:Black;" disabled="true"/>
+                                        <af:spacer height="24" width="0" rendered="true" id="s1"/>
+                                        <af:panelGroupLayout id="rolehp" layout="horizontal">
+                                            <af:selectOneChoice label="role" id="soc1"
+                                                                binding="#{userBackingBean.userTypeSelect}"
+                                                                simple="true" disabled="false">
+                                                <f:selectItems value="#{userBackingBean.allUserTypes}" id="si1"/>
+                                            </af:selectOneChoice>
+                                            <af:spacer width="50px" id="rolehpsp"/>
+                                            <af:selectOneChoice label="defaultHomepage" id="dhp" simple="true"
+                                                                rendered="#{appConfig.smvEnabled}" disabled="false"
+                                                                binding="#{userBackingBean.homePageSelect}"
+                                                                value="#{userBackingBean.defaultHomePage}">
+                                                <f:selectItem itemLabel="Desktop" itemValue="desktop" id="dhp1"/>
+                                                <f:selectItem itemLabel="Mobile" itemValue="mobile" id="dhp2"/>
+                                            </af:selectOneChoice>
+                                        </af:panelGroupLayout>
+
+                                        <af:spacer height="24" width="0" id="s2"/>
+
+                                        <af:panelGroupLayout layout="horizontal" id="pgl2">
+                                            <af:selectOneChoice label="workstation" id="soc2" simple="true" disabled="false"
+                                                                binding="#{userBackingBean.userWorkstationSelect}">
+                                                <f:selectItems value="#{userBackingBean.equipLoginAllValues}" id="si2"/>
+                                            </af:selectOneChoice>
+                                            <af:spacer width="14" id="s7"/>
+                                            <!-- Notices -->
+                                            <!--<af:link action="dialog:DODNotices" text="Notices" useWindow="true"
+                                                            windowHeight="500" windowWidth="600"
+                                                            inlineStyle="color:#FFFFFF; font-size:10pt; font-weight:bold;"
+                                                            id="login_cl1"/>-->
+                                            <af:spacer height="0" width="10" id="s9"/>
+                                        </af:panelGroupLayout>
+                                        <af:spacer height="6" width="0" rendered="true" id="s3"/>
+                                        <af:panelGroupLayout layout="horizontal" id="pgl3">
+                                            <af:link id="cb1" actionListener="#{userBackingBean.confirmCACLogin}"
+                                                     shortDesc="login button"
+                                                     rendered="true"
+                                                     action="#{userBackingBean.getLoginAction}"
+                                                     icon="resources/images/Login_Button.gif">
+                                                <!--af:image id="export" source="resources/images/Login_Button.gif" shortDesc="CAC Login"/-->
+                                            </af:link><b><jsp:expression>workloadbean.getCurrentSiteName()</jsp:expression></b>
+                                            <af:spacer width="20" height="0" id="s10"/>
+                                            <af:outputLabel value="#{userBackingBean.loginStatusMessage}" id="ol1"
+                                                            inlineStyle="color:Red; font-family:Arial, Helvetica, sans-serif; background-color:Menu; padding:2px; font-weight:bold;"
+                                                            rendered="#{not empty userBackingBean.loginStatusMessage}"/>
+
+
+                                        </af:panelGroupLayout>
+                                    </af:panelFormLayout>
+                                </af:gridCell>
+                            </af:gridRow>
+                        </f:facet>
+                    </af:switcher>
+                </af:panelGridLayout>
+            </af:form>
+            <f:subview id="classificationFooter">
+                <jsp:include page="/ClassificationBanner.jspx"/>
+            </f:subview>
+        </af:document>
+    </f:view>
+    <script language="Javascript" type="text/javascript">
+        var docPage = document.getElementById("hm_psl1");
+        var smvEnabled = document.getElementById("smvEn").value;
+        if (smvEnabled == "true") {
+            docPage.className += " smvBackground";
+        } else {
+            docPage.className += " noSmvBackground";
+        }
+    </script>
+</jsp:root>

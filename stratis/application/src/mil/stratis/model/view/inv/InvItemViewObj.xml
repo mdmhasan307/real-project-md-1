@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="InvItemViewObj"
+   Version="11.1.2.64.36"
+   SelectList="InventoryItem.INVENTORY_ITEM_ID, 
+       InventoryItem.NIIN_ID, 
+       InventoryItem.NIIN_LOC_ID, 
+       InventoryItem.INVENTORY_ID, 
+       InventoryItem.NUM_COUNTS, 
+       InventoryItem.CUM_NEG_ADJ, 
+       InventoryItem.CUM_POS_ADJ, 
+       InventoryItem.NUM_COUNTED, 
+       InventoryItem.CREATED_BY, 
+       InventoryItem.CREATED_DATE, 
+       InventoryItem.MODIFIED_BY, 
+       InventoryItem.MODIFIED_DATE, 
+       InventoryItem.INV_TYPE, 
+       InventoryItem.WAC_ID, 
+       InventoryItem.PRIORITY, 
+       InventoryItem.STATUS"
+   FromList="INVENTORY_ITEM InventoryItem"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.inv.InvItemViewObjImpl"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="InventoryItem"
+      Entity="mil.stratis.model.entity.inv.InventoryItem" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="InventoryItemId"
+      IsNotNull="true"
+      EntityAttrName="InventoryItemId"
+      EntityUsage="InventoryItem"
+      AliasName="INVENTORY_ITEM_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NiinId"
+      EntityAttrName="NiinId"
+      EntityUsage="InventoryItem"
+      AliasName="NIIN_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NiinLocId"
+      EntityAttrName="NiinLocId"
+      EntityUsage="InventoryItem"
+      AliasName="NIIN_LOC_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="InventoryId"
+      EntityAttrName="InventoryId"
+      EntityUsage="InventoryItem"
+      AliasName="INVENTORY_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NumCounts"
+      EntityAttrName="NumCounts"
+      EntityUsage="InventoryItem"
+      AliasName="NUM_COUNTS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CumNegAdj"
+      EntityAttrName="CumNegAdj"
+      EntityUsage="InventoryItem"
+      AliasName="CUM_NEG_ADJ" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CumPosAdj"
+      EntityAttrName="CumPosAdj"
+      EntityUsage="InventoryItem"
+      AliasName="CUM_POS_ADJ" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NumCounted"
+      EntityAttrName="NumCounted"
+      EntityUsage="InventoryItem"
+      AliasName="NUM_COUNTED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      EntityAttrName="CreatedBy"
+      EntityUsage="InventoryItem"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedDate"
+      IsNotNull="true"
+      EntityAttrName="CreatedDate"
+      EntityUsage="InventoryItem"
+      AliasName="CREATED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedBy"
+      EntityAttrName="ModifiedBy"
+      EntityUsage="InventoryItem"
+      AliasName="MODIFIED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedDate"
+      EntityAttrName="ModifiedDate"
+      EntityUsage="InventoryItem"
+      AliasName="MODIFIED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="InvType"
+      EntityAttrName="InvType"
+      EntityUsage="InventoryItem"
+      AliasName="INV_TYPE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WacId"
+      EntityAttrName="WacId"
+      EntityUsage="InventoryItem"
+      AliasName="WAC_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Priority"
+      EntityAttrName="Priority"
+      EntityUsage="InventoryItem"
+      AliasName="PRIORITY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Status"
+      EntityAttrName="Status"
+      EntityUsage="InventoryItem"
+      AliasName="STATUS" >
+   </ViewAttribute>
+</ViewObject>

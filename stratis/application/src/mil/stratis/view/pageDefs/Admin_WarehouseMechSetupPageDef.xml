@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Admin_WarehouseMechSetupPageDef"
+                Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables" Refresh="ifNeeded">
+      <variable Type="int" Name="AddNewCarouselLevel_LocationType" IsQueriable="false"/>
+      <variable Type="int" Name="AddNewCarouselLevel_GroupsPerLevel" IsQueriable="false"/>
+      <variable Type="int" Name="CreateHorizontalCarousel_WACID" IsQueriable="false"/>
+      <variable Type="int" Name="CreateVerticalCarousel_WACID" IsQueriable="false"/>
+      <variable Type="int" Name="AddNewVerticalCarouselLevel_LocationType" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="FilterLocationData_WacID" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="FilterLocationData_LocationLabel" IsQueriable="false"/>
+    </variableIterator>
+    <iterator id="WACList1Iterator" RangeSize="-1" Binds="Root.AppModule1.WACList1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="LocationViewWAC1Iterator" RangeSize="20" Binds="Root.AppModule1.LocationViewWAC1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="LocationClassificationView1Iterator" RangeSize="-1"
+              Binds="Root.AppModule1.LocationClassificationView1" DataControl="StratisRootServiceDataControl"
+              Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="TempMechCreateRows1Iterator" RangeSize="-1" Binds="Root.AppModule1.TempMechCreateRows1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="TempMechCreateRows2Iterator" RangeSize="-1" Binds="Root.AppModule1.TempMechCreateRows2"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="TempMechCreateRows1" IterBinding="TempMechCreateRows1Iterator">
+      <AttrNames>
+        <Item Value="LocationType"/>
+        <Item Value="BinImage"/>
+        <Item Value="DivideId"/>
+        <Item Value="Name"/>
+        <Item Value="Length"/>
+        <Item Value="Width"/>
+        <Item Value="Height"/>
+      </AttrNames>
+    </table>
+    <methodAction id="RemoveNewCarouselLevel" MethodName="removeNewCarouselLevel" RequiresUpdateModel="true"
+                  Action="invokeMethod" IsViewObjectMethod="false" DataControl="StratisRootServiceDataControl"
+                  InstanceName="StratisRootServiceDataControl.dataProvider.Root.AppModule1"/>
+    <methodAction id="AddNewCarouselLevel" MethodName="addNewCarouselLevel" RequiresUpdateModel="true"
+                  Action="invokeMethod" IsViewObjectMethod="false" DataControl="StratisRootServiceDataControl"
+                  InstanceName="StratisRootServiceDataControl.dataProvider.Root.AppModule1">
+      <NamedData NDName="LocationType" NDType="int" NDValue="${bindings.AddNewCarouselLevel_LocationType}"/>
+    </methodAction>
+    <attributeValues id="LocationType11" IterBinding="variables">
+      <AttrNames>
+        <Item Value="AddNewCarouselLevel_LocationType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="GroupsPerLevel1" IterBinding="variables">
+      <AttrNames>
+        <Item Value="AddNewCarouselLevel_GroupsPerLevel"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="WACID1" IterBinding="variables">
+      <AttrNames>
+        <Item Value="CreateHorizontalCarousel_WACID"/>
+      </AttrNames>
+    </attributeValues>
+    <list id="LocationType1" IterBinding="variables" StaticList="false" ListOperMode="setAttribute"
+          ListIter="LocationClassificationView1Iterator">
+      <AttrNames>
+        <Item Value="AddNewCarouselLevel_LocationType"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="LocClassificationId"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Name"/>
+        <Item Value="Description"/>
+      </ListDisplayAttrNames>
+    </list>
+    <methodAction id="RemoveNewVerticalCarouselLevel" MethodName="removeNewVerticalCarouselLevel"
+                  RequiresUpdateModel="true" Action="invokeMethod" IsViewObjectMethod="false"
+                  DataControl="StratisRootServiceDataControl"
+                  InstanceName="StratisRootServiceDataControl.dataProvider.Root.AppModule1"/>
+    <methodAction id="AddNewVerticalCarouselLevel" MethodName="addNewVerticalCarouselLevel" RequiresUpdateModel="true"
+                  Action="invokeMethod" IsViewObjectMethod="false" DataControl="StratisRootServiceDataControl"
+                  InstanceName="StratisRootServiceDataControl.dataProvider.Root.AppModule1">
+      <NamedData NDName="LocationType" NDType="int" NDValue="${bindings.AddNewVerticalCarouselLevel_LocationType}"/>
+    </methodAction>
+    <attributeValues id="LocationType22" IterBinding="variables">
+      <AttrNames>
+        <Item Value="AddNewVerticalCarouselLevel_LocationType"/>
+      </AttrNames>
+    </attributeValues>
+    <table id="TempMechCreateRows2" IterBinding="TempMechCreateRows2Iterator">
+      <AttrNames>
+        <Item Value="LocationType"/>
+        <Item Value="BinImage"/>
+        <Item Value="DivideId"/>
+        <Item Value="Name"/>
+        <Item Value="Length"/>
+        <Item Value="Width"/>
+        <Item Value="Height"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="WACID2" IterBinding="variables">
+      <AttrNames>
+        <Item Value="CreateVerticalCarousel_WACID"/>
+      </AttrNames>
+    </attributeValues>
+    <list id="LocationType2" IterBinding="variables" StaticList="false" ListOperMode="setAttribute"
+          ListIter="LocationClassificationView1Iterator">
+      <AttrNames>
+        <Item Value="AddNewVerticalCarouselLevel_LocationType"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="LocClassificationId"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Name"/>
+        <Item Value="Description"/>
+      </ListDisplayAttrNames>
+    </list>
+    <methodAction id="FilterLocationData" MethodName="filterLocationData" RequiresUpdateModel="true"
+                  Action="invokeMethod" IsViewObjectMethod="false" DataControl="StratisRootServiceDataControl"
+                  InstanceName="StratisRootServiceDataControl.dataProvider.Root.AppModule1">
+      <NamedData NDName="WacID" NDType="java.lang.String" NDValue="${bindings.FilterLocationData_WacID}"/>
+      <NamedData NDName="LocationLabel" NDType="java.lang.String"
+                 NDValue="${bindings.FilterLocationData_LocationLabel}"/>
+    </methodAction>
+    <attributeValues id="WacIDFilter" IterBinding="variables">
+      <AttrNames>
+        <Item Value="FilterLocationData_WacID"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LocationLabelFilter" IterBinding="variables">
+      <AttrNames>
+        <Item Value="FilterLocationData_LocationLabel"/>
+      </AttrNames>
+    </attributeValues>
+    <table id="LocationViewWAC1" IterBinding="LocationViewWAC1Iterator">
+      <AttrNames>
+        <Item Value="LocationId"/>
+        <Item Value="LocationLabel"/>
+        <Item Value="WacId"/>
+        <Item Value="WacNumber"/>
+        <Item Value="LocClassificationId"/>
+        <Item Value="Aisle"/>
+        <Item Value="AvailabilityFlag"/>
+        <Item Value="Bay"/>
+        <Item Value="Cube"/>
+        <Item Value="LocLevel"/>
+        <Item Value="Side"/>
+        <Item Value="Slot"/>
+        <Item Value="Weight"/>
+      </AttrNames>
+    </table>
+  </bindings>
+</pageDefinition>

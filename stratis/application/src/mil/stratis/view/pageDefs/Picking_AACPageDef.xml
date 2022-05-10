@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Picking_ACCPageDef"
+                ControllerClass="#{PickingAll}" Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="PickByAACQryVO1Iterator" RangeSize="-1" Binds="Root.PickingAM1.PickByAACQryVO1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="PickByAACQryVO1" IterBinding="PickByAACQryVO1Iterator">
+      <AttrNames>
+        <Item Value="CustomerId"/>
+        <Item Value="Aac"/>
+      </AttrNames>
+    </table>
+  </bindings>
+</pageDefinition>

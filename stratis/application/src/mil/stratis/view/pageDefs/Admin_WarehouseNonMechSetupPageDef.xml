@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="Admin_WarehouseNonMechSetupPageDef" Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables" Refresh="ifNeeded">
+      <variable Type="java.lang.String" Name="FilterLocationData_BuildingID" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="FilterLocationData_WacID" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="FilterLocationData_LocationLabel" IsQueriable="false"/>
+      <variable Type="int" Name="createBulkLocations_BuildingID" IsQueriable="false"/>
+      <variable Type="int" Name="createBulkLocations_WACID" IsQueriable="false"/>
+      <variable Type="int" Name="createBulkLocations_NumRows" IsQueriable="false"/>
+      <variable Type="int" Name="createBulkLocations_NumShelfGroups" IsQueriable="false"/>
+      <variable Type="int" Name="createBulkLocations_LocationsPerShelfGroup" IsQueriable="false"/>
+      <variable Type="int" Name="createBulkLocations_NumLevels" IsQueriable="false"/>
+      <variable Type="int" Name="createBulkLocations_LocationType" IsQueriable="false"/>
+    </variableIterator>
+    <iterator id="WACList1Iterator" RangeSize="-1" Binds="Root.AppModule1.WACList1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="LocationNonMechView1Iterator" RangeSize="10" Binds="Root.WarehouseSetup1.LocationNonMechView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <attributeValues id="WACID1" IterBinding="variables">
+      <AttrNames>
+        <Item Value="createBulkLocations_WACID"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FilterLocationData" MethodName="filterNonMechLocationData" RequiresUpdateModel="true"
+                  Action="invokeMethod" IsViewObjectMethod="false" DataControl="StratisRootServiceDataControl"
+                  InstanceName="StratisRootServiceDataControl.dataProvider.Root.WarehouseSetup1">
+      <NamedData NDName="WacID" NDType="java.lang.String" NDValue="${bindings.FilterLocationData_WacID}"/>
+      <NamedData NDName="LocationLabel" NDType="java.lang.String"
+                 NDValue="${bindings.FilterLocationData_LocationLabel}"/>
+    </methodAction>
+    <attributeValues id="WacID" IterBinding="variables">
+      <AttrNames>
+        <Item Value="FilterLocationData_WacID"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LocationLabel1" IterBinding="variables">
+      <AttrNames>
+        <Item Value="FilterLocationData_LocationLabel"/>
+      </AttrNames>
+    </attributeValues>
+    <table id="LocationNonMechView1" IterBinding="LocationNonMechView1Iterator">
+      <AttrNames>
+        <Item Value="LocationId"/>
+        <Item Value="LocationLabel"/>
+        <Item Value="WacId"/>
+        <Item Value="WacNumber"/>
+        <Item Value="LocClassificationId"/>
+        <Item Value="Aisle"/>
+        <Item Value="AvailabilityFlag"/>
+        <Item Value="Bay"/>
+        <Item Value="CreatedBy"/>
+        <Item Value="CreatedDate"/>
+        <Item Value="Cube"/>
+        <Item Value="DividerIndex"/>
+        <Item Value="LastStowDate"/>
+        <Item Value="LocationHeaderBinId"/>
+        <Item Value="LocLevel"/>
+        <Item Value="MechanizedFlag"/>
+        <Item Value="ModifiedBy"/>
+        <Item Value="ModifiedDate"/>
+        <Item Value="Side"/>
+        <Item Value="Slot"/>
+        <Item Value="Weight"/>
+        <Item Value="LocClassificationId1"/>
+        <Item Value="Length"/>
+        <Item Value="Width"/>
+        <Item Value="Height"/>
+        <Item Value="UsableCube"/>
+        <Item Value="UsableWeight"/>
+        <Item Value="MechanizableStorage"/>
+        <Item Value="DividerCode"/>
+        <Item Value="ImageFilename"/>
+        <Item Value="Description"/>
+        <Item Value="Name"/>
+        <Item Value="DividerTypeId"/>
+      </AttrNames>
+    </table>
+  </bindings>
+</pageDefinition>

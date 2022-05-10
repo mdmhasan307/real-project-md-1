@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="GCSSMCSiteRemoteConnectionsView"
+   Version="11.1.2.64.36"
+   SelectList="SiteRemoteConnections.CONNECTION_ID, 
+       SiteRemoteConnections.HOST_NAME, 
+       SiteRemoteConnections.IP_ADDRESS, 
+       SiteRemoteConnections.PROTOCOL, 
+       SiteRemoteConnections.PORT, 
+       SiteRemoteConnections.PASSWORD, 
+       SiteRemoteConnections.HOST_DIR, 
+       SiteRemoteConnections.LOCAL_DIR, 
+       SiteRemoteConnections.USE_CERTIFICATE_FLAG, 
+       SiteRemoteConnections.CERTIFICATE_PATH, 
+       SiteRemoteConnections.USER_ID, 
+       SiteRemoteConnections.DEF_MODE"
+   FromList="SITE_REMOTE_CONNECTIONS SiteRemoteConnections"
+   Where="def_mode =&#39;G&#39;"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.whsetup.GCSSMCSiteRemoteConnectionsViewImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="SiteRemoteConnections"
+      Entity="mil.stratis.model.entity.wlm.SiteRemoteConnections" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="ConnectionId"
+      EntityAttrName="ConnectionId"
+      EntityUsage="SiteRemoteConnections"
+      AliasName="CONNECTION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="HostName"
+      EntityAttrName="HostName"
+      EntityUsage="SiteRemoteConnections"
+      AliasName="HOST_NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IpAddress"
+      EntityAttrName="IpAddress"
+      EntityUsage="SiteRemoteConnections"
+      AliasName="IP_ADDRESS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Protocol"
+      EntityAttrName="Protocol"
+      EntityUsage="SiteRemoteConnections"
+      AliasName="PROTOCOL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Port"
+      EntityAttrName="Port"
+      EntityUsage="SiteRemoteConnections"
+      AliasName="PORT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Password"
+      EntityAttrName="Password"
+      EntityUsage="SiteRemoteConnections"
+      AliasName="PASSWORD" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="HostDir"
+      EntityAttrName="HostDir"
+      EntityUsage="SiteRemoteConnections"
+      AliasName="HOST_DIR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocalDir"
+      EntityAttrName="LocalDir"
+      EntityUsage="SiteRemoteConnections"
+      AliasName="LOCAL_DIR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UseCertificateFlag"
+      EntityAttrName="UseCertificateFlag"
+      EntityUsage="SiteRemoteConnections"
+      AliasName="USE_CERTIFICATE_FLAG" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CertificatePath"
+      EntityAttrName="CertificatePath"
+      EntityUsage="SiteRemoteConnections"
+      AliasName="CERTIFICATE_PATH" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UserId"
+      IsNotNull="true"
+      EntityAttrName="UserId"
+      EntityUsage="SiteRemoteConnections"
+      AliasName="USER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DefMode"
+      EntityAttrName="DefMode"
+      EntityUsage="SiteRemoteConnections"
+      AliasName="DEF_MODE" >
+   </ViewAttribute>
+</ViewObject>

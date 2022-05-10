@@ -1,0 +1,1029 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="Receipt"
+   Version="11.1.2.64.36"
+   DBObjectType="table"
+   DBObjectName="RECEIPT"
+   AliasName="Receipt"
+   BindingStyle="OracleName"
+   UseGlueCode="false"
+   RowClass="mil.stratis.model.entity.rcv.ReceiptImpl">
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Access" />
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_panelSchema" Value="table|alias" />
+   </DesignTime>
+   <Attribute
+      Name="Rcn"
+      IsUpdateable="while_insert"
+      DefaultValue="@0"
+      ColumnName="RCN"
+      SQLType="VARCHAR"
+      Domain="oracle.jbo.domain.DBSequence"
+      Type="oracle.jbo.domain.DBSequence"
+      ColumnType="NUMBER"
+      TableName="RECEIPT"
+      PrimaryKey="true"
+      RetrievedOnInsert="true" >
+      <DesignTime>
+         <Attr Name="_SequenceStart" Value="150" />
+         <Attr Name="_DisplaySize" Value="10" />
+         <Attr Name="_SequenceName" Value="RECEIPT_RCN_SEQ" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Rcn_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </Attribute>
+   <Attribute
+      Name="FrustrateCode"
+      Precision="2"
+      ColumnName="FRUSTRATE_CODE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="FrustrateLocation"
+      Precision="20"
+      ColumnName="FRUSTRATE_LOCATION"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="QuantityStowed"
+      IsNotNull="true"
+      DefaultValue="0"
+      Precision="6"
+      Scale="0"
+      ColumnName="QUANTITY_STOWED"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="QuantityBackordered"
+      DefaultValue="0"
+      Precision="6"
+      Scale="0"
+      ColumnName="QUANTITY_BACKORDERED"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="QuantityReleased"
+      IsNotNull="true"
+      DefaultValue="0"
+      Precision="6"
+      Scale="0"
+      ColumnName="QUANTITY_RELEASED"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="QuantityMeasured"
+      IsNotNull="true"
+      DefaultValue="1"
+      Precision="6"
+      Scale="0"
+      ColumnName="QUANTITY_MEASURED"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="QuantityInvoiced"
+      IsNotNull="true"
+      Precision="6"
+      Scale="0"
+      ColumnName="QUANTITY_INVOICED"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="QuantityInducted"
+      IsNotNull="true"
+      DefaultValue="0"
+      Precision="6"
+      Scale="0"
+      ColumnName="QUANTITY_INDUCTED"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="NiinId"
+      Precision="6"
+      Scale="0"
+      ColumnName="NIIN_ID"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ContractNumber"
+      Precision="13"
+      ColumnName="CONTRACT_NUMBER"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="FundCode"
+      Precision="2"
+      ColumnName="FUND_CODE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="SignalCode"
+      Precision="10"
+      ColumnName="SIGNAL_CODE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="2" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </Attribute>
+   <Attribute
+      Name="DocumentNumber"
+      Precision="20"
+      ColumnName="DOCUMENT_NUMBER"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="16" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </Attribute>
+   <Attribute
+      Name="DocumentId"
+      Precision="3"
+      ColumnName="DOCUMENT_ID"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="3" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="3" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </Attribute>
+   <Attribute
+      Name="Status"
+      Precision="20"
+      ColumnName="STATUS"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="10" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </Attribute>
+   <Attribute
+      Name="CreatedBy"
+      Precision="6"
+      Scale="0"
+      ColumnName="CREATED_BY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CreatedDate"
+      ColumnName="CREATED_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ModifiedBy"
+      Precision="6"
+      Scale="0"
+      ColumnName="MODIFIED_BY"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ModifiedDate"
+      ColumnName="MODIFIED_DATE"
+      SQLType="DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ConversionFlag"
+      DefaultValue="N"
+      Precision="1"
+      ColumnName="CONVERSION_FLAG"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="RoutingId"
+      Precision="6"
+      ColumnName="ROUTING_ID"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="6" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="3" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </Attribute>
+   <Attribute
+      Name="WorkStation"
+      Precision="10"
+      ColumnName="WORK_STATION"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Rdd"
+      Precision="6"
+      ColumnName="RDD"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="6" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="3" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="Rdd_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </Attribute>
+   <Attribute
+      Name="SupplementaryAddress"
+      Precision="9"
+      ColumnName="SUPPLEMENTARY_ADDRESS"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="9" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="6" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="SupplementaryAddress_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </Attribute>
+   <Attribute
+      Name="Consignee"
+      Precision="9"
+      ColumnName="CONSIGNEE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="9" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="6" >
+            </DISPLAYWIDTH>
+            <LABEL
+               ResId="Consignee_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </Attribute>
+   <Attribute
+      Name="DodDistCode"
+      Precision="6"
+      ColumnName="DOD_DIST_CODE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="6" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="DodDistCode_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="3" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </Attribute>
+   <Attribute
+      Name="Rpd"
+      Precision="5"
+      ColumnName="RPD"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="5" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Rpd_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="2" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </Attribute>
+   <Attribute
+      Name="PartialShipmentIndicator"
+      DefaultValue="N"
+      Precision="4"
+      ColumnName="PARTIAL_SHIPMENT_INDICATOR"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="1" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </Attribute>
+   <Attribute
+      Name="TraceabilityNumber"
+      Precision="20"
+      ColumnName="TRACEABILITY_NUMBER"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ClassCommodityNumber"
+      Precision="9"
+      ColumnName="CLASS_COMMODITY_NUMBER"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="9" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="6" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </Attribute>
+   <Attribute
+      Name="ShippedFrom"
+      Precision="30"
+      ColumnName="SHIPPED_FROM"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="ShippedFrom_LABEL" >
+            </LABEL>
+            <DISPLAYWIDTH
+               Value="6" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </Attribute>
+   <Attribute
+      Name="Cc"
+      DefaultValue="A"
+      Precision="1"
+      ColumnName="CC"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Cc_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </Attribute>
+   <Attribute
+      Name="ProjectCode"
+      DefaultValue="A"
+      Precision="3"
+      ColumnName="PROJECT_CODE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="3" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Pc"
+      DefaultValue="A"
+      Precision="2"
+      ColumnName="PC"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Pc_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </Attribute>
+   <Attribute
+      Name="CognizanceCode"
+      DefaultValue="AA"
+      Precision="2"
+      ColumnName="COGNIZANCE_CODE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="CognizanceCode_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </Attribute>
+   <Attribute
+      Name="MechNonMechFlag"
+      DefaultValue="N"
+      Precision="1"
+      ColumnName="MECH_NON_MECH_FLAG"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="MechNonMechFlag_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </Attribute>
+   <Attribute
+      Name="Ration"
+      DefaultValue="N"
+      Precision="1"
+      ColumnName="RATION"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Suffix"
+      Precision="3"
+      ColumnName="SUFFIX"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="3" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ShelfLifeCode"
+      DefaultValue="0"
+      Precision="1"
+      ColumnName="SHELF_LIFE_CODE"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <DISPLAYWIDTH
+               Value="1" >
+            </DISPLAYWIDTH>
+         </SchemaBasedProperties>
+      </Properties>
+   </Attribute>
+   <Attribute
+      Name="Weight"
+      DefaultValue="0.1"
+      ColumnName="WEIGHT"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Length"
+      DefaultValue="0.1"
+      ColumnName="LENGTH"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Height"
+      DefaultValue="0.1"
+      ColumnName="HEIGHT"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Width"
+      DefaultValue="0.1"
+      ColumnName="WIDTH"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Ui"
+      Precision="2"
+      ColumnName="UI"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Ui_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </Attribute>
+   <Attribute
+      Name="Price"
+      DefaultValue="0"
+      ColumnName="PRICE"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Price_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </Attribute>
+   <Attribute
+      Name="Fsc"
+      Precision="4"
+      ColumnName="FSC"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <LABEL
+               ResId="Fsc_LABEL" >
+            </LABEL>
+         </SchemaBasedProperties>
+      </Properties>
+   </Attribute>
+   <Attribute
+      Name="PartNumber"
+      Precision="16"
+      ColumnName="PART_NUMBER"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="16" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="SerialNumber"
+      Precision="30"
+      ColumnName="SERIAL_NUMBER"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Ri"
+      Precision="3"
+      ColumnName="RI"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="3" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Cube"
+      DefaultValue="0.001"
+      ColumnName="CUBE"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="PackingConsolidationId"
+      Precision="7"
+      Scale="0"
+      ColumnName="PACKING_CONSOLIDATION_ID"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Niin"
+      Precision="9"
+      ColumnName="NIIN"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="9" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="PartialShipment"
+      IsNotNull="true"
+      DefaultValue="N"
+      Precision="1"
+      ColumnName="PARTIAL_SHIPMENT"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="QtyStowloss"
+      IsNotNull="true"
+      DefaultValue="0"
+      ColumnName="QTY_STOWLOSS"
+      SQLType="NUMERIC"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      TableName="RECEIPT" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="OverageFlag"
+      Precision="1"
+      ColumnName="OVERAGE_FLAG"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT">
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1"/>
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ShortageFlag"
+      Precision="1"
+      ColumnName="SHORTAGE_FLAG"
+      SQLType="VARCHAR"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      TableName="RECEIPT">
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1"/>
+      </DesignTime>
+   </Attribute>
+   <AccessorAttribute
+      Name="NiinInfo"
+      Association="mil.stratis.model.entity.associations.ReceiptNiinFkAssoc"
+      AssociationEnd="mil.stratis.model.entity.associations.ReceiptNiinFkAssoc.NiinInfo"
+      AssociationOtherEnd="mil.stratis.model.entity.associations.ReceiptNiinFkAssoc.Receipt"
+      Type="mil.stratis.model.entity.site.NiinInfoImpl"
+      IsUpdateable="true">
+   </AccessorAttribute>
+   <Key
+      Name="ReceiptChk1" >
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="RECEIPT_CHK1" />
+         <Attr Name="_checkCondition" Value="CONVERSION_FLAG IN ('Y', 'N')" />
+         <Attr Name="_isCheck" Value="true" />
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="ReceiptChk2" >
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="RECEIPT_CHK2" />
+         <Attr Name="_checkCondition" Value="RATION IN ('Y', 'N')" />
+         <Attr Name="_isCheck" Value="true" />
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="ReceiptChk3" >
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="RECEIPT_CHK3" />
+         <Attr Name="_checkCondition" Value="MECH_NON_MECH_FLAG IN ('Y', 'N')" />
+         <Attr Name="_isCheck" Value="true" />
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="ReceiptChk4" >
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="RECEIPT_CHK4" />
+         <Attr Name="_checkCondition" Value="PARTIAL_SHIPMENT IN ('Y', 'N')" />
+         <Attr Name="_isCheck" Value="true" />
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="ReceiptChk5" >
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="RECEIPT_CHK5" />
+         <Attr Name="_checkCondition" Value="QTY_STOWLOSS >= 0" />
+         <Attr Name="_isCheck" Value="true" />
+      </DesignTime>
+      <AttrArray Name="Attributes"/>
+   </Key>
+   <Key
+      Name="ReceiptPk"
+      PrimaryKey="true" >
+      <DesignTime>
+         <Attr Name="_DBObjectName" Value="RECEIPT_PK" />
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.rcv.Receipt.Rcn"/>
+      </AttrArray>
+   </Key>
+   <Key
+      Name="ReceiptDocFk" >
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="DOCUMENT_TYPE_PK" />
+         <Attr Name="_isForeign" Value="true" />
+         <Attr Name="_DBObjectName" Value="RECEIPT_DOC_FK" />
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.rcv.Receipt.DocumentId"/>
+      </AttrArray>
+   </Key>
+   <Key
+      Name="ReceiptNiinFk" >
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="NIIN_INFO_PK" />
+         <Attr Name="_isForeign" Value="true" />
+         <Attr Name="_DBObjectName" Value="RECEIPT_NIIN_FK" />
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.rcv.Receipt.NiinId"/>
+      </AttrArray>
+   </Key>
+   <Key
+      Name="ReceiptPackingFk" >
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="PACKING_CONSOLIDATION_PK" />
+         <Attr Name="_isForeign" Value="true" />
+         <Attr Name="_DBObjectName" Value="RECEIPT_PACKING_FK" />
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.rcv.Receipt.PackingConsolidationId"/>
+      </AttrArray>
+   </Key>
+   <Key
+      Name="ReceiptUsersFk1" >
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="USERS_PK" />
+         <Attr Name="_isForeign" Value="true" />
+         <Attr Name="_DBObjectName" Value="RECEIPT_USERS_FK1" />
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.rcv.Receipt.CreatedBy"/>
+      </AttrArray>
+   </Key>
+   <Key
+      Name="ReceiptUsersFk2" >
+      <DesignTime>
+         <Attr Name="_referencedKey" Value="USERS_PK" />
+         <Attr Name="_isForeign" Value="true" />
+         <Attr Name="_DBObjectName" Value="RECEIPT_USERS_FK2" />
+      </DesignTime>
+      <AttrArray Name="Attributes">
+         <Item Value="mil.stratis.model.entity.rcv.Receipt.ModifiedBy"/>
+      </AttrArray>
+   </Key>
+</Entity>

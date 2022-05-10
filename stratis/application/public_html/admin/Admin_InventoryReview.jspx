@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:stratis="taglib.mil.usmc.stratis">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:useBean id="invmgmtbacking" class="mil.stratis.view.inventory.InventoryMgmtBacking" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="6"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="Admin_InventoryReview"/>
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session" />
+    <jsp:setProperty name="logBean" property="page" value="Inventory View"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="150" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6"/>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGroupLayout>
+                                <af:panelBox text="Inventory Management - Review" showDisclosure="false">
+                                    <af:separator/>
+                                    <af:toolbar>
+                                        <af:link text="Scheduled Inventory" action="GoAdminInventoryManagement"
+                                                 actionListener="#{bindings.ExecuteInventory.execute}"
+                                                 id="linkHome"/>
+                                        <af:group>
+                                            <af:link text="Review &amp; Release Inventories" disabled="true"/>
+                                        </af:group>
+                                    </af:toolbar>
+                                    <af:separator/>
+
+                                    <af:toolbar visible="#{!invmgmtbacking.inventoryreleasebuttonState}" partialTriggers="ReleaseTable">
+                                        <af:button actionListener="#{invmgmtbacking.submitInventoryItemToHost}"
+                                                   text="Release Selected to HOST" partialSubmit="false"/>
+                                        <af:button actionListener="#{invmgmtbacking.submitInventoryItemForRecount}"
+                                                   text="Send for Recount" partialSubmit="false"/>
+                                        <af:button text="Remove Survey" visible="#{invmgmtbacking.inventoryreleasebuttonState}"
+                                                   actionListener="#{invmgmtbacking.submitRemoveSurvey}" partialSubmit="false"/>
+                                    </af:toolbar>
+                                    <af:table value="#{bindings.InventoryItemFilterView1.collectionModel}" var="row"
+                                              rows="#{bindings.InventoryItemFilterView1.rangeSize}"
+                                              first="#{bindings.InventoryItemFilterView1.rangeStart}"
+                                              emptyText="#{bindings.InventoryItemFilterView1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                              selectionListener="#{bindings.InventoryItemFilterView1.collectionModel.makeCurrent}"
+                                              id="ReleaseTable"
+                                              selectedRowKeys="#{bindings.InventoryItemFilterView1.collectionModel.selectedRow}"
+                                              rowSelection="single"
+                                              autoHeightRows="#{bindings.InventoryItemFilterView1.rangeSize}"
+                                              styleClass="AFStretchWidth" columnStretching="last">
+                                        <af:column sortProperty="LocationLabel" sortable="true" headerText="Location"
+                                                   width="60">
+                                            <af:outputText value="#{row.LocationLabel}"/>
+                                        </af:column>
+                                        <af:column sortProperty="Niin" sortable="true" headerText="NIIN" width="60">
+                                            <af:outputText value="#{row.Niin}"/>
+                                        </af:column>
+                                        <af:column sortProperty="Description" sortable="true"
+                                                   headerText="#{bindings.InventoryItemFilterView1.labels.Description}"
+                                                   width="232">
+                                            <af:outputText value="#{row.Description}"/>
+                                        </af:column>
+                                        <af:column sortProperty="CreatedDate" sortable="true" headerText="Created Date"
+                                                   width="123">
+                                            <stratis:adfDateFormatter
+                                                    value="#{row.CreatedDate}"
+                                                    pattern="${userbean.dateWithTimeFormatPattern}"/>
+                                        </af:column>
+                                        <af:column sortProperty="CumNegAdj" sortable="false" headerText="Cum Neg Adj"
+                                                   width="25">
+                                            <af:outputText value="#{row.CumNegAdj}">
+                                                <f:convertNumber groupingUsed="false"
+                                                                 pattern="#{bindings.InventoryItemFilterView1.formats.CumNegAdj}"/>
+                                            </af:outputText>
+                                        </af:column>
+                                        <af:column sortProperty="CumPosAdj" sortable="false" headerText="Cum Pos Adj"
+                                                   width="25">
+                                            <af:outputText value="#{row.CumPosAdj}">
+                                                <f:convertNumber groupingUsed="false"
+                                                                 pattern="#{bindings.InventoryItemFilterView1.formats.CumPosAdj}"/>
+                                            </af:outputText>
+                                        </af:column>
+                                        <af:column sortProperty="NumCounted" sortable="false" headerText="# Counted"
+                                                   width="40">
+                                            <af:outputText value="#{row.NumCounted}">
+                                                <f:convertNumber groupingUsed="false"
+                                                                 pattern="#{bindings.InventoryItemFilterView1.formats.NumCounted}"/>
+                                            </af:outputText>
+                                        </af:column>
+                                        <af:column sortProperty="Qty" sortable="false" headerText="Qty" width="30">
+                                            <af:outputText value="#{row.NiinLocQty}">
+                                                <f:convertNumber groupingUsed="false"
+                                                                 pattern="#{bindings.InventoryItemFilterView1.formats.NiinLocQty}"/>
+                                            </af:outputText>
+                                        </af:column>
+                                        <af:column sortProperty="Ui" sortable="false" headerText="UI" width="30">
+                                            <af:outputText value="#{row.Ui}"/>
+                                        </af:column>
+                                        <af:column sortProperty="Price" sortable="false" headerText="Price" width="40">
+                                            <af:outputText value="#{row.Price}"/>
+                                        </af:column>
+                                        <af:column sortProperty="Nomenclature" sortable="false"
+                                                   headerText="Nomenclature" width="125">
+                                            <af:outputText value="#{row.Nomenclature}"/>
+                                        </af:column>
+                                        <af:column sortProperty="NumCounts" sortable="true" headerText="Times Counted"
+                                                   width="50">
+                                            <af:outputText value="#{row.NumCounts}">
+                                                <f:convertNumber groupingUsed="false"
+                                                                 pattern="#{bindings.InventoryItemFilterView1.formats.NumCounts}"/>
+                                            </af:outputText>
+                                        </af:column>
+                                    </af:table>
+                                    <af:spacer height="10"/>
+                                </af:panelBox>
+                            </af:panelGroupLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

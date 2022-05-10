@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="InventoryItem_NormalMainPageDef"
+                ControllerClass="#{InventoryItemAll}" Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="InventoryItemVO1Iterator" RangeSize="-1" Binds="Root.InventoryModule1.InventoryItemVO1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="SerialOrLotNumListInv1Iterator" RangeSize="-1" Binds="Root.InventoryModule1.SerialOrLotNumListInv1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator Binds="Root.WorkLoadManager1.NiinInfoView1" DataControl="StratisRootServiceDataControl" RangeSize="25"
+              id="NiinInfoView1Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues id="Niin" IterBinding="InventoryItemVO1Iterator">
+      <AttrNames>
+        <Item Value="Niin"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NiinId" IterBinding="InventoryItemVO1Iterator">
+      <AttrNames>
+        <Item Value="NiinId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Nomenclature" IterBinding="InventoryItemVO1Iterator">
+      <AttrNames>
+        <Item Value="Nomenclature"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NiinLocId" IterBinding="InventoryItemVO1Iterator">
+      <AttrNames>
+        <Item Value="NiinLocId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Qty" IterBinding="InventoryItemVO1Iterator">
+      <AttrNames>
+        <Item Value="Qty"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Status" IterBinding="InventoryItemVO1Iterator">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LocationLabel" IterBinding="InventoryItemVO1Iterator">
+      <AttrNames>
+        <Item Value="LocationLabel"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LocationId" IterBinding="InventoryItemVO1Iterator">
+      <AttrNames>
+        <Item Value="LocationId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="WacId" IterBinding="InventoryItemVO1Iterator">
+      <AttrNames>
+        <Item Value="WacId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="DividerIndex" IterBinding="InventoryItemVO1Iterator">
+      <AttrNames>
+        <Item Value="DividerIndex"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LocLevel" IterBinding="InventoryItemVO1Iterator">
+      <AttrNames>
+        <Item Value="LocLevel"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Bay" IterBinding="InventoryItemVO1Iterator">
+      <AttrNames>
+        <Item Value="Bay"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Side" IterBinding="InventoryItemVO1Iterator">
+      <AttrNames>
+        <Item Value="Side"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="MechanizedFlag" IterBinding="InventoryItemVO1Iterator">
+      <AttrNames>
+        <Item Value="MechanizedFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Slot" IterBinding="InventoryItemVO1Iterator">
+      <AttrNames>
+        <Item Value="Slot"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="DividerTypeId" IterBinding="InventoryItemVO1Iterator">
+      <AttrNames>
+        <Item Value="DividerTypeId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="InventoryItemId" IterBinding="InventoryItemVO1Iterator">
+      <AttrNames>
+        <Item Value="InventoryItemId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NsnRemark" IterBinding="InventoryItemVO1Iterator">
+      <AttrNames>
+        <Item Value="NsnRemark"/>
+      </AttrNames>
+    </attributeValues>
+    <table id="SerialOrLotNumListInv1" IterBinding="SerialOrLotNumListInv1Iterator">
+      <AttrNames>
+        <Item Value="SerialNumber"/>
+        <Item Value="LotConNum"/>
+        <Item Value="QtyLot"/>
+      </AttrNames>
+    </table>
+    <tree IterBinding="NiinInfoView1Iterator" id="NiinInfoView1">
+      <nodeDefinition DefName="mil.stratis.model.view.wlm.NiinInfoView" Name="NiinInfoView10">
+        <AttrNames>
+          <Item Value="NiinId"/>
+          <Item Value="Fsc"/>
+          <Item Value="Niin"/>
+          <Item Value="Nomenclature"/>
+          <Item Value="ShelfLifeCode"/>
+          <Item Value="Scc"/>
+          <Item Value="ShelfLifeExtension"/>
+          <Item Value="Cube"/>
+          <Item Value="Weight"/>
+          <Item Value="Price"/>
+          <Item Value="ActivityDate"/>
+          <Item Value="SupplyClass"/>
+          <Item Value="TypeOfMaterial"/>
+          <Item Value="InventoryThreshold"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

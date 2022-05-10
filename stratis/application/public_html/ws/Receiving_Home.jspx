@@ -1,0 +1,35 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:useBean id="workloadbean" scope="session" class="mil.stratis.view.session.Nav"/>
+    <jsp:setProperty name="userbean" property="selected" value="1"/>
+    <f:view>
+        <af:document title="Receiving_Home" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" topHeight="145" startWidth="24" bottomHeight="25">
+                    <f:facet name="bottom">
+                        <f:subview id="wrap_footer">
+                            <jsp:include page="/FooterMain.jspx"/>
+                        </f:subview>
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout id="pgl1">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start"/>
+                    <f:facet name="end"/>
+                    <f:facet name="top">
+                        <f:subview id="rh_wrap_header">
+                            <jsp:include page="/ws/WS_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

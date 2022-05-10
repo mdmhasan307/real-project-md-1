@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="UnprocessBarcodeRptView"
+   Version="11.1.2.64.36"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   ComponentClass="mil.stratis.model.view.ship.UnprocessBarcodeRptViewImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+      <Attr Name="_isExpertMode" Value="true" />
+   </DesignTime>
+   <Variable
+      Name="EQUIPMENT_NUMBER"
+      Kind="where"
+      Type="java.lang.String"
+      DefaultValue="0" >
+   </Variable>
+   <SQLQuery><![CDATA[
+select distinct s.packing_consolidation_id, p.Consolidation_Barcode, c.AAC, p.created_date    
+from Shipping s
+INNER JOIN Packing_Consolidation p
+on s.packing_consolidation_id=p.packing_consolidation_id
+INNER JOIN Customer c on p.customer_id=c.customer_id
+INNER JOIN Packing_Station ps on p.packing_station_id=ps.packing_station_id 
+WHERE s.shipping_manifest_id IS NULL 
+and ps.equipment_number in (select equipment_number from equip where description like 'Packing Station%' and warehouse_id= (select warehouse_id from equip where description='Shipping Station' and equipment_number=:EQUIPMENT_NUMBER)
+)
+   ]]></SQLQuery>
+   <ViewAttribute
+      Name="PackingConsolidationId"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PACKING_CONSOLIDATION_ID"
+      Expression="PACKING_CONSOLIDATION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ConsolidationBarcode"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CONSOLIDATION_BARCODE"
+      Expression="CONSOLIDATION_BARCODE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Aac"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="AAC"
+      Expression="AAC"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedDate"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="CREATED_DATE"
+      Expression="CREATED_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+      <Properties >
+         <SchemaBasedProperties >
+            <FMT_FORMAT
+               ResId="CreatedDate_FMT_FORMAT" >
+            </FMT_FORMAT>
+            <FMT_FORMATTER
+               ResId="CreatedDate_FMT_FORMATTER" >
+            </FMT_FORMATTER>
+         </SchemaBasedProperties>
+      </Properties>
+   </ViewAttribute>
+   
+   <ResourceBundle >
+      <JavaResourceBundle
+         MsgBundleClass="mil.stratis.model.view.ship.common.UnprocessBarcodeRptViewRowImplMsgBundle" >
+      </JavaResourceBundle>
+   </ResourceBundle>
+</ViewObject>

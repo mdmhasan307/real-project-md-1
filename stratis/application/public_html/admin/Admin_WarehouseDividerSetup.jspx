@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="1"/>
+    <jsp:setProperty name="userbean" property="selected3" value="3"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="Admin_WarehouseDividerSetup"/>
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session" />
+    <jsp:setProperty name="logBean" property="page" value="Divider Type"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="195" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGroupLayout layout="vertical">
+                                <af:panelBox text="Warehouse Setup - Divider Setup" showDisclosure="false">
+                                    <af:separator/>
+                                    <af:panelGroupLayout layout="horizontal" valign="top">
+                                        <af:panelGroupLayout layout="vertical" valign="top">
+                                            <af:toolbar>
+                                                <af:button actionListener="#{bindings.CreateInsert.execute}"
+                                                           text="Create" accessKey="C" id="CreateButton"
+                                                           inlineStyle="width:50px" partialSubmit="false"
+                                                           disabled="#{(!StorageSetupBacking.dividerTypeFlag) and (bindings.DividerTypeView1.estimatedRowCount > 0)}">
+                                                    <af:setActionListener from="#{false}"
+                                                                          to="#{StorageSetupBacking.dividerTypeFlag}"/>
+                                                    <af:setActionListener from="#{false}"
+                                                                          to="#{StorageSetupBacking.dividerTypeRefresh}"/>
+                                                </af:button>
+                                                <af:button actionListener="#{StorageSetupBacking.submitUpdateDivider}"
+                                                           text="Update" accessKey="U" id="UpdateButton"
+                                                           inlineStyle="width:50px" partialSubmit="false"
+                                                           disabled="#{!StorageSetupBacking.dividerTypeFlag}"/>
+                                                <af:group>
+                                                    <af:button text="Delete" accessKey="D" id="DeleteButton"
+                                                               inlineStyle="width:50px" partialSubmit="false"
+                                                               disabled="#{!StorageSetupBacking.dividerTypeFlag}">
+                                                        <af:showPopupBehavior popupId="confirmDelete" triggerType="action"
+                                                                              align="afterStart"/>
+                                                    </af:button>
+                                                    <af:popup id="confirmDelete">
+                                                        <af:dialog id="Confirm" title="Confirm" affirmativeTextAndAccessKey="Submit"
+                                                                   dialogListener="#{StorageSetupBacking.dialogListener1}">
+                                                            <af:activeOutputText id="Delete" value="Are you sure you want to Delete?"/>
+                                                        </af:dialog>
+                                                    </af:popup>
+                                                </af:group>
+                                            </af:toolbar>
+                                            <af:separator/>
+                                            <af:table value="#{bindings.DividerTypeView1.collectionModel}" var="row"
+                                                      binding="#{StorageSetupBacking.dividerTable}"
+                                                      rows="#{bindings.DividerTypeView1.rangeSize}"
+                                                      first="#{bindings.DividerTypeView1.rangeStart}"
+                                                      emptyText="#{bindings.DividerTypeView1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                      selectionListener="#{bindings.DividerTypeView1.collectionModel.makeCurrent}"
+                                                      id="DividerTable"
+                                                      selectedRowKeys="#{bindings.DividerTypeView1.collectionModel.selectedRow}"
+                                                      rowSelection="single" width="300" columnStretching="last">
+                                                <af:column sortProperty="Name" sortable="true"
+                                                           headerText="#{bindings.DividerTypeView1.labels.Name}">
+                                                    <af:outputText value="#{row.Name}"/>
+                                                </af:column>
+                                                <f:facet name="footer"/>
+                                            </af:table>
+                                        </af:panelGroupLayout>
+                                        <!-- onclick="return confirm ('Are you sure you want to permanently delete this Divider Type and its associated slots?');"/> -->
+                                        <af:panelFormLayout partialTriggers="DividerTable">
+                                            <af:outputLabel id="dividerTypeName" value="Name"
+                                                            inlineStyle="font-weight:bold"/>
+                                            <af:inputText value="#{bindings.Name.inputValue}" id="txtDividerTypeName"
+                                                          columns="#{bindings.Name.displayWidth}"
+                                                          binding="#{StorageSetupBacking.dividerTypeName}"
+                                                          shortDesc="Required Divider Type Name (max 20 alphanumeric)"
+                                                          maximumLength="20" contentStyle="text-transform:uppercase;"
+                                                          rendered="#{empty bindings.Name.inputValue}"/>
+                                            <af:inputText value="#{bindings.Name.inputValue}" id="txtDividerTypeName_h"
+                                                          columns="#{bindings.Name.displayWidth}"
+                                                          shortDesc="Required Divider Type Name (max 20 alphanumeric)"
+                                                          rendered="#{StorageSetupBacking.dividerTypeFlag or not empty bindings.Name.inputValue}"
+                                                          readOnly="true" styleClass="ReadOnlyField"/>
+                                            <af:image
+                                                    source="/SlotImage?type=SLOT&amp;DI=#{bindings.DividerTypeView1DividerTypeId.inputValue}"
+                                                    partialTriggers="DividerTypeSubTable DividerTable"/>
+                                            <af:toolbar rendered="#{!StorageSetupBacking.dividerTypeFlag}">
+                                                <af:button actionListener="#{StorageSetupBacking.submitSaveDivider}"
+                                                           text="Submit" accessKey="S" id="SaveButton"
+                                                           inlineStyle="width:50px" partialSubmit="false"/>
+                                                <af:button actionListener="#{StorageSetupBacking.submitResetDivider}"
+                                                           text="Reset" accessKey="R" id="ResetButton"
+                                                           inlineStyle="width:50px" partialSubmit="false"/>
+                                            </af:toolbar>
+                                        </af:panelFormLayout>
+                                        <af:spacer height="10"/>
+                                    </af:panelGroupLayout>
+                                    <af:separator/>
+                                    <af:spacer height="10"/>
+                                    <af:panelBox partialTriggers="DividerTable" text="Divider Type Slot Details"
+                                                 id="detailPanelBox"
+                                                 rendered="#{not empty bindings.DividerTypeView1DividerTypeId.inputValue}"
+                                                 showDisclosure="false">
+                                        <af:separator/>
+                                        <af:panelGroupLayout layout="horizontal" valign="top">
+                                            <af:table value="#{bindings.DividerTypeView1DividerSlotsView2.collectionModel}"
+                                                      var="row"
+                                                      rows="#{bindings.DividerTypeView1DividerSlotsView2.rangeSize}"
+                                                      first="#{bindings.DividerTypeView1DividerSlotsView2.rangeStart}"
+                                                      emptyText="#{bindings.DividerTypeView1DividerSlotsView2.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                      selectionListener="#{bindings.DividerTypeView1DividerSlotsView2.collectionModel.makeCurrent}"
+                                                      id="DividerTypeSubTable"
+                                                      binding="#{StorageSetupBacking.dividerTypeSubTable}"
+                                                      selectedRowKeys="#{bindings.DividerTypeView1DividerSlotsView2.collectionModel.selectedRow}"
+                                                      width="530" inlineStyle="height:500px;">
+                                                <af:column sortProperty="SelectIndex" sortable="false"
+                                                           headerText="Slot #" width="20">
+                                                    <af:outputText value="#{row.SelectIndex}">
+                                                        <f:convertNumber groupingUsed="false"
+                                                                         pattern="#{bindings.DividerTypeView1DividerSlotsView2.formats.SelectIndex}"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column sortProperty="RowNumber" sortable="false"
+                                                           headerText="Row Number" width="80">
+                                                    <af:outputText value="#{row.RowNumber}">
+                                                        <f:convertNumber groupingUsed="false"
+                                                                         pattern="#{bindings.DividerTypeView1DividerSlotsView2.formats.RowNumber}"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column sortProperty="ColumnNumber" sortable="false"
+                                                           headerText="Column Number">
+                                                    <af:outputText value="#{row.ColumnNumber}">
+                                                        <f:convertNumber groupingUsed="false"
+                                                                         pattern="#{bindings.DividerTypeView1DividerSlotsView2.formats.ColumnNumber}"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column sortProperty="Length" sortable="false" headerText="Length">
+                                                    <af:outputText value="#{row.Length}">
+                                                        <f:convertNumber groupingUsed="false"
+                                                                         pattern="#{bindings.DividerTypeView1DividerSlotsView2.formats.Length}"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column sortProperty="Width" sortable="false" headerText="Width">
+                                                    <af:outputText value="#{row.Width}"/>
+                                                </af:column>
+                                                <af:column sortProperty="DisplayPosition" sortable="false"
+                                                           headerText="Position">
+                                                    <af:outputText value="#{row.DisplayPosition}"/>
+                                                </af:column>
+                                            </af:table>
+                                            <af:panelFormLayout partialTriggers="DividerTypeSubTable"
+                                                                rendered="#{!StorageSetupBacking.dividerTypeFlag}">
+                                                <af:inputText value="#{bindings.DividerTypeView1DividerSlotsView2.estimatedRowCount}"
+                                                              label="Slot #" columns="10" readOnly="true"
+                                                              binding="#{StorageSetupBacking.dividerTypeSlotSelectIndex}"/>
+                                                <af:inputText value="" label="Position" inlineStyle="font-weight:bold;"
+                                                              contentStyle="text-transform:uppercase;" columns="10"
+                                                              maximumLength="2" showRequired="false" immediate="true"
+                                                              shortDesc="Required Position label (max 2 alphanumeric, e.g. A1)"
+                                                              binding="#{StorageSetupBacking.dividerTypeSlotPosition}"/>
+                                                <af:inputText value="" label="Row Start" inlineStyle="font-weight:bold"
+                                                              columns="10" maximumLength="3" showRequired="false" immediate="true"
+                                                              shortDesc="Required to start the row (positive number)"
+                                                              binding="#{StorageSetupBacking.dividerTypeSlotRow}"/>
+                                                <af:inputText value="" label="Column Start" immediate="true"
+                                                              inlineStyle="font-weight:bold" columns="10"
+                                                              showRequired="false" maximumLength="3"
+                                                              shortDesc="Required to start the column (positive number)"
+                                                              binding="#{StorageSetupBacking.dividerTypeSlotColumn}"/>
+                                                <af:inputText value="" label="Length" inlineStyle="font-weight:bold" immediate="true"
+                                                              columns="10" showRequired="false" maximumLength="3"
+                                                              shortDesc="Required length for the position (positive number)"
+                                                              binding="#{StorageSetupBacking.dividerTypeSlotLength}"/>
+                                                <af:inputText value="" label="Width" showRequired="false" immediate="true"
+                                                              inlineStyle="font-weight:bold" columns="10"
+                                                              maximumLength="3"
+                                                              shortDesc="Required width for the position (positive number)"
+                                                              binding="#{StorageSetupBacking.dividerTypeSlotWidth}"/>
+                                                <af:toolbar rendered="#{!StorageSetupBacking.dividerTypeFlag}">
+                                                    <af:button actionListener="#{StorageSetupBacking.submitCreateDividerSlot}"
+                                                               text="Create" id="CreateButton2"
+                                                               disabled="#{empty bindings.Name.inputValue}"
+                                                               inlineStyle="width:50px" accessKey="C" immediate="true"
+                                                               partialSubmit="false"/>
+                                                    <af:resetButton id="ResetButton2" text="Reset"
+                                                                    disabled="#{empty bindings.Name.inputValue}"
+                                                                    inlineStyle="width:50px" accessKey="R"/>
+                                                    <af:button actionListener="#{StorageSetupBacking.submitCancelDivider}"
+                                                               text="Cancel" accessKey="a" id="CancelButton" immediate="true"
+                                                               inlineStyle="width:50px" partialSubmit="false"/>
+                                                </af:toolbar>
+                                            </af:panelFormLayout>
+                                        </af:panelGroupLayout>
+                                    </af:panelBox>
+                                </af:panelBox>
+                            </af:panelGroupLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6"/>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

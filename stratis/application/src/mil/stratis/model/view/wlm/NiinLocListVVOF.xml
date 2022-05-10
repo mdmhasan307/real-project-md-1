@@ -1,0 +1,263 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="NiinLocListVVOF"
+   Version="11.1.2.64.36"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   ComponentClass="mil.stratis.model.view.wlm.NiinLocListVVOFImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+      <Attr Name="_isExpertMode" Value="true" />
+   </DesignTime>
+   <Variable
+      Name="expDtStr"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <Variable
+      Name="newWeight"
+      Kind="where"
+      Type="java.lang.Double" >
+   </Variable>
+   <Variable
+      Name="niinIdStr"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <Variable
+      Name="newCube"
+      Kind="where"
+      Type="java.lang.Double" >
+   </Variable>
+   <Variable
+      Name="whId"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <Variable
+      Name="locLabelStr"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <Variable
+      Name="ccStr"
+      Kind="where"
+      Type="java.lang.String" >
+   </Variable>
+   <SQLQuery><![CDATA[
+SELECT 
+    wh.WAREHOUSE_ID, 
+    wc.WAC_ID, 
+    l.LOCATION_ID, 
+    nl.NIIN_ID, 
+    wh.BUILDING, 
+    l.LOCATION_LABEL, 
+    l.BAY, 
+    l.LOC_LEVEL, 
+    l.SLOT, 
+    nl.EXPIRATION_DATE, 
+    nl.NIIN_LOC_ID, 
+    nl.QTY 
+FROM 
+    NIIN_LOCATION nl, 
+    LOCATION l, 
+    WAC wc, 
+    WAREHOUSE wh, 
+    LOCATION_CLASSIFICATION lc, 
+    LOCATION_HEADER lh, 
+    LOCATION_HEADER_BIN lhb 
+WHERE 
+    nl.LOCATION_ID = l.LOCATION_ID AND nvl(nl.LOCKED,'N') = 'N' AND NVL(nl.UNDER_AUDIT, 'N') = 'N' AND l.WAC_ID = wc.WAC_ID AND wc.WAREHOUSE_ID = wh.WAREHOUSE_ID AND (to_char(wh.WAREHOUSE_ID)) LIKE nvl(:whId,'%') AND l.LOCATION_HEADER_BIN_ID = lhb.LOCATION_HEADER_BIN_ID(+) AND lhb.LOC_HEADER_ID = lh.LOC_HEADER_ID(+) AND lhb.LOC_CLASSIFICATION_ID = lc.LOC_CLASSIFICATION_ID(+) AND (l.MECHANIZED_FLAG = 'N' OR (l.WEIGHT + :newWeight <= lc.USABLE_WEIGHT AND l.CUBE + :newCube <= (lc.USABLE_CUBE/lc.SLOT_COUNT) AND lhb.WEIGHT + :newWeight <= lhb.MAX_WEIGHT AND lh.WEIGHT + :newWeight <= lh.MAX_WEIGHT)) AND (to_char(nl.NIIN_ID)) like nvl(:niinIdStr,'%') AND (TO_CHAR(nl.EXPIRATION_DATE, 'YYYYMM') like nvl(:expDtStr,'%')) AND
+l.LOCATION_LABEL like nvl(:locLabelStr,'%')  AND
+nl.CC like nvl(:ccStr,'A')
+AND rownum < 100
+ORDER BY 
+    l.LAST_STOW_DATE desc , 
+    l.MECHANIZED_FLAG desc
+   ]]></SQLQuery>
+   <ViewAttribute
+      Name="WarehouseId"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="6"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="WAREHOUSE_ID"
+      Expression="WAREHOUSE_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="WacId"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="WAC_ID"
+      Expression="WAC_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationId"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="38"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="LOCATION_ID"
+      Expression="LOCATION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NiinId"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="NIIN_ID"
+      Expression="NIIN_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Building"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="BUILDING"
+      Expression="BUILDING"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationLabel"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="9"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="LOCATION_LABEL"
+      Expression="LOCATION_LABEL"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="9" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Bay"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="10"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="BAY"
+      Expression="BAY"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocLevel"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="10"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="LOC_LEVEL"
+      Expression="LOC_LEVEL"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Slot"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="2"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SLOT"
+      Expression="SLOT"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ExpirationDate"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="EXPIRATION_DATE"
+      Expression="EXPIRATION_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NiinLocId"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="NIIN_LOC_ID"
+      Expression="NIIN_LOC_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Qty"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="6"
+      Scale="0"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="QTY"
+      Expression="QTY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

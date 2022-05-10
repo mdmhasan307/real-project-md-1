@@ -1,0 +1,217 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:stratis="taglib.mil.usmc.stratis">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:useBean id="invmgmtbacking" class="mil.stratis.view.inventory.InventoryMgmtBacking" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="6"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="Admin_InventoryManagement"/>
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session" />
+    <jsp:setProperty name="logBean" property="page" value="Inventory Management"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="d1">
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="150" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6"/>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGroupLayout>
+                                <af:panelBox id="pb1" text="Inventory Management - Scheduled Inventory"
+                                             showDisclosure="false">
+                                    <af:separator/>
+                                    <af:toolbar>
+                                        <af:group>
+                                            <af:link text="Scheduled Inventory" disabled="true"/>
+                                        </af:group>
+                                        <af:group>
+                                            <af:link text="Review and Release Inventories"
+                                                     actionListener="#{invmgmtbacking.refreshInventoryItems}"
+                                                     action="GoAdminInventoryReview"/>
+                                        </af:group>
+                                    </af:toolbar>
+                                    <af:separator/>
+                                    <af:toolbar>
+                                        <af:button text="Create Inventory" action="GoAdminInventorySchedule"
+                                                   inlineStyle="width:180px;" id="btnCreateInventory"
+                                                   partialSubmit="false">
+                                            <af:setActionListener from="#{2}"
+                                                                  to="#{invmgmtbacking.inventoryscreenState}"/>
+                                        </af:button>
+                                        <af:spacer width="10" height="0"/>
+                                        <af:button text="Create Location Survey"
+                                                   action="GoAdminInventorySchedule" inlineStyle="width:180px;"
+                                                   id="btnCreateLocationSurvey" partialSubmit="false">
+                                            <af:setActionListener from="#{1}"
+                                                                  to="#{invmgmtbacking.inventoryscreenState}"/>
+                                        </af:button>
+                                    </af:toolbar>
+                                    <af:outputText value="Active Inventories"
+                                                   inlineStyle="font-size:large; font-weight:bold;"/>
+                                    <!-- Active inventory table -->
+                                    <!-- partialTriggers="interfacePoll" -->
+                                    <af:table value="#{bindings.InventoryView1.collectionModel}" var="row"
+                                              rows="#{bindings.InventoryView1.rangeSize}"
+                                              first="#{bindings.InventoryView1.rangeStart}"
+                                              emptyText="#{bindings.InventoryView1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                              selectionListener="#{bindings.InventoryView1.collectionModel.makeCurrent}"
+                                              binding="#{invmgmtbacking.inventoryTable}" id="InventoryTable"
+                                              selectedRowKeys="#{bindings.InventoryView1.collectionModel.selectedRow}"
+                                              rowSelection="single" styleClass="AFStretchWidth" columnStretching="last"
+                                              inlineStyle="height:230px;" autoHeightRows="8">
+                                        <af:column sortProperty="Description" sortable="true"
+                                                   headerText="#{bindings.InventoryView1.labels.Description}"
+                                                   width="388">
+                                            <af:outputText value="#{row.Description}"/>
+                                        </af:column>
+                                        <af:column sortProperty="RequestDate" sortable="true" headerText="Request Date"
+                                                   width="111">
+                                            <stratis:adfDateFormatter
+                                                    value="#{row.RequestDate}"
+                                                    pattern="${userbean.dateWithTimeFormatPattern}"/>
+                                        </af:column>
+                                        <af:column sortProperty="Status" headerText="Status" width="223">
+                                            <af:outputText value="#{row.Status}"/>
+                                        </af:column>
+                                    </af:table>
+                                    <!-- End of table -->
+                                    <af:spacer height="5"/>
+                                    <af:toolbar>
+                                        <af:button
+                                                text="Cancel Selected Inventory"
+                                                disabled="#{bindings.Status.inputValue == 'RUNNING'}"
+                                                partialTriggers="InventoryTable"
+                                                id="btnCancelSelectedInventory"
+                                                partialSubmit="false">
+                                            <af:showPopupBehavior popupId="confirmDelete" triggerType="action" align="afterStart"/>
+                                        </af:button>
+                                        <af:popup id="confirmDelete">
+                                            <af:dialog id="Confirm" title="Confirm"
+                                                       dialogListener="#{invmgmtbacking.dialogListener}"
+                                                       affirmativeTextAndAccessKey="Submit">
+                                                <af:activeOutputText id="Delete" value="Are you sure you want to Delete?"/>
+                                            </af:dialog>
+                                        </af:popup>
+                                    </af:toolbar>
+                                    <af:spacer height="5"/>
+                                    <af:panelBox text="Inventory Items" id="pb2" showDisclosure="false">
+                                        <af:separator/>
+                                        <af:outputText value="Locations for selected inventory"
+                                                       inlineStyle="font-size:large; font-weight:bold;"/>
+                                        <!-- Start of second table. -->
+                                        <af:spacer height="5"/>
+                                        <af:table value="#{bindings.InventoryItemView2.collectionModel}" var="row"
+                                                  rows="#{bindings.InventoryItemView2.rangeSize}"
+                                                  first="#{bindings.InventoryItemView2.rangeStart}"
+                                                  emptyText="#{bindings.InventoryItemView2.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                  selectionListener="#{bindings.InventoryItemView2.collectionModel.makeCurrent}"
+                                                  binding="#{invmgmtbacking.inventoryItemTable}" id="InventoryItemTable"
+                                                  selectedRowKeys="#{bindings.InventoryItemView2.collectionModel.selectedRow}"
+                                                  rowSelection="single" styleClass="AFStretchWidth"
+                                                  columnStretching="last" inlineStyle="height:230px;"
+                                                  partialTriggers="::InventoryTable" autoHeightRows="8">
+                                            <af:column sortProperty="LocationLabel" sortable="true"
+                                                       headerText="Location" width="100">
+                                                <af:outputText value="#{row.LocationLabel}"/>
+                                            </af:column>
+                                            <af:column sortProperty="Niin" sortable="true" headerText="NIIN"
+                                                       width="100">
+                                                <af:outputText value="#{row.Niin}"/>
+                                            </af:column>
+                                            <af:column sortProperty="Qty" sortable="false" headerText="Qty" width="75">
+                                                <af:outputText value="#{row.NiinLocQty}">
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.InventoryItemView2.formats.NiinLocQty}"/>
+                                                </af:outputText>
+                                            </af:column>
+                                            <af:column sortProperty="CumNegAdj" sortable="false" headerText="Neg Adj"
+                                                       width="50">
+                                                <af:outputText value="#{row.CumNegAdj}">
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.InventoryItemView2.formats.CumNegAdj}"/>
+                                                </af:outputText>
+                                            </af:column>
+                                            <af:column sortProperty="CumPosAdj" sortable="false" headerText="Pos Adj"
+                                                       width="75">
+                                                <af:outputText value="#{row.CumPosAdj}">
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.InventoryItemView2.formats.CumPosAdj}"/>
+                                                </af:outputText>
+                                            </af:column>
+                                            <af:column sortProperty="NumCounted" sortable="false" headerText="# Counted"
+                                                       width="75">
+                                                <af:outputText value="#{row.NumCounted}">
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.InventoryItemView2.formats.NumCounted}"/>
+                                                </af:outputText>
+                                            </af:column>
+                                            <af:column sortProperty="ModifiedDate" sortable="true"
+                                                       headerText="Modified Date" width="125">
+                                                <stratis:adfDateFormatter
+                                                        value="#{row.ModifiedDate}"
+                                                        pattern="${userbean.dateWithTimeFormatPattern}"/>
+                                            </af:column>
+                                            <af:column sortProperty="NumCounts" sortable="true"
+                                                       headerText="Times Counted" width="50">
+                                                <af:outputText value="#{row.NumCounts}">
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.InventoryItemView2.formats.NumCounts}"/>
+                                                </af:outputText>
+                                            </af:column>
+                                            <af:column sortProperty="Status" sortable="true"
+                                                       headerText="#{bindings.InventoryItemView2.labels.Status}"
+                                                       width="150">
+                                                <af:outputText value="#{row.Status}"/>
+                                            </af:column>
+                                        </af:table>
+                                        <!-- End of second table. -->
+                                        <af:spacer height="5"/>
+                                        <af:toolbar>
+                                            <af:button
+                                                    text="Cancel Selected Location"
+                                                    disabled="#{bindings.TransactionType.inputValue == 'NIN' or bindings.TransactionType.inputValue == 'SUP' or ( bindings.ItemStatus.inputValue != 'INVENTORYPENDING' and bindings.ItemStatus.inputValue != 'LOCSURVEYPENDING')}"
+                                                    id="btnCancelSelectedInventoryItem"
+                                                    partialTriggers="InventoryItemTable" partialSubmit="false">
+                                                <af:showPopupBehavior popupId="confirmDelete2" triggerType="action" align="afterStart"/>
+                                            </af:button>
+                                            <af:popup id="confirmDelete2">
+                                                <af:dialog id="Confirm2" title="Confirm"
+                                                           dialogListener="#{invmgmtbacking.dialogListener2}"
+                                                           affirmativeTextAndAccessKey="Submit">
+                                                    <af:activeOutputText id="Delete2" value="Are you sure you want to Delete?"/>
+                                                </af:dialog>
+                                            </af:popup>
+                                        </af:toolbar>
+                                        <af:spacer height="5"/>
+                                    </af:panelBox>
+                                </af:panelBox>
+                            </af:panelGroupLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<skins xmlns="http://xmlns.oracle.com/adf/view/faces/skin">
+  <skin>
+    <id>mycompany.desktop</id>
+    <family>mycompany</family>
+    <render-kit-id>oracle.adf.desktop</render-kit-id>
+    <style-sheet-name>css/Stratis.css</style-sheet-name>
+  </skin>
+</skins>

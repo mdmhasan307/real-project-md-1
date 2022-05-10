@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="LocClassificationViewObj"
+   Version="11.1.2.64.36"
+   SelectList="LocationClassification.LOC_CLASSIFICATION_ID, 
+       LocationClassification.LENGTH, 
+       LocationClassification.WIDTH, 
+       LocationClassification.HEIGHT, 
+       LocationClassification.USABLE_CUBE, 
+       LocationClassification.USABLE_WEIGHT, 
+       LocationClassification.MECHANIZABLE_STORAGE, 
+       LocationClassification.DIVIDER_CODE, 
+       LocationClassification.IMAGE_FILENAME, 
+       LocationClassification.DESCRIPTION, 
+       LocationClassification.NAME, 
+       LocationClassification.DIVIDER_TYPE_ID"
+   FromList="LOCATION_CLASSIFICATION LocationClassification"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.inv.LocClassificationViewObjImpl"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="LocationClassification"
+      Entity="mil.stratis.model.entity.loc.LocationClassification" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="LocClassificationId"
+      EntityAttrName="LocClassificationId"
+      EntityUsage="LocationClassification"
+      AliasName="LOC_CLASSIFICATION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Length"
+      EntityAttrName="Length"
+      EntityUsage="LocationClassification"
+      AliasName="LENGTH" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Width"
+      EntityAttrName="Width"
+      EntityUsage="LocationClassification"
+      AliasName="WIDTH" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Height"
+      EntityAttrName="Height"
+      EntityUsage="LocationClassification"
+      AliasName="HEIGHT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UsableCube"
+      EntityAttrName="UsableCube"
+      EntityUsage="LocationClassification"
+      AliasName="USABLE_CUBE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UsableWeight"
+      EntityAttrName="UsableWeight"
+      EntityUsage="LocationClassification"
+      AliasName="USABLE_WEIGHT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MechanizableStorage"
+      EntityAttrName="MechanizableStorage"
+      EntityUsage="LocationClassification"
+      AliasName="MECHANIZABLE_STORAGE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DividerCode"
+      EntityAttrName="DividerCode"
+      EntityUsage="LocationClassification"
+      AliasName="DIVIDER_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ImageFilename"
+      EntityAttrName="ImageFilename"
+      EntityUsage="LocationClassification"
+      AliasName="IMAGE_FILENAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Description"
+      EntityAttrName="Description"
+      EntityUsage="LocationClassification"
+      AliasName="DESCRIPTION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Name"
+      EntityAttrName="Name"
+      EntityUsage="LocationClassification"
+      AliasName="NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DividerTypeId"
+      EntityAttrName="DividerTypeId"
+      EntityUsage="LocationClassification"
+      AliasName="DIVIDER_TYPE_ID" >
+   </ViewAttribute>
+</ViewObject>

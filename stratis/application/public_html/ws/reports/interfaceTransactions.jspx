@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="8"/>
+    <jsp:setProperty name="userbean" property="selected2" value="0"/>
+    <!-- Interface Transactions -->
+    <af:table var="row" rowBandingInterval="1" id="t13_1" autoHeightRows="0"
+              styleClass="AFStretchWidth"
+              value="#{viewScope.ReportsQueryResultBean.stdReportColumnList}"
+              rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Interface Transactions'}">
+        <af:column sortable="false" headerText="Priority" id="c13_1" width="150">
+            <af:outputText value="#{row.priority}" id="ot13_1"/>
+        </af:column>
+        <af:column sortable="false" headerText="Output Date" id="c13_2" width="115">
+            <af:outputText value="#{row.outputDate}"/>
+        </af:column>
+        <af:column sortable="false" headerText="Transaction Type" id="c13_3">
+            <af:outputText value="#{row.transType}" id="ot13_3"/>
+        </af:column>
+        <af:column sortable="false" headerText="Document Number" id="c13_4">
+            <af:outputText value="#{row.docNumber}" id="ot13_4"/>
+        </af:column>
+        <af:column sortable="false" headerText="Route" id="c13_5">
+            <af:outputText value="#{row.route}" id="ot13_5"/>
+        </af:column>
+        <af:column sortable="false" headerText="NIIN" id="c13_6">
+            <af:outputText value="#{row.niin}" id="ot13_6"/>
+        </af:column>
+        <af:column sortable="false" headerText="UI" id="c13_7">
+            <af:outputText value="#{row.ui}" id="ot13_7"/>
+        </af:column>
+        <af:column sortable="false" headerText="QTY" id="c13_8"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.qty}" id="ot13_8"/>
+        </af:column>
+        <af:column sortable="false" headerText="CC" id="c13_9">
+            <af:outputText value="#{row.cc}" id="ot13_9"/>
+        </af:column>
+        <af:column sortable="false" headerText="Transaction Date" id="c13_10" width="115">
+            <af:outputText value="#{row.transDate}"/>
+        </af:column>
+    </af:table>
+</jsp:root>

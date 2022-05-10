@@ -1,0 +1,46 @@
+
+.AFTabAboveMiddleSelectedBackground:alias
+{
+background-image: url("Stratis/stratis_t3_above_mid_a.png");
+}
+.AFTabAboveStartSelectedBackground:alias:ltr 
+{
+background-image: url("Stratis/stratis_t3_above_start_a.png");
+}
+.AFTabAboveEndSelectedBackground:alias:ltr 
+{
+background-image: url("Stratis/stratis_t3_above_end_a.png");
+}
+.AFTabAboveEndUnselectedBackground:alias:ltr 
+{
+background-image: url("Stratis/stratis_t3_above_end_d.png");
+}
+.AFTabAboveStartUnselectedBackground:alias:ltr 
+{
+background-image: url("Stratis/stratis_t3_above_start_d.png");
+}
+.AFTabAboveMiddleUnselectedBackground:alias
+{
+background-image: url("Stratis/stratis_t3_above_mid_d.png");
+}
+.AFTabAboveStartUnselectedDisabledBackground:alias:ltr 
+{
+background-image: url("Stratis/stratis_t3_above_start_d.png");
+}
+.AFTabAboveMiddleUnselectedDisabledBackground:alias
+{
+background-image: url("Stratis/stratis_t3_above_mid_d.png");
+}
+.AFTabAboveEndUnselectedDisabledBackground:alias:ltr 
+{
+background-image: url("Stratis/stratis_t3_above_end_d.png");
+}
+.AFPopupMenuPopup tr[id$='_shwMr'] {
+    display: none;
+}
+.messagePanel {
+    max-height:80px;
+    overflow:auto;
+}
+
+

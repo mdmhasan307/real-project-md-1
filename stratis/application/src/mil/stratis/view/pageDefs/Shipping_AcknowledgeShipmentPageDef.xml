@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="Shipping_AcknowledgeShipmentPageDef" Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="UndeliveredLDCONListIterator" RangeSize="-1" Binds="Root.ShippingService1.UndeliveredLDCONList"
+              StateValidation="false" DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <invokeAction id="AlwaysFind" Binds="Find" RefreshCondition="${ !bindings.UndeliveredLDCONListIterator.findMode}"
+                  Refresh="ifNeeded"/>
+    <iterator id="UndeliveredLDCONResultsListIterator" Binds="Root.ShippingService1.UndeliveredLDCONList" RangeSize="-1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <invokeAction id="refresh1" Refresh="ifNeeded" Binds="ExecuteWithParams"/>
+  </executables>
+  <bindings>
+    <attributeValues id="Manifest" IterBinding="UndeliveredLDCONListIterator">
+      <AttrNames>
+        <Item Value="Manifest"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Aac" IterBinding="UndeliveredLDCONListIterator">
+      <AttrNames>
+        <Item Value="Aac"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ManifestPrintDate" IterBinding="UndeliveredLDCONListIterator">
+      <AttrNames>
+        <Item Value="ManifestPrintDate"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Execute" RequiresUpdateModel="true" Action="iteratorExecute"
+            IterBinding="UndeliveredLDCONListIterator"/>
+    <action IterBinding="UndeliveredLDCONListIterator" id="Find"
+            InstanceName="StratisRootServiceDataControl.Root.ShippingService1.UndeliveredLDCONList"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="iteratorFind"/>
+    <table id="UndeliveredLDCONList" IterBinding="UndeliveredLDCONResultsListIterator">
+      <AttrNames>
+        <Item Value="Manifest"/>
+        <Item Value="Aac"/>
+        <Item Value="ManifestPrintDate"/>
+        <Item Value="CustomerId"/>
+        <Item Value="ShippingManifestId"/>
+      </AttrNames>
+    </table>
+    <action id="ExecuteWithParams" IterBinding="UndeliveredLDCONListIterator"
+            InstanceName="StratisRootServiceDataControl.Root.ShippingService1.UndeliveredLDCONList"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="executeWithParams">
+      <NamedData NDName="EQUIPMENT_NUMBER" NDType="java.lang.String" NDValue="${userbean.workstationId}"/>
+    </action>
+  </bindings>
+</pageDefinition>

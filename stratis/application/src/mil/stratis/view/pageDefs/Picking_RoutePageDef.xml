@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Picking_RoutePageDef"
+                ControllerClass="#{PickingAll}" Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator id="PickingByRouteName1Iterator" RangeSize="-1" Binds="Root.PickingAM1.PickingByRouteName1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="PickingByRouteName1" IterBinding="PickingByRouteName1Iterator">
+      <AttrNames>
+        <Item Value="RouteId"/>
+        <Item Value="RouteName"/>
+      </AttrNames>
+    </table>
+  </bindings>
+</pageDefinition>

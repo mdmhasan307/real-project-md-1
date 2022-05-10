@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+>
+    <!-- Shelf-Life Report -->
+    <af:table var="row" rowBandingInterval="1" id="rg7t2_1" autoHeightRows="0"
+              styleClass="AFStretchWidth"
+              value="#{viewScope.ReportsQueryResultBean.reportColumnList}"
+              rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Shelf-Life Report'}">
+        <af:column sortable="false" headerText="Location" id="rg7c2_1">
+            <af:outputText value="#{row.location}" id="rg7ot2_1"/>
+        </af:column>
+        <af:column sortable="false" headerText="NIIN" id="rg7c2_2">
+            <af:outputText value="#{row.niin}" id="rg7ot2_2"/>
+        </af:column>
+        <af:column sortable="false" headerText="CC" id="rg7c2_3" width="25">
+            <af:outputText value="#{row.cc}" id="rg7ot2_3"/>
+        </af:column>
+        <af:column sortable="false" headerText="Date of Manufacture" id="rg7c2_4">
+            <af:outputText value="#{row.dom}"/>
+        </af:column>
+        <af:column sortable="false" headerText="Expiration Date" id="rg7c2_5" width="115">
+            <af:outputText value="#{row.expirationDate}"/>
+        </af:column>
+        <af:column sortable="false" headerText="Nomenclature" id="rg7c2_6">
+            <af:outputText value="#{row.nomenclature}" id="rg7ot2_6"/>
+        </af:column>
+        <af:column sortable="false" headerText="Qty" id="rg7c2_7"
+                   inlineStyle="text-align: right;">
+            <af:outputText value="#{row.qty}" id="rg7ot2_7"/>
+        </af:column>
+    </af:table>
+</jsp:root>

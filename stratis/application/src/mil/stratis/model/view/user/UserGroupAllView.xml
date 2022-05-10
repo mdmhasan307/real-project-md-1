@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="UserGroupAllView"
+  Version="11.1.2.64.36"
+  SelectList="UserGroups.GROUP_ID, 
+       UserGroups.USER_ID"
+  FromList="USER_GROUPS UserGroups"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="mil.stratis.model.view.user.UserGroupAllView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <EntityUsage
+    Name="UserGroups"
+    Entity="mil.stratis.model.entity.user.UserGroups"/>
+  <ViewAttribute
+    Name="GroupId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="GroupId"
+    EntityUsage="UserGroups"
+    AliasName="GROUP_ID"/>
+  <ViewAttribute
+    Name="UserId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="UserId"
+    EntityUsage="UserGroups"
+    AliasName="USER_ID"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="mil.stratis.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

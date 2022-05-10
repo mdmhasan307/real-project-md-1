@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="NiinLocationViewObj"
+   Version="11.1.2.64.36"
+   SelectList="Niin_Location.NIIN_LOC_ID, 
+       Niin_Location.NIIN_ID, 
+       Niin_Location.LOCATION_ID, 
+       Niin_Location.QTY, 
+       Niin_Location.EXPIRATION_DATE, 
+       Niin_Location.DATE_OF_MANUFACTURE, 
+       Niin_Location.CC, 
+       Niin_Location.LOCKED, 
+       Niin_Location.CREATED_BY, 
+       Niin_Location.CREATED_DATE, 
+       Niin_Location.MODIFIED_BY, 
+       Niin_Location.MODIFIED_DATE, 
+       Niin_Location.PROJECT_CODE, 
+       Niin_Location.PC, 
+       Niin_Location.LAST_INV_DATE, 
+       Niin_Location.CASE_WEIGHT_QTY, 
+       Niin_Location.LOT_CON_NUM, 
+       Niin_Location.SERIAL_NUMBER, 
+       Niin_Location.PACKED_DATE, 
+       Niin_Location.NUM_EXTENTS, 
+       Niin_Location.NUM_COUNTS, 
+       Niin_Location.NSN_REMARK"
+   FromList="NIIN_LOCATION Niin_Location"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.inv.NiinLocationViewObjImpl"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="Niin_Location"
+      Entity="mil.stratis.model.entity.loc.NiinLocation" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="NiinLocId"
+      IsNotNull="true"
+      EntityAttrName="NiinLocId"
+      EntityUsage="Niin_Location"
+      AliasName="NIIN_LOC_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NiinId"
+      IsNotNull="true"
+      EntityAttrName="NiinId"
+      EntityUsage="Niin_Location"
+      AliasName="NIIN_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LocationId"
+      IsNotNull="true"
+      EntityAttrName="LocationId"
+      EntityUsage="Niin_Location"
+      AliasName="LOCATION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Qty"
+      IsNotNull="true"
+      EntityAttrName="Qty"
+      EntityUsage="Niin_Location"
+      AliasName="QTY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ExpirationDate"
+      EntityAttrName="ExpirationDate"
+      EntityUsage="Niin_Location"
+      AliasName="EXPIRATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DateOfManufacture"
+      EntityAttrName="DateOfManufacture"
+      EntityUsage="Niin_Location"
+      AliasName="DATE_OF_MANUFACTURE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Cc"
+      EntityAttrName="Cc"
+      EntityUsage="Niin_Location"
+      AliasName="CC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Locked"
+      IsNotNull="true"
+      EntityAttrName="Locked"
+      EntityUsage="Niin_Location"
+      AliasName="LOCKED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      IsNotNull="true"
+      EntityAttrName="CreatedBy"
+      EntityUsage="Niin_Location"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedDate"
+      IsNotNull="true"
+      EntityAttrName="CreatedDate"
+      EntityUsage="Niin_Location"
+      AliasName="CREATED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedBy"
+      EntityAttrName="ModifiedBy"
+      EntityUsage="Niin_Location"
+      AliasName="MODIFIED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedDate"
+      EntityAttrName="ModifiedDate"
+      EntityUsage="Niin_Location"
+      AliasName="MODIFIED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectCode"
+      EntityAttrName="ProjectCode"
+      EntityUsage="Niin_Location"
+      AliasName="PROJECT_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Pc"
+      EntityAttrName="Pc"
+      EntityUsage="Niin_Location"
+      AliasName="PC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastInvDate"
+      EntityAttrName="LastInvDate"
+      EntityUsage="Niin_Location"
+      AliasName="LAST_INV_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CaseWeightQty"
+      EntityAttrName="CaseWeightQty"
+      EntityUsage="Niin_Location"
+      AliasName="CASE_WEIGHT_QTY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LotConNum"
+      EntityAttrName="LotConNum"
+      EntityUsage="Niin_Location"
+      AliasName="LOT_CON_NUM" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SerialNumber"
+      EntityAttrName="SerialNumber"
+      EntityUsage="Niin_Location"
+      AliasName="SERIAL_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PackedDate"
+      EntityAttrName="PackedDate"
+      EntityUsage="Niin_Location"
+      AliasName="PACKED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NumExtents"
+      EntityAttrName="NumExtents"
+      EntityUsage="Niin_Location"
+      AliasName="NUM_EXTENTS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NumCounts"
+      EntityAttrName="NumCounts"
+      EntityUsage="Niin_Location"
+      AliasName="NUM_COUNTS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NsnRemark"
+      IsNotNull="true"
+      EntityAttrName="NsnRemark"
+      EntityUsage="Niin_Location"
+      AliasName="NSN_REMARK" >
+   </ViewAttribute>
+</ViewObject>

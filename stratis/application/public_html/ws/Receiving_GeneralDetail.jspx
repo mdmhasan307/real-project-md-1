@@ -1,0 +1,499 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:stratis="taglib.mil.usmc.stratis">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="1"/>
+    <jsp:setProperty name="userbean" property="selected2" value="0"/>
+    <f:view>
+        <af:document title="STRATIS" id="d1">
+            <af:form id="main_form">
+                <af:panelStretchLayout id="psl1" startWidth="24" topHeight="150" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/HeaderMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout id="topGroup" layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGridLayout id="pgl1">
+                                <af:gridRow id="gr1">
+                                    <af:gridCell valign="top" id="gc1">
+                                        <f:subview id="svSideBar">
+                                            <jsp:include page="../SideBar.jspx"/>
+                                        </f:subview>
+                                    </af:gridCell>
+                                    <af:gridCell valign="top" id="gc2">
+                                        <!--<af:panelHeader text="Receipt - Modify Stow Information" id="ph1">-->
+                                        <af:panelGroupLayout layout="horizontal" valign="top" id="pgl2">
+                                            <af:panelFormLayout id="pfl1">
+                                                <af:inputText label="#{bindings.NiinInfoReceiptVView1DocumentNumber.label}"
+                                                              value="#{bindings.NiinInfoReceiptVView1DocumentNumber.inputValue}"
+                                                              readOnly="true" styleClass="ReadOnlyField" columns="20"
+                                                              id="itDocNumber"/>
+                                                <af:inputText value="#{bindings.NiinInfoReceiptVView1DocumentNumber.inputValue}"
+                                                              label="#{bindings.NiinInfoReceiptVView1DocumentNumber.label}"
+                                                              required="#{bindings.NiinInfoReceiptVView1DocumentNumber.mandatory}"
+                                                              columns="17" rendered="false" id="itDocNumber2">
+                                                    <f:validator binding="#{bindings.NiinInfoReceiptVView1DocumentNumber.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText label="CC"
+                                                              value="#{bindings.NiinInfoReceiptVView1Cc.inputValue}"
+                                                              columns="#{bindings.NiinInfoReceiptVView1Cc.displayWidth}"
+                                                              styleClass="ReadOnlyField" readOnly="true" id="itCc"/>
+                                                <af:inputText value="#{bindings.NiinInfoReceiptVView1Cc.inputValue}"
+                                                              label="#{bindings.NiinInfoReceiptVView1Cc.label}"
+                                                              required="#{bindings.NiinInfoReceiptVView1Cc.mandatory}"
+                                                              columns="#{bindings.NiinInfoReceiptVView1Cc.displayWidth}"
+                                                              rendered="false" id="itCc2">
+                                                    <f:validator binding="#{bindings.NiinInfoReceiptVView1Cc.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText label="#{bindings.NiinInfoReceiptVView1MechNonMechFlag.label}"
+                                                              value="#{bindings.NiinInfoReceiptVView1MechNonMechFlag.selectedValue}"
+                                                              styleClass="ReadOnlyField" readOnly="true" columns="1"
+                                                              id="itMechNonMechFlag"/>
+                                                <af:selectOneChoice value="#{bindings.NiinInfoReceiptVView1MechNonMechFlag.inputValue}"
+                                                                    label="#{bindings.NiinInfoReceiptVView1MechNonMechFlag.label}"
+                                                                    rendered="false" id="socMechNonMechFlag">
+                                                    <f:selectItems value="#{bindings.NiinInfoReceiptVView1MechNonMechFlag.items}"
+                                                                   id="siMechMonMechFlag"/>
+                                                </af:selectOneChoice>
+                                                <af:inputText label="UI"
+                                                              columns="#{bindings.NiinInfoReceiptVView1Ui.displayWidth}"
+                                                              value="#{bindings.NiinInfoReceiptVView1Ui.inputValue}"
+                                                              styleClass="ReadOnlyField" readOnly="true" id="itUi"/>
+                                                <af:inputText value="#{bindings.NiinInfoReceiptVView1Ui.inputValue}"
+                                                              label="UI"
+                                                              required="#{bindings.NiinInfoReceiptVView1Ui.mandatory}"
+                                                              columns="#{bindings.NiinInfoReceiptVView1Ui.displayWidth}"
+                                                              rendered="false" id="itUi2">
+                                                    <f:validator binding="#{bindings.NiinInfoReceiptVView1Ui.validator}"/>
+                                                </af:inputText>
+                                            </af:panelFormLayout>
+                                            <af:panelFormLayout id="pfl2">
+                                                <af:inputText label="#{bindings.NiinInfoReceiptVView1Suffix.label}"
+                                                              value="#{bindings.NiinInfoReceiptVView1Suffix.inputValue}"
+                                                              columns="#{bindings.NiinInfoReceiptVView1Suffix.displayWidth}"
+                                                              styleClass="ReadOnlyField" readOnly="true" id="itSuffix"/>
+                                                <af:inputText value="#{bindings.NiinInfoReceiptVView1Suffix.inputValue}"
+                                                              label="#{bindings.NiinInfoReceiptVView1Suffix.label}"
+                                                              required="#{bindings.NiinInfoReceiptVView1Suffix.mandatory}"
+                                                              columns="#{bindings.NiinInfoReceiptVView1Suffix.displayWidth}"
+                                                              rendered="false" id="itSuffix2">
+                                                    <f:validator binding="#{bindings.NiinInfoReceiptVView1Suffix.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText label="#{bindings.NiinInfoReceiptVView1ShelfLifeCode.label}"
+                                                              value="#{bindings.NiinInfoReceiptVView1ShelfLifeCode.inputValue}"
+                                                              columns="#{bindings.NiinInfoReceiptVView1ShelfLifeCode.displayWidth}"
+                                                              styleClass="ReadOnlyField" readOnly="true"
+                                                              id="itShelfLifeCode"/>
+                                                <af:inputText value="#{bindings.NiinInfoReceiptVView1ShelfLifeCode.inputValue}"
+                                                              label="#{bindings.NiinInfoReceiptVView1ShelfLifeCode.label}"
+                                                              required="#{bindings.NiinInfoReceiptVView1ShelfLifeCode.mandatory}"
+                                                              columns="#{bindings.NiinInfoReceiptVView1ShelfLifeCode.displayWidth}"
+                                                              rendered="false" id="itShelfLifeCode2">
+                                                    <f:validator binding="#{bindings.NiinInfoReceiptVView1ShelfLifeCode.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText label="SCC"
+                                                              columns="#{bindings.NiinInfoReceiptVView1Scc.displayWidth}"
+                                                              value="#{bindings.NiinInfoReceiptVView1Scc.inputValue}"
+                                                              styleClass="ReadOnlyField" readOnly="true" id="itScc"/>
+                                                <af:inputText value="#{bindings.NiinInfoReceiptVView1Scc.inputValue}"
+                                                              label="#{bindings.NiinInfoReceiptVView1Scc.label}"
+                                                              required="#{bindings.NiinInfoReceiptVView1Scc.mandatory}"
+                                                              columns="#{bindings.NiinInfoReceiptVView1Scc.displayWidth}"
+                                                              rendered="false" id="itScc2">
+                                                    <f:validator binding="#{bindings.NiinInfoReceiptVView1Scc.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText label="#{bindings.NiinInfoReceiptVView1QuantityStowed.label}"
+                                                              value="#{bindings.NiinInfoReceiptVView1QuantityStowed.inputValue}"
+                                                              columns="#{bindings.NiinInfoReceiptVView1QuantityStowed.displayWidth}"
+                                                              styleClass="ReadOnlyField" readOnly="true"
+                                                              id="itQtyStowed"/>
+                                                <af:inputText value="#{bindings.NiinInfoReceiptVView1QuantityStowed.inputValue}"
+                                                              label="#{bindings.NiinInfoReceiptVView1QuantityStowed.label}"
+                                                              required="#{bindings.NiinInfoReceiptVView1QuantityStowed.mandatory}"
+                                                              columns="#{bindings.NiinInfoReceiptVView1QuantityStowed.displayWidth}"
+                                                              rendered="false" id="itQtyStowed2">
+                                                    <f:validator binding="#{bindings.NiinInfoReceiptVView1QuantityStowed.validator}"/>
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.NiinInfoReceiptVView1QuantityStowed.format}"/>
+                                                </af:inputText>
+                                            </af:panelFormLayout>
+                                            <af:panelFormLayout id="pfl3">
+                                                <af:inputText label="FSC"
+                                                              value="#{bindings.NiinInfoReceiptVView1Fsc.inputValue}"
+                                                              columns="#{bindings.NiinInfoReceiptVView1Fsc.displayWidth}"
+                                                              readOnly="true" styleClass="ReadOnlyField" id="itFsc"/>
+                                                <af:inputText value="#{bindings.NiinInfoReceiptVView1Fsc.inputValue}"
+                                                              label="FSC"
+                                                              required="#{bindings.NiinInfoReceiptVView1Fsc.mandatory}"
+                                                              columns="#{bindings.NiinInfoReceiptVView1Fsc.displayWidth}"
+                                                              rendered="false" id="itFsc2">
+                                                    <f:validator binding="#{bindings.NiinInfoReceiptVView1Fsc.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText label="PC"
+                                                              value="#{bindings.NiinInfoReceiptVView1Pc.inputValue}"
+                                                              columns="#{bindings.NiinInfoReceiptVView1Pc.displayWidth}"
+                                                              readOnly="true" styleClass="ReadOnlyField" id="itPc"/>
+                                                <af:inputText value="#{bindings.NiinInfoReceiptVView1Pc.inputValue}"
+                                                              label="#{bindings.NiinInfoReceiptVView1Pc.label}"
+                                                              required="#{bindings.NiinInfoReceiptVView1Pc.mandatory}"
+                                                              columns="#{bindings.NiinInfoReceiptVView1Pc.displayWidth}"
+                                                              rendered="false" id="itPc2">
+                                                    <f:validator binding="#{bindings.NiinInfoReceiptVView1Pc.validator}"/>
+                                                </af:inputText>
+                                                <af:spacer width="10" height="17" id="s1"/>
+                                                <af:inputText label="#{bindings.NiinInfoReceiptVView1QuantityInducted.label}"
+                                                              value="#{bindings.NiinInfoReceiptVView1QuantityInducted.inputValue}"
+                                                              columns="#{bindings.NiinInfoReceiptVView1QuantityInducted.displayWidth}"
+                                                              readOnly="true" styleClass="ReadOnlyField"
+                                                              id="itQtyInducted"/>
+                                                <af:inputText value="#{bindings.NiinInfoReceiptVView1QuantityInducted.inputValue}"
+                                                              label="#{bindings.NiinInfoReceiptVView1QuantityInducted.label}"
+                                                              required="#{bindings.NiinInfoReceiptVView1QuantityInducted.mandatory}"
+                                                              columns="#{bindings.NiinInfoReceiptVView1QuantityInducted.displayWidth}"
+                                                              rendered="false" id="itQtyInducted2">
+                                                    <f:validator binding="#{bindings.NiinInfoReceiptVView1QuantityInducted.validator}"/>
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.NiinInfoReceiptVView1QuantityInducted.format}"/>
+                                                </af:inputText>
+                                            </af:panelFormLayout>
+                                            <af:panelFormLayout id="pfl4">
+                                                <af:inputText label="NIIN"
+                                                              value="#{bindings.NiinInfoReceiptVView1Niin.inputValue}"
+                                                              columns="#{bindings.NiinInfoReceiptVView1Niin.displayWidth}"
+                                                              styleClass="ReadOnlyField" readOnly="true" id="itNiin"/>
+                                                <af:inputText value="#{bindings.NiinInfoReceiptVView1Niin.inputValue}"
+                                                              label="#{bindings.NiinInfoReceiptVView1Niin.label}"
+                                                              required="#{bindings.NiinInfoReceiptVView1Niin.mandatory}"
+                                                              columns="#{bindings.NiinInfoReceiptVView1Niin.displayWidth}"
+                                                              rendered="false" id="itNiin2">
+                                                    <f:validator binding="#{bindings.NiinInfoReceiptVView1Niin.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText label="#{bindings.NiinInfoReceiptVView1TypeOfMaterial.label}"
+                                                              value="#{bindings.NiinInfoReceiptVView1TypeOfMaterial.inputValue}"
+                                                              columns="#{bindings.NiinInfoReceiptVView1TypeOfMaterial.displayWidth}"
+                                                              styleClass="ReadOnlyField" readOnly="true"
+                                                              id="itTypeOfMaterial"/>
+                                                <af:inputText value="#{bindings.NiinInfoReceiptVView1TypeOfMaterial.inputValue}"
+                                                              label="#{bindings.NiinInfoReceiptVView1TypeOfMaterial.label}"
+                                                              required="#{bindings.NiinInfoReceiptVView1TypeOfMaterial.mandatory}"
+                                                              columns="#{bindings.NiinInfoReceiptVView1TypeOfMaterial.displayWidth}"
+                                                              rendered="false" id="itTypeOfMaterial2">
+                                                    <f:validator binding="#{bindings.NiinInfoReceiptVView1TypeOfMaterial.validator}"/>
+                                                </af:inputText>
+                                                <af:spacer width="10" height="17" id="s2"/>
+                                                <af:inputText label="#{bindings.NiinInfoReceiptVView1QuantityReleased.label}"
+                                                              value="#{bindings.NiinInfoReceiptVView1QuantityReleased.inputValue}"
+                                                              columns="#{bindings.NiinInfoReceiptVView1QuantityReleased.displayWidth}"
+                                                              styleClass="ReadOnlyField" readOnly="true"
+                                                              id="itQtyReleased"/>
+                                                <af:inputText value="#{bindings.NiinInfoReceiptVView1QuantityReleased.inputValue}"
+                                                              label="#{bindings.NiinInfoReceiptVView1QuantityReleased.label}"
+                                                              required="#{bindings.NiinInfoReceiptVView1QuantityReleased.mandatory}"
+                                                              columns="#{bindings.NiinInfoReceiptVView1QuantityReleased.displayWidth}"
+                                                              rendered="false" id="itQtyReleased2">
+                                                    <f:validator binding="#{bindings.NiinInfoReceiptVView1QuantityReleased.validator}"/>
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.NiinInfoReceiptVView1QuantityReleased.format}"/>
+                                                </af:inputText>
+                                            </af:panelFormLayout>
+                                        </af:panelGroupLayout>
+                                        <!--</af:panelHeader>
+                                        <af:panelHeader text="Stow Information" id="phStowInformation">-->
+                                        <af:panelGroupLayout layout="horizontal" id="pgl3">
+                                            <af:button text="Select Row for Edit"
+                                                       actionListener="#{ReceivingGeneralDetail.EditStowForAReceipt}"
+                                                       id="cbSelectEditRow" partialSubmit="false"/>
+                                            <af:spacer width="10" height="10" id="s3"/>
+                                            <af:button text="Create New Stow Row"
+                                                       actionListener="#{ReceivingGeneralDetail.CreateStowForAReceipt}"
+                                                       id="cbCreateBewStowRow" partialSubmit="false"/>
+                                            <af:spacer width="10" height="10" id="s4"/>
+                                            <af:button text="Delete Selected Row"
+                                                       actionListener="#{ReceivingGeneralDetail.DeleteStowForAReceipt}"
+                                                       id="cbDeleteRow" partialSubmit="false"/>
+                                        </af:panelGroupLayout>
+                                        <af:table rows="#{bindings.NiinInfoReceiptVView1StowView2.rangeSize}"
+                                                  first="#{bindings.NiinInfoReceiptVView1StowView2.rangeStart}"
+                                                  emptyText="#{bindings.NiinInfoReceiptVView1StowView2.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                  var="row"
+                                                  value="#{bindings.NiinInfoReceiptVView1StowView2.collectionModel}"
+                                                  selectionListener="#{bindings.NiinInfoReceiptVView1StowView2.collectionModel.makeCurrent}"
+                                                  selectedRowKeys="#{bindings.NiinInfoReceiptVView1StowView2.collectionModel.selectedRow}"
+                                                  rowSelection="single" id="tStwVw2" autoHeightRows="5"
+                                                  width="700">
+                                            <af:column headerText="#{bindings.NiinInfoReceiptVView1StowView2.labels.Sid}"
+                                                       sortable="false" sortProperty="Sid" id="c1">
+                                                <af:outputText value="#{row.Sid}" id="otRowSid"/>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.NiinInfoReceiptVView1StowView2.labels.QtyToBeStowed}"
+                                                       sortable="false" sortProperty="QtyToBeStowed" id="c2">
+                                                <af:outputText value="#{row.QtyToBeStowed}" id="otQtyToBeStowed">
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.NiinInfoReceiptVView1StowView2.formats.QtyToBeStowed}"/>
+                                                </af:outputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.NiinInfoReceiptVView1StowView2.labels.ExpirationDate}"
+                                                       sortable="false" sortProperty="ExpirationDate" id="c3">
+                                                <stratis:adfDateFormatter
+                                                        value="#{row.ExpirationDate}"
+                                                        pattern="${userbean.dateFormatPattern}"
+                                                        shiftZone="false"/>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.NiinInfoReceiptVView1StowView2.labels.DateOfManufacture}"
+                                                       sortable="false" sortProperty="DateOfManufacture" id="c4">
+                                                <stratis:adfDateFormatter
+                                                        value="#{row.DateOfManufacture}"
+                                                        pattern="${userbean.dateFormatPattern}"/>
+                                            </af:column>
+                                            <af:column headerText="Location" sortable="false"
+                                                       sortProperty="LocationLabel" id="c5">
+                                                <af:outputText value="#{row.LocationLabel}" id="otLocLabel"/>
+                                            </af:column>
+                                            <af:column headerText="Serial Number" sortable="false"
+                                                       sortProperty="SerialNumber" id="c6">
+                                                <af:outputText inlineStyle="text-transform:uppercase;"
+                                                               value="#{row.SerialNumber}" id="otSerialNum"/>
+                                            </af:column>
+                                        </af:table>
+                                        <af:spacer width="10" height="10" id="s5"/>
+                                        <af:panelGroupLayout layout="scroll" id="pgedit">
+                                            <af:spacer width="10" height="10" id="s6"/>
+                                            <af:panelGroupLayout layout="horizontal" valign="top" id="pgl4">
+                                                <af:panelFormLayout id="pfl5" partialTriggers="tStwVw2">
+                                                    <f:facet name="footer"/>
+                                                    <af:inputText value="#{bindings.StowView2QtyToBeStowed.inputValue}"
+                                                                  label="#{bindings.StowView2QtyToBeStowed.label}"
+                                                                  required="#{bindings.StowView2QtyToBeStowed.mandatory}"
+                                                                  labelStyle="font-weight:bold;"
+                                                                  columns="#{bindings.StowView2QtyToBeStowed.displayWidth}"
+                                                                  maximumLength="5" id="itQtyToBeStowed">
+                                                        <f:validator binding="#{bindings.StowView2QtyToBeStowed.validator}"/>
+                                                        <f:convertNumber groupingUsed="false"
+                                                                         pattern="#{bindings.StowView2QtyToBeStowed.format}"/>
+                                                        <f:validator validatorId="javax.faces.LongRange"/>
+                                                    </af:inputText>
+                                                    <af:inputDate value="#{bindings.StowView2DateOfManufacture.inputValue}"
+                                                                  label="#{bindings.StowView2DateOfManufacture.label}"
+                                                                  required="#{bindings.StowView2DateOfManufacture.mandatory}"
+                                                                  labelStyle="#{bindings.NiinInfoReceiptVView1ShelfLifeCode.inputValue != '0' ? 'font-weight:bold;':''}"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  rendered="#{(bindings.NiinInfoReceiptVView1ShelfLifeCode.inputValue != '0')}"
+                                                                  id="idShelfLifeCode">
+                                                        <f:convertDateTime pattern="yyyy-MM-dd"
+                                                                           dateStyle="short"/>
+                                                    </af:inputDate>
+                                                    <af:inputDate value="#{bindings.StowView2DateOfManufacture.inputValue}"
+                                                                  label="#{bindings.StowView2DateOfManufacture.label}"
+                                                                  required="#{bindings.StowView2DateOfManufacture.mandatory}"
+                                                                  labelStyle="#{bindings.NiinInfoReceiptVView1ShelfLifeCode.inputValue != '0' ? 'font-weight:bold;':''}"
+                                                                  rendered="#{(bindings.NiinInfoReceiptVView1ShelfLifeCode.inputValue == '0')}"
+                                                                  id="idDtOfManuf">
+                                                        <f:convertDateTime pattern="yyyy-MM-dd"
+                                                                           dateStyle="short"/>
+                                                    </af:inputDate>
+                                                    <af:inputDate value="#{bindings.StowView2ExpirationDate.inputValue}"
+                                                                  label="#{bindings.StowView2ExpirationDate.label}"
+                                                                  required="#{bindings.StowView2ExpirationDate.mandatory}"
+                                                                  labelStyle="#{bindings.NiinInfoReceiptVView1ShelfLifeCode.inputValue != '0' ? 'font-weight:bold;':''}"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  rendered="#{(bindings.NiinInfoReceiptVView1ShelfLifeCode.inputValue != '0')}"
+                                                                  id="idExpDate2">
+                                                        <f:validator binding="#{bindings.StowView2ExpirationDate.validator}"/>
+                                                        <f:convertDateTime pattern="yyyy-MM-dd"
+                                                                           dateStyle="short"/>
+                                                    </af:inputDate>
+                                                    <af:inputDate value="#{bindings.StowView2ExpirationDate.inputValue}"
+                                                                  label="#{bindings.StowView2ExpirationDate.label}"
+                                                                  required="#{bindings.StowView2ExpirationDate.mandatory}"
+                                                                  labelStyle="#{bindings.NiinInfoReceiptVView1ShelfLifeCode.inputValue != '0' ? 'font-weight:bold;':''}"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  rendered="#{(bindings.NiinInfoReceiptVView1ShelfLifeCode.inputValue == '0')}"
+                                                                  id="idExpDate">
+                                                        <f:validator binding="#{bindings.StowView2ExpirationDate.validator}"/>
+                                                        <f:convertDateTime pattern="yyyy-MM-dd"
+                                                                           dateStyle="short"/>
+                                                    </af:inputDate>
+                                                    <af:inputText value="#{bindings.StowView2SerialNumber.inputValue}"
+                                                                  inlineStyle="text-transform:uppercase;"
+                                                                  label="Serial Number Edit"
+                                                                  required="#{bindings.StowView2SerialNumber.mandatory}"
+                                                                  rendered="#{(bindings.NiinInfoReceiptVView1SerialControlFlag.inputValue == 'Y')}"
+                                                                  columns="#{bindings.StowView2SerialNumber.displayWidth}"
+                                                                  maximumLength="30" id="itSerialNum">
+                                                        <f:validator binding="#{bindings.StowView2SerialNumber.validator}"/>
+                                                    </af:inputText>
+                                                    <af:inputText value="#{bindings.StowView2SerialNumber.inputValue}"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  label="#{bindings.StowView2SerialNumber.label}"
+                                                                  required="#{bindings.StowView2SerialNumber.mandatory}"
+                                                                  rendered="#{(bindings.NiinInfoReceiptVView1SerialControlFlag.inputValue == 'N')}"
+                                                                  columns="#{bindings.StowView2SerialNumber.displayWidth}"
+                                                                  maximumLength="30" id="itSerialNum2">
+                                                        <f:validator binding="#{bindings.StowView2SerialNumber.validator}"/>
+                                                    </af:inputText>
+                                                    <af:spacer width="10" height="10" id="s7"/>
+                                                    <af:panelGroupLayout layout="horizontal"
+                                                                         rendered="#{(bindings.NiinInfoReceiptVView1CodeValue.inputValue != null)}"
+                                                                         id="pgl5">
+                                                        <af:outputText value="Note: SECURE item(s)."
+                                                                       inlineStyle="font-style:italic; font-weight:bold; color:rgb(255,0,0);"
+                                                                       id="otSecureItems"/>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer width="10" height="10" id="s8"/>
+                                                    <af:panelGroupLayout layout="horizontal" id="pgl6">
+                                                        <af:inputText label="Enter Stow Area" id="newLocLabelId"
+                                                                      maximumLength="9" rendered="true" columns="9"
+                                                                      contentStyle="text-transform:uppercase;"
+                                                                      binding="#{ReceivingGeneralDetail.stowArea}"/>
+                                                        <af:spacer width="10" height="10" id="s9"/>
+                                                        <af:button text="Get Locations" id="getLocId"
+                                                                   actionListener="#{ReceivingGeneralDetail.BuildLocationList}"
+                                                                   partialSubmit="false"/>
+                                                    </af:panelGroupLayout>
+                                                </af:panelFormLayout>
+                                                <af:spacer width="10" height="10" id="s10"/>
+                                                <af:panelFormLayout
+                                                        rendered="#{(bindings.NiinInfoReceiptVView1LotControlFlag.inputValue == 'Y')}"
+                                                        id="pfl6">
+                                                    <f:facet name="footer"/>
+                                                    <af:inputText value="#{bindings.StowView2LotConNum.inputValue}"
+                                                                  label="#{bindings.StowView2LotConNum.label}"
+                                                                  required="#{bindings.StowView2LotConNum.mandatory}"
+                                                                  columns="#{bindings.StowView2LotConNum.displayWidth}"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  maximumLength="30" id="itLotConNum">
+                                                        <f:validator binding="#{bindings.StowView2LotConNum.validator}"/>
+                                                    </af:inputText>
+                                                    <af:inputText value="#{bindings.StowView2CaseWeightQty.inputValue}"
+                                                                  label="#{bindings.StowView2CaseWeightQty.label}"
+                                                                  required="#{bindings.StowView2CaseWeightQty.mandatory}"
+                                                                  columns="#{bindings.StowView2CaseWeightQty.displayWidth}"
+                                                                  maximumLength="9" id="itWeightQty">
+                                                        <f:validator binding="#{bindings.StowView2CaseWeightQty.validator}"/>
+                                                        <f:convertNumber groupingUsed="false"
+                                                                         pattern="#{bindings.StowView2CaseWeightQty.format}"/>
+                                                        <f:validator validatorId="javax.faces.LongRange"/>
+                                                    </af:inputText>
+                                                    <af:inputDate value="#{bindings.StowView2PackedDate.inputValue}"
+                                                                  label="#{bindings.StowView2PackedDate.label}"
+                                                                  required="#{bindings.StowView2PackedDate.mandatory}"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  id="idPackedDate">
+                                                        <f:validator binding="#{bindings.StowView2PackedDate.validator}"/>
+                                                        <f:convertDateTime pattern="#{bindings.StowView2PackedDate.format}"
+                                                                           dateStyle="short"/>
+                                                    </af:inputDate>
+                                                    <af:spacer width="10" height="10" id="s11"/>
+                                                    <af:spacer width="10" height="10" id="s12"/>
+                                                </af:panelFormLayout>
+                                                <af:panelFormLayout
+                                                        rendered="#{(bindings.NiinInfoReceiptVView1LotControlFlag.inputValue == 'N')}"
+                                                        id="pfl7">
+                                                    <af:inputText value="#{bindings.StowView2LotConNum.inputValue}"
+                                                                  label="#{bindings.StowView2LotConNum.label}"
+                                                                  required="#{bindings.StowView2LotConNum.mandatory}"
+                                                                  columns="#{bindings.StowView2LotConNum.displayWidth}"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  maximumLength="30" id="itLotConNum2">
+                                                        <f:validator binding="#{bindings.StowView2LotConNum.validator}"/>
+                                                    </af:inputText>
+                                                    <af:inputText value="#{bindings.StowView2CaseWeightQty.inputValue}"
+                                                                  label="#{bindings.StowView2CaseWeightQty.label}"
+                                                                  required="#{bindings.StowView2CaseWeightQty.mandatory}"
+                                                                  columns="#{bindings.StowView2CaseWeightQty.displayWidth}"
+                                                                  maximumLength="9" id="itCaseWeightQty">
+                                                        <f:validator binding="#{bindings.StowView2CaseWeightQty.validator}"/>
+                                                        <f:convertNumber groupingUsed="false"
+                                                                         pattern="#{bindings.StowView2CaseWeightQty.format}"/>
+                                                        <f:validator validatorId="javax.faces.LongRange"/>
+                                                    </af:inputText>
+                                                    <af:inputDate value="#{bindings.StowView2PackedDate.inputValue}"
+                                                                  label="#{bindings.StowView2PackedDate.label}"
+                                                                  required="#{bindings.StowView2PackedDate.mandatory}"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  id="idPackedDate2">
+                                                        <f:validator binding="#{bindings.StowView2PackedDate.validator}"/>
+                                                        <f:convertDateTime pattern="#{bindings.StowView2PackedDate.format}"
+                                                                           dateStyle="short"/>
+                                                    </af:inputDate>
+                                                    <af:spacer width="10" height="10" id="s13"/>
+                                                    <af:spacer width="10" height="10" id="s14"/>
+                                                </af:panelFormLayout>
+                                            </af:panelGroupLayout>
+                                            <af:panelGroupLayout layout="horizontal" id="pgl7">
+                                                <af:button text="Update Selected Stow Row" id="updateButton"
+                                                           actionListener="#{ReceivingGeneralDetail.UpdateStowForAReceipt}"
+                                                           partialSubmit="false"/>
+                                                <af:button text="Update Location on All Rows"
+                                                           id="updateLocations"
+                                                           actionListener="#{ReceivingGeneralDetail.UpdateLocationOnAllRows}"
+                                                           disabled="#{(bindings.NiinInfoReceiptVView1SerialControlFlag.inputValue != 'Y')}"
+                                                           partialSubmit="false"/>
+                                                <af:button text="Review Serial" id="reviewSerials"
+                                                           action="GoReceivingEnterSerial"
+                                                           actionListener="#{ReceivingGeneralDetail.goReviewSerial}" partialSubmit="false"/>
+                                                <af:button actionListener="#{ReceivingGeneralDetail.FinalUpdateOnReceiptAndStow}"
+                                                           text="Complete Receipt / Print SID(s)"
+                                                           action="#{ReceivingGeneralDetail.getForwardAction}"
+                                                           id="cbReviewSerial" partialSubmit="false"/>
+                                                <af:button actionListener="#{bindings.Rollback.execute}"
+                                                           text="Cancel" immediate="true"
+                                                           action="GoReceivingGeneral" rendered="false"
+                                                           id="cbRecevingGeneal" partialSubmit="false">
+                                                    <af:resetActionListener/>
+                                                </af:button>
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="10" height="20" id="s15"/>
+                                            <af:table value="#{bindings.LocationList1.collectionModel}" var="row"
+                                                      rows="#{bindings.LocationList1.rangeSize}"
+                                                      first="#{bindings.LocationList1.rangeStart}"
+                                                      emptyText="#{bindings.LocationList1.viewable ? 'No rows.' : 'Access Denied.'}"
+                                                      selectionListener="#{bindings.LocationList1.collectionModel.makeCurrent}"
+                                                      selectedRowKeys="#{bindings.LocationList1.collectionModel.selectedRow}"
+                                                      rowSelection="single" id="tLocLst" autoHeightRows="3">
+                                                <af:column sortProperty="LocationLabel" sortable="false"
+                                                           headerText="Location" id="c7">
+                                                    <af:inputText value="#{row.LocationLabel}" simple="true"
+                                                                  required="#{bindings.LocationList1.attrDefs.LocationLabel.mandatory}"
+                                                                  columns="20" readOnly="true"/>
+                                                </af:column>
+                                                <af:column sortProperty="LocQty" sortable="false"
+                                                           headerText="#{bindings.LocationList1.labels.LocQty}" id="c8">
+                                                    <af:inputText value="#{row.LocQty}"
+                                                                  required="#{bindings.LocationList1.attrDefs.LocQty.mandatory}"
+                                                                  columns="10" readOnly="true" id="itAttrDefs">
+                                                        <f:convertNumber groupingUsed="false"
+                                                                         pattern="#{bindings.LocationList1.formats.LocQty}"/>
+                                                    </af:inputText>
+                                                </af:column>
+
+                                            </af:table>
+                                            <af:spacer width="10" height="10" id="s16"/>
+                                        </af:panelGroupLayout>
+                                    </af:gridCell>
+                                </af:gridRow>
+                            </af:panelGridLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="../FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <af:spacer width="24" height="675"/>
+                    </f:facet>
+                    <f:facet name="end"/>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

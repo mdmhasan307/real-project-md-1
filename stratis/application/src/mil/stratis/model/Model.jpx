@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE JboProject SYSTEM "jbo_03_01.dtd">
+<!---->
+<JboProject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="Model"
+  Version="11.1.2.64.36"
+  SeparateXMLFiles="true"
+  PackageName="mil.stratis.model">
+  <DesignTime>
+    <Attr Name="_jprName" Value="../../../../Model.jpr"/>
+    <Attr Name="_jbo.TypeMapEntries" Value="OracleApps"/>
+    <Attr Name="_NamedConnection" Value="STRATDBSVR"/>
+    <Attr Name="_appModuleNames0" Value="mil.stratis.model.hh.HandHeldAM"/>
+    <Attr Name="_appModuleNames1" Value="mil.stratis.model.services.AppModule"/>
+    <Attr Name="_appModuleNames2" Value="mil.stratis.model.services.WorkLoadManager"/>
+    <Attr Name="_dataControlNames2" Value="WorkLoadManagerDataControl1"/>
+    <Attr Name="_appModuleNames3" Value="mil.stratis.model.services.Transactions"/>
+    <Attr Name="_appModuleNames4" Value="mil.stratis.model.services.GCSSMCTransactions"/>
+    <Attr Name="_appModuleNames12" Value="mil.stratis.model.services.InventoryModule"/>
+    <Attr Name="_appModuleNames11" Value="mil.stratis.model.services.StratisRootServiceAM"/>
+    <Attr Name="_appModuleNames10" Value="mil.stratis.model.services.LoginModule"/>
+    <Attr Name="_appModuleNames16" Value="mil.stratis.model.services.WarehouseSetup"/>
+    <Attr Name="_appModuleNames15" Value="mil.stratis.model.services.RcvHomeAM"/>
+    <Attr Name="_appModuleNames13" Value="mil.stratis.model.services.InventorySetupModule"/>
+    <Attr Name="_appModuleNames7" Value="mil.stratis.model.services.PackingModule"/>
+    <Attr Name="_appModuleNames6" Value="mil.stratis.model.services.StowingAM"/>
+    <Attr Name="_appModuleNames9" Value="mil.stratis.model.services.StratisRootService"/>
+    <Attr Name="_appModuleNames8" Value="mil.stratis.model.services.ShippingService"/>
+    <Attr Name="_appModuleNames17" Value="mil.stratis.model.services.SysAdmin"/>
+    <Attr Name="_appModuleNames18" Value="mil.stratis.model.services.PickingAM"/>
+    <Attr Name="_appModuleNames14" Value="mil.stratis.model.services.ImportFiles"/>
+    <Attr Name="_dataControlNames3" Value="TransacationsDataControl"/>
+    <Attr Name="_appModuleNames5" Value="mil.stratis.model.services.ReceiptAM"/>
+    <Attr Name="_dataControlNames17" Value="SysAdminDataControl1"/>
+    <Attr Name="_appModuleNames19" Value="mil.stratis.model.services.WalkThruAM"/>
+  </DesignTime>
+  <Containee
+    Name="associations"
+    PackageName="mil.stratis.model.entity.associations"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_AS" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="inv"
+    PackageName="mil.stratis.model.entity.inv"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_EO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="link"
+    PackageName="mil.stratis.model.entity.link"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VL" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="loc"
+    PackageName="mil.stratis.model.entity.loc"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_EO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="pack"
+    PackageName="mil.stratis.model.entity.pack"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_EO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="rcv"
+    PackageName="mil.stratis.model.entity.rcv"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_EO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="ref"
+    PackageName="mil.stratis.model.entity.ref"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_EO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="security"
+    PackageName="mil.stratis.model.entity.security"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_EO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="ship"
+    PackageName="mil.stratis.model.entity.ship"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_EO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="site"
+    PackageName="mil.stratis.model.entity.site"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_EO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="user"
+    PackageName="mil.stratis.model.entity.user"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_EO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="walkThru"
+    PackageName="mil.stratis.model.entity.walkThru"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_EO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="wlm"
+    PackageName="mil.stratis.model.entity.wlm"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_EO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="hh"
+    PackageName="mil.stratis.model.hh"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_AM" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="services"
+    PackageName="mil.stratis.model.services"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_AM" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="gcssmc"
+    PackageName="mil.stratis.model.view.gcssmc"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="hh"
+    PackageName="mil.stratis.model.view.hh"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="inv"
+    PackageName="mil.stratis.model.view.inv"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="invsetup"
+    PackageName="mil.stratis.model.view.invsetup"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="loc"
+    PackageName="mil.stratis.model.view.loc"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="pack"
+    PackageName="mil.stratis.model.view.pack"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="pick"
+    PackageName="mil.stratis.model.view.pick"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="rcv"
+    PackageName="mil.stratis.model.view.rcv"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+      <Attr Name="_VL" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="ref"
+    PackageName="mil.stratis.model.view.ref"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="security"
+    PackageName="mil.stratis.model.view.security"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="ship"
+    PackageName="mil.stratis.model.view.ship"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="site"
+    PackageName="mil.stratis.model.view.site"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="stow"
+    PackageName="mil.stratis.model.view.stow"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="sysadm"
+    PackageName="mil.stratis.model.view.sysadm"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+      <Attr Name="_VL" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="user"
+    PackageName="mil.stratis.model.view.user"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="walkThru"
+    PackageName="mil.stratis.model.view.walkThru"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="whsetup"
+    PackageName="mil.stratis.model.view.whsetup"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="wlm"
+    PackageName="mil.stratis.model.view.wlm"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+</JboProject>

@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="Admin_WarehouseNiinUpdatePageDef" Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <invokeAction id="RefreshSMCC" Binds="ExecuteSMCC" Refresh="ifNeeded"/>
+    <iterator id="NiinInfoView1Iterator" RangeSize="10" Binds="Root.AppModule1.NiinInfoView1"
+              DataControl="StratisRootServiceDataControl" StateValidation="false" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <variableIterator id="variables" Refresh="ifNeeded">
+      <variable Type="java.lang.String" Name="FilterNIINData_NIINQry" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="FilterNIINData_FSCQry" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="FilterNIINData_NomenclatureQry" IsQueriable="false"/>
+    </variableIterator>
+    <iterator id="RefUiValidView1Iterator" RangeSize="-1" Binds="Root.SysAdmin1.RefUiValidView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="MasterDropDownCOGVO1Iterator" RangeSize="-1" Binds="Root.ReceiptAM1.MasterDropDownCOGVO1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="MasterDropView_SMCC1Iterator" RangeSize="-1" Binds="Root.AppModule1.MasterDropView_SMCC1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="MasterDropView_SCC1Iterator" RangeSize="-1" Binds="Root.AppModule1.MasterDropView_SCC1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="MasterDropView_SC1Iterator" RangeSize="-1" Binds="Root.AppModule1.MasterDropView_SC1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="RefSlcView1Iterator" RangeSize="-1" Binds="Root.AppModule1.RefSlcView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <action id="ExecuteSMCC" RequiresUpdateModel="true" Action="iteratorExecute"
+            IterBinding="MasterDropView_SMCC1Iterator"/>
+    <action id="ExecuteNIIN" RequiresUpdateModel="true" Action="iteratorExecute" IterBinding="NiinInfoView1Iterator"/>
+    <table id="NiinInfoView1" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="NiinId"/>
+        <Item Value="Niin"/>
+        <Item Value="Nomenclature"/>
+        <Item Value="Cube"/>
+        <Item Value="Price"/>
+        <Item Value="ActivityDate"/>
+        <Item Value="Tamcn"/>
+        <Item Value="SupplyClass"/>
+        <Item Value="TypeOfMaterial"/>
+        <Item Value="CognizanceCode"/>
+        <Item Value="PartNumber"/>
+        <Item Value="Ui"/>
+        <Item Value="CageCode"/>
+        <Item Value="Fsc"/>
+        <Item Value="ShelfLifeCode"/>
+        <Item Value="Weight"/>
+        <Item Value="Length"/>
+        <Item Value="Width"/>
+        <Item Value="Height"/>
+        <Item Value="ShelfLifeExtension"/>
+        <Item Value="Scc"/>
+        <Item Value="InventoryThreshold"/>
+        <Item Value="SerialControlFlag"/>
+        <Item Value="LotControlFlag"/>
+        <Item Value="NewNsn"/>
+        <Item Value="ModifiedBy"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="NiinId" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="NiinId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Fsc" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="Fsc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Niin" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="Niin"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Nomenclature" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="Nomenclature"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Cube" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="Cube"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Price" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="Price"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ActivityDate" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="ActivityDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Tamcn" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="Tamcn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="SupplyClass" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="SupplyClass"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TypeOfMaterial" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="TypeOfMaterial"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CognizanceCode" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="CognizanceCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PartNumber" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="PartNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Ui" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="Ui"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CageCode" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="CageCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ShelfLifeCode" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="ShelfLifeCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Weight" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="Weight"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Length" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="Length"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Width" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="Width"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Height" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="Height"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ShelfLifeExtension" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="ShelfLifeExtension"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="Scc" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="Scc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="SerialControlFlag" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="SerialControlFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="LotControlFlag" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="LotControlFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="InventoryThreshold" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="InventoryThreshold"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NewNsn" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="NewNsn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ModifiedBy" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="ModifiedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="FilterNIINData" MethodName="filterNIINData" RequiresUpdateModel="true" Action="invokeMethod"
+                  IsViewObjectMethod="false" DataControl="StratisRootServiceDataControl"
+                  InstanceName="StratisRootServiceDataControl.dataProvider.Root.AppModule1">
+      <NamedData NDName="NIINQry" NDType="java.lang.String" NDValue="${bindings.FilterNIINData_NIINQry}"/>
+      <NamedData NDName="FSCQry" NDType="java.lang.String" NDValue="${bindings.FilterNIINData_FSCQry}"/>
+      <NamedData NDName="NomenclatureQry" NDType="java.lang.String"
+                 NDValue="${bindings.FilterNIINData_NomenclatureQry}"/>
+    </methodAction>
+    <attributeValues id="NIINQry" IterBinding="variables">
+      <AttrNames>
+        <Item Value="FilterNIINData_NIINQry"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="FSCQry" IterBinding="variables">
+      <AttrNames>
+        <Item Value="FilterNIINData_FSCQry"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NomenclatureQry" IterBinding="variables">
+      <AttrNames>
+        <Item Value="FilterNIINData_NomenclatureQry"/>
+      </AttrNames>
+    </attributeValues>
+    <list id="NiinInfoView1InventoryThreshold" IterBinding="NiinInfoView1Iterator" ListOperMode="setAttribute"
+          StaticList="true">
+      <AttrNames>
+        <Item Value="InventoryThreshold"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </list>
+    <action id="CreateInsert" IterBinding="NiinInfoView1Iterator"
+            InstanceName="StratisRootServiceDataControl.Root.AppModule1.NiinInfoView1"
+            DataControl="StratisRootServiceDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="ExecuteNiin" RequiresUpdateModel="true" Action="iteratorExecute" IterBinding="NiinInfoView1Iterator"/>
+    <list id="RefUiValidView1Code" IterBinding="NiinInfoView1Iterator" ListOperMode="setAttribute" StaticList="false"
+          ListIter="RefUiValidView1Iterator">
+      <AttrNames>
+        <Item Value="Ui"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="Code"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Code"/>
+      </ListDisplayAttrNames>
+    </list>
+    <list id="MasterDropDownCOGVO1value" IterBinding="NiinInfoView1Iterator" StaticList="false"
+          ListOperMode="setAttribute" ListIter="MasterDropDownCOGVO1Iterator">
+      <AttrNames>
+        <Item Value="CognizanceCode"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="value"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="value"/>
+      </ListDisplayAttrNames>
+    </list>
+    <list id="MasterDropView_SMCC1CodeValue" IterBinding="NiinInfoView1Iterator" StaticList="false"
+          ListOperMode="setAttribute" ListIter="MasterDropView_SMCC1Iterator">
+      <AttrNames>
+        <Item Value="TypeOfMaterial"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="Value"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Value"/>
+      </ListDisplayAttrNames>
+    </list>
+    <list id="MasterDropView_SCC1CodeValue" IterBinding="NiinInfoView1Iterator" StaticList="false"
+          ListOperMode="setAttribute" ListIter="MasterDropView_SCC1Iterator">
+      <AttrNames>
+        <Item Value="Scc"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="Value"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Value"/>
+      </ListDisplayAttrNames>
+    </list>
+    <list id="MasterDropView_SC1Value" IterBinding="NiinInfoView1Iterator" StaticList="false"
+          ListOperMode="setAttribute" ListIter="MasterDropView_SC1Iterator">
+      <AttrNames>
+        <Item Value="SupplyClass"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="Value"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Value"/>
+      </ListDisplayAttrNames>
+    </list>
+    <!--<list id="RefSlcView1ShelfLifeCode" IterBinding="NiinInfoView1Iterator"
+          StaticList="false" ListOperMode="0" ListIter="RefSlcView1Iterator">
+      <AttrNames>
+        <Item Value="ShelfLifeCode"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="ShelfLifeCode"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="ShelfLifeCode"/>
+      </ListDisplayAttrNames>
+    </list>-->
+    <list id="RefSlcView1ShelfLifeCode" IterBinding="NiinInfoView1Iterator" ListOperMode="setAttribute"
+          StaticList="true" NullValueFlag="start">
+      <AttrNames>
+        <Item Value="ShelfLifeCode"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="- Select -"/>
+        <Item Value="0"/>
+        <Item Value="1"/>
+        <Item Value="2"/>
+        <Item Value="4"/>
+        <Item Value="5"/>
+        <Item Value="6"/>
+        <Item Value="7"/>
+        <Item Value="8"/>
+        <Item Value="9"/>
+        <Item Value="A"/>
+        <Item Value="B"/>
+        <Item Value="C"/>
+        <Item Value="D"/>
+        <Item Value="E"/>
+        <Item Value="F"/>
+        <Item Value="G"/>
+        <Item Value="H"/>
+        <Item Value="I"/>
+        <Item Value="J"/>
+        <Item Value="K"/>
+        <Item Value="L"/>
+        <Item Value="M"/>
+        <Item Value="N"/>
+        <!--<Item Value="O"/>-->
+        <Item Value="P"/>
+        <Item Value="Q"/>
+        <Item Value="R"/>
+        <Item Value="S"/>
+        <Item Value="T"/>
+        <Item Value="U"/>
+        <Item Value="V"/>
+        <Item Value="W"/>
+        <Item Value="X"/>
+        <Item Value="Y"/>
+        <Item Value="Z"/>
+      </ValueList>
+    </list>
+  </bindings>
+</pageDefinition>

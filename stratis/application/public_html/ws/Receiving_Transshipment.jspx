@@ -1,0 +1,213 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="1"/>
+    <jsp:setProperty name="userbean" property="selected2" value="0"/>
+    <f:view>
+        <af:document title="STRATIS" id="d1">
+            <af:form id="main_form">
+                <af:panelStretchLayout id="psl1" startWidth="24" topHeight="150" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/ws/WS_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout id="topGroup" layout="scroll">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGridLayout id="pgl1">
+                                <af:gridRow id="gr1">
+                                    <af:gridCell valign="top" id="gc2">
+                                        <af:panelHeader text="Transshipment" id="ph1">
+                                            <af:panelGroupLayout layout="horizontal" id="pgl2" valign="top">
+                                                <af:panelFormLayout id="pfl3">
+                                                    <f:facet name="footer"/>
+                                                    <af:inputText label="#{bindings.Rcn.label}"
+                                                                  value="#{bindings.Rcn.inputValue}"
+                                                                  columns="#{bindings.Rcn.displayWidth}"
+                                                                  styleClass="ReadOnlyField" readOnly="true"
+                                                                  id="itRcn"/>
+                                                    <af:inputText label="#{bindings.Fsc.label}"
+                                                                  value="#{bindings.Fsc.inputValue}"
+                                                                  columns="#{bindings.Fsc.displayWidth}"
+                                                                  styleClass="ReadOnlyField" readOnly="true"
+                                                                  id="itFsc"/>
+                                                    <af:inputText label="#{bindings.Scc.label}"
+                                                                  value="#{bindings.Scc.inputValue}"
+                                                                  columns="#{bindings.Scc.displayWidth}"
+                                                                  styleClass="ReadOnlyField" readOnly="true"
+                                                                  id="itScc"/>
+                                                </af:panelFormLayout>
+                                                <af:panelFormLayout id="pfl4">
+                                                    <f:facet name="footer"/>
+                                                    <af:inputText label="#{bindings.RdocumentNumber.label}"
+                                                                  value="#{bindings.RdocumentNumber.inputValue}"
+                                                                  columns="20" styleClass="ReadOnlyField"
+                                                                  readOnly="true" id="itRDocNum"/>
+                                                    <af:inputText label="#{bindings.Niin.label}"
+                                                                  value="#{bindings.Niin.inputValue}"
+                                                                  columns="#{bindings.Niin.displayWidth}"
+                                                                  styleClass="ReadOnlyField" readOnly="true"
+                                                                  id="itNiin"/>
+                                                    <af:inputText label="#{bindings.Cc.label}"
+                                                                  value="#{bindings.Cc.inputValue}"
+                                                                  columns="#{bindings.Cc.displayWidth}"
+                                                                  styleClass="ReadOnlyField" readOnly="true" id="itCc"/>
+                                                </af:panelFormLayout>
+                                                <af:panelFormLayout id="pfl5">
+                                                    <f:facet name="footer"/>
+                                                    <af:inputText label="#{bindings.Rsuffix.label}"
+                                                                  value="#{bindings.Rsuffix.inputValue}"
+                                                                  columns="#{bindings.Rsuffix.displayWidth}"
+                                                                  styleClass="ReadOnlyField" readOnly="true"
+                                                                  id="itRsuffix"/>
+                                                    <af:inputText label="#{bindings.Ui.label}"
+                                                                  value="#{bindings.Ui.inputValue}"
+                                                                  columns="#{bindings.Ui.displayWidth}"
+                                                                  styleClass="ReadOnlyField" readOnly="true" id="itUi"/>
+                                                    <af:inputText label="#{bindings.ProjectCode.label}"
+                                                                  value="#{bindings.ProjectCode.inputValue}"
+                                                                  columns="#{bindings.ProjectCode.displayWidth}"
+                                                                  styleClass="ReadOnlyField" readOnly="true"
+                                                                  id="itProjectCode"/>
+                                                    <af:inputText label="#{bindings.QuantityInducted.label}"
+                                                                  value="#{bindings.QuantityInducted.inputValue}"
+                                                                  columns="#{bindings.QuantityInducted.displayWidth}"
+                                                                  styleClass="ReadOnlyField" readOnly="true"
+                                                                  id="itQtyInducted"/>
+                                                </af:panelFormLayout>
+                                            </af:panelGroupLayout>
+                                            <af:panelFormLayout id="pfl1">
+                                                <af:inputText value="#{bindings.Rcn.inputValue}"
+                                                              label="#{bindings.Rcn.label}"
+                                                              required="#{bindings.Rcn.mandatory}"
+                                                              columns="#{bindings.Rcn.displayWidth}" rendered="false"
+                                                              id="itRcn2">
+                                                    <f:validator binding="#{bindings.Rcn.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.RdocumentNumber.inputValue}"
+                                                              label="#{bindings.RdocumentNumber.label}"
+                                                              required="#{bindings.RdocumentNumber.mandatory}"
+                                                              columns="#{bindings.RdocumentNumber.displayWidth}"
+                                                              rendered="false" id="itRDocNum2">
+                                                    <f:validator binding="#{bindings.RdocumentNumber.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.Rsuffix.inputValue}"
+                                                              label="#{bindings.Rsuffix.label}"
+                                                              required="#{bindings.Rsuffix.mandatory}"
+                                                              columns="#{bindings.Rsuffix.displayWidth}"
+                                                              rendered="false" id="itRsuffix2">
+                                                    <f:validator binding="#{bindings.Rsuffix.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.Fsc.inputValue}"
+                                                              label="#{bindings.Fsc.label}"
+                                                              required="#{bindings.Fsc.mandatory}"
+                                                              columns="#{bindings.Fsc.displayWidth}" rendered="false"
+                                                              id="itFsc2">
+                                                    <f:validator binding="#{bindings.Fsc.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.Niin.inputValue}"
+                                                              label="#{bindings.Niin.label}"
+                                                              required="#{bindings.Niin.mandatory}"
+                                                              columns="#{bindings.Niin.displayWidth}" rendered="false"
+                                                              id="itNiin2">
+                                                    <f:validator binding="#{bindings.Niin.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.Ui.inputValue}"
+                                                              label="#{bindings.Ui.label}"
+                                                              required="#{bindings.Ui.mandatory}"
+                                                              columns="#{bindings.Ui.displayWidth}" rendered="false"
+                                                              id="itUi2">
+                                                    <f:validator binding="#{bindings.Ui.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.Scc.inputValue}"
+                                                              label="#{bindings.Scc.label}"
+                                                              required="#{bindings.Scc.mandatory}"
+                                                              columns="#{bindings.Scc.displayWidth}" rendered="false"
+                                                              id="itScc2">
+                                                    <f:validator binding="#{bindings.Scc.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.Cc.inputValue}"
+                                                              label="#{bindings.Cc.label}"
+                                                              required="#{bindings.Cc.mandatory}"
+                                                              columns="#{bindings.Cc.displayWidth}" rendered="false"
+                                                              id="itCc2">
+                                                    <f:validator binding="#{bindings.Cc.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.ProjectCode.inputValue}"
+                                                              label="#{bindings.ProjectCode.label}"
+                                                              required="#{bindings.ProjectCode.mandatory}"
+                                                              columns="#{bindings.ProjectCode.displayWidth}"
+                                                              rendered="false" id="it1">
+                                                    <f:validator binding="#{bindings.ProjectCode.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.QuantityInducted.inputValue}"
+                                                              label="#{bindings.QuantityInducted.label}"
+                                                              required="#{bindings.QuantityInducted.mandatory}"
+                                                              columns="#{bindings.QuantityInducted.displayWidth}"
+                                                              rendered="false" id="itQtyInducted2">
+                                                    <f:validator binding="#{bindings.QuantityInducted.validator}"/>
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.QuantityInducted.format}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.PartNumber.inputValue}"
+                                                              label="#{bindings.PartNumber.label}"
+                                                              required="#{bindings.PartNumber.mandatory}"
+                                                              columns="#{bindings.PartNumber.displayWidth}"
+                                                              rendered="false" id="itPartNumber">
+                                                    <f:validator binding="#{bindings.PartNumber.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.NiinId.inputValue}"
+                                                              label="#{bindings.NiinId.label}"
+                                                              required="#{bindings.NiinId.mandatory}"
+                                                              columns="#{bindings.NiinId.displayWidth}" rendered="false"
+                                                              id="itNiinId">
+                                                    <f:validator binding="#{bindings.NiinId.validator}"/>
+                                                    <f:convertNumber groupingUsed="false"
+                                                                     pattern="#{bindings.NiinId.format}"/>
+                                                </af:inputText>
+                                            </af:panelFormLayout>
+                                            <af:spacer width="10" height="10" id="s1"/>
+                                            <af:panelGroupLayout id="pgl3">
+                                                <af:inputText label="Please Scan or Enter Shipping/Consolidation barcode:"
+                                                              binding="#{backing_app_ReceiptGeneral.consolidationBarCode}"
+                                                              inlineStyle="font-weight:bold;"
+                                                              contentStyle="text-transform:uppercase;"
+                                                              maximumLength="10" id="itShipConsBarcode">
+                                                    <af:validateRegExp pattern="[a-zA-Z0-9]{5,10}"
+                                                                       messageDetailNoMatch="Shipping Barcode must be 5-10 alphanumeric characters only"/>
+                                                </af:inputText>
+                                                <af:panelGroupLayout layout="horizontal" id="pgl4">
+                                                    <af:button text="Print 1348"
+                                                               actionListener="#{backing_app_ReceiptGeneral.saveTransshipment}"
+                                                               action="#{backing_app_ReceiptGeneral.getForwardAction}"
+                                                               id="cbSave" partialSubmit="false"/>
+                                                    <af:button text="Cancel" action="GoReceivingGeneral"
+                                                               id="cbCancel" partialSubmit="false"/>
+                                                </af:panelGroupLayout>
+                                            </af:panelGroupLayout>
+                                        </af:panelHeader>
+                                    </af:gridCell>
+                                </af:gridRow>
+                            </af:panelGridLayout>
+                            <f:subview id="lwrap_footer">
+                                <jsp:include page="../FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <af:spacer width="24" height="675" id="s2"/>
+                    </f:facet>
+                    <f:facet name="end"/>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

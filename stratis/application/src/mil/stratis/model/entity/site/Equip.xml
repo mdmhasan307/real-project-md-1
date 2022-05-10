@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="Equip"
+  Version="11.1.2.64.36"
+  DBObjectType="SYNONYM"
+  DBObjectName="EQUIP"
+  AliasName="Equip"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <Attribute
+    Name="EquipmentNumber"
+    ColumnName="EQUIPMENT_NUMBER"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="EQUIP"
+    PrimaryKey="true"/>
+  <Attribute
+    Name="ComPortPrinterId"
+    Precision="6"
+    Scale="0"
+    ColumnName="COM_PORT_PRINTER_ID"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="EQUIP"/>
+  <Attribute
+    Name="ComPortEquipmentId"
+    Precision="6"
+    Scale="0"
+    ColumnName="COM_PORT_EQUIPMENT_ID"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="EQUIP"/>
+  <Attribute
+    Name="WacId"
+    ColumnName="WAC_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="EQUIP"/>
+  <Attribute
+    Name="Name"
+    Precision="30"
+    ColumnName="NAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EQUIP">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Description"
+    Precision="50"
+    ColumnName="DESCRIPTION"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EQUIP">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="WarehouseId"
+    ColumnName="WAREHOUSE_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="EQUIP"/>
+  <Attribute
+    Name="CurrentUserId"
+    ColumnName="CURRENT_USER_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="EQUIP"/>
+  <Attribute
+    Name="ShippingArea"
+    Precision="4"
+    ColumnName="SHIPPING_AREA"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EQUIP">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="PackingGroup"
+    Precision="4"
+    ColumnName="PACKING_GROUP"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EQUIP">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="HasCubiscan"
+    Precision="1"
+    ColumnName="HAS_CUBISCAN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EQUIP">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="PrinterName"
+    Precision="255"
+    ColumnName="PRINTER_NAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="EQUIP">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="255"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="ComPort1"
+    Association="mil.stratis.model.entity.associations.ComEquipFkAssoc"
+    AssociationEnd="mil.stratis.model.entity.associations.ComEquipFkAssoc.ComPort1"
+    AssociationOtherEnd="mil.stratis.model.entity.associations.ComEquipFkAssoc.Equip1"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="Warehouse"
+    Association="mil.stratis.model.entity.associations.EquipWarehouseFkAssoc"
+    AssociationEnd="mil.stratis.model.entity.associations.EquipWarehouseFkAssoc.Warehouse"
+    AssociationOtherEnd="mil.stratis.model.entity.associations.EquipWarehouseFkAssoc.Equip"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="PackingStation"
+    Association="mil.stratis.model.entity.associations.PackingStationEquipFkAssoc"
+    AssociationEnd="mil.stratis.model.entity.associations.PackingStationEquipFkAssoc.PackingStation"
+    AssociationOtherEnd="mil.stratis.model.entity.associations.PackingStationEquipFkAssoc.Equip"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="Ck1equip">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="CK1EQUIP"/>
+      <Attr Name="_checkCondition" Value="EQUIPMENT_NUMBER IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="EquipChk1">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="EQUIP_CHK1"/>
+      <Attr Name="_checkCondition" Value="HAS_CUBISCAN IN ('N', 'Y')"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="EquipPk1"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="EQUIP_PK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.site.Equip.EquipmentNumber"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="EquipUk1">
+    <DesignTime>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="EQUIP_UK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.site.Equip.Name"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="ComEquipFk">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="COM_PORT_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="COM_EQUIP_FK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.site.Equip.ComPortEquipmentId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="ComPrinterFk">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="COM_PORT_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="COM_PRINTER_FK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.site.Equip.ComPortPrinterId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="EquipWarehouseFk">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="WAREHOUSE_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="EQUIP_WAREHOUSE_FK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.site.Equip.WarehouseId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="RefEquipWacFk">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="WAC_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="REF_EQUIP_WAC_FK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mil.stratis.model.entity.site.Equip.WacId"/>
+    </AttrArray>
+  </Key>
+</Entity>

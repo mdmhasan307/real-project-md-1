@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="WalkThru_HomePageDef"
+                ControllerClass="#{WalkThruBacking}" Package="mil.stratis.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator Binds="WalkThruQueueVO1" RangeSize="25" DataControl="WalkThruAMDataControl"
+               id="WalkThruQueueVO1Iterator" Refresh="ifNeeded"/>
+    <invokeAction id="refreshIfNeeded" Binds="ExecuteWalkThru" Refresh="always"
+                  RefreshCondition="#{requestScope.refreshNeeded}"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="WalkThruQueueVO1Iterator" id="WalkThruQueueVO1">
+      <nodeDefinition DefName="mil.stratis.model.view.walkThru.WalkThruQueueVO" Name="WalkThruQueueVO10">
+        <AttrNames>
+          <Item Value="DocumentNumber"/>
+           <Item Value="Status"/>
+          <Item Value="CreatedBy"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="WalkThruQueueVO1Iterator" id="DocumentNumber">
+      <AttrNames>
+        <Item Value="DocumentNumber"/>
+      </AttrNames>
+    </attributeValues>
+     <attributeValues IterBinding="WalkThruQueueVO1Iterator" id="Status">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+     <attributeValues IterBinding="WalkThruQueueVO1Iterator" id="CreatedBy">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="CreateInsert" IterBinding="WalkThruQueueVO1Iterator" 
+            InstanceName="WalkThruAMDataControl.WalkThruQueueVO1" DataControl="WalkThruAMDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+     <action id="Commit" InstanceName="WalkThruAMDataControl.WalkThruQueueVO1"
+            DataControl="WalkThruAMDataControl" RequiresUpdateModel="true" Action="commitTransaction"/> 
+    <action id="ExecuteWalkThru" IterBinding="WalkThruQueueVO1Iterator" InstanceName="WalkThruAMDataControl.WalkThruQueueVO1"
+            DataControl="WalkThruAMDataControl" RequiresUpdateModel="true" Action="iteratorExecute"/>
+            
+  </bindings>
+</pageDefinition>

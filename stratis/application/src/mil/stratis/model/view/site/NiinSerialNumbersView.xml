@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="NiinSerialNumbersView"
+  Version="11.1.2.64.36"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  OrderBy="SERIAL_NUMBER">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="mil.stratis.model.view.site.NiinSerialNumbersView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery><![CDATA[SELECT SerialLotNumTrack.SERIAL_LOT_NUM_TRACK_ID, 
+       SerialLotNumTrack.NIIN_ID, 
+       SerialLotNumTrack.SERIAL_NUMBER, 
+       SerialLotNumTrack.CC, 
+       SerialLotNumTrack.EXPIRATION_DATE, 
+       SerialLotNumTrack.ISSUED_FLAG, 
+       Location.LOCATION_ID, 
+       Location.LOCATION_LABEL
+FROM SERIAL_LOT_NUM_TRACK SerialLotNumTrack
+INNER JOIN LOCATION Location ON 
+SerialLotNumTrack.LOCATION_ID = Location.LOCATION_ID]]></SQLQuery>
+  <EntityUsage
+    Name="SerialLotNumTrack"
+    Entity="mil.stratis.model.entity.site.SerialLotNumTrack"/>
+  <EntityUsage
+    Name="Location"
+    Entity="mil.stratis.model.entity.loc.Location"
+    SourceUsage="mil.stratis.model.view.site.NiinSerialNumbersView.SerialLotNumTrack"
+    ReadOnly="true"
+    Reference="true"
+    DeleteParticipant="false"/>
+  <ViewAttribute
+    Name="SerialLotNumTrackId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="SerialLotNumTrackId"
+    EntityUsage="SerialLotNumTrack"
+    AliasName="SERIAL_LOT_NUM_TRACK_ID"/>
+  <ViewAttribute
+    Name="NiinId"
+    PrecisionRule="true"
+    EntityAttrName="NiinId"
+    EntityUsage="SerialLotNumTrack"
+    AliasName="NIIN_ID"/>
+  <ViewAttribute
+    Name="SerialNumber"
+    PrecisionRule="true"
+    EntityAttrName="SerialNumber"
+    EntityUsage="SerialLotNumTrack"
+    AliasName="SERIAL_NUMBER"/>
+  <ViewAttribute
+    Name="Cc"
+    PrecisionRule="true"
+    EntityAttrName="Cc"
+    EntityUsage="SerialLotNumTrack"
+    AliasName="CC"/>
+  <ViewAttribute
+    Name="ExpirationDate"
+    PrecisionRule="true"
+    EntityAttrName="ExpirationDate"
+    EntityUsage="SerialLotNumTrack"
+    AliasName="EXPIRATION_DATE"/>
+  <ViewAttribute
+    Name="IssuedFlag"
+    PrecisionRule="true"
+    EntityAttrName="IssuedFlag"
+    EntityUsage="SerialLotNumTrack"
+    AliasName="ISSUED_FLAG"/>
+  <ViewAttribute
+    Name="LocationId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LocationId"
+    EntityUsage="Location"
+    AliasName="LOCATION_ID"
+    IsUpdateable="while_insert"/>
+  <ViewAttribute
+    Name="LocationLabel"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LocationLabel"
+    EntityUsage="Location"
+    AliasName="LOCATION_LABEL"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="mil.stratis.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

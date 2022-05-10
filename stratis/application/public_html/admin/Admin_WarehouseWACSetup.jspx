@@ -1,0 +1,372 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="7"/>
+    <jsp:setProperty name="userbean" property="selected2" value="1"/>
+    <jsp:setProperty name="userbean" property="selected3" value="4"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="Admin_WarehouseWACSetup"/>
+    <jsp:setProperty name="userbean" property="iteratorName" value="WarehouseTableView1Iterator"/>
+    <jsp:useBean id="logBean" class="mil.usmc.mls2.stratis.core.infrastructure.util.LogPageAccess" scope="session"/>
+    <jsp:setProperty name="logBean" property="page" value="WAC"/>
+    <f:view beforePhase="#{logBean.logLoadPage}">
+        <af:document title="STRATIS" id="d1">
+            <af:resource type="javascript" source="/js/warehouse_setup.js"/>
+            <af:form id="f1">
+                <af:panelStretchLayout id="psl1" startWidth="12" topHeight="195" endWidth="6" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/admin/Admin_Header.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll" id="pgl1">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGroupLayout layout="vertical" id="pgl2">
+                                <af:panelBox text="Warehouse Setup - WAC Setup" showDisclosure="false" id="pb1">
+                                    <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                                        <f:facet name="secondaryToolbar">
+                                            <af:toolbar inlineStyle="padding:2px;" id="t1">
+                                                <af:group id="g1">
+                                                    <af:button actionListener="#{bindings.CreateInsert.execute}"
+                                                               text="Create" accessKey="C" partialSubmit="false"
+                                                               inlineStyle="width:50px" id="CreateButton"
+                                                               disabled="#{(!WacSetupBacking.wacFlag) and (bindings.WacTableView1.estimatedRowCount > 0)}">
+                                                        <af:setActionListener from="#{false}"
+                                                                              to="#{WacSetupBacking.wacFlag}"/>
+                                                        <af:setActionListener from="#{false}"
+                                                                              to="#{WacSetupBacking.wacRefresh}"/>
+                                                        <af:setActionListener from="#{true}"
+                                                                              to="#{WacSetupBacking.wacNewFlag}"/>
+                                                    </af:button>
+                                                </af:group>
+                                                <af:group id="g2">
+                                                    <af:button actionListener="#{WacSetupBacking.submitUpdateWAC}"
+                                                               text="Update" accessKey="U" inlineStyle="width:50px"
+                                                               disabled="#{!WacSetupBacking.wacFlag}" id="UpdateButton"
+                                                               partialSubmit="false"/>
+                                                </af:group>
+                                                <af:group id="g3">
+                                                    <af:button text="Delete" accessKey="D" inlineStyle="width:50px"
+                                                               disabled="#{!WacSetupBacking.wacFlag}" id="DeleteButton"
+                                                               partialSubmit="false">
+                                                        <af:showPopupBehavior popupId="confirmDelete"
+                                                                              triggerType="action" align="afterStart"/>
+                                                    </af:button>
+                                                    <af:popup id="confirmDelete">
+                                                        <af:dialog id="Confirm" title="Confirm"
+                                                                   affirmativeTextAndAccessKey="Submit"
+                                                                   dialogListener="#{WacSetupBacking.dialogListener}">
+                                                            <af:activeOutputText id="Delete"
+                                                                                 value="Are you sure you want to Delete?"/>
+                                                        </af:dialog>
+                                                    </af:popup>
+                                                </af:group>
+                                            </af:toolbar>
+                                        </f:facet>
+                                        <af:table value="#{bindings.WacTableView1.collectionModel}"
+                                                  binding="#{WacSetupBacking.wacTable}" var="row"
+                                                  rows="#{bindings.WacTableView1.rangeSize}"
+                                                  emptyText="#{bindings.WacTableView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.WacTableView1.rangeSize}" rowBandingInterval="0"
+                                                  selectedRowKeys="#{bindings.WacTableView1.collectionModel.selectedRow}"
+                                                  selectionListener="#{bindings.WacTableView1.collectionModel.makeCurrent}"
+                                                  rowSelection="single" id="WACTbl" columnResizing="disabled"
+                                                  styleClass="AFStretchWidth" columnStretching="last"
+                                                  summary="WAC table">
+                                            <af:column sortProperty="WacNumber" sortable="false" headerText="WAC Number"
+                                                       id="c1" width="40" rowHeader="true">
+                                                <af:outputText value="#{row.WacNumber}"
+                                                               shortDesc="#{bindings.WacNumber.tooltip}" id="ot1"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.Building.name}" sortable="false"
+                                                       headerText="Building" id="c2" width="50">
+                                                <af:outputText value="#{row.Building}"
+                                                               shortDesc="#{bindings.Building.tooltip}" id="ot2"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.TasksPerTrip.name}" sortable="false"
+                                                       headerText="Tasks Per Trip" id="c3" width="40">
+                                                <af:outputText value="#{row.TasksPerTrip}"
+                                                               shortDesc="#{bindings.TasksPerTrip.tooltip}" id="ot3"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.SidsPerTrip.name}" sortable="false"
+                                                       headerText="SIDs Per Trip" id="c4" width="40">
+                                                <af:outputText value="#{row.SidsPerTrip}"
+                                                               shortDesc="#{bindings.SidsPerTrip.tooltip}" id="ot4"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MechanizedFlag.name}" sortable="false"
+                                                       headerText="Mech." id="c5" width="40">
+                                                <af:outputText value="#{row.MechanizedFlag}"
+                                                               shortDesc="#{bindings.MechanizedFlag.tooltip}" id="ot5"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.SecureFlag.name}" sortable="false"
+                                                       headerText="Secure Flag" id="c6" width="40">
+                                                <af:outputText value="#{row.SecureFlag}"
+                                                               shortDesc="#{bindings.SecureFlag.tooltip}" id="ot6"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.CarouselController.name}"
+                                                       sortable="false" headerText="Carousel Controller" id="c7"
+                                                       width="90">
+                                                <af:outputText value="#{row.CarouselController}"
+                                                               shortDesc="#{bindings.CarouselController.tooltip}"
+                                                               id="ot7"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.WacTableView1.hints.CarouselOffset.name}"
+                                                       sortable="false" headerText="Carousel Offset" id="c8" width="90">
+                                                <af:outputText value="#{row.CarouselOffset}"
+                                                               shortDesc="#{bindings.WacTableView1.hints.CarouselOffset.tooltip}"
+                                                               id="ot8"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.WacTableView1.hints.CarouselModel.name}"
+                                                       sortable="false" headerText="Carousel Model" id="c9" width="100">
+                                                <af:outputText value="#{row.CarouselModel}"
+                                                               shortDesc="#{bindings.WacTableView1.hints.CarouselModel.tooltip}"
+                                                               id="ot9"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.WacTableView1.hints.PackArea.name}"
+                                                       sortable="false" headerText="Pack Area" id="c10" width="60">
+                                                <af:outputText value="#{row.PackArea}"
+                                                               shortDesc="#{bindings.WacTableView1.hints.PackArea.tooltip}"
+                                                               id="ot10"/>
+                                            </af:column>
+                                        </af:table>
+                                    </af:panelCollection>
+                                    <af:spacer height="10"/>
+                                    <af:panelBox text="WAC Setup Details" id="wacSetupDetailPanelBox"
+                                                 rendered="#{bindings.WacTableView1.estimatedRowCount > 0}"
+                                                 showDisclosure="false">
+                                        <af:separator/>
+                                        <af:panelGridLayout>
+                                            <af:gridRow>
+                                                <af:gridCell>
+                                                    <af:spacer width="600" height="0"/>
+                                                </af:gridCell>
+                                            </af:gridRow>
+                                            <af:gridRow>
+                                                <af:gridCell halign="start">
+                                                    <af:panelFormLayout partialTriggers="pc1:WACTbl" rows="6"
+                                                                        unsecure="SecureFlag">
+                                                        <!-- WAC rendered="#{empty bindings.WacId.inputValue}" -->
+                                                        <af:inputText label="WAC" required="true" showRequired="false"
+                                                                      requiredMessageDetail="WAC is required."
+                                                                      value="#{bindings.WacNumber.inputValue}"
+                                                                      columns="10" maximumLength="3" id="wac_number"
+                                                                      shortDesc="Required WAC Number (max 3 alphanumeric)"
+                                                                      binding="#{WacSetupBacking.wacNumber}"
+                                                                      contentStyle="text-transform:uppercase;"
+                                                                      rendered="#{WacSetupBacking.wacNewFlag}"/>
+                                                        <af:inputText label="WAC"
+                                                                      value="#{bindings.WacNumber.inputValue}"
+                                                                      columns="10" id="wac_number_h" readOnly="true"
+                                                                      shortDesc="Required WAC Number (max 3 alphanumeric)"
+                                                                      styleClass="ReadOnlyField"
+                                                                      rendered="#{WacSetupBacking.wacFlag or !WacSetupBacking.wacNewFlag}"/>
+                                                        <!-- Mechanized -->
+                                                        <af:selectOneChoice label="Mechanized"
+                                                                            value="#{bindings.MechanizedFlag.inputValue}"
+                                                                            id="mechFlagSelectOne" autoSubmit="true"
+                                                                            required="true" showRequired="false"
+                                                                            requiredMessageDetail="Mechanized is required."
+                                                                            binding="#{WacSetupBacking.wacMechanizedFlag}"
+                                                                            shortDesc="Required Mechanized flag (Horizontal, Vertical or None)"
+                                                                            unselectedLabel="- Select -"
+                                                                            rendered="#{WacSetupBacking.wacNewFlag}">
+                                                            <af:selectItem label="Horizontal" value="H"/>
+                                                            <af:selectItem label="Vertical" value="V"/>
+                                                            <af:selectItem label="Non-Mech" value="N"/>
+                                                        </af:selectOneChoice>
+                                                        <af:inputText label="Mechanized"
+                                                                      value="#{bindings.MechanizedFlag.inputValue}"
+                                                                      columns="3" id="mechFlagSelectOne_h"
+                                                                      shortDesc="Required Mechanized flag (Horizontal, Vertical or None)"
+                                                                      readOnly="true" styleClass="ReadOnlyField"
+                                                                      rendered="#{WacSetupBacking.wacFlag or !WacSetupBacking.wacNewFlag}"/>
+                                                        <af:inputText label="Carousel Controller"
+                                                                      value="#{bindings.WacTableView1CarouselController.inputValue}"
+                                                                      columns="5"
+                                                                      contentStyle="text-transform:uppercase;"
+                                                                      shortDesc="Optional Enter Carousel Controller (must be a positive number)"
+                                                                      id="txtCarouselController"
+                                                                      partialTriggers="mechFlagSelectOne carouselModelSelectOne"
+                                                                      binding="#{WacSetupBacking.wacCarouselController}"
+                                                                      readOnly="#{bindings.WacTableView1MechanizedFlag.inputValue == 2 or ( bindings.CarouselModel.inputValue != 'REMSTAR' or bindings.WacTableView1CarouselModel1.inputValue != 3)}"
+                                                                      rendered="#{WacSetupBacking.wacNewFlag}"/>
+                                                        <af:inputText label="Carousel Controller"
+                                                                      value="#{bindings.WacTableView1CarouselController.inputValue}"
+                                                                      columns="10"
+                                                                      shortDesc="Optional Enter Carousel Controller (must be a positive number)"
+                                                                      id="txtCarouselController_h" readOnly="true"
+                                                                      styleClass="ReadOnlyField"
+                                                                      rendered="#{WacSetupBacking.wacFlag or !WacSetupBacking.wacNewFlag}"/>
+                                                        <af:selectOneChoice label="Carousel Model"
+                                                                            value="#{bindings.CarouselModel.inputValue}"
+                                                                            id="carouselModelSelectOne"
+                                                                            partialTriggers="mechFlagSelectOne"
+                                                                            autoSubmit="true"
+                                                                            shortDesc="Conditional Select Carousel Model"
+                                                                            binding="#{WacSetupBacking.wacCarouselModel}"
+                                                                            disabled="#{bindings.WacTableView1MechanizedFlag.inputValue == 2}"
+                                                                            rendered="#{WacSetupBacking.wacNewFlag}">
+                                                            <f:selectItems value="#{WacSetupBacking.wacCarouselModelList}"/>
+                                                        </af:selectOneChoice>
+                                                        <af:inputText label="Carousel Model"
+                                                                      value="#{bindings.CarouselModel.inputValue}"
+                                                                      columns="10" id="txtCarouselModel_h"
+                                                                      readOnly="true" styleClass="ReadOnlyField"
+                                                                      rendered="#{WacSetupBacking.wacFlag or !WacSetupBacking.wacNewFlag}"/>
+                                                        <!-- Pack Area  -->
+                                                        <af:inputText label="Pack Area"
+                                                                      value="#{bindings.PackArea.inputValue}"
+                                                                      required="true" showRequired="false"
+                                                                      requiredMessageDetail="Pack Area is required."
+                                                                      columns="10" id="txtPackArea" maximumLength="4"
+                                                                      contentStyle="text-transform:uppercase;"
+                                                                      binding="#{WacSetupBacking.wacPackArea}"
+                                                                      shortDesc="Required Pack Area"
+                                                                      rendered="#{!WacSetupBacking.wacFlag}"/>
+                                                        <af:inputText label="Pack Area"
+                                                                      value="#{bindings.PackArea.inputValue}"
+                                                                      columns="10" id="txtPackArea_h" readOnly="true"
+                                                                      styleClass="ReadOnlyField"
+                                                                      rendered="#{WacSetupBacking.wacFlag}"/>
+                                                        <!-- Tasks Per Trip  -->
+                                                        <af:inputText label="Tasks Per Trip"
+                                                                      value="#{bindings.TasksPerTrip.inputValue}"
+                                                                      columns="10" id="txtTasksPerTrip"
+                                                                      contentStyle="text-transform:uppercase;"
+                                                                      binding="#{WacSetupBacking.wacTasksPerTrip}"
+                                                                      rendered="#{!WacSetupBacking.wacFlag}"
+                                                                      shortDesc="Tasks per Trip used during Picking (must be a positive number)"/>
+                                                        <af:inputText label="Tasks Per Trip"
+                                                                      value="#{bindings.TasksPerTrip.inputValue}"
+                                                                      columns="10" id="txtTasksPerTrip_h"
+                                                                      shortDesc="Tasks per Trip used during Picking (must be a positive number)"
+                                                                      readOnly="true" styleClass="ReadOnlyField"
+                                                                      rendered="#{WacSetupBacking.wacFlag}"/>
+                                                        <af:selectOneChoice label="Warehouse"
+                                                                            value="#{bindings.WacTableView1WarehouseId.inputValue}"
+                                                                            id="warehouseSelectOne" required="true"
+                                                                            showRequired="false"
+                                                                            requiredMessageDetail="Warehouse is required."
+                                                                            binding="#{WacSetupBacking.wacWarehouse}"
+                                                                            shortDesc="Required Warehouse Building Number"
+                                                                            unselectedLabel="- Select -"
+                                                                            rendered="#{WacSetupBacking.wacNewFlag}">
+                                                            <f:selectItems value="#{bindings.WacTableView1WarehouseId.items}"/>
+                                                        </af:selectOneChoice>
+                                                        <af:inputText label="Warehouse"
+                                                                      value="#{bindings.Building.inputValue}"
+                                                                      columns="10" id="warehouseSelectOne_h"
+                                                                      shortDesc="Required Warehouse Building Number"
+                                                                      readOnly="true" styleClass="ReadOnlyField"
+                                                                      rendered="#{WacSetupBacking.wacFlag or !WacSetupBacking.wacNewFlag}"/>
+                                                        <!-- Secure -->
+                                                        <af:selectOneChoice label="Secure"
+                                                                            value="#{bindings.SecureFlag.inputValue}"
+                                                                            id="secureFlagSelectOne" required="true"
+                                                                            showRequired="false"
+                                                                            requiredMessageDetail="Secure is required."
+                                                                            partialTriggers="mechFlagSelectOne"
+                                                                            binding="#{WacSetupBacking.wacSecureFlag}"
+                                                                            shortDesc="Required Secure flag (Yes or No)"
+                                                                            unselectedLabel="- Select -"
+                                                                            visible="#{!WacSetupBacking.wacFlag}">
+                                                            <af:selectItem label="Y" value="Y"/>
+                                                            <af:selectItem label="N" value="N"/>
+                                                        </af:selectOneChoice>
+                                                        <af:inputText label="Secure"
+                                                                      value="#{bindings.SecureFlag.inputValue}"
+                                                                      columns="3" id="secureFlagSelectOne_h"
+                                                                      shortDesc="Required Secure flag (Yes or No)"
+                                                                      readOnly="true" styleClass="ReadOnlyField"
+                                                                      rendered="#{WacSetupBacking.wacFlag}"/>
+                                                        <!-- Carousel Offset  -->
+                                                        <af:inputText value="#{bindings.WacTableView1CarouselOffset.inputValue}"
+                                                                      columns="5" label="Carousel Offset"
+                                                                      contentStyle="text-transform:uppercase;"
+                                                                      partialTriggers="mechFlagSelectOne"
+                                                                      id="txtCarouselOffset"
+                                                                      shortDesc="Optional Enter Carousel Offset (must be a positive number)"
+                                                                      binding="#{WacSetupBacking.wacCarouselOffset}"
+                                                                      rendered="#{WacSetupBacking.wacNewFlag}"
+                                                                      readOnly="#{bindings.WacTableView1MechanizedFlag.inputValue == 2}"/>
+                                                        <af:inputText label="Carousel Offset"
+                                                                      value="#{bindings.WacTableView1CarouselOffset.inputValue}"
+                                                                      columns="10" id="txtCarouselOffset_h"
+                                                                      readOnly="true" styleClass="ReadOnlyField"
+                                                                      rendered="#{WacSetupBacking.wacFlag or !WacSetupBacking.wacNewFlag}"/>
+                                                        <!-- SKIP -->
+                                                        <af:inputText label="SKIP1" rendered="false"/>
+                                                        <!-- SKIP -->
+                                                        <af:inputText label="SKIP2" rendered="false"/>
+                                                        <!-- SIDs Per Trip -->
+                                                        <af:inputText label="SIDs Per Trip"
+                                                                      value="#{bindings.SidsPerTrip.inputValue}"
+                                                                      columns="10" id="txtSidsPerTrip"
+                                                                      contentStyle="text-transform:uppercase;"
+                                                                      binding="#{WacSetupBacking.wacSidsPerTrip}"
+                                                                      shortDesc="SIDs per Trip used during Picking (must be a positive number)"
+                                                                      rendered="#{!WacSetupBacking.wacFlag}"/>
+                                                        <af:inputText label="SIDs Per Trip"
+                                                                      value="#{bindings.SidsPerTrip.inputValue}"
+                                                                      columns="10" id="txtSidsPerTrip_h"
+                                                                      shortDesc="SIDs per Trip used during Picking (must be a positive number)"
+                                                                      readOnly="true" styleClass="ReadOnlyField"
+                                                                      rendered="#{WacSetupBacking.wacFlag}"/>
+                                                    </af:panelFormLayout>
+                                                </af:gridCell>
+                                            </af:gridRow>
+                                        </af:panelGridLayout>
+                                    </af:panelBox>
+                                    <af:separator/>
+                                    <af:toolbar rendered="#{!WacSetupBacking.wacFlag}">
+                                        <af:group>
+                                            <af:button actionListener="#{WacSetupBacking.submitSaveWAC}"
+                                                       inlineStyle="width:50px" accessKey="S" text="Submit"
+                                                       id="saveWACButton" partialSubmit="false"/>
+                                        </af:group>
+                                        <af:group rendered="#{!WacSetupBacking.wacNewFlag}">
+                                            <af:button actionListener="#{WacSetupBacking.submitResetWAC}"
+                                                       inlineStyle="width:50px" accessKey="R" text="Reset"
+                                                       rendered="#{!WacSetupBacking.wacNewFlag}" id="ResetButton"
+                                                       partialSubmit="false"/>
+                                        </af:group>
+                                        <af:group rendered="#{WacSetupBacking.wacNewFlag}">
+                                            <af:button text="Reset" accessKey="R" id="ResetButton2"
+                                                       rendered="#{WacSetupBacking.wacNewFlag}" inlineStyle="width:50px"
+                                                       immediate="true" partialSubmit="false">
+                                                <af:resetListener type="action"/>
+                                            </af:button>
+                                        </af:group>
+                                        <af:group>
+                                            <af:button actionListener="#{WacSetupBacking.submitCancelWAC}"
+                                                       inlineStyle="width:50px" accessKey="a" text="Cancel"
+                                                       id="CancelButton" immediate="true" partialSubmit="false"/>
+                                        </af:group>
+                                    </af:toolbar>
+                                </af:panelBox>
+                            </af:panelGroupLayout>
+                            <f:subview id="wrap_footer">
+                                <jsp:include page="/FooterMain.jspx"/>
+                            </f:subview>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_side_bar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="end">
+                        <af:spacer width="6"/>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

@@ -1,0 +1,224 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:stratis="taglib.mil.usmc.stratis">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="1"/>
+    <jsp:setProperty name="userbean" property="selected2" value="0"/>
+    <f:view>
+        <af:document title="ReceivingGeneralTransshipmentOrCrossDock" id="d1">
+            <af:form id="f1">
+                <f:subview id="wrap_header">
+                    <jsp:include page="/ws/WS_Header.jspx"/>
+                </f:subview>
+                <!--af:form id="f1"--> <!-- ZSL 12/2017 -->
+                <af:panelGroupLayout id="topGroup" layout="scroll">
+                    <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                    <af:panelGridLayout id="pgl1">
+                        <af:gridRow id="gr1">
+                            <af:gridCell valign="top" id="gc1">
+                                <f:subview id="wrap_sidebar">
+                                    <jsp:include page="../SideBar.jspx"/>
+                                </f:subview>
+                            </af:gridCell>
+                            <af:gridCell valign="top" id="gc2">
+                                <af:panelHeader text="Cross Docking" id="ph1">
+                                    <af:spacer width="10" height="10" id="s1"/>
+                                    <af:panelHeader text="Receipt &amp; Backorder Details" id="ph2">
+                                        <af:spacer width="10" height="10" id="s2"/>
+                                        <af:separator id="s3"/>
+                                        <af:panelHeader text="Receipt Details" inlineStyle="font-weight:bold;" id="ph3">
+                                            <af:spacer width="10" height="10" id="s4"/>
+                                            <af:panelFormLayout id="pfl2">
+                                                <af:inputText label="#{bindings.RdocumentNumber.label}"
+                                                              value="#{bindings.RdocumentNumber.inputValue}"
+                                                              columns="20" styleClass="ReadOnlyField" readOnly="true"
+                                                              id="itRDocumentNumber"/>
+                                                <af:inputText label="#{bindings.Fsc.label}"
+                                                              value="#{bindings.Fsc.inputValue}"
+                                                              columns="#{bindings.Fsc.displayWidth}"
+                                                              styleClass="ReadOnlyField" readOnly="true" id="itFsc"/>
+                                                <af:inputText label="#{bindings.Cc.label}"
+                                                              value="#{bindings.Cc.inputValue}"
+                                                              columns="#{bindings.Cc.displayWidth}"
+                                                              styleClass="ReadOnlyField" readOnly="true" id="itCc"/>
+                                                <af:inputText label="#{bindings.Scc.label}"
+                                                              value="#{bindings.Scc.inputValue}"
+                                                              columns="#{bindings.Scc.displayWidth}"
+                                                              styleClass="ReadOnlyField" readOnly="true" id="itScc"/>
+                                                <af:inputText label="#{bindings.Rsuffix.label}"
+                                                              value="#{bindings.Rsuffix.inputValue}"
+                                                              columns="#{bindings.Rsuffix.displayWidth}"
+                                                              styleClass="ReadOnlyField" readOnly="true"
+                                                              id="itRSuffix"/>
+                                                <af:inputText label="#{bindings.Niin.label}"
+                                                              value="#{bindings.Niin.inputValue}"
+                                                              columns="#{bindings.Niin.displayWidth}"
+                                                              styleClass="ReadOnlyField" readOnly="true" id="itNiin"/>
+                                                <af:inputText label="#{bindings.ProjectCode.label}"
+                                                              value="#{bindings.ProjectCode.inputValue}"
+                                                              columns="#{bindings.ProjectCode.displayWidth}"
+                                                              styleClass="ReadOnlyField" readOnly="true"
+                                                              id="itProjectCode"/>
+                                                <af:inputText label="Qty Available"
+                                                              value="#{bindings.QuantityInducted.inputValue}"
+                                                              columns="#{bindings.QuantityInducted.displayWidth}"
+                                                              styleClass="ReadOnlyField" readOnly="true"
+                                                              id="itInputValue"/>
+                                                <af:inputText label="#{bindings.Scn.label}"
+                                                              value="#{bindings.Scn.inputValue}"
+                                                              columns="#{bindings.Scn.displayWidth}"
+                                                              styleClass="ReadOnlyField" readOnly="true" id="itScn"/>
+                                                <af:inputText label="#{bindings.PartNumber.label}"
+                                                              value="#{bindings.PartNumber.inputValue}"
+                                                              columns="#{bindings.PartNumber.displayWidth}"
+                                                              styleClass="ReadOnlyField" readOnly="true"
+                                                              id="itPartNumber"/>
+                                                <af:inputText label="#{bindings.Ui.label}"
+                                                              value="#{bindings.Ui.inputValue}"
+                                                              columns="#{bindings.Ui.displayWidth}"
+                                                              styleClass="ReadOnlyField" readOnly="true" id="itUi"/>
+                                                <af:inputText label="Qty Released"
+                                                              value="#{bindings.QuantityReleased.inputValue}"
+                                                              columns="#{bindings.QuantityReleased.displayWidth}"
+                                                              styleClass="ReadOnlyField" readOnly="true"
+                                                              id="itQtyReleased"/>
+                                                <af:spacer width="10" height="10" id="s5"/>
+                                            </af:panelFormLayout>
+                                        </af:panelHeader>
+                                        <af:separator id="s6"/>
+                                        <af:panelHeader text="Requisition Details" inlineStyle="font-weight:bold;"
+                                                        id="ph4">
+                                            <af:spacer width="10" height="10" id="s11"/>
+                                            <af:panelFormLayout id="pfl1">
+                                                <af:inputText label="#{bindings.IdocumentNumber.label}"
+                                                              value="#{bindings.IdocumentNumber.inputValue}"
+                                                              columns="20" styleClass="ReadOnlyField" readOnly="true"
+                                                              id="itIDocNumber"/>
+                                                <af:inputText label="#{bindings.Isuffix.label}"
+                                                              value="#{bindings.Isuffix.inputValue}"
+                                                              columns="#{bindings.Isuffix.displayWidth}"
+                                                              styleClass="ReadOnlyField" readOnly="true"
+                                                              id="itISuffix"/>
+                                                <af:inputText label="#{bindings.Iqty.label}"
+                                                              value="#{bindings.Iqty.inputValue}"
+                                                              columns="#{bindings.Iqty.displayWidth}"
+                                                              styleClass="ReadOnlyField" readOnly="true" id="itIQty"/>
+                                            </af:panelFormLayout>
+                                        </af:panelHeader>
+                                    </af:panelHeader>
+                                    <af:panelHeader text="Backorder Fulfillment" id="ph5">
+                                        <af:panelGroupLayout layout="horizontal" id="pgl2">
+                                            <af:inputText label="Quantity to be released "
+                                                          value="#{bindings.Iqty.inputValue}"
+                                                          columns="#{bindings.Iqty.displayWidth}"
+                                                          styleClass="ReadOnlyField" readOnly="true"
+                                                          rendered="#{(bindings.Iqty.value le bindings.AvailQty.value)}"
+                                                          id="itIQty2"/>
+                                            <af:inputText label="Quantity to be released"
+                                                          value="#{bindings.AvailQty.inputValue}"
+                                                          columns="#{bindings.QuantityInducted.displayWidth}"
+                                                          styleClass="ReadOnlyField" readOnly="true"
+                                                          rendered="#{(bindings.Iqty.value gt bindings.AvailQty.value)}"
+                                                          id="itAvailQty"/>
+                                        </af:panelGroupLayout>
+                                        <af:panelGroupLayout
+                                                rendered="#{(bindings.SerialControlFlag.inputValue eq 'Y') || (bindings.LotControlFlag.inputValue eq 'Y')}"
+                                                id="pgl3">
+                                            <af:spacer width="10" height="10" id="s7"/>
+                                            <af:outputText inlineStyle="color:rgb(0,0,255); font-weight:bold;"
+                                                           value="Enter Serial and/or Lot Control Number(s) used for this crossdock"
+                                                           id="otSerialOrLot"/>
+                                            <af:spacer width="10" height="15" id="s8"/>
+                                            <af:table value="#{bindings.SerialOrLoNumR1.collectionModel}" var="row"
+                                                      rows="#{bindings.SerialOrLoNumR1.rangeSize}"
+                                                      first="#{bindings.SerialOrLoNumR1.rangeStart}"
+                                                      emptyText="#{bindings.SerialOrLoNumR1.viewable ? 'No rows yet.' : 'Access Denied.'}"
+                                                      selectionListener="#{bindings.SerialOrLoNumR1.collectionModel.makeCurrent}"
+                                                      selectedRowKeys="#{bindings.SerialOrLoNumR1.collectionModel.selectedRow}"
+                                                      rowSelection="single" id="tSerialOrLot" autoHeightRows="5">
+                                                <af:column sortProperty="SerialOrLoNum" sortable="false"
+                                                           headerText="Serial Number" id="c1">
+                                                    <af:inputText value="#{row.SerialOrLoNum}" simple="true"
+                                                                  required="#{bindings.SerialOrLoNumR1.attrDefs.SerialOrLoNum.mandatory}"
+                                                                  contentStyle="text-transform:uppercase;" columns="35"
+                                                                  maximumLength="30" id="itSerialOrLot"
+                                                                  readOnly="true"/>
+                                                </af:column>
+                                                <af:column sortProperty="ExpirationDate" sortable="false"
+                                                           headerText="#{bindings.SerialOrLoNumR1.labels.ExpirationDate}"
+                                                           id="c3">
+                                                    <stratis:adfDateFormatter value="#{row.ExpirationDate}"/>
+                                                </af:column>
+                                            </af:table>
+                                            <af:spacer width="10" height="10" id="s9"/>
+                                            <af:panelGroupLayout id="pgl4">
+                                                <af:panelGroupLayout layout="horizontal"
+                                                                     rendered="#{(bindings.SerialControlFlag.inputValue eq 'Y')}"
+                                                                     id="pgl5">
+                                                    <af:inputText label="Serial Num "
+                                                                  binding="#{backing_app_ReceiptGeneral.srlOrLotConNum}"
+                                                                  inlineStyle="font-weight:bold;"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  maximumLength="30" id="itSerialNum"/>
+                                                    <af:inputDate label="Exp Dt: "
+                                                                  binding="#{backing_app_ReceiptGeneral.expirationDate}"
+                                                                  id="idExpDt">
+                                                        <f:convertDateTime dateStyle="short" pattern="yyyy-MM-dd"/>
+                                                    </af:inputDate>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout layout="horizontal" id="pgl55">
+                                                    <af:inputText label="Serial Range from "
+                                                                  binding="#{backing_app_ReceiptGeneral.srlConNumFrom}"
+                                                                  inlineStyle="font-weight:bold;"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  maximumLength="30" id="startSerial"/>
+                                                    <af:inputText label=" to "
+                                                                  binding="#{backing_app_ReceiptGeneral.srlConNumTo}"
+                                                                  inlineStyle="font-weight:bold;"
+                                                                  contentStyle="text-transform:uppercase;"
+                                                                  maximumLength="30" id="endSerial"/>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout layout="horizontal" id="pgl7">
+                                                    <af:button text="Add to the List"
+                                                               actionListener="#{backing_app_ReceiptGeneral.addSrlLotNumList}"
+                                                               id="srLSubmitId1" partialSubmit="false"/>
+                                                    <af:button text="Delete"
+                                                               actionListener="#{backing_app_ReceiptGeneral.deleteSrlLotNumFromList}"
+                                                               id="srLDelId" partialSubmit="false"/>
+                                                </af:panelGroupLayout>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                        <af:spacer width="10" height="10" id="s10"/>
+                                        <af:panelGroupLayout id="pgl8">
+                                            <af:inputText label="Please Scan or Enter Shipping Barcode:"
+                                                          binding="#{backing_app_ReceiptGeneral.consolidationBarCode}"
+                                                          maximumLength="10" contentStyle="text-transform:uppercase;"
+                                                          id="itShipBarcode">
+                                                <af:validateRegExp pattern="[a-zA-Z0-9]{5,10}"
+                                                                   messageDetailNoMatch="Shipping Barcode must be 5-10 alphanumeric characters only"/>
+                                            </af:inputText>
+                                            <af:panelGroupLayout layout="horizontal" id="pgl9">
+                                                <af:button text="Print 1348"
+                                                           actionListener="#{backing_app_ReceiptGeneral.SaveCrossDock}"
+                                                           action="#{backing_app_ReceiptGeneral.getForwardAction}"
+                                                           id="cbSaveCrossDock" partialSubmit="false"/>
+                                                <af:button text="Cancel"
+                                                           actionListener="#{backing_app_ReceiptGeneral.CancelCrossDock}"
+                                                           action="#{backing_app_ReceiptGeneral.getForwardAction}"
+                                                           id="cbCancelCrossDock" partialSubmit="false"/>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                    </af:panelHeader>
+                                </af:panelHeader>
+                            </af:gridCell>
+                        </af:gridRow>
+                    </af:panelGridLayout>
+                    <f:subview id="wrap_footer">
+                        <jsp:include page="../FooterMain.jspx"/>
+                    </f:subview>
+                </af:panelGroupLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

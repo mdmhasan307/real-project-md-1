@@ -1,0 +1,231 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="IssueViewObj"
+   Version="11.1.2.64.36"
+   SelectList="Issue.SCN, 
+       Issue.DOCUMENT_ID, 
+       Issue.DOCUMENT_NUMBER, 
+       Issue.QTY, 
+       Issue.ISSUE_TYPE, 
+       Issue.ISSUE_PRIORITY_DESIGNATOR, 
+       Issue.ISSUE_PRIORITY_GROUP, 
+       Issue.CUSTOMER_ID, 
+       Issue.NIIN_ID, 
+       Issue.STATUS, 
+       Issue.CREATED_BY, 
+       Issue.CREATED_DATE, 
+       Issue.MODIFIED_BY, 
+       Issue.MODIFIED_DATE, 
+       Issue.PACKING_CONSOLIDATION_ID, 
+       Issue.SUFFIX, 
+       Issue.RCN, 
+       Issue.RDD, 
+       Issue.SUPPLEMENTARY_ADDRESS, 
+       Issue.FUND_CODE, 
+       Issue.MEDIA_AND_STATUS_CODE, 
+       Issue.ROUTING_ID_FROM, 
+       Issue.SIGNAL_CODE, 
+       Issue.DISTRIBUTION_CODE, 
+       Issue.PROJECT_CODE, 
+       Issue.ADVICE_CODE, 
+       Issue.CC, 
+       Issue.ERO_NUMBER, 
+       Issue.DEMIL_CODE"
+   FromList="ISSUE Issue"
+   BindingStyle="OracleName"
+   CustomQuery="false"
+   ComponentClass="mil.stratis.model.view.inv.IssueViewObjImpl"
+   FetchMode="FETCH_AS_NEEDED"
+   PageIterMode="Partial"
+   UseGlueCode="false" >
+   <DesignTime>
+      <Attr Name="_codeGenFlag2" Value="Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="Issue"
+      Entity="mil.stratis.model.entity.wlm.Issue" >
+   </EntityUsage>
+   <ViewAttribute
+      Name="Scn"
+      IsNotNull="true"
+      EntityAttrName="Scn"
+      EntityUsage="Issue"
+      AliasName="SCN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocumentId"
+      IsNotNull="true"
+      EntityAttrName="DocumentId"
+      EntityUsage="Issue"
+      AliasName="DOCUMENT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DocumentNumber"
+      IsNotNull="true"
+      EntityAttrName="DocumentNumber"
+      EntityUsage="Issue"
+      AliasName="DOCUMENT_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Qty"
+      IsNotNull="true"
+      EntityAttrName="Qty"
+      EntityUsage="Issue"
+      AliasName="QTY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IssueType"
+      EntityAttrName="IssueType"
+      EntityUsage="Issue"
+      AliasName="ISSUE_TYPE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IssuePriorityDesignator"
+      EntityAttrName="IssuePriorityDesignator"
+      EntityUsage="Issue"
+      AliasName="ISSUE_PRIORITY_DESIGNATOR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IssuePriorityGroup"
+      EntityAttrName="IssuePriorityGroup"
+      EntityUsage="Issue"
+      AliasName="ISSUE_PRIORITY_GROUP" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CustomerId"
+      IsNotNull="true"
+      EntityAttrName="CustomerId"
+      EntityUsage="Issue"
+      AliasName="CUSTOMER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NiinId"
+      EntityAttrName="NiinId"
+      EntityUsage="Issue"
+      AliasName="NIIN_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Status"
+      EntityAttrName="Status"
+      EntityUsage="Issue"
+      AliasName="STATUS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="Issue"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedDate"
+      IsNotNull="true"
+      EntityAttrName="CreatedDate"
+      EntityUsage="Issue"
+      AliasName="CREATED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedBy"
+      EntityAttrName="ModifiedBy"
+      EntityUsage="Issue"
+      AliasName="MODIFIED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ModifiedDate"
+      EntityAttrName="ModifiedDate"
+      EntityUsage="Issue"
+      AliasName="MODIFIED_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PackingConsolidationId"
+      EntityAttrName="PackingConsolidationId"
+      EntityUsage="Issue"
+      AliasName="PACKING_CONSOLIDATION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Suffix"
+      EntityAttrName="Suffix"
+      EntityUsage="Issue"
+      AliasName="SUFFIX" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Rcn"
+      EntityAttrName="Rcn"
+      EntityUsage="Issue"
+      AliasName="RCN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Rdd"
+      EntityAttrName="Rdd"
+      EntityUsage="Issue"
+      AliasName="RDD" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SupplementaryAddress"
+      EntityAttrName="SupplementaryAddress"
+      EntityUsage="Issue"
+      AliasName="SUPPLEMENTARY_ADDRESS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FundCode"
+      EntityAttrName="FundCode"
+      EntityUsage="Issue"
+      AliasName="FUND_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MediaAndStatusCode"
+      EntityAttrName="MediaAndStatusCode"
+      EntityUsage="Issue"
+      AliasName="MEDIA_AND_STATUS_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RoutingIdFrom"
+      EntityAttrName="RoutingIdFrom"
+      EntityUsage="Issue"
+      AliasName="ROUTING_ID_FROM" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SignalCode"
+      EntityAttrName="SignalCode"
+      EntityUsage="Issue"
+      AliasName="SIGNAL_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DistributionCode"
+      EntityAttrName="DistributionCode"
+      EntityUsage="Issue"
+      AliasName="DISTRIBUTION_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectCode"
+      EntityAttrName="ProjectCode"
+      EntityUsage="Issue"
+      AliasName="PROJECT_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AdviceCode"
+      EntityAttrName="AdviceCode"
+      EntityUsage="Issue"
+      AliasName="ADVICE_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Cc"
+      EntityAttrName="Cc"
+      EntityUsage="Issue"
+      AliasName="CC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EroNumber"
+      EntityAttrName="EroNumber"
+      EntityUsage="Issue"
+      AliasName="ERO_NUMBER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DemilCode"
+      EntityAttrName="DemilCode"
+      EntityUsage="Issue"
+      AliasName="DEMIL_CODE" >
+   </ViewAttribute>
+</ViewObject>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="Inventory_HomePageDef"
+                Package="mil.stratis.view.pageDefs" ControllerClass="#{inventorybean}">
+  <parameters/>
+  <executables>
+    <iterator id="InventoryItemVO1Iterator" RangeSize="20" Binds="Root.InventoryModule1.InventoryItemVO1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="LocSurveyVO1Iterator" RangeSize="20" Binds="Root.InventoryModule1.LocSurveyVO1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+    <iterator id="LocPendingViewObj1Iterator" RangeSize="10" Binds="Root.InventoryModule1.LocPendingViewObj1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="InventoryItemVO1" IterBinding="InventoryItemVO1Iterator">
+      <AttrNames>
+        <Item Value="Niin"/>
+        <Item Value="NiinId"/>
+        <Item Value="LocationLabel"/>
+        <Item Value="LocationId"/>
+        <Item Value="NiinLocId"/>
+        <Item Value="Nomenclature"/>
+      </AttrNames>
+    </table>
+    <table id="LocSurveyVO1" IterBinding="LocSurveyVO1Iterator">
+      <AttrNames>
+        <Item Value="LocationLabel"/>
+        <Item Value="LocationId"/>
+      </AttrNames>
+    </table>
+  </bindings>
+</pageDefinition>

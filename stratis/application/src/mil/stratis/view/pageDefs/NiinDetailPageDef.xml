@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="NiinDetailPageDef" Package="mil.stratis.view.pageDefs.">
+  <parameters/>
+  <executables>
+    <iterator id="NiinInfoView1Iterator" RangeSize="10" Binds="Root.WorkLoadManager1.NiinInfoView1"
+              DataControl="StratisRootServiceDataControl" Refresh="ifNeeded" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <table id="NiinInfoView1" IterBinding="NiinInfoView1Iterator">
+      <AttrNames>
+        <Item Value="NiinId"/>
+        <Item Value="Niin"/>
+        <Item Value="Nomenclature"/>
+        <Item Value="Cube"/>
+        <Item Value="Price"/>
+        <Item Value="ActivityDate"/>
+        <Item Value="Tamcn"/>
+        <Item Value="SupplyClass"/>
+        <Item Value="TypeOfMaterial"/>
+        <Item Value="CognizanceCode"/>
+        <Item Value="PartNumber"/>
+        <Item Value="Ui"/>
+        <Item Value="CageCode"/>
+        <Item Value="Fsc"/>
+        <Item Value="ShelfLifeCode"/>
+        <Item Value="Weight"/>
+        <Item Value="Length"/>
+        <Item Value="Width"/>
+        <Item Value="Height"/>
+        <Item Value="ShelfLifeExtension"/>
+        <Item Value="Scc"/>
+        <Item Value="InventoryThreshold"/>
+        <Item Value="SassyBalance"/>
+        <Item Value="RoThreshold"/>
+        <Item Value="Smic"/>
+      </AttrNames>
+    </table>
+  </bindings>
+</pageDefinition>

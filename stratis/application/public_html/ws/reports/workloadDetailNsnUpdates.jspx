@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <!-- Workload Detail (NSN Updates) -->
+    <af:table var="row" rowBandingInterval="1" id="t4_1" autoHeightRows="0"
+              styleClass="AFStretchWidth"
+              value="#{viewScope.ReportsQueryResultBean.reportColumnList}"
+              rendered="#{viewScope.ReportsQueryResultBean.reportsInfoBean.targetReportName == 'Workload Detail (NSN Updates)'}">
+        <af:column sortable="false" headerText="WAC" id="c4_5">
+            <af:outputText value="#{row.wac}" id="ot4_6"/>
+        </af:column>
+        <af:column sortable="false" headerText="Location" id="c4_2">
+            <af:outputText value="#{row.location}" id="ot4_2"/>
+        </af:column>
+        <af:column sortable="false" headerText="Expiration Date" id="c4_1" width="150">
+            <af:outputText value="#{row.expirationDate}"/>
+        </af:column>
+        <af:column sortable="false" headerText="NIIN" id="c4_3">
+            <af:outputText value="#{row.niin}" id="ot4_3"/>
+        </af:column>
+        <af:column sortable="false" headerText="Nomenclature" id="c4_10">
+            <af:outputText value="#{row.nomenclature}" id="ot4_10"/>
+        </af:column>
+        <af:column sortable="false" headerText="NSN Remark" id="c4_4">
+            <af:outputText value="#{row.nsnRemark}" id="ot4_4"/>
+        </af:column>
+    </af:table>
+</jsp:root>

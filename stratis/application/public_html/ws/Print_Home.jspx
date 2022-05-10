@@ -1,0 +1,615 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:useBean id="userbean" class="mil.stratis.view.user.UserInfo" scope="session"/>
+    <jsp:setProperty name="userbean" property="selected" value="9"/>
+    <jsp:setProperty name="userbean" property="selected2" value="-1"/>
+    <jsp:setProperty name="userbean" property="debugMessage" value="Print_Home.jspx"/>
+    <f:view>
+        <af:document title="STRATIS" id="d1">
+            <af:form id="printForm">
+                <af:panelStretchLayout id="psl1" startWidth="24" topHeight="135" bottomHeight="25">
+                    <f:facet name="top">
+                        <f:subview id="wrap_header">
+                            <jsp:include page="/HeaderMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll" id="pgl1">
+                            <af:messages id="m1" inline="true" inlineStyle="padding:5px;"/>
+                            <af:panelGroupLayout id="topGroup">
+                                <!-- ZSL 10/2017 moved location to fix the application hanging problem while traversing the menu tabs -->
+                                <!-- <af:form id="printForm"> -->
+                                <af:spacer height="10" id="s10"/>
+                                <af:panelTabbed position="above" id="mainShowOneTab" styleClass="AFStretchWidth"
+                                                inlineStyle="height:640px;">
+                                    <af:showDetailItem text="Container Summary" id="sdi1">
+                                        <af:spacer height="10"/>
+                                        <af:subform id="subFormContainerSummary">
+                                            <af:panelBox text="Container Summary Re-Print Page" id="pb1"
+                                                         showDisclosure="false">
+                                                <af:separator id="s1"/>
+                                                <!-- Begin page -->
+                                                <af:spacer height="10" id="s2"/>
+                                                <af:panelGridLayout id="innerPrintContainerSummaryTable">
+                                                    <af:gridRow id="gr2">
+                                                        <af:gridCell valign="top" id="gc3">
+                                                            <af:outputLabel value="Type"
+                                                                            id="lblHeader1_ContainerSummary"
+                                                                            inlineStyle="font-weight:bold"/>
+                                                        </af:gridCell>
+                                                        <af:gridCell valign="top" id="gc4">
+                                                            <af:outputLabel value="Selection"
+                                                                            id="lblHeader2_ContainerSummary"
+                                                                            inlineStyle="font-weight:bold"/>
+                                                        </af:gridCell>
+                                                    </af:gridRow>
+                                                    <af:gridRow id="gr4">
+                                                        <af:gridCell valign="top" id="gc5">
+                                                            <af:selectOneRadio id="radio_FormContainerSummary"
+                                                                               required="true"
+                                                                               requiredMessageDetail="Must select a type"
+                                                                               binding="#{ReprintBacking.formContainerSummaryRadioType}">
+                                                                <f:selectItem itemLabel="PIN" itemValue="pin" id="si1"/>
+                                                                <f:selectItem itemLabel="Shipping Barcode"
+                                                                              itemValue="barcode" id="si2"/>
+                                                            </af:selectOneRadio>
+                                                        </af:gridCell>
+                                                        <af:gridCell valign="top" id="gc6">
+                                                            <af:inputText id="txtInputSelection_ContainerSummary"
+                                                                          columns="20" required="true"
+                                                                          maximumLength="15"
+                                                                          contentStyle="text-transform:uppercase;"
+                                                                          requiredMessageDetail="Must enter a valid selection"
+                                                                          binding="#{ReprintBacking.containerSummaryTxtSelection}"/>
+                                                        </af:gridCell>
+                                                    </af:gridRow>
+                                                </af:panelGridLayout>
+                                                <af:spacer height="10" id="s11"/>
+                                                <af:toolbar inlineStyle="padding:5px;" id="t1">
+                                                    <af:button text="Print" id="submitButton_ContainerSummary"
+                                                               inlineStyle="width:100px"
+                                                               actionListener="#{ReprintBacking.submitReprintContainerSummary}"
+                                                               partialSubmit="false"/>
+                                                    <af:button text="Cancel" id="CancelButton_ContainerSummary"
+                                                               inlineStyle="width:100px" action="GoPrint"
+                                                               partialSubmit="false"/>
+                                                </af:toolbar>
+                                            </af:panelBox>
+                                        </af:subform>
+                                    </af:showDetailItem>
+                                    <af:showDetailItem text="1348" id="sdi2">
+                                        <af:spacer height="10" id="s12"/>
+                                        <af:subform id="subForm1348">
+                                            <!-- 1348 -->
+                                            <af:panelBox text="1348 Re-Print Page" id="pb2" showDisclosure="false">
+                                                <af:separator id="s13"/>
+                                                <af:spacer height="10" id="s3"/>
+                                                <!-- Begin page -->
+                                                <af:panelGridLayout id="innerPrint1348Table">
+                                                    <af:gridRow id="gr5">
+                                                        <af:gridCell valign="top" id="gc7">
+                                                            <af:outputLabel value="Type" id="lblHeader1_1348"
+                                                                            inlineStyle="font-weight:bold"/>
+                                                        </af:gridCell>
+                                                        <af:gridCell valign="top" id="gc8">
+                                                            <af:outputLabel value="Selection" id="lblHeader2_1348"
+                                                                            inlineStyle="font-weight:bold"/>
+                                                        </af:gridCell>
+                                                    </af:gridRow>
+                                                    <af:gridRow id="gr6">
+                                                        <af:gridCell valign="top" id="gc9">
+                                                            <af:selectOneRadio id="radio_Form1348" required="true"
+                                                                               requiredMessageDetail="Must select a type"
+                                                                               binding="#{ReprintBacking.form1348RadioType}">
+                                                                <f:selectItem itemLabel="Document Number"
+                                                                              itemValue="document_number" id="si3"/>
+                                                                <f:selectItem itemLabel="Shipping Barcode"
+                                                                              itemValue="barcode" id="si4"/>
+                                                            </af:selectOneRadio>
+                                                        </af:gridCell>
+                                                        <af:gridCell valign="top" id="gc10">
+                                                            <af:inputText id="txtInputSelection_1348"
+                                                                          contentStyle="text-transform:uppercase;"
+                                                                          required="true"
+                                                                          requiredMessageDetail="Must enter a valid selection"
+                                                                          columns="20" maximumLength="15"
+                                                                          binding="#{ReprintBacking.form1348TxtSelection}"/>
+                                                        </af:gridCell>
+                                                    </af:gridRow>
+                                                    <af:gridRow id="gr65">
+                                                        <af:gridCell id="gc95">
+                                                            <af:outputText value="&lt;br>" escape="false" id="ot5"/>
+                                                            <af:toolbar inlineStyle="padding:5px;" id="t2">
+                                                                <af:button text="Print" id="submitButton_1348"
+                                                                           inlineStyle="width:100px"
+                                                                           actionListener="#{ReprintBacking.submitPrint1348}"
+                                                                           partialSubmit="false"/>
+                                                                <af:button text="Cancel" id="CancelButton_1348"
+                                                                           inlineStyle="width:100px"
+                                                                           action="GoPrint" partialSubmit="false"/>
+                                                            </af:toolbar>
+                                                        </af:gridCell>
+                                                    </af:gridRow>
+                                                </af:panelGridLayout>
+                                            </af:panelBox>
+                                        </af:subform>
+                                    </af:showDetailItem>
+                                    <af:showDetailItem text="Labels" id="sdi3">
+                                        <af:spacer height="10"/>
+                                        <af:panelTabbed id="innerTab" position="above" styleClass="AFStretchWidth">
+                                            <af:showDetailItem text="Floor Location Labels" id="sdi4">
+                                                <af:spacer height="10"/>
+                                                <af:subform id="subFormFloorLocationLabels">
+                                                    <af:panelBox text="Floor Location Labels Re-Print Page" id="pb3"
+                                                                 showDisclosure="false">
+                                                        <af:separator id="s14"/>
+                                                        <af:spacer height="10" id="s4"/>
+                                                        <!-- Begin page -->
+                                                        <af:panelGridLayout id="innerPrintFloorLocationTable">
+                                                            <af:gridRow id="gr7">
+                                                                <af:gridCell valign="top" id="gc11">
+                                                                    <af:spacer width="10"/>
+                                                                </af:gridCell>
+                                                                <af:gridCell valign="top" id="gc12">
+                                                                    <af:outputLabel value="Floor Location"
+                                                                                    id="lblHeader2_FloorLoc"
+                                                                                    inlineStyle="font-weight:bold"/>
+                                                                </af:gridCell>
+                                                                <af:gridCell valign="top" id="gc13">
+                                                                    <af:outputLabel value="AAC" id="lblHeader3_FloorLoc"
+                                                                                    inlineStyle="font-weight:bold"/>
+                                                                </af:gridCell>
+                                                                <af:gridCell valign="top" id="gc14">
+                                                                    <af:outputLabel value="Area"
+                                                                                    id="lblHeader4_FloorLoc"
+                                                                                    inlineStyle="font-weight:bold"/>
+                                                                </af:gridCell>
+                                                            </af:gridRow>
+
+                                                            <af:gridRow id="gr8">
+                                                                <af:gridCell valign="top" id="gc15">
+                                                                    <af:outputLabel value="Fields"
+                                                                                    id="txtFloorLoc_Selection"/>
+                                                                </af:gridCell>
+                                                                <af:gridCell valign="top" id="gc16">
+                                                                    <af:inputText id="txtFloorLoc_FloorLocation"
+                                                                                  maximumLength="5" columns="7"
+                                                                                  contentStyle="text-transform:uppercase;"
+                                                                                  required="true"
+                                                                                  requiredMessageDetail="Floor Location - Must enter a valid selection"
+                                                                                  binding="#{ReprintBacking.floorLocFloorLocationTxtSelection}"/>
+                                                                </af:gridCell>
+                                                                <af:gridCell valign="top" id="gc17">
+                                                                    <af:inputText id="txtFloorLoc_AAC" maximumLength="6"
+                                                                                  columns="7"
+                                                                                  contentStyle="text-transform:uppercase;"
+                                                                                  required="true"
+                                                                                  requiredMessageDetail="AAC - Must enter a valid selection"
+                                                                                  binding="#{ReprintBacking.floorLocAACTxtSelection}"/>
+                                                                </af:gridCell>
+                                                                <af:gridCell valign="top" id="gc18">
+                                                                    <af:inputText id="txtFloorLoc_Area"
+                                                                                  maximumLength="20" columns="15"
+                                                                                  contentStyle="text-transform:uppercase;"
+                                                                                  required="true"
+                                                                                  requiredMessageDetail="Area - Must enter a valid selection"
+                                                                                  binding="#{ReprintBacking.floorLocAreaTxtSelection}"/>
+                                                                </af:gridCell>
+                                                            </af:gridRow>
+
+                                                            <af:gridRow id="gr85">
+                                                                <af:gridCell id="gc185">
+
+                                                                    <af:toolbar inlineStyle="padding:5px;" id="t3">
+                                                                        <af:button text="Print"
+                                                                                   id="submitButton_FloorLoc"
+                                                                                   inlineStyle="width:100px"
+                                                                                   actionListener="#{ReprintBacking.submitReprintFloorLocation}"
+                                                                                   partialSubmit="false"/>
+                                                                        <af:button text="Cancel"
+                                                                                   id="CancelButton_FloorLoc"
+                                                                                   inlineStyle="width:100px"
+                                                                                   action="GoPrint"
+                                                                                   partialSubmit="false"/>
+                                                                    </af:toolbar>
+                                                                </af:gridCell>
+                                                            </af:gridRow>
+                                                        </af:panelGridLayout>
+                                                    </af:panelBox>
+                                                </af:subform>
+                                            </af:showDetailItem>
+                                            <af:showDetailItem text="Location Labels" id="sdi5">
+                                                <af:spacer height="10" id="s15"/>
+                                                <af:subform id="subFormLocationLabels">
+                                                    <af:panelBox text="Location Labels Re-Print Page" id="pb4"
+                                                                 showDisclosure="false">
+                                                        <af:separator id="s16"/>
+                                                        <af:spacer height="10" id="s5"/>
+                                                        <!-- Begin page -->
+                                                        <af:panelGridLayout id="innerPrintLocationTable">
+                                                            <af:gridRow id="gr9">
+                                                                <af:gridCell valign="top" id="gc19">
+                                                                    <af:outputLabel value="Type" id="lblHeader1_Loc"
+                                                                                    inlineStyle="font-weight:bold"/>
+                                                                </af:gridCell>
+                                                                <af:gridCell valign="top" id="gc20">
+                                                                    <af:outputLabel value="Selection"
+                                                                                    id="lblHeader2_Loc"
+                                                                                    inlineStyle="font-weight:bold"/>
+                                                                </af:gridCell>
+                                                                <af:gridCell valign="top" id="gc21">
+                                                                    <af:outputLabel value="# of Copies"
+                                                                                    id="lblHeader3_Loc"
+                                                                                    inlineStyle="font-weight:bold"/>
+                                                                </af:gridCell>
+                                                            </af:gridRow>
+                                                            <af:gridRow id="gr10">
+                                                                <af:gridCell valign="top" id="gc22">
+                                                                    <af:outputLabel value="Location"
+                                                                                    id="lblHeader1_Loc_Location"/>
+                                                                </af:gridCell>
+                                                                <af:gridCell valign="top" id="gc23">
+                                                                    <af:inputText id="txtInputSelection_Loc"
+                                                                                  columns="20" required="true"
+                                                                                  maximumLength="9"
+                                                                                  contentStyle="text-transform:uppercase;"
+                                                                                  requiredMessageDetail="Must enter a valid selection"
+                                                                                  binding="#{ReprintBacking.locTxtSelection}"/>
+                                                                </af:gridCell>
+                                                                <af:gridCell valign="top" id="gc44">
+                                                                    <af:inputText id="txtCopies_Loc" columns="2"
+                                                                                  maximumLength="2" required="true"
+                                                                                  value="1"
+                                                                                  requiredMessageDetail="Must enter number of copies to print"
+                                                                                  binding="#{ReprintBacking.locTxtCopies}"/>
+                                                                </af:gridCell>
+                                                            </af:gridRow>
+                                                        </af:panelGridLayout>
+                                                        <af:spacer height="10" id="s17"/>
+                                                        <af:toolbar inlineStyle="padding:5px;" id="t4">
+                                                            <af:button text="Print" id="submitButton_Loc"
+                                                                       inlineStyle="width:100px"
+                                                                       actionListener="#{ReprintBacking.submitPrintLocation}"
+                                                                       partialSubmit="false"/>
+                                                            <af:button text="Cancel" id="CancelButton_Loc"
+                                                                       inlineStyle="width:100px"
+                                                                       action="GoPrint" partialSubmit="false"/>
+                                                        </af:toolbar>
+                                                    </af:panelBox>
+                                                </af:subform>
+                                            </af:showDetailItem>
+                                            <af:showDetailItem text="NSN Labels" id="sdi6">
+                                                <af:spacer height="10" id="s18"/>
+                                                <af:subform id="subFormNIINLabels">
+                                                    <af:panelBox text="NSN Labels Re-Print Page" id="pb5"
+                                                                 showDisclosure="false">
+                                                        <af:separator id="s19"/>
+                                                        <af:spacer height="10" id="s6"/>
+                                                        <!-- Begin page -->
+                                                        <af:panelGridLayout id="innerPrintNiinTable">
+                                                            <af:gridRow id="gr11">
+                                                                <af:gridCell valign="top" id="gc24">
+                                                                    <af:outputLabel value="NSN"
+                                                                                    id="lblHeader1_Niin_NIIN"/>
+                                                                </af:gridCell>
+                                                                <af:gridCell valign="top" id="gc25">
+                                                                    <af:outputLabel value="Selection"
+                                                                                    id="lblHeader2_Niin"
+                                                                                    inlineStyle="font-weight:bold"/>
+                                                                </af:gridCell>
+                                                                <af:gridCell valign="top" id="gc26">
+                                                                    <af:outputLabel value="# of Copies"
+                                                                                    id="lblHeader3_Niin"
+                                                                                    inlineStyle="font-weight:bold"/>
+                                                                </af:gridCell>
+                                                            </af:gridRow>
+                                                            <af:gridRow id="gr12">
+                                                                <af:gridCell valign="top" id="gc27">
+                                                                    <af:selectOneRadio id="radio_NSN" required="true"
+                                                                                       requiredMessageDetail="Must select a type"
+                                                                                       binding="#{ReprintBacking.niinRadioType}">
+                                                                        <f:selectItem itemLabel="NSN" itemValue="NSN"
+                                                                                      id="si5"/>
+                                                                        <f:selectItem itemLabel="NIIN" itemValue="NIIN"
+                                                                                      id="si6"/>
+                                                                    </af:selectOneRadio>
+                                                                </af:gridCell>
+                                                                <af:gridCell valign="top" id="gc28">
+                                                                    <af:inputText id="txtInputSelection_Niin"
+                                                                                  columns="20" required="true"
+                                                                                  maximumLength="13"
+                                                                                  contentStyle="text-transform:uppercase;"
+                                                                                  requiredMessageDetail="Must enter a valid selection"
+                                                                                  binding="#{ReprintBacking.niinTxtSelection}"/>
+                                                                </af:gridCell>
+                                                                <af:gridCell valign="top" id="gc29">
+                                                                    <af:inputText id="txtCopies_Niin" columns="2"
+                                                                                  maximumLength="2" required="true"
+                                                                                  value="1"
+                                                                                  requiredMessageDetail="Must enter number of copies to print"
+                                                                                  binding="#{ReprintBacking.niinTxtCopies}"/>
+                                                                </af:gridCell>
+                                                            </af:gridRow>
+                                                        </af:panelGridLayout>
+                                                        <af:outputText value="&lt;br>" escape="false" id="ot13"/>
+                                                        <af:toolbar inlineStyle="padding:5px;" id="t5">
+                                                            <af:button text="Print" id="submitButton_Niin"
+                                                                       inlineStyle="width:100px"
+                                                                       actionListener="#{ReprintBacking.submitPrintNIIN}"
+                                                                       partialSubmit="false"/>
+                                                            <af:button text="Cancel" id="CancelButton_Niin"
+                                                                       inlineStyle="width:100px"
+                                                                       action="GoPrint" partialSubmit="false"/>
+                                                        </af:toolbar>
+                                                    </af:panelBox>
+                                                </af:subform>
+                                            </af:showDetailItem>
+                                            <af:showDetailItem text="Pick Labels" id="sdi7">
+                                                <af:spacer height="10"/>
+                                                <af:subform id="subFormPickLabels">
+                                                    <af:panelBox text="Pick Labels Re-Print Page" id="pb6"
+                                                                 showDisclosure="false">
+                                                        <af:separator id="s20"/>
+                                                        <af:spacer height="10" id="s7"/>
+                                                        <!-- Begin page -->
+                                                        <af:panelGridLayout id="innerPrintPickTable">
+                                                            <af:gridRow id="gr13">
+                                                                <af:gridCell valign="top" id="gc30">
+                                                                    <af:outputLabel value="Type" id="lblHeader1_Pick"
+                                                                                    inlineStyle="font-weight:bold"/>
+                                                                </af:gridCell>
+                                                                <af:gridCell valign="top" id="gc31">
+                                                                    <af:outputLabel value="Selection"
+                                                                                    id="lblHeader2_Pick"
+                                                                                    inlineStyle="font-weight:bold"/>
+                                                                </af:gridCell>
+                                                                <af:gridCell valign="top" id="gc32">
+                                                                    <af:outputLabel value="# of Copies"
+                                                                                    id="lblHeader3_Pick"
+                                                                                    inlineStyle="font-weight:bold"/>
+                                                                </af:gridCell>
+                                                            </af:gridRow>
+                                                            <af:gridRow id="gr14">
+                                                                <af:gridCell valign="top" id="gc33">
+                                                                    <af:outputLabel value="PIN"
+                                                                                    id="lblHeader1_Pick_PIN"/>
+                                                                </af:gridCell>
+                                                                <af:gridCell valign="top" id="gc34">
+                                                                    <af:inputText id="txtInputSelection_Pick"
+                                                                                  columns="20" required="true"
+                                                                                  maximumLength="13"
+                                                                                  contentStyle="text-transform:uppercase;"
+                                                                                  requiredMessageDetail="Must enter a valid selection"
+                                                                                  binding="#{ReprintBacking.pickTxtSelection}"/>
+                                                                </af:gridCell>
+                                                                <af:gridCell valign="top" id="gc35">
+                                                                    <af:inputText id="txtCopies_Pick" columns="2"
+                                                                                  maximumLength="2" required="true"
+                                                                                  value="1"
+                                                                                  requiredMessageDetail="Must enter number of copies to print"
+                                                                                  binding="#{ReprintBacking.pickTxtCopies}"/>
+                                                                </af:gridCell>
+                                                            </af:gridRow>
+                                                        </af:panelGridLayout>
+                                                        <af:outputText value="&lt;br>" escape="false" id="ot14"/>
+                                                        <af:toolbar inlineStyle="padding:5px;" id="t6">
+                                                            <af:button text="Print" id="submitButton_Pick"
+                                                                       inlineStyle="width:100px"
+                                                                       actionListener="#{ReprintBacking.submitPrintPIN}"
+                                                                       partialSubmit="false"/>
+                                                            <af:button text="Cancel" id="CancelButton_Pick"
+                                                                       inlineStyle="width:100px"
+                                                                       action="GoPrint" partialSubmit="false"/>
+                                                        </af:toolbar>
+                                                    </af:panelBox>
+                                                </af:subform>
+                                            </af:showDetailItem>
+                                            <af:showDetailItem text="Stow Labels" id="sdi8">
+                                                <af:spacer height="10"/>
+                                                <af:subform id="subFormStowLabels">
+                                                    <af:panelBox text="Stow Labels Re-Print Page" id="pb7"
+                                                                 showDisclosure="false">
+                                                        <af:separator id="s22"/>
+                                                        <af:spacer height="10" id="s8"/>
+                                                        <!-- Begin page -->
+                                                        <af:panelGridLayout id="innerPrintStowTable">
+                                                            <af:gridRow id="gr15">
+                                                                <af:gridCell valign="top" id="gc36">
+                                                                    <af:outputLabel value="Type" id="lblHeader1_Stow"
+                                                                                    inlineStyle="font-weight:bold"/>
+                                                                </af:gridCell>
+                                                                <af:gridCell valign="top" id="gc37">
+                                                                    <af:outputLabel value="Selection"
+                                                                                    id="lblHeader2_Stow"
+                                                                                    inlineStyle="font-weight:bold"/>
+                                                                </af:gridCell>
+                                                                <af:gridCell valign="top" id="gc45">
+                                                                    <af:outputLabel value="# of Copies"
+                                                                                    id="lblHeader3_Stow"
+                                                                                    inlineStyle="font-weight:bold"/>
+                                                                </af:gridCell>
+                                                            </af:gridRow>
+                                                            <af:gridRow id="gr16">
+                                                                <af:gridCell valign="top" id="gc46">
+                                                                    <af:selectOneRadio id="radio_Stow" required="true"
+                                                                                       requiredMessageDetail="Must select a type"
+                                                                                       binding="#{ReprintBacking.stowRadioType}">
+                                                                        <f:selectItem itemLabel="Document Number"
+                                                                                      itemValue="document_number"
+                                                                                      id="si7"/>
+                                                                        <f:selectItem itemLabel="SID" itemValue="sid"
+                                                                                      id="si8"/>
+                                                                    </af:selectOneRadio>
+                                                                </af:gridCell>
+                                                                <af:gridCell valign="top" id="gc38">
+                                                                    <af:inputText id="txtInputSelection_Stow"
+                                                                                  contentStyle="text-transform:uppercase;"
+                                                                                  required="true"
+                                                                                  requiredMessageDetail="Must enter a valid selection"
+                                                                                  columns="20" maximumLength="14"
+                                                                                  binding="#{ReprintBacking.stowTxtSelection}"/>
+                                                                </af:gridCell>
+                                                                <af:gridCell valign="top" id="gc39">
+                                                                    <af:inputText id="txtCopies_Stow" columns="2"
+                                                                                  required="true"
+                                                                                  requiredMessageDetail="Must enter number of copies to print"
+                                                                                  maximumLength="2" value="1"
+                                                                                  binding="#{ReprintBacking.stowTxtCopies}"/>
+                                                                </af:gridCell>
+                                                            </af:gridRow>
+                                                        </af:panelGridLayout>
+                                                        <af:outputText value="&lt;br>" escape="false" id="ot16"/>
+                                                        <af:toolbar inlineStyle="padding:5px;" id="t7">
+                                                            <af:button text="Print" id="submitButton_Stow"
+                                                                       inlineStyle="width:100px"
+                                                                       actionListener="#{ReprintBacking.submitPrintSid}"
+                                                                       partialSubmit="false"/>
+                                                            <af:button text="Cancel" id="CancelButton_Stow"
+                                                                       inlineStyle="width:100px"
+                                                                       action="GoPrint" partialSubmit="false"/>
+                                                        </af:toolbar>
+                                                    </af:panelBox>
+                                                </af:subform>
+                                            </af:showDetailItem>
+                                        </af:panelTabbed>
+                                    </af:showDetailItem>
+                                    <af:showDetailItem text="Shipping Manifests" id="sdi9">
+                                        <af:spacer height="10" id="s23"/>
+                                        <af:subform id="subFormShippingManifests">
+                                            <af:panelBox text="Shipping Manifests Re-Print Page" id="pb8"
+                                                         showDisclosure="false">
+                                                <af:separator id="s24"/>
+                                                <af:spacer height="10" id="s9"/>
+                                                <!-- Begin page -->
+                                                <af:panelGridLayout id="innerPrintManifestTable">
+                                                    <af:gridRow id="gr17">
+                                                        <af:gridCell valign="top" id="gc40">
+                                                            <af:outputLabel value="Type" id="lblHeader1"
+                                                                            inlineStyle="font-weight:bold"/>
+                                                        </af:gridCell>
+                                                        <af:gridCell valign="top" id="gc41">
+                                                            <af:outputLabel value="Selection" id="lblHeader2"
+                                                                            inlineStyle="font-weight:bold"/>
+                                                        </af:gridCell>
+                                                    </af:gridRow>
+                                                    <af:gridRow id="gr18">
+                                                        <af:gridCell valign="top" id="gc42">
+                                                            <af:outputLabel value="LD CON"
+                                                                            id="lblHeader1_Manifest_LDCON"/>
+                                                        </af:gridCell>
+                                                        <af:gridCell valign="top" id="gc43">
+                                                            <af:inputText id="txtInputSelection_manifest"
+                                                                          contentStyle="text-transform:uppercase;"
+                                                                          columns="20" required="true" maximumLength="8"
+                                                                          requiredMessageDetail="Must enter a valid selection"
+                                                                          binding="#{ReprintBacking.manifestTxtSelection}"/>
+                                                        </af:gridCell>
+                                                    </af:gridRow>
+                                                </af:panelGridLayout>
+                                                <af:outputText value="&lt;br>" escape="false" id="ot18"/>
+                                                <af:toolbar inlineStyle="padding:5px;" id="t8">
+                                                    <af:button text="Print" id="submitButton"
+                                                               inlineStyle="width:100px"
+                                                               actionListener="#{ReprintBacking.submitReprintManifest}"
+                                                               partialSubmit="false"/>
+                                                    <af:button text="Cancel" id="CancelButton"
+                                                               inlineStyle="width:100px" action="GoPrint"
+                                                               partialSubmit="false"/>
+                                                    <af:link actionListener="#{ReprintBacking.submitReprintAMSCMOS}"
+                                                             id="cmdLinkExport" text="Export AMS or CMOS"
+                                                             icon="/resources/images/export.gif">
+                                                    </af:link>
+                                                    <af:commandButton text="Export" visible="false" id="downloadAMSCMOS"
+                                                                      clientComponent="true"
+                                                                      binding="#{ReprintBacking.downloadCommandButton}">
+                                                        <af:fileDownloadActionListener contentType="text/plain; charset=utf-8"
+                                                                                       method="#{ReprintBacking.downloadZip}"/>
+                                                    </af:commandButton>
+                                                </af:toolbar>
+                                            </af:panelBox>
+                                        </af:subform>
+                                    </af:showDetailItem>
+                                    <af:showDetailItem text="Carousel Command" id="sdi10">
+                                        <af:spacer height="10" id="s25"/>
+                                        <af:subform id="subFormCarousel">
+                                            <!-- 1348 -->
+                                            <af:panelBox text="Carousel Command" id="pb9" showDisclosure="false">
+                                                <af:separator id="s26"/>
+                                                <af:spacer height="10" id="s27"/>
+                                                <!-- Begin page -->
+                                                <af:panelGridLayout id="innerMoveCarouselTable">
+                                                    <af:gridRow id="gr19">
+                                                        <af:gridCell valign="top" id="gc47">
+                                                            <af:outputLabel value="Type" id="lblHeader1_Carousel"
+                                                                            inlineStyle="font-weight:bold"/>
+                                                        </af:gridCell>
+                                                        <af:gridCell valign="top" id="gc48">
+                                                            <af:outputLabel value="Selection" id="lblHeader2_Carousel"
+                                                                            inlineStyle="font-weight:bold"/>
+                                                        </af:gridCell>
+                                                    </af:gridRow>
+                                                    <af:gridRow id="gr20">
+                                                        <af:gridCell valign="top" id="gc49">
+                                                            <af:outputLabel value="Response Cmd" id="lblHeader3_Carousel"
+                                                                            inlineStyle="font-weight:bold"/>
+                                                        </af:gridCell>
+                                                        <af:gridCell valign="top" id="gc50">
+                                                            <af:inputText id="txtInputSelection_Carousel"
+                                                                          contentStyle="text-transform:uppercase;"
+                                                                          required="true"
+                                                                          requiredMessageDetail="Must enter a valid selection"
+                                                                          columns="20"
+                                                                          binding="#{ReprintBacking.carouselTxtSelection}"/>
+                                                        </af:gridCell>
+                                                    </af:gridRow>
+                                                    <af:gridRow id="gr21">
+                                                        <af:gridCell id="gc51">
+                                                            <af:outputText value="&lt;br>" escape="false" id="ot19"/>
+                                                            <af:toolbar inlineStyle="padding:5px;" id="t9">
+                                                                <af:button text="Print" id="submitButton_Carousel"
+                                                                           inlineStyle="width:100px"
+                                                                           actionListener="#{ReprintBacking.submitSendCarouselCommand}"
+                                                                           partialSubmit="false"/>
+                                                                <af:button text="Cancel" id="CancelButton_Carousel"
+                                                                           inlineStyle="width:100px"
+                                                                           action="GoPrint" partialSubmit="false"/>
+                                                            </af:toolbar>
+                                                        </af:gridCell>
+                                                    </af:gridRow>
+                                                    <af:gridRow id="gr22">
+                                                        <af:gridCell valign="top" id="gc52">
+                                                            <af:outputText value="" id="lblCarousel_output"
+                                                                           inlineStyle="font-weight:bold"
+                                                                           binding="#{ReprintBacking.outputStr}"/>
+                                                        </af:gridCell>
+                                                    </af:gridRow>
+                                                </af:panelGridLayout>
+                                            </af:panelBox>
+                                        </af:subform>
+                                    </af:showDetailItem>
+                                </af:panelTabbed>
+                                <!--/af:form-->
+                                <f:subview id="wrap_footer">
+                                    <jsp:include page="../FooterMain.jspx"/>
+                                </f:subview>
+                            </af:panelGroupLayout>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="start">
+                        <f:subview id="wrap_sidebar">
+                            <jsp:include page="/SideBarMain.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                    <f:facet name="bottom">
+                        <f:subview id="classificationFooter">
+                            <jsp:include page="/ClassificationBanner.jspx"/>
+                        </f:subview>
+                    </f:facet>
+                </af:panelStretchLayout>
+            </af:form>
+            <af:resource type="javascript" source="/js/download.js"/>
+        </af:document>
+    </f:view>
+</jsp:root>
